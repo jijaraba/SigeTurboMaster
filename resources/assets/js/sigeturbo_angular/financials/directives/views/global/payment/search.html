@@ -1,0 +1,58 @@
+<section style="position: relative" id="search" class="search">
+    <div class="search">
+        <span id="container_search" ng-click="searchForm()">
+            <sige-turbo-search-tags tags="search"></sige-turbo-search-tags>
+        </span>
+        <i class="fa fa-search" onclick="this.form.submit()"></i>
+    </div>
+    <div class="container sige-search-container" ng-if="showSearch">
+        <ul class="display-horizontal col-100 search-options">
+            <li class="col-100">
+                <ul class="display-horizontal col-100">
+                    <li class="col-20 gutter-5 title">
+                        <label for="search_year">Año</label>
+                    </li>
+                    <li class="col-30 gutter-5 text">
+                        <select id="search_year" name="search_year" ng-model="search.year"
+                                ng-options="year.idyear as year.name for year in years" required>
+                        </select>
+                    </li>
+                    <li class="col-25 gutter-5 title">
+                        <label for="search_code">Cód Estudiante:</label>
+                    </li>
+                    <li class="col-25 gutter-5 text">
+                        <input id="search_code_est" name="search_code_est" type="text" ng-model="search.code_est">
+                    </li>
+                    <li class="col-20 gutter-5 title">
+                        <label for="search_family">Cód Familia:</label>
+                    </li>
+                    <li class="col-20 gutter-5 text">
+                        <input id="search_code" name="search_code" type="text" ng-model="search.code">
+                    </li>
+                    <li class="col-20 gutter-5 title">
+                        <label for="search_family">Familia:</label>
+                    </li>
+                    <li class="col-40 gutter-5 text">
+                        <input id="search_family" name="search_family" type="text" ng-model="search.family">
+                    </li>
+                    <li class="col-20 gutter-5 title">
+                        <label for="search_pendings">Pendientes:</label>
+                    </li>
+                    <li class="col-30 gutter-5 text">
+                        <select id="search_pendings" name="search_pendings" ng-model="search.pending"
+                                ng-options="pending.idpending as pending.name for pending in pendings" required>
+                        </select>
+                    </li>
+                    <li class="col-50 gutter-5 text">
+
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-100 text">
+                        <button type="submit" class="btn btn-green">Search</button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>

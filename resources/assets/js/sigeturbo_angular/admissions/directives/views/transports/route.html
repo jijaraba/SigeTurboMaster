@@ -1,0 +1,50 @@
+<form ng-submit="SaveRoute()">
+    <ul class="display-horizontal col-100 enrollment-extended">
+        <li class="col-100">
+            <ul class="display-horizontal col-100">
+                <li class="col-25 scholarship-text">Vehículo</li>
+                <li class="col-75 scholarship">
+                    <select id="idvehicle" name="idvehicle" ng-model="routeform.idvehicle" ng-options="vehicle.idvehicle as vehicle.plate for vehicle in vehicles" required>
+                        <option value="">Seleccione un Vehículo</option>
+                    </select>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 scholarship-text">Conductor</li>
+                <li class="col-75 scholarship">
+                    <select id="idconveyor" name="idconveyor" ng-model="routeform.idconveyor"
+                                ng-options="conveyor.idconveyor as conveyor.firstname+' '+conveyor.lastname for conveyor in conveyors" required>
+                                <option  ng-value="">Seleccione un Conductor</option>
+                    </select>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 scholarship-text">Acompañante</li>
+                <li class="col-75 scholarship">
+                    <select id="idcompanion" name="idcompanion" ng-model="routeform.idcompanion"
+                        ng-options="conveyor.idconveyor as conveyor.firstname+' '+conveyor.lastname for conveyor in conveyors" required>
+                            <option ng-value="">Seleccione un Acompañante</option>
+                    </select>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Nombre</li>
+                <li class="col-75 inclusion">
+                    <input name="lastnames" type="text" ng-model="routeform.name" ng-value="routeform.name"  required>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 scholarship-text">Hora</li>
+                <li class="col-45 scholarship">
+                    <input name="hour" type="text" ng-model="routeform.hour" ng-value="routeform.hour"  required>
+                </li>
+                <li class="col-30">
+                    <button type="submit" class="btn btn-aquamarine" ng-disabled="routeform.idconveyor == routeform.idcompanion">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</form>
+<div ng-if="(routeform.idconveyor == routeform.idcompanion) && (routeform.idconveyor != undefined && routeform.idcompanion != undefined)">No pueden ser Iguales el conductor y el Acompañante</div>

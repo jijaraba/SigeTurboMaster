@@ -1,0 +1,32 @@
+<input type="search" ng-model="user_name" ng-blur="search()" style="text-align: left"/>
+<section class="sige-search-family-container" ng-if="showUsers">
+    <div class="close" ng-click="close()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+    <ul class="display-horizontal col-100 search">
+        <li class="col-100 families" data-ng-repeat="user in users | filter:user_name | limitTo:5">
+            <ul class="display-horizontal col-100 family">
+                <li class="col-10">
+                    <div>
+                        <img ng-src="{{assets}}/img/users/{{user.photo}}" alt="{{ user.lastname }}"  title="{{ user.lastname}} {{ user.firstname }}"/>
+                    </div>
+                </li>
+                <li class="col-10">
+                    <div>
+                        <span ng-click="AddUser(user,AddToRoute(user.iduser,route))">Adicionar usuario</span>
+                    </div>
+                </li>
+                <li class="col-30">
+                    <div>
+                        <span >{{ user.iduser }}</span>
+                    </div>
+                </li>
+                <li class="col-50">
+                    <div>
+                        {{ user.firstname }} {{ user.lastname }}
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</section>

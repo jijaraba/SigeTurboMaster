@@ -1,0 +1,91 @@
+<div ng-if="showIndicators">
+    <div class="sige-insert-header">
+        <section ng-if="showAchievementList">
+            <h5>Ingresar Indicador</h5>
+            <form name="indicatorForm" ng-submit="insertIndicator()">
+                <ul class="display-horizontal">
+                    <li class="col-60 gutter-5"></li>
+                    <li class="col-15 gutter-5 indicator-category"><span>Categoría del Indicador</span></li>
+                    <li class="col-25 gutter-10">
+                        <label for="type02" class="select-arrow">
+                            <select name="idindicatorcategory" id="idindicatorcategory"
+                                    ng-model="indicator.idindicatorcategory" required
+                                    ng-init="indicator.idindicatorcategory='1'">
+                                <option value="1">General</option>
+                                <option value="2">Flexibilización</option>
+                                <option value="3">Profundización</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li class="col-100">
+                        <ul class="display-horizontal" id="indicators">
+                            <li class="col-10 gutter-5" id="consecutive">
+                                <div class="consecutive">
+                                    <span>{{indicator.consecutive}}</span>
+                                    <input type="hidden" ng-model="indicator.consecutive" value="indicator.indicator"/>
+                                </div>
+                            </li>
+                            <li class="col-90 gutter-5" id="indicator">
+                                <ul class="display-horizontal">
+                                    <li class="col-100">
+                                        <ul class="display-horizontal">
+                                            <li class="col-20 gutter-5">
+                                                <label for="type01" class="select-arrow">
+                                                    <select name="type01" id="type01" ng-model="indicator.type01"
+                                                            required ng-init="indicator.type01='1'">
+                                                        <option value="1">Fortaleza</option>
+                                                    </select>
+                                                </label>
+                                            </li>
+                                            <li class="col-80 gutter-5">
+                                                <input type="text" ng-model="indicator.fortitude"
+                                                       placeholder="Indicador" value="" required/>
+                                            </li>
+                                            <li style="display: none"></li>
+                                        </ul>
+                                    </li>
+                                    <li class="col-100">
+                                        <ul class="display-horizontal">
+                                            <li class="col-20 gutter-5">
+                                                <label for="type02" class="select-arrow">
+                                                    <select name="type02" id="type02" ng-model="indicator.type02"
+                                                            required ng-init="indicator.type02='2'">
+                                                        <option value="2">Recomendación</option>
+                                                    </select>
+                                                </label>
+                                            </li>
+                                            <li class="col-80 gutter-5">
+                                                <input type="text" ng-model="indicator.recommendation"
+                                                       placeholder="Indicador" value="" required/>
+                                            </li>
+                                            <li style="display: none"></li>
+                                        </ul>
+                                    </li>
+                                    <li style="display: none"></li>
+                                </ul>
+                            </li>
+                            <li style="display: none"></li>
+                        </ul>
+                    </li>
+                    <li class="button gutter-5">
+                        <button type="submit" class="btn btn-aquamarine">Guardar</button>
+                    </li>
+                </ul>
+                <input type="hidden" ng-model="indicator.achievement" value="{{indicator.achievement}}"/>
+            </form>
+        </section>
+        <section ng-if="!showAchievementList">
+            <h5>Ingresar Logro</h5>
+            <form name="achievementForm" ng-submit="insertAchievement()">
+                <ul class="display-horizontal">
+                    <li class="col-100 gutter-5">
+                        <textarea ng-model="achievement.achievement" placeholder="Logro" required></textarea>
+                    </li>
+                    <li class="button gutter-5">
+                        <button type="submit" class="btn btn-aquamarine">Guardar</button>
+                    </li>
+                </ul>
+            </form>
+        </section>
+    </div>
+</div>

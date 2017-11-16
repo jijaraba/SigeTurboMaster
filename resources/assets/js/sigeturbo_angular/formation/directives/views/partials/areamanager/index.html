@@ -1,0 +1,45 @@
+<ul style="width:100%"  ng-controller="AcademicManagementController">
+	<li style="width:100%;border-bottom: 1px solid #CCCCCC;">
+        <ul style="width:100%;display: -ms-flexbox;display: flex;-ms-flex-direction: row;flex-direction: row;-ms-flex-pack: start;justify-content: flex-start;-ms-flex-flow: row wrap;flex-flow: row wrap;">
+            <li style="width:15%">
+				<button class="btn btn-green" id="showmonitoringtype"  ng-click="form(areamanager,'AreaManagerController')">
+                   	<i class="fa fa-plus-circle"></i> Nuevo
+                </button>
+            </li>
+            <li style="width:20%">
+                <div>Area</div>
+            </li>
+            <li style="width:35%">
+                <div>Profesor</div>
+            </li>
+            <li style="width:30%;padding:2px;">
+            	Acciones
+            </li>
+        </ul>
+    </li>  
+    <li style="width:100%;border-bottom: 1px solid #CCCCCC;" data-ng-animate="'repeat'" ng-repeat="areamanager in areamanagers">
+        <ul style="width:100%;display: -ms-flexbox;display: flex;-ms-flex-direction: row;flex-direction: row;-ms-flex-pack: start;justify-content: flex-start;-ms-flex-flow: row wrap;flex-flow: row wrap;">
+            <li style="width:15%">
+                <div style="position: relative;text-align: center;margin: 5px auto;width: 40px;height: 40px;border-radius: 50%;padding: 3px;background-color: #53bbb4;">
+                    <img style="border-radius: 50%;" ng-src="{{ assets }}/img/users/{{areamanager.photo}}" alt="{{ areamanager.Student }}" title="{{ areamanager.Student }}"/>
+                </div>
+            </li>
+            <li style="width:20%">
+                <div>{{areamanager.area}}</div>
+            </li>
+            <li style="width:35%">
+                <div>{{areamanager.Student}}</div>
+            </li>
+            <li style="width:15%;padding:2px;">
+                <button type="button" ng-click="edit(areamanager,'AreaManagerController')" class="btn btn-aquamarine">
+                    <i class="fa fa-pencil-square" aria-hidden="true"></i> Editar
+                </button>
+            </li>
+            <li style="width:15%;padding:2px;">
+				<button class="option option-red" ng-click="deleteregistry(areamanager.idareamanager)">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i> Borrar
+                </button>
+            </li>
+        </ul>
+    </li>                     
+</ul>

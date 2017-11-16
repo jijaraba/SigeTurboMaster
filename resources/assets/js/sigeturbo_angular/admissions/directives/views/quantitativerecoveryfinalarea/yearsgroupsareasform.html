@@ -1,0 +1,28 @@
+<li class="col-15 gutter-5">
+    <label class="select-arrow" for="idyear">
+        <select id="idyear" name="idyear" ng-model="recoveryfinalform.idyear" ng-options="year.idyear as year.name for year in years">
+            <option ng-value="">Seleccione el Año</option>
+        </select>
+    </label>
+</li>
+<li class="col-10 gutter-5">
+    <label class="select-arrow" for="idprovenance">
+        <select id="idprovenance" name="idprovenance" ng-model="recoveryfinalform.idprovenance" ng-options="provenance.idprovenance as provenance.name for provenance in provenances" required>
+            <option  ng-value="">Seleccione la Proveniencia</option>
+        </select>
+    </label>
+</li>
+<li class="col-15 gutter-5">
+    <label class="select-arrow" for="idgroup">
+        <select id="idgroup" name="idgroup" ng-model="recoveryfinalform.idgroup" ng-options="group.idgroup as group.name for group in groups" required>
+            <option  ng-value="">Seleccione el Grupo</option>
+        </select>
+    </label>
+</li>
+<li class="col-40 gutter-5">
+    <label class="select-arrow" for="idarea">
+        <select id="idarea" name="idarea" ng-model="recoveryfinalform.idarea" ng-options="area.idarea as area.name for area in areas" required>
+            <option  ng-value="">Seleccione el Area</option>
+        </select>
+    </label>
+</li>

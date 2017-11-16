@@ -1,0 +1,754 @@
+@import "core";
+
+.status-photo-1 {
+  background: $sige-global-bgcolor-04;
+}
+
+.status-photo-4 {
+  background: $sige-global-bgcolor-10;
+}
+
+.status-photo-6 {
+  background: $sige-global-bgcolor-14;
+}
+
+.status-list-1 {
+  border-radius: 5px;
+}
+
+.status-list-4 {
+  background: rgba($sige-global-bgcolor-10, 1);
+  border-radius: 10px;
+  color: white;
+}
+
+.sige-financials-student {
+  padding: 20px 10px;
+  font: {
+    size: 0.9em;
+  }
+}
+
+.sige-financials-transactions {
+  padding: 20px;
+  font: {
+    size: 1em;
+  }
+  header {
+    text-align: left;
+    position: relative;
+    > .close {
+      position: absolute;
+      top: 0px;
+      right: 10px;
+      > span {
+        font: {
+          size: 1.6em;
+        }
+      }
+    }
+  }
+  .payments {
+    padding: 5px;
+    > div.payment-title {
+      line-height: 40px;
+      position: relative;
+      > span {
+        padding: 5px;
+        display: block;
+        border-bottom: 1px solid $sige-border-color-03;
+        text-align: left;
+      }
+      > i {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+      }
+    }
+    > .transactions {
+      margin-top: 25px;
+      > .exports {
+        width: 500px;
+        float: right;
+        margin-bottom: 15px;
+      }
+      .transaction-titles {
+        > ul {
+          > li {
+            font: {
+              size: 0.95em;
+            }
+            text-align: center;
+          }
+        }
+      }
+      .transaction-edit {
+        border-bottom: 1px solid #eee;
+        section {
+          > ul {
+            > li {
+              padding: 5px 4px;
+            }
+          }
+        }
+        input {
+          font: {
+            size: 1em;
+          }
+          padding: 12px 8px;
+        }
+        i {
+          font: {
+            size: 1.6em;
+          }
+          padding-top: 10px;
+        }
+        button {
+          width: 100%;
+          padding: 10px;
+        }
+        .photo {
+          padding: 8px;
+          > div {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            padding: 3px;
+            background-color: rgba($sige-global-bgcolor-03, 1);
+            > img {
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+      .transaction-totals {
+        margin-top: 10px;
+        height: 45px;
+        > ul {
+          background: $sige-global-bgcolor-27;
+          border-radius: 5px;
+          box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+          float: right;
+          background: rgba($sige-global-bgcolor-07, 0.1);
+          li {
+            line-height: 45px;
+            text-align: center;
+            font: {
+              size: 1em;
+            }
+            color: $sige-global-color-07;
+            > span {
+              font: {
+                weight: bold;
+              }
+              color: $sige-global-color-07;
+            }
+          }
+        }
+      }
+      .transaction-new {
+        section {
+          > ul {
+            > li {
+              padding: 5px 4px;
+              input {
+                font: {
+                  size: 1em;
+                }
+                padding: 12px 8px;
+              }
+            }
+          }
+        }
+        background: $sige-global-bgcolor-27;
+        border-radius: 5px;
+        box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+        .new {
+          i {
+            font: {
+              size: 1.6em;
+            }
+            padding-top: 10px;
+            &.empty {
+              display: block;
+              width: 15px;
+            }
+          }
+          button {
+            width: 100%;
+            padding: 10px;
+
+          }
+        }
+        .photo {
+          padding: 8px;
+          > div {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            padding: 3px;
+            background-color: rgba($sige-global-bgcolor-03, 1);
+            > img {
+              border-radius: 50%;
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+
+.sige-financials-payment-register {
+  margin-bottom: 20px;
+  float: right;
+  > a {
+    > i {
+      font: {
+        size: 1.4em;
+      }
+    }
+  }
+}
+
+.sige-payments-lists {
+  position: relative;
+  margin-top: 40px;
+  .search-container {
+    float: right;
+    margin-top: 10px;
+    width: 50%;
+    span {
+      margin-bottom: 5px;
+      font: {
+        family: $sige-font-family-03;
+        size: 0.9em;
+      }
+      color: $sige-global-color-04;
+    }
+    #search {
+      position: relative;
+      div.search {
+        > input {
+          padding: 7px;
+          width: 100%;
+        }
+        > span {
+          height: 42px;
+          border: 2px solid $sige-border-color-03;
+          padding: 5px 2px;
+          width: 100%;
+          display: inline-block;
+          border-radius: 5px;
+        }
+        i {
+          position: absolute;
+          width: 40px;
+          right: 0px;
+          text-align: center;
+          background: #f5f5f5;
+          border-width: 1px;
+          border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+          border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+          border-bottom-color: #b3b3b3;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          height: 42px;
+          line-height: 42px;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+      }
+      div.container {
+        width: 100%;
+        font: {
+          size: 0.9em;
+        }
+        ul.search-options {
+          border-bottom: 1px solid $sige-border-color-03;
+          li {
+            &.title {
+              > label {
+                position: relative;
+                top: 25%;
+                transform: translateY(-50%);
+                font: {
+                  size: 0.9em;
+                }
+              }
+            }
+            &.text {
+              > input {
+                background: white;
+                border-radius: 3px;
+                border: 1px solid #C7CCD1;
+                padding: 6px;
+                font: {
+                  size: 1em;
+                }
+              }
+              > select {
+                background: white;
+                border-radius: 3px;
+                border: 1px solid #C7CCD1;
+                padding: 6px;
+                text-align: center;
+                font: {
+                  size: 1em;
+                }
+              }
+              > button {
+                width: 100px;
+                padding: 8px 12px;
+                margin: 0px 0px 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+    li#views {
+      position: relative;
+      top: 5px;
+      > input[type="radio"] + label {
+        width: 40px;
+        padding: 2px 0px;
+      }
+    }
+    #order {
+      padding: 6px;
+      width: 90%;
+      appearance: none;
+    }
+    li#reverse {
+      position: relative;
+      top: 5px;
+      > input[type="radio"] + label {
+        width: 30px;
+        padding: 2px 0px;
+      }
+    }
+  }
+}
+
+.payment-list {
+  font: {
+    size: 0.9em;
+  }
+  color: #8D9AA5;
+}
+
+.payment {
+  border-bottom: 1px solid $sige-border-color-03;
+  .select {
+    > input {
+      position: relative;
+      top: 40%;
+      transform: translateY(-50%);
+    }
+  }
+  .photo {
+    line-height: normal;
+    div {
+      position: relative;
+      top: 40%;
+      transform: translateY(-50%);
+      text-align: center;
+      margin: 5px auto;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      padding: 3px;
+      background-color: rgba($sige-global-bgcolor-03, 1);
+      > a {
+        > img {
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+  .family {
+    > div {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  .payments {
+    > div {
+
+    }
+  }
+  .pending {
+    > div {
+      text-align: right;
+      margin-right: 10px;
+      line-height: initial;
+      padding: 20px;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  .detail {
+    a {
+      padding: 8px 18px;
+      background-color: $sige-global-bgcolor-22 !important;
+      border-radius: 3px;
+      color: $sige-global-color-01;
+      position: relative;
+      top: 40%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.payment-calendar {
+  font: {
+    size: 0.85em;
+  }
+  margin: 10px;
+  > ul {
+    > li {
+      width: 60px;
+      float: right;
+      margin-bottom: 5px;
+      section.is-payment {
+        border-radius: 5px;
+        line-height: initial;
+        text-align: center;
+        margin: 0px 2px;
+        position: relative;
+        > img {
+          width: 40px;
+        }
+        &.N {
+        }
+        &.Y {
+        }
+        > span {
+          display: block;
+          a {
+            color: $sige-global-bgcolor-03;
+          }
+          &.type {
+            font: {
+              size: 0.8em;
+            }
+            color: $sige-global-color-04;
+          }
+          &.month {
+            color: $sige-global-bgcolor-03;
+          }
+        }
+        > em {
+          display: none;
+          &.virtual {
+            padding: 2px;
+            display: block;
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            content: "V";
+            background: $sige-global-bgcolor-04;
+            border-radius: 50px;
+            font: {
+              size: 0.8em;
+            }
+            color: white;
+            top: 0px;
+            right: 5px;
+          }
+        }
+      }
+    }
+  }
+  .payment-calendar-edit {
+    font: {
+      size: 1em;
+    }
+    a {
+      color: $sige-global-bgcolor-03;
+      &.edit {
+        text-align: right;
+      }
+    }
+    div {
+      padding: 5px;
+    }
+    .banks {
+      text-align: left;
+      > select.bank {
+        text-align: left;
+      }
+    }
+  }
+}
+
+.sige-payments-container {
+  position: relative;
+  background: #f9fafa;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  > article {
+    > header {
+      z-index: 1;
+      > h2 {
+        padding-top: 20px;
+        border-bottom: none;
+        text-align: center;
+      }
+      > img {
+        margin: 0px auto;
+        width: 180px;
+        display: block;
+      }
+    }
+    > section {
+      > h2 {
+        padding-top: 10px;
+        border-bottom: none;
+        text-align: center;
+        color: $sige-global-color-04;
+        font: {
+          size: 2.1em;
+        }
+        > span {
+          font: {
+            size: 0.6em;
+          }
+          color: $sige-global-bgcolor-10;
+        }
+      }
+      p {
+        padding: 0px;
+        text-align: center;
+        font: {
+          size: 0.85em;
+        }
+        &.observation {
+          padding-top: 15px;
+        }
+        &.transaction {
+          margin: 25px;
+          color: $sige-global-color-01;
+          > span.A {
+            padding: 10px;
+            border-radius: 5px;
+            background: $sige-global-bgcolor-07;
+            color: white;
+            border-bottom: 3px solid $sige-global-bgcolor-08;
+          }
+          > span.P {
+            padding: 10px;
+            border-radius: 5px;
+            background: $sige-global-bgcolor-12;
+            color: white;
+            border-bottom: 3px solid $sige-global-bgcolor-11;
+          }
+          > span.R {
+            padding: 10px;
+            border-radius: 5px;
+            background: $sige-global-bgcolor-09;
+            color: white;
+            border-bottom: 3px solid $sige-global-bgcolor-10;
+          }
+        }
+        &.message {
+          padding: 5px 0px;
+          font: {
+            size: 0.8em;
+          }
+        }
+      }
+    }
+    > footer {
+      position: absolute;
+      bottom: 5px;
+      min-height: inherit;
+      top: inherit;
+      width: 100%;
+      > div {
+        height: 40px;
+        margin: 10px 20px;
+        padding-top: 15px;
+        border-top: 1px solid $sige-border-color-03;
+        color: $sige-global-color-04;
+        text-align: center;
+        font: {
+          size: 0.8em;
+        }
+      }
+    }
+  }
+  .payments-options {
+    font: {
+      size: 0.9em;
+    }
+    > ul {
+      > li {
+        text-align: center;
+        > div {
+          margin: 0px auto;
+          width: 120px;
+          img {
+            max-width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+.sige-payments-create {
+  position: relative;
+  background: #f9fafa;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  > article {
+    > header {
+      z-index: 1;
+      > h2 {
+        padding-top: 20px;
+        border-bottom: none;
+        text-align: center;
+      }
+      > img {
+        margin: 0px auto;
+        width: 180px;
+        display: block;
+      }
+    }
+    > section {
+      > h2 {
+        padding-top: 10px;
+        border-bottom: none;
+        text-align: center;
+        color: $sige-global-color-04;
+        font: {
+          size: 2.1em;
+        }
+        > span {
+          font: {
+            size: 0.6em;
+          }
+          color: $sige-global-bgcolor-10;
+        }
+      }
+      p {
+        padding: 0px;
+        text-align: center;
+        font: {
+          size: 0.85em;
+        }
+        &.observation {
+          padding-top: 15px;
+        }
+        &.transaction {
+          margin: 25px;
+          color: $sige-global-color-01;
+        }
+        &.message {
+          padding: 5px 0px;
+          font: {
+            size: 0.8em;
+          }
+        }
+      }
+      section.methods {
+        margin: 0px auto;
+        text-align: center;
+        color: $sige-global-color-04;
+        width: 70%;
+        font: {
+          size: 0.9em;
+        }
+        > .method {
+          width: 80%;
+          margin: 0px auto;
+          > li {
+            > a {
+              text-align: center;
+              display: inline-block;
+              height: 200px;
+              width: 200px;
+              span {
+                margin-top: -15px;
+                display: block;
+                font: {
+                  size: 0.9em;
+                }
+              }
+            }
+          }
+        }
+        > .container-method {
+          margin-top: 10px;
+          width: 100%;
+          padding: 10px 20px;
+          background: $sige-global-bgcolor-01;
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+          li {
+            margin: 3px 0px;
+            &.border {
+              border-top: 1px solid $sige-border-color-06;
+              margin-top: 5px;
+              padding-top: 10px;
+            }
+          }
+          select {
+            background: white;
+          }
+          input {
+            background: white;
+            text-align: center;
+          }
+          textarea {
+            background: white;
+            text-align: center;
+            height: 80px;
+            text-align: left;
+          }
+          p {
+            font: {
+              size: 1em;
+            }
+            line-height: 50px;
+            text-align: left;
+          }
+          h3 {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 5px;
+          }
+          button {
+            margin: 10px auto;
+          }
+          &.massive {
+          }
+          &.individual {
+          }
+        }
+      }
+    }
+    > footer {
+      bottom: 5px;
+      min-height: inherit;
+      top: inherit;
+      width: 100%;
+      > div {
+        height: 40px;
+        margin: 10px 20px;
+        padding-top: 15px;
+        border-top: 1px solid $sige-border-color-03;
+        color: $sige-global-color-04;
+        text-align: center;
+        font: {
+          size: 0.8em;
+        }
+      }
+    }
+  }
+}

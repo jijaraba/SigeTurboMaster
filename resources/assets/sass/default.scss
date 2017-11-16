@@ -1,0 +1,3310 @@
+@import "sigeturbo/core";
+@import "sigeturbo/reset";
+@import "sigeturbo/style";
+
+body {
+  width: 100%;
+  display: block;
+  font: {
+    family: $sige-font-family-01;
+    size: 1em;
+    weight: 100;
+  }
+  letter-spacing: -1px;
+  background-color: $sige-global-bgcolor-01;
+  color: $sige-global-color-03;
+}
+
+header {
+  position: relative;
+  max-width: 1500px;
+  height: 100%;
+  display: block;
+  z-index: 101;
+  ul#account-info {
+    height: 70px;
+    max-width: 1400px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 101;
+    margin-left: 100px;
+    padding: 10px 30px;
+    left: 0;
+    right: 0;
+    > li {
+      position: relative;
+      height: 100%;
+      float: right;
+      pointer-events: auto;
+      &#notifications {
+        width: 50px;
+        > a {
+          .bell {
+            top: 5px;
+            position: relative;
+            width: 25px;
+            height: 30px;
+            background: {
+              size: 50px 30px;
+              position: 25px 0px;
+              image: url("/resources/assets/sass/images/bells.svg");
+              image: url("/resources/assets/sass/images/bells.svg");
+            }
+            opacity: 0.9;
+            &:hover {
+              background: {
+                size: 50px 30px;
+                position: -50px 0px;
+              }
+              transition: opacity 3s ease;
+            }
+            &.show {
+              background: {
+                size: 50px 30px;
+                position: -50px 0px;
+              }
+              transition: opacity 3s ease;
+            }
+            opacity: 1;
+          }
+          em {
+            color: white;
+            font: {
+              size: 1em;
+              family: $sige-font-family-02;
+              weight: normal;
+            }
+            top: -30px;
+            position: relative;
+            right: -20px;
+            background: $sige-global-bgcolor-10;
+            padding: 0px 6px;
+            border-radius: 3px;
+            border: 1px solid $sige-global-bgcolor-09;
+
+          }
+        }
+      }
+      &#profile {
+        width: 200px;
+        > a {
+          padding-right: 25px;
+          padding-left: 50px;
+          figure {
+            float: left;
+            margin-top: -3px;
+            div#photo {
+              float: left;
+              position: relative;
+              height: 50px;
+              width: 50px;
+              border-radius: 50%;
+              border: 4px solid $sige-global-bgcolor-03;
+              img {
+                border-radius: 50%;
+                display: block;
+                position: relative;
+                z-index: 3;
+              }
+            }
+            figcaption {
+              position: absolute;
+              left: 60px;
+              right: 0;
+              top: 5px;
+              h4 {
+                color: #788189;
+                border: none;
+                padding-bottom: 0px;
+                font: {
+                  size: 1em;
+                  family: $sige-font-family-03;
+                }
+              }
+              em {
+                color: #788189;
+                top: -5px;
+                position: relative;
+                font: {
+                  size: 12px;
+                  family: $sige-font-family-03;
+                  weight: normal;
+                }
+              }
+            }
+          }
+          &:after {
+            display: inline-block;
+            content: "";
+            width: 12px;
+            height: 8px;
+            background: {
+              size: 24px 16px;
+              position: -12px 0px;
+              image: url("/resources/assets/sass/images/arrows.svg");
+            }
+          ;
+            position: absolute;
+            top: 22px;
+            right: 15px;
+            transition: border-color 0.2s ease;
+          }
+        }
+      }
+    }
+  }
+  ul#breadcrumb {
+    background-color: $sige-global-bgcolor-01;
+    margin-left: 70px;
+    height: 70px;
+    max-width: 1430px;
+    padding: 20px 30px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    &.on:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      box-shadow: 0 -4px 0px 4px #edeff0, 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+      z-index: 0;
+      opacity: 1;
+      transition: opacity 1s ease, margin 0.2s ease;
+      right: 20%;
+      margin: 0px 55px 0px 25px;
+    }
+    .mobile-logo {
+      display: none;
+    }
+    .title {
+      text-align: left;
+      width: 100%;
+    }
+    .mobile-toggle {
+      display: none;
+      a {
+        .hamburger {
+          position: relative;
+          top: 25px;
+          background-color: #8d9aa5;
+          width: 25px;
+          height: 3px;
+          display: block;
+          border-radius: 6px;
+          background-clip: padding-box;
+          transition: top 0.3s ease 0.2s, bottom 0.3s ease 0.2s, background-color 0.3s ease, transform 0.3s ease;
+          &:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -7px;
+            background-color: #8d9aa5;
+            width: 25px;
+            height: 3px;
+            display: block;
+            border-radius: 6px;
+            background-clip: padding-box;
+            transition: top 0.3s ease 0.2s, bottom 0.3s ease 0.2s, background-color 0.3s ease, transform 0.3s ease;
+          }
+          &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: -7px;
+            background-color: #8d9aa5;
+            width: 25px;
+            height: 3px;
+            display: block;
+            border-radius: 6px;
+            background-clip: padding-box;
+            transition: top 0.3s ease 0.2s, bottom 0.3s ease 0.2s, background-color 0.3s ease, transform 0.3s ease;
+          }
+        }
+        em {
+          color: white;
+          font: {
+            size: 1em;
+            family: $sige-font-family-02;
+            weight: normal;
+          }
+          position: relative;
+          right: -20px;
+          background: $sige-global-bgcolor-10;
+          padding: 0px 6px;
+          border-radius: 5px;
+          border: 3px solid $sige-global-bgcolor-09;
+        }
+      }
+    }
+  }
+  > nav {
+    background-color: $sige-global-bgcolor-02;
+    width: 70px;
+    left: 0;
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    ul#sige-main-nav {
+      margin: 0px 5px;
+      li {
+        width: 100%;
+        height: 65px;
+        border-radius: 5px;
+        &.sige-nav-module {
+          a {
+            color: $sige-global-color-02;
+            text-align: center;
+            display: block;
+            width: 100%;
+            span {
+              visibility: hidden;
+            }
+          }
+        }
+        &#home {
+          height: 120px;
+          width: 80%;
+          margin: 0 auto;
+          img {
+            padding-top: 10px;
+            vertical-align: middle;
+          }
+        }
+        &#admissions {
+          margin-top: 20px;
+          a {
+            padding: 10px;
+            border-radius: 5px;
+            img {
+              width: 100%;
+              opacity: 0.5;
+              vertical-align: middle;
+              top: 10px;
+              position: relative;
+              &:hover {
+                opacity: 1;
+              }
+            }
+            span {
+              visibility: hidden;
+            }
+          }
+        }
+        &#financials {
+          position: relative;
+          a {
+            padding: 10px;
+            border-radius: 5px;
+            img {
+              width: 100%;
+              opacity: 0.5;
+              vertical-align: middle;
+              top: 10px;
+              position: relative;
+              &:hover {
+                opacity: 1;
+              }
+            }
+            span {
+              visibility: hidden;
+            }
+          }
+          em {
+            position: absolute;
+            top: 10px;
+            left: 25px;
+            background: $sige-global-bgcolor-10;
+            font: {
+              size: 0.7em;
+            }
+            border-radius: 5px;
+            padding: 3px;
+            color: white;
+          }
+        }
+        &#formation {
+          a {
+            position: relative;
+            padding: 10px;
+            border-radius: 5px;
+            img {
+              width: 90%;
+              opacity: 0.5;
+              vertical-align: middle;
+              top: 10px;
+              position: relative;
+              &:hover {
+                opacity: 1;
+              }
+            }
+            span {
+              visibility: hidden;
+            }
+          }
+        }
+        &#resources {
+          a {
+            padding: 10px;
+            border-radius: 5px;
+            img {
+              width: 100%;
+              opacity: 0.5;
+              vertical-align: middle;
+              top: 10px;
+              position: relative;
+              &:hover {
+                opacity: 1;
+              }
+            }
+            span {
+              visibility: hidden;
+            }
+          }
+        }
+        &#communications {
+          a {
+            padding: 10px;
+            border-radius: 5px;
+            img {
+              width: 100%;
+              opacity: 0.5;
+              vertical-align: middle;
+              top: 10px;
+              position: relative;
+              &:hover {
+                opacity: 1;
+              }
+            }
+            span {
+              visibility: hidden;
+            }
+          }
+        }
+        &#parents {
+          a {
+            padding: 10px;
+            border-radius: 5px;
+            img {
+              width: 90%;
+              opacity: 0.5;
+              vertical-align: middle;
+              top: 10px;
+              position: relative;
+              &:hover {
+                opacity: 1;
+              }
+            }
+            span {
+              visibility: hidden;
+            }
+          }
+        }
+        &#roles {
+          margin-top: 20px;
+          display: none;
+          border-top: 1px solid rgba($sige-border-color-03, 0.2);
+          a {
+            padding: 10px;
+            border-radius: 5px;
+            span {
+              visibility: hidden;
+            }
+          }
+        }
+        &#settings {
+          display: none;
+          a {
+            padding: 10px;
+            border-radius: 5px;
+            span {
+              visibility: hidden;
+            }
+          }
+        }
+        &#logout {
+          margin-top: 10px;
+          display: none;
+          border-top: 1px solid rgba($sige-border-color-03, 0.2);
+          a {
+            padding: 10px;
+            border-radius: 5px;
+            span {
+              visibility: hidden;
+            }
+          }
+        }
+        &.current {
+          background-color: rgba($sige-global-color-02, 0.12);
+          > a {
+            > img {
+              opacity: 1 !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.sige-main-container {
+  position: relative;
+  margin-left: 70px;
+  max-width: 1430px;
+  height: 100%;
+  top: 70px;
+}
+
+.sige-main-container-guest {
+  position: relative;
+  max-width: 1100px;
+  height: 100%;
+  top: 130px;
+  margin: 0px auto;
+}
+
+.sige-content {
+  width: 80%;
+  height: auto;
+  min-height: 600px;
+  padding: 0px 60px 60px 30px;
+  position: relative;
+}
+
+.sige-content-guest {
+  width: 100%;
+  height: auto;
+  min-height: 600px;
+  position: relative;
+}
+
+.sige-stream-content {
+  display: none;
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  bottom: -70px;
+  z-index: 101;
+  padding: 10px 0px;
+  left: 0px;
+  right: 0px;
+  .stream {
+    height: auto;
+    min-height: 70px;
+    padding: 12px 20px;
+    position: relative;
+    background: white;
+    border-radius: 3px 3px 0px 3px;
+    box-shadow: 0px -1px 6px rgba(0, 0, 0, 0.2);
+    font: {
+      size: 0.9em;
+    }
+    > .photo {
+      float: left;
+      width: 5%;
+      > div {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        padding: 3px;
+        background-color: rgba($sige-global-bgcolor-03, 1);
+        > img {
+          border-radius: 50%;
+        }
+      }
+    }
+    > .message {
+      float: left;
+      line-height: 36px;
+      width: 95%;
+    }
+  }
+}
+
+.sige-panel {
+  width: 80%;
+  height: auto;
+  min-height: 120px;
+  padding: 0px 60px 60px 30px;
+  position: relative;
+}
+
+.sige-contained-welcome {
+  background-color: $sige-global-bgcolor-04;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+  min-height: 80px;
+  padding: 30px 25px;
+  position: relative;
+  h4 {
+    color: white;
+  }
+  p {
+    color: white;
+  }
+}
+
+.sige-welcome-close {
+  top: 10px;
+  right: 10px;
+  margin: 0px;
+  position: absolute;
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  height: 35px;
+  width: 35px;
+  padding: 0px;
+  border-radius: 5px;
+  font: {
+    size: 1.1em;
+  }
+  cursor: pointer;
+}
+
+.sige-contained {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+  min-height: 80px;
+  padding: 30px 25px;
+  position: relative;
+}
+
+.sige-search-container {
+  position: absolute;
+  background-color: #ffffff;
+  width: 300px;
+  border-radius: 5px;
+  margin-top: 5px;
+  box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  z-index: 100;
+  font: {
+    size: 0.8em;
+  }
+  .search {
+    .text {
+
+    }
+    > .products {
+      padding-top: 10px;
+      text-align: left;
+      border-bottom: 1px solid $sige-border-color-02;
+      .product {
+        line-height: 10px;
+        li {
+          span {
+            color: $sige-global-bgcolor-04;
+            &:hover {
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.sige-search-family-container {
+  position: absolute;
+  background-color: #ffffff;
+  width: 98%;
+  border-radius: 5px;
+  margin-top: 5px;
+  box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 999;
+  font: {
+    size: 0.8em;
+  }
+  > div.close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    i {
+      font: {
+        size: 1.2em;
+      }
+    }
+
+  }
+  .search {
+    .text {
+
+    }
+    > .families {
+      padding-top: 10px;
+      text-align: left;
+      border-bottom: 1px solid $sige-border-color-02;
+      .family {
+        line-height: 10px;
+        > li {
+          > div {
+            position: relative;
+            top: 40%;
+            transform: translateY(-50%);
+            > ul {
+              > li {
+                width: 45px;
+                display: inline-table;
+                &.photo {
+                  > div {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    padding: 3px;
+                    background-color: rgba($sige-global-bgcolor-03, 1);
+                    > img {
+                      border-radius: 50%;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          span {
+            color: $sige-global-bgcolor-04;
+            &:hover {
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.search-tags {
+  line-height: normal;
+  > .search-tag {
+    display: inline-block;
+    border-radius: 5px;
+    background: $sige-global-bgcolor-21;
+    padding: 0px 5px;
+    font: {
+      size: 0.8em;
+    }
+    > .name {
+      line-height: 30px;
+      padding: 0px 5px;
+      border-radius: 5px;
+    }
+  }
+}
+
+.sige-list {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+  min-height: 80px;
+  padding: 15px 25px;
+  margin: 10px 0px;
+}
+
+.sige-help {
+  border-top: 1px solid $sige-border-color-03;
+  margin-top: 15px;
+  ul {
+    float: right;
+    li {
+      border-right: 1px solid $sige-border-color-03;
+      padding: 0px 5px;
+      &:last-child {
+        border: none;
+      }
+      p {
+        text-align: center;
+        font: {
+          size: 0.8em;
+        }
+      }
+    }
+  }
+}
+
+aside {
+  width: 20%;
+  position: absolute;
+  top: 70px;
+  right: 30px;
+  overflow: auto;
+  height: 100%;
+  min-height: 695px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.sige-app-list {
+  display: block;
+  li {
+    display: block;
+    line-height: 1em;
+    padding: 15px;
+    border-bottom: 1px solid $sige-border-color-02;
+    transition: all 0.3s ease;
+    position: relative;
+    &.active {
+      border-left: 7px solid $sige-global-color-07;
+      a {
+        color: $sige-global-color-07;
+      }
+    }
+    &:hover {
+      border-left: 7px solid $sige-border-color-04;
+    }
+    a {
+      padding: 10px;
+      font-family: $sige-font-family-04;
+      color: #8d9aa5;
+      white-space: nowrap;
+      &:hover {
+        color: #5a6772;
+      }
+    }
+    em {
+      position: absolute;
+      top: 10px;
+      left: 95px;
+      background: #da4453;
+      font-size: .7em;
+      border-radius: 5px;
+      padding: 3px;
+      color: #fff;
+    }
+  }
+}
+
+.sige-app-select {
+  display: none;
+}
+
+form {
+  margin: 20px 0px;
+  > ul {
+    > li {
+      display: inline-block;
+      > select {
+        width: 100%;
+      }
+      > &:last-child {
+        width: 100%;
+      }
+    }
+  }
+}
+
+footer {
+  min-height: 150px;
+  width: 100%;
+  position: relative;
+  top: 70px;
+  .sige-footer-content {
+    margin-left: 100px;
+    max-width: 1430px;
+    padding: 20px 0px;
+    font: {
+      size: 0.9em;
+    }
+    color: #8d9aa5;
+  }
+}
+
+//*
+//|-----------------------------------------------------------
+//| Generic Styles
+//|-----------------------------------------------------------
+//*/
+
+.normal-background {
+  background-color: rgba($sige-global-bgcolor-04, 1);
+}
+
+.sige-student-lists {
+  position: relative;
+  .search-container {
+    float: right;
+    margin-top: 10px;
+    width: 60%;
+    label {
+      font: {
+        family: $sige-font-family-04;
+        size: 0.9em;
+      }
+      color: $sige-global-color-04;
+      margin-right: 5px;
+    }
+    #search {
+      position: relative;
+      div.search {
+        > input {
+          padding: 7px;
+          width: 100%;
+        }
+        > span {
+          border: 2px solid $sige-border-color-03;
+          padding: 5px 2px;
+          width: 100%;
+          display: inline-block;
+          border-radius: 5px;
+        }
+        i {
+          position: absolute;
+          width: 40px;
+          right: 0px;
+          text-align: center;
+          background: #f5f5f5;
+          border-width: 1px;
+          border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+          border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+          border-bottom-color: #b3b3b3;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          height: 42px;
+          line-height: 42px;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+      }
+      div.container {
+        width: 100%;
+        font: {
+          size: 0.9em;
+        }
+        ul.search-options {
+          border-bottom: 1px solid $sige-border-color-03;
+          line-height: 25px;
+          li {
+            &.title {
+              line-height: 25px;
+            }
+            &.text {
+              > input {
+                background: white;
+                border-radius: 3px;
+                border: 1px solid #C7CCD1;
+                padding: 6px;
+                font: {
+                  size: 1em;
+                }
+              }
+              > select {
+                background: white;
+                border-radius: 3px;
+                border: 1px solid #C7CCD1;
+                padding: 6px;
+                text-align: center;
+                font: {
+                  size: 1em;
+                }
+                &#search_status {
+                  height: 100px;
+                }
+                &#search_category {
+                  height: 100px;
+                }
+              }
+              > button {
+                width: 100px;
+                padding: 8px 12px;
+                margin: 15px 0px 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+    li#views {
+      position: relative;
+      top: 5px;
+      > input[type="radio"] + label {
+        width: 40px;
+        padding: 2px 0px;
+      }
+    }
+    #order {
+      padding: 6px;
+      width: 65%;
+      -webkit-appearance: button;
+      -moz-appearance: button;
+      appearance: button;
+    }
+    li#reverse {
+      position: relative;
+      top: 5px;
+      > input[type="radio"] + label {
+        width: 30px;
+        padding: 2px 0px;
+      }
+    }
+  }
+  .student-list {
+    h4 {
+      margin: 25px 0px 15px 0px;
+    }
+    ul#student-list {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      flex-flow: row wrap;
+      li {
+        .student {
+          background: #f9fafa;
+          border: 1px solid #D8D7D9;
+          margin: 5px;
+          border-radius: 3px;
+          &:hover {
+            box-shadow: 0px 2px 4px #dce8ed;
+          }
+          .body {
+            padding: 10px 40px;
+            .image {
+              position: relative;
+              border-radius: 50%;
+              width: 96px;
+              height: 96px;
+              margin: 0px auto;
+              cursor: pointer;
+              padding: 6px;
+              text-align: center;
+              > img {
+                width: 100%;
+                text-align: center;
+                border-radius: 50%;
+              }
+              > div.rating {
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                font: {
+                  size: 12px;
+                }
+                &:before {
+                  top: 0px;
+                  content: initial;
+                }
+              }
+              > div.inclusion {
+                position: absolute;
+                top: 5px;
+                left: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                background-color: $sige-global-bgcolor-08;
+                &:before {
+                  line-height: 25px;
+                }
+              }
+              > div.observer {
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                background-color: $sige-global-bgcolor-08;
+                padding-top: 4px;
+                font-size: 0.8em;
+                &:before {
+                  line-height: 25px;
+                }
+              }
+              > div.partial {
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                background-color: $sige-global-bgcolor-08;
+                &:before {
+                  line-height: 25px;
+                }
+              }
+              > div.descriptivereport {
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                background-color: $sige-global-bgcolor-08;
+                &:before {
+                  line-height: 25px;
+                }
+              }
+            }
+          }
+          .lead {
+            font-size: 90%;
+            text-align: center;
+            margin-top: 5px;
+            padding-bottom: 10px;
+            color: $sige-global-color-03;
+          }
+          .student-info {
+            background-color: white;
+            li {
+              width: 33%;
+              text-align: center;
+              padding: 7px;
+              float: left;
+              strong {
+                width: 100%;
+                float: left;
+                font: {
+                  size: 0.8em;
+                }
+              }
+              em {
+                color: #788189;
+                position: relative;
+                font: {
+                  size: 0.8em;
+                  weight: normal;
+                }
+              }
+              &.absent {
+                border-right: 1px solid #EDEDED;
+              }
+              &.tardy {
+                border-right: 1px solid #EDEDED;
+              }
+              &.grade {
+
+              }
+              &.amount {
+                height: 35px;
+                > .list {
+                  font: {
+                    family: $sige-font-family-01;
+                    size: 0.9em;
+                  }
+                  color: $sige-global-color-05;
+                }
+              }
+            }
+            &:after {
+              content: "";
+              line-height: 0;
+              display: table;
+            }
+            &:before {
+              content: "";
+              line-height: 0;
+              display: table;
+            }
+          }
+        }
+      }
+    }
+    ul#student-list-normal {
+      display: inline-flex;
+      li {
+        .student {
+          background: #f9fafa;
+          border: 1px solid #D8D7D9;
+          margin: 5px;
+          border-radius: 3px;
+          &:hover {
+            box-shadow: 0px 2px 4px #dce8ed;
+          }
+          .body {
+            padding: 10px 40px;
+            .image {
+              position: relative;
+              border-radius: 50%;
+              width: 96px;
+              height: 96px;
+              margin: 0px auto;
+              cursor: pointer;
+              padding: 6px;
+              text-align: center;
+              > img {
+                width: 100%;
+                text-align: center;
+                border-radius: 50%;
+              }
+              > div.rating {
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                font: {
+                  size: 12px;
+                }
+                &:before {
+                  top: 0px;
+                  content: initial;
+                }
+              }
+              > div.inclusion {
+                position: absolute;
+                top: 5px;
+                left: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                background-color: $sige-global-bgcolor-08;
+                &:before {
+                  line-height: 25px;
+                }
+              }
+              > div.observer {
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                background-color: $sige-global-bgcolor-08;
+                padding-top: 4px;
+                font-size: 0.8em;
+                &:before {
+                  line-height: 25px;
+                }
+              }
+              > div.partial {
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                background-color: $sige-global-bgcolor-08;
+                &:before {
+                  line-height: 25px;
+                }
+              }
+              > div.descriptivereport {
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                background-color: $sige-global-bgcolor-08;
+                &:before {
+                  line-height: 25px;
+                }
+              }
+            }
+          }
+          .lead {
+            font-size: 90%;
+            text-align: center;
+            margin-top: 5px;
+            padding-bottom: 10px;
+            color: $sige-global-color-03;
+          }
+          .student-info {
+            background-color: white;
+            li {
+              width: 33%;
+              text-align: center;
+              padding: 7px;
+              float: left;
+              strong {
+                width: 100%;
+                float: left;
+                font: {
+                  size: 0.8em;
+                }
+              }
+              em {
+                color: #788189;
+                position: relative;
+                font: {
+                  size: 0.8em;
+                  weight: normal;
+                }
+              }
+              &.absent {
+                border-right: 1px solid #EDEDED;
+              }
+              &.tardy {
+                border-right: 1px solid #EDEDED;
+              }
+              &.grade {
+
+              }
+              &.amount {
+                height: 35px;
+                > .list {
+                  font: {
+                    family: $sige-font-family-01;
+                    size: 0.9em;
+                  }
+                  color: $sige-global-color-05;
+                }
+              }
+            }
+            &:after {
+              content: "";
+              line-height: 0;
+              display: table;
+            }
+            &:before {
+              content: "";
+              line-height: 0;
+              display: table;
+            }
+          }
+        }
+        .user {
+          background: #f9fafa;
+          border: 1px solid #D8D7D9;
+          margin: 5px;
+          border-radius: 3px;
+          &:hover {
+            box-shadow: 0px 2px 4px #dce8ed;
+          }
+          .body {
+            padding: 10px 40px;
+            .image {
+              position: relative;
+              border-radius: 50%;
+              width: 96px;
+              height: 96px;
+              margin: 0px auto;
+              cursor: pointer;
+              padding: 6px;
+              text-align: center;
+              > img {
+                width: 100%;
+                text-align: center;
+                border-radius: 50%;
+              }
+              > div.rating {
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                font: {
+                  size: 12px;
+                }
+                &:before {
+                  top: 0px;
+                  content: initial;
+                }
+              }
+              > div.inclusion {
+                position: absolute;
+                top: 5px;
+                left: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                background-color: $sige-global-bgcolor-08;
+                &:before {
+                  line-height: 25px;
+                }
+              }
+              > div.observer {
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                background-color: $sige-global-bgcolor-08;
+                padding-top: 4px;
+                font-size: 0.8em;
+                &:before {
+                  line-height: 25px;
+                }
+              }
+              > div.partial {
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                background-color: $sige-global-bgcolor-08;
+                &:before {
+                  line-height: 25px;
+                }
+              }
+              > div.descriptivereport {
+                position: absolute;
+                top: 5px;
+                right: 0px;
+                border-radius: 50%;
+                width: 28px;
+                height: 28px;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+                background-color: $sige-global-bgcolor-08;
+                &:before {
+                  line-height: 25px;
+                }
+              }
+            }
+          }
+          .lead {
+            font-size: 90%;
+            text-align: center;
+            margin-top: 5px;
+            padding-bottom: 10px;
+            color: $sige-global-color-03;
+          }
+          .student-info {
+            background-color: white;
+            li {
+              width: 33%;
+              text-align: center;
+              padding: 7px;
+              float: left;
+              strong {
+                width: 100%;
+                float: left;
+                font: {
+                  size: 0.8em;
+                }
+              }
+              em {
+                color: #788189;
+                position: relative;
+                font: {
+                  size: 0.8em;
+                  weight: normal;
+                }
+              }
+              &.absent {
+                border-right: 1px solid #EDEDED;
+              }
+              &.tardy {
+                border-right: 1px solid #EDEDED;
+              }
+              &.grade {
+
+              }
+              &.amount {
+                height: 35px;
+                > .list {
+                  font: {
+                    family: $sige-font-family-01;
+                    size: 0.9em;
+                  }
+                  color: $sige-global-color-05;
+                }
+              }
+            }
+            &:after {
+              content: "";
+              line-height: 0;
+              display: table;
+            }
+            &:before {
+              content: "";
+              line-height: 0;
+              display: table;
+            }
+          }
+        }
+      }
+    }
+    #student-list-simple {
+      font: {
+        size: 0.90em;
+      }
+      color: #8D9AA5;
+      h4 {
+        margin-top: 30px;
+      }
+      li {
+        > ul.student {
+          border-bottom: 1px solid $sige-border-color-03;
+          height: 70px;
+          line-height: 70px;
+          li {
+            &.code {
+              text-align: left;
+            }
+            &.photo {
+              padding: 10px;
+              > div {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                padding: 3px;
+                background-color: rgba($sige-global-bgcolor-03, 1);
+                > img {
+                  border-radius: 50%;
+                }
+              }
+            }
+            &.name {
+
+            }
+            &.status {
+              text-align: left;
+            }
+            &.register {
+              text-align: left;
+            }
+            &.edit {
+              line-height: 80px;
+              text-align: right;
+              a {
+                margin-right: 5px;
+                width: 100px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+              }
+            }
+          }
+        }
+        > ul.user {
+          border-bottom: 1px solid $sige-border-color-03;
+          height: 70px;
+          line-height: 70px;
+          li {
+            &.code {
+              text-align: left;
+            }
+            &.photo {
+              padding: 10px;
+              > div {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                padding: 3px;
+                background-color: rgba($sige-global-bgcolor-03, 1);
+                > img {
+                  border-radius: 50%;
+                }
+              }
+            }
+            &.name {
+
+            }
+            &.status {
+              text-align: left;
+            }
+            &.register {
+              text-align: left;
+            }
+            &.edit {
+              line-height: 80px;
+              text-align: right;
+              a {
+                margin-right: 5px;
+                width: 100px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//*
+//|-----------------------------------------------------------
+//| Dashboard
+//|-----------------------------------------------------------
+//*/
+
+.dashboard-count-container {
+  width: 95%;
+}
+
+.dashboard-count {
+  border: 1px solid $sige-border-color-03;
+  border-radius: 10px;
+  > div.title {
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    > span {
+      text-align: center;
+      font: {
+        size: 1.5em;
+        family: $sige-font-family-01;
+      }
+    }
+  }
+  > div.body {
+    text-align: center;
+    height: 140px;
+    line-height: 140px;
+    font: {
+      size: 5em;
+      family: $sige-font-family-05;
+    }
+    color: $sige-global-color-04;
+  }
+}
+
+.sige-main-dialog {
+  > div {
+    margin: 15px auto;
+    width: 130px;
+    > img {
+
+    }
+  }
+  h4 {
+    width: 100%;
+    text-align: center;
+    color: #575757;
+    font: {
+      size: 1.6em;
+    }
+  }
+  font: {
+    size: 0.9em;
+  }
+  color: #797979;
+  > .indicators {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: rgba($sige-global-color-01, 0.1);
+    > ul {
+      > li {
+        padding: 5px 0px;
+        border-bottom: 1px solid $sige-border-color-03;
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+  > p {
+    line-height: 16px;
+    font: {
+      size: 1.05em;
+    }
+  }
+}
+
+.sige-dashboard {
+  > ul {
+    > li {
+      padding: 5px;
+      &#main_dashboard {
+
+      }
+      &#secondary_dashboard {
+
+      }
+    }
+    .dashboard-values {
+
+    }
+    &.dashboard-graphics {
+
+    }
+  }
+}
+
+.sige-dashboard-attendances {
+  > li {
+    &.students {
+      > ul.student {
+
+      }
+    }
+  }
+}
+
+.sige-members {
+  width: 100%;
+  margin: 0px auto;
+  > h5 {
+    border-bottom: none;
+    text-align: center;
+    margin: 0px;
+    padding-top: 15px;
+    border-bottom: 1px solid $sige-border-color-06;
+    background: $sige-global-bgcolor-01;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  > ul#member-list {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    justify-content: center;
+    > li {
+      .member {
+        border: none;
+        margin: 5px;
+        &:hover {
+          .body {
+            .image {
+              box-shadow: 0px 2px 4px #dce8ed;
+            }
+          }
+        }
+        .body {
+          padding: 5px 10px;
+          .image {
+            position: relative;
+            border-radius: 50%;
+            width: 96px;
+            height: 96px;
+            margin: 0px auto;
+            cursor: pointer;
+            padding: 4px;
+            text-align: center;
+            > img {
+              width: 100%;
+              text-align: center;
+              border-radius: 50%;
+            }
+          }
+        }
+        .lead {
+          font-size: 90%;
+          text-align: center;
+          color: $sige-global-color-01;
+          &.first {
+            font: {
+              weight: bold;
+            }
+          }
+          &.last {
+            margin-bottom: 10px;
+          }
+        }
+        .member-info {
+          background-color: white;
+          li {
+            width: 33%;
+            text-align: center;
+            padding: 7px;
+            float: left;
+            strong {
+              width: 100%;
+              float: left;
+              font: {
+                size: 0.8em;
+              }
+            }
+            em {
+              color: #788189;
+              position: relative;
+              font: {
+                size: 0.8em;
+                weight: normal;
+              }
+            }
+          }
+          &:after {
+            content: "";
+            line-height: 0;
+            display: table;
+          }
+          &:before {
+            content: "";
+            line-height: 0;
+            display: table;
+          }
+        }
+      }
+
+    }
+  }
+  section.member-new {
+    position: relative;
+  }
+  section.member-assign {
+    position: relative;
+  }
+}
+
+//*
+//|-----------------------------------------------------------
+//| Media Queries
+//|-----------------------------------------------------------
+//*/
+
+@media screen and (max-width: 1500px) {
+  .sige-student-lists {
+    > .search-container {
+      width: 50%;
+      li {
+        width: 40%;
+        #search {
+          padding: 6px;
+          width: 100%;
+        }
+        #order {
+          padding: 4px;
+          width: 100%;
+          -webkit-appearance: button;
+          -moz-appearance: button;
+          appearance: button;
+        }
+      }
+      li#reverse {
+        top: 25px;
+        position: relative;
+        width: 20%;
+        > input[type="radio"] + label {
+          width: 30px;
+          padding: 2px 0px;
+        }
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 1300px) {
+
+  header {
+    ul#breadcrumb {
+      &.on:before {
+        margin: 0px;
+        width: 100%;
+      }
+    }
+  }
+
+  aside {
+    position: initial;
+    width: 95%;
+    margin: 0px auto;
+    right: 0px;
+    min-height: 0px;
+    .sige-app-list {
+      display: none;
+    }
+    .sige-app-select {
+      display: block;
+      select {
+        background: transparent;
+        border: transparent;
+        padding: 14px;
+        color: $sige-global-color-01;
+        font: {
+          family: $sige-font-family-03;
+          size: 1em;
+        }
+      }
+    }
+  }
+  .sige-content {
+    width: 95%;
+    margin: 0px auto;
+    padding: 1px;
+    margin-top: 10px;
+  }
+  .sige-student-lists {
+    > .search-container {
+      width: 60%;
+      li {
+        width: 40%;
+        #search {
+          padding: 6px;
+          width: 100%;
+        }
+        #order {
+          padding: 6px;
+          width: 100%;
+          -webkit-appearance: button;
+          -moz-appearance: button;
+          appearance: button;
+        }
+      }
+    }
+    li#reverse {
+      width: 20%;
+      top: 25px;
+      position: relative;
+      > input[type="radio"] + label {
+        width: 30px;
+        padding: 2px 0px;
+      }
+    }
+  }
+
+  .sige-stream-content {
+    .stream {
+      .photo {
+        width: 10%;
+      }
+      .message {
+        width: 90%;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 1000px) {
+  aside {
+    position: initial;
+    width: 95%;
+    margin: 0px auto;
+    right: 0px;
+    min-height: 0px;
+    .sige-app-list {
+      display: none;
+    }
+    .sige-app-select {
+      display: block;
+      select {
+        background: transparent;
+        border: transparent;
+        padding: 14px;
+        color: $sige-global-color-01;
+        font: {
+          family: $sige-font-family-03;
+          size: 1em;
+        }
+      }
+    }
+  }
+  .sige-content {
+    width: 95%;
+    margin: 0px auto;
+    padding: 0px;
+    margin-top: 10px;
+  }
+  .sige-student-lists {
+    .search-container {
+      width: 70%;
+      li {
+        width: 35%;
+        #search {
+          padding: 6px;
+          width: 100%;
+        }
+        #order {
+          padding: 6px;
+          width: 100%;
+          -webkit-appearance: button;
+          -moz-appearance: button;
+          appearance: button;
+        }
+      }
+      li#reverse {
+        width: 20%;
+        top: 25px;
+        position: relative;
+        > input[type="radio"] + label {
+          width: 30px;
+          padding: 2px 0px;
+        }
+      }
+    }
+  }
+
+  .sige-stream-content {
+    .stream {
+      .photo {
+        width: 7%;
+      }
+      .message {
+        width: 93%;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 838px) {
+
+  .sige-stream-content {
+    .stream {
+      .photo {
+        width: 10%;
+      }
+      .message {
+        width: 90%;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  header {
+    ul#account-info {
+      display: none;
+      margin-left: initial;
+      height: 90px;
+      width: 250px;
+      padding: 10px;
+      background-color: $sige-global-bgcolor-02;
+      left: initial;
+      right: 0;
+      > li {
+        &#notifications {
+
+        }
+        &#profile {
+          width: 175px;
+          padding-left: 5px;
+          > a {
+            figure {
+              figcaption {
+                left: 65px;
+                h4 {
+                  color: white;
+                }
+              }
+            }
+            &:after {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    ul#breadcrumb {
+      margin-left: 0px;
+      height: 90px;
+      padding: 10px;
+      transition: opacity 0.2s ease, margin 0.2s ease;
+      opacity: .9;
+      &.on:before {
+        right: 0;
+        margin: 0px;
+      }
+      .mobile-logo {
+        display: block;
+        width: 10%;
+        img {
+          width: 35px;
+        }
+      }
+      .title {
+        text-align: center;
+        width: 80%;
+        h3 {
+          line-height: 65px;
+        }
+      }
+      .mobile-toggle {
+        display: block;
+        width: 10%;
+        a {
+          .hamburger {
+
+          }
+        }
+      }
+    }
+    nav {
+      display: none;
+      width: 250px;
+      top: 90px;
+      ul#sige-main-nav {
+        li.sige-nav-module {
+          a {
+            padding-left: 15px;
+            text-align: left;
+            font: {
+              family: $sige-font-family-03;
+            }
+          }
+        }
+        li {
+          height: 40px;
+          &#home {
+            display: none;
+          }
+          &#admissions {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#financials {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+            em {
+              left: 90px;
+            }
+          }
+          &#formation {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#resources {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#communications {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#parents {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#roles {
+            display: block;
+            a {
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#settings {
+            display: block;
+            a {
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#logout {
+            display: block;
+            a {
+              span {
+                visibility: visible;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .sige-main-container {
+    position: relative;
+    margin-left: 0px;
+    max-width: 1430px;
+    height: 100%;
+    top: 90px;
+    transition: top 0.5s ease, padding 0.5s ease, left 0.5s ease, right 0.5s ease;
+  }
+  aside {
+    position: initial;
+    width: 95%;
+    margin: 0px auto;
+    right: 0px;
+    min-height: 0px;
+    .sige-app-list {
+      display: none;
+    }
+    .sige-app-select {
+      display: block;
+      select {
+        background: transparent;
+        border: transparent;
+        padding: 14px;
+        color: $sige-global-color-01;
+        font: {
+          family: $sige-font-family-03;
+          size: 1em;
+        }
+      }
+    }
+  }
+  .sige-content {
+    width: 95%;
+    margin: 0px auto;
+    padding: 0px;
+    margin-top: 10px;
+  }
+  .sige-academic {
+    ul {
+      li {
+        width: 100%;
+        padding: 0px;
+        border-bottom: 1px solid $sige-border-color-03;
+        &:last-child {
+          border-bottom: none;
+        }
+        select {
+          background: transparent;
+          border: transparent;
+          padding: 14px;
+          font: {
+            family: $sige-font-family-03;
+            size: 1em;
+          }
+          color: $sige-global-color-04;
+        }
+      }
+    }
+  }
+
+  .sige-student-lists {
+    .search-container {
+      width: 70%;
+      li {
+        width: 40%;
+        #search {
+          padding: 8px;
+          width: 100%;
+        }
+        #order {
+          padding: 6px;
+          width: 100%;
+          -webkit-appearance: button;
+          -moz-appearance: button;
+          appearance: button;
+        }
+      }
+      li#reverse {
+        width: 20%;
+        top: 25px;
+        position: relative;
+        > input[type="radio"] + label {
+          width: 30px;
+          padding: 2px 0px;
+        }
+      }
+    }
+  }
+
+  .sige-help {
+    ul {
+      width: 40%;
+      float: right;
+    }
+  }
+
+  footer {
+    .sige-footer-content {
+      margin-top: 20px;
+      margin-left: 0px;
+      padding: 20px 30px;
+    }
+  }
+
+  .sige-stream-content {
+    margin-left: 0px;
+    .stream {
+      .photo {
+        width: 10%;
+      }
+      .message {
+        width: 90%;
+      }
+    }
+  }
+
+  .sige-dashboard {
+    > ul {
+      > li {
+        &#main_dashboard {
+
+        }
+        &#secondary_dashboard {
+        }
+      }
+    }
+  }
+  .sige-dashboard-attendances {
+    > li {
+      &.students {
+        > ul.student {
+          > li {
+            &.photo {
+
+            }
+            &.subject {
+              > p {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+            }
+            &.total {
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+
+  header {
+    ul#account-info {
+      display: none;
+      margin-left: initial;
+      height: 90px;
+      width: 250px;
+      padding: 10px;
+      background-color: $sige-global-bgcolor-02;
+      left: initial;
+      right: 0;
+      > li {
+        &#notifications {
+
+        }
+        &#profile {
+          width: 175px;
+          padding-left: 5px;
+          > a {
+            figure {
+              figcaption {
+                left: 65px;
+                h4 {
+                  color: white;
+                }
+              }
+            }
+            &:after {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    ul#breadcrumb {
+      margin-left: 0px;
+      height: 90px;
+      padding: 10px;
+      transition: opacity 0.2s ease, margin 0.2s ease;
+      opacity: .9;
+      &.on:before {
+        right: 0;
+        margin: 0px;
+      }
+      .mobile-logo {
+        display: block;
+        width: 10%;
+        img {
+          width: 35px;
+        }
+      }
+      .title {
+        text-align: center;
+        width: 80%;
+        h3 {
+          line-height: 65px;
+        }
+      }
+      .mobile-toggle {
+        display: block;
+        width: 10%;
+        a {
+          .hamburger {
+
+          }
+        }
+      }
+    }
+    nav {
+      display: none;
+      width: 250px;
+      top: 90px;
+      ul#sige-main-nav {
+        li.sige-nav-module {
+          a {
+            padding-left: 15px;
+            text-align: left;
+            font: {
+              family: $sige-font-family-03;
+            }
+          }
+        }
+        li {
+          height: 40px;
+          &#home {
+            display: none;
+          }
+          &#admissions {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#financials {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+            em {
+              left: 90px;
+            }
+          }
+          &#formation {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#resources {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#communications {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#parents {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#roles {
+            display: block;
+            a {
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#settings {
+            display: block;
+            a {
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#logout {
+            display: block;
+            a {
+              span {
+                visibility: visible;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .sige-main-container {
+    position: relative;
+    margin-left: 0px;
+    max-width: 1430px;
+    height: 100%;
+    top: 90px;
+    transition: top 0.5s ease, padding 0.5s ease, left 0.5s ease, right 0.5s ease;
+  }
+  aside {
+    position: initial;
+    width: 95%;
+    margin: 0px auto;
+    right: 0px;
+    min-height: 0px;
+    .sige-app-list {
+      display: none;
+    }
+    .sige-app-select {
+      display: block;
+      select {
+        background: transparent;
+        border: transparent;
+        padding: 14px;
+        color: $sige-global-color-01;
+        font: {
+          family: $sige-font-family-03;
+          size: 1em;
+        }
+      }
+    }
+  }
+  .sige-content {
+    width: 95%;
+    margin: 0px auto;
+    padding: 0px;
+    margin-top: 10px;
+  }
+  .sige-academic {
+    ul {
+      li {
+        width: 100%;
+        padding: 0px;
+        border-bottom: 1px solid $sige-border-color-03;
+        &:last-child {
+          border-bottom: none;
+        }
+        select {
+          background: transparent;
+          border: transparent;
+          padding: 14px;
+          font: {
+            family: $sige-font-family-03;
+            size: 1em;
+          }
+          color: $sige-global-color-04;
+        }
+      }
+    }
+  }
+  .sige-student-lists {
+    .search-container {
+      width: 100%;
+      li {
+        width: 40%;
+        #search {
+          padding: 8px;
+          width: 100%;
+        }
+        #order {
+          padding: 6px;
+          width: 100%;
+          -webkit-appearance: button;
+          -moz-appearance: button;
+          appearance: button;
+        }
+      }
+      li#reverse {
+        width: 20%;
+        top: 25px;
+        position: relative;
+        > input[type="radio"] + label {
+          width: 30px;
+          padding: 2px 0px;
+        }
+      }
+    }
+    .student-list {
+      width: 100%;
+      overflow-x: scroll;
+
+      ul#student-list {
+        display: table;
+        width: 100%;
+        flex-direction: inherit;
+        justify-content: inherit;
+        flex-flow: inherit;
+        li {
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          flex: inherit;
+          float: inherit;
+          .student {
+            padding: 15px;
+            .body {
+              padding: 10px;
+              .image {
+                position: relative;
+                border-radius: 50%;
+                width: 96px;
+                height: 96px;
+                padding: 6px;
+                margin: 0px auto;
+                cursor: pointer;
+                img {
+                  width: 100%;
+                  text-align: center;
+                  border-radius: 50%;
+                }
+              }
+            }
+            .lead {
+              font-size: 90%;
+              text-align: center;
+            }
+            .student-info {
+              span {
+                width: 33%;
+                text-align: center;
+                float: left;
+                &.absent {
+                  border-right: 1px solid #EDEDED;
+                }
+                &.tardy {
+                  border-right: 1px solid #EDEDED;
+                }
+                &.grade {
+
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .sige-help {
+    ul {
+      width: 50%;
+      float: right;
+    }
+  }
+
+  footer {
+    margin-top: 20px;
+    .sige-footer-content {
+      margin-left: 0px;
+      padding: 20px 30px;
+    }
+  }
+
+  .sige-stream-content {
+    margin-left: 0px;
+    padding: 0px;
+    .stream {
+      .photo {
+        width: 15%;
+      }
+      .message {
+        width: 85%;
+        line-height: 15px;
+        font: {
+          size: 0.9em;
+        }
+      }
+    }
+  }
+
+  .sige-contained-welcome {
+    > p {
+      font: {
+        size: 0.89em;
+      }
+    }
+  }
+
+  .sige-dashboard {
+    > ul {
+      > li {
+        &#main_dashboard {
+          width: 100%;
+        }
+        &#secondary_dashboard {
+          width: 100%;
+        }
+      }
+      &.dashboard-values {
+        > li {
+          width: 50%;
+        }
+      }
+      &.dashboard-graphics {
+
+      }
+    }
+  }
+
+  .sige-dashboard-attendances {
+    > li {
+      &.students {
+        > ul.student {
+          > li {
+            &.photo {
+              width: 20%;
+            }
+            &.subject {
+              width: 70%;
+              > p {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+            }
+            &.total {
+              width: 10%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 360px) {
+
+  header {
+    ul#account-info {
+      > li {
+        &#notifications {
+
+        }
+        &#profile {
+          padding-left: 5px;
+          width: 175px;
+          > a {
+            figure {
+              figcaption {
+                left: 65px;
+                h4 {
+                  color: white;
+                }
+              }
+            }
+            &:after {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    ul#breadcrumb {
+      margin-left: 0px;
+      height: 90px;
+      padding: 10px;
+      &.on:before {
+        right: 0;
+        margin: 0px;
+      }
+      .mobile-logo {
+        display: block;
+        width: 10%;
+        img {
+          width: 35px;
+        }
+      }
+      .title {
+        text-align: center;
+        width: 80%;
+        h3 {
+          line-height: 65px;
+        }
+      }
+      .mobile-toggle {
+        display: block;
+        width: 10%;
+        a {
+          .hamburger {
+
+          }
+          em {
+            right: -10px;
+          }
+        }
+      }
+    }
+    nav {
+      display: none;
+      width: 250px;
+      top: 90px;
+      ul#sige-main-nav {
+        li.sige-nav-module {
+          a {
+            padding-left: 15px;
+            text-align: left;
+            font: {
+              family: $sige-font-family-03;
+            }
+          }
+        }
+        li {
+          height: 40px;
+          &#home {
+            display: none;
+          }
+          &#admissions {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#financials {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+            em {
+              left: 90px;
+            }
+          }
+          &#formation {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#resources {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#communications {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#parents {
+            a {
+              img {
+                display: none;
+              }
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#roles {
+            display: block;
+            a {
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#settings {
+            display: block;
+            a {
+              span {
+                visibility: visible;
+              }
+            }
+          }
+          &#logout {
+            display: block;
+            a {
+              span {
+                visibility: visible;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .sige-main-container {
+    position: relative;
+    margin-left: 0px;
+    max-width: 1430px;
+    height: 100%;
+    top: 90px;
+  }
+  aside {
+    position: initial;
+    width: 95%;
+    margin: 0px auto;
+    right: 0px;
+    min-height: 0px;
+    .sige-app-list {
+      display: none;
+    }
+    .sige-app-select {
+      display: block;
+      select {
+        background: transparent;
+        border: transparent;
+        padding: 16px;
+        color: $sige-global-color-01;
+        font: {
+          family: $sige-font-family-03;
+          size: 1em;
+        }
+      }
+    }
+  }
+  .sige-content {
+    width: 95%;
+    margin: 0px auto;
+    padding: 0px;
+    margin-top: 10px;
+  }
+  .sige-student-lists {
+    .search-container {
+      width: 100%;
+      li {
+        width: 35%;
+        #search {
+          padding: 8px;
+          width: 100%;
+        }
+        #order {
+          padding: 4px;
+          width: 100%;
+          -webkit-appearance: button;
+          -moz-appearance: button;
+          appearance: button;
+        }
+      }
+      li#reverse {
+        width: 30%;
+        top: 25px;
+        position: relative;
+        > input[type="radio"] + label {
+          width: 25px;
+          padding: 2px 0px;
+        }
+      }
+    }
+  }
+  .sige-academic {
+    ul {
+      li {
+        width: 100%;
+        padding: 0px;
+        border-bottom: 1px solid $sige-border-color-03;
+        &:last-child {
+          border-bottom: none;
+        }
+        select {
+          background: transparent;
+          border: transparent;
+          padding: 14px;
+        }
+      }
+    }
+  }
+
+  .sige-help {
+    ul {
+      width: 50%;
+      float: right;
+    }
+  }
+
+  footer {
+    .sige-footer-content {
+      margin-left: 0px;
+      padding: 20px 30px;
+    }
+  }
+
+  .sige-stream-content {
+    padding: 0px;
+    margin-left: 0px;
+    .stream {
+      .photo {
+        width: 20%;
+      }
+      .message {
+        width: 80%;
+        line-height: 15px;
+        font: {
+          size: 0.9em;
+        }
+      }
+    }
+  }
+
+  .sige-contained-welcome {
+    > p {
+      font: {
+        size: 0.89em;
+      }
+    }
+  }
+
+  .sige-dashboard {
+    > ul {
+      > li {
+        &#main_dashboard {
+          width: 100%;
+        }
+        &#secondary_dashboard {
+          width: 100%;
+        }
+      }
+      &.dashboard-values {
+        > li {
+          width: 50%;
+        }
+      }
+      &.dashboard-graphics {
+
+      }
+    }
+  }
+
+  .sige-student-lists {
+    .search-container {
+      width: 100%;
+      li {
+        width: 100%;
+        #search {
+          padding: 6px;
+          width: 100%;
+        }
+        #order {
+          padding: 4px;
+          width: 90%;
+          -webkit-appearance: button;
+          -moz-appearance: button;
+          appearance: button;
+        }
+      }
+      li#sequence {
+        width: 75%;
+        position: relative;
+        > input[type="radio"] + label {
+          width: 25px;
+          padding: 2px 0px;
+        }
+      }
+      li#reverse {
+        width: 25%;
+        top: 25px;
+        position: relative;
+        > input[type="radio"] + label {
+          width: 25px;
+          padding: 2px 0px;
+        }
+      }
+    }
+  }
+
+  .sige-dashboard-attendances {
+    > li {
+      &.students {
+        > ul.student {
+          > li {
+            &.photo {
+              width: 25%;
+            }
+            &.subject {
+              width: 65%;
+              > p {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+            }
+            &.total {
+              width: 10%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 359px) {
+
+  .sige-stream-content {
+    padding: 0px;
+    margin-left: 0px;
+    .stream {
+      .photo {
+        width: 20%;
+      }
+      .message {
+        width: 80%;
+        line-height: 15px;
+        font: {
+          size: 0.9em;
+        }
+      }
+    }
+  }
+
+  .sige-contained-welcome {
+    > p {
+      font: {
+        size: 0.89em;
+      }
+    }
+  }
+
+  .sige-dashboard {
+    > ul {
+      > li {
+        &#main_dashboard {
+          width: 100%;
+        }
+        &#secondary_dashboard {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .sige-student-lists {
+    .search-container {
+      width: 100%;
+      li {
+        width: 100%;
+        #search {
+          padding: 6px;
+          width: 100%;
+        }
+        #order {
+          padding: 4px;
+          width: 90%;
+          -webkit-appearance: button;
+          -moz-appearance: button;
+          appearance: button;
+        }
+      }
+      li#sequence {
+        width: 70%;
+        position: relative;
+        > input[type="radio"] + label {
+          width: 25px;
+          padding: 2px 0px;
+        }
+      }
+      li#reverse {
+        width: 30%;
+        top: 25px;
+        position: relative;
+        > input[type="radio"] + label {
+          width: 25px;
+          padding: 2px 0px;
+        }
+      }
+    }
+  }
+
+  .sige-dashboard-attendances {
+    > li {
+      &.students {
+        > ul.student {
+          > li {
+            &.photo {
+              width: 25%;
+            }
+            &.subject {
+              width: 65%;
+              > p {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+            }
+            &.total {
+              width: 10%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 320px) {
+
+  .sige-contained-welcome {
+    > p {
+      font: {
+        size: 0.89em;
+      }
+    }
+  }
+
+  .sige-dashboard {
+    > ul {
+      > li {
+        &#main_dashboard {
+          width: 100%;
+        }
+        &#secondary_dashboard {
+          width: 100%;
+        }
+      }
+      &.dashboard-values {
+        > li {
+          width: 100%;
+        }
+      }
+      &.dashboard-graphics {
+
+      }
+    }
+  }
+
+  .sige-student-lists {
+    .search-container {
+      width: 100%;
+      li {
+        width: 100%;
+        #search {
+          padding: 6px;
+          width: 100%;
+        }
+        #order {
+          padding: 4px;
+          width: 90%;
+          -webkit-appearance: button;
+          -moz-appearance: button;
+          appearance: button;
+        }
+      }
+      li#sequence {
+        width: 70%;
+        position: relative;
+        > input[type="radio"] + label {
+          width: 25px;
+          padding: 2px 0px;
+        }
+      }
+      li#reverse {
+        width: 30%;
+        top: 25px;
+        position: relative;
+        > input[type="radio"] + label {
+          width: 25px;
+          padding: 2px 0px;
+        }
+      }
+    }
+  }
+
+  .sige-dashboard-attendances {
+    > li {
+      &.students {
+        > ul.student {
+          > li {
+            &.photo {
+              width: 25%;
+            }
+            &.subject {
+              width: 65%;
+              > p {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+            }
+            &.total {
+              width: 10%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

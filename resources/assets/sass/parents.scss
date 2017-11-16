@@ -1,0 +1,3419 @@
+@import "core";
+
+%performance {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
+.dp {
+  @extend %performance;
+  background-color: $sige-global-bgcolor-09;
+  border: 3px solid $sige-global-bgcolor-10;
+  &:before {
+    content: "Desempeño en Proceso";
+    left: 30px;
+    position: relative;
+    top: -10px;
+    display: inline-block;
+    width: 150px;
+    color: $sige-global-color-04;
+  }
+}
+
+.dp-background {
+  background-color: $sige-global-bgcolor-09;
+  border: 1px solid $sige-global-bgcolor-10;
+}
+
+.db {
+  @extend %performance;
+  background-color: $sige-global-bgcolor-11;
+  border: 3px solid $sige-global-bgcolor-12;
+  &:before {
+    content: "Desempeño Básico";
+    left: 30px;
+    position: relative;
+    top: -10px;
+    display: inline-block;
+    width: 150px;
+    color: $sige-global-color-04;
+  }
+}
+
+.db-background {
+  background-color: $sige-global-bgcolor-11;
+  border: 1px solid $sige-global-bgcolor-12;
+}
+
+.da {
+  @extend %performance;
+  background-color: $sige-global-bgcolor-13;
+  border: 3px solid $sige-global-bgcolor-14;
+  &:before {
+    content: "Desempeño Alto";
+    left: 30px;
+    position: relative;
+    top: -10px;
+    display: inline-block;
+    width: 150px;
+    color: $sige-global-color-04;
+  }
+}
+
+.da-background {
+  background-color: $sige-global-bgcolor-13;
+  border: 1px solid $sige-global-bgcolor-14;
+}
+
+.ds {
+  @extend %performance;
+  background-color: $sige-global-bgcolor-15;
+  border: 3px solid $sige-global-bgcolor-16;
+  &:before {
+    content: "Desempeño Superior";
+    left: 30px;
+    position: relative;
+    top: -10px;
+    display: inline-block;
+    width: 150px;
+    color: $sige-global-color-04;
+  }
+}
+
+.ds-background {
+  background-color: $sige-global-bgcolor-15;
+  border: 1px solid $sige-global-bgcolor-16;
+}
+
+.sige-family {
+  margin-bottom: 10px;
+  > li {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    margin: 5px;
+    text-align: center;
+    line-height: 100px;
+    background-color: $sige-global-bgcolor-01;
+    color: $sige-global-bgcolor-17;
+  }
+}
+
+.sige-container-update {
+  margin-top: 20px;
+  form {
+    fieldset.step {
+      margin-top: 5px;
+      legend {
+        font: {
+          family: $sige-font-family-03;
+          size: 1.5em;
+        }
+        padding-bottom: 10px;
+        color: $sige-global-color-01;
+      }
+    }
+  }
+}
+
+.sige-payments {
+  > ul {
+    > .payment {
+      > .payment-container {
+        border-bottom: 1px solid #EEE;
+        padding: 5px;
+        font: {
+          size: 90%;
+        }
+        ul {
+          li {
+            &.image {
+              img {
+                max-width: 30%;
+              }
+            }
+            &.concept {
+              line-height: 45px;
+            }
+            &.value {
+              line-height: 45px;
+              text-align: center;
+            }
+            &.payment {
+              line-height: 45px;
+              text-align: center;
+              > .is-payment {
+                height: 100%;
+                max-width: 50%;
+                background: url("/resources/assets/sass/images/modules/paymentOK.svg") no-repeat;
+              }
+              > .not-payment {
+                height: 100%;
+                max-width: 50%;
+                background: url("/resources/assets/sass/images/modules/paymentCancel.svg") no-repeat;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.sige-academic-options {
+
+}
+
+.sige-monitorings {
+  margin-top: 40px;
+  > ul {
+    > .monitoring {
+      > .monitoring-container {
+        border-bottom: 1px solid #EEE;
+        padding: 5px;
+        font: {
+          size: 90%;
+        }
+        ul {
+          li {
+            &.image {
+              > i {
+                font: {
+                  size: 1.8em;
+                }
+              ;
+                margin: 10px;
+                color: $sige-global-color-04;
+              }
+            }
+            &.concept {
+              line-height: 45px;
+              top: 50%;
+              white-space: pre;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            &.monitoring {
+              text-align: center;
+              > div.monitorings {
+                border-radius: 50%;
+                width: 35px;
+                height: 35px;
+                top: 8px;
+                position: relative;
+                text-align: center;
+                color: white;
+                &.dp-parents {
+                  padding-top: 5px;
+                  background-color: $sige-global-bgcolor-09;
+                  border: 3px solid $sige-global-bgcolor-10;
+                }
+                &.db-parents {
+                  padding-top: 5px;
+                  background-color: $sige-global-bgcolor-11;
+                  border: 3px solid $sige-global-bgcolor-12;
+                }
+                &.da-parents {
+                  padding-top: 5px;
+                  background-color: $sige-global-bgcolor-13;
+                  border: 3px solid $sige-global-bgcolor-14;
+                }
+                &.ds-parents {
+                  padding-top: 5px;
+                  background-color: $sige-global-bgcolor-15;
+                  border: 3px solid $sige-global-bgcolor-16;
+                }
+              }
+            }
+            &.subject {
+              font: {
+                family: $sige-font-family-01;
+                size: 1.05em;
+              }
+            }
+            &.recovery {
+              &:before {
+                content: ""
+              }
+            }
+            &.attendance {
+              text-align: left;
+              &:before {
+                content: "Faltas: "
+              }
+            }
+            &.value {
+              line-height: 45px;
+              text-align: center;
+            }
+            &.detail {
+              line-height: 45px;
+              text-align: center;
+              > a {
+                font: {
+                  size: 2em;
+                }
+                color: $sige-global-bgcolor-07;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.monitoring-detail {
+  > .category {
+    clear: both;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid $sige-border-color-03;
+    margin-bottom: 20px;
+    > ul {
+      > li {
+        &.category-name {
+          text-align: left;
+          color: #657380;
+        }
+        &.monitoring {
+          text-align: right;
+          color: #657380;
+          > div.monitorings {
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            top: 8px;
+            position: relative;
+            text-align: center;
+            color: white;
+            &.dp-parents {
+              padding-top: 5px;
+              background-color: $sige-global-bgcolor-09;
+              border: 3px solid $sige-global-bgcolor-10;
+            }
+            &.db-parents {
+              padding-top: 5px;
+              background-color: $sige-global-bgcolor-11;
+              border: 3px solid $sige-global-bgcolor-12;
+            }
+            &.da-parents {
+              padding-top: 5px;
+              background-color: $sige-global-bgcolor-13;
+              border: 3px solid $sige-global-bgcolor-14;
+            }
+            &.ds-parents {
+              padding-top: 5px;
+              background-color: $sige-global-bgcolor-15;
+              border: 3px solid $sige-global-bgcolor-16;
+            }
+          }
+        }
+      }
+    }
+  }
+  > .detail {
+    border-bottom: 1px solid $sige-border-color-03;
+    margin-bottom: 10px;
+    padding: 10px;
+    height: auto;
+    input {
+      width: 60px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+  }
+
+}
+
+.task-list {
+  padding-top: 20px;
+  font: {
+    size: 1em;
+  }
+  ul#task-list {
+    li {
+      transition: all 1s ease-out;
+      > ul.task {
+        border-bottom: 1px solid $sige-border-color-03;
+        padding: 10px;
+        &:hover {
+          background: $sige-global-bgcolor-21;
+        }
+        li {
+          font: {
+            size: 0.9em;
+          }
+          letter-spacing: -1px;
+          &.icon {
+            font: {
+              size: 1.5em;
+            }
+          }
+          &.select {
+            line-height: 80px;
+            text-align: left;
+          }
+          &.type {
+            span {
+              line-height: 20px;
+              margin-top: 25px;
+              display: block;
+              text-align: center;
+              &.task {
+                background: $sige-global-bgcolor-08;
+                padding: 5px;
+                border-radius: 3px;
+                &:after {
+                  content: "T";
+                  color: white;
+                }
+              }
+              &.plan {
+                padding: 5px;
+                border-radius: 3px;
+                background: $sige-global-bgcolor-10;
+                &:after {
+                  content: "P";
+                  color: white;
+                }
+              }
+              &.test {
+                padding: 5px;
+                border-radius: 3px;
+                background: $sige-global-bgcolor-14;
+                &:after {
+                  content: "E";
+                  color: white;
+                }
+              }
+            }
+          }
+          &.ends {
+            line-height: 80px;
+            text-align: center;
+          }
+          &.group {
+            line-height: 80px;
+          }
+          &.main-info {
+            padding: 15px 0px;
+            .title {
+              padding-bottom: 5px;
+              font: {
+                weight: 600;
+              }
+              color: $sige-global-color-01;
+            }
+            .ends {
+            }
+          }
+          &.photo {
+            padding: 10px;
+            margin-top: 5px;
+            > div {
+              width: 48px;
+              height: 48px;
+              border-radius: 50%;
+              padding: 3px;
+              background-color: rgba($sige-global-bgcolor-03, 1);
+              position: relative;
+              margin: 0px auto;
+              > img {
+                border-radius: 50%;
+              }
+            }
+
+          }
+          &.days {
+            line-height: 80px;
+            text-align: right;
+            padding-right: 10px;
+          }
+          &.detail {
+            a {
+              div {
+                cursor: pointer;
+                border: 1px solid $sige-global-bgcolor-08;
+                border-radius: 2px;
+                width: 80px;
+                height: 40px;
+                position: relative;
+                top: 30px;
+                &:before {
+                  width: 20px;
+                  padding: 0px 30px;
+                  top: 10px;
+                  position: relative;
+                  font-size: 1.1em;
+                  color: $sige-global-bgcolor-08;
+                }
+
+              }
+            }
+          }
+          &.edit {
+            line-height: 80px;
+            text-align: right;
+            a {
+              width: 150px;
+              padding: 8px 18px;
+              background-color: $sige-global-bgcolor-22 !important;
+              border-radius: 3px;
+              color: $sige-global-color-01;
+
+            }
+          }
+          &.delete {
+            line-height: 80px;
+            text-align: right;
+            a {
+              width: 100px;
+              padding: 8px 18px;
+              background-color: $sige-global-bgcolor-22 !important;
+              border-radius: 3px;
+              color: $sige-global-color-01;
+            }
+          }
+          &.files {
+
+          }
+        }
+      }
+    }
+  }
+}
+
+.description {
+  text-align: right;
+  font: {
+    size: 0.9em;
+  }
+  a {
+    color: $sige-global-color-05;
+  }
+}
+
+.task-description {
+  display: block;
+  text-align: left;
+  p {
+    padding: 10px 0px;
+  }
+}
+
+.file-list {
+  font: {
+    size: 1em;
+  }
+  > ul.progress {
+    margin-top: 5px;
+    border-radius: 3px;
+    border-bottom: 1px solid #EEE;
+    transition: all 1s ease 0s;
+    &:hover {
+      background: rgba($sige-global-bgcolor-02, 0.1);
+    }
+    &.loading {
+      > li {
+        &.icon {
+          color: white !important;
+        }
+        &.name {
+          a {
+            color: white !important;
+          }
+        }
+        &.delete {
+          color: white !important;
+        }
+      }
+    }
+    > li {
+      padding: 15px;
+      a {
+        color: $sige-global-color-05;
+      }
+      &.icon {
+        color: $sige-global-bgcolor-03;
+        font: {
+          size: 1.4em;
+        }
+      }
+      &.delete {
+        color: $sige-global-color-01;
+        cursor: pointer;
+      }
+      &.size {
+        text-align: right;
+      }
+    }
+
+  }
+}
+
+%payment_status {
+  text-align: center;
+  padding: 20px;
+  color: $sige-global-bgcolor-02;
+  border-radius: 5px;
+  font: {
+    size: 1.6em;
+    family: $sige-font-family-03;
+  }
+  a {
+    color: $sige-global-color-04;
+  }
+}
+
+.sige-dashboard {
+  margin-top: 25px;
+  #secondary_dashboard {
+    .measurements {
+      li {
+        > article {
+          > ul {
+            > li {
+              > div {
+                cursor: pointer;
+                border: 1px solid $sige-border-color-03;
+                &.global {
+                  border-left: 5px solid $sige-global-bgcolor-08;
+                  @extend %payment_status;
+                }
+                &.is-payment {
+                  border-left: 5px solid $sige-global-bgcolor-08;
+                  @extend %payment_status;
+                }
+                &.not-payment {
+                  border-left: 5px solid $sige-global-bgcolor-10;
+                  @extend %payment_status;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.sige-payments-lists {
+  position: relative;
+  .search-container {
+    float: right;
+    margin-top: 10px;
+    width: 70%;
+    label {
+      font: {
+        family: $sige-font-family-03;
+        size: 0.8em;
+      }
+      color: $sige-global-color-04;
+      margin-right: 5px;
+    }
+    #search {
+      padding: 6px;
+      width: 70%;
+    }
+    #order {
+      padding: 6px;
+      width: 68%;
+      -webkit-appearance: button;
+      -moz-appearance: button;
+      appearance: button;
+    }
+    li#reverse {
+      position: relative;
+      top: 5px;
+      > input[type="radio"] + label {
+        width: 30px;
+        padding: 2px 0px;
+      }
+    }
+  }
+}
+
+.payment-list {
+  font: {
+    size: 0.8em;
+  }
+  color: #8D9AA5;
+}
+
+.payment {
+  border-bottom: 1px solid $sige-border-color-03;
+  height: 60px;
+  line-height: 60px;
+  &.R {
+    background: rgba($sige-global-bgcolor-09, 0.03);
+    border-radius: 10px;
+  }
+  &.A {
+    background: rgba($sige-global-bgcolor-07, 0.1);
+    border-radius: 10px;
+  }
+  > li {
+    &.is_payment {
+      margin-top: 0px;
+      text-align: center;
+      > .payment-container {
+        width: 60px;
+      }
+    }
+    &.photo {
+      margin-top: 0px;
+      div {
+        text-align: center;
+        margin: 5px auto;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        padding: 3px;
+        background-color: rgba($sige-global-bgcolor-03, 1);
+        > img {
+          border-radius: 50%;
+        }
+      }
+    }
+    &.concept {
+      div {
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        padding-right: 10px;
+      }
+    }
+    &.date {
+      div {
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        padding-right: 10px;
+        text-align: center;
+      }
+    }
+    &.voucher {
+      > div {
+        text-align: right;
+        padding-right: 10px;
+        > span.R {
+          font: {
+            size: 0.9em;
+          }
+          padding: 10px;
+          border-radius: 5px;
+          background: $sige-global-bgcolor-09;
+          color: white;
+          border-bottom: 3px solid $sige-global-bgcolor-10;
+        }
+        > span.A {
+          font: {
+            size: 0.9em;
+          }
+          padding: 10px;
+          border-radius: 5px;
+          background: $sige-global-bgcolor-07;
+          color: white;
+          border-bottom: 3px solid $sige-global-bgcolor-08;
+        }
+        > span.P {
+          font: {
+            size: 0.9em;
+          }
+          padding: 10px;
+          border-radius: 5px;
+          background: $sige-global-bgcolor-12;
+          color: white;
+          border-bottom: 3px solid $sige-global-bgcolor-11;
+        }
+      }
+    }
+    &.total {
+      text-align: right;
+      padding-right: 10px;
+    }
+    &.edit {
+      cursor: pointer;
+      a {
+        padding: 12px 18px;
+        background-color: $sige-global-bgcolor-07 !important;
+        border-radius: 3px;
+        color: $sige-global-color-02;
+        width: 100%;
+        height: 40px;
+        display: inline-block;
+        line-height: initial;
+        text-align: center;
+        border-bottom: 3px solid $sige-global-bgcolor-08;
+      }
+    }
+    &.generate {
+      ul {
+        > li {
+          &.generate {
+            cursor: pointer;
+            a {
+              padding: 12px 18px;
+              background-color: $sige-global-bgcolor-07 !important;
+              border-radius: 3px;
+              color: $sige-global-color-02;
+              width: 100%;
+              height: 40px;
+              display: inline-block;
+              line-height: initial;
+              text-align: center;
+              border-bottom: 3px solid $sige-global-bgcolor-08;
+            }
+          }
+          &.generated {
+            a {
+              padding: 12px 18px;
+              background-color: $sige-global-bgcolor-11 !important;
+              border-radius: 3px;
+              color: $sige-global-color-02;
+              width: 100%;
+              height: 40px;
+              display: inline-block;
+              line-height: initial;
+              text-align: center;
+              border-bottom: 3px solid $sige-global-bgcolor-12;
+            }
+          }
+          &.download {
+            text-align: center;
+            a {
+              color: $sige-global-color-01;
+            }
+          }
+        }
+      }
+    }
+
+    &.detail {
+      a {
+        padding: 12px 18px;
+        border-radius: 3px;
+        color: $sige-global-bgcolor-08;
+        width: 100%;
+        height: 40px;
+        display: inline-block;
+        line-height: initial;
+        text-align: center;
+        border: 1px solid $sige-global-bgcolor-08;
+        font: {
+          size: 1.1em;
+        }
+      }
+    }
+  }
+}
+
+.sige-payments-checkout {
+
+}
+
+.checkout-methods {
+  margin-top: 35px;
+  width: 450px;
+  > li {
+    line-height: 60px;
+    color: $sige-global-color-01;
+    &.method {
+
+    }
+    &.method-discount {
+      > div {
+        width: 70px;
+        height: 70px;
+        cursor: pointer;
+        > img {
+          opacity: 0.8;
+          &:hover {
+            opacity: 1;
+          }
+        }
+        > span {
+          display: block;
+          margin-top: -60px;
+          text-align: center;
+          letter-spacing: 0;
+          font: {
+            size: 0.85em;
+            family: $sige-font-family-02;
+          }
+        }
+      }
+    }
+  }
+}
+
+.checkout-payments {
+  margin-top: 20px;
+  font: {
+    size: 0.8em;
+    family: $sige-font-family-01;
+  }
+  color: $sige-global-color-04;
+  > .checkout {
+    background: #f9fafa;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    > p {
+      padding: 20px;
+    }
+    > form {
+      display: none;
+      padding: 0px;
+      margin: 0px;
+    }
+    > ul {
+      > li {
+        &.photo {
+          padding: 0px 10px;
+          margin-top: 5px;
+          > div {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            padding: 3px;
+            background-color: rgba($sige-global-bgcolor-03, 1);
+            > img {
+              border-radius: 50%;
+            }
+          }
+
+        }
+        &.concept {
+          margin-top: 5px;
+          > div {
+            width: 100%;
+            margin-bottom: 2px;
+            &.title {
+              font: {
+                family: $sige-font-family-01;
+              }
+              color: $sige-global-bgcolor-03;
+            }
+            &.comment {
+              font: {
+                size: 0.85em;
+              }
+            }
+            &.date {
+              color: $sige-global-color-01;
+            }
+          }
+        }
+        &.total {
+          margin-top: 22px;
+          font: {
+            size: 1.1em;
+          }
+        }
+        &.total_agreement {
+          margin-top: 8px;
+          font: {
+            size: 1.1em;
+          }
+          > input {
+            background: white;
+            text-align: right;
+          }
+        }
+        &.pay {
+          margin-top: 10px;
+          > input {
+            float: right;
+          }
+        }
+      }
+    }
+  }
+}
+
+.sige-payments-respond {
+  position: relative;
+  background: #f9fafa;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  height: 470px;
+  > article {
+    > header {
+      z-index: 1;
+      > h2 {
+        padding-top: 20px;
+        border-bottom: none;
+        text-align: center;
+      }
+      > img {
+        margin: 0px auto;
+        width: 180px;
+        display: block;
+      }
+    }
+    > section {
+      > h2 {
+        padding-top: 10px;
+        border-bottom: none;
+        text-align: center;
+        color: $sige-global-color-04;
+        font: {
+          size: 2.1em;
+        }
+        > span {
+          font: {
+            size: 0.6em;
+          }
+          color: $sige-global-bgcolor-10;
+        }
+      }
+      p {
+        padding: 0px;
+        text-align: center;
+        font: {
+          size: 0.85em;
+        }
+        &.observation {
+          padding-top: 15px;
+        }
+        &.transaction {
+          margin: 25px;
+          color: $sige-global-color-01;
+          > span.A {
+            padding: 10px;
+            border-radius: 5px;
+            background: $sige-global-bgcolor-07;
+            color: white;
+            border-bottom: 3px solid $sige-global-bgcolor-08;
+          }
+          > span.P {
+            padding: 10px;
+            border-radius: 5px;
+            background: $sige-global-bgcolor-12;
+            color: white;
+            border-bottom: 3px solid $sige-global-bgcolor-11;
+          }
+          > span.R {
+            padding: 10px;
+            border-radius: 5px;
+            background: $sige-global-bgcolor-09;
+            color: white;
+            border-bottom: 3px solid $sige-global-bgcolor-10;
+          }
+        }
+        &.message {
+          padding: 5px 0px;
+          font: {
+            size: 0.8em;
+          }
+        }
+      }
+    }
+    > footer {
+      position: absolute;
+      bottom: 5px;
+      min-height: inherit;
+      top: inherit;
+      width: 100%;
+      > div {
+        height: 40px;
+        margin: 10px 20px;
+        padding-top: 15px;
+        border-top: 1px solid $sige-border-color-03;
+        color: $sige-global-color-04;
+        text-align: center;
+        font: {
+          size: 0.8em;
+        }
+      }
+    }
+  }
+}
+
+.sige-parents-communications {
+  > h5 {
+    margin: 10px 0px 0px 0px;
+  }
+  > p {
+    font: {
+      size: 0.90em;
+      family: $sige-font-family-05;
+    }
+    a {
+      color: $sige-global-color-05;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+
+  .sige-academic-options {
+    > ul {
+      width: 60%;
+      > li {
+        width: 50%;
+      }
+    }
+  }
+
+  .task-list {
+    padding-top: 20px;
+    font: {
+      size: 1em;
+    }
+    ul#task-list {
+      li {
+        transition: all 1s ease-out;
+        > ul.task {
+          li {
+            font: {
+              size: 0.9em;
+            }
+            letter-spacing: -1px;
+            &.icon {
+              font: {
+                size: 1.5em;
+              }
+            }
+            &.select {
+              display: none;
+            }
+            &.type {
+              width: 100%;
+              order: 1;
+              span {
+                &.task {
+                  padding: 10px 5px;
+                  &:after {
+                    content: "Tarea";
+                  }
+                }
+                &.plan {
+                  padding: 10px 5px;
+                  &:after {
+                    content: "Plan de Apoyo";
+                  }
+                }
+                &.test {
+                  padding: 10px 5px;
+                  &:after {
+                    content: "Examen";
+                  }
+                }
+              }
+            }
+            &.ends {
+              width: 100%;
+              order: 4;
+              line-height: 40px;
+              margin-bottom: 10px;
+              text-align: left;
+              &:before {
+                content: "Fecha de Entrega: ";
+              }
+            }
+            &.group {
+              line-height: 80px;
+              display: none;
+            }
+            &.main-info {
+              width: 85%;
+              order: 3;
+            }
+            &.photo {
+              width: 15%;
+              order: 2;
+              > div {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                padding: 3px;
+                background-color: rgba($sige-global-bgcolor-03, 1);
+                position: relative;
+                margin: 10px auto;
+                > img {
+                  border-radius: 50%;
+                }
+              }
+
+            }
+            &.days {
+              display: none;
+            }
+            &.description {
+              width: 100%;
+              order: 5;
+            }
+            &.detail {
+              a {
+                div {
+                  cursor: pointer;
+                  border: 1px solid $sige-global-bgcolor-08;
+                  border-radius: 2px;
+                  width: 80px;
+                  height: 40px;
+                  position: relative;
+                  top: 30px;
+                  &:before {
+                    width: 20px;
+                    padding: 0px 30px;
+                    top: 10px;
+                    position: relative;
+                    font-size: 1.1em;
+                    color: $sige-global-bgcolor-08;
+                  }
+
+                }
+              }
+            }
+            &.edit {
+              line-height: 80px;
+              text-align: right;
+              a {
+                width: 150px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+
+              }
+            }
+            &.delete {
+              line-height: 80px;
+              text-align: right;
+              a {
+                width: 100px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+              }
+            }
+            &.files {
+              width: 100%;
+              order: 6
+            }
+          }
+        }
+      }
+    }
+  }
+  .file-list {
+    > ul.progress {
+      > li {
+        padding: 5px;
+        &:nth-child(1) {
+          width: 20%;
+          text-align: center;
+          margin-top: 5px;
+        }
+        &:nth-child(2) {
+          order: 1;
+          width: 75%;
+        }
+        &:nth-child(3) {
+          display: none;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 950px) {
+
+  .payment {
+    border-bottom: 1px solid $sige-border-color-03;
+    line-height: inherit;
+    height: inherit;
+    > li {
+      &.is_payment {
+        order: 1;
+        width: 10%;
+      }
+      &.photo {
+        order: 2;
+        width: 10%;
+      }
+      &.concept {
+        order: 3;
+        width: 30%;
+        div {
+          line-height: 60px;
+        }
+      }
+      &.date {
+        order: 4;
+        width: 15%;
+        div {
+          line-height: 60px;
+        }
+      }
+      &.total {
+        order: 5;
+        width: 20%;
+        div {
+          line-height: 60px;
+        }
+      }
+      &.edit {
+        order: 6;
+        width: 15%;
+        a {
+          width: 100%;
+          margin-top: 10px;
+        }
+      }
+      &.detail {
+        order: 6;
+        width: 15%;
+        a {
+          width: 100%;
+          margin-top: 10px;
+        }
+      }
+      &.voucher {
+        order: 7;
+        width: 100%;
+        display: none;
+      }
+    }
+  }
+
+  .sige-payments-lists {
+    .search-container {
+      width: 80%;
+      > ul {
+        > li {
+          &:nth-child(1) {
+            width: 40%;
+          }
+          &:nth-child(2) {
+            width: 40%;
+          }
+          &:nth-child(3) {
+            width: 20%;
+            text-align: right;
+            label {
+              margin: 20px 0px;
+            }
+          }
+          #search {
+            width: 100%;
+          }
+          #order {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  .payment {
+    border-bottom: 1px solid $sige-border-color-03;
+    line-height: inherit;
+    height: inherit;
+    > li {
+      &.is_payment {
+        order: 1;
+        width: 13%;
+      }
+      &.photo {
+        order: 2;
+        width: 12%;
+      }
+      &.concept {
+        order: 3;
+        width: 40%;
+        div {
+          line-height: 60px;
+        }
+      }
+      &.total {
+        order: 4;
+        width: 20%;
+        div {
+          line-height: 60px;
+        }
+      }
+      &.edit {
+        order: 5;
+        width: 15%;
+        a {
+          width: 100%;
+          margin-top: 10px;
+        }
+      }
+      &.detail {
+        order: 5;
+        width: 15%;
+        a {
+          width: 100%;
+          margin-top: 10px;
+        }
+      }
+      &.date {
+        order: 5;
+        width: 40%;
+        display: none;
+      }
+      &.voucher {
+        order: 7;
+        width: 100%;
+        display: none;
+      }
+    }
+  }
+
+  .sige-payments-lists {
+    .search-container {
+      width: 80%;
+      > ul {
+        > li {
+          &:nth-child(1) {
+            width: 40%;
+          }
+          &:nth-child(2) {
+            width: 40%;
+          }
+          &:nth-child(3) {
+            width: 20%;
+            text-align: right;
+            label {
+              margin: 20px 0px;
+            }
+          }
+          #search {
+            width: 100%;
+          }
+          #order {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .sige-academic-options {
+    > ul {
+      width: 100%;
+      > li {
+        width: 50%;
+      }
+    }
+  }
+
+  .sige-dashboard {
+    #main_dashboard {
+      width: 60%;
+      ul {
+        li#description {
+          width: 40%;
+        }
+        li#chart {
+          width: 60%;
+        }
+      }
+    }
+    #secondary_dashboard {
+      width: 40%;
+    }
+  }
+
+  .task-list {
+    padding-top: 20px;
+    font: {
+      size: 1em;
+    }
+    ul#task-list {
+      li {
+        transition: all 1s ease-out;
+        > ul.task {
+          li {
+            font: {
+              size: 0.9em;
+            }
+            letter-spacing: -1px;
+            &.icon {
+              font: {
+                size: 1.5em;
+              }
+            }
+            &.select {
+              display: none;
+            }
+            &.type {
+              width: 100%;
+              order: 1;
+              span {
+                &.task {
+                  padding: 10px 5px;
+                  &:after {
+                    content: "Tarea";
+                  }
+                }
+                &.plan {
+                  padding: 10px 5px;
+                  &:after {
+                    content: "Plan de Apoyo";
+                  }
+                }
+                &.test {
+                  padding: 10px 5px;
+                  &:after {
+                    content: "Examen";
+                  }
+                }
+              }
+            }
+            &.ends {
+              width: 100%;
+              order: 4;
+              line-height: 40px;
+              margin-bottom: 10px;
+              text-align: left;
+              &:before {
+                content: "Fecha de Entrega: ";
+              }
+            }
+            &.group {
+              line-height: 80px;
+              display: none;
+            }
+            &.main-info {
+              width: 85%;
+              order: 3;
+            }
+            &.photo {
+              width: 15%;
+              order: 2;
+              > div {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                padding: 3px;
+                background-color: rgba($sige-global-bgcolor-03, 1);
+                position: relative;
+                margin: 10px auto;
+                > img {
+                  border-radius: 50%;
+                }
+              }
+
+            }
+            &.days {
+              display: none;
+            }
+            &.description {
+              width: 100%;
+              order: 5;
+            }
+            &.detail {
+              a {
+                div {
+                  cursor: pointer;
+                  border: 1px solid $sige-global-bgcolor-08;
+                  border-radius: 2px;
+                  width: 80px;
+                  height: 40px;
+                  position: relative;
+                  top: 30px;
+                  &:before {
+                    width: 20px;
+                    padding: 0px 30px;
+                    top: 10px;
+                    position: relative;
+                    font-size: 1.1em;
+                    color: $sige-global-bgcolor-08;
+                  }
+
+                }
+              }
+            }
+            &.edit {
+              line-height: 80px;
+              text-align: right;
+              a {
+                width: 150px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+
+              }
+            }
+            &.delete {
+              line-height: 80px;
+              text-align: right;
+              a {
+                width: 100px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+              }
+            }
+            &.files {
+              width: 100%;
+              order: 6
+            }
+          }
+        }
+      }
+    }
+  }
+  .file-list {
+    > ul.progress {
+      > li {
+        padding: 5px;
+        &:nth-child(1) {
+          width: 20%;
+          text-align: center;
+          margin-top: 5px;
+        }
+        &:nth-child(2) {
+          order: 1;
+          width: 75%;
+        }
+        &:nth-child(3) {
+          display: none;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 566px) {
+
+  .payment {
+    border-bottom: 1px solid $sige-border-color-03;
+    line-height: 60px;
+    height: inherit;
+    > li {
+      &.is_payment {
+        order: 1;
+        width: 25%;
+        display: none;
+      }
+      &.photo {
+        order: 2;
+        width: 10%;
+      }
+      &.concept {
+        order: 3;
+        width: 20%;
+      }
+      &.total {
+        order: 4;
+        width: 25%;
+      }
+      &.edit {
+        order: 5;
+        width: 15%;
+        a {
+          width: 100%;
+        }
+      }
+      &.generate {
+        order: 8;
+        width: 15%;
+      }
+      &.detail {
+        order: 5;
+        width: 15%;
+        a {
+          width: 100%;
+        }
+      }
+      &.date {
+        order: 5;
+        width: 40%;
+        display: none;
+      }
+      &.voucher {
+        order: 7;
+        width: 100%;
+        display: none;
+      }
+    }
+  }
+
+  .sige-payments-lists {
+    .search-container {
+      width: 70%;
+      > ul {
+        > li {
+          &:nth-child(1) {
+            width: 40%;
+          }
+          &:nth-child(2) {
+            width: 40%;
+          }
+          &:nth-child(3) {
+            width: 20%;
+            text-align: right;
+            label {
+              margin: 20px 0px;
+            }
+          }
+          #search {
+            width: 100%;
+          }
+          #order {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .sige-payments-lists {
+    .search-container {
+      width: 100%;
+      > ul {
+        > li {
+          &:nth-child(1) {
+            width: 100%;
+          }
+          &:nth-child(2) {
+            width: 65%;
+          }
+          &:nth-child(3) {
+            width: 35%;
+            text-align: right;
+            label {
+              margin: 20px 0px;
+            }
+          }
+          #search {
+            width: 100%;
+          }
+          #order {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+
+  .sige-contained {
+    padding: 30px 15px;
+  }
+
+  .payment {
+    border-bottom: 1px solid $sige-border-color-03;
+    line-height: 60px;
+    height: inherit;
+    > li {
+      &.is_payment {
+        order: 1;
+        width: 25%;
+        display: none;
+      }
+      &.photo {
+        order: 2;
+        width: 10%;
+      }
+      &.concept {
+        order: 3;
+        width: 20%;
+      }
+      &.total {
+        order: 4;
+        width: 25%;
+      }
+      &.edit {
+        order: 5;
+        width: 15%;
+        a {
+          width: 100%;
+        }
+      }
+      &.generate {
+        order: 8;
+        width: 15%;
+      }
+      &.detail {
+        order: 5;
+        width: 15%;
+        a {
+          width: 100%;
+        }
+      }
+      &.date {
+        order: 5;
+        width: 40%;
+        display: none;
+      }
+      &.voucher {
+        order: 7;
+        width: 100%;
+        display: none;
+      }
+    }
+  }
+
+  .sige-payments-lists {
+    .search-container {
+      width: 100%;
+      > ul {
+        > li {
+          &:nth-child(1) {
+            width: 100%;
+          }
+          &:nth-child(2) {
+            width: 65%;
+          }
+          &:nth-child(3) {
+            width: 35%;
+            text-align: right;
+            label {
+              margin: 20px 0px;
+            }
+          }
+          #search {
+            width: 100%;
+          }
+          #order {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .sige-academic-options {
+    > ul {
+      width: 100%;
+      > li {
+        width: 50%;
+      }
+    }
+  }
+
+  .sige-container-update {
+    form {
+      fieldset.step {
+        > ul {
+          > li#user_container {
+            width: 100%;
+            input {
+              text-align: right;
+            }
+          }
+          > li#firstname_container {
+            width: 50%;
+          }
+          > li#lastname_container {
+            width: 50%;
+          }
+          > li#ididentificationtype_container {
+            width: 60%;
+          }
+          > li#identification_container {
+            width: 40%;
+          }
+          > li#expedition_container {
+            width: 50%;
+          }
+          > li#religion_container {
+            width: 50%;
+          }
+          > li#address_container {
+            width: 100%;
+          }
+          > li#district_container {
+            width: 50%;
+          }
+          > li#town_container {
+            width: 50%;
+          }
+          > li#email_container {
+            width: 100%;
+          }
+          > li#phone_container {
+            width: 50%;
+          }
+          > li#celular_container {
+            width: 50%;
+          }
+          > li#idbloodtype_container {
+            width: 50%;
+          }
+          > li#eps_container {
+            width: 50%;
+          }
+          > li#prepaidmedical_container {
+            width: 50%;
+          }
+          > li#policynumber_container {
+            width: 50%;
+          }
+          > li#medicaltreatment_container {
+            width: 100%;
+          }
+          > li#medicaltreatmentdescription_container {
+            width: 100%;
+          }
+          > li#equaltreatment_container {
+            width: 100%;
+          }
+          > li#takemedication_container {
+            width: 100%;
+          }
+          > li#medicationdescription_container {
+            width: 100%;
+          }
+          > li#whytakemedication_container {
+            width: 100%;
+          }
+          > li#dose_container {
+            width: 100%;
+          }
+          > li#isallergic_container {
+            width: 100%;
+          }
+          > li#isallergic_profession {
+            width: 100%;
+          }
+          > li#isallergic_occupation {
+            width: 100%;
+          }
+          > li#isallergic_company {
+            width: 100%;
+          }
+          > li#isallergic_phonecompany {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .sige-monitorings {
+    > ul {
+      > .monitoring {
+        > .monitoring-container {
+          ul {
+            li {
+              &.image {
+                order: 1;
+                width: 20%;
+                display: block;
+                i {
+                  margin: 10px 5px;
+                }
+              }
+              &.concept {
+                line-height: 45px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+              &.subject {
+                order: 2;
+                width: 60%;
+              }
+              &.nivel {
+                display: none;
+              }
+              &.monitoring {
+                width: 20%;
+                order: 3;
+                text-align: center;
+                > div.monitorings {
+                  border-radius: 50%;
+                  width: 35px;
+                  height: 35px;
+                  top: 8px;
+                  position: relative;
+                  text-align: center;
+                  color: white;
+                  display: inline-block;
+                  &.dp-parents {
+                    padding-top: 5px;
+                    background-color: $sige-global-bgcolor-09;
+                    border: 3px solid $sige-global-bgcolor-10;
+                  }
+                  &.db-parents {
+                    padding-top: 5px;
+                    background-color: $sige-global-bgcolor-11;
+                    border: 3px solid $sige-global-bgcolor-12;
+                  }
+                  &.da-parents {
+                    padding-top: 5px;
+                    background-color: $sige-global-bgcolor-13;
+                    border: 3px solid $sige-global-bgcolor-14;
+                  }
+                  &.ds-parents {
+                    padding-top: 5px;
+                    background-color: $sige-global-bgcolor-15;
+                    border: 3px solid $sige-global-bgcolor-16;
+                  }
+                }
+
+              }
+              &.value {
+                line-height: 45px;
+                text-align: center;
+              }
+              &.recovery {
+                order: 5;
+                width: 40%;
+                &:before {
+                  content: ""
+                }
+              }
+              &.attendance {
+                order: 4;
+                width: 40%;
+                text-align: left;
+                &:before {
+                  content: "Faltas: "
+                }
+              }
+              &.detail {
+                order: 6;
+                width: 20%;
+                line-height: 45px;
+                text-align: center;
+                > a {
+                  width: 100%;
+                  text-align: center;
+                  font: {
+                    size: 1.8em;
+                  }
+                  color: $sige-global-bgcolor-07;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .sige-dashboard {
+    #main_dashboard {
+      width: 100%;
+      ul {
+        li#description {
+          width: 30%;
+        }
+        li#chart {
+          width: 70%;
+        }
+      }
+    }
+    #secondary_dashboard {
+      width: 100%;
+    }
+  }
+
+  .task-list {
+    padding-top: 20px;
+    font: {
+      size: 1em;
+    }
+    ul#task-list {
+      li {
+        transition: all 1s ease-out;
+        > ul.task {
+          li {
+            font: {
+              size: 0.9em;
+            }
+            letter-spacing: -1px;
+            &.icon {
+              font: {
+                size: 1.5em;
+              }
+            }
+            &.select {
+              display: none;
+            }
+            &.type {
+              width: 100%;
+              order: 1;
+              span {
+                &.task {
+                  padding: 10px 5px;
+                  &:after {
+                    content: "Tarea";
+                  }
+                }
+                &.plan {
+                  padding: 10px 5px;
+                  &:after {
+                    content: "Plan de Apoyo";
+                  }
+                }
+                &.test {
+                  padding: 10px 5px;
+                  &:after {
+                    content: "Examen";
+                  }
+                }
+              }
+            }
+            &.ends {
+              width: 100%;
+              order: 4;
+              line-height: 40px;
+              margin-bottom: 10px;
+              text-align: left;
+              &:before {
+                content: "Fecha de Entrega: ";
+              }
+            }
+            &.group {
+              line-height: 80px;
+              display: none;
+            }
+            &.main-info {
+              width: 70%;
+              order: 3;
+            }
+            &.photo {
+              width: 30%;
+              order: 2;
+              > div {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                padding: 3px;
+                background-color: rgba($sige-global-bgcolor-03, 1);
+                position: relative;
+                margin: 10px auto;
+                > img {
+                  border-radius: 50%;
+                }
+              }
+
+            }
+            &.days {
+              display: none;
+            }
+            &.description {
+              width: 100%;
+              order: 5;
+            }
+            &.detail {
+              a {
+                div {
+                  cursor: pointer;
+                  border: 1px solid $sige-global-bgcolor-08;
+                  border-radius: 2px;
+                  width: 80px;
+                  height: 40px;
+                  position: relative;
+                  top: 30px;
+                  &:before {
+                    width: 20px;
+                    padding: 0px 30px;
+                    top: 10px;
+                    position: relative;
+                    font-size: 1.1em;
+                    color: $sige-global-bgcolor-08;
+                  }
+
+                }
+              }
+            }
+            &.edit {
+              line-height: 80px;
+              text-align: right;
+              a {
+                width: 150px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+
+              }
+            }
+            &.delete {
+              line-height: 80px;
+              text-align: right;
+              a {
+                width: 100px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+              }
+            }
+            &.files {
+              width: 100%;
+              order: 6
+            }
+          }
+        }
+      }
+    }
+  }
+  .file-list {
+    > ul.progress {
+      > li {
+        padding: 5px;
+        &:nth-child(1) {
+          width: 20%;
+          text-align: center;
+          margin-top: 5px;
+        }
+        &:nth-child(2) {
+          order: 1;
+          width: 75%;
+        }
+        &:nth-child(3) {
+          display: none;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 360px) {
+
+  .sige-contained {
+    padding: 30px 15px;
+  }
+
+  .payment {
+    border-bottom: 1px solid $sige-border-color-03;
+    line-height: 60px;
+    height: inherit;
+    > li {
+      &.is_payment {
+        order: 1;
+        width: 25%;
+        display: none;
+      }
+      &.photo {
+        order: 2;
+        width: 15%;
+      }
+      &.concept {
+        order: 3;
+        width: 10%;
+      }
+      &.total {
+        order: 4;
+        width: 30%;
+      }
+      &.edit {
+        order: 5;
+        width: 15%;
+        a {
+          width: 100%;
+        }
+      }
+      &.generate {
+        order: 8;
+        width: 15%;
+      }
+      &.detail {
+        order: 5;
+        width: 15%;
+        a {
+          width: 100%;
+        }
+      }
+      &.date {
+        order: 5;
+        width: 40%;
+        display: none;
+      }
+      &.voucher {
+        order: 7;
+        width: 100%;
+        display: none;
+      }
+    }
+  }
+
+  .sige-payments-lists {
+    .search-container {
+      width: 100%;
+      > ul {
+        > li {
+          &:nth-child(1) {
+            width: 100%;
+          }
+          &:nth-child(2) {
+            width: 65%;
+          }
+          &:nth-child(3) {
+            width: 35%;
+            text-align: right;
+            label {
+              margin: 20px 0px;
+            }
+          }
+          #search {
+            width: 100%;
+          }
+          #order {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .sige-academic-options {
+    > ul {
+      width: 100%;
+      > li {
+        width: 50%;
+      }
+    }
+  }
+
+  .sige-container-update {
+    form {
+      fieldset.step {
+        > ul {
+          > li#user_container {
+            width: 100%;
+            input {
+              text-align: right;
+            }
+          }
+          > li#firstname_container {
+            width: 50%;
+          }
+          > li#lastname_container {
+            width: 50%;
+          }
+          > li#ididentificationtype_container {
+            width: 60%;
+          }
+          > li#identification_container {
+            width: 40%;
+          }
+          > li#expedition_container {
+            width: 50%;
+          }
+          > li#religion_container {
+            width: 50%;
+          }
+          > li#address_container {
+            width: 100%;
+          }
+          > li#district_container {
+            width: 50%;
+          }
+          > li#town_container {
+            width: 50%;
+          }
+          > li#email_container {
+            width: 100%;
+          }
+          > li#phone_container {
+            width: 50%;
+          }
+          > li#celular_container {
+            width: 50%;
+          }
+          > li#idbloodtype_container {
+            width: 50%;
+          }
+          > li#eps_container {
+            width: 50%;
+          }
+          > li#prepaidmedical_container {
+            width: 50%;
+          }
+          > li#policynumber_container {
+            width: 50%;
+          }
+          > li#medicaltreatment_container {
+            width: 100%;
+          }
+          > li#medicaltreatmentdescription_container {
+            width: 100%;
+          }
+          > li#equaltreatment_container {
+            width: 100%;
+          }
+          > li#takemedication_container {
+            width: 100%;
+          }
+          > li#medicationdescription_container {
+            width: 100%;
+          }
+          > li#whytakemedication_container {
+            width: 100%;
+          }
+          > li#dose_container {
+            width: 100%;
+          }
+          > li#isallergic_container {
+            width: 100%;
+          }
+          > li#isallergic_profession {
+            width: 100%;
+          }
+          > li#isallergic_occupation {
+            width: 100%;
+          }
+          > li#isallergic_company {
+            width: 100%;
+          }
+          > li#isallergic_phonecompany {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .sige-monitorings {
+    > ul {
+      > .monitoring {
+        > .monitoring-container {
+          ul {
+            li {
+              &.image {
+                order: 1;
+                width: 20%;
+                display: block;
+                i {
+                  margin: 10px 5px;
+                }
+              }
+              &.concept {
+                line-height: 45px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+              &.subject {
+                order: 2;
+                width: 60%;
+              }
+              &.nivel {
+                display: none;
+              }
+              &.monitoring {
+                width: 20%;
+                order: 3;
+                text-align: center;
+                > div.monitorings {
+                  border-radius: 50%;
+                  width: 35px;
+                  height: 35px;
+                  top: 8px;
+                  position: relative;
+                  text-align: center;
+                  color: white;
+                  &.dp-parents {
+                    padding-top: 5px;
+                    background-color: $sige-global-bgcolor-09;
+                    border: 3px solid $sige-global-bgcolor-10;
+                  }
+                  &.db-parents {
+                    padding-top: 5px;
+                    background-color: $sige-global-bgcolor-11;
+                    border: 3px solid $sige-global-bgcolor-12;
+                  }
+                  &.da-parents {
+                    padding-top: 5px;
+                    background-color: $sige-global-bgcolor-13;
+                    border: 3px solid $sige-global-bgcolor-14;
+                  }
+                  &.ds-parents {
+                    padding-top: 5px;
+                    background-color: $sige-global-bgcolor-15;
+                    border: 3px solid $sige-global-bgcolor-16;
+                  }
+                }
+
+              }
+              &.value {
+                line-height: 35px;
+                text-align: center;
+              }
+              &.recovery {
+                order: 5;
+                width: 40%;
+                &:before {
+                  content: ""
+                }
+              }
+              &.attendance {
+                order: 4;
+                width: 40%;
+                text-align: left;
+                &:before {
+                  content: "Faltas: "
+                }
+              }
+              &.detail {
+                order: 6;
+                width: 20%;
+                line-height: 35px;
+                text-align: center;
+                > a {
+                  width: 100%;
+                  text-align: center;
+                  font: {
+                    size: 1.8em;
+                  }
+                  color: $sige-global-bgcolor-07;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .sige-dashboard {
+    #main_dashboard {
+      width: 100%;
+      ul {
+        li#description {
+          width: 30%;
+        }
+        li#chart {
+          width: 70%;
+        }
+      }
+    }
+    #secondary_dashboard {
+      width: 100%;
+    }
+  }
+
+  .task-list {
+    padding-top: 20px;
+    font: {
+      size: 1em;
+    }
+    ul#task-list {
+      li {
+        transition: all 1s ease-out;
+        > ul.task {
+          li {
+            font: {
+              size: 0.9em;
+            }
+            letter-spacing: -1px;
+            &.icon {
+              font: {
+                size: 1.5em;
+              }
+            }
+            &.select {
+              display: none;
+            }
+            &.type {
+              width: 100%;
+              order: 1;
+              span {
+                &.task {
+                  &:after {
+                    content: "Tarea";
+                  }
+                }
+                &.plan {
+                  &:after {
+                    content: "Plan de Apoyo";
+                  }
+                }
+                &.test {
+                  &:after {
+                    content: "Examen";
+                  }
+                }
+              }
+            }
+            &.ends {
+              width: 100%;
+              order: 4;
+              line-height: 40px;
+              margin-bottom: 10px;
+              text-align: left;
+              &:before {
+                content: "Fecha de Entrega: ";
+              }
+            }
+            &.group {
+              line-height: 80px;
+              display: none;
+            }
+            &.main-info {
+              width: 70%;
+              order: 3;
+            }
+            &.photo {
+              width: 30%;
+              order: 2;
+              > div {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                padding: 3px;
+                background-color: rgba($sige-global-bgcolor-03, 1);
+                position: relative;
+                margin: 10px auto;
+                > img {
+                  border-radius: 50%;
+                }
+              }
+
+            }
+            &.days {
+              display: none;
+            }
+            &.description {
+              width: 100%;
+              order: 5;
+            }
+            &.detail {
+              a {
+                div {
+                  cursor: pointer;
+                  border: 1px solid $sige-global-bgcolor-08;
+                  border-radius: 2px;
+                  width: 80px;
+                  height: 40px;
+                  position: relative;
+                  top: 30px;
+                  &:before {
+                    width: 20px;
+                    padding: 0px 30px;
+                    top: 10px;
+                    position: relative;
+                    font-size: 1.1em;
+                    color: $sige-global-bgcolor-08;
+                  }
+
+                }
+              }
+            }
+            &.edit {
+              line-height: 80px;
+              text-align: right;
+              a {
+                width: 150px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+
+              }
+            }
+            &.delete {
+              line-height: 80px;
+              text-align: right;
+              a {
+                width: 100px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+              }
+            }
+            &.files {
+              width: 100%;
+              order: 6
+            }
+          }
+        }
+      }
+    }
+  }
+  .file-list {
+    > ul.progress {
+      > li {
+        padding: 5px;
+        &:nth-child(1) {
+          width: 20%;
+          text-align: center;
+          margin-top: 5px;
+        }
+        &:nth-child(2) {
+          order: 1;
+          width: 75%;
+        }
+        &:nth-child(3) {
+          display: none;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 359px) {
+
+  .sige-contained {
+    padding: 30px 15px;
+  }
+
+  .payment {
+    border-bottom: 1px solid $sige-border-color-03;
+    line-height: 60px;
+    height: inherit;
+    > li {
+      &.is_payment {
+        order: 1;
+        width: 25%;
+        display: none;
+      }
+      &.photo {
+        order: 2;
+        width: 15%;
+      }
+      &.concept {
+        order: 3;
+        width: 10%;
+      }
+      &.total {
+        order: 4;
+        width: 30%;
+      }
+      &.edit {
+        order: 5;
+        width: 15%;
+        a {
+          width: 100%;
+        }
+      }
+      &.generate {
+        order: 8;
+        width: 15%;
+      }
+      &.detail {
+        order: 5;
+        width: 15%;
+        a {
+          width: 100%;
+        }
+      }
+      &.date {
+        order: 5;
+        width: 40%;
+        display: none;
+      }
+      &.voucher {
+        order: 7;
+        width: 100%;
+        display: none;
+      }
+    }
+  }
+
+  .sige-payments-lists {
+    .search-container {
+      width: 100%;
+      > ul {
+        > li {
+          &:nth-child(1) {
+            width: 100%;
+          }
+          &:nth-child(2) {
+            width: 65%;
+          }
+          &:nth-child(3) {
+            width: 35%;
+            text-align: right;
+            label {
+              margin: 20px 0px;
+            }
+          }
+          #search {
+            width: 100%;
+          }
+          #order {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .sige-academic-options {
+    > ul {
+      width: 100%;
+      > li {
+        width: 100%;
+      }
+    }
+  }
+
+  .sige-container-update {
+    form {
+      fieldset.step {
+        > ul {
+          > li#user_container {
+            width: 100%;
+            input {
+              text-align: right;
+            }
+          }
+          > li#firstname_container {
+            width: 50%;
+          }
+          > li#lastname_container {
+            width: 50%;
+          }
+          > li#ididentificationtype_container {
+            width: 60%;
+          }
+          > li#identification_container {
+            width: 40%;
+          }
+          > li#expedition_container {
+            width: 50%;
+          }
+          > li#religion_container {
+            width: 50%;
+          }
+          > li#address_container {
+            width: 100%;
+          }
+          > li#district_container {
+            width: 50%;
+          }
+          > li#town_container {
+            width: 50%;
+          }
+          > li#email_container {
+            width: 100%;
+          }
+          > li#phone_container {
+            width: 50%;
+          }
+          > li#celular_container {
+            width: 50%;
+          }
+          > li#idbloodtype_container {
+            width: 50%;
+          }
+          > li#eps_container {
+            width: 50%;
+          }
+          > li#prepaidmedical_container {
+            width: 50%;
+          }
+          > li#policynumber_container {
+            width: 50%;
+          }
+          > li#medicaltreatment_container {
+            width: 100%;
+          }
+          > li#medicaltreatmentdescription_container {
+            width: 100%;
+          }
+          > li#equaltreatment_container {
+            width: 100%;
+          }
+          > li#takemedication_container {
+            width: 100%;
+          }
+          > li#medicationdescription_container {
+            width: 100%;
+          }
+          > li#whytakemedication_container {
+            width: 100%;
+          }
+          > li#dose_container {
+            width: 100%;
+          }
+          > li#isallergic_container {
+            width: 100%;
+          }
+          > li#isallergic_profession {
+            width: 100%;
+          }
+          > li#isallergic_occupation {
+            width: 100%;
+          }
+          > li#isallergic_company {
+            width: 100%;
+          }
+          > li#isallergic_phonecompany {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .sige-monitorings {
+    > ul {
+      > .monitoring {
+        > .monitoring-container {
+          ul {
+            li {
+              &.image {
+                order: 1;
+                width: 20%;
+                display: block;
+                i {
+                  margin: 10px 5px;
+                }
+              }
+              &.concept {
+                line-height: 45px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+              &.subject {
+                order: 2;
+                width: 60%;
+              }
+              &.nivel {
+                display: none;
+              }
+              &.monitoring {
+                width: 20%;
+                order: 3;
+                text-align: center;
+                > div.monitorings {
+                  border-radius: 50%;
+                  width: 35px;
+                  height: 35px;
+                  top: 8px;
+                  position: relative;
+                  text-align: center;
+                  color: white;
+                  &.dp-parents {
+                    padding-top: 5px;
+                    background-color: $sige-global-bgcolor-09;
+                    border: 3px solid $sige-global-bgcolor-10;
+                  }
+                  &.db-parents {
+                    padding-top: 5px;
+                    background-color: $sige-global-bgcolor-11;
+                    border: 3px solid $sige-global-bgcolor-12;
+                  }
+                  &.da-parents {
+                    padding-top: 5px;
+                    background-color: $sige-global-bgcolor-13;
+                    border: 3px solid $sige-global-bgcolor-14;
+                  }
+                  &.ds-parents {
+                    padding-top: 5px;
+                    background-color: $sige-global-bgcolor-15;
+                    border: 3px solid $sige-global-bgcolor-16;
+                  }
+                }
+
+              }
+              &.value {
+                line-height: 35px;
+                text-align: center;
+              }
+              &.recovery {
+                order: 5;
+                width: 40%;
+                &:before {
+                  content: ""
+                }
+              }
+              &.attendance {
+                order: 4;
+                width: 40%;
+                text-align: left;
+                &:before {
+                  content: "Faltas: "
+                }
+              }
+              &.detail {
+                order: 6;
+                width: 20%;
+                line-height: 35px;
+                text-align: center;
+                > a {
+                  width: 100%;
+                  text-align: center;
+                  font: {
+                    size: 1.8em;
+                  }
+                  color: $sige-global-bgcolor-07;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .sige-dashboard {
+    #main_dashboard {
+      width: 100%;
+      ul {
+        li#description {
+          width: 20%;
+          .consecutive {
+            height: 60px;
+            span {
+              line-height: 60px;
+            }
+          }
+        }
+        li#chart {
+          width: 80%;
+        }
+      }
+    }
+    #secondary_dashboard {
+      width: 100%;
+    }
+  }
+  .task-list {
+    padding-top: 20px;
+    font: {
+      size: 1em;
+    }
+    ul#task-list {
+      li {
+        transition: all 1s ease-out;
+        > ul.task {
+          li {
+            font: {
+              size: 0.9em;
+            }
+            letter-spacing: -1px;
+            &.icon {
+              font: {
+                size: 1.5em;
+              }
+            }
+            &.select {
+              display: none;
+            }
+            &.type {
+              width: 100%;
+              order: 1;
+              span {
+                &.task {
+                  &:after {
+                    content: "Tarea";
+                  }
+                }
+                &.plan {
+                  &:after {
+                    content: "Plan de Apoyo";
+                  }
+                }
+                &.test {
+                  &:after {
+                    content: "Examen";
+                  }
+                }
+              }
+            }
+            &.ends {
+              width: 100%;
+              order: 4;
+              line-height: 40px;
+              margin-bottom: 10px;
+              text-align: left;
+              &:before {
+                content: "Fecha de Entrega: ";
+              }
+            }
+            &.group {
+              line-height: 80px;
+              display: none;
+            }
+            &.main-info {
+              width: 70%;
+              order: 3;
+            }
+            &.photo {
+              width: 30%;
+              order: 2;
+              > div {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                padding: 3px;
+                background-color: rgba($sige-global-bgcolor-03, 1);
+                position: relative;
+                margin: 10px auto;
+                > img {
+                  border-radius: 50%;
+                }
+              }
+
+            }
+            &.days {
+              display: none;
+            }
+            &.description {
+              width: 100%;
+              order: 5;
+            }
+            &.detail {
+              a {
+                div {
+                  cursor: pointer;
+                  border: 1px solid $sige-global-bgcolor-08;
+                  border-radius: 2px;
+                  width: 80px;
+                  height: 40px;
+                  position: relative;
+                  top: 30px;
+                  &:before {
+                    width: 20px;
+                    padding: 0px 30px;
+                    top: 10px;
+                    position: relative;
+                    font-size: 1.1em;
+                    color: $sige-global-bgcolor-08;
+                  }
+
+                }
+              }
+            }
+            &.edit {
+              line-height: 80px;
+              text-align: right;
+              a {
+                width: 150px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+
+              }
+            }
+            &.delete {
+              line-height: 80px;
+              text-align: right;
+              a {
+                width: 100px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+              }
+            }
+            &.files {
+              width: 100%;
+              order: 6
+            }
+          }
+        }
+      }
+    }
+  }
+  .file-list {
+    > ul.progress {
+      > li {
+        padding: 5px;
+        &:nth-child(1) {
+          width: 20%;
+          text-align: center;
+          margin-top: 5px;
+        }
+        &:nth-child(2) {
+          order: 1;
+          width: 75%;
+        }
+        &:nth-child(3) {
+          display: none;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 320px) {
+
+  .sige-contained {
+    padding: 30px 15px;
+  }
+
+  .payment {
+    border-bottom: 1px solid $sige-border-color-03;
+    line-height: 60px;
+    height: inherit;
+    > li {
+      &.is_payment {
+        order: 1;
+        width: 25%;
+        display: none;
+      }
+      &.photo {
+        order: 2;
+        width: 15%;
+      }
+      &.concept {
+        order: 3;
+        width: 10%;
+      }
+      &.total {
+        order: 4;
+        width: 30%;
+      }
+      &.edit {
+        order: 5;
+        width: 15%;
+        a {
+          width: 100%;
+        }
+      }
+      &.detail {
+        order: 5;
+        width: 15%;
+        a {
+          width: 100%;
+        }
+      }
+      &.date {
+        order: 5;
+        width: 40%;
+        display: none;
+      }
+      &.voucher {
+        order: 7;
+        width: 100%;
+        display: none;
+      }
+      &.generate {
+        order: 8;
+        width: 15%;
+      }
+    }
+  }
+
+  .sige-payments-lists {
+    .search-container {
+      width: 100%;
+      > ul {
+        > li {
+          &:nth-child(1) {
+            width: 100%;
+          }
+          &:nth-child(2) {
+            width: 65%;
+          }
+          &:nth-child(3) {
+            width: 35%;
+            text-align: right;
+            label {
+              margin: 20px 0px;
+            }
+          }
+          #search {
+            width: 100%;
+          }
+          #order {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .task-list {
+    padding-top: 20px;
+    font: {
+      size: 1em;
+    }
+    ul#task-list {
+      li {
+        transition: all 1s ease-out;
+        > ul.task {
+          li {
+            font: {
+              size: 0.9em;
+            }
+            letter-spacing: -1px;
+            &.icon {
+              font: {
+                size: 1.5em;
+              }
+            }
+            &.select {
+              display: none;
+            }
+            &.type {
+              width: 100%;
+              order: 1;
+              span {
+                &.task {
+                  &:after {
+                    content: "Tarea";
+                  }
+                }
+                &.plan {
+                  &:after {
+                    content: "Plan de Apoyo";
+                  }
+                }
+                &.test {
+                  &:after {
+                    content: "Examen";
+                  }
+                }
+              }
+            }
+            &.ends {
+              width: 100%;
+              order: 4;
+              line-height: 40px;
+              margin-bottom: 10px;
+              text-align: left;
+              &:before {
+                content: "Fecha de Entrega: ";
+              }
+            }
+            &.group {
+              line-height: 80px;
+              display: none;
+            }
+            &.main-info {
+              width: 70%;
+              order: 3;
+            }
+            &.photo {
+              width: 30%;
+              order: 2;
+              > div {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                padding: 3px;
+                background-color: rgba($sige-global-bgcolor-03, 1);
+                position: relative;
+                margin: 10px auto;
+                > img {
+                  border-radius: 50%;
+                }
+              }
+
+            }
+            &.days {
+              display: none;
+            }
+            &.description {
+              width: 100%;
+              order: 5;
+            }
+            &.detail {
+              a {
+                div {
+                  cursor: pointer;
+                  border: 1px solid $sige-global-bgcolor-08;
+                  border-radius: 2px;
+                  width: 80px;
+                  height: 40px;
+                  position: relative;
+                  top: 30px;
+                  &:before {
+                    width: 20px;
+                    padding: 0px 30px;
+                    top: 10px;
+                    position: relative;
+                    font-size: 1.1em;
+                    color: $sige-global-bgcolor-08;
+                  }
+
+                }
+              }
+            }
+            &.edit {
+              line-height: 80px;
+              text-align: right;
+              a {
+                width: 150px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+
+              }
+            }
+            &.delete {
+              line-height: 80px;
+              text-align: right;
+              a {
+                width: 100px;
+                padding: 8px 18px;
+                background-color: $sige-global-bgcolor-22 !important;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+              }
+            }
+            &.files {
+              width: 100%;
+              order: 6
+            }
+          }
+        }
+      }
+    }
+  }
+  .file-list {
+    > ul.progress {
+      > li {
+        padding: 5px;
+        &:nth-child(1) {
+          width: 20%;
+          text-align: center;
+          margin-top: 5px;
+        }
+        &:nth-child(2) {
+          order: 1;
+          width: 75%;
+        }
+        &:nth-child(3) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .monitoring-detail {
+    > .category {
+      clear: both;
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid $sige-border-color-03;
+      margin-bottom: 20px;
+      > ul {
+        > li {
+          &.category-name {
+            width: 70%;
+          }
+          &.monitoring {
+            width: 30%;
+          }
+        }
+      }
+    }
+    > .detail {
+
+    }
+
+  }
+}

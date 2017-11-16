@@ -1,0 +1,33 @@
+<input type="search" ng-model="user_name" ng-blur="search()" style="text-align: left"/>
+<section class="sige-search-family-container" ng-if="showUsers" style="width: {{widthdefault}}%;">
+    <div class="close" ng-click="close()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+    <ul class="display-horizontal col-100 search">
+        <li class="col-100 families" data-ng-repeat="user in users | filter:user_name | limitTo:5">
+            <ul class="display-horizontal col-100 family">
+                <li class="col-10">
+                    <div style="border-radius: 50%;">
+                        <img style="border-radius: 50%;background-color: #53bbb4;padding: 3px;" ng-src="{{assets}}/img/users/{{user.photo}}" alt="{{ user.lastname }}"  title="{{ user.lastname}} {{ user.firstname }}"/>
+                    </div>
+                </li>
+                <li class="col-25">
+                    <div ng-switch="destination">
+                        <span ng-click="AddUser(user,AddToRoute(user.iduser,route.idroute))" ng-switch-when="assignuser">Adicionar usuario</span>
+                        <span ng-click="AddUser(user)" ng-switch-when="selectuser">Seleccionar usuario</span>
+                    </div>
+                </li>
+                <li class="col-20">
+                    <div>
+                        <span >{{ user.iduser }}</span>
+                    </div>
+                </li>
+                <li class="col-45">
+                    <div>
+                        {{user.firstname +" "+ user.lastname }}
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</section>

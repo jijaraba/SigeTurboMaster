@@ -1,0 +1,43 @@
+<section style="padding-top: 10px">
+    <div class="grid-100">
+        <div class="sige-contained">
+            <section class="sige-observer-new">
+                <form ng-submit="partialRegister()">
+                    <fieldset>
+                        <ul class="display-horizontal student col-100">
+                            <li class="photo col-100">
+                                <div>
+                                    <img ng-src="{{assets}}/img/users/{{user.photo}}" alt="{{ user.firstname }}" title="{{ user.lastname }} {{ user.firstname }}"/>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <fieldset>
+                        <ul class="display-horizontal col-100">
+                            <li class="col-100 gutter-5">
+                                <label class="select-arrow" for="rating">
+                                    <select name="rating" id="rating" ng-model="partial.rating" required>
+                                        <option value="2.99" selected>Desempeño en Proceso</option>
+                                        <option value="3.70">Desempeño Básico</option>
+                                        <option value="4.29">Desempeño Alto</option>
+                                        <option value="5.00">Desempeño Superior</option>
+                                    </select>
+                                </label>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <fieldset>
+                        <ul class="display-horizontal col-100">
+                            <li class="col-100 gutter-5">
+                                <textarea name="observer" id="observer" ng-model="partial.description" rows="4" placeholder="Solo para Preescolar"></textarea>
+                            </li>
+                            <li class="col-100">
+                                <button type="submit" class="btn btn-aquamarine" ng-disabled="isDisabled">Guardar</button>
+                            </li>
+                        </ul>
+                    </fieldset>
+                </form>
+            </section>
+        </div>
+    </div>
+</section>

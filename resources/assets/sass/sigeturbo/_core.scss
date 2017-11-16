@@ -1,0 +1,139 @@
+//*
+//|-----------------------------------------------------------
+//| Variables
+//|-----------------------------------------------------------
+//*/
+
+//Background Colors
+$sige-global-bgcolor-01: #edeff0; //Background App (Gray)
+$sige-global-bgcolor-02: #384047; //Background App (Blue)
+$sige-global-bgcolor-03: #53BBB4; //Aquamarine light
+$sige-global-bgcolor-04: #45AFA8; //Aquamarine Dark
+$sige-global-bgcolor-05: #3f8abf; //Blue light
+$sige-global-bgcolor-06: #2c6085; //Blue Dark
+$sige-global-bgcolor-07: #5cb860; //Green light
+$sige-global-bgcolor-08: #4cae50; //Green Dark
+$sige-global-bgcolor-09: #ed5565; //Red light  para Gráficos
+$sige-global-bgcolor-10: #da4453; //Red Dark para Gráficos
+$sige-global-bgcolor-11: #e9573f; //Naranja light  para Gráficos
+$sige-global-bgcolor-12: #fc6e51; //Naranja Dark  para Gráficos
+$sige-global-bgcolor-13: #38afda; //Blue light  para Gráficos
+$sige-global-bgcolor-14: #4fc1e9; //Blue Dark  para Gráficos
+$sige-global-bgcolor-15: #8cc152; //Verde light para Gráficos
+$sige-global-bgcolor-16: #a0d468; //Verde Dark para Gráficos
+$sige-global-bgcolor-17: #717b85; //Gray light para Gráficos
+$sige-global-bgcolor-18: #656e77; //Gray Dark para Gráficos
+$sige-global-bgcolor-19: #7D669E; //Purple light para Gráficos
+$sige-global-bgcolor-20: #5c429e; //Purple Dark para Gráficos
+$sige-global-bgcolor-21: #F5F5F5; //Gray2 light para Gráficos
+$sige-global-bgcolor-22: #E6E6E6; //Gray2 Dark para Gráficos
+$sige-global-bgcolor-23: #FFCE56; //Yellow Dark para Gráficos
+$sige-global-bgcolor-24: #D1A92F; //Yellow Dark para Gráficos
+$sige-global-bgcolor-25: #E6E6E6; //Gray3 para Formularios
+$sige-global-bgcolor-26: #E3E3E3; //Gray4 para Formularios
+$sige-global-bgcolor-27: #F9FAFA; //Gray4 para Formularios
+
+
+//Font Colors
+$sige-global-color-01: #657380; //Black
+$sige-global-color-02: #fff; //White
+$sige-global-color-03: #384047; //Black Home
+$sige-global-color-04: #8d9aa5; //Gris
+$sige-global-color-05: #53BBB4; //Aquamarine
+$sige-global-color-06: #da4453;
+$sige-global-color-07: #5a6772; //Gris Oscuro
+$sige-global-color-08: #587492; //Gris Oscuro
+
+//Landing Page
+$sige-landing-color01: #313b48;
+$sige-landing-color02: #75AF66;
+$sige-landing-color03: #EEEEEF;
+$sige-landing-color04: #D1A92F;
+$sige-landing-color05: #fff;
+$sige-global-width: 960px;
+$sige-global-color-opacity: #000;
+$sige-global-browsers: moz webkit ms o khtml;
+$sige-input-types: text email tel password;
+
+//Fonts
+$sige-font-family-01: 'Gotham Rounded Book', Helvetica Neue, Helvetica, sans-serif;
+$sige-font-family-02: 'PT Sans Narrow', Helvetica Neue, Helvetica, sans-serif;
+$sige-font-family-03: 'Gotham Rounded Bold', Helvetica Neue, Helvetica, sans-serif;
+$sige-font-family-04: 'Gotham Rounded Medium', Helvetica Neue, Helvetica, sans-serif;
+$sige-font-family-05: 'Gotham Rounded Light', Helvetica Neue, Helvetica, sans-serif;
+$sige-font-family-06: 'Open Sans', Helvetica Neue, Helvetica, sans-serif;
+$sige-font-family-07: 'Montserrat Bold', Helvetica Neue, Helvetica, sans-serif;
+$sige-font-family-08: 'Montserrat Regular', Helvetica Neue, Helvetica, sans-serif;
+
+//Border Color
+$sige-border-color-01: #ddd;
+$sige-border-color-02: #edeff0;
+$sige-border-color-03: #eee;
+$sige-border-color-04: #45afa8; //Aquamarine Dark
+$sige-border-color-05: #4F6D8D;
+$sige-border-color-06: #ffffff;
+
+//*
+//|-----------------------------------------------------------
+//| Mixin
+//|-----------------------------------------------------------
+//*/
+@mixin sige-text-shadow($h-shadow: 1px, $v-shadow: 1px, $blur: 2px, $spread: 0px, $color: $sige-global-color-opacity, $opacity: 0.3) {
+  text-shadow: $h-shadow $v-shadow $blur $spread rgba($color, $opacity);
+}
+
+@mixin sige-box-shadow-extend($shadow ...) {
+  box-shadow: $shadow;
+}
+
+//*
+//|-----------------------------------------------------------
+//| Border ZigZag
+//|-----------------------------------------------------------
+//*/
+@mixin sige-border-top-zigzag($height, $size, $color-outer) {
+  & {
+    height: $height;
+  }
+  &:before {
+    top: $height;
+    background-position: left top;
+    @include sige-background(linear-gradient(-135deg, $color-outer $size / 2, transparent 0), linear-gradient(135deg, $color-outer $size / 2, transparent 0));
+    @include sige-border-zigzag-helper($size, $color-outer);
+  }
+}
+
+@mixin sige-border-bottom-zigzag($height, $size, $color-outer) {
+  & {
+    height: $height;
+  }
+  &:after {
+    bottom: $height;
+    background-position: left bottom;
+    @include sige-background(linear-gradient(-45deg, $color-outer $size / 2, transparent 0), linear-gradient(45deg, $color-outer $size / 2, transparent 0));
+    @include sige-border-zigzag-helper($size, $color-outer);
+  }
+}
+
+@mixin sige-border-zigzag-helper($size, $color-outer) {
+  content: " ";
+  display: block;
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  height: $size;
+  background-repeat: repeat-x;
+  background-size: $size $size;
+}
+
+//*
+//|-----------------------------------------------------------
+//| Vertical Align
+//|-----------------------------------------------------------
+//*/
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+}

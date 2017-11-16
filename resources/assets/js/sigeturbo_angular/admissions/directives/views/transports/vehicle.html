@@ -1,0 +1,25 @@
+<form ng-submit="SaveVehicle();">
+    <ul class="display-horizontal col-100 enrollment-extended">
+        <li class="col-100">
+            <ul class="display-horizontal col-100">
+                <li class="col-40 scholarship-text">Placa</li>
+                <li class="col-60 scholarship">
+                    <input name="plate" type="text" ng-model="vehicleform.plate" ng-value="vehicleform.plate" required>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-40 inclusion-text">Tipo de Vehículo</li>
+                <li class="col-60 inclusion">
+                    <input name="type" type="text" ng-model="vehicleform.type" ng-value="vehicleform.type" required>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-100">
+                    <button type="submit" class="btn btn-aquamarine">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</form>

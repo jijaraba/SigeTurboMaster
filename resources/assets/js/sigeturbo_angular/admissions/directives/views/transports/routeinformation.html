@@ -1,0 +1,87 @@
+<ul id="payment-list display-horizontal col-100" >
+        <li class="col-100">
+            <ul class="display-horizontal col-100 payment">
+                <li class="col-10 family">
+                    <div>Conductor</div>
+                </li>
+                    <li class="col-15 family">
+                    <div>{{conveyorctual.firstname}} {{conveyorctual.lastname}}</div>
+                </li>
+                <li class="col-15 family">
+                    <div>Celular Conductor</div>
+                </li>
+                <li class="col-15 family">
+                    <div> {{conveyorctual.celular}}
+                    </div>
+                </li>
+                <li class="col-15 family">
+                    <div>Tipo de Vehículo</div>
+                </li>
+                <li class="col-15 family">
+                    <div>{{vehicleactual.type}}</div>
+                </li>
+                <li class="col-5 edit" style="padding:5px;">
+                    <button type="button" ng-click="editform('conveyor',conveyors,route.idconveyor)" class="btn btn-aquamarine">
+                        <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </li>
+        <li class="col-100">
+            <ul class="display-horizontal col-100 payment">
+                <li class="col-10 family">
+                    <div>Acompañante</div>
+                </li>
+                <li class="col-15 family">
+                    <div>{{companionactual.firstname}} {{companionactual.lastname}}</div>
+                </li>
+                <li class="col-15 family">
+                    <div>Celular Acompañante</div>
+                </li>
+                <li class="col-15 family">
+                    <div> {{companionactual.celular}} <i ng-click="editform('conveyor',conveyors,route.idcompanion)" class="fa fa-pencil-square-o" aria-hidden="true"  style="cursor:pointer" title="Editar Acompañante"></i>
+                    </div>
+                </li>
+                <li class="col-15 family">
+                    <div>Placa de Vehículo</div>
+                </li>
+                <li class="col-15 family">
+                    <div>{{vehicleactual.plate}}</div>
+                </li>
+                <li class="col-5 edit" style="padding:5px;">
+                    <button type="button" ng-click="editform('vehicle',vehicles,route.idvehicle)" class="btn btn-aquamarine">
+                        <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </li>
+        <li class="col-100">
+            <ul class="display-horizontal col-100 payment">
+                <li class="col-10 family">
+                    <div>Ruta</div>
+                </li>
+                <li class="col-15 family">
+                    <div > {{route.idroute}}</div>
+                </li>
+                <li class="col-15 family">
+                    <div>Nombre</div>
+                </li>
+                <li class="col-15 family">
+                    <div>{{route.name}}</div>
+                </li>
+                <li class="col-15 family">
+                    <div>Hora</div>
+                </li>
+                <li class="col-15 family">
+                    <div>
+                        {{route.hour}}
+                    </div>
+                </li>
+                <li class="col-5 edit" style="padding:5px;">
+                    <button type="button" ng-click="editform('route',route,route.idroute)" class="btn btn-aquamarine">
+                        <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </li>                      
+    </ul>

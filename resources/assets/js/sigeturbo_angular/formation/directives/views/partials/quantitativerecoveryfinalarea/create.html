@@ -1,0 +1,54 @@
+<section class="grid-100 sige-academic">
+    <section class="sige-contained" id="academic">
+        <h4>Académico</h4>
+        <section class="academic">
+            <form name="academicForm" ng-submit="searching()">
+                <ul class="display-horizontal col-100">
+                    <li class="col-20 gutter-5">
+                        <label class="select-arrow" for="idyear">
+                            <select id="idyear" name="idyear" ng-model="academic.year" ng-options="year.idyear as year.name for year in years">
+                                <option value="">Año</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li class="col-20 gutter-5">
+                        <label class="select-arrow" for="idperiod">
+                            <select id="idperiod" name="idperiod" ng-model="academic.period" ng-options="period.idperiod as period.name for period in periods">
+                                <option value="">Periodo</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li class="col-20 gutter-5">
+                        <label class="select-arrow" for="idgroup">
+                            <select id="idgroup" name="idgroup" ng-model="academic.group" ng-options="group.idgroup as group.name for group in groups" ng-change="changeGroup(academic.group)">
+                                <option value="">Grupo</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li class="col-20 gutter-5">
+                        <label class="select-arrow" for="idsubject">
+                            <select ng-disabled="subjectEnable" id="idsubject" name="idsubject" ng-model="academic.subject" ng-options="subject.idsubject as subject.name for subject in subjects">
+                                <option value="">Asignatura</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li class="col-20 gutter-5">
+                        <label class="select-arrow" for="idnivel">
+                            <select id="idnivel" name="idnivel" ng-model="academic.nivel" ng-options="nivel.idnivel as nivel.name for nivel in nivels">
+                                <option value="">Nivel</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li class="button gutter-5">
+                        <button id="search" type="submit" class="btn btn-aquamarine" ng-disabled="buttonSearchEnable">Buscar</button>
+                    </li>
+                </ul>
+            </form>
+            <a href="#" id="show_academic_info"><i class="fa fa-info-circle"></i><span>Help</span></a>
+        </section>
+        <section class="info" style="display: none">
+            <a class="icon icon-info" href="#"></a>
+            <p>Seleccione las opciones correspondientes al <strong>grupo, asignatura y nivel</strong> que desea realizar una acción</p>
+        </section>
+    </section>
+</section>

@@ -1,0 +1,63 @@
+<section class="grid-100 sige-academic">
+    <section class="sige-contained" id="academic">
+        <h4>Académico</h4>
+        <section class="academic">
+            <form name="academicForm" ng-submit="save()">
+                <ul class="display-horizontal col-100">
+                    <li class="col-20 gutter-5">
+                        <label class="select-arrow" for="idyear">
+                            <select id="idyear" name="idyear" ng-model="academic.idyear" ng-options="year.idyear as year.name for year in years">
+                                <option value="">Año</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li class="col-20 gutter-5">
+                        <label class="select-arrow" for="idperiod">
+                            <select id="idperiod" name="idperiod" ng-model="academic.idperiod" ng-options="period.idperiod as period.name for period in periods">
+                                <option value="">Periodo</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li class="col-20 gutter-5">
+                        <label class="select-arrow" for="idgroup">
+                            <select id="idgroup" name="idgroup" ng-model="academic.idgroup" ng-options="group.idgroup as group.name for group in groups" ng-change="changeGroup(academic.idgroup)">
+                                <option value="">Grupo</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li class="col-40 gutter-5">
+                        <label class="select-arrow" for="idsubject">
+                            <select ng-disabled="subjectEnable" id="idsubject" name="idsubject" ng-model="academic.idsubject" ng-options="subject.idsubject as subject.name for subject in subjects">
+                                <option value="">Asignatura</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li class="col-20 gutter-5">
+                        <label class="select-arrow" for="idnivel">
+                            <select id="idnivel" name="idnivel" ng-model="academic.idnivel" ng-options="nivel.idnivel as nivel.name for nivel in nivels">
+                                <option value="">Nivel</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li class="col-50 gutter-5">
+                        <sige-turbo-admissions-assign-or-selected-students route="objectform" user="user" user_name="user_name" destination="selectuser" widthdefault="40" showusers="getPersonalAcademic" userdefault="academic.iduser"></sige-turbo-admissions-assign-or-selected-students>
+                        <input name="iduser" id="iduser"  type="hidden" ng-model="academic.iduser" ng-value="academic.iduser = ((academic.iduser == '' || academic.iduser == null || academic.iduser == undefined) && (academic.iduser != '' || academic.iduser != null || academic.iduser != undefined))? user.iduser : academic.iduser" required>
+                    </li>
+                    <li class="col-10 gutter-5">
+                        <input name="timeintensity" type="text" ng-model="academic.timeintensity" ng-value="academic.timeintensity" placeholder="Tiempo" required>
+                    </li>
+                    <li class="col-20 gutter-5">
+                        <button id="search" type="submit" class="btn btn-aquamarine">Guardar</button>
+                    </li>
+                </ul>
+                <input name="idcontract" id="idcontract"  type="hidden" ng-model="academic.idcontract" ng-value="academic.idcontract" required>
+            </form>
+            <a href="#" id="show_academic_info"><i class="fa fa-info-circle"></i><span>Help</span></a>
+        </section>
+        <section class="info" style="display: none">
+            <a class="icon icon-info" href="#"></a>
+            <p>Seleccione las opciones correspondientes al <strong>grupo, asignatura y nivel</strong> que desea realizar una acción</p>
+        </section>
+    </section>
+</section>
+<sige-turbo-academic-contract id="academicsearch"></sige-turbo-academic-contract>

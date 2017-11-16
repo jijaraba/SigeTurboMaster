@@ -1,0 +1,35 @@
+<ul style="width:100%"  ng-controller="AcademicManagementController" id="AcademicManagementController">
+	<li style="width:100%;border-bottom: 1px solid #CCCCCC;">
+        <ul style="width:100%;display: -ms-flexbox;display: flex;-ms-flex-direction: row;flex-direction: row;-ms-flex-pack: start;justify-content: flex-start;-ms-flex-flow: row wrap;flex-flow: row wrap;">
+            <li style="width:20%">
+                <div>Asignatura</div>
+            </li>
+            <li style="width:50%;">
+                <div style="width:70%;float: left;">Categoría de Seguimiento</div>
+                <div style="width:30%;float: right;">Porcentaje</div>
+            </li>
+            <li style="width:20%">
+                <div style="width:50%;float: left;">Acciones</div>
+                <div style="width:50%;float: right;"><button class="btn btn-green" style="padding: 0px 0px;width: 80px;" id="showmonitoringtype"  ng-click="form(monitoringcategorybysubject,'MonitoringcategorybyyearController')">
+                    <i class="fa fa-plus-circle"></i> Nuevo
+                </button></div>
+            </li>
+            <li style="width:10%;">
+                Total
+            </li>
+        </ul>
+    </li>  
+    <li style="width:100%;border-bottom: 1px solid #CCCCCC;" data-ng-animate="'repeat'" ng-repeat="monitoringcategorygroup in monitoringcategorygroups">
+        <ul style="width:100%;display: -ms-flexbox;display: flex;-ms-flex-direction: row;flex-direction: row;-ms-flex-pack: start;justify-content: flex-start;-ms-flex-flow: row wrap;flex-flow: row wrap;">
+            <li style="width:20%">
+                <div style="padding: {{monitoringcategorygroup.count * 4.4}}% {{monitoringcategorygroup.count * 2}}%;">{{monitoringcategorygroup.subject}}</div>
+            </li>
+            <li style="width:70%">
+                <sige-turbo-percentbysubject idsubject="monitoringcategorygroup.idsubject" monitoringcategorybyyears="monitoringcategorybyyears"></sige-turbo-percentbysubject>
+            </li>
+            <li style="width:10%;">
+                <div style="padding: {{monitoringcategorygroup.count * 9}}% {{monitoringcategorygroup.count * 8}}%;">{{monitoringcategorygroup.sum | number:2}}</div>
+            </li>
+        </ul>
+    </li>                     
+</ul>

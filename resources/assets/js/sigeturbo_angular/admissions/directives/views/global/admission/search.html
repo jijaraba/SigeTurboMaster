@@ -1,0 +1,71 @@
+<section style="position: relative" id="search" class="search">
+    <div class="search">
+        <span id="container_search" ng-click="searchForm()">
+            <sige-turbo-search-tags tags="search"></sige-turbo-search-tags>
+        </span>
+        <i class="fa fa-search" onclick="this.form.submit()"></i>
+    </div>
+    <div class="container sige-search-container" ng-if="showSearch">
+        <ul class="display-horizontal col-100 search-options">
+            <li class="col-100">
+                <ul class="display-horizontal col-100">
+                    <li class="col-50 gutter-3"></li>
+                    <li class="col-20 gutter-3 title">
+                        <label for="search_code">Código</label>
+                    </li>
+                    <li class="col-30 gutter-3 text">
+                        <input id="search_code" name="search_code" type="text" ng-model="search.code">
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-20 gutter-3 title">
+                        <label for="search_year">Año</label>
+                    </li>
+                    <li class="col-30 gutter-3 text">
+                        <select id="search_year" name="search_year" ng-model="search.year"
+                                ng-options="year.idyear as year.name for year in years" required>
+                        </select>
+                    </li>
+                    <li class="col-20 gutter-3 title">
+                        <label for="search_group">Grupo</label>
+                    </li>
+                    <li class="col-30 gutter-3 text">
+                        <select style="text-align: left" id="search_group" name="search_group" ng-model="search.group"
+                                ng-options="group.idgroup as group.name for group in groups">
+                            <option value="">Grupo</option>
+                        </select>
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-20 gutter-3 title">
+                        <label for="search_firstname">Nombre</label>
+                    </li>
+                    <li class="col-80 gutter-3 text">
+                        <input id="search_firstname" name="search_firstname" type="text" ng-model="search.firstname">
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-20 gutter-3 title">
+                        <label for="search_lastname">Apellido</label>
+                    </li>
+                    <li class="col-80 gutter-3 text">
+                        <input id="search_lastname" name="search_lastname" type="text" ng-model="search.lastname">
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-100 gutter-3 text">
+                        <select multiple size="2" style="text-align: left" id="search_status" name="search_status"
+                                ng-model="search.status"
+                                ng-options="status.idstatusschooltype as status.name for status in statuses" required>
+                        </select>
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-100 text">
+                        <button type="submit" class="btn btn-aquamarine">Search</button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>

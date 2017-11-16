@@ -1,0 +1,33 @@
+<h4 style="margin-top: 20px">Recovery</h4>
+<section class="recovery">
+    <form name="recoveryForm" id="recoveryForm" ng-submit="save()">
+        <ul class="display-horizontal col-100">
+            <li class="col-15 gutter-5">
+                <label for="rating">Nota Final</label>
+                <input id="rating" type="text" ng-model="rating" value="{{ rating }}" name="recovery" readonly />
+            </li>
+            <li class="col-15 gutter-5">
+                <label for="recovery">Recuperación</label>
+                <input id="recovery" type="text" ng-model="recovery" value="" name="recovery" autocomplete="off"/>
+            </li>
+            <li class="col-15 gutter-5">
+                <label for="folio">Folio</label>
+                <input id="folio" type="text" ng-model="folio" value="" name="folio" autocomplete="off"/>
+            </li>
+            <li class="col-40 gutter-5">
+                <label for="description">Observación</label>
+                <input class="description" id="description" type="text" ng-model="description" value="" name="description" autocomplete="off" placeholder="Especificar observación"/>
+            </li>
+            <li class="col-15 gutter-5">
+                <button type="submit" class="btn btn-aquamarine">Save</button>
+            </li>
+        </ul>
+        <ul ng-show="flash" class="flash">
+            <li class="flash-success">¡Petición satisfactoria!</li>
+        </ul>
+    </form>
+    <div class="info">
+        <a class="icon icon-info" href="#"></a>
+        <p>Para guardar satisfactoriamnete una recuperación debe especificar el campo de  <strong>Recuperación</strong>. Los campos de folio y observación no serán tenidos en cuenta para el año académico 2014-2015</p>
+    </div>
+</section>

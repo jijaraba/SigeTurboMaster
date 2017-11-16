@@ -1,0 +1,53 @@
+<ul style="width:100%">
+	<li style="width:100%;border-bottom: 1px solid #CCCCCC;">
+        <ul style="width:100%;display: -ms-flexbox;display: flex;-ms-flex-direction: row;flex-direction: row;-ms-flex-pack: start;justify-content: flex-start;-ms-flex-flow: row wrap;flex-flow: row wrap;">
+            <li style="width:30%;">
+                <sige-turbo-assign-only-user route="objectform" user="user" user_name="user_name" destination="selectuser" widthdefault="40" showusers="getAllStudents" showusersparams="{year : 2017}" userdefault="studentselect"></sige-turbo-assign-only-user>
+                <input name="iduser" id="iduser"  type="hidden" ng-model="studentselect" ng-value="studentselect = ((studentselect == '' || studentselect == null || studentselect == undefined) && (studentselect != '' || studentselect != null || studentselect != undefined))? user.iduser : studentselect" required>
+            </li>
+            <li style="width:15%">
+                <select ng-model="groupselect" ng-change="input('group',groupselect,groupselect.Groups)" ng-options="groupinput as groupinput.Groups for groupinput in groupsinput">
+                    <option value="">Grupo</option>
+               </select>
+            </li>
+            <li style="width:20%">
+                <select ng-model="subjectselect" ng-change="elementsearch = {id:'subject',value : subjectselect,searchvalue : subjectselect.Subject}" ng-options="subjectinput as subjectinput.Subject for subjectinput in subjectsinput">
+                    <option value="">Asignatura</option>
+               </select>
+            </li>
+            <li style="width:20%">
+                <sige-turbo-assign-only-user route="objectform" user="teacher" user_name="user_name" destination="selectuser" widthdefault="40" showusers="getPersonalAcademic" userdefault="teacherselect"></sige-turbo-assign-only-user>
+                <input name="teacherselect" id="teacherselect"  type="hidden" ng-model="teacherselect" ng-value="teacherselect = ((teacherselect == '' || teacherselect == null || teacherselect == undefined) && (teacherselect != '' || teacherselect != null || teacherselect != undefined))? teacher.iduser : teacherselect" required>
+            </li>
+            <li style="width:15%;">
+                <select ng-model="statusselect" ng-change="input('status',statusselect,statusselect.Status)" ng-options="statusinput as statusinput.Status for statusinput in statusesinput">
+                    <option value="">Estado Académico</option>
+               </select>
+            </li>
+        </ul>
+    </li>  
+    <li style="font-size: 0.8em;width:100%;border-bottom: 1px solid #CCCCCC;" data-ng-animate="'repeat'" ng-repeat="registry in registries  | filter:elementsearch.searchvalue ">
+        <ul style="width:100%;display: -ms-flexbox;display: flex;-ms-flex-direction: row;flex-direction: row;-ms-flex-pack: start;justify-content: flex-start;-ms-flex-flow: row wrap;flex-flow: row wrap;">
+            <li style="width:10%">
+                <div style="position: relative;text-align: center;margin: 5px auto;width: 40px;height: 40px;border-radius: 50%;padding: 3px;background-color: #53bbb4;">
+                    <img style="border-radius: 50%;" ng-src="{{ assets }}/img/users/{{registry.photo}}" alt="{{ registry.Student }}" title="{{ registry.Student }}"/>
+                </div>
+            </li>
+            <li style="width:20%">
+                <div>{{registry.Student}}</div>
+            </li>
+            <li style="width:15%">
+                <div>{{registry.Groups}}</div>
+            </li>
+            <li style="width:20%">
+                <div>{{registry.Subject}}</div>
+            </li>
+            <li style="width:20%;">
+                <sige-turbo-teachers-pendings-by-rating teachersdata="registry.nivels"></sige-turbo-teachers-pendings-by-rating>
+            </li>
+            <li style="width:15%;">
+		       <div>{{registry.Status}}</div>
+            </li>
+        </ul>
+    </li>                     
+</ul>

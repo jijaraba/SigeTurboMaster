@@ -1,0 +1,11 @@
+<span class="search-tags" data-ng-repeat="(name,value) in tags">
+    <span class="search-tag" ng-if="value && name=='year'">
+        <span class="name">{{ name.toUpperCase() }}:</span>{{ value }}-{{ value + 1 }}
+    </span>
+    <span class="search-tag" ng-if="value && name=='group'">
+        <span class="name">{{ name.toUpperCase() }}:</span>{{ groups[value-1].name }}
+    </span>
+    <span class="search-tag" ng-if="value && name!='year' && name!='group'">
+        <span class="name">{{ name.toUpperCase() }}:</span>{{ value }}
+    </span>
+</span>

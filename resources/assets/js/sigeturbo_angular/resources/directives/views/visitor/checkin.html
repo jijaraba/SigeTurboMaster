@@ -1,0 +1,5 @@
+<button ng-disabled="ClassCheckout" ng-class="{normal: ClassNormal,checkin: ClassCheckin,checkout:ClassCheckout}" type="button" class="btn" id="checkin" ng-click="checkIn()">
+    <i ng-show="ClassCheckin" class="fa fa-arrow-up"></i>
+    <i ng-show="ClassCheckout" class="fa fa-arrow-down"></i>
+    <span ng-class="{checkin: ClassCheckin || ClassCheckout}">{{buttonText}}</span>
+</button>

@@ -1,0 +1,64 @@
+<div class="grid-100" ng-if="showAttendance">
+    <div class="sige-contained">
+        <section class="sige-attendance">
+            <h4>Asistencia</h4>
+            <section class="time">
+                <span current-time="format"></span>
+            </section>
+            <section class="new-attendance">
+                <ul class="display-horizontal col-100">
+                    <li class="col-50">
+                        <label for="new-attendance">Nueva Asistencia</label>
+                    </li>
+                    <li class="col-50">
+                        <input name="date" id="date" id="new-attendance" type="text" ng-model="attendance.attendanceNew"
+                               value="{{ attendance.attendanceNew }}" ng-blur="searching()"/>
+                    </li>
+                </ul>
+            </section>
+            <div class="clearfix"></div>
+            <ul>
+                <li ng-repeat="user in users" class="student">
+                    <div class="student-container">
+                        <form id="attendance{{ user.iduser }}">
+                            <ul class="display-horizontal detail">
+                                <li class="col-10 photo">
+                                    <div>
+                                        <img ng-src="{{assets}}/img/users/{{user.photo}}" alt="{{ user.firstname }}"
+                                             title="{{ user.lastname}} {{ user.firstname }}"/>
+                                    </div>
+                                </li>
+                                <li class="col-25 name">
+                                    <div>
+                                        <div id="lastname">{{ user.lastname }} {{ user.firstname }}</div>
+                                    </div>
+                                </li>
+                                <li class="col-15 count">
+                                    <ul class="display-horizontal col-100">
+                                        <li id="types" ng-repeat="attendance in user.attendances">
+                                            <a href="/formation/attendances/showbystudent/?year={{ academic.year }}&period={{ academic.period }}&group={{ academic.group }}&subject={{ academic.subject }}&nivel={{ academic.nivel }}&student={{ user.iduser }}">
+                                                <div id="counts" class="attendance-{{ attendance.type }}-count"
+                                                     title="{{ attendance.type }}">
+                                                    {{ attendance.amount }}
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="col-00 today">
+                                    <ul class="display-horizontal col-100">
+
+                                    </ul>
+                                </li>
+                                <li class="col-50 attendance">
+                                    <sige-turbo-attendance-types academic="academic" user="user" attendance="attendance"
+                                                                 style="float: right"></sige-turbo-attendance-types>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>

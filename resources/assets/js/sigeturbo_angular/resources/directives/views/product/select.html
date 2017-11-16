@@ -1,0 +1,16 @@
+<input type="search" ng-model="product_code" ng-blur="search()" style="text-align: center"/>
+<section class="sige-search-container" ng-if="showSearch">
+    <ul class="display-horizontal col-100 search">
+        <li class="col-100 gutter-5 text">
+            <input type="text" ng-model="searchProduct" placeholder="Buscar Producto"/>
+        </li>
+        <li class="col-100 products" data-ng-repeat="product in products | filter:searchProduct | limitTo:3">
+            <ul class="display-horizontal col-100 product">
+                <li class="col-30 gutter-5">
+                    <span ng-click="selectProduct(product.code)">{{ product.code }}</span>
+                </li>
+                <li class="col-70 gutter-5">{{ product.name }}</li>
+            </ul>
+        </li>
+    </ul>
+</section>

@@ -1,0 +1,64 @@
+<section class="payment-list">
+    <ul id="payment-list display-horizontal col-100">
+        <li class="col-100">
+            <ul class="display-horizontal col-100 payment">
+                <li class="col-10">
+                </li>
+                <li class="col-20 family">
+                    <div>Usuario</div>
+                </li>
+                <li class="col-15 family">
+                    <div>
+                        Tipo de Usuario
+                    </div>
+                </li>
+                <li class="col-30 family">
+                    <div>Direccion</div>
+                </li>
+                <li class="col-10 family">
+                    <div>
+                        Telefono
+                    </div>
+                </li>
+                <li class="col-10 family">
+                    <div>Celular</div>
+                </li>
+                <li class="col-5 family"> 
+                </li>
+            </ul>
+        </li>
+        <li class="col-100" ng-repeat="user in usersbyroute | filter:searchStudent | orderBy:order.item:order.reverse">
+            <ul class="display-horizontal col-100 payment">
+                <li class="col-10 photo">
+                    <div>
+                        <a>
+                            <img ng-src="{{assets}}/img/users/{{user.photo}}" alt="{{ user.userroute}}"  title="{{ user.userroute}}"/>
+                        </a>
+                    </div>
+                </li>
+                <li class="col-20 family">
+                    <div>{{user.userroute}}</div>
+                </li>
+                <li class="col-15 family">
+                    <div>
+                        {{ user.Typeuser }}
+                    </div>
+                </li>
+                <li class="col-30 family">
+                    <div>{{ user.address }}</div>
+                </li>
+                <li class="col-10 family">
+                    <div>
+                        {{user.phone}}
+                    </div>
+                </li>
+                <li class="col-10 family">
+                    <div>{{ user.celular }}</div>
+                </li>
+                <li class="col-5 family">  
+                    <div><a style="cursor: pointer;color:red;" ng-click="changeItem(2,user.idroutebyuser,$index);"><i class="fa fa-trash" aria-hidden="true"></i></a></div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</section>

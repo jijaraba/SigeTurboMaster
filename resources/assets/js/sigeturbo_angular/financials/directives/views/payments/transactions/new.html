@@ -1,0 +1,41 @@
+<section>
+    <ul class="display-horizontal col-100">
+        <li class="col-10 gutter-5 voucher">
+            <input type="text" name="voucher" id="voucher" ng-model="transaction.vouchertype" placeholder=""
+                   ng-blur="changeVoucher(transaction.vouchertype)">
+        </li>
+        <li class="col-10 gutter-5">
+            <input type="text" name="account" id="account" ng-model="transaction.accounttype" placeholder="">
+        </li>
+        <li class="col-05 gutter-5">
+            <select id="transactiontype" name="transactiontype" ng-model="transaction.idtransactiontype"
+                    ng-options="transactiontype.idtransactiontype as transactiontype.prefix for transactiontype in transactiontypes"
+                    required>
+            </select>
+        </li>
+        <li class="col-07 gutter-5">
+            <input type="text" name="document" id="document" ng-model="transaction.document" placeholder="">
+        </li>
+        <li class="col-20 gutter-5">
+            <input type="text" name="description" id="description" ng-model="transaction.description" placeholder="">
+        </li>
+        <li class="col-08 gutter-5">
+            <input type="text" name="value" id="value" ng-model="transaction.value" placeholder="">
+        </li>
+        <li class="col-10 gutter-5">
+            <input type="text" name="date" id="date" ng-model="transaction.date" placeholder="">
+        </li>
+        <li class="col-10 gutter-5">
+            <input type="text" name="nit" id="nit" ng-model="transaction.nit" placeholder="">
+        </li>
+        <li class="col-05 gutter-5">
+            <input type="text" name="costcenter" id="costcenter" ng-model="transaction.costcenter" placeholder="">
+        </li>
+        <li class="col-03 new">
+            <i class="fa fa-plus-square" aria-hidden="true" ng-click="newTransaction()"></i>
+        </li>
+        <li class="col-02 new">
+            <i class="empty" aria-hidden="true"></i>
+        </li>
+    </ul>
+</section>

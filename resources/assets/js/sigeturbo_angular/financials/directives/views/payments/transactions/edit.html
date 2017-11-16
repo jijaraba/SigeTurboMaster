@@ -1,0 +1,42 @@
+<section id="transaction_{{ transaction.idtransaction }}">
+    <ul class="display-horizontal col-100">
+        <li class="col-10 gutter-5 voucher">
+            <input type="text" name="voucher" id="voucher" ng-model="transaction.vouchertype">
+        </li>
+        <li class="col-10 gutter-5">
+            <input type="text" name="account" id="account" ng-model="transaction.accounttype">
+        </li>
+        <li class="col-05 gutter-5">
+            <select id="transactiontype" name="transactiontype" ng-model="transaction.idtransactiontype"
+                    ng-options="transactiontype.idtransactiontype as transactiontype.prefix for transactiontype in transactiontypes"
+                    required>
+                <option value="">Tipo</option>
+            </select>
+        </li>
+        <li class="col-07 gutter-5">
+            <input type="text" name="document" id="document" ng-model="transaction.document">
+        </li>
+        <li class="col-20 gutter-5">
+            <input type="text" name="description" id="description" ng-model="transaction.description">
+        </li>
+        <li class="col-08 gutter-5">
+            <input type="text" name="value" id="value" ng-model="transaction.value">
+        </li>
+        <li class="col-10 gutter-5">
+            <input type="text" name="date" id="date" ng-model="transaction.date">
+        </li>
+        <li class="col-10 gutter-5">
+            <input type="text" name="value" id="nit" ng-model="transaction.nit">
+        </li>
+        <li class="col-05 gutter-5">
+            <input type="text" name="costcenter" id="costcenter" ng-model="transaction.costcenter">
+        </li>
+        <li class="col-03 edit">
+            <i class="fa fa-pencil-square-o" aria-hidden="true" ng-click="updateTransaction()"> </i>
+
+        </li>
+        <li class="col-02 delete">
+            <i class="fa fa-trash-o" aria-hidden="true" ng-click="deleteTransaction()"> </i>
+        </li>
+    </ul>
+</section>

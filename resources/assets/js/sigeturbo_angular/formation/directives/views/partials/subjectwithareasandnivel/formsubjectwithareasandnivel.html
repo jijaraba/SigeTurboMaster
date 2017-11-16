@@ -1,0 +1,51 @@
+{{message}}
+<form ng-submit="SaveMonitoringcategorybyyear()">
+    <ul class="display-horizontal col-100 enrollment-extended">
+        <li class="col-100">
+            <ul class="display-horizontal col-100">
+                <li class="col-25 scholarship-text">Año Académico</li>
+                <li class="col-75 scholarship">
+                    <label class="select-arrow" for="idyear">
+                        <select id="idyear" name="idyear" ng-model="registry.idyear" ng-options="year.idyear as year.name for year in years">
+                            <option value="">Año</option>
+                        </select>
+                    </label>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Asignatura</li>
+                <li class="col-75 inclusion">
+                    <label class="select-arrow" for="idsubject">
+                        <select id="idsubject" name="idsubject" ng-model="registry.idsubject" ng-options="subject.idsubject as subject.name for subject in subjects">
+                            <option value="">Asignaturas</option>
+                        </select>
+                    </label>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Categoría de Seguimiento</li>
+                <li class="col-75 inclusion">
+                    <label class="select-arrow" for="idmonitoringcategory">
+                        <select id="idmonitoringcategory" name="idmonitoringcategory" ng-model="registry.idmonitoringcategory" ng-options="monitoringcategory.idmonitoringcategory as monitoringcategory.name for monitoringcategory in monitoringcategories">
+                            <option value="">Categorías de Seguimiento</option>
+                        </select>
+                    </label>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Porcentaje</li>
+                <li class="col-75 inclusion">
+                    <input name="percent" type="text" ng-model="registry.percent" ng-value="registry.percent" required>
+                    <!--<p ng-if="(registry.percent | getValidatePercent) == false">Formato de Porcentaje Incorrecto</p>-->
+                </li>
+            </ul>
+            <ul>
+                <li class="col-100">
+                    <button type="submit" class="btn btn-aquamarine">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</form>

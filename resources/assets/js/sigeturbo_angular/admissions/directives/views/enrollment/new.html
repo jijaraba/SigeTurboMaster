@@ -1,0 +1,55 @@
+<form ng-submit="newEnrollment()" class="new-enrollment">
+    <ul class="display-horizontal col-100 enrollment">
+        <li class="col-08 photo">
+            <div>
+                <img ng-src="{{ assets }}/img/users/sigeturbo.png"
+                     alt="Employee"
+                     title="Employee"/>
+            </div>
+        </li>
+        <li class="col-15 year">
+            <label class="select-arrow" for="idyear">
+                <select id="idyear" name="idyear" ng-model="enrollment.idyear"
+                        ng-options="year.idyear as year.name for year in years" required>
+                    <option value="">Año</option>
+                </select>
+            </label>
+        </li>
+        <li class="col-15 group">
+            <label class="select-arrow" for="idgroup">
+                <select id="idgroup" name="idgroup" ng-model="enrollment.idgroup"
+                        ng-options="group.idgroup as group.name for group in groups" required>
+                    <option value="">Grupo</option>
+                </select>
+            </label>
+        </li>
+        <li class="col-15 register">
+            <input name="register" type="text" ng-model="enrollment.register" ng-value="enrollment.register" placeholder="Registro">
+        </li>
+        <li class="col-15 status">
+            <label class="select-arrow" for="idstatusschooltype">
+                <select id="idstatusschooltype" name="idstatusschooltype" ng-model="enrollment.idstatusschooltype"
+                        ng-options="statusschooltype.idstatusschooltype as statusschooltype.name for statusschooltype in statusschooltypes" required>
+                    <option value="">Estado</option>
+                </select>
+            </label>
+        </li>
+        <li class="col-15 date">
+            <input name="statusdate" type="text" ng-model="enrollment.statusdate" ng-value="enrollment.statusdate" placeholder="Fecha Estado">
+        </li>
+        <li class="col-05 reentry">
+            <input id="reentry" name="reentry" type="checkbox" ng-model="enrollment.reentry" ng-value="enrollment.reentry">
+            <label class="fa fa-retweet" for="reentry"></label>
+        </li>
+        <li class="col-07 inclusion">
+            <input id="inclusion" name="inclusion" type="checkbox"
+                   ng-model="enrollment.inclusion" ng-value="enrollment.inclusion">
+            <label class="fa fa-child" for="inclusion"></label>
+        </li>
+        <li class="col-05 new">
+            <button type="submit" class="btn btn-aquamarine">
+                <i class="fa fa-plus-square" aria-hidden="true"></i>
+            </button>
+        </li>
+    </ul>
+</form>

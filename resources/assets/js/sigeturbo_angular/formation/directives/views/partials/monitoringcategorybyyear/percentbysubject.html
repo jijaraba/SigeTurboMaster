@@ -1,0 +1,22 @@
+<ul style="width:100%">
+    <li style="width:100%;border-bottom: 1px solid #CCCCCC;" data-ng-animate="'repeat'" ng-repeat="monitoringcategorybysubject in monitoringcategorybysubjects">
+        <ul style="width:100%;display: -ms-flexbox;display: flex;-ms-flex-direction: row;flex-direction: row;-ms-flex-pack: start;justify-content: flex-start;-ms-flex-flow: row wrap;flex-flow: row wrap;">
+            <li style="width:50%">
+                <div>{{monitoringcategorybysubject.category}}</div>
+            </li>
+            <li style="width:20%;padding:2px;">
+                <div>{{monitoringcategorybysubject.percent}}</div>
+            </li>
+            <li style="width:15%;padding:2px;">
+                <button type="button" ng-click="editDialog(monitoringcategorybysubject,'MonitoringcategorybyyearController')" class="btn btn-aquamarine" style="padding: 0px 0px;width: 80px;">
+                    <i class="fa fa-pencil-square" aria-hidden="true"></i> Editar
+                </button>
+            </li>
+            <li style="width:15%;padding:2px;">
+                <button class="option option-red" ng-click="deleteregistry(monitoringcategorybysubject.idmonitoringcategorybyyear)" style="padding: 0px 0px;width: 80px;">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i> Borrar
+                </button>
+            </li>
+        </ul>
+    </li>                     
+</ul>

@@ -1,0 +1,38 @@
+<ul class="display-horizontal col-100">
+    <li class="col-30"></li>
+    <li class="col-60">
+        <section class="sige-turbo-export">
+            <ul class="display-horizontal col-100 export">
+                <li class="col-40 title">Exportar</li>
+                <li class="col-00-block">
+                    <a ng-click="export('student','xlsx')">
+                        <img ng-src="{{ assets }}/img/modules/export_as_xlsx.svg" alt="EXCEL">
+                    </a>
+                </li>
+                <li class="col-00-block">
+                    <a ng-click="export('student','csv')">
+                        <img ng-src="{{ assets }}/img/modules/export_as_csv.svg" alt="CSV">
+                    </a>
+                </li>
+                <li class="col-00-block">
+                    <a ng-click="export('student','docx')">
+                        <img ng-src="{{ assets }}/img/modules/export_as_word.svg" alt="WORD">
+                    </a>
+                </li>
+                <li class="col-00-block">
+                    <a ng-click="export('student','pdf')">
+                        <img ng-src="{{ assets }}/img/modules/export_as_pdf.svg" alt="PDF">
+                    </a>
+                </li>
+            </ul>
+            <ul ng-if="showDownload" class="display-horizontal col-100 download">
+                <li class="col-100">
+                    <a href="{{ download }}">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                        Download
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </li>
+</ul>

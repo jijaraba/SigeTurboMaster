@@ -1,0 +1,29 @@
+<form ng-submit="SaveConvenyor()">
+    <ul class="display-horizontal col-100 enrollment-extended">
+        <li class="col-100">
+            <ul class="display-horizontal col-100">
+                <li class="col-25 scholarship-text">Nombres</li>
+                <li class="col-75 scholarship">
+                    <input name="names" type="text" ng-model="conveyorform.firstname" ng-value="conveyorform.firstname" required>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Apellidos</li>
+                <li class="col-75 inclusion">
+                    <input name="lastnames" type="text" ng-model="conveyorform.lastname" ng-value="conveyorform.lastname" required>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 scholarship-text">Celular</li>
+                <li class="col-45 scholarship">
+                    <input name="celular" type="text" ng-model="conveyorform.celular" ng-value="conveyorform.celular">
+                </li>
+                <li class="col-30">
+                    <button type="submit" class="btn btn-aquamarine">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</form>

@@ -1,0 +1,99 @@
+<form ng-submit="updateEnrollment()">
+    <ul class="display-horizontal col-100 enrollment {{ enrollment.inclusion?'inclusion':'' }}">
+        <li class="col-08 photo">
+            <div>
+                <img ng-src="{{ assets }}/img/users/{{enrollment.photo}}"
+                     alt="{{ enrollment.employee }}"
+                     title="{{ enrollment.employee }}"/>
+            </div>
+        </li>
+        <li class="col-15 year">
+            <label class="select-arrow" for="idyear">
+                <select id="idyear" name="idyear" ng-model="enrollment.idyear"
+                        ng-options="year.idyear as year.name for year in years" required>
+                    <option value="">Año</option>
+                </select>
+            </label>
+        </li>
+        <li class="col-15 group">
+            <label class="select-arrow" for="idgroup">
+                <select id="idgroup" name="idgroup" ng-model="enrollment.idgroup"
+                        ng-options="group.idgroup as group.name for group in groups" required>
+                    <option value="">Grupo</option>
+                </select>
+            </label>
+        </li>
+        <li class="col-15 register">
+            <input name="register" type="text" ng-model="enrollment.register" ng-value="enrollment.register"
+                   placeholder="Registro">
+        </li>
+        <li class="col-15 status">
+            <label class="select-arrow" for="idstatusschooltype">
+                <select id="idstatusschooltype" name="idstatusschooltype" ng-model="enrollment.idstatusschooltype"
+                        ng-options="statusschooltype.idstatusschooltype as statusschooltype.name for statusschooltype in statusschooltypes"
+                        required>
+                    <option value="">Estado</option>
+                </select>
+            </label>
+        </li>
+        <li class="col-15 date">
+            <input name="statusdate" type="text" ng-model="enrollment.statusdate" ng-value="enrollment.statusdate"
+                   placeholder="Fecha Estado">
+        </li>
+        <li class="col-05 reentry">
+            <input id="reentry{{enrollment.idenrollment}}" name="reentry{{enrollment.idenrollment}}" type="checkbox"
+                   ng-model="enrollment.reentry" ng-value="enrollment.reentry">
+            <label class="fa fa-retweet" for="reentry{{enrollment.idenrollment}}"></label>
+        </li>
+        <li class="col-07 expand">
+            <a ng-click="showItemsExtended()">
+                {{ showItemsTitle }}
+            </a>
+        </li>
+        <li class="col-05 edit">
+            <button type="submit" class="btn btn-aquamarine">
+                <i class="fa fa-pencil-square" aria-hidden="true"></i>
+            </button>
+        </li>
+    </ul>
+    <ul class="display-horizontal col-100 enrollment-extended" ng-if="showItems">
+        <li class="col-100">
+            <ul class="display-horizontal col-100">
+                <li class="col-15 scholarship-text">¿El estudiante tiene asignada una Beca?</li>
+                <li class="col-10 scholarship">
+                    <input name="scholarship" type="text" ng-model="enrollment.scholarship" ng-value="enrollment.scholarship"
+                           placeholder="Beca">
+                </li>
+                <li class="col-15 inclusion-text">¿El estudiante tiene inclusión?</li>
+                <li class="col-10 inclusion">
+                    <input id="inclusion{{enrollment.idenrollment}}" name="inclusion{{enrollment.idenrollment}}" type="checkbox"
+                           ng-model="enrollment.inclusion" ng-value="enrollment.inclusion">
+                    <label class="fa fa-child" for="inclusion{{enrollment.idenrollment}}"></label>
+                </li>
+                <li class="col-15 fieldtrip-text">¿Aprueba las Salidas Pedagógicas?</li>
+                <li class="col-10 fieldtrip">
+                    <input id="fieldtrip{{enrollment.isapprovedyear}}" name="fieldtrip{{enrollment.idenrollment}}" type="checkbox"
+                           ng-model="enrollment.fieldtrip" ng-value="enrollment.fieldtrip">
+                    <label class="fa fa-bus" for="fieldtrip{{enrollment.idenrollment}}"></label>
+                </li>
+                <li class="col-15 isapprovedyear-text">¿El estudiante aprobó  el año?</li>
+                <li class="col-10 isapprovedyear">
+                    <input id="isapprovedyear{{enrollment.isapprovedyear}}" name="isapprovedyear{{enrollment.idenrollment}}" type="checkbox"
+                    ng-model="enrollment.isapprovedyear" ng-value="enrollment.isapprovedyear">
+                    <!--<label class="fa fa-calendar-check-o" for="inclusion{{enrollment.idenrollment}}"></label>-->
+                    <label class="fa fa-graduation-cap" for="isapprovedyear{{enrollment.idenrollment}}"></label>
+                </li>
+                <li class="col-100 gutter-5 observation">
+                    <textarea name="observation" id="observation" rows="3" ng-model="enrollment.observation" ng-value="enrollment.observation"></textarea>
+                </li>
+            </ul>
+        </li>
+        <li class="col-100">
+            <ul class="display-horizontal col-100">
+                <li class="col-100">
+                    <section>{{ enrollment.enrollmentlogs }}</section>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</form>

@@ -1,0 +1,16 @@
+<h3>{{message}}</h3>
+<div ng-switch="item">
+  <div ng-switch-when="user">
+  	<sige-turbo-admissions-user-assign route="objectform" user="user" user_name="user_name" destination="assignuser" widthdefault="100" showusers="all" userdefault="userdefault"></sige-turbo-admissions-user-assign>
+	  <input name="user" id="user" type="hidden" value="{{ user.iduser }}" ng-model="user.iduser">
+  </div>
+  <div ng-switch-when="conveyor">
+  	<sige-turbo-admissions-transport-convenyor conveyor="objectform" conveyors="conveyors"></sige-turbo-admissions-transport-convenyor>
+  </div>
+  <div ng-switch-when="vehicle">
+  	<sige-turbo-admissions-transport-vehicle vehicle="objectform" vehicles="vehicles"></sige-turbo-admissions-transport-vehicle>
+  </div>
+  <div ng-switch-when="route">
+  	<sige-turbo-admissions-transport-route route="objectform" vehicles="vehicles" conveyors="conveyors" ></sige-turbo-admissions-transport-route>
+  </div>
+</div>

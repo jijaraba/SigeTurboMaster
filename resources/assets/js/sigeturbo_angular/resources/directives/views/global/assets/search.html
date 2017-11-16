@@ -1,0 +1,54 @@
+<section style="position: relative" id="search" class="search">
+    <div class="search">
+        <span id="container_search" ng-click="searchForm()">
+            <sige-turbo-search-tags tags="search"></sige-turbo-search-tags>
+        </span>
+        <i class="fa fa-search" onclick="this.form.submit()"></i>
+    </div>
+    <div class="container sige-search-container" ng-if="showSearch">
+        <ul class="display-horizontal col-100 search-options">
+            <li class="col-100">
+                <ul class="display-horizontal col-100">
+                    <li class="col-50 gutter-3"></li>
+                    <li class="col-20 gutter-3 title">
+                        <label for="search_code">Código</label>
+                    </li>
+                    <li class="col-30 gutter-3 text">
+                        <input id="search_code" name="search_code" type="text" ng-model="search.code">
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-20 gutter-3 title">
+                        <label for="search_ubication">Ubication</label>
+                    </li>
+                    <li class="col-30 gutter-3 text">
+                        <select id="search_ubication" name="search_ubication" ng-model="search.ubication"
+                                ng-options="ubication.idubication as ubication.name for ubication in ubications" required>
+                        </select>
+                    </li>
+                    <li class="col-20 gutter-3 title">
+                        <label for="search_inventory">Inventario</label>
+                    </li>
+                    <li class="col-30 gutter-3 text">
+                        <select style="text-align: left" id="search_inventory" name="search_inventory" ng-model="search.inventory"
+                                ng-options="inventory.idinventorytype as inventory.name for inventory in inventories">
+                        </select>
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-20 gutter-3 title">
+                        <label for="search_name">Nombre</label>
+                    </li>
+                    <li class="col-80 gutter-3 text">
+                        <input id="search_name" name="search_name" type="text" ng-model="search.name">
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-100 text">
+                        <button type="submit" class="btn btn-aquamarine">Search</button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>

@@ -1,0 +1,55 @@
+<ul class="display-horizontal checkout-methods">
+    <li class="col-25 method method-discount" ng-click="method('discount')">
+        <div>
+            <img ng-src="{{assets}}/img/modules/{{icon_discount}}"/>
+            <span>Descuento</span>
+        </div>
+    </li>
+    <li class="col-25 method method-discount" ng-click="method('normal')">
+        <div>
+            <img ng-src="{{assets}}/img/modules/{{icon_normal}}"/>
+            <span>Normal</span>
+        </div>
+    </li>
+    <li class="col-25 method method-discount" ng-click="method('rate')">
+        <div>
+            <img ng-src="{{assets}}/img/modules/{{icon_rate}}"/>
+            <span>Pago en Mora</span>
+        </div>
+    </li>
+    <li class="col-25 method method-discount" ng-click="method('agreement')">
+        <div>
+            <img ng-src="{{assets}}/img/modules/{{icon_agreement}}"/>
+            <span>Acuerdo</span>
+        </div>
+    </li>
+</ul>
+<section class="checkout-payments col-100">
+    <div ng-show="methodValid" class="col-100 checkout">
+        <ul class="display-horizontal col-100">
+            <li class="col-10 photo">
+                <div>
+                    <img ng-src="{{assets}}/img/users/{{payment.photo}}" alt="{{ payment.student }}" title="{{ payment.student}}"/>
+                </div>
+            </li>
+            <li class="col-65 concept">
+                <div class="title">{{ payment_ref.concept }}</div>
+                <div class="comment">{{ payment_ref.observation }}</div>
+                <div class="date">Fecha: {{ payment_ref.date }}</div>
+            </li>
+            <li ng-if="!agreement" class="col-10 total">
+                {{ payment_ref.value | currency}}
+            </li>
+            <li ng-if="agreement" class="col-10 total_agreement">
+                <input type="text" value="{{ payment_ref.value }}" ng-model="payment_ref.value" ng-blur="changeValueAgreement()">
+            </li>
+            <li class="col-15 pay">
+                <input class="btn btn-green" type="button" value="Pagar" id="btnPaymentCpv" ng-click="submit()">
+            </li>
+        </ul>
+        <form data-comment="CPV" id="formPaymentCpv" method="post" action="https://www.pagosvirtualesavvillas.com.co/personal/pagos/pagar" />
+    </div>
+    <div ng-show="!methodValid" class="col-100 checkout">
+        <p>{{ message }}</p>
+    </div>
+</section>

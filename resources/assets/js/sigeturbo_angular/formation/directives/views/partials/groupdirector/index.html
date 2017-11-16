@@ -1,0 +1,45 @@
+<ul style="width:100%" ng-controller="AcademicManagementController">
+	<li style="width:100%;border-bottom: 1px solid #CCCCCC;">
+        <ul style="width:100%;display: -ms-flexbox;display: flex;-ms-flex-direction: row;flex-direction: row;-ms-flex-pack: start;justify-content: flex-start;-ms-flex-flow: row wrap;flex-flow: row wrap;">
+            <li style="width:15%">
+				<button class="btn btn-green" id="showmonitoringtype"  ng-click="form(groupdirector,'GroupDirectorController')">
+                   	<i class="fa fa-plus-circle"></i> Nuevo
+                </button>
+            </li>
+            <li style="width:20%">
+                <div>Grupo</div>
+            </li>
+            <li style="width:35%">
+                <div>Profesor</div>
+            </li>
+            <li style="width:30%;padding:2px;">
+            	Acciones
+            </li>
+        </ul>
+    </li>  
+    <li style="width:100%;border-bottom: 1px solid #CCCCCC;" data-ng-animate="'repeat'" ng-repeat="groupdirector in groupdirectors">
+        <ul style="width:100%;display: -ms-flexbox;display: flex;-ms-flex-direction: row;flex-direction: row;-ms-flex-pack: start;justify-content: flex-start;-ms-flex-flow: row wrap;flex-flow: row wrap;">
+            <li style="width:15%">
+                <div style="position: relative;text-align: center;margin: 5px auto;width: 40px;height: 40px;border-radius: 50%;padding: 3px;background-color: #53bbb4;">
+                    <img style="border-radius: 50%;" ng-src="{{ assets }}/img/users/{{groupdirector.photo}}" alt="{{ groupdirector.Student }}" title="{{ groupdirector.Student }}"/>
+                </div>
+            </li>
+            <li style="width:20%">
+                <div>{{groupdirector.group}}</div>
+            </li>
+            <li style="width:35%">
+                <div>{{groupdirector.Student}}</div>
+            </li>
+            <li style="width:15%;padding:2px;">
+                <button type="button" ng-click="edit(groupdirector,'GroupDirectorController')" class="btn btn-aquamarine">
+                    <i class="fa fa-pencil-square" aria-hidden="true"></i> Editar
+                </button>
+            </li>
+            <li style="width:15%;padding:2px;">
+				<button class="option option-red" ng-click="delete(groupdirector.idgroupdirector)">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i> Borrar
+                </button>
+            </li>
+        </ul>
+    </li>                     
+</ul>

@@ -1,0 +1,12 @@
+<section class="payments" ng-repeat="payment in payments" class="payments">
+    <div class="payment-title" ng-click="showPayment($index)">
+        <span>{{ payment.concept2 }}</span>
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
+    </div>
+    <section class="transactions" id="show_payment_{{ $index }}">
+        <section class="exports">
+            <sige-turbo-financials-export payment="payment.idpayment"></sige-turbo-financials-export>
+        </section>
+        <sige-turbo-financials-transactions payment="payment"></sige-turbo-financials-transactions>
+    </section>
+</section>

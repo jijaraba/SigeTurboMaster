@@ -1,0 +1,69 @@
+<div ng-if="showGrid">
+    <section class="sige-monitorings-modal">
+        <div class="sige-contained modal">
+            <div class="close" ng-click="close()">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <section class="sige-monitorings">
+                <h4>Monitoring</h4>
+                <section class="student">
+                    <ul class="body display-horizontal col-30">
+                        <li class="header col-30">
+                            <div class="image">
+                                <img ng-src="{{assets}}/img/users/{{user.photo}}" alt="{{ user.lastname }}"
+                                     title="{{ user.lastname}} {{ user.firstname }}"/>
+
+                                <div class="rating {{ rating.global | performance }}">{{ rating.global |
+                                    scale:academic.group }}
+                                </div>
+                            </div>
+                        </li>
+                        <li class="info-student col-70">
+                            <div>
+                                {{ user.iduser }}
+                            </div>
+                            <div>
+                                {{ user.firstname }}
+                            </div>
+                            <div>
+                                {{ user.lastname }}
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+                <div class="sige-monitoring-category">
+                    <div ng-repeat="monitoringcategory in monitoringcategories" class="category {{ grid[$index] }}">
+                        <div class="title">
+                            <span class="truncate">{{ monitoringcategory.name}}
+                            {{monitoringcategory.percent | percentage:0}}
+                            </span>
+                            <em>{{
+                                monitorings | averageByCategory:'rating': monitoringcategory}}</em></div>
+                        <div class="monitorings">
+                            <sige-turbo-monitoring-type academic="academic" user="user" monitorings="monitorings"
+                                                        monitoringtypes="monitoringtypes"
+                                                        monitoringcategory="{{ monitoringcategory.idmonitoringcategory }}"></sige-turbo-monitoring-type>
+                        </div>
+                    </div>
+                    <div style="display: none">{{ rating.global = (monitorings | averageGlobal:'rating':
+                        monitoringcategories)}}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <sige-turbo-recovery rating="{{ rating.global }}" academic="academic" user="user"></sige-turbo-recovery>
+                <div class="clearfix"></div>
+                <section class="sige-help">
+                    <ul class="display-horizontal col-20">
+                        <li class="col-50">
+                            <p><strong>F1:</strong> Borrar</p>
+                        </li>
+                        <li class="col-50">
+                            <p><strong>Tab:</strong> Guardar</p>
+                        </li>
+                    </ul>
+                </section>
+                <div class="clearfix"></div>
+            </section>
+        </div>
+    </section>
+</div>

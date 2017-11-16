@@ -1,0 +1,79 @@
+{{message}}
+<form ng-submit="SaveAcademic()">
+    <ul class="display-horizontal col-100 enrollment-extended">
+        <li class="col-100">
+            <ul class="display-horizontal col-100">
+                <li class="col-25 scholarship-text">Año Académico</li>
+                <li class="col-75 scholarship">
+                    <label class="select-arrow" for="idyear">
+                        <select id="idyear" name="idyear" ng-model="registry.idyear" ng-options="year.idyear as year.name for year in years">
+                            <option value="">Año</option>
+                        </select>
+                    </label>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Calendario</li>
+                <li class="col-75 inclusion">
+                    <label class="select-arrow" for="idcalendar">
+                        <select id="idcalendar" name="idcalendar" ng-model="registry.idcalendar" ng-options="calendar.idcalendar as calendar.name for calendar in calendars">
+                            <option value="">Calendario</option>
+                        </select>
+                    </label>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Periodos</li>
+                <li class="col-75 inclusion">
+                    <label class="select-arrow" for="idperiod">
+                        <select id="idperiod" name="idperiod" ng-model="registry.idperiod" ng-options="period.idperiod as period.name for period in periods">
+                            <option value="">Periodo</option>
+                        </select>
+                    </label>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Fecha de Inicio</li>
+                <li class="col-75 inclusion">
+                    <input name="starts" type="text" ng-model="registry.starts" ng-value="registry.starts" ng-bind-html="registry.starts | getValidate" required>
+                    <p ng-if="(registry.starts | getValidate) == false">Formato de Fecha Incorrecto</p>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Fecha de Finalización</li>
+                <li class="col-75 inclusion">
+                    <input name="ends" type="text" ng-model="registry.ends" ng-value="registry.ends" ng-bind-html="registry.ends | getValidate" required>
+                    <p ng-if="(registry.ends | getValidate) == false">Formato de Fecha Incorrecto</p>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Fecha Máxima para Calificar</li>
+                <li class="col-75 inclusion">
+                    <input name="rating" type="text" ng-model="registry.rating" ng-value="registry.rating"  ng-bind-html="registry.rating | getValidate" required>
+                    <p ng-if="(registry.rating | getValidate) == false">Formato de Fecha Incorrecto</p>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Fecha de revisión</li>
+                <li class="col-75 inclusion">
+                    <input name="review" type="text" ng-model="registry.review" ng-value="registry.review" ng-bind-html="registry.review | getValidate" required>
+                    <p ng-if="(registry.review | getValidate) == false">Formato de Fecha Incorrecto</p>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Fecha de Impresión</li>
+                <li class="col-75 inclusion">
+                    <input name="print" type="text" ng-model="registry.print" ng-value="registry.print" ng-bind-html="registry.print | getValidate" required>
+                    <p ng-if="(registry.print | getValidate) == false">Formato de Fecha Incorrecto</p>
+                </li>
+            </ul>
+            <ul>
+                <li class="col-100">
+                    <button type="submit" class="btn btn-aquamarine">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</form>

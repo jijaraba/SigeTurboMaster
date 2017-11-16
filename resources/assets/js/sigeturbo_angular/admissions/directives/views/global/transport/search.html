@@ -1,0 +1,47 @@
+<section style="position: relative" id="search" class="search">
+    <div class="search">
+        <span id="container_search" ng-click="searchForm()">
+            <sige-turbo-search-tags tags="search"></sige-turbo-search-tags>
+        </span>
+        <i class="fa fa-search" onclick="this.form.submit()"></i>
+    </div>
+    <div class="container sige-search-container" ng-if="showSearch">
+        <ul class="display-horizontal col-100 search-options">
+            <li class="col-100"><ul style="float: right;"><div class="close" ng-click="close()"> <i class="fa fa-times" aria-hidden="true"></i> </div></ul></li>
+            
+            <li class="col-100">
+                <ul class="display-horizontal col-100">
+                    <li class="col-50 gutter-3"></li>
+                    <li class="col-20 gutter-3 title">
+                        <label for="search_code">Ruta</label>
+                    </li>
+                    <li class="col-30 gutter-3 text">
+                        <input id="search_idroute" name="search_idroute" type="text" ng-model="search.idroute">
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-20 gutter-3 title">
+                        <label for="search_name">Nombre Ruta</label>
+                    </li>
+                    <li class="col-80 gutter-3 text">
+                        <input id="search_name" name="search_name" type="text" ng-model="search.name">
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-40 gutter-3 title">
+                        <label for="search_name">Nombres y Apellidos Pasajero</label>
+                    </li>
+                    <li class="col-60 gutter-3 text">
+                        <sige-turbo-admissions-user-assign route="objectform" user="search.iduser" user_name="user_name" destination="selectuser" showusers="all" widthdefault="100" userdefault="userdefault"></sige-turbo-admissions-user-assign>
+                        <input name="search_iduser" id="search_iduser" type="hidden" ng-model="search.iduser">
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-100 text">
+                        <button type="submit" class="btn btn-aquamarine">Search</button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>

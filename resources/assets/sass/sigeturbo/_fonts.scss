@@ -1,0 +1,68 @@
+@font-face {
+  font-family: "Gotham Rounded Book";
+  font-style: normal;
+  src:
+    url('fonts/GothamRoundedBook.eot');
+  src:
+    url('fonts/GothamRoundedBook.ttf') format('truetype'),
+    url('fonts/GothamRoundedBook.otf') format('opentype'),
+    url('fonts/GothamRoundedBook.woff') format('woff');
+}
+@font-face {
+  font-family: "Gotham Rounded Bold";
+  font-style: normal;
+  src:
+  url('fonts/GothamRoundedBold.eot');
+  src:
+    url('fonts/GothamRoundedBold.ttf') format('truetype'),
+    url('fonts/GothamRoundedBold.otf') format('opentype'),
+    url('fonts/GothamRoundedBold.woff') format('woff');
+}
+@font-face {
+  font-family: "Gotham Rounded Medium";
+  font-style: normal;
+  src:
+    url('fonts/GothamRoundedMedium.eot');
+  src:
+    url('fonts/GothamRoundedMedium.ttf') format('truetype'),
+    url('fonts/GothamRoundedMedium.otf') format('opentype'),
+    url('fonts/GothamRoundedMedium.svg') format('svg');
+}
+@font-face {
+  font-family: "Gotham Rounded Light";
+  font-style: normal;
+  src:
+  url('fonts/GothamRoundedLight.eot');
+  src:
+    url('fonts/GothamRoundedLight.ttf') format('truetype'),
+    url('fonts/GothamRoundedLight.otf') format('opentype'),
+    url('fonts/GothamRoundedLight.woff') format('woff');
+}
+@font-face {
+  font-family: 'PT Sans Narrow';
+  src:
+    url('fonts/PTSansNarrowRegular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/OpensansLight.eot");
+  src:
+  url("fonts/OpensansLight.eot?#iefix") format('embedded-opentype'),
+  url("fonts/OpensansLight.woff") format('woff'),
+  url("fonts/OpensansLight.ttf") format('truetype'),
+  url("fonts/OpensansLight.svg#OpenSansLight") format('svg');
+}
+@font-face {
+  font-family: 'Montserrat Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/Montserrat-Bold.ttf") format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/Montserrat-Regular.ttf") format('truetype');
+}

@@ -1,0 +1,34 @@
+<input type="search" ng-model="family_name" ng-blur="search()" style="text-align: left"/>
+<section class="sige-search-family-container" ng-if="showFamilies">
+    <div class="close" ng-click="close()">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+    <ul class="display-horizontal col-100 search">
+        <li class="col-100 families" data-ng-repeat="family in families | filter:family_name | limitTo:5">
+            <ul class="display-horizontal col-100 family">
+                <li class="col-20">
+                    <div>
+                        <span ng-click="selectFamily(family)">{{ family.idfamily }}</span>
+                    </div>
+                </li>
+                <li class="col-30">
+                    <div>
+                        {{ family.name }}
+                    </div>
+                </li>
+                <li class="col-50">
+                    <div>
+                        <ul class="display-horizontal col-100">
+                            <li class="photo" data-ng-repeat="user in family.users | limitTo:4">
+                                <div>
+                                    <img ng-src="{{assets}}/img/users/{{user.photo}}" alt="{{ user.lastname }}"
+                                         title="{{ user.lastname}} {{ user.firstname }}"/>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</section>

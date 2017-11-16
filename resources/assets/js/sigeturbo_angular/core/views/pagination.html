@@ -1,0 +1,9 @@
+<section class="sige-turbo-pagination col-40" ng-if="total > 0 ">
+    <ul class="display-horizontal col-100">
+        <li class="first col-25"><span><a ng-click="first()" href="">First</a></span></li>
+        <li class="previus col-25"><span><a ng-click="previous()" href="">Previous</a></span></li>
+        <li class="next col-25"><span><a ng-click="next()" href="">Next</a></span></li>
+        <li class="last col-25"><span><a ng-click="last()" href="">Last</a></span></li>
+    </ul>
+    <span>{{ ngModel }} of {{ totalPages }}</span>
+</section>

@@ -1,0 +1,84 @@
+<section ng-if="showAchievementContainerOptions" class="sige-list-indicator">
+    <section class="grid-100" ng-if="showAchievementList">
+        <div class="sige-list sige-achievements" ng-repeat="achievement in achievements">
+            <h4>Logro</h4>
+            <section id="achievement">
+                <ul class="display-horizontal">
+                    <li class="col-100 gutter-5">
+                        <textarea name="achievement" ng-model="achievement.achievement">></textarea>
+
+                    </li>
+                    <li id="option" class="col-30 gutter-5">
+                        <button class="option option-red right" ng-click="deleteAchievement(achievement)"
+                                style="width: 135px">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            Borrar
+                        </button>
+                        <button class="option option-blue right" ng-click="updateAchievement(achievement)"
+                                style="width: 135px">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            Modificar
+                        </button>
+                    </li>
+                </ul>
+            </section>
+            <h4 ng-if="achievement.indicators.length>0">Indicadores</h4>
+            <section class="indicators-legend col-100">
+                <ul class="display-horizontal col-40">
+                    <li class="col-33">
+                        <em class="category-1"></em>
+                        <span>General</span>
+                    </li>
+                    <li class="col-33">
+                        <em class="category-2"></em>
+                        <span>Flexibilización</span>
+                    </li>
+                    <li class="col-33">
+                        <em class="category-3"></em>
+                        <span>Profundización</span>
+                    </li>
+                </ul>
+            </section>
+            <div class="clearfix"></div>
+            <section ng-repeat="(consecutive, indicators) in achievement.indicators | groupBy: 'consecutive'">
+                <ul class="display-horizontal list-indicator">
+                    <li class="col-10 gutter-5" id="consecutive">
+                        <div class="consecutive">
+                            <span>{{consecutive}}</span>
+                        </div>
+                    </li>
+                    <li class="col-90 gutter-5" id="indicator">
+                        <div ng-repeat="indicator in indicators" title="{{ indicator.indicator }}"
+                             class="index-{{ $index }}">
+                            <div class="type category-{{ indicator.category_prefix }}"><div>{{ indicator.category }}</div></div>
+                            <input type="text" ng-model="indicator.indicator" value="indicator.indicator" ng-dblclick="dialogsforms(indicator,achievement.indicators);"/>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section class="sige-help">
+                    <ul class="display-horizontal col-30">
+                        <li class="col-100">
+                            <p><strong>Doble Click:</strong> Modificar indicadores</p>
+                        </li>
+                    </ul>
+            </section>
+            <div class="clearfix"></div>
+        </div>
+    </section>
+    <section class="grid-100">
+        <section class="header-section">
+            <ul class="display-horizontal col-60" style="float: right" id="header">
+                <li class="col-80">
+                    <a class="icon icon-info" href="#"></a>
+                    <p>Ingresar Logros e Indicadores de Desempeño</p>
+                </li>
+                <li class="col-20" id="button">
+                    <button class="btn btn-green" id="showmonitoringtype" style="float:right" ng-click="showForm()">
+                        Ingresar
+                    </button>
+                </li>
+            </ul>
+        </section>
+    </section>
+</section>

@@ -1,0 +1,22 @@
+<section style="position: relative" id="search">
+    <div class="search">
+        <input id="container_search" type="text" ng-model="search" value="{{search}}" placeholder="Search"
+               onblur="this.form.submit()">
+        <i class="fa fa-search"></i>
+    </div>
+    <div class="container sige-search-container" ng-if="showSearch">
+        <ul class="display-horizontal col-100 search-options">
+            <li class="col-100">
+                <ul class="display-horizontal col-100">
+                    <li class="col-20 title">
+                        <label for="firstname_search">Nombre</label>
+                    </li>
+                    <li class="col-80 text">
+                        <input id="firstname_search" name="firstname_search" type="text" ng-value="resource.name"
+                               ng-model="resource.name">
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>

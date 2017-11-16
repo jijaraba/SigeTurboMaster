@@ -1,0 +1,102 @@
+<section class="tooltip is-payment {{ payment.ispayment }}" title="{{ payment.concept2 }}">
+    <img class="{{ (payment.idbank ==1)?'virtual':'normal' }}" ng-if="payment.approved == 'A'"
+         ng-click="verifyPaymentPending(payment)"
+         ng-src="{{assets}}/img/modules/payment_approved.svg"/>
+    <img ng-if="payment.approved == 'R'" ng-src="{{assets}}/img/modules/payment_rejected_real.svg"/>
+    <img class="animate-scale" ng-click="verifyPaymentPending(payment)" ng-if="payment.approved == 'P'"
+         ng-src="{{assets}}/img/modules/payment_pending.svg"/>
+    <img ng-if="payment.approved == 'N'" ng-src="{{assets}}/img/modules/payment_notpayment.svg"/>
+    <em class="{{ (payment.idbank ==1 && payment.approved == 'A')?'virtual':'normal' }}">
+        <i class="fa fa-link" aria-hidden="true"></i>
+    </em>
+    <span class="month" ng-click="showOptions(payment.idpayment)" style="cursor: pointer">{{ payment.month_name | monthName }}</span>
+    <span class="type">{{ payment.idpaymenttype | paymentType }}</span>
+    <section class="contextual-options" id="calendar_options_{{ payment.idpayment }}">
+        <ul class="display-horizontal col-100">
+            <li title="Generar asiento rápido" class="col-50" ng-click="showShort(payment.idpayment)"
+                style="cursor: pointer">
+                <i class="fa fa-id-card" aria-hidden="true"></i>
+            </li>
+            <li title="Ver Detalle de Asientos" class="col-50" ng-click="showLong(payment.idpayment)"
+                style="cursor: pointer">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </li>
+        </ul>
+    </section>
+    <section class="sige-main-modal" id="calendar_short_{{ payment.idpayment }}">
+        <section class="modal-content" style="width: 600px">
+            <section class="contextual-verify payment-calendar-edit">
+                <header>
+                    <span class="icon fa fa-mobile" aria-hidden="true"></span>
+                    <h4>PROCESAR PAGO #{{ payment.idpayment }}</h4>
+                    <div class="close" ng-click="closeShort(payment.idpayment)">
+                        <span class="fa fa-times" aria-hidden="true"></span>
+                    </div>
+                </header>
+                <section class="methods">
+                    <section class="method">
+                        <h6>COMPROBANTE</h6>
+                        <ul class="display-horizontal col-100" style="padding-top: 10px">
+                            <li class="col-20 banks">
+                                <select id="bank" class="bank" name="bank" ng-model="data.bank"
+                                        ng-options="bank.idbank as bank.name for bank in banks"
+                                        ng-init='data.bank = payment.idbank' required>
+                                </select>
+                            </li>
+                            <li class="col-25">
+                                <input type="text" ng-model="data.voucher" placeholder="Comprobante">
+                            </li>
+                            <li class="col-25">
+                                <input type="text" ng-model="data.value" placeholder="Valor">
+                            </li>
+                            <li class="col-25">
+                                <input type="text" ng-model="data.date" placeholder="Fecha">
+                            </li>
+                            <li class="col-80">
+                                <input class="observation" type="text" ng-model="data.observation"
+                                       placeholder="OBSERVACIÓN">
+                            </li>
+                            <li class="col-20">
+                                <button type="button" class="btn btn-green observation"
+                                        ng-click="updatePayment(payment)">
+                                    Procesar
+                                </button>
+                            </li>
+                        </ul>
+                    </section>
+                    <section ng-if="payment.approved == 'A'" class="method normal"
+                             style="margin: 5px 0;text-align: right">
+                        <sige-turbo-financials-export payment="payment.idpayment"></sige-turbo-financials-export>
+                    </section>
+                    <section class="method" style="margin: 5px 0;text-align: right">
+                        <span style="text-align: left"></span>
+                        <a class="edit" ng-click="showLong(payment.idpayment)">Editar {{
+                            (payment.transactions.length > 0)?"(Asientos: " + payment.transactions.length +")":"" }}</a>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>
+    <section class="sige-main-modal" id="calendar_long_{{ payment.idpayment }}">
+        <section class="modal-content" style="width: 1000px">
+            <section class="sige-financials-transactions">
+                <header>
+                    <h4>DETALLE DEL PAGO #{{ payment.idpayment }}</h4>
+                    <div class="close" ng-click="closeLong(payment.idpayment)">
+                        <span class="fa fa-times" aria-hidden="true"></span>
+                    </div>
+                </header>
+                <section class="payments">
+                    <div class="payment-title" ng-click="showPayment($index)">
+                        <span>{{ payment.concept2 }}</span>
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </div>
+                    <section class="transactions" id="show_payment_{{ $index }}">
+                        <sige-turbo-financials-transactions load="load"
+                                                            payment="payment"></sige-turbo-financials-transactions>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>
+</section>

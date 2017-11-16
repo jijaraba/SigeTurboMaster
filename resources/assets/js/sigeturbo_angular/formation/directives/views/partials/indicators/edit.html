@@ -1,0 +1,51 @@
+<section class="sige-indicators-edit">
+    <h4>Modificar</h4>
+    <form ng-submit="editindicators()">
+        <ul class="display-horizontal col-100">
+            <li class="col-100">
+                <ul class="display-horizontal col-100">
+                    <li class="col-30 gutter-5">
+                        <span>Categoría</span>
+                    </li>
+                    <li class="col-70 gutter-5">
+                        <select id="idindicatorcategory" name="idindicatorcategory" ng-model="indicator.idindicatorcategory" ng-options="indicatorcategory.idindicatorcategory as indicatorcategory.name for indicatorcategory in indicatorcategories" required>
+                            <option  ng-value="">Seleccione la Categoría del Indicador</option>
+                        </select>
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-30 gutter-5">
+                        <span>Fortaleza</span>
+                    </li>
+                    <li class="col-70 gutter-5">
+                        <textarea name="fortitude" id="fortitude" rows="2" ng-model="indicator.indicator" ng-value="indicator.indicator"></textarea>
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-30 gutter-5">
+                        <span>Recomendación</span>
+                    </li>
+                    <li class="col-70 gutter-5">
+                        <textarea name="recomendation" id="recomendation" rows="2" ng-model="recomendacion.indicator" ng-value="recomendacion.indicator"></textarea>
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-30 gutter-5">
+                        <span>Consecutivo</span>
+                    </li>
+                    <li class="col-70 gutter-5">
+                        <input name="consecutive" type="text" ng-model="indicator.consecutive" ng-value="indicator.consecutive" required>
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-100 gutter-5">
+                        <button type="submit" class="btn btn-aquamarine" ng-disabled="validateconsecutivo"> 
+                            Guardar
+                        </button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </form>
+</section>
+<div style="color:#e01010" ng-if="validateconsecutivo">Consecutivo Invalido</div>

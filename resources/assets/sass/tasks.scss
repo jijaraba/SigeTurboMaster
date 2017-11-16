@@ -1,0 +1,1469 @@
+@import "core";
+
+body {
+  width: 100%;
+  display: block;
+  font: {
+    family: $sige-font-family-01;
+    size: 1em;
+  }
+}
+
+.sige-help-intro {
+  border-top: 1px solid $sige-border-color-03;
+  margin-top: 15px;
+  ul {
+    float: right;
+    li {
+      border-right: 1px solid $sige-border-color-03;
+      padding: 0px 5px;
+      &:last-child {
+        border: none;
+      }
+      p {
+        text-align: center;
+        font: {
+          size: 0.8em;
+        }
+      }
+    }
+  }
+}
+
+aside {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+}
+
+header {
+  max-width: 100%;
+  background: rgba($sige-landing-color05, 0.7);
+  height: 110px;
+  box-shadow: 1px 1px 1px rgba($sige-global-color-opacity, 0.2);
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  .header-container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0px auto;
+    > .nav-container {
+      > ul.menu {
+        > li {
+          &.logo {
+            img {
+              top: 10px;
+              height: 80px;
+              max-width: 100%;
+              position: relative;
+            }
+          }
+          &.title {
+            h4 {
+              line-height: 110px;
+              border-bottom: none;
+              text-align: center;
+              font: {
+                size: 1.7em;
+              }
+            }
+          }
+          &.login {
+            position: relative;
+            a {
+              width: 120px;
+              padding: 10px 5px;
+              color: #FFF;
+              border-radius: 5px;
+              display: inline-block;
+              top: 30px;
+              text-align: center;
+              box-shadow: none;
+              position: relative;
+              float: right;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.sige-panel {
+  height: 350px;
+  width: 100%;
+  background: $sige-global-bgcolor-08;
+}
+
+.sige-tasks-lists {
+  position: relative;
+  margin-top: 20px;
+  .search-container {
+    float: right;
+    margin-top: 50px;
+    width: 100%;
+
+    span {
+      display: block;
+      margin-bottom: 5px;
+      font: {
+        family: $sige-font-family-03;
+        size: 1em;
+      }
+      color: $sige-global-color-04;
+    }
+    #search {
+      padding: 10px;
+      font: {
+        size: 0.9em;
+        family: $sige-font-family-01;
+      }
+      border-radius: 5px;
+    }
+    #group {
+      padding: 10px;
+      font: {
+        size: 0.9em;
+        family: $sige-font-family-01;
+      }
+      border-radius: 5px;
+    }
+    #order {
+      padding: 10px;
+      font: {
+        size: 0.9em;
+        family: $sige-font-family-01;
+      }
+      border-radius: 5px;
+    }
+    li#reverse {
+      > span {
+        color: #fff;
+      }
+      position: relative;
+      text-align: right;
+      > input[type="radio"] + label {
+        width: 40px;
+        padding: 9px 0;
+        height: 40px;
+      }
+    }
+  }
+}
+
+.task-list {
+  padding-top: 20px;
+  font: {
+    size: 1em;
+  }
+  ul#task-list {
+    li {
+      transition: all 1s ease-out;
+      > ul.task {
+        border-bottom: 1px solid $sige-border-color-03;
+        padding: 10px 5px;
+        &:hover {
+          background: $sige-global-bgcolor-21;
+          border-radius: 5px;
+        }
+        li {
+          font: {
+            family: $sige-font-family-01;
+            size: 0.9em;
+          }
+          letter-spacing: -1px;
+          &.select {
+            line-height: 80px;
+          }
+          &.type {
+            span {
+              line-height: 20px;
+              margin-top: 20px;
+              display: block;
+              text-align: center;
+              &.task {
+                background: $sige-global-bgcolor-07;
+                border-bottom: 3px solid $sige-global-bgcolor-08;
+                padding: 10px 5px;
+                border-radius: 5px;
+                &:after {
+                  content: "Tarea";
+                  color: white;
+                }
+              }
+              &.plan {
+                padding: 10px 5px;
+                border-radius: 5px;
+                background: $sige-global-bgcolor-11;
+                border-bottom: 3px solid $sige-global-bgcolor-10;
+                &:after {
+                  content: "Plan de Apoyo";
+                  color: white;
+                }
+              }
+              &.test {
+                padding: 10px 5px;
+                border-radius: 5px;
+                background: $sige-global-bgcolor-14;
+                border-bottom: 3px solid $sige-global-bgcolor-13;
+                &:after {
+                  content: "Examen";
+                  color: white;
+                }
+              }
+            }
+          }
+          &.starts {
+            line-height: 80px;
+            text-align: center;
+          }
+          &.group {
+            line-height: 80px;
+          }
+          &.description {
+            padding: 15px 0px;
+            .title {
+              font: {
+                family: $sige-font-family-04;
+              }
+              color: $sige-global-color-04;
+              padding-bottom: 5px;
+              font: {
+                weight: 500;
+                size: 1.1em;
+              }
+            }
+            .ends {
+            }
+            .files {
+              height: 20px;
+              padding-top: 5px;
+              a {
+                color: $sige-global-bgcolor-03;
+              }
+            }
+            .comment {
+              margin-top: 15px;
+              color: $sige-global-color-04;
+
+            }
+          }
+          &.photo {
+            padding: 10px;
+            margin-top: 5px;
+            > div {
+              width: 60px;
+              height: 60px;
+              border-radius: 50%;
+              padding: 3px;
+              background-color: rgba($sige-global-bgcolor-03, 1);
+              > img {
+                border-radius: 50%;
+              }
+            }
+
+          }
+          &.days {
+            line-height: 80px;
+            text-align: center;
+            padding-right: 10px;
+          }
+          &.detail {
+            a {
+              div {
+                cursor: pointer;
+                border: 1px solid $sige-global-bgcolor-08;
+                border-radius: 2px;
+                width: 80px;
+                height: 40px;
+                position: relative;
+                top: 30px;
+                &:before {
+                  width: 20px;
+                  padding: 0px 30px;
+                  top: 10px;
+                  position: relative;
+                  font-size: 1.1em;
+                  color: $sige-global-bgcolor-08;
+                }
+
+              }
+            }
+          }
+          &.edit {
+            line-height: 80px;
+            text-align: right;
+            a {
+              width: 150px;
+              padding: 8px 18px;
+              background-color: $sige-global-bgcolor-22 !important;
+              border-radius: 3px;
+              color: $sige-global-color-01;
+
+            }
+          }
+          &.delete {
+            line-height: 80px;
+            text-align: right;
+            a {
+              width: 100px;
+              padding: 8px 18px;
+              background-color: $sige-global-bgcolor-22 !important;
+              border-radius: 3px;
+              color: $sige-global-color-01;
+
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.task-description {
+  margin-top: 15px;
+  p {
+    padding: 10px 0px;
+    margin-bottom: 25px;
+  }
+}
+
+.file-list {
+  font: {
+    size: 0.9em;
+  }
+  > ul.progress {
+    margin-top: 5px;
+    border-radius: 3px;
+    border: 1px solid #EEE;
+    transition: all 1s ease 0s;
+    &.loading {
+      > li {
+        &.icon {
+          color: white !important;
+        }
+        &.name {
+          a {
+            color: white !important;
+          }
+        }
+        &.delete {
+          color: white !important;
+        }
+      }
+    }
+    > li {
+      padding: 15px;
+      a {
+        color: $sige-global-color-05;
+      }
+      &.icon {
+        color: $sige-global-bgcolor-03;
+        font: {
+          size: 1.4em;
+        }
+      }
+      &.delete {
+        color: $sige-global-color-01;
+        cursor: pointer;
+      }
+    }
+
+  }
+}
+
+footer {
+  max-width: 1100px;
+  margin: 0px auto;
+  > .sige-footer-content {
+    margin-top: 100px;
+    margin-left: inherit;
+    padding: 0px;
+    > div {
+      padding: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 1500px) {
+
+}
+
+@media screen and (max-width: 1100px) {
+
+  header.sige-task-header {
+    > section.header-container {
+      > nav.nav-container {
+        display: block !important;
+      }
+    }
+  }
+
+  .sige-tasks-lists {
+    position: relative;
+    margin-top: 20px;
+    .search-container {
+      .search {
+        width: 40%;
+        #search {
+          font: {
+            size: 0.9em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .group {
+        width: 25%;
+        #group {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .order {
+        width: 25%;
+        #order {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .reverse {
+        width: 10%;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+  header.sige-task-header {
+    > section.header-container {
+      max-width: 100%;
+      width: 100%;
+      > nav.nav-container {
+        padding: 5px 25px;
+        width: 100%;
+        display: block !important;
+        > ul {
+          > li {
+            &.logo {
+              width: 20%;
+              padding-left: 5px;
+            }
+            &.title {
+              width: 60%;
+              > h4 {
+                top: 20px;
+                position: relative;
+                line-height: inherit;
+                font: {
+                  size: 1.3em;
+                }
+              }
+            }
+            &.login {
+              width: 20%;
+              a {
+                width: 80px;
+                font: {
+                  size: 0.9em;
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  #paginator_top {
+    display: block;
+  }
+
+  .sige-content-guest {
+    width: 95%;
+    padding: 0px;
+    margin: 0px auto
+  }
+
+  .sige-tasks-lists {
+    position: relative;
+    margin-top: 20px;
+    .search-container {
+      .search {
+        width: 100%;
+        #search {
+          font: {
+            size: 0.9em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .group {
+        width: 45%;
+        #group {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .order {
+        width: 40%;
+        #order {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .reverse {
+        width: 15%;
+      }
+    }
+  }
+
+  .task-list {
+    ul#task-list {
+      li {
+        > ul.task {
+          li {
+            &.select {
+              display: none;
+            }
+            &.badge {
+              width: 0%;
+              order: 1;
+            }
+            &.type {
+              width: 25%;
+              order: 2;
+            }
+            &.photo {
+              width: 25%;
+              order: 3;
+            }
+            &.group {
+              width: 25%;
+              order: 5;
+              font: {
+                weight: 600;
+              }
+              text-align: right;
+              padding-right: 5px;
+            }
+            &.starts {
+              line-height: 80px;
+              width: 25%;
+              &:before {
+                content: "";
+              }
+              order: 4;
+            }
+            &.description {
+              width: 100%;
+              padding: 5px 0px;
+              order: 6;
+            }
+            &.days {
+              width: 100%;
+              line-height: 25px;
+              text-align: left;
+              &:before {
+                content: "Duration: ";
+              }
+              order: 7;
+            }
+            &.detail {
+              width: 100%;
+              line-height: 0px;
+              text-align: right;
+              > a {
+                > div {
+                  top: 0px;
+                }
+              }
+              order: 8;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  header.sige-task-header {
+    > section.header-container {
+      max-width: 100%;
+      width: 100%;
+      > nav.nav-container {
+        padding: 5px 25px;
+        width: 100%;
+        display: block !important;
+        > ul {
+          > li {
+            &.logo {
+              width: 20%;
+              padding-left: 5px;
+            }
+            &.title {
+              width: 60%;
+              > h4 {
+                top: 20px;
+                position: relative;
+                line-height: inherit;
+                font: {
+                  size: 1.6em;
+                }
+              }
+            }
+            &.login {
+              width: 20%;
+              a {
+                width: 80px;
+                font: {
+                  size: 0.9em;
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  #paginator_top {
+    display: block;
+  }
+
+  .sige-content-guest {
+    width: 95%;
+    padding: 0px;
+    margin: 0px auto
+  }
+
+  .sige-tasks-lists {
+    position: relative;
+    margin-top: 20px;
+    .search-container {
+      .search {
+        width: 100%;
+        #search {
+          font: {
+            size: 0.9em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .group {
+        width: 45%;
+        #group {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .order {
+        width: 40%;
+        #order {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .reverse {
+        width: 15%;
+      }
+    }
+  }
+
+  .task-list {
+    ul#task-list {
+      li {
+        > ul.task {
+          li {
+            &.select {
+              display: none;
+            }
+            &.badge {
+              width: 0%;
+              order: 1;
+            }
+            &.type {
+              width: 25%;
+              order: 2;
+            }
+            &.photo {
+              width: 25%;
+              order: 3;
+            }
+            &.group {
+              width: 25%;
+              order: 5;
+              font: {
+                weight: 600;
+              }
+              text-align: right;
+            }
+            &.starts {
+              line-height: 80px;
+              width: 25%;
+              &:before {
+                content: "";
+              }
+              order: 4;
+            }
+            &.description {
+              width: 100%;
+              padding: 5px 0px;
+              order: 6;
+            }
+            &.days {
+              width: 100%;
+              line-height: 25px;
+              text-align: left;
+              &:before {
+                content: "Duration: ";
+              }
+              order: 7;
+            }
+            &.detail {
+              width: 100%;
+              line-height: 0px;
+              text-align: right;
+              > a {
+                > div {
+                  top: 0px;
+                }
+              }
+              order: 8;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .file-list {
+    > ul.progress {
+      > li {
+        padding: 5px;
+        &:nth-child(1) {
+          width: 5%;
+        }
+        &:nth-child(2) {
+          width: 75%;
+        }
+        &:nth-child(3) {
+          text-align: center;
+          width: 15%;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 620px) {
+
+  header.sige-task-header {
+    > section.header-container {
+      max-width: 100%;
+      width: 100%;
+      > nav.nav-container {
+        padding: 5px 25px;
+        width: 100%;
+        display: block !important;
+        > ul {
+          > li {
+            &.logo {
+              width: 20%;
+              padding-left: 5px;
+            }
+            &.title {
+              width: 60%;
+              > h4 {
+                top: 20px;
+                position: relative;
+                line-height: inherit;
+                font: {
+                  size: 1.6em;
+                }
+              }
+            }
+            &.login {
+              width: 20%;
+              a {
+                width: 80px;
+                font: {
+                  size: 0.9em;
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  .sige-tasks-lists {
+    position: relative;
+    margin-top: 20px;
+    .search-container {
+      .search {
+        width: 100%;
+        #search {
+          font: {
+            size: 0.9em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .group {
+        width: 100%;
+        #group {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .order {
+        width: 80%;
+        #order {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .reverse {
+        width: 20%;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+
+  header.sige-task-header {
+    > section.header-container {
+      max-width: 100%;
+      width: 100%;
+      > nav.nav-container {
+        padding: 5px 25px;
+        width: 100%;
+        display: block !important;
+        > ul {
+          > li {
+            &.logo {
+              width: 20%;
+              padding-left: 5px;
+            }
+            &.title {
+              width: 60%;
+              > h4 {
+                top: 20px;
+                position: relative;
+                line-height: inherit;
+                font: {
+                  size: 1.3em;
+                }
+              }
+            }
+            &.login {
+              width: 20%;
+              a {
+                width: 80px;
+                font: {
+                  size: 0.9em;
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  #paginator_top {
+    display: block;
+  }
+
+  .sige-content-guest {
+    width: 95%;
+    padding: 0px;
+    margin: 0px auto
+  }
+
+  .sige-tasks-lists {
+    position: relative;
+    margin-top: 20px;
+    .search-container {
+      .search {
+        width: 100%;
+        #search {
+          font: {
+            size: 0.9em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .group {
+        width: 100%;
+        #group {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .order {
+        width: 70%;
+        #order {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .reverse {
+        width: 30%;
+      }
+    }
+  }
+
+  .task-list {
+    ul#task-list {
+      li {
+        > ul.task {
+          li {
+            &.select {
+              display: none;
+            }
+            &.badge {
+              width: 0%;
+              order: 1;
+            }
+            &.type {
+              width: 100%;
+              order: 2;
+            }
+            &.photo {
+              width: 30%;
+              order: 3;
+            }
+            &.group {
+              width: 70%;
+              order: 4;
+              font: {
+                weight: 600;
+              }
+              text-align: right;
+            }
+            &.starts {
+              line-height: 20px;
+              width: 35%;
+              text-align: left;
+              &:before {
+                content: "Fecha Inicio: ";
+              }
+              order: 5;
+            }
+            &.description {
+              width: 100%;
+              padding: 5px 0px;
+              order: 6;
+            }
+            &.days {
+              width: 100%;
+              line-height: 25px;
+              text-align: left;
+              &:before {
+                content: "Duration: ";
+              }
+              order: 7;
+            }
+            &.detail {
+              width: 100%;
+              line-height: 0px;
+              text-align: right;
+              > a {
+                > div {
+                  top: 0px;
+                }
+              }
+              order: 8;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .file-list {
+    > ul.progress {
+      > li {
+        padding: 5px;
+        &:nth-child(1) {
+          width: 20%;
+          text-align: center;
+          margin-top: 5px;
+        }
+        &:nth-child(2) {
+          order: 1;
+          width: 75%;
+        }
+        &:nth-child(3) {
+          display: none;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 360px) {
+
+  header.sige-task-header {
+    > section.header-container {
+      max-width: 100%;
+      width: 100%;
+      > nav.nav-container {
+        padding: 5px 25px;
+        width: 100%;
+        display: block !important;
+        > ul {
+          > li {
+            &.logo {
+              width: 20%;
+              padding-left: 5px;
+            }
+            &.title {
+              width: 60%;
+              > h4 {
+                top: 20px;
+                position: relative;
+                line-height: inherit;
+                font: {
+                  size: 1.1em;
+                }
+              }
+            }
+            &.login {
+              width: 20%;
+              a {
+                width: 80px;
+                font: {
+                  size: 0.9em;
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  #paginator_top {
+    display: block;
+  }
+
+  .sige-content-guest {
+    width: 95%;
+    padding: 0px;
+    margin: 0px auto
+  }
+
+  .sige-tasks-lists {
+    position: relative;
+    margin-top: 20px;
+    .search-container {
+      .search {
+        width: 100%;
+        #search {
+          font: {
+            size: 0.9em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .group {
+        width: 100%;
+        #group {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .order {
+        width: 70%;
+        #order {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .reverse {
+        width: 30%;
+      }
+    }
+  }
+
+  .task-list {
+    ul#task-list {
+      li {
+        > ul.task {
+          li {
+            &.select {
+              display: none;
+            }
+            &.badge {
+              width: 0%;
+              order: 1;
+            }
+            &.type {
+              width: 100%;
+              order: 2;
+            }
+            &.photo {
+              width: 30%;
+              order: 3;
+            }
+            &.group {
+              width: 70%;
+              order: 4;
+              font: {
+                weight: 600;
+              }
+              text-align: right;
+            }
+            &.starts {
+              line-height: 20px;
+              width: 35%;
+              text-align: left;
+              &:before {
+                content: "Fecha Inicio: ";
+              }
+              order: 5;
+            }
+            &.description {
+              width: 100%;
+              padding: 5px 0px;
+              order: 6;
+            }
+            &.days {
+              width: 100%;
+              line-height: 25px;
+              text-align: left;
+              &:before {
+                content: "Duration: ";
+              }
+              order: 7;
+            }
+            &.detail {
+              width: 100%;
+              line-height: 0px;
+              text-align: right;
+              > a {
+                > div {
+                  top: 0px;
+                }
+              }
+              order: 8;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .file-list {
+    > ul.progress {
+      > li {
+        padding: 5px;
+        &:nth-child(1) {
+          width: 20%;
+          text-align: center;
+          margin-top: 5px;
+        }
+        &:nth-child(2) {
+          order: 1;
+          width: 75%;
+        }
+        &:nth-child(3) {
+          display: none;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 359px) {
+
+  header.sige-task-header {
+    > section.header-container {
+      max-width: 100%;
+      width: 100%;
+      > nav.nav-container {
+        width: 100%;
+        display: block !important;
+        padding: 5px 25px;
+        > ul {
+          > li {
+            &.logo {
+              width: 20%;
+              padding-left: 5px;
+            }
+            &.title {
+              width: 45%;
+              > h4 {
+                top: 20px;
+                position: relative;
+                line-height: inherit;
+                font: {
+                  size: 1.1em;
+                }
+              }
+            }
+            &.login {
+              width: 20%;
+              a {
+                width: 80px;
+                font: {
+                  size: 0.9em;
+                }
+              }
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+  #paginator_top {
+    display: block;
+  }
+
+  .sige-content-guest {
+    width: 95%;
+    padding: 0px;
+    margin: 0px auto
+  }
+
+  .sige-tasks-lists {
+    position: relative;
+    margin-top: 20px;
+    .search-container {
+      .search {
+        width: 100%;
+        #search {
+          font: {
+            size: 0.9em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .group {
+        width: 100%;
+        #group {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .order {
+        width: 60%;
+        #order {
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-01;
+          }
+          letter-spacing: 1px;
+          width: 100%;
+        }
+      }
+      .reverse {
+        width: 40%;
+        #reverse {
+          > input[type="radio"] + label {
+            width: 25%;
+          }
+        }
+      }
+    }
+  }
+
+  .task-list {
+    ul#task-list {
+      li {
+        > ul.task {
+          li {
+            &.select {
+              display: none;
+            }
+            &.badge {
+              width: 0%;
+              order: 1;
+            }
+            &.type {
+              width: 100%;
+              order: 2;
+            }
+            &.photo {
+              width: 30%;
+              order: 3;
+            }
+            &.group {
+              width: 70%;
+              order: 4;
+              font: {
+                weight: 600;
+              }
+              text-align: right;
+            }
+            &.starts {
+              line-height: 20px;
+              width: 35%;
+              text-align: left;
+              &:before {
+                content: "Fecha Inicio: ";
+              }
+              order: 5;
+            }
+            &.description {
+              width: 100%;
+              padding: 5px 0px;
+              order: 6;
+            }
+            &.days {
+              width: 100%;
+              line-height: 25px;
+              text-align: left;
+              &:before {
+                content: "Duration: ";
+              }
+              order: 7;
+            }
+            &.detail {
+              width: 100%;
+              line-height: 0px;
+              text-align: right;
+              > a {
+                > div {
+                  top: 0px;
+                }
+              }
+              order: 8;
+            }
+          }
+        }
+      }
+    }
+  }
+  .file-list {
+    > ul.progress {
+      > li {
+        padding: 5px;
+        &:nth-child(1) {
+          width: 20%;
+          text-align: center;
+          margin-top: 5px;
+        }
+        &:nth-child(2) {
+          order: 1;
+          width: 75%;
+        }
+        &:nth-child(3) {
+          display: none;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 320px) {
+
+  .file-list {
+    > ul.progress {
+      > li {
+        padding: 5px;
+        &:nth-child(1) {
+          width: 20%;
+          text-align: center;
+          margin-top: 5px;
+        }
+        &:nth-child(2) {
+          order: 1;
+          width: 75%;
+        }
+        &:nth-child(3) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+

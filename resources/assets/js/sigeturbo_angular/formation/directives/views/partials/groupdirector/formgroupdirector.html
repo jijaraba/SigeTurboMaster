@@ -1,0 +1,41 @@
+{{message}}
+<form ng-submit="SaveGroupDirector()">
+    <ul class="display-horizontal col-100 enrollment-extended">
+        <li class="col-100">
+            <ul class="display-horizontal col-100">
+                <li class="col-25 scholarship-text">Año Académico</li>
+                <li class="col-75 scholarship">
+                    <label class="select-arrow" for="idyear">
+                        <select id="idyear" name="idyear" ng-model="registry.idyear" ng-options="year.idyear as year.name for year in years">
+                            <option value="">Año</option>
+                        </select>
+                    </label>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Grupo</li>
+                <li class="col-75 inclusion">
+                    <label class="select-arrow" for="idgroup">
+                        <select id="idgroup" name="idgroup" ng-model="registry.idgroup" ng-options="group.idgroup as group.name for group in groups">
+                            <option value="">Grupo</option>
+                        </select>
+                    </label>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <li class="col-25 scholarship-text">Profesor</li>
+                <li class="col-75 scholarship">
+                   <sige-turbo-assign-only-user route="objectform" user="user" user_name="user_name" destination="selectuser" widthdefault="40" showusers="getPersonalAcademic" userdefault="registry.iduser"></sige-turbo-assign-only-user>
+                    <input name="iduser" id="iduser"  type="hidden" ng-model="registry.iduser" ng-value="registry.iduser = ((registry.iduser == '' || registry.iduser == null || registry.iduser == undefined) && (registry.iduser != '' || registry.iduser != null || registry.iduser != undefined))? user.iduser : registry.iduser" required>
+                </li>
+            </ul>
+            <ul>
+                <li class="col-100">
+                    <button type="submit" class="btn btn-aquamarine">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</form>

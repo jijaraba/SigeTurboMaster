@@ -1,0 +1,37 @@
+<section style="position: relative" id="search" class="search">
+    <div class="search">
+        <span id="container_search" ng-click="searchForm()">
+            <sige-turbo-search-tags tags="search"></sige-turbo-search-tags>
+        </span>
+        <i class="fa fa-search" onclick="this.form.submit()"></i>
+    </div>
+    <div class="container sige-search-container" ng-if="showSearch">
+        <ul class="display-horizontal col-100 search-options">
+            <li class="col-100">
+                <ul class="display-horizontal col-100">
+                    <li class="col-30 gutter-3 title">
+                        <label for="search_name">Nombres y Apellidos del Estudiante</label>
+                    </li>
+                    <li class="col-70 gutter-3 text">
+                        <sige-turbo-admissions-assign-or-selected-students-recoveries-search route="objectform" user="search.iduser" user_name="user_name" destination="selectuser" showusers="getAllStudents" widthdefault="100" userdefault="search.iduser"></sige-turbo-admissions-assign-or-selected-students-recoveries-search>
+                        <input name="search_iduser" id="search_iduser" type="hidden" ng-model="search.iduser" ng-value="search.iduser = ((search.iduser == '' || search.iduser == null || search.iduser == undefined) && (search.iduser != '' || search.iduser != null || search.iduser != undefined))? user.iduser : search.iduser">
+                    </li>
+                </ul>
+                <ul class="display-horizontal col-100">
+                    <li class="col-30 gutter-3 title">
+                        <label for="search_rating">Mostrar</label>
+                    </li>
+                    <li class="col-40 gutter-3 text">
+                        <select id="search_mostrar" name="search_mostrar"  ng-model="search.mostrar">
+                          <option value="Pendientes">Pendientes</option>
+                          <option value="Todos">Todos</option>
+                        </select>
+                    </li>
+                    <li class="col-30 gutter-3 text">
+                        <button type="submit" class="btn btn-aquamarine" style="margin: 0px 20px;">Search</button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>

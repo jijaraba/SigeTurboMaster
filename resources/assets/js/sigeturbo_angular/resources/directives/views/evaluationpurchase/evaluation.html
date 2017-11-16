@@ -1,0 +1,25 @@
+<section class="sige-purchase-evaluation">
+    <h4>Evaluación</h4>
+    <div class="total {{ evaluationpurchase.total | purchaseEvaluation }}">{{ evaluationpurchase.total | percentage:0 }}</div>
+    <ul class="display-horizontal col-100 evaluation" ng-show="showEvaluation">
+        <li class="col-40"></li>
+        <li class="col-20 opportunity">
+            <label for="">Oportunidad</label>
+            <input type="text" ng-model="evaluationpurchase.opportunity" ng-blur="total()">
+        </li>
+        <li class="col-20 quality">
+            <label for="">Calidad</label>
+            <input type="text" ng-model="evaluationpurchase.quality" ng-blur="total()">
+        </li>
+        <li class="col-20 service">
+            <label for="">Servicio</label>
+            <input type="text" ng-model="evaluationpurchase.service" ng-blur="total()">
+        </li>
+        <li class="col-100">
+            <textarea name="observation" id="" cols="30" rows="10" ng-model="evaluationpurchase.observation" placeholder="Establecer observación referente a la evaluación (Opcional)"></textarea>
+        </li>
+        <li class="col-100">
+            <button ng-disabled="enabledEvaluation" id="save" type="button" class="btn btn-aquamarine" ng-click="evaluation()">Save</button>
+        </li>
+    </ul>
+</section>

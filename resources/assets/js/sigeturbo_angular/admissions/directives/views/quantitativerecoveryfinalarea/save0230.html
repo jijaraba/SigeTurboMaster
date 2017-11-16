@@ -1,0 +1,55 @@
+<form name="academicForm" ng-submit="SaveQualitativerecoveryfinalarea()">
+    <ul class="display-horizontal col-100">
+        <li class="col-15 gutter-5">
+            <label class="select-arrow" for="idyear">
+                <select id="idyear" name="idyear" ng-model="recoveryfinalform.idyear" ng-options="year.idyear as year.name for year in years">
+                    <option ng-value="">Seleccione el Año</option>
+                </select>
+            </label>
+        </li>
+        <li class="col-10 gutter-5">
+            <label class="select-arrow" for="idprovenance">
+                <select id="idprovenance" name="idprovenance" ng-model="recoveryfinalform.idprovenance" ng-options="provenance.idprovenance as provenance.name for provenance in provenances" required>
+                    <option  ng-value="">Seleccione la Proveniencia</option>
+                </select>
+            </label>
+        </li>
+        <li class="col-15 gutter-5">
+            <label class="select-arrow" for="idgroup">
+                <select id="idgroup" name="idgroup" ng-model="recoveryfinalform.idgroup" ng-options="group.idgroup as group.name for group in groups" required>
+                    <option  ng-value="">Seleccione el Grupo</option>
+                </select>
+            </label>
+        </li>
+        <li class="col-40 gutter-5">
+            <label class="select-arrow" for="idarea">
+                <select id="idarea" name="idarea" ng-model="recoveryfinalform.idarea" ng-options="area.idarea as area.name for area in areas" required>
+                    <option  ng-value="">Seleccione el Area</option>
+                </select>
+            </label>
+        </li>
+        <li class="col-10 gutter-5">
+            <label class="select-arrow" for="idassessment">
+                <select id="idassessment" name="idassessment" ng-model="recoveryfinalform.idassessment" ng-options="assessment.idassessment as assessment.name for assessment in assessments" required>
+                    <option  ng-value="">Seleccione la calificación</option>
+                </select>
+            </label>
+        </li>
+        <li class="col-10 gutter-5">
+            <input id="act" type="text" ng-model="recoveryfinalform.act" value="" name="recoveryfinalform.act" autocomplete="off" placeholder="Acta" required/>
+        </li>
+        <li class="col-25 gutter-5">
+            <sige-turbo-admissions-assign-or-selected-students route="objectform" user="user" user_name="user_name" destination="selectuser" widthdefault="40" showusers="getPersonalAcademic" userdefault="recoveryfinalform.idteacher"></sige-turbo-admissions-assign-or-selected-students>
+            <input name="idteacher" id="idteacher"  type="hidden" ng-model="recoveryfinalform.idteacher" ng-value="recoveryfinalform.idteacher = ((recoveryfinalform.idteacher == '' || recoveryfinalform.idteacher == null || recoveryfinalform.idteacher == undefined) && (recoveryfinalform.idteacher != '' || recoveryfinalform.idteacher != null || recoveryfinalform.idteacher != undefined))? user.iduser : recoveryfinalform.idteacher" required>
+        </li>
+        <li class="col-15 gutter-5">
+            <input name="recovery_at" type="text" ng-model="recoveryfinalform.recovery_at" ng-value="recoveryfinalform.recovery_at" placeholder="Fecha" autocomplete="off" required>
+        </li>
+        <li class="col-45 gutter-5">
+            <input name="observation" type="text" ng-model="recoveryfinalform.observation" ng-value="recoveryfinalform.observation" placeholder="Especificar observación" autocomplete="off" required>
+        </li>
+        <li class="button gutter-10">
+            <button id="search" type="submit" class="btn btn-aquamarine" ng-disabled="buttonSearchEnable">Guardar</button>
+        </li>
+    </ul>
+</form>

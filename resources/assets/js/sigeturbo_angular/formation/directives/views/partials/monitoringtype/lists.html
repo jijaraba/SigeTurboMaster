@@ -1,0 +1,51 @@
+<div ng-if="showMonitoringtypeContainerOptions">
+    <div class="grid-100">
+        <section class="header-section">
+            <ul class="display-horizontal col-60" style="float: right" id="header">
+                <li class="col-80" id="description">
+                    <a class="icon icon-info" href="#"></a>
+
+                    <p>Ingresar Tipo de Seguimiento</p>
+                </li>
+                <li class="col-20" id="button">
+                    <button class="btn btn-green" id="showmonitoringtype" style="float:right" ng-click="showForm()">
+                        Ingresar
+                    </button>
+                </li>
+            </ul>
+        </section>
+    </div>
+    <div class="grid-100" ng-if="showMonitoringTypesList">
+        <div class="sige-list sige-monitoringtypes" ng-repeat="monitoringtype in monitoringtypes">
+            <ul class="display-horizontal">
+                <li class="col-10">
+                    <div class="photo">
+                        <div>
+                            <img ng-src="{{assets}}/img/users/{{monitoringtype.photo}}"
+                                 alt="{{ monitoringtype.lastname }}"
+                                 title="{{ monitoringtype.lastname}} {{ monitoringtype.firstname }}"/>
+                        </div>
+                    </div>
+                </li>
+                <li class="col-60">
+                    <div class="title">{{ monitoringtype.name }}</div>
+                    <div class="description">{{ monitoringtype.description }}</div>
+                    <div class="date">{{ monitoringtype.date | date:fullDate }}</div>
+                    <p class="note">Reasignar los indicadores asociados al Tipo de seguimiento</p>
+                    <sige-turbo-monitoring-types-indicators monitoringtype="monitoringtype.idmonitoringtype"
+                                                            indicators="indicators"
+                                                            monitoringtypeindicator="monitoringtype.monitoringtypeindicator"></sige-turbo-monitoring-types-indicators>
+                </li>
+                <li class="col-15 gutter-5">
+
+                </li>
+                <li class="col-15 gutter-5">
+                    <button class="option option-red" ng-click="delete(monitoringtype)">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        Borrar
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

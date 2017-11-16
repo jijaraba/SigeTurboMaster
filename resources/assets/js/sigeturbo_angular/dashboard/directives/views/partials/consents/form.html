@@ -1,0 +1,46 @@
+{{message}}
+<form ng-submit="SaveConsent()">
+    <ul class="display-horizontal col-100 enrollment-extended">
+        <li class="col-100">
+            <ul class="display-horizontal col-100">
+                <li class="col-25 inclusion-text">Tipo de Consentimiento</li>
+                <li class="col-75 inclusion">
+                    <label class="select-arrow" for="idgroup">
+                        <select id="idconsenttype" name="idconsenttype" ng-model="registry.idconsenttype" ng-options="consenttype.idconsenttype as consenttype.name for consenttype in consenttypes">
+                            <option value="">Tipo de Consentimiento</option>
+                        </select>
+                    </label>
+                </li>
+            </ul>
+            <ul class="display-horizontal col-100">
+                <fieldset >
+                    <section class="file-list" ng-if="registry.path" style="padding-top: 5px">
+                        <h4>Archivos</h4>
+                        <ul class="display-horizontal col-100 progress" >
+                            <li class="col-05 gutter-5 icon fa fa-cloud-download"></li>
+                            <li class="col-75 gutter-5 name"><a target="_blank" href="@{{ assets }}/task/@{{ registry.path }}">{{registry.path}}</a></li>
+                            <li class="col-10 gutter-5 size"></li>
+                            <li class="col-05 gutter-5 delete" ng-click="delete(registry.idconsent)">
+                                 <span class="fa fa-times" ></span>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="file-upload">
+                        <ul class="display-horizontal col-100">
+                            <li class="col-100" style="padding: 5px 0px">
+                                <sige-turbo-verified-file-upload type="consent" on-finish="close(registry.send)" isvalid="isvalid" registry="registry"></sige-turbo-file-upload>
+                            </li>
+                        </ul>
+                    </section>
+                </fieldset>
+            </ul>
+            <ul style="padding-top: 14%;" ng-if="isvalid">
+                <li class="col-100">
+                    <button type="submit" class="btn btn-aquamarine" >
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</form>

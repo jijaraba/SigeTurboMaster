@@ -1,0 +1,70 @@
+<div ng-if="showStudents">
+    <div class="sige-secondary-heading clearfix">
+        <h4>Observador</h4>
+    </div>
+    <div class="grid-100">
+        <div class="sige-contained">
+            <section class="sige-student-lists">
+                <a href="/formation/observator" class="btn btn-transparent"><i class="fa fa-arrow-left"></i>Volver</a>
+                <h4>Estudiantes</h4>
+                <div class="search-container">
+                    <ul class="display-horizontal col-100">
+                        <li class="col-40 gutter-5">
+                            <label for="search">Buscar: </label>
+                            <input id="search" type="text" ng-model="searchStudent"/>
+                        </li>
+                        <li class="col-40 gutter-5">
+                            <label for="order">Ordenar: </label>
+                            <select name="order" id="order" ng-init="order.item='lastname'" ng-model="order.item">
+                                <option value="lastname">Apellido</option>
+                                <option value="firstname">Nombre</option>
+                                <option value="status">Estado</option>
+                                <option value="gender">Género</option>
+                                <option value="birth">Edad</option>
+                                <option value="observers">Observación</option>
+                                <option value="inclusion">Inclusión</option>
+                            </select>
+                        </li>
+                        <li id="reverse" class="col-20 gutter-5">
+                            <input ng-value="false" ng-model="order.reverse" id="asc" name="type" type="radio">
+                            <label for="asc">
+                                <div class="fa fa-sort-asc"></div>
+                            </label>
+                            <input ng-value="true" ng-model="order.reverse" id="desc" name="type" type="radio">
+                            <label for="desc">
+                                <div class="fa fa-sort-desc"></div>
+                            </label>
+                        </li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+                <section class="student-list">
+                    <ul id="student-list">
+                        <li data-ng-animate="'repeat'"
+                            ng-repeat="user in users | filter:searchStudent | orderBy:order.item:order.reverse">
+                            <div class="student" id="student" data-student-id="{{ user.iduser }}">
+                                <div class="body" id="student_{{user.iduser}}" ng-click="select(user)">
+                                    <div class="image {{ rating.global | performance:'background' }}">
+                                        <div ng-if="user.inclusion == 'Y'" class="inclusion fa fa-child fa-lg" title="Inclusión"></div>
+                                        <img ng-src="{{assets}}/img/users/{{user.photo}}" alt="{{ user.lastname }}" title="{{ user.lastname}} {{ user.firstname }}"/>
+                                        <div ng-if="user.observers.length > 0" class="observer" title="Cantidad de Informes Parciales">{{ user.observers.length}}</div>
+                                    </div>
+                                </div>
+                                <div class="lead">
+                                    {{ user.firstname }}
+                                </div>
+                                <ul class="student-info display-horizontal">
+                                    <li class="amount">
+                                        <a class="list" ng-if="user.observers.length > 0" href="/formation/observator/{{academic.year}}/{{academic.group}}/{{user.iduser}}">Ver</a>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </div>
+</div>

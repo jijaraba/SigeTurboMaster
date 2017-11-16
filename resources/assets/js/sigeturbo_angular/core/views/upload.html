@@ -1,0 +1,24 @@
+<section class="upload-container">
+    <div class="upload">
+        <input type="file" name="files[]" id="file" ng-model="upload.file" multiple file-bind="files">
+        <span>Upload</span>
+    </div>
+    <div class="drop-zone" id="drop_zone">
+        <i style=" font-size:3em" class="fa fa-plus-circle col-100"></i>
+        <span>Arrastrar archivos a SigeTurbo</span>
+    </div>
+    <ul class="display-horizontal col-100 upload-list">
+        <li ng-repeat="file in upload.files" class="col-100">
+            <section class="progress {{ file.status | fileStatus }} {{ file.deleted | fileDeleted }}" ng-if="!file.deleted">
+                <ul class="display-horizontal col-100">
+                    <li class="col-05 gutter-5 icon fa fa-cloud-upload"></li>
+                    <li class="col-75 gutter-5 name">{{file.name}}</li>
+                    <li class="col-10 gutter-5 size">{{file.size | size }}</li>
+                    <li class="col-05 gutter-5 delete" ng-click="delete($index)">
+                        <span ng-if="file.status > 0" class="fa fa-times"></span>
+                    </li>
+                </ul>
+            </section>
+        </li>
+    </ul>
+</section>

@@ -1,0 +1,544 @@
+@import "core";
+
+.sige-evaluations-lists {
+  position: relative;
+  margin-top: 40px;
+  .search-container {
+    float: right;
+    margin-top: 10px;
+    width: 50%;
+
+    span {
+      margin-bottom: 5px;
+      margin-right: 2px;
+      font: {
+        family: $sige-font-family-03;
+        size: 0.9em;
+      }
+      color: $sige-global-color-04;
+    }
+    #search {
+      position: relative;
+      div.search {
+        > input {
+          padding: 7px;
+          width: 100%;
+        }
+        i {
+          position: absolute;
+          width: 40px;
+          right: 0px;
+          text-align: center;
+          background: #f5f5f5 linear-gradient(to bottom, #fff, #e6e6e6) repeat-x;
+          border-width: 1px;
+          border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+          border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+          border-bottom-color: #b3b3b3;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          height: 35px;
+          line-height: 35px;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+      }
+      div.container {
+        width: 100%;
+        font: {
+          size: 0.9em;
+        }
+        ul.search-options {
+          border-bottom: 1px solid $sige-border-color-03;
+          line-height: 50px;
+          li {
+            &.title {
+              line-height: 50px;
+            }
+            &.text {
+              > input {
+                background: white;
+                border-radius: 3px;
+                border: 1px solid #C7CCD1;
+                padding: 6px;
+                font: {
+                  size: 0.95em;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    li#views {
+      position: relative;
+      top: 5px;
+      > input[type="radio"] + label {
+        width: 40px;
+        padding: 2px 0px;
+      }
+    }
+    #order {
+      padding: 6px;
+      width: 95%;
+      appearance: none;
+    }
+    li#reverse {
+      position: relative;
+      top: 5px;
+      text-align: right;
+      > input[type="radio"] + label {
+        width: 30px;
+        padding: 2px 0px;
+      }
+    }
+  }
+}
+
+.evaluation-list {
+  padding-top: 20px;
+  font: {
+    size: 1em;
+  }
+  ul#evaluation-list {
+    li {
+      transition: all 1s ease-out;
+      > ul.evaluation {
+        border-bottom: 1px solid $sige-border-color-03;
+        padding: 10px 0px;
+        li {
+          font: {
+            family: $sige-font-family-01;
+            size: 0.9em;
+          }
+          letter-spacing: -1px;
+          &.select {
+            line-height: 80px;
+          }
+          &.photo {
+            padding: 10px;
+            margin-top: 5px;
+            > div {
+              width: 48px;
+              height: 48px;
+              border-radius: 50%;
+              padding: 3px;
+              background-color: rgba($sige-global-bgcolor-03, 1);
+              > img {
+                border-radius: 50%;
+              }
+            }
+
+          }
+          &.week {
+            line-height: 80px;
+            color: $sige-global-color-04;
+          }
+          &.comment {
+            > p {
+              @include vertical-align();
+              white-space: pre-wrap;
+            }
+          }
+          &.edit {
+            line-height: 60px;
+            text-align: right;
+            a {
+              width: 150px;
+              padding: 8px 18px;
+              background-color: $sige-global-bgcolor-22 !important;
+              border-radius: 3px;
+              color: $sige-global-color-01;
+            }
+          }
+          &.delete {
+            line-height: 60px;
+            text-align: right;
+            form {
+              padding: 0px;
+              margin: 0px;
+              > button {
+                cursor: pointer;
+                width: inherit;
+                padding: 6px 22px;
+                border: 1px solid $sige-border-color-03;
+                border-radius: 3px;
+                color: $sige-global-color-01;
+                font: {
+                  family: $sige-font-family-01;
+                  size: 0.95em;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.sige-evaluation-new {
+  > form {
+    > fieldset {
+      > ul {
+        border-bottom: 1px solid $sige-border-color-03;
+        > li {
+          textarea {
+            height: 180px;
+            border: none;
+            background: transparent !important;
+          }
+          &.photo {
+            padding: 10px;
+            margin-top: 5px;
+            > div {
+              width: 100px;
+              height: 100px;
+              border-radius: 50%;
+              padding: 3px;
+              background-color: rgba($sige-global-bgcolor-03, 1);
+              > img {
+                border-radius: 50%;
+              }
+            }
+
+          }
+        }
+      }
+    }
+    > .submit {
+      > input[type="submit"] {
+        width: 120px;
+        border-radius: 5px;
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 1100px) {
+
+  .sige-evaluations-lists {
+    .search-container {
+      width: 80%;
+    }
+  }
+}
+
+@media screen and (max-width: 850px) {
+
+  .sige-evaluations-lists {
+    .search-container {
+      width: 80%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .sige-evaluations-lists {
+    .search-container {
+      width: 80%;
+    }
+  }
+
+  .evaluation-list {
+    ul#evaluation-list {
+      li {
+        > ul.evaluation {
+          li {
+            &.week {
+
+            }
+            &.comment {
+              width: 50%;
+            }
+            &.edit {
+              width: 15%;
+            }
+            &.delete {
+              width: 15%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+
+  .sige-evaluations-lists {
+    .search-container {
+      width: 100%;
+      > ul {
+        > li {
+          &:nth-child(1){
+            order: 1;
+            width: 100%;
+          }
+          &:nth-child(2){
+            order: 3;
+            width: 50%;
+          }
+          &:nth-child(3){
+            order: 2;
+            width: 100%;
+            #order {
+              width: 100%;
+            }
+          }
+          &:nth-child(4){
+            order: 4;
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+
+  .evaluation-list {
+    ul#evaluation-list {
+      li {
+        > ul.evaluation {
+          li {
+            &.select {
+              display: none;
+            }
+            &.photo {
+              order: 1;
+              width: 50%;
+            }
+            &.week {
+              line-height: 40px;
+              order: 4;
+              width: 100%;
+              > span:before {
+                content: "Week: "
+              }
+            }
+            &.comment {
+              order: 5;
+              width: 100%;
+            }
+            &.edit {
+              order: 2;
+              width: 25%;
+            }
+            &.delete {
+              order: 3;
+              width: 25%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .sige-evaluations-lists {
+    .search-container {
+      width: 100%;
+      > ul {
+        > li {
+          &:nth-child(1){
+            order: 1;
+            width: 100%;
+          }
+          &:nth-child(2){
+            order: 3;
+            width: 50%;
+          }
+          &:nth-child(3){
+            order: 2;
+            width: 100%;
+            #order {
+              width: 100%;
+            }
+          }
+          &:nth-child(4){
+            order: 4;
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+
+  .evaluation-list {
+    ul#evaluation-list {
+      li {
+        > ul.evaluation {
+          li {
+            &.select {
+              display: none;
+            }
+            &.photo {
+              order: 1;
+              width: 20%;
+            }
+            &.week {
+              line-height: 40px;
+              order: 4;
+              width: 100%;
+              > span:before {
+                content: "Week: "
+              }
+            }
+            &.comment {
+              order: 5;
+              width: 100%;
+            }
+            &.edit {
+              order: 2;
+              width: 30%;
+            }
+            &.delete {
+              order: 3;
+              width: 30%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 359px) {
+  .sige-evaluations-lists {
+    .search-container {
+      width: 100%;
+      > ul {
+        > li {
+          &:nth-child(1){
+            order: 1;
+            width: 100%;
+          }
+          &:nth-child(2){
+            order: 3;
+            width: 50%;
+          }
+          &:nth-child(3){
+            order: 2;
+            width: 100%;
+            #order {
+              width: 100%;
+            }
+          }
+          &:nth-child(4){
+            order: 4;
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+
+  .evaluation-list {
+    ul#evaluation-list {
+      li {
+        > ul.evaluation {
+          li {
+            &.select {
+              display: none;
+            }
+            &.photo {
+              order: 1;
+              width: 20%;
+            }
+            &.week {
+              line-height: 40px;
+              order: 4;
+              width: 100%;
+              > span:before {
+                content: "Week: "
+              }
+            }
+            &.comment {
+              order: 5;
+              width: 100%;
+            }
+            &.edit {
+              order: 2;
+              width: 30%;
+            }
+            &.delete {
+              order: 3;
+              width: 30%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .sige-evaluations-lists {
+    .search-container {
+      width: 100%;
+      > ul {
+        > li {
+          &:nth-child(1){
+            order: 1;
+            width: 100%;
+          }
+          &:nth-child(2){
+            order: 3;
+            width: 50%;
+          }
+          &:nth-child(3){
+            order: 2;
+            width: 100%;
+            #order {
+              width: 100%;
+            }
+          }
+          &:nth-child(4){
+            order: 4;
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+
+  .evaluation-list {
+    ul#evaluation-list {
+      li {
+        > ul.evaluation {
+          li {
+            &.select {
+              display: none;
+            }
+            &.photo {
+              order: 1;
+              width: 20%;
+            }
+            &.week {
+              line-height: 40px;
+              order: 4;
+              width: 100%;
+              > span:before {
+                content: "Week: "
+              }
+            }
+            &.comment {
+              order: 5;
+              width: 100%;
+            }
+            &.edit {
+              order: 2;
+              width: 30%;
+            }
+            &.delete {
+              order: 3;
+              width: 30%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

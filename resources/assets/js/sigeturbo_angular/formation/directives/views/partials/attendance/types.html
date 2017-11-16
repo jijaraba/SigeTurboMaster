@@ -1,0 +1,23 @@
+<select style="text-align:center;margin-right: 3px;width:50px;padding:8px" ng-model="user.count"
+        id="count{{ user.iduser }}"
+        name="count{{ user.iduser }}" name="idyear" id="idyear" ng-model="academic.year"
+        ng-options="attendance.idattendance as attendance.name for attendance in attendances"></select>
+<input ng-click="attendanceSave(user,user.attendance)" ng-value="'Present'" ng-model="user.attendance"
+       class="attendance-present" id="present{{ user.iduser }}" name="type{{ user.iduser }}" value="Present"
+       type="radio">
+<label for="present{{ user.iduser }}"></label>
+<input ng-click="attendanceSave(user,user.attendance)" ng-value="'Absent'" ng-model="user.attendance"
+       class="attendance-absent" id="absent{{ user.iduser }}" name="type{{ user.iduser }}" value="Absent" type="radio"
+       checked="true">
+<label for="absent{{ user.iduser }}"></label>
+<input ng-click="attendanceSave(user,user.attendance)" ng-value="'Tardy'" ng-model="user.attendance"
+       class="attendance-tardy" id="tardy{{ user.iduser }}" name="type{{ user.iduser }}" value="Tardy" type="radio">
+<label for="tardy{{ user.iduser }}"></label>
+<input ng-click="attendanceSave(user,user.attendance)" ng-value="'Missing'" ng-model="user.attendance"
+       class="attendance-missing" id="missing{{ user.iduser }}" name="type{{ user.iduser }}" value="Missing"
+       type="radio">
+<label for="missing{{ user.iduser }}"></label>
+<input ng-click="attendanceSave(user,user.attendance)" ng-value="'Excused'" ng-model="user.attendance"
+       class="attendance-excused" id="excused{{ user.iduser }}" name="type{{ user.iduser }}" value="Excused"
+       type="radio">
+<label for="excused{{ user.iduser }}"></label>

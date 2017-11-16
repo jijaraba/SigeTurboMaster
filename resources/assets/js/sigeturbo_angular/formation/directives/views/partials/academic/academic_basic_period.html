@@ -1,0 +1,34 @@
+<div class="grid-100 sige-academic">
+    <div class="sige-contained" id="academic">
+        <h4>Académico</h4>
+        <section class="academic">
+            <form name="academicForm" ng-submit="searching()">
+                <ul class="display-horizontal col-50">
+                    <li class="col-50 gutter-5">
+                        <label class="select-arrow" for="idyear">
+                            <select id="idyear" name="idyear" ng-model="academic.year" ng-options="year.idyear as year.name for year in years">
+                                <option value="">Año</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li class="col-50 gutter-5">
+                        <label class="select-arrow" for="idperiod">
+                            <select id="idperiod" name="idperiod" ng-model="academic.idperiod" ng-options="period.idperiod as period.name for period in periods">
+                                <option value="">Periodo</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li class="button gutter-5">
+                        <button id="search" type="submit" class="btn btn-aquamarine" ng-disabled="buttonSearchEnable">Buscar</button>
+                    </li>
+                </ul>
+            </form>
+            <a href="#" id="show_academic_info"><i class="fa fa-info-circle"></i><span>Help</span></a>
+        </section>
+        <section class="info" style="display:none">
+            <a class="icon icon-info" href="#"></a>
+            <p>Seleccione las opciones correspondientes al <strong>año y periodo</strong> que desea consultar
+            </p>
+        </section>
+    </div>
+</div>

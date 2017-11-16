@@ -1,0 +1,34 @@
+<ul style="width:100%"  ng-controller="AcademicManagementController" id="AcademicManagementController">
+	<li style="width:100%;border-bottom: 1px solid #CCCCCC;">
+        <ul style="width:100%;display: -ms-flexbox;display: flex;-ms-flex-direction: row;flex-direction: row;-ms-flex-pack: start;justify-content: flex-start;-ms-flex-flow: row wrap;flex-flow: row wrap;">
+            <li style="width:25%">
+                <div style="width:50%;float: left;">Area</div>
+                <div style="width:50%;float: right;"><button class="btn btn-green" style="padding: 0px 0px;width: 80px;" id="showmonitoringtype"  ng-click="form(areagroup,'MonitoringcategorybyyearController')">
+                    <i class="fa fa-plus-circle"></i> Nuevo
+                </button></div>
+            </li>
+            <li style="width:55%;">
+                <div style="width:50%;float: left;">Asignaturas</div>
+                <div style="width:50%;float: right;"><button class="btn btn-green" style="padding: 0px 0px;width: 80px;" id="showmonitoringtype"  ng-click="form(areagroup,'MonitoringcategorybyyearController')">
+                    <i class="fa fa-plus-circle"></i> Nuevo
+                </button></div>
+            </li>
+            <li style="width:20%;">
+                <div style="width:50%;float: left;">Nivels</div>
+                <div style="width:50%;float: right;"><button class="btn btn-green" style="padding: 0px 0px;width: 80px;" id="showmonitoringtype"  ng-click="form(areagroup,'MonitoringcategorybyyearController')">
+                    <i class="fa fa-plus-circle"></i> Nuevo
+                </button></div>
+            </li>
+        </ul>
+    </li>  
+    <li style="width:100%;border-bottom: 1px solid #CCCCCC;" data-ng-animate="'repeat'" ng-repeat="areagroup in areasgroups">
+        <ul style="width:100%;display: -ms-flexbox;display: flex;-ms-flex-direction: row;flex-direction: row;-ms-flex-pack: start;justify-content: flex-start;-ms-flex-flow: row wrap;flex-flow: row wrap;">
+            <li style="width:25%">
+                <div style="padding: {{(areagroup.count == 1) ? 0 : areagroup.count * 10}}px 0px 0px 0px;">{{areagroup.area}}</div>
+            </li>
+            <li style="width:75%">
+                <sige-turbo-subjectsbyarea idarea="areagroup.idarea" subjectwithareasandnivels="subjectwithareasandnivels"></sige-turbo-subjectsbyarea>
+            </li>
+        </ul>
+    </li>                     
+</ul>

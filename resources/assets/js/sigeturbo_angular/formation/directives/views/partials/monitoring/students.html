@@ -1,0 +1,86 @@
+<div ng-if="showStudents">
+    <div class="sige-secondary-heading clearfix">
+        <h4>Seguimiento</h4>
+    </div>
+    <div class="grid-100">
+        <div class="sige-contained">
+            <section class="sige-student-lists">
+                <h4>Estudiantes</h4>
+                <div class="search-container">
+                    <ul class="display-horizontal col-100">
+                        <li class="col-40 gutter-5">
+                            <label for="search">Buscar: </label>
+                            <input id="search" type="text" ng-model="searchStudent"/>
+                        </li>
+                        <li id="sequence" class="col-40 gutter-5">
+                            <label for="order">Ordenar: </label>
+                            <select name="order" id="order" ng-init="order.item='lastname'" ng-model="order.item">
+                                <option value="lastname">Apellido</option>
+                                <option value="firstname">Nombre</option>
+                                <option value="status">Estado</option>
+                                <option value="gender">Género</option>
+                                <option value="birth">Edad</option>
+                                <option value="attendances">Asistencia</option>
+                                <option value="grade">Desempeño</option>
+                            </select>
+                        </li>
+                        <li id="reverse" class="col-20 gutter-5">
+                            <input ng-value="false" ng-model="order.reverse" id="asc" name="type" type="radio">
+                            <label for="asc">
+                                <div class="fa fa-sort-asc"></div>
+                            </label>
+                            <input ng-value="true" ng-model="order.reverse" id="desc" name="type" type="radio">
+                            <label for="desc">
+                                <div class="fa fa-sort-desc"></div>
+                            </label>
+                        </li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+                <section class="student-list">
+                    <ul id="student-list">
+                        <li data-ng-animate="'repeat'"
+                            ng-repeat="user in users | filter:searchStudent | orderBy:order.item:order.reverse">
+                            <div class="student" id="student" data-student-id="{{ user.iduser }}">
+                                <div class="body" id="student_{{user.iduser}}" ng-click="select(user)">
+                                    <em style="display: none">{{ rating.global = (user.grade = (ratings |
+                                        grades:user.iduser)) }}</em>
+                                    <input type="hidden" ng-value="0" ng-model="user.grade" value="0"/>
+                                    <div class="image {{ rating.global | performance:'background' }}">
+                                        <div ng-if="user.inclusion == 'Y'" class="inclusion fa fa-child fa-lg"
+                                             title="Inclusión"></div>
+                                        <img ng-src="{{assets}}/img/users/{{user.photo}}" alt="{{ user.lastname }}"
+                                             title="{{ user.lastname}} {{ user.firstname }}"/>
+                                        <div ng-if="rating.global > 0"
+                                             class="rating {{ rating.global | performance:'normal' }}">{{ rating.global
+                                            | scale:academic.group }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lead">
+                                    {{ user.firstname }}
+                                </div>
+                                <ul class="student-info display-horizontal">
+                                    <li class="absent">
+                                        <strong>Absent</strong>
+                                        <em>{{ user.attendances_absent[0].amount }}</em>
+                                    </li>
+                                    <li class="tardy">
+                                        <strong>Tardy</strong>
+                                        <em>{{ user.attendances_tardy[0].amount }}</em>
+                                    </li>
+                                    <li class="grade">
+                                        <strong>Grade</strong>
+                                        <em>0</em>
+                                    </li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </div>
+</div>
