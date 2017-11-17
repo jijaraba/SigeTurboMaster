@@ -100,8 +100,6 @@ class DatabaseSeeder extends Seeder
         //Resources
         $this->call('StatuspurchasesTableSeeder');
         $this->command->info('Statuspurchases table seeded!');
-        $this->call('ProvidersTableSeeder');
-        $this->command->info('Providers table seeded!');
         $this->call('ProductcategoriesTableSeeder');
         $this->command->info('Productcategories table seeded!');
         $this->call('ProductsTableSeeder');

@@ -13,10 +13,6 @@ class UsersTableSeeder extends Seeder {
      */
     public function run()
     {
-        DB::table('users')->delete();
-
-        //DB::unprepared(file_get_contents('dummies/sql/users.sql'));
-
         User::create([
             'iduser' => 99999996,
             'idcategory' => 13,
