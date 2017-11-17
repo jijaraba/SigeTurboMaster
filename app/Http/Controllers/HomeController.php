@@ -2,27 +2,41 @@
 
 namespace SigeTurbo\Http\Controllers;
 
-use Illuminate\Http\Request;
+use SigeTurbo\Repositories\Attendance\AttendanceRepositoryInterface;
+use SigeTurbo\Repositories\Year\YearRepositoryInterface;
 
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @var AttendanceRepositoryInterface
      */
-    public function __construct()
+    private $attendanceRepository;
+    /**
+     * @var YearRepositoryInterface
+     */
+    private $yearRepository;
+
+    /**
+     * HomeController constructor.
+     * @param AttendanceRepositoryInterface $attendanceRepository
+     * @param YearRepositoryInterface $yearRepository
+     */
+    public function __construct(AttendanceRepositoryInterface $attendanceRepository,
+                                YearRepositoryInterface $yearRepository)
     {
-        $this->middleware('auth');
+        $this->attendanceRepository = $attendanceRepository;
+        $this->yearRepository = $yearRepository;
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * Dashboard
+     * @return $this
      */
-    public function index()
+    public function dashboard()
     {
-        return view('home');
+        return view('home.dashboard')
+            ->with('attendances',$this->attendanceRepository->getAttendancesAmount())
+            ->withYear($this->yearRepository->getCurrentYear()->idyear);
     }
+
 }

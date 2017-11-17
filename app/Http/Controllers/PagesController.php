@@ -11,7 +11,7 @@ class PagesController extends Controller {
 	 */
 	public function index()
 	{
-		return View::make('pages.index');
+		return view('pages.index');
 	}
 
 

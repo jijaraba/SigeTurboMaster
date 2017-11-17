@@ -11,22 +11,6 @@
 |
 */
 
-Route::get('emails_payment', function () {
-    return view('emails.payment.accepted')
-        ->withUser(['firstname' => 'Prueba'])
-        ->withPayment(\SigeTurbo\Payment::select('*')->where('idpayment', '=', 1)->first());
-});
-
-Route::get('emails_monitoring', function () {
-    return view('emails.monitoring.parents')->with(['user' => ['firstname' => 'Prueba'], 'monitoring' => ["monitoring" => "Información del Visitante", 'family' => 'Prueba Prueba', 'idgender' => 1, 'student' => 'José Prueba', 'amount' => 10, 'iduser' => 1]]);
-});
-
-
-Route::get('/totxt', [
-    'as' => 'totxt',
-    'uses' => 'ExportsController@exportTransactionsToTxt'
-]);
-
 
 /**
  * ===================================
@@ -43,13 +27,41 @@ Route::get('/portal', [
 ]);
 Route::resource('pages', 'PagesController');
 
+/**
+ * ===================================
+ * Authentication Module
+ * ===================================
+ */
+Auth::routes();
+Route::get('/logout', [
+    'as' => 'logout',
+    'uses' => 'Auth\LoginController@logout',
+]);
 
 /**
  * ===================================
- * WEB MIDDLEWARE
+ * Authenticated Area
  * ===================================
  */
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['auth', 'permission']], function () {
+
+
+    /**
+     * ===================================
+     * Dashboard Module
+     * ===================================
+     */
+
+    /* --- HomeController ---*/
+    Route::get('/home', [
+        'as' => 'home',
+        'uses' => 'HomeController@dashboard'
+    ]);
+    Route::get('/dashboard', [
+        'middleware' => ['auth', 'permission'],
+        'as' => 'dashboard',
+        'uses' => 'HomeController@dashboard'
+    ]);
 
     /**
      * ===================================
@@ -63,23 +75,12 @@ Route::group(['middleware' => ['web']], function () {
      * ===================================
      */
     /* --- Authentication routes ---*/
-    Route::get('/gettoken', ['middleware' => ['auth'], function () {
+    Route::get('/gettoken', function () {
         return response()->json(array(
             'token' => \SigeTurbo\User::find(Auth::user()->iduser)->api_token,
             'user' => Auth::user()->iduser
         ));
-    }]);
-
-
-    /**
-     * ===================================
-     * Authentication Module
-     * ===================================
-     */
-    Auth::routes();
-    Route::get('/', 'Auth\LoginController@login');
-    Route::get('/logout', 'Auth\LoginController@logout');
-
+    });
 
     /**
      * ===================================
@@ -88,12 +89,10 @@ Route::group(['middleware' => ['web']], function () {
      */
     /* --- RolesController ---*/
     Route::get('/roles', [
-        'middleware' => ['auth'],
         'as' => 'roles',
         'uses' => 'RolesController@index'
     ]);
     Route::post('/roles', [
-        'middleware' => ['auth'],
         'as' => 'roles.store',
         'uses' => 'RolesController@store'
     ]);
@@ -269,24 +268,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/homeworks/detail/{task}/', [
         'as' => 'guest.tasks.detail',
         'uses' => 'TasksController@getDetail'
-    ]);
-
-    /**
-     * ===================================
-     * Dashboard Module
-     * ===================================
-     */
-
-    /* --- HomeController ---*/
-    Route::get('/home', [
-        'middleware' => ['auth', 'permission'],
-        'as' => 'home',
-        'uses' => 'HomeController@dashboard'
-    ]);
-    Route::get('/dashboard', [
-        'middleware' => ['auth', 'permission'],
-        'as' => 'dashboard',
-        'uses' => 'HomeController@dashboard'
     ]);
 
 
@@ -998,8 +979,14 @@ Route::group(['middleware' => ['web']], function () {
         'uses' => 'ConsentsController@index'
     ]);
 
+    /**
+     * ===================================
+     * Export
+     * ===================================
+     */
+    Route::get('/totxt', [
+        'as' => 'totxt',
+        'uses' => 'ExportsController@exportTransactionsToTxt'
+    ]);
+
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

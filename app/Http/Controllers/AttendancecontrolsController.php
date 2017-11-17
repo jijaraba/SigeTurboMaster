@@ -4,13 +4,8 @@ namespace SigeTurbo\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Validator;
-use SigeTurbo\Events\Stream;
 use SigeTurbo\Http\Requests\AttendancecontrolRequest;
-use SigeTurbo\Attendancecontrol;
 use SigeTurbo\Repositories\Attendancecontrol\AttendancecontrolRepositoryInterface;
 
 class AttendancecontrolsController extends Controller
@@ -32,7 +27,7 @@ class AttendancecontrolsController extends Controller
 
     /**
      * Display a listing of the resource.
-     * GET /Attendances by Employee 
+     * GET /Attendances by Employee
      * @return Response
      */
     public function index()
