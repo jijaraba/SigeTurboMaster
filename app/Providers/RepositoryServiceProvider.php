@@ -40,6 +40,14 @@ class RepositoryServiceProvider extends ServiceProvider
             'SigeTurbo\Repositories\Attendance\AttendanceRepository'
         );
         App::bind(
+            'SigeTurbo\Repositories\Attendancecontrol\AttendancecontrolRepositoryInterface',
+            'SigeTurbo\Repositories\Attendancecontrol\AttendancecontrolRepository'
+        );
+        App::bind(
+            'SigeTurbo\Repositories\Attendancebyemployee\AttendancebyemployeeRepositoryInterface',
+            'SigeTurbo\Repositories\Attendancebyemployee\AttendancebyemployeeRepository'
+        );
+        App::bind(
             'SigeTurbo\Repositories\Bank\BankRepositoryInterface',
             'SigeTurbo\Repositories\Bank\BankRepository'
         );
@@ -226,6 +234,10 @@ class RepositoryServiceProvider extends ServiceProvider
         App::bind(
             'SigeTurbo\Repositories\Period\PeriodRepositoryInterface',
             'SigeTurbo\Repositories\Period\PeriodRepository'
+        );
+        App::bind(
+            'SigeTurbo\Repositories\Permission\PermissionRepositoryInterface',
+            'SigeTurbo\Repositories\Permission\PermissionRepository'
         );
         App::bind(
             'SigeTurbo\Repositories\Year\YearRepositoryInterface',

@@ -2,10 +2,10 @@
 
 /* Dashboard Controllers */
 angular.module('Dashboard.controllers', [])
-    .controller('DashboardController', ["$log", "$scope", function ($log, $scope) {
+    .controller('DashboardController', [function () {
 
     }])
-    .controller('DashboardTeacherController', ["$log", "$scope", 'Attendance', function ($log, $scope, Attendance) {
+    .controller('DashboardTeacherController', ['$log', '$scope', 'Attendance', function ($log, $scope, Attendance) {
         //Scope Data
         $scope.data = {
             labels: [],
@@ -25,7 +25,7 @@ angular.module('Dashboard.controllers', [])
 
         Attendance.getAttendancesAmountByDate({year: 2017}).$promise.then(
             function (attendances) {
-                angular.forEach(attendances, function (attendance, key) {
+                angular.forEach(attendances, function (attendance) {
                     $scope.data.labels.push(attendance.date);
                     $scope.data.datasets[0].data.push(attendance.amount);
                 });
@@ -63,7 +63,7 @@ angular.module('Dashboard.controllers', [])
         $scope.close = function($param){
             if ($param){
                 ngDialog.close() ;
-                window.location = "/users/consent";
+                window.location = '/users/consent';
             } 
         };
         Consenttype.all({}).$promise.then(
@@ -80,16 +80,16 @@ angular.module('Dashboard.controllers', [])
             $scope.isvalid = false;
             ////$scope.message = ($object.idconsent) ? "Editar consentimiento" : "Ingresar consetimiento";
             if($object.idconsent){
-                $scope.message = "Editar consentimiento";
+                $scope.message = 'Editar consentimiento';
                 $scope.registry = $object;
                 //var $view = '../directives/views/partials/consents/form.html';
             }else{
-               $scope.registry = {};
-               $scope.registry = {
+                $scope.registry = {};
+                $scope.registry = {
                     send : false,
                     iduser : $object.iduser
                 };
-                $scope.message = "Ingresar consetimiento";
+                $scope.message = 'Ingresar consetimiento';
                 //var $view = '../directives/views/partials/consents/form.html';
             }
             ngDialog.open({
@@ -100,16 +100,15 @@ angular.module('Dashboard.controllers', [])
             });
         };
     }])
-    .controller('ConsentsformController', ['$scope', '$log','ngDialog', function ($scope, $log,ngDialog) {
+    .controller('ConsentsformController', ['$scope',function ($scope) {
         $scope.SaveConsent = function () {
-                if (!$scope.registry.idconsent) {
-                    //Insert Group Director
-                    $scope.registry.send = $scope.isvalid;
-                }
-                 else {
-                    $scope.registry.send = $scope.isvalid;
-                    alert(JSON.stringify($scope.registry.send ));
-                }
-        }
+            if (!$scope.registry.idconsent) {
+                //Insert Group Director
+                $scope.registry.send = $scope.isvalid;
+            }
+            else {
+                $scope.registry.send = $scope.isvalid;
+            }
+        };
         
     }]);

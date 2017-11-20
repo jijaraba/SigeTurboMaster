@@ -237,7 +237,11 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
-
+        'Points' => SigeTurbo\Facades\Points::class,
+        'Calendar' => SigeTurbo\Facades\Calendar::class,
+        'Alert' => SigeTurbo\Facades\Alert::class,
+        'Monitorings' => SigeTurbo\Facades\Monitorings::class,
+        'SMS' => SigeTurbo\SMS\Facade\SMS::class,
     ],
 
 ];

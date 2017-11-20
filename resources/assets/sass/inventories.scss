@@ -1,10 +1,10 @@
-@import "core";
-@import "reset";
-@import "style";
+@import "sigeturbo/core";
+@import "sigeturbo/reset";
+@import "sigeturbo/style";
 
 html {
   background-size: cover;
-  background: #d8ddd0 url('/resources/assets/sass/images/login.svg') no-repeat fixed center center;
+  background: #d8ddd0 url('../images/login.svg') no-repeat fixed center center;
 }
 
 body {

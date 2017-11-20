@@ -21,7 +21,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      * ===================================
      */
     Route::get('/points/getpoints', [
-        'as' => 'api.v1.settings.getpoints',
+        'as' => 'settings.getpoints',
         'uses' => 'SettingsController@getpoints'
     ]);
 
@@ -32,7 +32,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Verified
     Route::get('/assets/setverified', [
-        'as' => 'api.v1.assets.setverified',
+        'as' => 'assets.setverified',
         'uses' => 'AssetsController@setVerified'
     ]);
     //Global Assets
@@ -54,7 +54,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //GET academics by years
     Route::get('/academics/getacademicsbyyear/year/{idyear}', [
-        'as' => 'api.v1.academics.getacademicsbyyear',
+        'as' => 'academics.getacademicsbyyear',
         'uses' => 'AcademicsController@getacademicsbyyear'
     ]);
     //Academics
@@ -75,7 +75,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Attendances Amount By Date
     Route::get('/attendances/getattendancesamountbydate', [
-        'as' => 'api.v1.attendances.getattendancesamountbydate',
+        'as' => 'attendances.getattendancesamountbydate',
         'uses' => 'AttendancesController@getAttendancesAmountByDate'
     ]);
     //Global Attendances
@@ -88,7 +88,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Contracts By years and periods
     Route::get('/contracts/getcontractsbyyearandperiod', [
-        'as' => 'api.v1.contracts.getcontractsbyyearandperiod',
+        'as' => 'contracts.getcontractsbyyearandperiod',
         'uses' => 'ContractsController@getcontractsbyyearandperiod'
     ]);
 
@@ -109,7 +109,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
 
     //GET Group Director By Year or Group
     Route::get('/groupdirectors/getgroupdirectorsbyyear', [
-        'as' => 'api.v1.groupdirectors.getgroupdirectorsbyyear',
+        'as' => 'groupdirectors.getgroupdirectorsbyyear',
         'uses' => 'GroupdirectorsController@getgroupdirectorsbyyear'
     ]);
 
@@ -134,7 +134,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
 
     //GET Area Manager By Year or Group
     Route::get('/areamanagers/getareamanagersbyyear', [
-        'as' => 'api.v1.areamanagers.getareamanagersbyyear',
+        'as' => 'areamanagers.getareamanagersbyyear',
         'uses' => 'AreamanagersController@getareamanagersbyyear'
     ]);
 
@@ -149,7 +149,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
 
     //GET Areas By Year
     Route::get('/areas/getareasbyyear', [
-        'as' => 'api.v1.areas.getareasbyyear',
+        'as' => 'areas.getareasbyyear',
         'uses' => 'AreasController@getareasbyyear'
     ]);
 
@@ -163,9 +163,10 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Achievements
     Route::get('/achievements/getachievementsbygroup', [
-        'as' => 'api.v1.achievements.getachievementsbygroup',
+        'as' => 'achievements.getachievementsbygroup',
         'uses' => 'AchievementsController@getAchievements'
     ]);
+
     //Achievements
     Route::resource('achievements', 'AchievementsController', array('only' => array('index', 'show', 'store', 'update', 'destroy')));
 
@@ -196,7 +197,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'uses' => 'CostcentersController@getCostcenterByStudent'
     ]);
 
-
     /**
      * ===================================
      * Departments
@@ -212,7 +212,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Enrollments
     Route::get('/academics/getperiodsbyyear/year/{idyear}', [
-        'as' => 'api.v1.academics.getperiodsbyyear',
+        'as' => 'academics.getperiodsbyyear',
         'uses' => 'AcademicsController@getperiodsbyyear'
     ]);
 
@@ -223,63 +223,63 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Enrollments
     Route::get('/enrollments/getenrollments/year/{idyear}/group/{idgroup}', [
-        'as' => 'api.v1.enrollments.getenrollments',
+        'as' => 'enrollments.getenrollments',
         'uses' => 'EnrollmentsController@getenrollments'
     ]);
     //Get Student By Status
-    Route::get('/enrollments/getenrollmentsbystatus', [
-        'as' => 'api.v1.enrollments.getenrollmentsbystatus',
+    Route::get('/enrollments/getenrollmentsbystatus1', [
+        'as' => 'enrollments.getenrollmentsbystatus',
         'uses' => 'EnrollmentsController@getEnrollmentsByStatus'
     ]);
     //Get Enrollments With Attendances
     Route::get('/enrollments/getenrollmentswithattendance/year/{idyear}/period/{idperiod}/group/{idgroup}/subject/{idsubject}/nivel/{idnivel}', [
-        'as' => 'api.v1.enrollments.getenrollmentswithattendance',
+        'as' => 'enrollments.getenrollmentswithattendance',
         'uses' => 'EnrollmentsController@getEnrollmentsWithAttendance'
     ]);
     //Get Enrollments With Data
     Route::get('/enrollments/getenrollmentswithdata/year/{idyear}/period/{idperiod}/group/{idgroup}/subject/{idsubject}/nivel/{idnivel}', [
-        'as' => 'api.v1.enrollments.getenrollmentswithdata',
+        'as' => 'enrollments.getenrollmentswithdata',
         'uses' => 'EnrollmentsController@getEnrollmentsWithData'
     ]);
     //Get Enrollments With Partial
     Route::get('/enrollments/getenrollmentswithpartial/year/{idyear}/period/{idperiod}/group/{idgroup}/subject/{idsubject}/nivel/{idnivel}', [
-        'as' => 'api.v1.enrollments.getenrollmentswithpartial',
+        'as' => 'enrollments.getenrollmentswithpartial',
         'uses' => 'EnrollmentsController@getEnrollmentsWithPartial'
     ]);
     //Get Enrollments With Descriptivereport
     Route::get('/enrollments/getenrollmentswithdescriptivereport/year/{idyear}/period/{idperiod}/group/{idgroup}/subject/{idsubject}/nivel/{idnivel}', [
-        'as' => 'api.v1.enrollments.getenrollmentswithdescriptivereport',
+        'as' => 'enrollments.getenrollmentswithdescriptivereport',
         'uses' => 'EnrollmentsController@getEnrollmentsWithDescriptivereport'
     ]);
     //Get Enrollments With Grades
     Route::get('/enrollments/getenrollmentswithgrades/year/{idyear}/period/{idperiod}/group/{idgroup}/subject/{idsubject}/nivel/{idnivel}', [
-        'as' => 'api.v1.enrollments.getenrollmentswithgrades',
+        'as' => 'enrollments.getenrollmentswithgrades',
         'uses' => 'EnrollmentsController@getEnrollmentsWithGrades'
     ]);
     //Get Enrollments With Observers
     Route::get('/enrollments/getenrollmentswithobservers/year/{idyear}/group/{idgroup}', [
-        'as' => 'api.v1.enrollments.getenrollmentswithobservers',
+        'as' => 'enrollments.getenrollmentswithobservers',
         'uses' => 'EnrollmentsController@getEnrollmentsWithObservers'
     ]);
     //Get Enrollments To Attendances Lists
     Route::get('/enrollments/getenrollmentsatendanccesslist/year/{idyear}/group/{idgroup}', [
-        'as' => 'api.v1.enrollments.getenrollmentsatendanccesslist',
+        'as' => 'enrollments.getenrollmentsatendanccesslist',
         'uses' => 'EnrollmentsController@getenrollmentsAtendanccesslist'
     ]);
 
     //Get Enrollments By Student
     Route::get('/enrollments/getenrollmentsbystudent', [
-        'as' => 'api.v1.enrollments.getenrollmentsbystudent',
+        'as' => 'enrollments.getenrollmentsbystudent',
         'uses' => 'EnrollmentsController@getEnrollmentsByStudent'
     ]);
     //Get Enrollments By Student With Cost
     Route::get('/enrollments/getenrollmentslatestbystudentwithcost', [
-        'as' => 'api.v1.enrollments.getenrollmentslatestbystudentwithcost',
+        'as' => 'enrollments.getenrollmentslatestbystudentwithcost',
         'uses' => 'EnrollmentsController@getEnrollmentsLatestByStudentWithCost'
     ]);
     //Get Enrollments By Student
     Route::get('/enrollments/getenrollmentslatestbystudent', [
-        'as' => 'api.v1.enrollments.getenrollmentslatestbystudent',
+        'as' => 'enrollments.getenrollmentslatestbystudent',
         'uses' => 'EnrollmentsController@getEnrollmentsLatestByStudent'
     ]);
 
@@ -288,7 +288,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
 
     //Get Enrollments To Attendances Lists
     Route::get('/attendancecontrols', [
-        'as' => 'api.v1.attendancecontrols.index',
+        'as' => 'attendancecontrols.index',
         'uses' => 'AttendancecontrolsController@index'
     ]);
 
@@ -318,17 +318,17 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Indicators By Group
     Route::get('/indicators/getindicatorsbygroup', [
-        'as' => 'api.v1.indicators.getindicatorsbygroup',
+        'as' => 'indicators.getindicatorsbygroup',
         'uses' => 'IndicatorsController@getindicatorsbygroup'
     ]);
     //Get Indicators
     Route::get('/indicators/getindicators', [
-        'as' => 'api.v1.indicators.getindicators',
+        'as' => 'indicators.getindicators',
         'uses' => 'IndicatorsController@getindicators'
     ]);
     //Get Indicators Pending By Teacher
     Route::get('/indicators/getindicatorspendingbyteacher', [
-        'as' => 'api.v1.indicators.getindicatorspendingbyteacher',
+        'as' => 'indicators.getindicatorspendingbyteacher',
         'uses' => 'IndicatorsController@getIndicatorsPendingByTeacher'
     ]);
     //Global Indicators
@@ -358,11 +358,11 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Groups By Year AND Period
     Route::get('/groups/getgroupsbyyearandperiod', [
-        'as' => 'api.v1.groups.getgroupsbyyearandperiod',
+        'as' => 'groups.getgroupsbyyearandperiod',
         'uses' => 'GroupsController@getGroupsForObservator'
     ]);
     Route::get('/groups/getgroupsforobservator', [
-        'as' => 'api.v1.groups.getgroupsbyyearandperiod',
+        'as' => 'groups.getgroupsbyyearandperiod',
         'uses' => 'GroupsController@getGroupsForObservator'
     ]);
     Route::resource('groups', 'GroupsController', array('only' => array('index', 'show')));
@@ -382,7 +382,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Current Year
     Route::get('/years/getcurrentyear', [
-        'as' => 'api.v1.years.getcurrentyear',
+        'as' => 'years.getcurrentyear',
         'uses' => 'YearsController@getcurrentyear'
     ]);
     //Academic Years
@@ -403,13 +403,13 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Monitoring Categories by Years and Subject
     Route::get('/monitoringcategorybyyears/getmonitoringcategoriesbyyearandsubject/year/{idyear}/subject/{idsubject}', [
-        'as' => 'api.v1.monitoringcategorybyyears.getmonitoringcategoriesbyyearandsubject',
+        'as' => 'monitoringcategorybyyears.getmonitoringcategoriesbyyearandsubject',
         'uses' => 'MonitoringcategorybyyearsController@getmonitoringcategoriesbyyearandsubject'
     ]);
 
     //Get Monitoring Categories by Years Detail
     Route::get('/monitoringcategorybyyears/getmonitoringcategorybyyeardetail', [
-        'as' => 'api.v1.monitoringcategorybyyears.getmonitoringcategorybyyeardetail',
+        'as' => 'monitoringcategorybyyears.getmonitoringcategorybyyeardetail',
         'uses' => 'MonitoringcategorybyyearsController@getmonitoringcategorybyyeardetail'
     ]);
 
@@ -423,17 +423,17 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Monitoring Types
     Route::get('/monitoringtypes/getmonitoringtypesbygroup', [
-        'as' => 'api.v1.monitoringtypes.getmonitoringtypesbygroup',
+        'as' => 'monitoringtypes.getmonitoringtypesbygroup',
         'uses' => 'MonitoringtypesController@getmonitoringtypesbygroup'
     ]);
     //Get Monitoring Types With Chart
     Route::get('/monitoringtypes/getmonitoringtypesbygroupchart', [
-        'as' => 'api.v1.monitoringtypes.getmonitoringtypesbygroupchart',
+        'as' => 'monitoringtypes.getmonitoringtypesbygroupchart',
         'uses' => 'MonitoringtypesController@getmonitoringtypesbygroupchart'
     ]);
     //Get Monitoring Categories
     Route::get('/monitoringtypes/getmonitoringtypesbycategory', [
-        'as' => 'api.v1.monitoringtypes.getmonitoringtypesbycategory',
+        'as' => 'monitoringtypes.getmonitoringtypesbycategory',
         'uses' => 'MonitoringtypesController@getmonitoringtypesbycategory'
     ]);
     //Global Monitoring types
@@ -454,27 +454,27 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Monitorings By User
     Route::get('/monitorings/getmonitoringsbyuser', [
-        'as' => 'api.v1.monitorings.getmonitoringsbyuser',
+        'as' => 'monitorings.getmonitoringsbyuser',
         'uses' => 'MonitoringsController@getMonitoringsByUser'
     ]);
     Route::get('/monitorings/getglobalperformances', [
-        'as' => 'api.v1.monitorings.getglobalperformances',
+        'as' => 'monitorings.getglobalperformances',
         'uses' => 'MonitoringsController@getGlobalPerformances'
     ]);
 
     Route::get('/monitorings/getmonitoringsbyuserforparents', [
-        'as' => 'api.v1.monitorings.getmonitoringsbyuserforparents',
+        'as' => 'monitorings.getmonitoringsbyuserforparents',
         'uses' => 'MonitoringsController@getMonitoringsForParents'
     ]);
     //Get Teacher Without Monitoring in Curren Week
     Route::get('/monitorings/getmonitoringsincurrentweek', [
-        'as' => 'api.v1.monitorings.getmonitoringsincurrentweek',
+        'as' => 'monitorings.getmonitoringsincurrentweek',
         'uses' => 'MonitoringsController@getMonitoringsInCurrentWeek'
     ]);
 
     //Get Monitorings Pendings By Students
     Route::get('/monitorings/getstudentspendigsbymonitoring', [
-        'as' => 'api.v1.monitorings.getstudentspendigsbymonitoring',
+        'as' => 'monitorings.getstudentspendigsbymonitoring',
         'uses' => 'MonitoringsController@getstudentspendigsbymonitoring'
     ]);
 
@@ -488,13 +488,13 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Nivels By Year AND Period And Groups and Subject
     Route::get('/nivels/getnivelsbyyearandperiodandgroupandsubject', [
-        'as' => 'api.v1.nivels.getnivelsbyyearandperiodandgroupandsubject',
+        'as' => 'nivels.getnivelsbyyearandperiodandgroupandsubject',
         'uses' => 'NivelsController@getnivelsbyyearandperiodandgroupandsubject'
     ]);
 
     //Get Nivels By Subject
     Route::get('/nivels/{idsubject}/getnivelsbysubject', [
-        'as' => 'api.v1.nivels.getnivelsbysubject',
+        'as' => 'nivels.getnivelsbysubject',
         'uses' => 'NivelsController@getnivelsbysubject'
     ]);
     //Academic Nivel
@@ -507,12 +507,12 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Periods By Year
     Route::get('/periods/getperiodsbyyear', [
-        'as' => 'api.v1.periods.getperiodsbyyear',
+        'as' => 'periods.getperiodsbyyear',
         'uses' => 'PeriodsController@getperiodsbyyear'
     ]);
     //Get Current Period
     Route::get('/periods/getcurrentperiod', [
-        'as' => 'api.v1.periods.getcurrentperiod',
+        'as' => 'periods.getcurrentperiod',
         'uses' => 'PeriodsController@getcurrentperiod'
     ]);
     //Academic Periods
@@ -573,19 +573,19 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Subjects By Year AND Period And Groups
     Route::get('/subjects/getsubjectsbyyearandperiodandgroup', [
-        'as' => 'api.v1.subjects.getsubjectsbyyearandperiodandgroup',
+        'as' => 'subjects.getsubjectsbyyearandperiodandgroup',
         'uses' => 'SubjectsController@getsubjectsbyyearandperiodandgroup'
     ]);
 
     //GET Subjects By Year
     Route::get('/subjects/getsubjectsbyyear', [
-        'as' => 'api.v1.subjects.getsubjectsbyyear',
+        'as' => 'subjects.getsubjectsbyyear',
         'uses' => 'SubjectsController@getsubjectsbyyear'
     ]);
 
     //GET Subjects By Year
     Route::get('/subjects/getsubjectwithareasandnivels', [
-        'as' => 'api.v1.subjects.getsubjectwithareasandnivels',
+        'as' => 'subjects.getsubjectwithareasandnivels',
         'uses' => 'SubjectsController@getsubjectwithareasandnivels'
     ]);
     //Academic Subjects
@@ -599,22 +599,22 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Global Performannce
     Route::get('/statistics/globalperformances', [
-        'as' => 'api.v1.statistics.globalperformances',
+        'as' => 'statistics.globalperformances',
         'uses' => 'StatisticsController@globalPerformances'
     ]);
     //Groups With Performances
     Route::get('/statistics/globalperformancebygroup', [
-        'as' => 'api.v1.statistics.globalperformancebygroup',
+        'as' => 'statistics.globalperformancebygroup',
         'uses' => 'StatisticsController@globalPerformanceByGroup'
     ]);
     //Subjects With Performances
     Route::get('/statistics/globalperformancebysubject', [
-        'as' => 'api.v1.statistics.globalperformancebysubject',
+        'as' => 'statistics.globalperformancebysubject',
         'uses' => 'StatisticsController@globalPerformanceBySubject'
     ]);
     //Areas With Performances
     Route::get('/statistics/globalperformancebyarea', [
-        'as' => 'api.v1.statistics.globalperformancebyarea',
+        'as' => 'statistics.globalperformancebyarea',
         'uses' => 'StatisticsController@globalPerformanceByArea'
     ]);
 
@@ -633,64 +633,64 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Latest Users
     Route::get('/users/getlatest', [
-        'as' => 'api.v1.users.getlatest',
+        'as' => 'users.getlatest',
         'uses' => 'UsersController@getLatest'
     ]);
 
     //Get All Personal Academic
     Route::get('/users/getpersonalacademic', [
-        'as' => 'api.v1.users.getpersonalacademic',
+        'as' => 'users.getpersonalacademic',
         'uses' => 'UsersController@getPersonalAcademic'
     ]);
     //Get All Students In School
     Route::get('/users/getallstudents', [
-        'as' => 'api.v1.users.getallstudents',
+        'as' => 'users.getallstudents',
         'uses' => 'UsersController@getallstudents'
     ]);
 
     //Get Latest Code
     Route::get('/users/getlatestcode', [
-        'as' => 'api.v1.users.getlatestcode',
+        'as' => 'users.getlatestcode',
         'uses' => 'UsersController@getLatestCode'
     ]);
     //Verify Celular
     Route::post('/users/verifycelular', [
-        'as' => 'api.v1.users.verifycelular',
+        'as' => 'users.verifycelular',
         'uses' => 'UsersController@verifyCelular'
     ]);
     //Verify Celular Message
     Route::post('/users/verifycelularmessage', [
-        'as' => 'api.v1.users.verifycelularmessage',
+        'as' => 'users.verifycelularmessage',
         'uses' => 'UsersController@verifyCelularMessage'
     ]);
     //Save Celular By Passcode
     Route::post('/users/savecelularbypasscode', [
-        'as' => 'api.v1.users.savecelularbypasscode',
+        'as' => 'users.savecelularbypasscode',
         'uses' => 'UsersController@saveCelularByPasscode'
     ]);
     //Save Celular By Certification
     Route::post('/users/savecelularbycertification', [
-        'as' => 'api.v1.users.savecelularbycertification',
+        'as' => 'users.savecelularbycertification',
         'uses' => 'UsersController@saveCelularByCertification'
     ]);
     //Verify Email
     Route::post('/users/verifyemail', [
-        'as' => 'api.v1.users.verifyemail',
+        'as' => 'users.verifyemail',
         'uses' => 'UsersController@verifyEmail'
     ]);
     //Verify Email Message
     Route::post('/users/verifyemailmessage', [
-        'as' => 'api.v1.users.verifyemailmessage',
+        'as' => 'users.verifyemailmessage',
         'uses' => 'UsersController@verifyEmailMessage'
     ]);
     //Save Email By Passcode
     Route::post('/users/saveemailbypasscode', [
-        'as' => 'api.v1.users.saveemailbypasscode',
+        'as' => 'users.saveemailbypasscode',
         'uses' => 'UsersController@saveEmailByPasscode'
     ]);
     //Save Email By Certification
     Route::post('/users/saveemailbycertification', [
-        'as' => 'api.v1.users.saveemailbycertification',
+        'as' => 'users.saveemailbycertification',
         'uses' => 'UsersController@saveEmailByCertification'
     ]);
     //User
@@ -703,7 +703,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Search Family by name
     Route::get('/families/searchfamilybyname', [
-        'as' => 'api.v1.families.searchfamilybyname',
+        'as' => 'families.searchfamilybyname',
         'uses' => 'FamiliesController@searchfamilybyname'
     ]);
     //Search Families By Year
@@ -722,7 +722,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Users By Family
     Route::get('/userfamilies/getusersbyfamily', [
-        'as' => 'api.v1.userfamilies.getusersbyfamily',
+        'as' => 'userfamilies.getusersbyfamily',
         'uses' => 'UserfamiliesController@getusersbyfamily'
     ]);
     //Userfamily
@@ -736,10 +736,9 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Recovery By User
     Route::get('/quantitativerecoveries/getrecoverybyuser', [
-        'as' => 'api.v1.quantitativerecoveries.getrecoverybyuser',
+        'as' => 'quantitativerecoveries.getrecoverybyuser',
         'uses' => 'QuantitativerecoveriesController@getrecoverybyuser'
     ]);
-    //Quantitativerecovery
     Route::resource('quantitativerecoveries', 'QuantitativerecoveriesController', array('only' => array('index', 'show', 'store', 'update', 'destroy')));
 
 
@@ -766,7 +765,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Preregistration By User
     Route::get('/preregistrations/getpreregistrationbyuser', [
-        'as' => 'api.v1.preregistrations.getpreregistrationbyuser',
+        'as' => 'preregistrations.getpreregistrationbyuser',
         'uses' => 'PreregistrationsController@getpreregistrationbyuser'
     ]);
     //Preregistration
@@ -811,52 +810,52 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Payments By User
     Route::get('/payments/getpaymentsbyuser', [
-        'as' => 'api.v1.payments.getpaymentsbyuser',
+        'as' => 'payments.getpaymentsbyuser',
         'uses' => 'PaymentsController@getPaymentsByUser'
     ]);
     //Get Payments By User With Transactions
     Route::get('/payments/{student}/getpaymentsbyuserwithtransactions', [
-        'as' => 'api.v1.payments.getpaymentsbyuserwithtransactions',
+        'as' => 'payments.getpaymentsbyuserwithtransactions',
         'uses' => 'PaymentsController@getPaymentsByUserWithTransactions'
     ]);
     //Set Payment Method
     Route::get('/payments/setpaymentmethod', [
-        'as' => 'api.v1.payments.setpaymentmethod',
+        'as' => 'payments.setpaymentmethod',
         'uses' => 'PaymentsController@setPaymentMethod'
     ]);
     //Set Payment Agreement
     Route::get('/payments/setpaymentagreement', [
-        'as' => 'api.v1.payments.setpaymentagreement',
+        'as' => 'payments.setpaymentagreement',
         'uses' => 'PaymentsController@setPaymentAgreement'
     ]);
     //Set Payment Individual
     Route::post('/payments/setpaymentindividual', [
-        'as' => 'api.v1.payments.setpaymentindividual',
+        'as' => 'payments.setpaymentindividual',
         'uses' => 'PaymentsController@setPaymentIndividual'
     ]);
     //Set Payment Individual NEW
     Route::post('/payments/setpaymentindividualnew', [
-        'as' => 'api.v1.payments.setpaymentindividualnew',
+        'as' => 'payments.setpaymentindividualnew',
         'uses' => 'PaymentsController@setPaymentIndividualNew'
     ]);
     //Set Payment Massive
     Route::post('/payments/setpaymentmassive', [
-        'as' => 'api.v1.payments.setpaymentmassive',
+        'as' => 'payments.setpaymentmassive',
         'uses' => 'PaymentsController@setPaymentMassive'
     ]);
     //Verify Payment pending
     Route::post('/payments/verifypaymentpending', [
-        'as' => 'api.v1.payments.verifypaymentpending',
+        'as' => 'payments.verifypaymentpending',
         'uses' => 'PaymentsController@verifyPaymentPending'
     ]);
     //Update Payment Short
     Route::post('/payments/updatepaymentshort', [
-        'as' => 'api.v1.payments.updatepaymentshort',
+        'as' => 'payments.updatepaymentshort',
         'uses' => 'PaymentsController@updatePaymentShort'
     ]);
     //Get Payments Pendings
     Route::get('/payments/getpaymentspendings', [
-        'as' => 'api.v1.payments.getpaymentspendings',
+        'as' => 'payments.getpaymentspendings',
         'uses' => 'PaymentsController@getPaymentsPendings'
     ]);
     //Payments
@@ -878,7 +877,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Search By Code
     Route::get('/products/searchbycode', [
-        'as' => 'api.v1.products.searchbycode',
+        'as' => 'products.searchbycode',
         'uses' => 'ProductsController@searchbycode'
     ]);
     //Products
@@ -916,17 +915,17 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Generate Code
     Route::get('/purchases/generatecode', [
-        'as' => 'api.v1.purchases.generatecode',
+        'as' => 'purchases.generatecode',
         'uses' => 'PurchasesController@generatecode'
     ]);
     //Get Discounts
     Route::get('/purchases/getdiscount', [
-        'as' => 'api.v1.purchases.getdiscount',
+        'as' => 'purchases.getdiscount',
         'uses' => 'PurchasesController@getdiscount'
     ]);
     //Status Update
     Route::post('/purchases/statusupdate', [
-        'as' => 'api.v1.purchases.statusupdate',
+        'as' => 'purchases.statusupdate',
         'uses' => 'PurchasesController@statusUpdate'
     ]);
 
@@ -945,7 +944,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Status Update
     Route::get('/evaluationpurchases/getevaluationbypurchase', [
-        'as' => 'api.v1.evaluationpurchases.getevaluationbypurchase',
+        'as' => 'evaluationpurchases.getevaluationbypurchase',
         'uses' => 'EvaluationpurchasesController@getEvaluationByPurchase'
     ]);
     //Evaluationpurchases
@@ -966,7 +965,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Observers By Users
     Route::get('/observers/getobservers', [
-        'as' => 'api.v1.observers.getobservers',
+        'as' => 'observers.getobservers',
         'uses' => 'ObserversController@getObservers'
     ]);
     //Observers
@@ -987,17 +986,17 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Set Tasks Approved
     Route::get('/tasks/setapproved', [
-        'as' => 'api.v1.tasks.setapproved',
+        'as' => 'tasks.setapproved',
         'uses' => 'TasksController@setApproved'
     ]);
     //Get Tasks By Year
     Route::get('/tasks/gettasks', [
-        'as' => 'api.v1.tasks.gettasks',
+        'as' => 'tasks.gettasks',
         'uses' => 'TasksController@getTasks'
     ]);
     //Get Tasks By user
     Route::get('/tasks/gettasksbyuser', [
-        'as' => 'api.v1.tasks.gettasksbyuser',
+        'as' => 'tasks.gettasksbyuser',
         'uses' => 'TasksController@getTasksByUser'
     ]);
     //Tasks
@@ -1050,7 +1049,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
     //Vehicles
     Route::resource('vehicles', 'VehiclesController', array('only' => array('index', 'store', 'update', 'destroy')));
 
-
     /**
      * ===================================
      * Ubications
@@ -1058,7 +1056,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Ubications
     Route::get('/ubications/getubications', [
-        'as' => 'api.v1.ubications.getubications',
+        'as' => 'ubications.getubications',
         'uses' => 'UbicationsController@getUbications'
     ]);
     //Ubications
@@ -1088,22 +1086,22 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Generate Code
     Route::get('/visitors/generatecode', [
-        'as' => 'api.v1.visitors.generatecode',
+        'as' => 'visitors.generatecode',
         'uses' => 'VisitorsController@generatecode'
     ]);
     //Checkin
     Route::get('/visitors/checkin', [
-        'as' => 'api.v1.visitors.checkin',
+        'as' => 'visitors.checkin',
         'uses' => 'VisitorsController@checkin'
     ]);
     //Checkout
     Route::get('/visitors/checkout', [
-        'as' => 'api.v1.visitors.checkout',
+        'as' => 'visitors.checkout',
         'uses' => 'VisitorsController@checkout'
     ]);
     //Get Visitors Today
     Route::get('/visitors/getvisitorsnow', [
-        'as' => 'api.v1.visitors.getvisitorsnow',
+        'as' => 'visitors.getvisitorsnow',
         'uses' => 'VisitorsController@getVisitorsNow'
     ]);
     //Visitors
@@ -1115,10 +1113,9 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      * ===================================
      */
     Route::get('/voucherconsecutives/getvoucherconsecutivebycode', [
-        'as' => 'api.v1.voucherconsecutives.getvoucherconsecutivebycode',
+        'as' => 'voucherconsecutives.getvoucherconsecutivebycode',
         'uses' => 'VoucherconsecutivesController@getVoucherConsecutiveByCode'
     ]);
-
 
     /**
      * ===================================
@@ -1127,7 +1124,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Evaluations By Year
     Route::get('/weeklyevaluations/getevaluations', [
-        'as' => 'api.v1.weeklyevaluations.getevaluations',
+        'as' => 'weeklyevaluations.getevaluations',
         'uses' => 'WeeklyevaluationsController@getEvaluations'
     ]);
     //Weeklyevaluations
@@ -1140,15 +1137,15 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      * ===================================
      */
     Route::get('/exports/students/enrollments', [
-        'as' => 'api.v1.exports.students.enrollments',
+        'as' => 'exports.students.enrollments',
         'uses' => 'ExportsController@exportStudentEnrollments'
     ]);
     Route::get('/exports/payments/reports', [
-        'as' => 'api.v1.exports.payments.reports',
+        'as' => 'exports.payments.reports',
         'uses' => 'ExportsController@exportPaymentsReports'
     ]);
     Route::get('/exports/reports/partials', [
-        'as' => 'api.v1.exports.reports.partials',
+        'as' => 'exports.reports.partials',
         'uses' => 'ExportsController@exportReportsPartials'
     ]);
 
@@ -1176,7 +1173,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      * ===================================
      */
     Route::get('/responsibleparents/getresponsibleparentbystudent', [
-        'as' => 'api.v1.responsibleparents.getresponsibleparentbystudent',
+        'as' => 'responsibleparents.getresponsibleparentbystudent',
         'uses' => 'ResponsibleparentsController@getResponsibleparentByStudent'
     ]);
 
@@ -1188,12 +1185,12 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      */
     //Get Evaluations By Year
     Route::get('/transactions/gettransactionsbypayment', [
-        'as' => 'api.v1.transactions.gettransactionsbypayment',
+        'as' => 'transactions.gettransactionsbypayment',
         'uses' => 'TransactionsController@getTransactionsByPayment'
     ]);
     //Find Voucher In Transactions With Payment
     Route::get('/transactions/findvoucherintransactions', [
-        'as' => 'api.v1.transactions.findvoucherintransactions',
+        'as' => 'transactions.findvoucherintransactions',
         'uses' => 'TransactionsController@findVoucherInTransactions'
     ]);
     //Transactions
@@ -1215,7 +1212,7 @@ Route::group(['prefix' => 'v2', 'as' => 'api.v2.', 'middleware' => ['throttle:25
     /**
      * User Login
      */
-    Route::post('/users/login', ['as' => 'api.v2.users.login', function (\Illuminate\Http\Request $request) {
+    Route::post('/users/login', ['as' => 'users.login', function (\Illuminate\Http\Request $request) {
         if (Auth::attempt(['email' => $request["email"], 'password' => $request["password"]])) {
             return Response::json([
                 'sigeturbo' => [
@@ -1237,7 +1234,7 @@ Route::group(['prefix' => 'v2', 'as' => 'api.v2.', 'middleware' => ['throttle:25
     /**
      * Get Member By Family
      */
-    Route::get('/families/getmembers/{user}', ['as' => 'api.v2.families.getmembers', function ($user) {
+    Route::get('/families/getmembers/{user}', ['as' => 'families.getmembers', function ($user) {
 
         //Find Family
         $family = new SigeTurbo\Repositories\Userfamily\UserfamilyRepository();
@@ -1251,7 +1248,7 @@ Route::group(['prefix' => 'v2', 'as' => 'api.v2.', 'middleware' => ['throttle:25
     }]);
 
     //Get Tasks By user
-    Route::get('/tasks/gettasksbyuser/{user}', ['as' => 'api.v2.tasks.gettasksbyuser', function ($user) {
+    Route::get('/tasks/gettasksbyuser/{user}', ['as' => 'tasks.gettasksbyuser', function ($user) {
 
         //Find Tasks
         $task = new SigeTurbo\Repositories\Task\TaskRepository();
@@ -1265,7 +1262,7 @@ Route::group(['prefix' => 'v2', 'as' => 'api.v2.', 'middleware' => ['throttle:25
     }]);
 
     //Get Monitorings By user
-    Route::get('/monitorings/getmonitoringsbyuser/{user}', ['as' => 'api.v2.monitorings.getmonitoringsbyuser', function ($user) {
+    Route::get('/monitorings/getmonitoringsbyuser/{user}', ['as' => 'monitorings.getmonitoringsbyuser', function ($user) {
 
         //Find Monitorings
         return Response::json([
@@ -1278,7 +1275,7 @@ Route::group(['prefix' => 'v2', 'as' => 'api.v2.', 'middleware' => ['throttle:25
     }]);
 
     Route::get('/monitorings/getmonitoringsdetailsbyuser/{idyear}/{idperiod}/{idgroup}/{idsubject}/{idnivel}/{iduser}',
-        ['as' => 'api.v2.monitorings.getmonitoringsdetailsbyuser', function ($idyear, $idperiod, $idgroup, $idsubject, $idnivel, $iduser) {
+        ['as' => 'monitorings.getmonitoringsdetailsbyuser', function ($idyear, $idperiod, $idgroup, $idsubject, $idnivel, $iduser) {
             //Find Monitorings
             $monitoring = new SigeTurbo\Repositories\Monitoring\MonitoringRepository();
             $monitorings = $monitoring->getMonitoringsDetailForParents($idyear, $idperiod, $idgroup, $idsubject, $idnivel, $iduser);
@@ -1303,7 +1300,7 @@ Route::group(['prefix' => 'v2', 'as' => 'api.v2.', 'middleware' => ['throttle:25
      */
     //Get Current Year
     Route::get('/years/getcurrentyear/', [
-        'as' => 'api.v2.years.getcurrentyear',
+        'as' => 'years.getcurrentyear',
         'uses' => 'YearsController@getcurrentyear'
     ]);
     //Academic Years
@@ -1316,11 +1313,10 @@ Route::group(['prefix' => 'v2', 'as' => 'api.v2.', 'middleware' => ['throttle:25
      */
     //Get Groups By Year AND Period
     Route::get('/groups/getgroups', [
-        'as' => 'api.v2.groups.getgroups',
+        'as' => 'groups.getgroups',
         'uses' => 'GroupsController@getGroupForGuest'
     ]);
     Route::resource('groups', 'GroupsController', array('only' => array('index', 'show')));
-
 
     /**
      * ===================================
@@ -1329,7 +1325,7 @@ Route::group(['prefix' => 'v2', 'as' => 'api.v2.', 'middleware' => ['throttle:25
      */
     //Get Visitors Today
     Route::get('/visitors/getvisitorsnow', [
-        'as' => 'api.v2.visitors.getvisitorsnow',
+        'as' => 'visitors.getvisitorsnow',
         'uses' => 'VisitorsController@getVisitorsNowForDisplay'
     ]);
 
@@ -1340,9 +1336,8 @@ Route::group(['prefix' => 'v2', 'as' => 'api.v2.', 'middleware' => ['throttle:25
      */
     //Search Family by name
     Route::get('/families/searchfamilybyname', [
-        'as' => 'api.v2.families.searchfamilybyname',
+        'as' => 'families.searchfamilybyname',
         'uses' => 'FamiliesController@searchfamilybyname'
     ]);
-
 
 });

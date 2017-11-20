@@ -2,7 +2,7 @@
 
 namespace SigeTurbo\Repositories\Permission;
 
-interface IdentificationRepositoryInterface {
+interface PermissionRepositoryInterface {
     public function all();
     public function find($permission);
     public function store($data);

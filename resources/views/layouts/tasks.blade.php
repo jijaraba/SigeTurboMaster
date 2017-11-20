@@ -17,7 +17,7 @@
                 <nav class="nav-container">
                     <ul class="display-horizontal col-100 menu">
                         <li class="col-20 logo">
-                            {!! HTML::image('img/sigeturbo.png','Home') !!}
+                            {!! HTML::image('images/sigeturbo.png','Home') !!}
                         </li>
                         <li class="col-60 title">
                             <h4>Tareas, Planes de Apoyo y Exámenes</h4>

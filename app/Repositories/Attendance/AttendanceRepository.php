@@ -108,7 +108,6 @@ class AttendanceRepository implements AttendanceRepositoryInterface
     {
         return Attendance::select(array(
             'attendances.idyear',
-            'attendances.idperiod',
             'attendances.idgroup',
             'attendances.idsubject',
             'attendances.idnivel',
@@ -125,7 +124,7 @@ class AttendanceRepository implements AttendanceRepositoryInterface
             ->join('groups', 'groups.idgroup', '=', 'attendances.idgroup')
             ->join('subjects', 'subjects.idsubject', '=', 'attendances.idsubject')
             ->join('nivels', 'nivels.idnivel', '=', 'attendances.idnivel')
-            ->join(DB::raw('(SELECT idyear,idperiod,idgroup,idsubject,idnivel,ROUND((((timeintensity*40)*0.20)+1),0) AS totals FROM contracts WHERE contracts.idyear = ' . $this->yearRepository->getCurrentYear()->idyear . ' GROUP BY idyear,idgroup,idsubject) AS group_max'), function ($join) {
+            ->join(DB::raw('(SELECT idyear,idgroup,idsubject,ROUND((((timeintensity*40)*0.20)+1),0) AS totals FROM contracts WHERE contracts.idyear = ' . $this->yearRepository->getCurrentYear()->idyear . ' GROUP BY idyear,idgroup,idsubject,timeintensity) AS group_max'), function ($join) {
                 $join
                     ->on('attendances.idyear', '=', 'group_max.idyear')
                     ->on('attendances.idgroup', '=', 'group_max.idgroup')
@@ -137,7 +136,9 @@ class AttendanceRepository implements AttendanceRepositoryInterface
             ->groupBy('attendances.idyear')
             ->groupBy('attendances.idgroup')
             ->groupBy('attendances.idsubject')
+            ->groupBy('attendances.idnivel')
             ->groupBy('attendances.iduser')
+            ->groupBy('group_max.totals')
             ->orderBy('total', 'DESC')
             ->orderBy('attendances.idgroup')
             ->limit(5)

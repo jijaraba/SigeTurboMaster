@@ -144,7 +144,7 @@ class StudentsController extends Controller
      * @param MedicalinsuranceRepositoryInterface $medicalinsuranceRepository
      * @param LanguageRepositoryInterface $languageRepository
      * @param CountryRepositoryInterface $countryRepository
-     * @param ResponsibleparentRepositoryInterface $responsibleparentRepository     
+     * @param ResponsibleparentRepositoryInterface $responsibleparentRepository
      */
     public function __construct(UserRepositoryInterface $userRepository,
                                 CategoryRepositoryInterface $categoryRepository,
@@ -356,14 +356,14 @@ class StudentsController extends Controller
         $celular = str_random(3) . "-" . str_random(4) . "-" . str_random(2) . "-" . str_random(2);
 
         return view('students.create')
-            ->with('categories', $this->categoryRepository->all()->lists('name', 'idcategory'))
-            ->with('statuses', $this->statusRepository->all()->lists('name', 'idstatus'))
-            ->with('towns', $this->townRepository->all()->lists('name', 'idtown'))
-            ->with('stratuses', $this->stratusRepository->all()->lists('name', 'idstratus'))
-            ->with('ethnicgroups', $this->ethnicgroupRepository->all()->lists('name', 'idethnicgroup'))
-            ->with('maritalstatuses', $this->maritalstatusRepository->all()->lists('name', 'idmaritalstatus'))
-            ->with('genders', $this->genderRepository->all()->lists('name', 'idgender'))
-            ->with('religions', $this->religionRepository->all()->lists('name', 'idreligion'))
+            ->with('categories', $this->categoryRepository->all()->pluck('name', 'idcategory'))
+            ->with('statuses', $this->statusRepository->all()->pluck('name', 'idstatus'))
+            ->with('towns', $this->townRepository->all()->pluck('name', 'idtown'))
+            ->with('stratuses', $this->stratusRepository->all()->pluck('name', 'idstratus'))
+            ->with('ethnicgroups', $this->ethnicgroupRepository->all()->pluck('name', 'idethnicgroup'))
+            ->with('maritalstatuses', $this->maritalstatusRepository->all()->pluck('name', 'idmaritalstatus'))
+            ->with('genders', $this->genderRepository->all()->pluck('name', 'idgender'))
+            ->with('religions', $this->religionRepository->all()->pluck('name', 'idreligion'))
             ->withCredential([
                 'password' => str_random(6),
                 'username' => $username,
@@ -418,23 +418,23 @@ class StudentsController extends Controller
 
         return view('students.edit')
             ->withStudent($this->userRepository->getStudentById($student))
-            ->withCategories($this->categoryRepository->all()->lists('name', 'idcategory'))
-            ->withStatuses($this->statusRepository->all()->lists('name', 'idstatus'))
-            ->withTowns($this->townRepository->all()->lists('name', 'idtown'))
-            ->withStratuses($this->stratusRepository->all()->lists('name', 'idstratus'))
-            ->withEthnicgroups($this->ethnicgroupRepository->all()->lists('name', 'idethnicgroup'))
-            ->withMaritalstatuses($this->maritalstatusRepository->all()->lists('name', 'idmaritalstatus'))
-            ->withGenders($this->genderRepository->all()->lists('name', 'idgender'))
-            ->withReligions($this->religionRepository->all()->lists('name', 'idreligion'))
-            ->withIdentificationtypes($this->identificationtypeRepository->all()->lists('name', 'ididentificationtype'))
-            ->withEnrollmentreasons($this->enrollmentreasonRepository->all()->lists('name', 'idenrollmentreason'))
-            ->withCalendars($this->calendarRepository->all()->lists('name', 'idcalendar'))
-            ->withGrades($this->gradeRepository->all()->lists('name', 'idgrade'))
-            ->withBloodtypes($this->bloodtypeRepository->all()->lists('name', 'idbloodtype'))
-            ->withPrepaidmedicals($this->prepaidmedicalRepository->all()->lists('name', 'idprepaidmedical'))
-            ->withMedicalinsurances($this->medicalinsuranceRepository->all()->lists('name', 'idmedicalinsurance'))
-            ->withLanguages($this->languageRepository->all()->lists('name', 'idlanguage'))
-            ->withCountries($this->countryRepository->all()->lists('name', 'idcountry'))
+            ->withCategories($this->categoryRepository->all()->pluck('name', 'idcategory'))
+            ->withStatuses($this->statusRepository->all()->pluck('name', 'idstatus'))
+            ->withTowns($this->townRepository->all()->pluck('name', 'idtown'))
+            ->withStratuses($this->stratusRepository->all()->pluck('name', 'idstratus'))
+            ->withEthnicgroups($this->ethnicgroupRepository->all()->pluck('name', 'idethnicgroup'))
+            ->withMaritalstatuses($this->maritalstatusRepository->all()->pluck('name', 'idmaritalstatus'))
+            ->withGenders($this->genderRepository->all()->pluck('name', 'idgender'))
+            ->withReligions($this->religionRepository->all()->pluck('name', 'idreligion'))
+            ->withIdentificationtypes($this->identificationtypeRepository->all()->pluck('name', 'ididentificationtype'))
+            ->withEnrollmentreasons($this->enrollmentreasonRepository->all()->pluck('name', 'idenrollmentreason'))
+            ->withCalendars($this->calendarRepository->all()->pluck('name', 'idcalendar'))
+            ->withGrades($this->gradeRepository->all()->pluck('name', 'idgrade'))
+            ->withBloodtypes($this->bloodtypeRepository->all()->pluck('name', 'idbloodtype'))
+            ->withPrepaidmedicals($this->prepaidmedicalRepository->all()->pluck('name', 'idprepaidmedical'))
+            ->withMedicalinsurances($this->medicalinsuranceRepository->all()->pluck('name', 'idmedicalinsurance'))
+            ->withLanguages($this->languageRepository->all()->pluck('name', 'idlanguage'))
+            ->withCountries($this->countryRepository->all()->pluck('name', 'idcountry'))
             ->withAcademic($this->yearRepository->getCurrentYear())
             ->withYear($request['year'])
             ->withSearch($request['search'])

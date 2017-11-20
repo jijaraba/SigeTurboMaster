@@ -1,11 +1,12 @@
+/* eslint-disable no-console */
 'use strict';
 
 /* Admissions Controllers */
 angular.module('Admissions.controllers', [])
-    .controller('DashboardController', ["$log", "$scope", function ($log, $scope) {
+    .controller('DashboardController', [function () {
 
     }])
-    .controller('DashboardAdmissionsEnrollmentsController', ["$log", "$scope", function ($log, $scope) {
+    .controller('DashboardAdmissionsEnrollmentsController', ['$log', '$scope', function ($log, $scope) {
         $scope.data = {
             labels: ['Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
             datasets: [
@@ -71,7 +72,7 @@ angular.module('Admissions.controllers', [])
                 }
                 text.push('');
 
-                return text.join("");
+                return text.join('');
             },
 
             // Need to override these to give a nice default
@@ -92,7 +93,7 @@ angular.module('Admissions.controllers', [])
             console.log(event);
         };
     }])
-    .controller('StudentsController', ["$log", "$scope", function ($log, $scope) {
+    .controller('StudentsController', ['$log', '$scope', function ($log, $scope) {
         //Scope
         $scope.search = {};
         $scope.init = function (search) {
@@ -101,11 +102,11 @@ angular.module('Admissions.controllers', [])
         $scope.result = {};
 
     }])
-    .controller('StudentsCreateController', ["$log", "$scope", 'User', function ($log, $scope, User) {
+    .controller('StudentsCreateController', ['$log', '$scope', 'User', function ($log, $scope, User) {
         $scope.student = {
             user: '',
             category: '13',
-        }
+        };
 
         User.getLatestCode({}).$promise.then(
             function (result) {
@@ -116,7 +117,7 @@ angular.module('Admissions.controllers', [])
             }
         );
     }])
-    .controller('StudentsUpdateController', ["$log", "$scope", 'User', function ($log, $scope, User) {
+    .controller('StudentsUpdateController', ['$log', '$scope', function ($log, $scope) {
 
         //Scope
         $scope.items = {
@@ -136,83 +137,83 @@ angular.module('Admissions.controllers', [])
         //Functions
         $scope.changeItem = function (item) {
             switch (item) {
-                case 1:
-                    $scope.items = {
-                        'family': true,
-                        'identificationdata': false,
-                        'healthdata': false,
-                        'schooldata': false,
-                        'origindata': false,
-                        'alumnusdata': false,
-                        'responsibleparentdata': false,                        
-                    };
-                    break;
-                case 2:
-                    $scope.items = {
-                        'family': false,
-                        'identificationdata': true,
-                        'healthdata': false,
-                        'schooldata': false,
-                        'origindata': false,
-                        'alumnusdata': false,
-                        'responsibleparentdata': false,                        
-                    };
-                    break;
-                case 3:
-                    $scope.items = {
-                        'family': false,
-                        'identificationdata': false,
-                        'healthdata': true,
-                        'schooldata': false,
-                        'origindata': false,
-                        'alumnusdata': false,
-                        'responsibleparentdata': false,                        
-                    };
-                    break;
-                case 4:
-                    $scope.items = {
-                        'family': false,
-                        'identificationdata': false,
-                        'healthdata': false,
-                        'schooldata': true,
-                        'origindata': false,
-                        'alumnusdata': false,
-                        'responsibleparentdata': false,                        
-                    };
-                    break;
-                case 5:
-                    $scope.items = {
-                        'family': false,
-                        'identificationdata': false,
-                        'healthdata': false,
-                        'schooldata': false,
-                        'origindata': true,
-                        'alumnusdata': false,
-                        'responsibleparentdata': false,                        
-                    };
-                    break;
-                case 6:
-                    $scope.items = {
-                        'family': false,
-                        'identificationdata': false,
-                        'healthdata': false,
-                        'schooldata': false,
-                        'origindata': false,
-                        'alumnusdata': true,
-                        'responsibleparentdata': false,
-                    };
-                    break;
-                case 7:
-                    $scope.items = {
-                        'family': false,
-                        'identificationdata': false,
-                        'healthdata': false,
-                        'schooldata': false,
-                        'origindata': false,
-                        'alumnusdata': false,
-                        'responsibleparentdata': true,
-                    };
-                    break;
+            case 1:
+                $scope.items = {
+                    'family': true,
+                    'identificationdata': false,
+                    'healthdata': false,
+                    'schooldata': false,
+                    'origindata': false,
+                    'alumnusdata': false,
+                    'responsibleparentdata': false,                        
+                };
+                break;
+            case 2:
+                $scope.items = {
+                    'family': false,
+                    'identificationdata': true,
+                    'healthdata': false,
+                    'schooldata': false,
+                    'origindata': false,
+                    'alumnusdata': false,
+                    'responsibleparentdata': false,                        
+                };
+                break;
+            case 3:
+                $scope.items = {
+                    'family': false,
+                    'identificationdata': false,
+                    'healthdata': true,
+                    'schooldata': false,
+                    'origindata': false,
+                    'alumnusdata': false,
+                    'responsibleparentdata': false,                        
+                };
+                break;
+            case 4:
+                $scope.items = {
+                    'family': false,
+                    'identificationdata': false,
+                    'healthdata': false,
+                    'schooldata': true,
+                    'origindata': false,
+                    'alumnusdata': false,
+                    'responsibleparentdata': false,                        
+                };
+                break;
+            case 5:
+                $scope.items = {
+                    'family': false,
+                    'identificationdata': false,
+                    'healthdata': false,
+                    'schooldata': false,
+                    'origindata': true,
+                    'alumnusdata': false,
+                    'responsibleparentdata': false,                        
+                };
+                break;
+            case 6:
+                $scope.items = {
+                    'family': false,
+                    'identificationdata': false,
+                    'healthdata': false,
+                    'schooldata': false,
+                    'origindata': false,
+                    'alumnusdata': true,
+                    'responsibleparentdata': false,
+                };
+                break;
+            case 7:
+                $scope.items = {
+                    'family': false,
+                    'identificationdata': false,
+                    'healthdata': false,
+                    'schooldata': false,
+                    'origindata': false,
+                    'alumnusdata': false,
+                    'responsibleparentdata': true,
+                };
+                break;
             }
         };
 
@@ -220,12 +221,12 @@ angular.module('Admissions.controllers', [])
         $scope.init = function (student, item) {
             $scope.showFamilyForm = true;
             $scope.showEnrollmentForm = true;
-            $scope.changeItem(item)
+            $scope.changeItem(item);
         };
 
 
     }])
-    .controller('TransportsController', ["$log", "$scope", "ngDialog","Route", "Routebyuser","Vehicle","Conveyor",  "SweetAlert", function ($log, $scope, ngDialog,Route, Routebyuser,Vehicle,Conveyor, SweetAlert) {
+    .controller('TransportsController', ['$log', '$scope', 'ngDialog','Route', 'Routebyuser','Vehicle','Conveyor',  'SweetAlert', function ($log, $scope, ngDialog,Route, Routebyuser,Vehicle,Conveyor, SweetAlert) {
         //Scope
         $scope.routeactual = {};
         $scope.init = function (search) {
@@ -253,7 +254,7 @@ angular.module('Admissions.controllers', [])
         );
 
         //Functions
-        $scope.dialogsforms = function (item,message,/*Define si es edición*/$array) {
+        $scope.dialogsforms = function (item,message,$array) {
             $scope.item = item;
             $scope.message = message;
             $scope.objectform = ($array) ? $array : (item == 'user') ? $scope.routeactual : {};
@@ -267,23 +268,23 @@ angular.module('Admissions.controllers', [])
 
         $scope.deleteuserbyroute = function($iduser,$index){
             Routebyuser.delete({
-                    routebyuserId: $iduser
-                }).$promise.then(
+                routebyuserId: $iduser
+            }).$promise.then(
                 function (result) {
-                    SweetAlert.success("Excelente", result.message);
+                    SweetAlert.success('Excelente', result.message);
                     $scope.usersbyroute.splice($index, 1);
                 },
                 function (error) {
                     $log.error(error);
-                    SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                    SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                 }
             );
-        }
+        };
 
     }])
-    .controller('DialogsController', ['$scope', function ($scope) { }])
-    .controller('PaymentsCreateController', ["$log", "$scope", function ($log, $scope) {}])
-    .controller('QuantitaiverecoveryfinalareasController', ["$log", "$scope", 'SweetAlert', "Quantitativerecoveryfinalarea","$window", function ($log, $scope, SweetAlert, Quantitativerecoveryfinalarea,$window) {
+    .controller('DialogsController', [function () { }])
+    .controller('PaymentsCreateController', [function () {}])
+    .controller('QuantitaiverecoveryfinalareasController', ['$log', '$scope', 'SweetAlert', 'Quantitativerecoveryfinalarea','$window', function ($log, $scope, SweetAlert, Quantitativerecoveryfinalarea,$window) {
         //Scope
         $scope.newrecovery = {};
         $scope.actual = {};
@@ -296,7 +297,7 @@ angular.module('Admissions.controllers', [])
         $scope.search = {};
         $scope.init = function (search) {
             $scope.search = search;
-           // alert("En controlador : "+JSON.stringify(search));
+            // alert("En controlador : "+JSON.stringify(search));
         };
         $scope.result = {};
 
@@ -305,35 +306,35 @@ angular.module('Admissions.controllers', [])
             $scope.actual = {};
             $scope.newrecovery = {};
             switch (item) {
-                case 1:
-                    if($arreglo.tablesource == 'qualitativeratingfinalareas'){
-                        $scope.show0230= true;
-                        $scope.show1290= false;
-                    }else{
-                        $scope.show1290= true;
-                        $scope.show0230= false;
-                    }
-                    $scope.showfornew = true;
-                    break;
-                case 2:
-                    if($arreglo.idquantitativerecoveryfinalarea){
-                        $scope.show1290= true;
-                        $scope.show0230= false;
-                        $scope.newrecovery.idquantitativerecoveryfinalarea =  $arreglo.idquantitativerecoveryfinalarea;
-                        $scope.newrecovery.rating =  $arreglo.rating;
-                    }
-                    if($arreglo.idqualitativerecoveryfinalarea){
-                        $scope.show0230= true;
-                        $scope.show1290= false;
-                        $scope.newrecovery.idqualitativerecoveryfinalarea =  $arreglo.idqualitativerecoveryfinalarea;
-                        $scope.newrecovery.idassessment =  $arreglo.idassessment;
-                    }
-                    $scope.newrecovery.idyear =  $arreglo.idyear;
-                    $scope.newrecovery.idteacher =  $arreglo.idteacher;
-                    $scope.newrecovery.act =  $arreglo.act;
-                    $scope.newrecovery.observation =  $arreglo.observation;
-                    $scope.newrecovery.recovery_at =  $arreglo.recovery_at;
-                    $scope.showforedit = true;
+            case 1:
+                if($arreglo.tablesource == 'qualitativeratingfinalareas'){
+                    $scope.show0230= true;
+                    $scope.show1290= false;
+                }else{
+                    $scope.show1290= true;
+                    $scope.show0230= false;
+                }
+                $scope.showfornew = true;
+                break;
+            case 2:
+                if($arreglo.idquantitativerecoveryfinalarea){
+                    $scope.show1290= true;
+                    $scope.show0230= false;
+                    $scope.newrecovery.idquantitativerecoveryfinalarea =  $arreglo.idquantitativerecoveryfinalarea;
+                    $scope.newrecovery.rating =  $arreglo.rating;
+                }
+                if($arreglo.idqualitativerecoveryfinalarea){
+                    $scope.show0230= true;
+                    $scope.show1290= false;
+                    $scope.newrecovery.idqualitativerecoveryfinalarea =  $arreglo.idqualitativerecoveryfinalarea;
+                    $scope.newrecovery.idassessment =  $arreglo.idassessment;
+                }
+                $scope.newrecovery.idyear =  $arreglo.idyear;
+                $scope.newrecovery.idteacher =  $arreglo.idteacher;
+                $scope.newrecovery.act =  $arreglo.act;
+                $scope.newrecovery.observation =  $arreglo.observation;
+                $scope.newrecovery.recovery_at =  $arreglo.recovery_at;
+                $scope.showforedit = true;
                 break;
             }
             $scope.newrecovery.idprovenance =  $arreglo.idprovenance;
@@ -357,58 +358,58 @@ angular.module('Admissions.controllers', [])
 
         $scope.insert = function () {
             Quantitativerecoveryfinalarea.save({
-                    'idyear': $scope.newrecovery.idyear,
-                    'idgroup': $scope.newrecovery.idgroup,
-                    'idprovenance': $scope.newrecovery.idprovenance,
-                    'idarea': $scope.newrecovery.idarea,
-                    'iduser': $scope.newrecovery.iduser,
-                    'rating': $scope.newrecovery.rating,
-                    'act': $scope.newrecovery.act,
-                    'observation': $scope.newrecovery.observation,
-                    'recovery_at': $scope.newrecovery.recovery_at
-                }).$promise.then(
-                    function (result) {
-                        SweetAlert.success("Excelente", result.message);
-                        $scope.showfornew = false;
-                        $scope.clearform();
-                        $window.location.href = "/admissions/quantitativerecoveryfinalareas?search="+encodeURIComponent(JSON.stringify($scope.search)).replace(/[!'()]/g, escape).replace(/\*/g, "%2A")+"&page="+$scope.search.page
-                    },
-                    function (error) {
-                        $log.error(error);
-                        SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
-                    }
-                );
+                'idyear': $scope.newrecovery.idyear,
+                'idgroup': $scope.newrecovery.idgroup,
+                'idprovenance': $scope.newrecovery.idprovenance,
+                'idarea': $scope.newrecovery.idarea,
+                'iduser': $scope.newrecovery.iduser,
+                'rating': $scope.newrecovery.rating,
+                'act': $scope.newrecovery.act,
+                'observation': $scope.newrecovery.observation,
+                'recovery_at': $scope.newrecovery.recovery_at
+            }).$promise.then(
+                function (result) {
+                    SweetAlert.success('Excelente', result.message);
+                    $scope.showfornew = false;
+                    $scope.clearform();
+                    $window.location.href = '/admissions/quantitativerecoveryfinalareas?search='+encodeURIComponent(JSON.stringify($scope.search)).replace(/[!'()]/g, escape).replace(/\*/g, '%2A')+'&page='+$scope.search.page;
+                },
+                function (error) {
+                    $log.error(error);
+                    SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
+                }
+            );
         };
 
         $scope.save = function () {
             Quantitativerecoveryfinalarea.update({
-                    'idquantitativerecoveryfinalarea': $scope.actual.idquantitativerecoveryfinalarea,
-                    'idyear': $scope.newrecovery.idyear,
-                    'idgroup': $scope.newrecovery.idgroup,
-                    'idprovenance': $scope.newrecovery.idprovenance,
-                    'idarea': $scope.newrecovery.idarea,
-                    'iduser': $scope.newrecovery.iduser,
-                    'rating': $scope.newrecovery.rating,
-                    'act': $scope.newrecovery.act,
-                    'observation': $scope.newrecovery.observation,
-                    'recovery_at': $scope.newrecovery.recovery_at
-                }).$promise.then(
-                    function (result) {
-                        SweetAlert.success("Excelente", result.message);
-                        $scope.showforedit = false;
-                        $scope.clearform();
-                    },
-                    function (error) {
-                        $log.error(error);
-                        SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
-                    }
-                );
+                'idquantitativerecoveryfinalarea': $scope.actual.idquantitativerecoveryfinalarea,
+                'idyear': $scope.newrecovery.idyear,
+                'idgroup': $scope.newrecovery.idgroup,
+                'idprovenance': $scope.newrecovery.idprovenance,
+                'idarea': $scope.newrecovery.idarea,
+                'iduser': $scope.newrecovery.iduser,
+                'rating': $scope.newrecovery.rating,
+                'act': $scope.newrecovery.act,
+                'observation': $scope.newrecovery.observation,
+                'recovery_at': $scope.newrecovery.recovery_at
+            }).$promise.then(
+                function (result) {
+                    SweetAlert.success('Excelente', result.message);
+                    $scope.showforedit = false;
+                    $scope.clearform();
+                },
+                function (error) {
+                    $log.error(error);
+                    SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
+                }
+            );
         };
     }])
-    .controller('FamiliesAssignController', ["$log", "$scope", function ($log, $scope) {
+    .controller('FamiliesAssignController', ['$log', '$scope', function ($log, $scope) {
         //Scope
-        $scope.family = {}
-        $scope.family_name = ''
+        $scope.family = {};
+        $scope.family_name = '';
         $scope.init = function (family) {
             $scope.family_name = family;
         };

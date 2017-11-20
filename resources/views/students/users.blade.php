@@ -22,16 +22,20 @@
                     <section class="search-container">
                         <ul class="display-horizontal col-100">
                             <li class="col-100 gutter-5">
-                                <sige-turbo-admission-search-user search="search" result="result"></sige-turbo-admission-search-user>
-                                <input name="search" ng-model="result" ng-value="result" type="hidden" value="{{json_encode($search)}}" />
+                                <sige-turbo-admission-search-user search="search"
+                                                                  result="result"></sige-turbo-admission-search-user>
+                                <input name="search" ng-model="result" ng-value="result" type="hidden"
+                                       value="{{json_encode($search)}}"/>
                             </li>
                             <li id="views" class="col-35 gutter-5">
                                 <label for="view">Vista: </label>
-                                <input value="photo" id="images" type="radio" name="view" {{ ($view == 'photo')? 'checked' : '' }} onclick="this.form.submit()">
+                                <input value="photo" id="images" type="radio" name="view"
+                                       {{ ($view == 'photo')? 'checked' : '' }} onclick="this.form.submit()">
                                 <label for="images">
                                     <div class="fa fa-picture-o"></div>
                                 </label>
-                                <input value="list" id="list" type="radio" name="view" {{ ($view == 'list')? 'checked' : '' }} onclick="this.form.submit()">
+                                <input value="list" id="list" type="radio" name="view"
+                                       {{ ($view == 'list')? 'checked' : '' }} onclick="this.form.submit()">
                                 <label for="list">
                                     <div class="fa fa-list"></div>
                                 </label>
@@ -39,16 +43,19 @@
                             <li class="col-45 gutter-5">
                                 <label for="order">Ordenar: </label>
                                 <select name="sort" id="order" onchange="this.form.submit()">
-                                    <option value="category" {{ ($sort == 'category')? 'selected' : '' }}>Categoría</option>
+                                    <option value="category" {{ ($sort == 'category')? 'selected' : '' }}>Categoría
+                                    </option>
                                 </select>
                             </li>
                             <li id="reverse" class="col-20 gutter-5">
                                 <label for="order"></label>
-                                <input value="asc" id="asc" name="order" type="radio" {{ ($order == 'asc')? 'checked' : '' }} onclick="this.form.submit()">
+                                <input value="asc" id="asc" name="order" type="radio"
+                                       {{ ($order == 'asc')? 'checked' : '' }} onclick="this.form.submit()">
                                 <label for="asc">
                                     <div class="fa fa-sort-alpha-asc"></div>
                                 </label>
-                                <input value="desc" id="desc" name="order" type="radio" {{ ($order == 'desc')? 'checked' : '' }} onclick="this.form.submit()">
+                                <input value="desc" id="desc" name="order" type="radio"
+                                       {{ ($order == 'desc')? 'checked' : '' }} onclick="this.form.submit()">
                                 <label for="desc">
                                     <div class="fa fa-sort-alpha-desc"></div>
                                 </label>
@@ -81,16 +88,16 @@
         </div>
     </div>
 @stop
-@section("script")
-    {!! HTML::script('js/' . getCurrentRoute() . '.js') !!}
-@stop
 @section("vendor")
-    {!! HTML::script('js/vendor/vendor.js') !!}
+    {!! HTML::script(mix('js/vendor/vendor.js')) !!}
+@stop
+@section("script")
+    {!! HTML::script(mix('js/angular/' . getCurrentRoute() . '.js')) !!}
 @stop
 @section("socket")
-    {!! HTML::script('js/vendor/socket.io.js') !!}
+    {!! HTML::script(mix('js/vendor/socket.io.js')) !!}
 @stop
 @section("sigeturbo")
-    {!! HTML::script('js/SigeTurbo.js') !!}
-    {!! HTML::script('js/Stream.js') !!}
+    {!! HTML::script(mix('js/SigeTurbo.js')) !!}
+    {!! HTML::script(mix('js/Stream.js')) !!}
 @stop

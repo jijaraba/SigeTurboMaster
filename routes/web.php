@@ -43,7 +43,7 @@ Route::get('/logout', [
  * Authenticated Area
  * ===================================
  */
-Route::group(['middleware' => ['auth', 'permission']], function () {
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
 
 
     /**
@@ -775,7 +775,7 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
     Route::get('/resources/providers/create', [
         'middleware' => ['auth', 'permission'],
         'as' => 'resources.providers.create',
-        'uses' => 'ProviderController@create'
+        'uses' => 'ProvidersController@create'
     ]);
 
     /* --- VisitorsController ---*/

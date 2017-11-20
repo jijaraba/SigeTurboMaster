@@ -1,3 +1,26 @@
 {
-    "/css/login.css": "/css/login.css?id=9d0c6c4785fc76a8fe61"
+    "/js/angular/admissions.js": "/js/angular/admissions.js?id=3248d2821835b78796b9",
+    "/js/angular/dashboard.js": "/js/angular/dashboard.js?id=3b4dff3c814893b5ed5e",
+    "/css/login.css": "/css/login.css?id=b2673b14d75b0ddd510d",
+    "/css/default.css": "/css/default.css?id=e4b8e0c8fbd0c86a444e",
+    "/css/dashboard.css": "/css/dashboard.css?id=648f7fbebf9036bf1e7f",
+    "/css/admissions.css": "/css/admissions.css?id=c50ae5cb060285f60f7d",
+    "/css/communications.css": "/css/communications.css?id=3347a5be043a526ab32b",
+    "/css/financials.css": "/css/financials.css?id=352189fea8edbae062b5",
+    "/css/formation.css": "/css/formation.css?id=da783791835f8cc96226",
+    "/css/parents.css": "/css/parents.css?id=f0ce5e2c0a51d0e855eb",
+    "/css/resources.css": "/css/resources.css?id=db99525d99d35cdcb684",
+    "/css/roles.css": "/css/roles.css?id=2e8c6f5e89b9a3efd9b1",
+    "/css/tasks.css": "/css/tasks.css?id=7d91e0f18290000117b9",
+    "/css/inventories.css": "/css/inventories.css?id=690c690554c959c3a52f",
+    "/css/payments.css": "/css/payments.css?id=ad3c770f29927eeef055",
+    "/js/Utils.js": "/js/Utils.js?id=8a1357f5a7eca156f04f",
+    "/js/Stream.js": "/js/Stream.js?id=c8c196c0fdbd0a28283b",
+    "/js/SigeTurbo.js": "/js/SigeTurbo.js?id=241c3be8e162309717b1",
+    "/js/Roles.js": "/js/Roles.js?id=3219de296c249143df01",
+    "/js/Login.js": "/js/Login.js?id=b306d7283b7d8e19d5d3",
+    "/js/Homework.js": "/js/Homework.js?id=4fa877a67a22622fa873",
+    "/js/vendor/vendor.js": "/js/vendor/vendor.js?id=cb5b9d1014b7555b55c1",
+    "/js/vendor/socket.io.js": "/js/vendor/socket.io.js?id=922279e7225bd2e5b4c6",
+    "/css/vendor/vendor.css": "/css/vendor/vendor.css?id=dac416d5efe7fdc88c1d"
 }

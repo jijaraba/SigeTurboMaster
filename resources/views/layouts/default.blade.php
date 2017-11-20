@@ -3,13 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>@yield("title")</title>
     @yield("sweetCSS")
     @yield("dialogCSS")
-    {!! HTML::style('css/default.css') !!}
-    {!! HTML::style('css/'. (isset($cssprefered) ? $cssprefered : getCurrentRoute()) . '.css') !!}
-    {!! HTML::style('css/vendor/vendor.css') !!}
+    {!! HTML::style(mix('css/default.css')) !!}
+    {!! HTML::style(mix('css/'. (isset($cssprefered) ? $cssprefered : getCurrentRoute()) . '.css')) !!}
+    {!! HTML::style(mix('css/vendor/vendor.css')) !!}
     {!! HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css') !!}
     <base href="/{{ getCurrentRoute() }}"/>
 </head>
@@ -57,7 +58,7 @@
     <ul id="breadcrumb" class="display-horizontal">
         <li class="col-10 mobile-logo">
             <a href="{{ URL::route('dashboard') }}">
-                {!! HTML::image('img/sigeturbo.png','Home') !!}
+                {!! HTML::image('images/sigeturbo.png','Home') !!}
             </a>
         </li>
         <li class="col-80 title">
@@ -75,16 +76,16 @@
             <li id="home" class="sige-nav-module {{ setCurrentModule('dashboard') }}">
                 <a href="{{ URL::route('dashboard') }}" title="{{ Lang::get('sige.Home') }}"
                    data-title="{{ Lang::get('sige.Home') }}">
-                    {!! HTML::image('img/sigeturbo.png','Home') !!}
+                    {!! HTML::image('images/sigeturbo.png','Home') !!}
                 </a>
             </li>
             <li id="admissions" class="sige-nav-module {{ setCurrentModule('admissions') }}">
                 <a href="{{ URL::route('admissions.dashboard') }}" title="{{ Lang::get('sige.Admissions') }}"
                    data-title="{{ Lang::get('sige.Admissions') }}">
                     @if(setCurrentModule('admissions') == 'current')
-                        {!! HTML::image('img/modules/admissions_active.svg',Lang::get('sige.Admissions')) !!}
+                        {!! HTML::image('images/modules/admissions_active.svg',Lang::get('sige.Admissions')) !!}
                     @else
-                        {!! HTML::image('img/modules/admissions.svg',Lang::get('sige.Admissions')) !!}
+                        {!! HTML::image('images/modules/admissions.svg',Lang::get('sige.Admissions')) !!}
                     @endif
                     <span>{{ Lang::get('sige.Admissions') }}</span>
                 </a>
@@ -93,9 +94,9 @@
                 <a href="{{ URL::route('financials.dashboard') }}" title="{{ Lang::get('sige.Financials') }}"
                    data-title="{{ Lang::get('sige.Financials') }}">
                     @if(setCurrentModule('financials') == 'current')
-                        {!! HTML::image('img/modules/financials_active.svg',Lang::get('sige.Financials')) !!}
+                        {!! HTML::image('images/modules/financials_active.svg',Lang::get('sige.Financials')) !!}
                     @else
-                        {!! HTML::image('img/modules/financials.svg',Lang::get('sige.financials')) !!}
+                        {!! HTML::image('images/modules/financials.svg',Lang::get('sige.financials')) !!}
                     @endif
                     <span>{{ Lang::get('sige.Financials') }}</span>
                 </a>
@@ -105,9 +106,9 @@
                 title="{{ Lang::get('sige.Formation') }}" data-title="{{ Lang::get('sige.Formation') }}">
                 <a href="{{ URL::route('formation.dashboard') }}">
                     @if(setCurrentModule('formation') == 'current')
-                        {!! HTML::image('img/modules/formation_active.svg',Lang::get('sige.Formation')) !!}
+                        {!! HTML::image('images/modules/formation_active.svg',Lang::get('sige.Formation')) !!}
                     @else
-                        {!! HTML::image('img/modules/formation.svg',Lang::get('sige.Formation')) !!}
+                        {!! HTML::image('images/modules/formation.svg',Lang::get('sige.Formation')) !!}
                     @endif
                     <span>{{ Lang::get('sige.Formation') }}</span>
                 </a>
@@ -116,9 +117,9 @@
                 title="{{ Lang::get('sige.Resources') }}" data-title="{{ Lang::get('sige.Resources') }}">
                 <a href="{{ URL::route('resources.dashboard') }}">
                     @if(setCurrentModule('resources') == 'current')
-                        {!! HTML::image('img/modules/resources_active.svg',Lang::get('sige.Resources')) !!}
+                        {!! HTML::image('images/modules/resources_active.svg',Lang::get('sige.Resources')) !!}
                     @else
-                        {!! HTML::image('img/modules/resources.svg',Lang::get('sige.Resources')) !!}
+                        {!! HTML::image('images/modules/resources.svg',Lang::get('sige.Resources')) !!}
                     @endif
                     <span>{{ Lang::get('sige.Resources') }}</span>
                 </a>
@@ -127,9 +128,9 @@
                 title="{{ Lang::get('sige.Communications') }}" data-title="{{ Lang::get('sige.Communications') }}">
                 <a href="{{ URL::route('communications.dashboard') }}">
                     @if(setCurrentModule('communications') == 'current')
-                        {!! HTML::image('img/modules/communications_active.svg',Lang::get('sige.Communications')) !!}
+                        {!! HTML::image('images/modules/communications_active.svg',Lang::get('sige.Communications')) !!}
                     @else
-                        {!! HTML::image('img/modules/communications.svg',Lang::get('sige.Communications')) !!}
+                        {!! HTML::image('images/modules/communications.svg',Lang::get('sige.Communications')) !!}
                     @endif
                     <span>{{ Lang::get('sige.Communications') }}</span>
                 </a>
@@ -138,9 +139,9 @@
                 title="{{ Lang::get('sige.Parents') }}" data-title="{{ Lang::get('sige.Parents') }}">
                 <a href="{{ URL::route('parents.dashboard') }}">
                     @if(setCurrentModule('parents') == 'current')
-                        {!! HTML::image('img/modules/parents_active.svg',Lang::get('sige.Parents')) !!}
+                        {!! HTML::image('images/modules/parents_active.svg',Lang::get('sige.Parents')) !!}
                     @else
-                        {!! HTML::image('img/modules/parents.svg',Lang::get('sige.Parents')) !!}
+                        {!! HTML::image('images/modules/parents.svg',Lang::get('sige.Parents')) !!}
                     @endif
                     <span>{{ Lang::get('sige.Parents') }}</span>
                 </a>
@@ -188,7 +189,6 @@
         <div>{{ Lang::get('sige.' . ucfirst(getCurrentRoute())) }}: v<span app-version></span></div>
     </div>
 </footer>
-{!! HTML::script('/js/vendor/jquery.js') !!}
 @yield("payments")
 @yield("vendor")
 @yield("angular")

@@ -8,5 +8,5 @@ interface ProviderRepositoryInterface
     public function find($idprovider);
     public function store($data);
     public function update($idprovider,$data);
-    public function destroy($idvisitor);
+    public function destroy($idprovider);
 }

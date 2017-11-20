@@ -14,11 +14,4 @@
             <span>{{ Lang::get('sige.Dashboard') }}</span>
         </a>
     </li>
-    @if(getUser()->role_selected == 'Admin' )
-        <li class="{{ (getCurrentRoute() == 'dashboard') ? '' : setCurrentApp('consent','active') }}">
-            <a href="{{ URL::route('users.consent.index') }}">
-                <span>{{ Lang::get('sige.Consents') }}</span>
-            </a>
-        </li>
-    @endif
 </ul>

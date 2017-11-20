@@ -100,7 +100,7 @@ class ProviderRepository implements ProviderRepositoryInterface
         return $provider->save();
     }
 
-    public function destroy($idvisitor)
+    public function destroy($idprovider)
     {
         // TODO: Implement destroy() method.
     }

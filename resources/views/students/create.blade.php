@@ -90,7 +90,7 @@
                                 <li class="col-25 gutter-5 celular">
                                     <sige-turbo-student-verify-celular ng-model="student.celular" confirmed="0"></sige-turbo-student-verify-celular>
                                     <input name="celular" id="celular" type="hidden" ng-model="student.celular"
-                                           ng-value="student.celular" title="{{ Lang::get('sige.CelularTitle') }}" 
+                                           ng-value="student.celular" title="{{ Lang::get('sige.CelularTitle') }}"
                                            ng-init="student.celular='{{ $credential['celular'] }}'"/>
                                 </li>
                                 <li class="col-25 gutter-5">
@@ -163,16 +163,16 @@
     </section>
     <sige-turbo-enrollments ng-if="showEnrollmentForm"></sige-turbo-enrollments>
 @stop
-@section("script")
-    {!! HTML::script('js/' . getCurrentRoute() . '.js') !!}
-@stop
 @section("vendor")
-    {!! HTML::script('js/vendor/vendor.js') !!}
+    {!! HTML::script(mix('js/vendor/vendor.js')) !!}
+@stop
+@section("script")
+    {!! HTML::script(mix('js/angular/' . getCurrentRoute() . '.js')) !!}
 @stop
 @section("socket")
-    {!! HTML::script('js/vendor/socket.io.js') !!}
+    {!! HTML::script(mix('js/vendor/socket.io.js')) !!}
 @stop
 @section("sigeturbo")
-    {!! HTML::script('js/SigeTurbo.js') !!}
-    {!! HTML::script('js/Stream.js') !!}
+    {!! HTML::script(mix('js/SigeTurbo.js')) !!}
+    {!! HTML::script(mix('js/Stream.js')) !!}
 @stop

@@ -1,10 +1,12 @@
+/* eslint-disable no-console */
 'use strict';
 
 //Core
-require('angular')
-require('angular-resource')
-require('tc-angular-chartjs')
-require('ng-dialog')
+let angular = require('angular');
+let moment = require('moment');
+require('angular-resource');
+require('tc-angular-chartjs');
+require('ng-dialog');
 
 
 //Core
@@ -33,21 +35,10 @@ angular.module('Dashboard', [
     'Dashboard.factories',
     'Dashboard.directives',
     'Dashboard.controllers',
-]).constant("moment", moment);
+]).constant('moment', moment);
 
-angular.module('Dashboard').run(['$window','Token','sigeTurboStorage',function($window,Token,sigeTurboStorage){
-    if (!sigeTurboStorage.getStorage('token')) {
-        Token.getToken().$promise.then(
-            function (data) {
-                $window.sessionStorage.setItem('token', data.token);
-                sigeTurboStorage.setStorage('user', data.user);
-                sigeTurboStorage.setStorage('token', data.token);
-            }
-        );
-    }
-}]);
 
-angular.module('Dashboard').config(['$httpProvider',function ($httpProvider) {
+angular.module('Dashboard').config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');
 }]);
 

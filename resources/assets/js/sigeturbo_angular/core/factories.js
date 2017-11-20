@@ -17,7 +17,7 @@ angular.module('Core.factories', [])
     .factory('Token', ['$resource', function ($resource) {
         return $resource('/gettoken', {}, {
             getToken: {
-                method: "GET",
+                method: 'GET',
                 params: {}
             }
         });
@@ -26,12 +26,13 @@ angular.module('Core.factories', [])
         return {
             request: function (config) {
                 config.headers = config.headers || {};
-                if (sigeTurboStorage.getStorage('token')) {
-                    config.headers.Authorization = 'Bearer ' + sigeTurboStorage.getStorage('token');
-                } else {
-                    config.headers.Authorization = 'Bearer ' + angular.element('#sigeturboToken').data().token;
-                }
+                config.headers = {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content,
+                    'Authorization': 'Bearer ' + document.querySelector('#sigeturboToken').getAttribute('data-token')
+                };
                 return config;
+
             },
             responseError: function (response) {
                 // Unauthorized

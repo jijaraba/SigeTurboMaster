@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="">
+<html>
     <head>
         <meta charset="utf-8">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
                 </tr>
             </table>
         </section>
-        {!! HTML::script('/js/vendor/jquery.js') !!}
-        {!! HTML::script('/js/Login.js') !!}
+        {!! HTML::script(mix('/js/vendor/vendor.js')) !!}
+        {!! HTML::script(mix('/js/Login.js')) !!}
     </body>
 </html>

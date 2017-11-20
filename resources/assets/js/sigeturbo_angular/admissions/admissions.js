@@ -1,12 +1,13 @@
 'use strict';
 
 //Core
-require('angular')
-require('angular-resource')
-require('angular-filter')
-require('tc-angular-chartjs')
-require('angular-sanitize')
-require('ng-dialog')
+let angular = require('angular');
+let moment = require('moment');
+require('angular-resource');
+require('angular-filter');
+require('tc-angular-chartjs');
+require('angular-sanitize');
+require('ng-dialog');
 
 
 //Core
@@ -37,7 +38,8 @@ angular.module('Admissions', [
     'Admissions.factories',
     'Admissions.directives',
     'Admissions.controllers',
-]).constant("moment", moment);
+]).constant('moment', moment);
+
 
 angular.module('Admissions').run(['Token','sigeTurboStorage',function(Token,sigeTurboStorage){
     if (!sigeTurboStorage.getStorage('token')) {

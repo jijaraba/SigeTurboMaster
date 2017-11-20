@@ -1,4 +1,5 @@
 'use strict';
+import moment from 'moment';
 
 /* Admissions Directives */
 angular.module('Admissions.directives', [])
@@ -11,9 +12,9 @@ angular.module('Admissions.directives', [])
         return {
             restrict: 'AE',
             scope: {
-                ngModel: "=",
-                confirmed: "@",
-                user: "@",
+                ngModel: '=',
+                confirmed: '@',
+                user: '@',
             },
             controller: ['$scope', function ($scope) {
                 //Scope
@@ -26,7 +27,7 @@ angular.module('Admissions.directives', [])
                 }
             }],
             template: require('./views/student/verify/celular.html'),
-            link: function ($scope, element, attrs) {
+            link: function ($scope) {
                 //Verify Celular
                 $scope.verifyCelular = function () {
                     if (parseInt($scope.confirmed) == 0) {
@@ -34,57 +35,57 @@ angular.module('Admissions.directives', [])
                             function (result) {
                                 if (result.exists) {
                                     SweetAlert.swal({
-                                            title: "¿Desea verificarlo?",
-                                            text: result.message,
-                                            type: "warning",
-                                            showCancelButton: true,
-                                            confirmButtonColor: "#53BBB4",
-                                            confirmButtonText: "Verificar",
-                                            closeOnConfirm: true
-                                        },
-                                        function (isConfirm) {
-                                            if (isConfirm) {
-                                                $scope.showForm = true;
-                                            } else {
-                                                $scope.showForm = false;
-                                            }
-                                        });
+                                        title: '¿Desea verificarlo?',
+                                        text: result.message,
+                                        type: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#53BBB4',
+                                        confirmButtonText: 'Verificar',
+                                        closeOnConfirm: true
+                                    },
+                                    function (isConfirm) {
+                                        if (isConfirm) {
+                                            $scope.showForm = true;
+                                        } else {
+                                            $scope.showForm = false;
+                                        }
+                                    });
                                 } else {
                                     $scope.showForm = true;
                                 }
                             },
                             function (error) {
-                                SweetAlert.error("Error", "Se presentó un error al verificar la información.");
+                                SweetAlert.error('Error', 'Se presentó un error al verificar la información: ' + error);
                             }
                         );
                     } else {
                         SweetAlert.swal({
-                                title: "¿Desea cambiarlo?",
-                                text: "El número " + $scope.ngModel + " ya fue verificado.",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#53BBB4",
-                                confirmButtonText: "Cambiar",
-                                closeOnConfirm: true
-                            },
-                            function (isConfirm) {
-                                if (isConfirm) {
-                                    $scope.celularEnable = false;
-                                    $scope.confirmed = 0;
-                                }
-                            });
+                            title: '¿Desea cambiarlo?',
+                            text: 'El número ' + $scope.ngModel + ' ya fue verificado.',
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#53BBB4',
+                            confirmButtonText: 'Cambiar',
+                            closeOnConfirm: true
+                        },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                $scope.celularEnable = false;
+                                $scope.confirmed = 0;
+                            }
+                        });
                     }
-                }
+                };
 
                 //Send SMS
                 $scope.sendCelularMessage = function () {
-                    $scope.data.passcode = "Sending ...";
+                    $scope.data.passcode = 'Sending ...';
                     if ($scope.celularSendEnable == true) {
                         User.verifyCelularMessage({user: $scope.user, celular: $scope.ngModel}).$promise.then(
                             function (result) {
                                 $log.info(result);
                                 $scope.celularSendEnable == false;
-                                $scope.data.passcode = "Sent"
+                                $scope.data.passcode = 'Sent';
                             },
                             function (error) {
                                 $log.error(error);
@@ -92,7 +93,7 @@ angular.module('Admissions.directives', [])
                             }
                         );
                     }
-                }
+                };
 
                 //Save Celular By Passcode
                 $scope.saveCelularByPasscode = function () {
@@ -101,16 +102,16 @@ angular.module('Admissions.directives', [])
                         celular: $scope.ngModel,
                         passcode: $scope.data.passcode
                     }).$promise.then(
-                        function (result) {
+                        function () {
                             $scope.showForm = false;
                             $scope.confirmed = 1;
                         },
-                        function (error) {
+                        function () {
                             $scope.showForm = true;
                             $scope.confirmed = 0;
                         }
                     );
-                }
+                };
 
                 //Save Celular By Certification
                 $scope.saveCelularByCertification = function () {
@@ -118,32 +119,32 @@ angular.module('Admissions.directives', [])
                         user: $scope.user,
                         celular: $scope.ngModel
                     }).$promise.then(
-                        function (result) {
+                        function () {
                             $scope.showForm = false;
                             $scope.confirmed = 1;
                         },
-                        function (error) {
+                        function () {
                             $scope.showForm = true;
                             $scope.confirmed = 0;
                         }
                     );
-                }
+                };
 
                 //Close
                 $scope.close = function () {
                     $scope.showForm = false;
-                }
+                };
 
             }
-        }
+        };
     }])
     .directive('sigeTurboStudentVerifyEmail', ['$log', 'User', 'SweetAlert', function ($log, User, SweetAlert) {
         return {
             restrict: 'AE',
             scope: {
-                ngModel: "=",
-                confirmed: "@",
-                user: "@",
+                ngModel: '=',
+                confirmed: '@',
+                user: '@',
             },
             controller: ['$scope', function ($scope) {
                 //Scope
@@ -155,7 +156,7 @@ angular.module('Admissions.directives', [])
                 }
             }],
             template: require('./views/student/verify/email.html'),
-            link: function ($scope, element, attrs) {
+            link: function ($scope) {
                 //Verify Email
                 $scope.verifyEmail = function () {
                     if (parseInt($scope.confirmed) == 0) {
@@ -163,47 +164,47 @@ angular.module('Admissions.directives', [])
                             function (result) {
                                 if (result.exists) {
                                     SweetAlert.swal({
-                                            title: "¿Desea verificarlo?",
-                                            text: result.message,
-                                            type: "warning",
-                                            showCancelButton: true,
-                                            confirmButtonColor: "#53BBB4",
-                                            confirmButtonText: "Verificar",
-                                            closeOnConfirm: true
-                                        },
-                                        function (isConfirm) {
-                                            if (isConfirm) {
-                                                $scope.showForm = true;
-                                            } else {
-                                                $scope.showForm = false;
-                                            }
-                                        });
+                                        title: '¿Desea verificarlo?',
+                                        text: result.message,
+                                        type: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#53BBB4',
+                                        confirmButtonText: 'Verificar',
+                                        closeOnConfirm: true
+                                    },
+                                    function (isConfirm) {
+                                        if (isConfirm) {
+                                            $scope.showForm = true;
+                                        } else {
+                                            $scope.showForm = false;
+                                        }
+                                    });
                                 } else {
                                     $scope.showForm = true;
                                 }
                             },
                             function (error) {
-                                SweetAlert.error("Error", "Se presentó un error al verificar la información.");
+                                SweetAlert.error('Error', 'Se presentó un error al verificar la información: ' + error);
                             }
                         );
                     } else {
                         SweetAlert.swal({
-                                title: "¿Desea cambiarlo?",
-                                text: "El correo " + $scope.ngModel + " ya fue verificado.",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#53BBB4",
-                                confirmButtonText: "Cambiar",
-                                closeOnConfirm: true
-                            },
-                            function (isConfirm) {
-                                if (isConfirm) {
-                                    $scope.emailEnable = false;
-                                    $scope.confirmed = 0;
-                                }
-                            });
+                            title: '¿Desea cambiarlo?',
+                            text: 'El correo ' + $scope.ngModel + ' ya fue verificado.',
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#53BBB4',
+                            confirmButtonText: 'Cambiar',
+                            closeOnConfirm: true
+                        },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                $scope.emailEnable = false;
+                                $scope.confirmed = 0;
+                            }
+                        });
                     }
-                }
+                };
 
                 //Send Email
                 $scope.sendEmailMessage = function () {
@@ -215,7 +216,7 @@ angular.module('Admissions.directives', [])
                             $log.error(error);
                         }
                     );
-                }
+                };
 
                 //Save Email By Passcode
                 $scope.saveEmailByPasscode = function () {
@@ -224,16 +225,16 @@ angular.module('Admissions.directives', [])
                         email: $scope.ngModel,
                         passcode: $scope.data.passcode
                     }).$promise.then(
-                        function (result) {
+                        function () {
                             $scope.showForm = false;
                             $scope.confirmed = 1;
                         },
-                        function (error) {
+                        function () {
                             $scope.showForm = true;
                             $scope.confirmed = 0;
                         }
                     );
-                }
+                };
 
                 //Save Email By Certification
                 $scope.saveEmailByCertification = function () {
@@ -241,30 +242,30 @@ angular.module('Admissions.directives', [])
                         user: $scope.user,
                         email: $scope.ngModel
                     }).$promise.then(
-                        function (result) {
+                        function () {
                             $scope.showForm = false;
                             $scope.confirmed = 1;
                         },
-                        function (error) {
+                        function () {
                             $scope.showForm = true;
                             $scope.confirmed = 0;
                         }
                     );
-                }
+                };
 
                 //Close
                 $scope.close = function () {
                     $scope.showForm = false;
-                }
+                };
 
             }
-        }
+        };
     }])
     .directive('sigeTurboEnrollments', ['$log', 'Enrollment', function ($log, Enrollment) {
         return {
             restrict: 'AE',
             scope: {
-                student: "@"
+                student: '@'
             },
             controller: ['$scope', function ($scope) {
                 Enrollment.getEnrollmentsByStudent({'student': $scope.student}).$promise.then(
@@ -278,21 +279,21 @@ angular.module('Admissions.directives', [])
 
             }],
             template: require('./views/enrollment/list.html'),
-            link: function (scope, element, attrs) {
+            link: function () {
             }
-        }
+        };
     }])
     .directive('sigeTurboEnrollment', ['$log', 'SweetAlert', 'ASSETS_SERVER', 'Group', 'Enrollment', function ($log, SweetAlert, ASSETS_SERVER, Group, Enrollment) {
         return {
             restrict: 'AE',
             scope: {
-                enrollment: "="
+                enrollment: '='
             },
             controller: ['$scope', 'Year', 'Statusschooltype', function ($scope, Year, Statusschooltype) {
                 //Scope
                 $scope.assets = ASSETS_SERVER;
                 $scope.showItems = false;
-                $scope.showItemsTitle = "Show";
+                $scope.showItemsTitle = 'Show';
                 // Get Years
                 Year.query().$promise.then(
                     function (years) {
@@ -327,17 +328,17 @@ angular.module('Admissions.directives', [])
 
                 //Show Items Extended
                 $scope.showItemsExtended = function () {
-                    $scope.showItems = !$scope.showItems
+                    $scope.showItems = !$scope.showItems;
                     if ($scope.showItems) {
-                        $scope.showItemsTitle = "Hide";
+                        $scope.showItemsTitle = 'Hide';
                     } else {
-                        $scope.showItemsTitle = "Show";
+                        $scope.showItemsTitle = 'Show';
                     }
-                }
+                };
 
             }],
             template: require('./views/enrollment/enrollment.html'),
-            link: function ($scope, element, attrs) {
+            link: function ($scope) {
 
                 //Change Reentry
                 $scope.$watch('enrollment.idyear', function (newYear, oldYear) {
@@ -396,13 +397,13 @@ angular.module('Admissions.directives', [])
                 //Change StatusType
                 $scope.$watch('enrollment.idstatusschooltype', function (newStatus, oldStatus) {
                     if (newStatus != oldStatus) {
-                        $scope.enrollment.statusdate = moment().add($scope.statusschooltypes[newStatus - 1].duration, 'days').format("YYYY-MM-DD");
+                        $scope.enrollment.statusdate = moment().add($scope.statusschooltypes[newStatus - 1].duration, 'days').format('YYYY-MM-DD');
                         if (parseInt(newStatus) == 4) {
                             $scope.showItems = true;
-                            $scope.showItemsTitle = "Hide";
+                            $scope.showItemsTitle = 'Hide';
                         } else {
                             $scope.showItems = false;
-                            $scope.showItemsTitle = "Show";
+                            $scope.showItemsTitle = 'Show';
                         }
                     }
                 });
@@ -425,23 +426,23 @@ angular.module('Admissions.directives', [])
                         observation: ($scope.enrollment.observation == '') ? null : $scope.enrollment.observation,
                     }).$promise.then(
                         function (enrollment) {
-                            SweetAlert.success("Excelente", enrollment.message);
+                            SweetAlert.success('Excelente', enrollment.message);
                         },
                         function (error) {
-                            SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                            SweetAlert.error('Error', 'Se ha presentado un error al guardar la información: ' + error);
                         }
                     );
-                }
+                };
 
             }
-        }
+        };
     }])
     .directive('sigeTurboEnrollmentNew', ['$log', 'SweetAlert', 'ASSETS_SERVER', 'Group', 'Enrollment', function ($log, SweetAlert, ASSETS_SERVER, Group, Enrollment) {
         return {
             restrict: 'AE',
             scope: {
-                user: "=",
-                year: "=",
+                user: '=',
+                year: '=',
             },
             controller: ['$scope', 'Year', 'Statusschooltype', function ($scope, Year, Statusschooltype) {
 
@@ -449,11 +450,11 @@ angular.module('Admissions.directives', [])
                 $scope.assets = ASSETS_SERVER;
                 $scope.enrollment = {
                     student: $scope.user,
-                    register: moment().format("YYYY-MM-DD"),
-                    scholarship: "0.00",
+                    register: moment().format('YYYY-MM-DD'),
+                    scholarship: '0.00',
                     reentry: false,
                     inclusion: false
-                }
+                };
 
                 // Get Years
                 Year.query().$promise.then(
@@ -489,7 +490,7 @@ angular.module('Admissions.directives', [])
                 );
             }],
             template: require('./views/enrollment/new.html'),
-            link: function ($scope, element, attrs) {
+            link: function ($scope) {
 
                 //Change Reentry
                 $scope.$watch('enrollment.idyear', function (newYear, oldYear) {
@@ -513,7 +514,7 @@ angular.module('Admissions.directives', [])
                 $scope.$watch('enrollment.idstatusschooltype', function (newStatus, oldStatus) {
                     if (newStatus != oldStatus) {
                         if (newStatus != null && newStatus != undefined) {
-                            $scope.enrollment.statusdate = moment().add($scope.statusschooltypes[newStatus - 1].duration, 'days').format("YYYY-MM-DD");
+                            $scope.enrollment.statusdate = moment().add($scope.statusschooltypes[newStatus - 1].duration, 'days').format('YYYY-MM-DD');
                         } else {
                             $scope.enrollment.statusdate = undefined;
                         }
@@ -526,39 +527,39 @@ angular.module('Admissions.directives', [])
                     if ($scope.enrollment.idenrollment == undefined) {
 
                         SweetAlert.swal({
-                                title: "¿Está seguro?",
-                                text: "Una vez le asigne al estudiante la Admisión se genera un cobro por concepto de Matrícula y Pensión. No aplica para los estado de Promoción de estudiantes",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#53BBB4",
-                                confirmButtonText: "Asignar",
-                                closeOnConfirm: false
-                            },
-                            function (isConfirm) {
-                                if (isConfirm) {
-                                    //Save Enrollment
-                                    Enrollment.save({
-                                        year: $scope.enrollment.idyear,
-                                        group: $scope.enrollment.idgroup,
-                                        student: $scope.user,
-                                        register: $scope.enrollment.register,
-                                        status: $scope.enrollment.idstatusschooltype,
-                                        statusdate: $scope.enrollment.statusdate,
-                                        scholarship: 0,
-                                        reentry: $scope.enrollment.reentry,
-                                        inclusion: $scope.enrollment.inclusion
-                                    }).$promise.then(
-                                        function (result) {
-                                            $scope.enrollment.idenrollment = result.enrollment.idenrollment
-                                            SweetAlert.success("Excelente", result.message);
-                                        },
-                                        function (error) {
-                                            SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
-                                        }
-                                    );
-                                }
-                                ;
-                            });
+                            title: '¿Está seguro?',
+                            text: 'Una vez le asigne al estudiante la Admisión se genera un cobro por concepto de Matrícula y Pensión. No aplica para los estado de Promoción de estudiantes',
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#53BBB4',
+                            confirmButtonText: 'Asignar',
+                            closeOnConfirm: false
+                        },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                //Save Enrollment
+                                Enrollment.save({
+                                    year: $scope.enrollment.idyear,
+                                    group: $scope.enrollment.idgroup,
+                                    student: $scope.user,
+                                    register: $scope.enrollment.register,
+                                    status: $scope.enrollment.idstatusschooltype,
+                                    statusdate: $scope.enrollment.statusdate,
+                                    scholarship: 0,
+                                    reentry: $scope.enrollment.reentry,
+                                    inclusion: $scope.enrollment.inclusion
+                                }).$promise.then(
+                                    function (result) {
+                                        $scope.enrollment.idenrollment = result.enrollment.idenrollment;
+                                        SweetAlert.success('Excelente', result.message);
+                                    },
+                                    function (error) {
+                                        SweetAlert.error('Error', 'Se ha presentado un error al guardar la información: ' + error);
+                                    }
+                                );
+                            }
+                            
+                        });
 
                     } else {
                         //Update Enrollment
@@ -574,17 +575,17 @@ angular.module('Admissions.directives', [])
                             inclusion: $scope.enrollment.inclusion
                         }).$promise.then(
                             function (enrollment) {
-                                SweetAlert.success("Excelente", enrollment.message);
+                                SweetAlert.success('Excelente', enrollment.message);
                             },
                             function (error) {
-                                SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                                SweetAlert.error('Error', 'Se ha presentado un error al guardar la información: ' + error);
                             }
                         );
                     }
-                }
+                };
 
             }
-        }
+        };
     }])
     .directive('sigeTurboAdmissionSearch', ['$log', 'Year', 'Group', 'Statusschooltype', function ($log, Year, Group, Statusschooltype) {
         return {
@@ -630,18 +631,17 @@ angular.module('Admissions.directives', [])
 
             }],
             template: require('./views/global/admission/search.html'),
-            link: function ($scope, element, attrs) {
+            link: function ($scope) {
 
                 //Verified Empty Text
                 $scope.isEmpty = function (str) {
                     return typeof str == 'string' && !str.trim() || typeof str == 'undefined' || str === null;
-                }
-
+                };
 
                 //Search
                 $scope.searchForm = function () {
                     $scope.showSearch = true;
-                }
+                };
                 //Watch Year
                 $scope.$watch('search.year', function (newYear) {
                     if (isNaN(newYear)) {
@@ -712,7 +712,7 @@ angular.module('Admissions.directives', [])
                 });
 
             }
-        }
+        };
     }])
     .directive('sigeTurboAdmissionSearchUser', ['$log', 'Category', function ($log, Category) {
         return {
@@ -734,15 +734,15 @@ angular.module('Admissions.directives', [])
                 );
             }],
             template: require('./views/global/admission/searchuser.html'),
-            link: function ($scope, element, attrs) {
+            link: function ($scope) {
                 //Verified Empty Text
                 $scope.isEmpty = function (str) {
                     return typeof str == 'string' && !str.trim() || typeof str == 'undefined' || str === null;
-                }
+                };
                 //Search
                 $scope.searchForm = function () {
                     $scope.showSearch = true;
-                }
+                };
                 //Watch Firstname
                 $scope.$watch('search.firstname', function (newFirstname) {
                     if ($scope.isEmpty(newFirstname)) {
@@ -789,14 +789,14 @@ angular.module('Admissions.directives', [])
                     $scope.result = JSON.stringify($scope.search);
                 });
             }
-        }
+        };
     }])
     .directive('sigeTurboAdmissionsFamilyAssign', ['$log', 'Family', 'ASSETS_SERVER', function ($log, Family, ASSETS_SERVER) {
         return {
             restrict: 'AE',
             scope: {
-                family: "=",
-                family_name: "@",
+                family: '=',
+                family_name: '@',
             },
             controller: ['$scope', function ($scope) {
                 //Scope
@@ -814,7 +814,7 @@ angular.module('Admissions.directives', [])
 
                 $scope.close = function () {
                     $scope.showFamilies = false;
-                }
+                };
 
             }],
             template: require('./views/families/select.html'),
@@ -822,13 +822,13 @@ angular.module('Admissions.directives', [])
                 //Verified Empty Text
                 scope.isEmpty = function (str) {
                     return typeof str == 'string' && !str.trim() || typeof str == 'undefined' || str === null;
-                }
+                };
 
                 scope.selectFamily = function (family) {
                     scope.family_name = family.name;
                     scope.family = family;
                     scope.showFamilies = false;
-                }
+                };
 
                 scope.$watch('family_name', function (newFamily) {
                     if (newFamily != undefined || !scope.isEmpty(newFamily)) {
@@ -838,7 +838,7 @@ angular.module('Admissions.directives', [])
             }
         };
     }])
-    .directive('sigeTurboAdmissionSearchStudent', ['$log', function ($log) {
+    .directive('sigeTurboAdmissionSearchStudent', [function () {
         return {
             restrict: 'AE',
             scope: {
@@ -850,22 +850,22 @@ angular.module('Admissions.directives', [])
                 //Close
                 $scope.close = function () {
                     $scope.showSearch = false;
-                }
+                };
             }],
             template: require('./views/global/admission/searchallstudents.html'),
-            link: function ($scope, element, attrs) {
+            link: function ($scope) {
                 //Verified Empty Text
                 $scope.isEmpty = function (str) {
                     return typeof str == 'string' && !str.trim() || typeof str == 'undefined' || str === null;
-                }
+                };
                 //Search
                 $scope.searchForm = function () {
                     $scope.showSearch = true;
-                }
+                };
 
                 //Watch Year
-                $scope.$watch('search.mostrar', function (newRating, oldRating) {
-                    if (newRating == "") {
+                $scope.$watch('search.mostrar', function (newRating) {
+                    if (newRating == '') {
                         $scope.search.mostrar = undefined;
                         $scope.result = JSON.stringify($scope.search);
                     } else {
@@ -877,11 +877,11 @@ angular.module('Admissions.directives', [])
                 //Watch User 
                 $scope.$watch('search.iduser', function (newUser, oldUser) {
                     if (newUser != oldUser) {
-                        if (newUser == "" || newUser == null || newUser == null) {
-                            $scope.search.iduser = "";
+                        if (newUser == '' || newUser == null || newUser == null) {
+                            $scope.search.iduser = '';
                             $scope.result = JSON.stringify($scope.search);
                         } else {
-                            if (typeof oldUser != "object") {
+                            if (typeof oldUser != 'object') {
                                 $scope.search.iduser = newUser;
                             } else {
                                 $scope.search.iduser = newUser.iduser;
@@ -903,9 +903,9 @@ angular.module('Admissions.directives', [])
                     }
                 });
             }
-        }
+        };
     }])
-    .directive('sigeTurboTransportSearch', ['$log', function ($log) {
+    .directive('sigeTurboTransportSearch', [function () {
         return {
             restrict: 'AE',
             scope: {
@@ -917,19 +917,19 @@ angular.module('Admissions.directives', [])
                 //Close
                 $scope.close = function () {
                     $scope.showSearch = false;
-                }
-                $scope.search.iduser = "";
+                };
+                $scope.search.iduser = '';
             }],
             template: require('./views/global/transport/search.html'),
-            link: function ($scope, element, attrs) {
+            link: function ($scope) {
                 //Verified Empty Text
                 $scope.isEmpty = function (str) {
                     return typeof str == 'string' && !str.trim() || typeof str == 'undefined' || str === null;
-                }
+                };
                 //Search
                 $scope.searchForm = function () {
                     $scope.showSearch = true;
-                }
+                };
                 //Watch Firstname
                 $scope.$watch('search.idroute', function (newCode) {
                     if ($scope.isEmpty(newCode)) {
@@ -952,30 +952,29 @@ angular.module('Admissions.directives', [])
                 });
                 //Watch User
                 $scope.$watch('search.iduser', function (newUser, oldUser) {
-                    //alert("Old Value:" +JSON.stringify(oldUser)+"New Value :"+JSON.stringify(newUser));
                     if (newUser != oldUser) {
                         if ($scope.isEmpty(newUser)) {
                             $scope.search.iduser = undefined;
                             $scope.result = JSON.stringify($scope.search);
                         } else {
-                            if (typeof oldUser != "object") {
+                            if (typeof oldUser != 'object') {
                                 $scope.search.iduser = newUser.iduser;
                                 $scope.result = JSON.stringify($scope.search);
-                                ;
+                                
                             }
                         }
                     }
                 });
             }
-        }
+        };
     }])
     .directive('sigeTurboAdmissionsRouteActual', ['$controller', '$filter', function ($controller, $filter) {
         return {
             restrict: 'AE',
             scope: {
-                vehicles: "=",
-                conveyors: "=",
-                routeactual: "@",
+                vehicles: '=',
+                conveyors: '=',
+                routeactual: '@',
             },
             controller: ['$scope', function ($scope) {
                 $scope.launch = function ($object) {
@@ -985,11 +984,11 @@ angular.module('Admissions.directives', [])
                         $scope.conveyorctual = $scope.actuals('idconveyor', 'idconveyor', $scope.conveyors);
                         $scope.companionactual = $scope.actuals('idconveyor', 'idcompanion', $scope.conveyors);
                     } else $scope.route = $scope.$eval($scope.routeactual);
-                }
+                };
                 $scope.launch();
                 $scope.actuals = function ($propierty, $propiertyroute, $array) {
                     return $filter('getByProperty')($propierty, $scope.route[$propiertyroute], $array);
-                }
+                };
             }],
             template: require('./views/transports/routeinformation.html'),
             link: function (scope, element, attr, controller) {
@@ -1000,34 +999,34 @@ angular.module('Admissions.directives', [])
                     controller: controller
                 });
                 scope.editform = function (form, $items, $id) {
-                    var $name = "";
-                    var $title = "";
+                    var $name = '';
+                    var $title = '';
                     switch (form) {
-                        case 'conveyor':
-                            $name = 'idconveyor';
-                            $title = "Editar Conductor";
-                            break;
-                        case 'vehicle':
-                            $name = 'idvehicle';
-                            $title = "Editar Vehículo";
-                            break;
-                        case 'route':
-                            $name = 'idroute';
-                            $title = "Editar Ruta";
-                            break;
+                    case 'conveyor':
+                        $name = 'idconveyor';
+                        $title = 'Editar Conductor';
+                        break;
+                    case 'vehicle':
+                        $name = 'idvehicle';
+                        $title = 'Editar Vehículo';
+                        break;
+                    case 'route':
+                        $name = 'idroute';
+                        $title = 'Editar Ruta';
+                        break;
                     }
                     var item = (form == 'route') ? $items : $filter('getByProperty')($name, $id, $items);
                     scope.dialogsforms(form, $title, item);
                 };
 
                 scope.$watch('vehicles', function (newVehicle) {
-                    if ((newVehicle != undefined && newVehicle != "") && (typeof newVehicle == "object")) {
+                    if ((newVehicle != undefined && newVehicle != '') && (typeof newVehicle == 'object')) {
                         scope.vehicleactual = scope.actuals('idvehicle', 'idvehicle', scope.vehicles);
                     }
                 });
 
                 scope.$watch('conveyors', function (newConveyor) {
-                    if ((newConveyor != undefined && newConveyor != "") && (typeof newConveyor == "object")) {
+                    if ((newConveyor != undefined && newConveyor != '') && (typeof newConveyor == 'object')) {
                         scope.conveyorctual = scope.actuals('idconveyor', 'idconveyor', scope.conveyors);
                         scope.companionactual = scope.actuals('idconveyor', 'idcompanion', scope.conveyors);
                     }
@@ -1039,15 +1038,15 @@ angular.module('Admissions.directives', [])
         return {
             restrict: 'AE',
             scope: {
-                route: "=",
-                vehicles: "=",
-                conveyors: "="
+                route: '=',
+                vehicles: '=',
+                conveyors: '='
             },
             controller: ['$scope', function ($scope) {
                 $scope.routeform = angular.copy($scope.route); //Independización del Array para que no se dañe el orginal si no hay POST | Actaulizacion o Modificación
             }],
             template: require('./views/transports/route.html'),
-            link: function (scope, element, attr) {
+            link: function (scope) {
                 scope.SaveRoute = function () {
                     if (scope.route.idroute) {
                         Route.update(scope.routeform).$promise.then(
@@ -1057,36 +1056,35 @@ angular.module('Admissions.directives', [])
                                 scope.route.idcompanion = scope.routeform.idcompanion;
                                 scope.route.name = scope.routeform.name;
                                 scope.route.hour = scope.routeform.hour;
-                                SweetAlert.success("Excelente", result.message);
-                                angular.element(document.getElementById("routeinformation")).scope().$$childTail.$$prevSibling.launch(scope.route);
-                                /*Acceder al metodo de la directiva sigeTurboAdmissionsUsersbyroute ya que no tiene asociación con esta directiva */
+                                SweetAlert.success('Excelente', result.message);
+                                angular.element(document.getElementById('routeinformation')).scope().$$childTail.$$prevSibling.launch(scope.route);
                                 ngDialog.close();
                             },
                             function (error) {
                                 $log.error(error);
-                                SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                                SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                             }
                         );
                     } else {
                         Route.save(scope.routeform).$promise.then(
                             function (result) {
-                                SweetAlert.success("Excelente", result.message);
+                                SweetAlert.success('Excelente', result.message);
                                 ngDialog.close();
                                 //search = {lastpage:true,page:1};
-                                $window.location.href = "/admissions/transports?search=" + encodeURIComponent(JSON.stringify({
-                                        "lastpage": true,
-                                        "name": null,
-                                        "iduser": null,
-                                        "idroute": null
-                                    })).replace(/[!'()]/g, escape).replace(/\*/g, "%2A") + "&page=" + 1
+                                $window.location.href = '/admissions/transports?search=' + encodeURIComponent(JSON.stringify({
+                                    'lastpage': true,
+                                    'name': null,
+                                    'iduser': null,
+                                    'idroute': null
+                                })).replace(/[!'()]/g, escape).replace(/\*/g, '%2A') + '&page=' + 1;
                             },
                             function (error) {
                                 $log.error(error);
-                                SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                                SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                             }
                         );
                     }
-                }
+                };
             }
         };
     }])
@@ -1094,13 +1092,13 @@ angular.module('Admissions.directives', [])
         return {
             restrict: 'AE',
             scope: {
-                usersinroute: "@",
+                usersinroute: '@',
             },
             controller: ['$scope', function ($scope) {
                 $scope.assets = ASSETS_SERVER;
                 $scope.launch = function ($array) {
                     (!$array) ? $scope.usersbyroute = $scope.$eval($scope.usersinroute) : $scope.usersbyroute = $array;
-                }
+                };
                 $scope.launch();
             }],
             template: require('./views/users/usersbyroute.html'),
@@ -1118,13 +1116,13 @@ angular.module('Admissions.directives', [])
         return {
             restrict: 'AE',
             scope: {
-                destination: "@",
-                route: "=",
-                user: "=",
-                user_name: "@",
-                widthdefault: "@",
-                showusers: "@",
-                userdefault: "="
+                destination: '@',
+                route: '=',
+                user: '=',
+                user_name: '@',
+                widthdefault: '@',
+                showusers: '@',
+                userdefault: '='
             },
             controller: ['$scope', function ($scope) {
                 //Scope
@@ -1141,7 +1139,7 @@ angular.module('Admissions.directives', [])
 
                 $scope.close = function () {
                     $scope.showUsers = false;
-                }
+                };
 
             }],
             template: require('./views/users/select.html'),
@@ -1156,13 +1154,13 @@ angular.module('Admissions.directives', [])
                 //Verified Empty Text
                 scope.isEmpty = function (str) {
                     return typeof str == 'string' && !str.trim() || typeof str == 'undefined' || str === null;
-                }
+                };
 
                 scope.AddUser = function (user) {
-                    scope.user_name = (user == null || Object.keys(user).length == 0) ? "" : user.firstname + " " + user.lastname;
+                    scope.user_name = (user == null || Object.keys(user).length == 0) ? '' : user.firstname + ' ' + user.lastname;
                     scope.user = user;
                     scope.showUsers = false;
-                }
+                };
 
                 scope.AddToRoute = function (iduser, idroute) {
                     Routebyuser.save({
@@ -1170,18 +1168,18 @@ angular.module('Admissions.directives', [])
                         'route': idroute
                     }).$promise.then(
                         function (result) {
-                            SweetAlert.success("Excelente", result.message);
+                            SweetAlert.success('Excelente', result.message);
                             scope.showUsers = false;
-                            angular.element(document.getElementById("usersinthisroute")).scope().$$childTail.$$prevSibling.launch(result.routebyuserRepository);
+                            angular.element(document.getElementById('usersinthisroute')).scope().$$childTail.$$prevSibling.launch(result.routebyuserRepository);
                             /*Acceder al metodo de la directiva sigeTurboAdmissionsUsersbyroute ya que no tiene asociación con esta directiva */
                             ngDialog.close();
                         },
                         function (error) {
                             $log.error(error);
-                            SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                            SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                         }
                     );
-                }
+                };
 
                 scope.$watch('user_name', function (newFamily) {
                     if (newFamily != undefined || !scope.isEmpty(newFamily)) {
@@ -1207,8 +1205,8 @@ angular.module('Admissions.directives', [])
         return {
             restrict: 'AE',
             scope: {
-                conveyor: "=",
-                conveyors: "="
+                conveyor: '=',
+                conveyors: '='
             },
             controller: ['$scope', function ($scope) {
                 $scope.conveyorform = angular.copy($scope.conveyor); //Independización del Array para que no se dañe el orginal si no hay POST | Actaulizacion o Modificación
@@ -1223,29 +1221,29 @@ angular.module('Admissions.directives', [])
                                 scope.conveyor.firstname = scope.conveyorform.firstname;
                                 scope.conveyor.lastname = scope.conveyorform.lastname;
                                 scope.conveyor.celular = scope.conveyorform.celular;
-                                SweetAlert.success("Excelente", result.message);
+                                SweetAlert.success('Excelente', result.message);
                                 ngDialog.close();
                             },
                             function (error) {
                                 $log.error(error);
-                                SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                                SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                             }
                         );
                     } else {
                         Conveyor.save(scope.conveyorform).$promise.then(
                             function (result) {
                                 scope.conveyorform.idconveyor = result.idconveyor;
-                                SweetAlert.success("Excelente", result.message);
+                                SweetAlert.success('Excelente', result.message);
                                 ngDialog.close();
                                 scope.conveyors.push(scope.conveyorform);
                             },
                             function (error) {
                                 $log.error(error);
-                                SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                                SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                             }
                         );
                     }
-                }
+                };
             }
         };
     }])
@@ -1253,8 +1251,8 @@ angular.module('Admissions.directives', [])
         return {
             restrict: 'AE',
             scope: {
-                vehicle: "=",
-                vehicles: "="
+                vehicle: '=',
+                vehicles: '='
             },
             controller: ['$scope', function ($scope) {
                 $scope.vehicleform = angular.copy($scope.vehicle); //Independización del Array para que no se dañe el orginal si no hay POST| Actaulizacion o Modificación
@@ -1268,29 +1266,29 @@ angular.module('Admissions.directives', [])
                             function (result) {
                                 scope.vehicle.plate = scope.vehicleform.plate;
                                 scope.vehicle.type = scope.vehicleform.type;
-                                SweetAlert.success("Excelente", result.message);
+                                SweetAlert.success('Excelente', result.message);
                                 ngDialog.close();
                             },
                             function (error) {
                                 $log.error(error);
-                                SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                                SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                             }
                         );
                     } else {
                         Vehicle.save(scope.vehicleform).$promise.then(
                             function (result) {
                                 scope.vehicleform.idvehicle = result.idvehicle;
-                                SweetAlert.success("Excelente", result.message);
+                                SweetAlert.success('Excelente', result.message);
                                 ngDialog.close();
                                 scope.vehicles.push(scope.vehicleform);
                             },
                             function (error) {
                                 $log.error(error);
-                                SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                                SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                             }
                         );
                     }
-                }
+                };
             }
         };
     }])
@@ -1298,14 +1296,14 @@ angular.module('Admissions.directives', [])
         return {
             restrict: 'AE',
             scope: {
-                year: "@"
+                year: '@'
             },
             controller: ['$scope', function ($scope) {
                 $scope.showDownload = false;
                 $scope.assets = ASSETS_SERVER;
             }],
             template: require('./views/global/admission/export.html'),
-            link: function ($scope, element, attrs) {
+            link: function ($scope) {
                 $scope.export = function (filename, format) {
                     $scope.showDownload = false;
                     Export.getEnrollmentsReport({
@@ -1315,23 +1313,23 @@ angular.module('Admissions.directives', [])
                     }).$promise.then(
                         function (result) {
                             $scope.showDownload = true;
-                            $scope.download = $scope.assets + "/export/" + result.file;
+                            $scope.download = $scope.assets + '/export/' + result.file;
                         },
                         function (error) {
                             $log.error(error);
                             $scope.showDownload = false;
                         }
                     );
-                }
+                };
             }
-        }
+        };
     }])
     .directive('sigeTurboAdmissionsRecoveryFinal', ['$log', 'SweetAlert', 'Quantitativerecoveryfinalarea', 'Area', 'Year', 'Group', '$window', function ($log, SweetAlert, Quantitativerecoveryfinalarea, Area, Year, Group, $window) {
         return {
             restrict: 'AE',
             scope: {
-                recovery: "@",
-                search: "="
+                recovery: '@',
+                search: '='
             },
             controller: ['$scope', function ($scope) {
                 $scope.provenances = [{'idprovenance': 1, 'name': 'Interna'}, {'idprovenance': 2, 'name': 'Externa'}];
@@ -1364,7 +1362,7 @@ angular.module('Admissions.directives', [])
                 );
             }],
             template: require('./views/quantitativerecoveryfinalarea/save1290.html'),
-            link: function (scope, element, attr) {
+            link: function (scope) {
                 //Watch User
                 scope.$watch('recovery', function (newRecovery, oldRecovery) {
                     if (newRecovery != oldRecovery || newRecovery === oldRecovery) {
@@ -1375,28 +1373,28 @@ angular.module('Admissions.directives', [])
                     if (JSON.parse(scope.recovery)['idquantitativerecoveryfinalarea']) {//ESTA CONDICION CON EL PARSE JASON ES PORQUE LLEGA CONVERTIDO COMO0 STRING
                         Quantitativerecoveryfinalarea.update(scope.recoveryfinalform).$promise.then(
                             function (result) {
-                                SweetAlert.success("Excelente", result.message);
-                                $window.location.href = "/admissions/getrecoveriesbyuser?search=" + encodeURIComponent(JSON.stringify(scope.search)).replace(/[!'()]/g, escape).replace(/\*/g, "%2A") + "&page=" + scope.search.page
+                                SweetAlert.success('Excelente', result.message);
+                                $window.location.href = '/admissions/getrecoveriesbyuser?search=' + encodeURIComponent(JSON.stringify(scope.search)).replace(/[!'()]/g, escape).replace(/\*/g, '%2A') + '&page=' + scope.search.page;
                             },
                             function (error) {
                                 $log.error(error);
-                                SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                                SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                             }
                         );
                     } else {
                         Quantitativerecoveryfinalarea.save(scope.recoveryfinalform).$promise.then(
                             function (result) {
-                                SweetAlert.success("Excelente", result.message);
+                                SweetAlert.success('Excelente', result.message);
                                 //search = {lastpage:true,page:1};
-                                $window.location.href = "/admissions/getrecoveriesbyuser?search=" + encodeURIComponent(JSON.stringify(scope.search)).replace(/[!'()]/g, escape).replace(/\*/g, "%2A") + "&page=" + scope.search.page
+                                $window.location.href = '/admissions/getrecoveriesbyuser?search=' + encodeURIComponent(JSON.stringify(scope.search)).replace(/[!'()]/g, escape).replace(/\*/g, '%2A') + '&page=' + scope.search.page;
                             },
                             function (error) {
                                 $log.error(error);
-                                SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                                SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                             }
                         );
                     }
-                }
+                };
 
             }
         };
@@ -1405,8 +1403,8 @@ angular.module('Admissions.directives', [])
         return {
             restrict: 'AE',
             scope: {
-                recoveryquali: "@",
-                search: "="
+                recoveryquali: '@',
+                search: '='
             },
             controller: ['$scope', function ($scope) {
                 $scope.provenances = [{'idprovenance': 1, 'name': 'Interna'}, {'idprovenance': 2, 'name': 'Externa'}];
@@ -1446,7 +1444,7 @@ angular.module('Admissions.directives', [])
                 );
             }],
             template: require('./views/quantitativerecoveryfinalarea/save0230.html'),
-            link: function (scope, element, attr) {
+            link: function (scope) {
                 //Watch User
                 scope.$watch('recoveryquali', function (newRecovery, oldRecovery) {
                     if (newRecovery != oldRecovery || newRecovery === oldRecovery) {
@@ -1457,28 +1455,28 @@ angular.module('Admissions.directives', [])
                     if (JSON.parse(scope.recoveryquali)['idqualitativerecoveryfinalarea']) {//ESTA CONDICION CON EL PARSE JASON ES PORQUE LLEGA CONVERTIDO COMO0 STRING
                         Qualitativerecoveryfinalarea.update(scope.recoveryfinalform).$promise.then(
                             function (result) {
-                                SweetAlert.success("Excelente", result.message);
-                                $window.location.href = "/admissions/getrecoveriesbyuser?search=" + encodeURIComponent(JSON.stringify(scope.search)).replace(/[!'()]/g, escape).replace(/\*/g, "%2A") + "&page=" + scope.search.page
+                                SweetAlert.success('Excelente', result.message);
+                                $window.location.href = '/admissions/getrecoveriesbyuser?search=' + encodeURIComponent(JSON.stringify(scope.search)).replace(/[!'()]/g, escape).replace(/\*/g, '%2A') + '&page=' + scope.search.page;
                             },
                             function (error) {
                                 $log.error(error);
-                                SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                                SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                             }
                         );
                     } else {
                         Qualitativerecoveryfinalarea.save(scope.recoveryfinalform).$promise.then(
                             function (result) {
-                                SweetAlert.success("Excelente", result.message);
+                                SweetAlert.success('Excelente', result.message);
                                 //search = {lastpage:true,page:1};
-                                $window.location.href = "/admissions/getrecoveriesbyuser?search=" + encodeURIComponent(JSON.stringify(scope.search)).replace(/[!'()]/g, escape).replace(/\*/g, "%2A") + "&page=" + scope.search.page
+                                $window.location.href = '/admissions/getrecoveriesbyuser?search=' + encodeURIComponent(JSON.stringify(scope.search)).replace(/[!'()]/g, escape).replace(/\*/g, '%2A') + '&page=' + scope.search.page;
                             },
                             function (error) {
                                 $log.error(error);
-                                SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                                SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                             }
                         );
                     }
-                }
+                };
 
             }
         };
@@ -1487,13 +1485,13 @@ angular.module('Admissions.directives', [])
         return {
             restrict: 'AE',
             scope: {
-                destination: "@",
-                route: "=",
-                user: "=",
-                user_name: "@",
-                widthdefault: "@",
-                showusers: "@",
-                userdefault: "="
+                destination: '@',
+                route: '=',
+                user: '=',
+                user_name: '@',
+                widthdefault: '@',
+                showusers: '@',
+                userdefault: '='
             },
             controller: ['$scope', function ($scope) {
                 //Scope
@@ -1510,22 +1508,22 @@ angular.module('Admissions.directives', [])
 
                 $scope.close = function () {
                     $scope.showUsers = false;
-                }
+                };
 
             }],
             template: require('./views/student/select.html'),
-            link: function (scope, element, attr, controller) {
+            link: function (scope) {
 
                 //Verified Empty Text
                 scope.isEmpty = function (str) {
                     return typeof str == 'string' && !str.trim() || typeof str == 'undefined' || str === null;
-                }
+                };
 
                 scope.AddUser = function (user) {
-                    scope.user_name = (user == null || Object.keys(user).length == 0) ? "" : user.firstname + " " + user.lastname;
+                    scope.user_name = (user == null || Object.keys(user).length == 0) ? '' : user.firstname + ' ' + user.lastname;
                     scope.user = user;
                     scope.showUsers = false;
-                }
+                };
 
                 scope.$watch('user_name', function (newUser) {
                     if (newUser != undefined || !scope.isEmpty(newUser)) {
@@ -1550,13 +1548,13 @@ angular.module('Admissions.directives', [])
         return {
             restrict: 'AE',
             scope: {
-                destination: "@",
-                route: "=",
-                user: "=",
-                user_name: "@",
-                widthdefault: "@",
-                showusers: "@",
-                userdefault: "="
+                destination: '@',
+                route: '=',
+                user: '=',
+                user_name: '@',
+                widthdefault: '@',
+                showusers: '@',
+                userdefault: '='
             },
             controller: ['$scope', function ($scope) {
                 //Scope
@@ -1573,16 +1571,16 @@ angular.module('Admissions.directives', [])
 
                 $scope.close = function () {
                     $scope.showUsers = false;
-                }
+                };
 
             }],
             template: require('./views/student/select.html'),
-            link: function (scope, element, attr, controller) {
+            link: function (scope) {
 
-                scope.$watch('users', function (newUsers, oldUsers) {
+                scope.$watch('users', function (newUsers) {
                     if (newUsers != undefined) {
-                        scope.$watch('userdefault', function (newUser, oldUser) {
-                            if ((newUser != undefined && typeof newUser != "object")) {
+                        scope.$watch('userdefault', function (newUser) {
+                            if ((newUser != undefined && typeof newUser != 'object')) {
                                 var usershow = $filter('getByProperty')('iduser', newUser, scope.users);
                                 scope.AddUser(usershow);
                                 scope.showUsers = false;
@@ -1600,13 +1598,13 @@ angular.module('Admissions.directives', [])
                         //Verified Empty Text
                         scope.isEmpty = function (str) {
                             return typeof str == 'string' && !str.trim() || typeof str == 'undefined' || str === null;
-                        }
+                        };
 
                         scope.AddUser = function (user) {
-                            scope.user_name = (user == null || Object.keys(user).length == 0) ? "" : user.firstname + " " + user.lastname;
+                            scope.user_name = (user == null || Object.keys(user).length == 0) ? '' : user.firstname + ' ' + user.lastname;
                             scope.user = user;
                             scope.showUsers = false;
-                        }
+                        };
                     }
                 });
             }

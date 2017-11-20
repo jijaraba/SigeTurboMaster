@@ -48,8 +48,8 @@ header {
             background: {
               size: 50px 30px;
               position: 25px 0px;
-              image: url("/resources/assets/sass/images/bells.svg");
-              image: url("/resources/assets/sass/images/bells.svg");
+              image: url("../images/bells.svg");
+              image: url("../images/bells.svg");
             }
             opacity: 0.9;
             &:hover {
@@ -142,7 +142,7 @@ header {
             background: {
               size: 24px 16px;
               position: -12px 0px;
-              image: url("/resources/assets/sass/images/arrows.svg");
+              image: url("../images/arrows.svg");
             }
           ;
             position: absolute;

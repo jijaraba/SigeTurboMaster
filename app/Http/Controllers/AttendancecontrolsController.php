@@ -15,12 +15,14 @@ class AttendancecontrolsController extends Controller
      */
     private $attendancecontrolRepository;
 
+
     /**
-     * AttendancecontrolController constructor.
+     * AttendancecontrolsController constructor.
      * @param AttendancecontrolRepositoryInterface $attendancecontrolRepository
      */
     public function __construct(AttendancecontrolRepositoryInterface $attendancecontrolRepository)
     {
+
         $this->attendancecontrolRepository = $attendancecontrolRepository;
     }
 
