@@ -27,7 +27,7 @@ class CreateMonitoringsTable extends Migration {
 			$table->text('observation')->nullable();
 			$table->integer('created_by');
 			$table->integer('updated_by');
-			$table->integer('monitoringable_id');
+			$table->integer('monitoringable_id')->default(0);
 			$table->string('monitoringable_type')->default('Monitoringtype');
 			$table->timestamps();
 			$table->foreign('idprovenance')

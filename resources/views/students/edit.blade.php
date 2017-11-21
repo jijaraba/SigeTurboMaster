@@ -118,7 +118,7 @@
                                         <input name="birth" id="birth" type="text" ng-model="student.birth"
                                                ng-value="student.birth" title="{{ Lang::get('sige.BirthTitle') }}"
                                                ng-init="student.birth = '{{$student->birth}}'"
-                                               placeholder="Fecha de Nacimiento" required="true"/>
+                                               placeholder="{{ Lang::get('sige.BirthTitle') }}" data-toggle="birth" required="true"/>
                                     </li>
                                 </ul>
                             </li>

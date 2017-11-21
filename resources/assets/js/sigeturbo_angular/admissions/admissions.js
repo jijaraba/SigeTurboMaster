@@ -40,18 +40,6 @@ angular.module('Admissions', [
     'Admissions.controllers',
 ]).constant('moment', moment);
 
-
-angular.module('Admissions').run(['Token','sigeTurboStorage',function(Token,sigeTurboStorage){
-    if (!sigeTurboStorage.getStorage('token')) {
-        Token.getToken().$promise.then(
-            function (data) {
-                sigeTurboStorage.setStorage('user', data.user);
-                sigeTurboStorage.setStorage('token', data.token);
-            }
-        );
-    }
-}]);
-
 angular.module('Admissions').config(['$httpProvider',function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');
 }]);

@@ -16,6 +16,7 @@ use SigeTurbo\Repositories\Payment\PaymentRepositoryInterface;
 use SigeTurbo\Repositories\User\UserRepositoryInterface;
 use SigeTurbo\Repositories\Userfamily\UserfamilyRepositoryInterface;
 use SigeTurbo\Repositories\Year\YearRepositoryInterface;
+use SigeTurbo\Statusschooltype;
 
 
 class EnrollmentsController extends Controller
@@ -96,7 +97,7 @@ class EnrollmentsController extends Controller
 
         $data = [];
 
-        //Update Reentry
+        //Save Enrollment
         DB::beginTransaction();
         try {
             //Update Reentry
@@ -112,23 +113,27 @@ class EnrollmentsController extends Controller
             $enrollment = $this->enrollmentRepository->store($request);
 
             if ($enrollment) {
-                //GENERATE PAYMENT
-                //Find Costs
-                $cost = $this->costRepository->costByGroup($request["year"], $request["group"]);
-                //Find Student
-                $student = $this->enrollmentRepository->getEnrollmentsLatestByStudent($request["student"]);
-                //Find Family
-                $family = $this->userfamilyRepository->getFamilyByUser($student->iduser);
-                //Save Payment Individual
-                $this->paymentRepository->setPaymentIndividual($family->family, $this->paymentRepository->configDataPayment($request["year"], $request["group"], $cost, $student, null));
-                DB::commit();
                 $data['successful'] = true;
                 $data['message'] = Lang::get('sige.SuccessSaveMessage');
                 $data['enrollment'] = $enrollment;
+                //GENERATE PAYMENT
+                if ($request['status'] == Statusschooltype::STATUS_PREENROLLMENT) {
+                    //Find Costs
+                    $cost = $this->costRepository->costByGroup($request["year"], $request["group"]);
+                    //Find Student
+                    $student = $this->enrollmentRepository->getEnrollmentsLatestByStudent($request["student"]);
+                    //Find Family
+                    $family = $this->userfamilyRepository->getFamilyByUser($student->iduser);
+                    //Save Payment Individual
+                    $this->paymentRepository->setPaymentIndividual($family->family, $this->paymentRepository->configDataPayment($request["year"], $request["group"], $cost, $student, null));
+                }
                 //Stream
                 $user = $this->userRepository->find($request["student"]);
                 $group = $this->groupRepository->find($request["group"]);
                 event(new Stream(['description' => "asignó " . (($user->idgender == 1) ? " el estudiante " : " la estudiante ") . "$user->firstname $user->lastname al grupo $group->name"]));
+                //Commit
+                DB::commit();
+                //Response
                 return response()->json($data);
             }
             return response()->json($data);

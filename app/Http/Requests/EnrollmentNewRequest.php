@@ -2,9 +2,9 @@
 
 namespace SigeTurbo\Http\Requests;
 
-use SigeTurbo\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class EnrollmentNewRequest extends Request
+class EnrollmentNewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -113,17 +113,6 @@
                     <span>{{ Lang::get('sige.Formation') }}</span>
                 </a>
             </li>
-            <li id="resources" class="sige-nav-module {{ setCurrentModule('resources') }}"
-                title="{{ Lang::get('sige.Resources') }}" data-title="{{ Lang::get('sige.Resources') }}">
-                <a href="{{ URL::route('resources.dashboard') }}">
-                    @if(setCurrentModule('resources') == 'current')
-                        {!! HTML::image('images/modules/resources_active.svg',Lang::get('sige.Resources')) !!}
-                    @else
-                        {!! HTML::image('images/modules/resources.svg',Lang::get('sige.Resources')) !!}
-                    @endif
-                    <span>{{ Lang::get('sige.Resources') }}</span>
-                </a>
-            </li>
             <li id="communications" class="sige-nav-module {{ setCurrentModule('communications') }}"
                 title="{{ Lang::get('sige.Communications') }}" data-title="{{ Lang::get('sige.Communications') }}">
                 <a href="{{ URL::route('communications.dashboard') }}">

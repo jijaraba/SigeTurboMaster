@@ -141,7 +141,7 @@ class TasksController extends Controller
         $paginator->setPath('formation/tasks');
         return view('tasks.dashboard')
             ->withTasks($paginator)
-            ->withSubjects($this->subjectRepository->getSubjectsWithoutPeriod($this->yearRepository->getCurrentYear()->idyear)->prepend(['idsubject' => 0, 'name' => 'Todas'])->lists('name', 'idsubject'))
+            ->withSubjects($this->subjectRepository->getSubjectsWithoutPeriod($this->yearRepository->getCurrentYear()->idyear)->prepend(['idsubject' => 0, 'name' => 'Todas'])->pluck('name', 'idsubject'))
             ->withSort($sort)
             ->withSubject($subject)
             ->withOrder($order);
@@ -210,7 +210,7 @@ class TasksController extends Controller
         $paginator->setPath('/homeworks');
         return view('tasks.index')
             ->withTasks($paginator)
-            ->withGroups($this->groupRepository->getGroups($this->yearRepository->getCurrentYear()->idyear, $this->periodRepository->getCurrentPeriod()->idperiod)->prepend(['idgroup' => 0, 'name' => 'Todos'])->lists('name', 'idgroup'))
+            ->withGroups($this->groupRepository->getGroups($this->yearRepository->getCurrentYear()->idyear, $this->periodRepository->getCurrentPeriod()->idperiod)->prepend(['idgroup' => 0, 'name' => 'Todos'])->pluck('name', 'idgroup'))
             ->withSort($sort)
             ->withGroup($group)
             ->withOrder($order);
@@ -261,7 +261,7 @@ class TasksController extends Controller
     public function create()
     {
         return view('tasks.create')
-            ->withTasktypes($this->tasktypeRepository->all()->lists('name', 'idtasktype'));
+            ->withTasktypes($this->tasktypeRepository->all()->pluck('name', 'idtasktype'));
     }
 
     /**

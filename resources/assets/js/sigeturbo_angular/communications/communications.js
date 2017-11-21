@@ -1,7 +1,8 @@
 'use strict';
 
 //Core
-require('angular')
+let angular = require('angular');
+let moment = require('moment');
 require('angular-resource')
 
 
@@ -30,17 +31,6 @@ angular.module('Communications', [
     'Communications.directives',
     'Communications.controllers',
 ]).constant("moment", moment);
-
-angular.module('Communications').run(['Token','sigeTurboStorage',function(Token,sigeTurboStorage){
-    if (!sigeTurboStorage.getStorage('token')) {
-        Token.getToken().$promise.then(
-            function (data) {
-                sigeTurboStorage.setStorage('user', data.user);
-                sigeTurboStorage.setStorage('token', data.token);
-            }
-        );
-    }
-}]);
 
 angular.module('Communications').config(['$httpProvider',function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');

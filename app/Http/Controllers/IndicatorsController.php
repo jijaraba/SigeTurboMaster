@@ -237,6 +237,7 @@ class IndicatorsController extends Controller
      */
     public function getIndicatorsPendingByTeacher()
     {
+
         $data = [];
         $result = $this->indicatorRepository->getIndicatorsPendingByTeacher(
             $this->yearRepository->getCurrentYear()->idyear,

@@ -2,6 +2,7 @@
 
 namespace SigeTurbo\Repositories\Monitoring;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use SigeTurbo\Monitoring;
@@ -46,7 +47,10 @@ class MonitoringRepository implements MonitoringRepositoryInterface
             'idmonitoringtype' => $data['monitoringtype'],
             'rating' => $data['rating'],
             'monitoringable_id' => $data['monitoringtype'],
-            "created_by" => getUser()->iduser
+            "created_by" => getUser()->iduser,
+            "updated_by" => getUser()->iduser,
+            "created_at" => Carbon::now(),
+            "updated_at" => Carbon::now(),
         ]);
     }
 
@@ -62,7 +66,8 @@ class MonitoringRepository implements MonitoringRepositoryInterface
         $monitoring = Monitoring::find($monitoring);
         $monitoring->fill(array(
             'rating' => $data['rating'],
-            'updated_by' => getUser()->iduser
+            'updated_by' => getUser()->iduser,
+            "updated_at" => Carbon::now(),
         ));
 
         return $monitoring->save();
@@ -110,6 +115,8 @@ class MonitoringRepository implements MonitoringRepositoryInterface
     {
         return Monitoring::select(DB::raw("idmonitoringtype,idmonitoring,CASE WHEN (rating BETWEEN 0.00 AND 2.99) THEN 'DP' ELSE CASE WHEN (rating BETWEEN 3.00 AND 3.70) THEN 'DB' ELSE CASE WHEN (rating BETWEEN 3.71 AND 4.30) THEN 'DA' ELSE CASE WHEN (rating BETWEEN 4.31 AND 5.00) THEN 'DS' END END END END label, CASE WHEN (rating BETWEEN 0.00 AND 2.99) THEN '#ED5565' ELSE CASE WHEN (rating BETWEEN 3.00 AND 3.70) THEN '#FC6E51' ELSE CASE WHEN (rating BETWEEN 3.71 AND 4.30) THEN '#2f9da3' ELSE CASE WHEN (rating BETWEEN 4.31 AND 5.00) THEN '#A0D468' END END END END color,CASE WHEN (rating BETWEEN 0.00 AND 2.99) THEN '#DA4453' ELSE CASE WHEN (rating BETWEEN 3.00 AND 3.70) THEN '#E9573F' ELSE CASE WHEN (rating BETWEEN 3.71 AND 4.30) THEN '#3ababa' ELSE CASE WHEN (rating BETWEEN 4.31 AND 5.00) THEN '#8CC152' END END END END highlight,COUNT(*) value"))
             ->where('monitorings.idyear', '=', $year)
+            ->groupBy('idmonitoringtype')
+            ->groupBy('idmonitoring')
             ->groupBy('label')
             ->get();
     }
@@ -169,7 +176,7 @@ class MonitoringRepository implements MonitoringRepositoryInterface
      */
     public function getMonitoringsInCurrentWeek($year, $period, $user)
     {
-        return Monitoring::select('monitorings.*',DB::raw('COUNT(*) AS amount'))
+        return Monitoring::select('monitorings.*', DB::raw('COUNT(*) AS amount'))
             ->where('monitorings.idyear', '=', $year)
             ->where('monitorings.idperiod', '=', $period)
             ->where('monitorings.created_by', '=', $user)

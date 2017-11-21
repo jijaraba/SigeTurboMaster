@@ -24,21 +24,25 @@
             </label>
         </li>
         <li class="col-15 register">
-            <input name="register" type="text" ng-model="enrollment.register" ng-value="enrollment.register" placeholder="Registro">
+            <input name="register" type="text" ng-model="enrollment.register" ng-value="enrollment.register"
+                   placeholder="Registro">
         </li>
         <li class="col-15 status">
             <label class="select-arrow" for="idstatusschooltype">
                 <select id="idstatusschooltype" name="idstatusschooltype" ng-model="enrollment.idstatusschooltype"
-                        ng-options="statusschooltype.idstatusschooltype as statusschooltype.name for statusschooltype in statusschooltypes" required>
+                        ng-options="statusschooltype.idstatusschooltype as statusschooltype.name for statusschooltype in statusschooltypes"
+                        required>
                     <option value="">Estado</option>
                 </select>
             </label>
         </li>
         <li class="col-15 date">
-            <input name="statusdate" type="text" ng-model="enrollment.statusdate" ng-value="enrollment.statusdate" placeholder="Fecha Estado">
+            <input name="statusdate" type="text" ng-model="enrollment.statusdate" ng-value="enrollment.statusdate"
+                   placeholder="Fecha Estado">
         </li>
         <li class="col-05 reentry">
-            <input id="reentry" name="reentry" type="checkbox" ng-model="enrollment.reentry" ng-value="enrollment.reentry">
+            <input id="reentry" name="reentry" type="checkbox" ng-model="enrollment.reentry"
+                   ng-value="enrollment.reentry">
             <label class="fa fa-retweet" for="reentry"></label>
         </li>
         <li class="col-07 inclusion">

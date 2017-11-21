@@ -13,7 +13,8 @@
         </section>
         <section class="grid-100">
             <div class="sige-contained">
-                <a href="{{ URL::route('formation.observators.index')}}" class="btn btn-transparent"><i class="fa fa-arrow-left"></i>Volver</a>
+                <a href="{{ URL::route('formation.observators.index')}}" class="btn btn-transparent"><i
+                            class="fa fa-arrow-left"></i>Volver</a>
                 <section class="sige-observer-lists">
                     <h4>Observador {{ $student->firstname }}</h4>
                     <div class="search-container">
@@ -48,36 +49,38 @@
                     <div class="observer-list">
                         <ul id="observer-list" class="display-horizontal col-100">
                             @foreach($observers as $observer)
-                            <li class="col-100">
-                                <div class="observer" id="observer" data-observer-id="{{ $observer->idobserver }}">
-                                    <ul class="display-horizontal col-100">
-                                        <li class="header col-100">
-                                            <div class="teacher-info col-100">
-                                                <ul class="display-horizontal col-100">
-                                                    <li class="photo col-10">
-                                                        <div>
-                                                            <img src="{{ env('ASSETS_SERVER') . "/img/users/" . $observer->teacher_photo}}" alt="{{ $observer->teacher }}" title="{{ $observer->teacher }}"/>
-                                                        </div>
-                                                    </li>
-                                                    <li class="teacher col-90">
-                                                        <div>{{ $observer->teacher }}</div>
-                                                        <div>{{ $observer->teacher_email }}</div>
-                                                        <div>{{ $observer->observed_at }}</div>
-                                                    </li>
+                                <li class="col-100">
+                                    <div class="observer" id="observer" data-observer-id="{{ $observer->idobserver }}">
+                                        <ul class="display-horizontal col-100">
+                                            <li class="header col-100">
+                                                <div class="teacher-info col-100">
+                                                    <ul class="display-horizontal col-100">
+                                                        <li class="photo col-10">
+                                                            <div>
+                                                                <img src="{{ env('ASSETS_SERVER') . "/img/users/" . $observer->teacher_photo}}"
+                                                                     alt="{{ $observer->teacher }}"
+                                                                     title="{{ $observer->teacher }}"/>
+                                                            </div>
+                                                        </li>
+                                                        <li class="teacher col-90">
+                                                            <div>{{ $observer->teacher }}</div>
+                                                            <div>{{ $observer->teacher_email }}</div>
+                                                            <div>{{ $observer->observed_at }}</div>
+                                                        </li>
 
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li class="body col-100">
-                                            <div class="type">{{ $observer->type }}</div>
-                                            <p class="observer">{{ $observer->observer }}</p>
-                                            @foreach(explode(',',$observer->tags) as $tag)
-                                            <span class="tags">{{ $tag }}</span>
-                                            @endforeach
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="body col-100">
+                                                <div class="type">{{ $observer->type }}</div>
+                                                <p class="observer">{{ $observer->observer }}</p>
+                                                @foreach(explode(',',$observer->tags) as $tag)
+                                                    <span class="tags">{{ $tag }}</span>
+                                                @endforeach
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
@@ -86,16 +89,16 @@
         </section>
     </section>
 @stop
-@section("script")
-    {!! HTML::script('js/' . getCurrentRoute() . '.js') !!}
-@stop
 @section("vendor")
-    {!! HTML::script('js/vendor/vendor.js') !!}
+    {!! HTML::script(mix('js/vendor/vendor.js')) !!}
+@stop
+@section("script")
+    {!! HTML::script(mix('js/angular/' . getCurrentRoute() . '.js')) !!}
 @stop
 @section("socket")
-    {!! HTML::script('js/vendor/socket.io.js') !!}
+    {!! HTML::script(mix('js/vendor/socket.io.js')) !!}
 @stop
 @section("sigeturbo")
-    {!! HTML::script('js/SigeTurbo.js') !!}
-    {!! HTML::script('js/Stream.js') !!}
+    {!! HTML::script(mix('js/SigeTurbo.js')) !!}
+    {!! HTML::script(mix('js/Stream.js')) !!}
 @stop

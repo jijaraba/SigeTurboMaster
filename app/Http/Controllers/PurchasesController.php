@@ -121,8 +121,8 @@ class PurchasesController extends Controller
      */
     public function create(){
         return view('purchases.create')
-            ->withStatuses($this->statuspurchaseRepository->all()->lists('name', 'idstatuspurchase'))
-            ->withProviders($this->providerRepository->all()->lists('name','idprovider'));
+            ->withStatuses($this->statuspurchaseRepository->all()->pluck('name', 'idstatuspurchase'))
+            ->withProviders($this->providerRepository->all()->pluck('name','idprovider'));
     }
 
     /**
@@ -180,8 +180,8 @@ class PurchasesController extends Controller
     public function edit($purchase, Request $request){
         return view('purchases.edit')
             ->withPurchase($this->purchaseProvider->find($purchase))
-            ->withStatuses($this->statuspurchaseRepository->all()->lists('name', 'idstatuspurchase'))
-            ->withProviders($this->providerRepository->all()->lists('name','idprovider'))
+            ->withStatuses($this->statuspurchaseRepository->all()->pluck('name', 'idstatuspurchase'))
+            ->withProviders($this->providerRepository->all()->pluck('name','idprovider'))
             ->withSort($request['sort'])
             ->withOrder($request['order'])
             ->withPage($request['page']);

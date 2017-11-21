@@ -139,8 +139,8 @@ class AssetsController extends Controller
     public function create(Request $request)
     {
         return view('assets.create')
-            ->withProviders($this->providerRepository->all()->lists('name', 'idprovider'))
-            ->withAssetcategories($this->assetcategoryRepository->all()->lists('name', 'idassetcategory'))
+            ->withProviders($this->providerRepository->all()->pluck('name', 'idprovider'))
+            ->withAssetcategories($this->assetcategoryRepository->all()->pluck('name', 'idassetcategory'))
             ->withSearch($request['search'])
             ->withSort($request['sort'])
             ->withOrder($request['order'])
@@ -185,8 +185,8 @@ class AssetsController extends Controller
     {
         return view('assets.edit')
             ->withAsset($this->assetRepository->find($asset))
-            ->withProviders($this->providerRepository->all()->lists('name', 'idprovider'))
-            ->withAssetcategories($this->assetcategoryRepository->all()->lists('name', 'idassetcategory'))
+            ->withProviders($this->providerRepository->all()->pluck('name', 'idprovider'))
+            ->withAssetcategories($this->assetcategoryRepository->all()->pluck('name', 'idassetcategory'))
             ->withSearch($request['search'])
             ->withSort($request['sort'])
             ->withOrder($request['order'])

@@ -72,8 +72,8 @@ class InventoriesController extends Controller
         return view('inventories.index')
             ->withSearch($search)
             ->withInventorytype($this->inventorytypeRepository->getInventoryLatest())
-            ->withUbications($this->ubicationRepository->all()->lists('codes', 'idubication'))
-            ->withQualities($this->qualityRepository->all()->lists('name', 'idquality'));
+            ->withUbications($this->ubicationRepository->all()->pluck('codes', 'idubication'))
+            ->withQualities($this->qualityRepository->all()->pluck('name', 'idquality'));
     }
 
 

@@ -437,7 +437,7 @@ angular.module('Admissions.directives', [])
             }
         };
     }])
-    .directive('sigeTurboEnrollmentNew', ['$log', 'SweetAlert', 'ASSETS_SERVER', 'Group', 'Enrollment', function ($log, SweetAlert, ASSETS_SERVER, Group, Enrollment) {
+    .directive('sigeTurboEnrollmentNew', ['$log', 'SweetAlert', 'ASSETS_SERVER', 'Group', 'Enrollment', '$window', function ($log, SweetAlert, ASSETS_SERVER, Group, Enrollment, $window) {
         return {
             restrict: 'AE',
             scope: {
@@ -528,7 +528,7 @@ angular.module('Admissions.directives', [])
 
                         SweetAlert.swal({
                             title: '¿Está seguro?',
-                            text: 'Una vez le asigne al estudiante la Admisión se genera un cobro por concepto de Matrícula y Pensión. No aplica para los estado de Promoción de estudiantes',
+                            text: 'Una vez asigne al estudiante la Admisión se genera un cobro por concepto de Matrícula y Pensión. Solo Aplica para el estado: PREMATRICULADO',
                             type: 'warning',
                             showCancelButton: true,
                             confirmButtonColor: '#53BBB4',
@@ -552,13 +552,15 @@ angular.module('Admissions.directives', [])
                                     function (result) {
                                         $scope.enrollment.idenrollment = result.enrollment.idenrollment;
                                         SweetAlert.success('Excelente', result.message);
+                                        //Reload
+                                        $window.location.reload()
                                     },
-                                    function (error) {
-                                        SweetAlert.error('Error', 'Se ha presentado un error al guardar la información: ' + error);
+                                    function () {
+                                        SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                                     }
                                 );
                             }
-                            
+
                         });
 
                     } else {
@@ -960,7 +962,7 @@ angular.module('Admissions.directives', [])
                             if (typeof oldUser != 'object') {
                                 $scope.search.iduser = newUser.iduser;
                                 $scope.result = JSON.stringify($scope.search);
-                                
+
                             }
                         }
                     }

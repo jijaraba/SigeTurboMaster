@@ -14,7 +14,8 @@
                 <ul class="display-horizontal col-100">
                     <li class="col-50 gutter-10">
                         <label class="select-arrow" for="idyear">
-                            <select name="idyear" id="idyear" ng-model="academic.year" ng-init="academic.year = '2017'" ng-change="change(academic.year,academic.period)">
+                            <select name="idyear" id="idyear" ng-model="academic.year" ng-init="academic.year = '2017'"
+                                    ng-change="change(academic.year,academic.period)">
                                 <option value="2017">2017-2018</option>
                                 <option value="2016">2016-2017</option>
                                 <option value="2015">2015-2016</option>
@@ -25,7 +26,8 @@
                     </li>
                     <li class="col-50 gutter-10">
                         <label class="select-arrow" for="idperiod">
-                            <select name="idperiod" id="idperiod" ng-model="academic.period" ng-init="academic.period = '1'" ng-change="change(academic.year,academic.period)">
+                            <select name="idperiod" id="idperiod" ng-model="academic.period"
+                                    ng-init="academic.period = '1'" ng-change="change(academic.year,academic.period)">
                                 <option value="1">Primer Periodo</option>
                                 <option value="2">Segundo Periodo</option>
                                 <option value="3">Tercer Periodo</option>
@@ -42,14 +44,19 @@
                             <ul class="display-horizontal">
                                 <li class="col-40" id="description">
                                     <ul class="display-horizontal line">
-                                        <li ng-if="DP" class="col-100">@{{ DP }} <div class="dp"></div>
-                                        <li ng-if="DB" class="col-100">@{{ DB }} <div class="db"></div>
-                                        <li ng-if="DA" class="col-100">@{{ DA }} <div class="da"></div>
-                                        <li ng-if="DS" class="col-100">@{{ DS }} <div class="ds"></div>
+                                        <li ng-if="DP" class="col-100">@{{ DP }}
+                                            <div class="dp"></div>
+                                        <li ng-if="DB" class="col-100">@{{ DB }}
+                                            <div class="db"></div>
+                                        <li ng-if="DA" class="col-100">@{{ DA }}
+                                            <div class="da"></div>
+                                        <li ng-if="DS" class="col-100">@{{ DS }}
+                                            <div class="ds"></div>
                                     </ul>
                                 </li>
                                 <li class="col-60" id="chart">
-                                    <canvas tc-chartjs-doughnut chart-options="options" chart-data="data" width="250" height="250"></canvas>
+                                    <canvas tc-chartjs-doughnut chart-options="options" chart-data="data" width="250"
+                                            height="250"></canvas>
                                 </li>
                             </ul>
                         </article>
@@ -70,7 +77,8 @@
                             <li class="col-100">
                                 <article>
                                     <h5 class="header-aquamarine">Por Segmento</h5>
-                                    <p>Seleccione el segmento <strong>Grupo, Asignatura, Area</strong> del cual desea ver las estadísticas</p>
+                                    <p>Seleccione el segmento <strong>Grupo, Asignatura, Area</strong> del cual desea
+                                        ver las estadísticas</p>
                                     <ul class="display-horizontal col-100 reports">
                                         <li class="col-100">
                                             <a href="/formation/statistics/group">
@@ -100,16 +108,16 @@
         </section>
     </section>
 @stop
-@section("script")
-    {!! HTML::script('js/' . getCurrentRoute() . '.js') !!}
-@stop
 @section("vendor")
-    {!! HTML::script('js/vendor/vendor.js') !!}
+    {!! HTML::script(mix('js/vendor/vendor.js')) !!}
+@stop
+@section("script")
+    {!! HTML::script(mix('js/angular/' . getCurrentRoute() . '.js')) !!}
 @stop
 @section("socket")
-    {!! HTML::script('js/vendor/socket.io.js') !!}
+    {!! HTML::script(mix('js/vendor/socket.io.js')) !!}
 @stop
 @section("sigeturbo")
-    {!! HTML::script('js/SigeTurbo.js') !!}
-    {!! HTML::script('js/Stream.js') !!}
+    {!! HTML::script(mix('js/SigeTurbo.js')) !!}
+    {!! HTML::script(mix('js/Stream.js')) !!}
 @stop

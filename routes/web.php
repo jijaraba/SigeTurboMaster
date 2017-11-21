@@ -38,6 +38,64 @@ Route::get('/logout', [
     'uses' => 'Auth\LoginController@logout',
 ]);
 
+
+/**
+ * ===================================
+ * Guest Module
+ * ===================================
+ */
+//Tasks
+Route::get('/tasks', [
+    'as' => 'guest.tasks.index',
+    'uses' => 'TasksController@index'
+]);
+Route::post('/tasks', [
+    'as' => 'guest.tasks.index',
+    'uses' => 'TasksController@index'
+]);
+Route::get('/tasks/{taskID}', [
+    'as' => 'guest.tasks.gettask',
+    'uses' => 'TasksController@gettask'
+]);
+Route::get('/tasks/gettasks', [
+    'as' => 'guest.tasks.gettasks',
+    'uses' => 'TasksController@getTasks'
+]);
+//Homeworks
+Route::get('/homeworks', [
+    'as' => 'guest.tasks.index',
+    'uses' => 'TasksController@index'
+]);
+Route::post('/homeworks', [
+    'as' => 'guest.tasks.index',
+    'uses' => 'TasksController@index'
+]);
+Route::get('/homeworks/{taskID}', [
+    'as' => 'guest.tasks.gettask',
+    'uses' => 'TasksController@gettask'
+]);
+Route::get('/homeworks/gettasks', [
+    'as' => 'guest.tasks.gettasks',
+    'uses' => 'TasksController@getTasks'
+]);
+Route::get('/homeworks/detail/{task}/', [
+    'as' => 'guest.tasks.detail',
+    'uses' => 'TasksController@getDetail'
+]);
+
+//Payments
+Route::get('/payments/', [
+    'as' => 'guest.payments.guest',
+    'uses' => 'PaymentsController@guest'
+]);
+
+//Lists Attendancess
+Route::get('/homeworks/detail/{task}/', [
+    'as' => 'guest.tasks.detail',
+    'uses' => 'TasksController@getDetail'
+]);
+
+
 /**
  * ===================================
  * Authenticated Area
@@ -212,64 +270,6 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
         }
         return "OK";
     }]);
-
-
-    /**
-     * ===================================
-     * Guest Module
-     * ===================================
-     */
-    //Tasks
-    Route::get('/tasks', [
-        'as' => 'guest.tasks.index',
-        'uses' => 'TasksController@index'
-    ]);
-    Route::post('/tasks', [
-        'as' => 'guest.tasks.index',
-        'uses' => 'TasksController@index'
-    ]);
-    Route::get('/tasks/{taskID}', [
-        'as' => 'guest.tasks.gettask',
-        'uses' => 'TasksController@gettask'
-    ]);
-    Route::get('/tasks/gettasks', [
-        'as' => 'guest.tasks.gettasks',
-        'uses' => 'TasksController@getTasks'
-    ]);
-    //Homeworks
-    Route::get('/homeworks', [
-        'as' => 'guest.tasks.index',
-        'uses' => 'TasksController@index'
-    ]);
-    Route::post('/homeworks', [
-        'as' => 'guest.tasks.index',
-        'uses' => 'TasksController@index'
-    ]);
-    Route::get('/homeworks/{taskID}', [
-        'as' => 'guest.tasks.gettask',
-        'uses' => 'TasksController@gettask'
-    ]);
-    Route::get('/homeworks/gettasks', [
-        'as' => 'guest.tasks.gettasks',
-        'uses' => 'TasksController@getTasks'
-    ]);
-    Route::get('/homeworks/detail/{task}/', [
-        'as' => 'guest.tasks.detail',
-        'uses' => 'TasksController@getDetail'
-    ]);
-
-    //Payments
-    Route::get('/payments/', [
-        'as' => 'guest.payments.guest',
-        'uses' => 'PaymentsController@guest'
-    ]);
-
-    //Lists Attendancess
-    Route::get('/homeworks/detail/{task}/', [
-        'as' => 'guest.tasks.detail',
-        'uses' => 'TasksController@getDetail'
-    ]);
-
 
     /**
      * ===================================

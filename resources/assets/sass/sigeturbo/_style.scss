@@ -1771,6 +1771,33 @@ input[type="radio"]:checked + label {
 
 //*
 //|-----------------------------------------------------------
+//| Datepicker
+//|-----------------------------------------------------------
+//*/
+.datepicker-container {
+  padding: 15px;
+}
+
+.datepicker-top-left, .datepicker-top-right {
+  border-top-color: $sige-global-bgcolor-03 !important;
+}
+
+.datepicker-panel > ul > li.picked, .datepicker-panel > ul > li.picked:hover {
+  color: white !important;
+  background-color: $sige-global-bgcolor-03 !important;
+}
+
+.datepicker-panel > ul > li.highlighted:hover {
+  background-color: rgba($sige-global-bgcolor-03, 0.5) !important;
+}
+
+.datepicker-panel > ul > li.muted, .datepicker-panel > ul > li.muted:hover {
+  background-color: rgba($sige-global-bgcolor-21, 0.5) !important;
+}
+
+
+//*
+//|-----------------------------------------------------------
 //| Media Queries
 //|-----------------------------------------------------------
 //*/

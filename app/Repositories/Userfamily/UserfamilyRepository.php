@@ -98,7 +98,7 @@ class UserfamilyRepository implements UserfamilyRepositoryInterface
         if (isset($data['category']) && $data['category'] != 'null') {
             $typesearch = (getUser()->role_selected === 'Student') ? 'iduser' : 'idfamily'; //Esta condición nos permite hacer una búsqueda que dependera del Rol Seleccionado del usuario, si la categoría es estudiante, solo devolvera los datos del estudiante, de lo contrario devolvera los demas miembros de la familia que sean estudiantes incluyendo el usuario de la búsqueda
             $category = $data['category'];
-            DB::setFetchMode(PDO::FETCH_ASSOC);
+
             return DB::select("SELECT
             DISTINCT users.iduser,
             users.firstname,
@@ -118,10 +118,9 @@ class UserfamilyRepository implements UserfamilyRepositoryInterface
             userfamilies." . $typesearch . " IN (SELECT " . $typesearch . " FROM userfamilies WHERE userfamilies.iduser = $user)
             AND users.idstatus IN (1 , 2, 3, 5, 6, 7, 11)
             AND users.idcategory = $category
-          GROUP BY users.iduser  ");
+          GROUP BY users.iduser, userfamilies.idfamily");
 
         } else {
-            DB::setFetchMode(PDO::FETCH_ASSOC);
             return DB::select("SELECT
             DISTINCT users.iduser,
             users.firstname,
@@ -139,7 +138,7 @@ class UserfamilyRepository implements UserfamilyRepositoryInterface
             INNER JOIN categories ON categories.idcategory = users.idcategory
           WHERE
             userfamilies.idfamily IN (SELECT idfamily FROM userfamilies WHERE userfamilies.iduser = $user)
-          GROUP BY users.iduser  ");
+          GROUP BY users.iduser, userfamilies.idfamily");
         }
 
     }
@@ -224,7 +223,7 @@ class UserfamilyRepository implements UserfamilyRepositoryInterface
      * @param $family
      * @return array
      */
-    public function getEmailsByFamily($year,$family)
+    public function getEmailsByFamily($year, $family)
     {
         $data = DB::SELECT("
             SELECT

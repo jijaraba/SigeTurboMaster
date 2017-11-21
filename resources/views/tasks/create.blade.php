@@ -10,7 +10,8 @@
     <section ng-controller="TaskNewController">
         <div class="grid-100">
             <div class="sige-contained">
-                <a href="{{ URL::route('formation.tasks.index')}}" class="btn btn-transparent"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
+                <a href="{{ URL::route('formation.tasks.index')}}" class="btn btn-transparent"><i
+                            class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
                 <section class="sige-task-new">
                     <h4>Nueva Tarea</h4>
                     <form ng-submit="Insert()" name="taskForm" id="taskForm" method="post">
@@ -25,16 +26,20 @@
                                     </label>
                                 </li>
                                 <li class="col-50 gutter-5">
-                                    <input name="name" id="name" type="text" ng-model="task.name" placeholder="Nombre de la Tarea" required>
+                                    <input name="name" id="name" type="text" ng-model="task.name"
+                                           placeholder="Nombre de la Tarea" required>
                                 </li>
                                 <li class="col-15 gutter-5">
-                                    <input name="starts" id="starts" type="text" ng-model="task.starts" placeholder="Inicio" required>
+                                    <input name="starts" id="starts" type="text" ng-model="task.starts"
+                                           placeholder="Inicio" required>
                                 </li>
                                 <li class="col-15 gutter-5">
-                                    <input name="ends" id="ends" type="text" ng-model="task.ends" placeholder="Terminación" required>
+                                    <input name="ends" id="ends" type="text" ng-model="task.ends"
+                                           placeholder="Terminación" required>
                                 </li>
                                 <li class="col-100 gutter-5">
-                                    <textarea name="description" id="description" ng-model="task.description" placeholder="Descripción de la Tarea"></textarea>
+                                    <textarea name="description" id="description" ng-model="task.description"
+                                              placeholder="Descripción de la Tarea"></textarea>
                                 </li>
                             </ul>
                         </fieldset>
@@ -42,7 +47,8 @@
                             <section class="file-upload" ng-if="taskSave">
                                 <ul class="display-horizontal col-100">
                                     <li class="col-100 gutter-5">
-                                        <sige-turbo-file-upload type="task" id="@{{task.idtask}}"></sige-turbo-file-upload>
+                                        <sige-turbo-file-upload type="task"
+                                                                id="@{{task.idtask}}"></sige-turbo-file-upload>
                                     </li>
                                 </ul>
                             </section>
@@ -50,7 +56,8 @@
                         <fieldset>
                             <ul class="display-horizontal col-100">
                                 <li class="col-100">
-                                    <button type="submit" class="btn btn-aquamarine">{{ Lang::get('sige.Save') }}</button>
+                                    <button type="submit"
+                                            class="btn btn-aquamarine">{{ Lang::get('sige.Save') }}</button>
                                 </li>
                             </ul>
                         </fieldset>
@@ -60,16 +67,16 @@
         </div>
     </section>
 @stop
-@section("script")
-    {!! HTML::script('js/' . getCurrentRoute() . '.js') !!}
-@stop
 @section("vendor")
-    {!! HTML::script('js/vendor/vendor.js') !!}
+    {!! HTML::script(mix('js/vendor/vendor.js')) !!}
+@stop
+@section("script")
+    {!! HTML::script(mix('js/angular/' . getCurrentRoute() . '.js')) !!}
 @stop
 @section("socket")
-    {!! HTML::script('js/vendor/socket.io.js') !!}
+    {!! HTML::script(mix('js/vendor/socket.io.js')) !!}
 @stop
 @section("sigeturbo")
-    {!! HTML::script('js/SigeTurbo.js') !!}
-    {!! HTML::script('js/Stream.js') !!}
+    {!! HTML::script(mix('js/SigeTurbo.js')) !!}
+    {!! HTML::script(mix('js/Stream.js')) !!}
 @stop

@@ -87,7 +87,7 @@ class ObserversController extends Controller
             ->withYear($year)
             ->withGroup($group)
             ->withStudent($this->userRepository->find($student))
-            ->withObservertypes($this->observertypeRepository->all()->lists('name','idobservertype'));
+            ->withObservertypes($this->observertypeRepository->all()->pluck('name','idobservertype'));
     }
 
     /**

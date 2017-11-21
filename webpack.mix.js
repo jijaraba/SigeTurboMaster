@@ -22,7 +22,8 @@ mix
 //Socket
 mix
     .scripts([
-        'bower_components/socket.io-client/dist/socket.io.js'
+        'bower_components/socket.io-client/dist/socket.io.js',
+        'bower_components/datepicker/dist/datepicker.js',
     ], 'public/js/vendor/socket.io.js');
 
 /*
@@ -59,6 +60,9 @@ mix
     .styles([
         'bower_components/intro.js/minified/introjs.min.css',
         'bower_components/sweetalert/dist/sweetalert.css',
+        'bower_components/datepicker/dist/datepicker.css',
+        'node_modules/ng-dialog/css/ngDialog.css',
+        'node_modules/ng-dialog/css/ngDialog-theme-default.css',
     ], 'public/css/vendor/vendor.css');
 
 /*
@@ -68,8 +72,13 @@ mix
  |--------------------------------------------------------------------------
 */
 mix
-    .js('resources/assets/js/sigeturbo_angular/dashboard/dashboard.js', 'public/js/angular')
     .js('resources/assets/js/sigeturbo_angular/admissions/admissions.js', 'public/js/angular')
+    .js('resources/assets/js/sigeturbo_angular/communications/communications.js', 'public/js/angular')
+    .js('resources/assets/js/sigeturbo_angular/dashboard/dashboard.js', 'public/js/angular')
+    .js('resources/assets/js/sigeturbo_angular/financials/financials.js', 'public/js/angular')
+    .js('resources/assets/js/sigeturbo_angular/formation/formation.js', 'public/js/angular')
+    .js('resources/assets/js/sigeturbo_angular/guest/guest.js', 'public/js/angular')
+    .js('resources/assets/js/sigeturbo_angular/parents/parents.js', 'public/js/angular')
     .webpackConfig({
         module: {
             rules: [

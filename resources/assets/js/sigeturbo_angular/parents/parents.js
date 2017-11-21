@@ -1,7 +1,8 @@
 'use strict';
 
 //Core
-require('angular')
+let angular = require('angular');
+let moment = require('moment');
 require('angular-resource')
 require('angular-timer')
 

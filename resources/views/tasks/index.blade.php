@@ -8,7 +8,17 @@
                 <h4>{{ Lang::get('sige.Task') }}</h4>
                 <section class="info">
                     <a class="icon icon-info" href="#"></a>
-                    <p>@if (getUser()) {{ getUser()->firstname }}, en los enlaces <a style="color:#53BBB4" href="{{ env('ASSETS_SERVER') }}/global/TNSProgramadorTareas2016_3.pdf">PROGRAMADOR DE TAREAS</a> y <a style="color:#53BBB4" href="{{ env('ASSETS_SERVER') }}/global/TNSRúbricaEvaluaciónTareasV3.pdf">RÚBRICA PARA LA EVALUACIÓN DE TAREAS</a> puede encontrar información relativa a la asignación de tareas y la forma de evaluación. Seleccione @else En los enlaces <a style="color:#53BBB4" href="{{ env('ASSETS_SERVER') }}/global/TNSProgramadorTareas2016_2.pdf">PROGRAMADOR DE TAREAS</a> y <a style="color:#53BBB4" href="{{ env('ASSETS_SERVER') }}/global/TNSRúbricaEvaluaciónTareasV3.pdf">RÚBRICA PARA LA EVALUACIÓN DE TAREAS</a> puede encontrar información relativa a la asignación de tareas y la forma de evaluación. Seleccione @endif las opciones que
+                    <p>@if (getUser()) {{ getUser()->firstname }}, en los enlaces <a style="color:#53BBB4"
+                                                                                     href="{{ env('ASSETS_SERVER') }}/global/TNSProgramadorTareas2016_3.pdf">PROGRAMADOR
+                            DE TAREAS</a> y <a style="color:#53BBB4"
+                                               href="{{ env('ASSETS_SERVER') }}/global/TNSRúbricaEvaluaciónTareasV3.pdf">RÚBRICA
+                            PARA LA EVALUACIÓN DE TAREAS</a> puede encontrar información relativa a la asignación de
+                        tareas y la forma de evaluación. Seleccione @else En los enlaces <a style="color:#53BBB4"
+                                                                                            href="{{ env('ASSETS_SERVER') }}/global/TNSProgramadorTareas2016_2.pdf">PROGRAMADOR
+                            DE TAREAS</a> y <a style="color:#53BBB4"
+                                               href="{{ env('ASSETS_SERVER') }}/global/TNSRúbricaEvaluaciónTareasV3.pdf">RÚBRICA
+                            PARA LA EVALUACIÓN DE TAREAS</a> puede encontrar información relativa a la asignación de
+                        tareas y la forma de evaluación. Seleccione @endif las opciones que
                         más se ajusten a sus necesidades de búsqueda tales como seleccionar el <strong>grupo</strong> y
                         la forma de ordenar la tarea. <strong>Recuerde:</strong> Puede ampliar la información asociada a
                         la tarea dando clic en el botón "Detalle" .</p>
@@ -81,7 +91,8 @@
                                     <li class="col-10 photo">
                                         <div>
                                             <img src="{{env('ASSETS_SERVER')}}/img/users/{{$task->photo}}"
-                                                 alt="{{ $task->teacher }}" title="{{ $task->teacher }} - {{ $task->email }}"/>
+                                                 alt="{{ $task->teacher }}"
+                                                 title="{{ $task->teacher }} - {{ $task->email }}"/>
                                         </div>
                                     </li>
                                     <li class="col-10 group">
@@ -123,15 +134,15 @@
         </section>
     </div>
 @stop
-@section("script")
-    {!! HTML::script('js/' . getCurrentRoute() . '.js') !!}
-@stop
 @section("vendor")
-    {!! HTML::script('js/vendor/vendor.js') !!}
+    {!! HTML::script(mix('js/vendor/vendor.js')) !!}
+@stop
+@section("script")
+    {!! HTML::script(mix('js/angular/' . getCurrentRoute() . '.js')) !!}
 @stop
 @section("socket")
-    {!! HTML::script('js/vendor/socket.io.js') !!}
+    {!! HTML::script(mix('js/vendor/socket.io.js')) !!}
 @stop
 @section("sigeturbo")
-    {!! HTML::script('js/Homework.js') !!}
+    {!! HTML::script(mix('js/Homework.js')) !!}
 @stop

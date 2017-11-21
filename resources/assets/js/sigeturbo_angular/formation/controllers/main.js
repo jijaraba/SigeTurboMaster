@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 'use strict';
 /* Formation Controllers */
 angular.module('Formation.controllers', [])
-    .controller('DashboardController', ["$scope", '$log', 'Monitoring', 'Year', 'Indicator', 'ngDialog', function ($scope, $log, Monitoring, Year, Indicator, ngDialog) {
+    .controller('DashboardController', ['$scope', '$log', 'Monitoring', 'Year', 'Indicator', 'ngDialog', function ($scope, $log, Monitoring, Year, Indicator, ngDialog) {
         $scope.academic = [];
         $scope.performances = [];
 
@@ -33,12 +34,14 @@ angular.module('Formation.controllers', [])
                         $scope.academic.year = year.idyear;
                         $scope.globalPerformances($scope.academic.year);
                         //Verified Pendings 
-                        Indicator.getIndicatorsPendingByTeacher().$promise.then(
+
+                        //TO-DO
+                        /*Indicator.getIndicatorsPendingByTeacher().$promise.then(
                             function (pendings) {
                                 if (pendings.length > 0) {
                                     $scope.pendings = pendings;
                                     ngDialog.open({
-                                        template: require('../directives/views/partials/indicators/indicatorpending.html') ,
+                                        template: require('../directives/views/partials/indicators/indicatorpending.html'),
                                         plain: true,
                                         scope: $scope
                                     });
@@ -47,7 +50,7 @@ angular.module('Formation.controllers', [])
                             function (error) {
                                 $log.error(error);
                             }
-                        );
+                        );*/
                     },
                     function (error) {
                         $log.error(error);
@@ -71,37 +74,37 @@ angular.module('Formation.controllers', [])
                 $scope.DS = 0;
                 $scope.performances.$promise.then(
                     function (performances) {
-                        angular.forEach(performances, function (performance, key) {
+                        angular.forEach(performances, function (performance) {
                             $scope.total = $scope.total + performance.value;
                             switch (performance.label) {
                                 case 'DP':
                                     $scope.DP = performance.value;
-                                    $scope.data.labels.push("DP");
+                                    $scope.data.labels.push('DP');
                                     $scope.data.datasets[0].data.push(performance.value);
                                     $scope.data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                                 case 'DB':
                                     $scope.DB = performance.value;
-                                    $scope.data.labels.push("DP");
+                                    $scope.data.labels.push('DP');
                                     $scope.data.datasets[0].data.push(performance.value);
                                     $scope.data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                                 case 'DA':
                                     $scope.DA = performance.value;
-                                    $scope.data.labels.push("DP");
+                                    $scope.data.labels.push('DP');
                                     $scope.data.datasets[0].data.push(performance.value);
                                     $scope.data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                                 case 'DS':
                                     $scope.DS = performance.value;
-                                    $scope.data.labels.push("DP");
+                                    $scope.data.labels.push('DP');
                                     $scope.data.datasets[0].data.push(performance.value);
                                     $scope.data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                             }
                         });
                     }
-                )
+                );
             }
         };
 
@@ -114,36 +117,33 @@ angular.module('Formation.controllers', [])
         };
 
     }])
-    .controller('IndicatorController', ['$scope', '$log', function ($scope, $log) {
-        $scope.message = "Indicators";
+    .controller('IndicatorController', ['$scope', function ($scope) {
+        $scope.message = 'Indicators';
     }])
-    .controller('MonitoringtypeController', ['$scope', '$log', function ($scope, $log) {
-        $scope.message = "Monitoringtype";
+    .controller('MonitoringtypeController', ['$scope', function ($scope) {
+        $scope.message = 'Monitoringtype';
     }])
-    .controller('MonitoringController', ['$scope', 'ASSETS_SERVER', "$log", function ($scope, ASSETS_SERVER, $log) {
+    .controller('MonitoringController', ['$scope', 'ASSETS_SERVER', function ($scope, ASSETS_SERVER) {
         $scope.showGrid = false;
         $scope.assets = ASSETS_SERVER;
     }])
-    .controller('AttendanceController', ['$scope', '$log', function ($scope, $log) {
-        $scope.message = "Attendance";
+    .controller('AttendanceController', ['$scope', function ($scope) {
+        $scope.message = 'Attendance';
     }])
-    .controller('AttendanceShowController', ['$scope', '$log', function ($scope, $log) {
-        $scope.message = "Attendance";
+    .controller('AttendanceShowController', ['$scope', function ($scope) {
+        $scope.message = 'Attendance';
     }])
-    .controller('ObservatorController', ['$scope', '$log', function ($scope, $log) {
-        $scope.message = "Observator";
+    .controller('ObservatorController', ['$scope', function ($scope) {
+        $scope.message = 'Observator';
     }])
-    .controller('VoteController', ['$scope', '$log', function ($scope, $log) {
-        alert("Hola");
+    .controller('VoteController', ['$scope', function () {
+
     }])
-    .controller('ReportsController', ['$scope', '$log', 'Monitoring', function ($scope, $log,Monitoring) {
+    .controller('ReportsController', ['$scope', '$log', 'Monitoring', function ($scope, $log, Monitoring) {
         $scope.search = {};
-        $scope.elementsearch="";
+        $scope.elementsearch = '';
         $scope.resumen = {};
 
-        /*scope.$watch('elementsearch', function (newElementsearch,oldElementsearch) {
-            scope.q = newTeacher;
-        });*/
         $scope.init = function (search) {
             $scope.search = search;
             Monitoring.getMonitoringsPendingsByUser({
@@ -154,18 +154,17 @@ angular.module('Formation.controllers', [])
                     $scope.registries = registries;
                 },
                 function (error) {
-                    $log.error(error)
+                    $log.error(error);
                 }
             );
-           
+
         };
     }])
-    .controller('ContractController', ['$scope', '$log', function ($scope, $log) {
-        $scope.message = "Contracts";
+    .controller('ContractController', ['$scope', function ($scope) {
+        $scope.message = 'Contracts';
         $scope.search = {};
         $scope.init = function (search) {
             $scope.search = search;
-           // alert("En controlador : "+JSON.stringify(search));
         };
     }])
     .controller('ObservatorNewController', ['$scope', '$log', 'SweetAlert', 'Observer', function ($scope, $log, SweetAlert, Observer) {
@@ -176,14 +175,14 @@ angular.module('Formation.controllers', [])
         $scope.observer = {
             'type': 3,
             'tags': 'General'
-        }
+        };
 
         $scope.$watch('observer.type', function (newType, oldType) {
             if (newType !== oldType) {
                 if (newType !== null && $scope.observer.observer !== '') {
-                    $scope.isDisabled = false
+                    $scope.isDisabled = false;
                 } else {
-                    $scope.isDisabled = true
+                    $scope.isDisabled = true;
                 }
             }
         });
@@ -191,9 +190,9 @@ angular.module('Formation.controllers', [])
         $scope.$watch('observer.observer', function (newObserver, oldObserver) {
             if (newObserver !== oldObserver) {
                 if (newObserver !== '' && $scope.observer.type !== null) {
-                    $scope.isDisabled = false
+                    $scope.isDisabled = false;
                 } else {
-                    $scope.isDisabled = true
+                    $scope.isDisabled = true;
                 }
             }
         });
@@ -211,13 +210,13 @@ angular.module('Formation.controllers', [])
                 }).$promise.then(
                     function (observer) {
                         $scope.observerSave = true;
-                        $scope.observer.idobserver = observer.observer.idobserver
-                        SweetAlert.success("Excelente", observer.message);
+                        $scope.observer.idobserver = observer.observer.idobserver;
+                        SweetAlert.success('Excelente', observer.message);
                     },
                     function (error) {
                         $log.error(error);
                         $scope.observerSave = false;
-                        SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                        SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                     }
                 );
             }
@@ -234,19 +233,19 @@ angular.module('Formation.controllers', [])
                 }).$promise.then(
                     function (observer) {
                         $scope.observerSave = true;
-                        SweetAlert.success("Excelente", observer.message);
+                        SweetAlert.success('Excelente', observer.message);
                     },
                     function (error) {
                         $log.error(error);
                         $scope.observerSave = true;
-                        SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                        SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                     }
                 );
             }
-        }
+        };
 
     }])
-    .controller('ObservatorListController', ['$scope', '$log', function ($scope, $log) {
+    .controller('ObservatorListController', ['$scope', function ($scope) {
 
         $scope.order = {
             item: 'date',
@@ -255,7 +254,7 @@ angular.module('Formation.controllers', [])
 
 
     }])
-    .controller('AcademicManagementController', ['$scope', 'ASSETS_SERVER', '$log', 'ngDialog','Year', 'GroupDirector', function ($scope, ASSETS_SERVER, $log, ngDialog, Year,GroupDirector) {
+    .controller('AcademicManagementController', ['$scope', 'ASSETS_SERVER', '$log', 'ngDialog', 'Year', 'GroupDirector', function ($scope, ASSETS_SERVER, $log, ngDialog, Year, GroupDirector) {
         $scope.assets = ASSETS_SERVER;
         // Get years
         Year.query().$promise.then(
@@ -266,9 +265,8 @@ angular.module('Formation.controllers', [])
                 $log.error(error);
             }
         );
-        $scope.edit = function (registry,$controller) {
-            //$scope.registry = registry;
-            $scope.registry = angular.copy(registry) ; //Independización del Array para que no se dañe el orginal si no hay POST| Actaulizacion o Modificación
+        $scope.edit = function (registry, $controller) {
+            $scope.registry = angular.copy(registry);
             switch ($controller) {
                 case 'GroupDirectorController':
                     ngDialog.open({
@@ -277,7 +275,7 @@ angular.module('Formation.controllers', [])
                         controller: $controller,
                         scope: $scope
                     });
-                break;
+                    break;
                 case 'AreaManagerController':
                     ngDialog.open({
                         template: require('../directives/views/partials/areamanager/formareamanager.html'),
@@ -285,7 +283,7 @@ angular.module('Formation.controllers', [])
                         controller: $controller,
                         scope: $scope
                     });
-                break;
+                    break;
                 case 'AcademicController':
                     ngDialog.open({
                         template: require('../directives/views/partials/academic/formacademic.html'),
@@ -303,52 +301,62 @@ angular.module('Formation.controllers', [])
                     });
                     break;
             }
-            //alert(JSON.stringify($scope.user));
-        }
-
+        };
 
         $scope.delete = function (idgroupdirector) {
             //Envío de Parámetros
             GroupDirector.remove({
                 groupdirectorId: idgroupdirector,
             }).$promise.then(
-                function (data) {
-                    //alert("Eliminación" + JSON.stringify(data));
-                    angular.element(document.getElementById("Groupdirectorlist")).scope().$$childTail.$parent.searching();
+                function () {
+                    angular.element(document.getElementById('Groupdirectorlist')).scope().$$childTail.$parent.searching();
                 },
-                function (error) {
-                    alert("Eliminación" + JSON.stringify(data));
+                function () {
+
                 }
             );
-        }
-        
-        $scope.form = function (registry,$controller) {
+        };
+
+        $scope.form = function (registry, $controller) {
             $scope.registry = (registry) ? registry : {};
-            var $routeview =null;
             switch ($controller) {
                 case 'GroupDirectorController':
-                    $routeview = "../directives/views/partials/groupdirector/formgroupdirector.html";
-                break;
+                    ngDialog.open({
+                        template: require('../directives/views/partials/groupdirector/formgroupdirector.html'),
+                        plain: true,
+                        controller: $controller,
+                        scope: $scope
+                    });
+                    break;
                 case 'AreaManagerController':
-                    $routeview = "../directives/views/partials/areamanager/formareamanager.html";
-                break;
+                    ngDialog.open({
+                        template: require('../directives/views/partials/areamanager/formareamanager.html'),
+                        plain: true,
+                        controller: $controller,
+                        scope: $scope
+                    });
+                    break;
                 case 'AcademicController':
-                    $routeview = "../directives/views/partials/academic/formacademic.html";
+                    ngDialog.open({
+                        template: require('../directives/views/partials/academic/formacademic.html'),
+                        plain: true,
+                        controller: $controller,
+                        scope: $scope
+                    });
                     break;
                 case 'MonitoringcategorybyyearController':
-                    $routeview = "../directives/views/partials/monitoringcategorybyyear/formmonitoringcategorybyyear.html";
+                    ngDialog.open({
+                        template: require('../directives/views/partials/monitoringcategorybyyear/formmonitoringcategorybyyear.html'),
+                        plain: true,
+                        controller: $controller,
+                        scope: $scope
+                    });
                     break;
             }
-            ngDialog.open({
-                template: require($routeview),
-                plain: true,
-                controller: $controller,
-                scope: $scope
-            });
-        }
+        };
     }])
     .controller('GroupDirectorController', ['$scope', '$log', 'Group', 'GroupDirector', function ($scope, $log, Group, GroupDirector) {
-        $scope.message = "Director de Grupo";
+        $scope.message = 'Director de Grupo';
         //Get Groups
         Group.all('').$promise.then(
             function (groups) {
@@ -359,7 +367,6 @@ angular.module('Formation.controllers', [])
             }
         );
         $scope.SaveGroupDirector = function () {
-            //$scope.registry = (registry) ? registry : {};
             if (!$scope.registry.idgroupdirector) {
                 //Insert Group Director
                 GroupDirector.save({
@@ -367,12 +374,12 @@ angular.module('Formation.controllers', [])
                     idgroup: $scope.registry.idgroup,
                     iduser: $scope.registry.iduser
                 }).$promise.then(
-                    function (groupdirector) {
-                        angular.element(document.getElementById("Groupdirectorlist")).scope().$$childTail.$parent.searching();
-                        angular.element(document.getElementById("GroupDirectorController")).scope().$$childTail.$parent.closeDialog();
+                    function () {
+                        angular.element(document.getElementById('Groupdirectorlist')).scope().$$childTail.$parent.searching();
+                        angular.element(document.getElementById('GroupDirectorController')).scope().$$childTail.$parent.closeDialog();
                     },
-                    function (error) {
-                        alert("No se puede ingresar");
+                    function () {
+                        alert('No se puede ingresar');
                     }
                 );
             }
@@ -384,19 +391,19 @@ angular.module('Formation.controllers', [])
                     idgroup: $scope.registry.idgroup,
                     iduser: $scope.registry.iduser
                 }).$promise.then(
-                    function (groupdirector) {
-                        angular.element(document.getElementById("Groupdirectorlist")).scope().$$childTail.$parent.searching();
-                        angular.element(document.getElementById("GroupDirectorController")).scope().$$childTail.$parent.closeDialog();
+                    function () {
+                        angular.element(document.getElementById('Groupdirectorlist')).scope().$$childTail.$parent.searching();
+                        angular.element(document.getElementById('GroupDirectorController')).scope().$$childTail.$parent.closeDialog();
                     },
-                    function (error) {
-                        alert("No se puede ingresar");
+                    function () {
+                        alert('No se puede ingresar');
                     }
                 );
             }
-        }
+        };
     }])
     .controller('AreasubjectandnivelController', ['$scope', '$log', 'Subject', function ($scope, $log, Subject) {
-        $scope.message = "Subjects";
+        $scope.message = 'Subjects';
         //Get Areas Subjects And Nivels
         Subject.getSubjectWithAreasAndNivels('').$promise.then(
             function (subjectwithareasandnivels) {
@@ -406,45 +413,9 @@ angular.module('Formation.controllers', [])
                 $log.error(error);
             }
         );
-        /*$scope.SaveGroupDirector = function () {
-            //$scope.registry = (registry) ? registry : {};
-            if (!$scope.registry.idgroupdirector) {
-                //Insert Group Director
-                GroupDirector.save({
-                    idyear: $scope.registry.idyear,
-                    idgroup: $scope.registry.idgroup,
-                    iduser: $scope.registry.iduser
-                }).$promise.then(
-                    function (groupdirector) {
-                        angular.element(document.getElementById("Groupdirectorlist")).scope().$$childTail.$parent.searching();
-                        angular.element(document.getElementById("GroupDirectorController")).scope().$$childTail.$parent.closeDialog();
-                    },
-                    function (error) {
-                        alert("No se puede ingresar");
-                    }
-                );
-            }
-            else {
-                //Update Group Director
-                GroupDirector.update({
-                    idgroupdirector: $scope.registry.idgroupdirector,
-                    idyear: $scope.registry.idyear,
-                    idgroup: $scope.registry.idgroup,
-                    iduser: $scope.registry.iduser
-                }).$promise.then(
-                    function (groupdirector) {
-                        angular.element(document.getElementById("Groupdirectorlist")).scope().$$childTail.$parent.searching();
-                        angular.element(document.getElementById("GroupDirectorController")).scope().$$childTail.$parent.closeDialog();
-                    },
-                    function (error) {
-                        alert("No se puede ingresar");
-                    }
-                );
-            }
-        }*/
     }])
     .controller('AreaManagerController', ['$scope', '$log', 'Area', 'AreaManager', function ($scope, $log, Area, AreaManager) {
-        $scope.message = "Jefe de Area";
+        $scope.message = 'Jefe de Area';
         $scope.areamanagers = {};
         //Get Groups
         Area.all('').$promise.then(
@@ -458,17 +429,17 @@ angular.module('Formation.controllers', [])
 
         $scope.searchingcontor = function () {
             AreaManager.getAreamanagersByYear({
-                yearId: angular.element(document.getElementById("academic")).scope().academic.year,
-                areaId: angular.element(document.getElementById("academic")).scope().academic.area
+                yearId: angular.element(document.getElementById('academic')).scope().academic.year,
+                areaId: angular.element(document.getElementById('academic')).scope().academic.area
             }).$promise.then(
                 function (areamanagers) {
                     $scope.areamanagers = areamanagers;
                 },
                 function (error) {
-                    $log.error(error)
+                    $log.error(error);
                 }
             );
-        }
+        };
 
 
         $scope.delete = function (idareaManager) {
@@ -476,15 +447,14 @@ angular.module('Formation.controllers', [])
             AreaManager.remove({
                 areamanagerId: idareaManager,
             }).$promise.then(
-                function (data) {
-                    //alert("Eliminación" + JSON.stringify(data));
-                    angular.element(document.getElementById("AreaManagerController")).scope().$$childTail.$parent.searchingcontor();
+                function () {
+                    angular.element(document.getElementById('AreaManagerController')).scope().$$childTail.$parent.searchingcontor();
                 },
-                function (error) {
-                    alert("Eliminación" + JSON.stringify(data));
+                function () {
+                    alert('Eliminación' + JSON.stringify());
                 }
             );
-        }
+        };
 
         $scope.SaveAreamanager = function () {
             //$scope.registry = (registry) ? registry : {};
@@ -495,13 +465,12 @@ angular.module('Formation.controllers', [])
                     idarea: $scope.registry.idarea,
                     iduser: $scope.registry.iduser
                 }).$promise.then(
-                    function (areamanager) {
-                        //$scope.searchingcontor();
-                        angular.element(document.getElementById("AreaManagerController")).scope().$$childTail.$parent.searchingcontor();
-                        angular.element(document.getElementById("AreaManagerController")).scope().$$childTail.$parent.closeDialog();
+                    function () {
+                        angular.element(document.getElementById('AreaManagerController')).scope().$$childTail.$parent.searchingcontor();
+                        angular.element(document.getElementById('AreaManagerController')).scope().$$childTail.$parent.closeDialog();
                     },
-                    function (error) {
-                        alert("No se puede actualizar");
+                    function () {
+                        alert('No se puede actualizar');
                     }
                 );
             }
@@ -513,19 +482,19 @@ angular.module('Formation.controllers', [])
                     idarea: $scope.registry.idarea,
                     iduser: $scope.registry.iduser
                 }).$promise.then(
-                    function (areamanager) {
-                        angular.element(document.getElementById("AreaManagerController")).scope().$$childTail.$parent.searchingcontor();
-                        angular.element(document.getElementById("AreaManagerController")).scope().$$childTail.$parent.closeDialog();
+                    function () {
+                        angular.element(document.getElementById('AreaManagerController')).scope().$$childTail.$parent.searchingcontor();
+                        angular.element(document.getElementById('AreaManagerController')).scope().$$childTail.$parent.closeDialog();
                     },
-                    function (error) {
-                        alert("No se puede ingresar");
+                    function () {
+                        alert('No se puede ingresar');
                     }
                 );
             }
-        }
+        };
     }])
-    .controller('AcademicController', ['$scope', '$log' , 'Period', 'Calendar', 'Academic','Academicrequest', '$filter', function ($scope, $log, Period, Calendar, Academic,Academicrequest, $filter) {
-        $scope.message = "Calendario Académico";
+    .controller('AcademicController', ['$scope', '$log', 'Period', 'Calendar', 'Academic', 'Academicrequest', function ($scope, $log, Period, Calendar, Academic, Academicrequest) {
+        $scope.message = 'Calendario Académico';
         $scope.academics = {};
         //Get Periods
         Period.all('').$promise.then(
@@ -549,17 +518,17 @@ angular.module('Formation.controllers', [])
 
         $scope.searchingcontor = function () {
             Academic.getAcademicsByYear({
-                yearId: angular.element(document.getElementById("academic")).scope().academic.year,
-                idperiod: angular.element(document.getElementById("academic")).scope().academic.period
+                yearId: angular.element(document.getElementById('academic')).scope().academic.year,
+                idperiod: angular.element(document.getElementById('academic')).scope().academic.period
             }).$promise.then(
                 function (academics) {
                     $scope.academics = academics;
                 },
                 function (error) {
-                    $log.error(error)
+                    $log.error(error);
                 }
             );
-        }
+        };
 
 
         $scope.delete = function (idacademic) {
@@ -567,15 +536,14 @@ angular.module('Formation.controllers', [])
             Academicrequest.remove({
                 academicId: idacademic,
             }).$promise.then(
-                function (data) {
-                    //alert("Eliminación" + JSON.stringify(data));
-                    angular.element(document.getElementById("AcademicController")).scope().$$childTail.$parent.searchingcontor();
+                function () {
+                    angular.element(document.getElementById('AcademicController')).scope().$$childTail.$parent.searchingcontor();
                 },
-                function (error) {
-                    alert("Eliminación" + JSON.stringify(data));
+                function () {
+                    alert('Eliminación' + JSON.stringify());
                 }
             );
-        }
+        };
 
         $scope.SaveAcademic = function () {
             //$scope.registry = (registry) ? registry : {};
@@ -591,13 +559,12 @@ angular.module('Formation.controllers', [])
                     review: $scope.registry.review,
                     print: $scope.registry.print
                 }).$promise.then(
-                    function (areamanager) {
-                        //$scope.searchingcontor();
-                        angular.element(document.getElementById("AcademicController")).scope().$$childTail.$parent.searchingcontor();
-                        angular.element(document.getElementById("AcademicController")).scope().$$childTail.$parent.closeDialog();
+                    function () {
+                        angular.element(document.getElementById('AcademicController')).scope().$$childTail.$parent.searchingcontor();
+                        angular.element(document.getElementById('AcademicController')).scope().$$childTail.$parent.closeDialog();
                     },
-                    function (error) {
-                        alert("No se puede actualizar");
+                    function () {
+                        alert('No se puede actualizar');
                     }
                 );
             }
@@ -614,19 +581,19 @@ angular.module('Formation.controllers', [])
                     review: $scope.registry.review,
                     print: $scope.registry.print
                 }).$promise.then(
-                    function (areamanager) {
-                        angular.element(document.getElementById("AcademicController")).scope().$$childTail.$parent.searchingcontor();
-                        angular.element(document.getElementById("AcademicController")).scope().$$childTail.$parent.closeDialog();
+                    function () {
+                        angular.element(document.getElementById('AcademicController')).scope().$$childTail.$parent.searchingcontor();
+                        angular.element(document.getElementById('AcademicController')).scope().$$childTail.$parent.closeDialog();
                     },
-                    function (error) {
-                        alert("No se puede ingresar");
+                    function () {
+                        alert('No se puede ingresar');
                     }
                 );
             }
-        }
+        };
     }])
-    .controller('MonitoringcategorybyyearController', ['$scope', '$log' , 'Subject', 'Monitoringcategory','Monitoringcategorybyyearrequest',  '$filter', function ($scope, $log, Subject, Monitoringcategory, Monitoringcategorybyyearrequest, $filter) {
-        $scope.message = "Categorías de Seguimiento";
+    .controller('MonitoringcategorybyyearController', ['$scope', '$log', 'Subject', 'Monitoringcategory', 'Monitoringcategorybyyearrequest', function ($scope, $log, Subject, Monitoringcategory, Monitoringcategorybyyearrequest) {
+        $scope.message = 'Categorías de Seguimiento';
         $scope.monitoringcategorybyyears = {};
 
         //Get Subjects
@@ -651,17 +618,17 @@ angular.module('Formation.controllers', [])
 
         $scope.searchingcontor = function () {
             Monitoringcategorybyyearrequest.getMonitoringcategoriesByYear({
-                yearId: angular.element(document.getElementById("academic")).scope().academic.year,
-                idsubject: angular.element(document.getElementById("academic")).scope().academic.subject
+                yearId: angular.element(document.getElementById('academic')).scope().academic.year,
+                idsubject: angular.element(document.getElementById('academic')).scope().academic.subject
             }).$promise.then(
                 function (monitoringcategorybyyears) {
                     $scope.monitoringcategorybyyears = monitoringcategorybyyears;
                 },
                 function (error) {
-                    $log.error(error)
+                    $log.error(error);
                 }
             );
-        }
+        };
 
 
         $scope.delete = function (idmonitoringcategorybyyear) {
@@ -669,18 +636,15 @@ angular.module('Formation.controllers', [])
             Monitoringcategorybyyearrequest.remove({
                 monitoringcategorybyyearId: idmonitoringcategorybyyear,
             }).$promise.then(
-                function (data) {
-                    //alert("Eliminación" + JSON.stringify(data));
-                    angular.element(document.getElementById("MonitoringcategorybyyearController")).scope().$$childTail.$parent.searchingcontor();
+                function () {
+                    angular.element(document.getElementById('MonitoringcategorybyyearController')).scope().$$childTail.$parent.searchingcontor();
                 },
-                function (error) {
-                    alert("Eliminación" + JSON.stringify(data));
+                function () {
                 }
             );
-        }
+        };
 
         $scope.SaveMonitoringcategorybyyear = function () {
-            //$scope.registry = (registry) ? registry : {};
             if (!$scope.registry.idmonitoringcategorybyyear) {
                 //Insert Area Manager
                 Monitoringcategorybyyearrequest.save({
@@ -689,13 +653,12 @@ angular.module('Formation.controllers', [])
                     idmonitoringcategory: $scope.registry.idmonitoringcategory,
                     percent: $scope.registry.percent
                 }).$promise.then(
-                    function (areamanager) {
-                        //$scope.searchingcontor();
-                        angular.element(document.getElementById("MonitoringcategorybyyearController")).scope().$$childTail.$parent.searchingcontor();
-                        angular.element(document.getElementById("MonitoringcategorybyyearController")).scope().$$childTail.$parent.closeDialog();
+                    function () {
+                        angular.element(document.getElementById('MonitoringcategorybyyearController')).scope().$$childTail.$parent.searchingcontor();
+                        angular.element(document.getElementById('MonitoringcategorybyyearController')).scope().$$childTail.$parent.closeDialog();
                     },
-                    function (error) {
-                        alert("No se puede ingresar");
+                    function () {
+                        alert('No se puede ingresar');
                     }
                 );
             }
@@ -708,19 +671,19 @@ angular.module('Formation.controllers', [])
                     idmonitoringcategory: $scope.registry.idmonitoringcategory,
                     percent: $scope.registry.percent
                 }).$promise.then(
-                    function (areamanager) {
-                        angular.element(document.getElementById("MonitoringcategorybyyearController")).scope().$$childTail.$parent.searchingcontor();
-                        angular.element(document.getElementById("MonitoringcategorybyyearController")).scope().$$childTail.$parent.closeDialog();
+                    function () {
+                        angular.element(document.getElementById('MonitoringcategorybyyearController')).scope().$$childTail.$parent.searchingcontor();
+                        angular.element(document.getElementById('MonitoringcategorybyyearController')).scope().$$childTail.$parent.closeDialog();
                     },
-                    function (error) {
-                        alert("No se puede actualizar");
+                    function () {
+                        alert('No se puede actualizar');
                     }
                 );
             }
-        }
+        };
     }])
     .controller('PartialController', ['$scope', 'ASSETS_SERVER', '$log', 'ngDialog', function ($scope, ASSETS_SERVER, $log, ngDialog) {
-        $scope.message = "Partial";
+        $scope.message = 'Partial';
         $scope.assets = ASSETS_SERVER;
         $scope.select = function (user) {
             $scope.user = user;
@@ -730,10 +693,10 @@ angular.module('Formation.controllers', [])
                 controller: 'PartialNewController',
                 scope: $scope
             });
-        }
+        };
     }])
     .controller('PartialNewController', ['$scope', '$log', 'ASSETS_SERVER', 'SweetAlert', 'Partial', function ($scope, $log, ASSETS_SERVER, SweetAlert, Partial) {
-        $scope.message = "Partial New";
+        $scope.message = 'Partial New';
         $scope.assets = ASSETS_SERVER;
         $scope.partialSave = false;
         $scope.partial = [];
@@ -764,13 +727,13 @@ angular.module('Formation.controllers', [])
                 }).$promise.then(
                     function (result) {
                         $scope.partialSave = true;
-                        SweetAlert.success("Excelente", result.message);
+                        SweetAlert.success('Excelente', result.message);
                         $scope.partial.idpartialrating = result.last_insert_id;
                     },
                     function (error) {
                         $scope.partialSave = false;
                         $log.error(error);
-                        SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                        SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                     }
                 );
             } else {
@@ -787,19 +750,19 @@ angular.module('Formation.controllers', [])
                 }).$promise.then(
                     function (result) {
                         $scope.partialSave = true;
-                        SweetAlert.success("Excelente", result.message);
+                        SweetAlert.success('Excelente', result.message);
                     },
                     function (error) {
                         $scope.partialSave = false;
                         $log.error(error);
-                        SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                        SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                     }
                 );
             }
-        }
+        };
     }])
     .controller('DescriptivereportController', ['$scope', 'ASSETS_SERVER', '$log', 'ngDialog', function ($scope, ASSETS_SERVER, $log, ngDialog) {
-        $scope.message = "Descriptive Report";
+        $scope.message = 'Descriptive Report';
         $scope.assets = ASSETS_SERVER;
         $scope.select = function (user) {
             $scope.user = user;
@@ -810,10 +773,10 @@ angular.module('Formation.controllers', [])
                 className: 'ngdialog-theme-default dialogwidth600',
                 scope: $scope
             });
-        }
+        };
     }])
     .controller('DescriptivereportNewController', ['$scope', '$log', 'ASSETS_SERVER', 'SweetAlert', 'Descriptivereport', function ($scope, $log, ASSETS_SERVER, SweetAlert, Descriptivereport) {
-        $scope.message = "Descriptive Report New";
+        $scope.message = 'Descriptive Report New';
         $scope.assets = ASSETS_SERVER;
         $scope.descriptivereportSave = false;
         $scope.descriptivereport = [];
@@ -843,13 +806,13 @@ angular.module('Formation.controllers', [])
                 }).$promise.then(
                     function (result) {
                         $scope.descriptivereportSave = true;
-                        SweetAlert.success("Excelente", result.message);
+                        SweetAlert.success('Excelente', result.message);
                         $scope.descriptivereport.iddescriptivereport = result.last_insert_id;
                     },
                     function (error) {
                         $scope.descriptivereportSave = false;
                         $log.error(error);
-                        SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                        SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                     }
                 );
             } else {
@@ -865,22 +828,22 @@ angular.module('Formation.controllers', [])
                 }).$promise.then(
                     function (result) {
                         $scope.descriptivereportSave = true;
-                        SweetAlert.success("Excelente", result.message);
+                        SweetAlert.success('Excelente', result.message);
                     },
                     function (error) {
                         $scope.descriptivereportSave = false;
                         $log.error(error);
-                        SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                        SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                     }
                 );
             }
-        }
+        };
     }])
-    .controller('TaskController', ['$scope', '$log', function ($scope, $log) {
+    .controller('TaskController', [function () {
 
     }])
     .controller('TaskNewController', ['$scope', '$log', 'moment', 'SweetAlert', 'Tasktype', 'Task', function ($scope, $log, moment, SweetAlert, Tasktype, Task) {
-        $scope.message = "Task New";
+        $scope.message = 'Task New';
         $scope.task = {
             type: 1,
             starts: new moment().format('YYYY-MM-DD'),
@@ -914,14 +877,14 @@ angular.module('Formation.controllers', [])
                 }).$promise.then(
                     function (result) {
                         $scope.taskSave = true;
-                        SweetAlert.success("Excelente", result.message);
+                        SweetAlert.success('Excelente', result.message);
                         $scope.task.idtask = result.task.idtask;
                         document.taskForm.name.focus();
                     },
                     function (error) {
                         $scope.taskSave = false;
                         $log.error(error);
-                        SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                        SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                     }
                 );
             } else {
@@ -940,19 +903,19 @@ angular.module('Formation.controllers', [])
                 }).$promise.then(
                     function (result) {
                         $scope.taskSave = true;
-                        SweetAlert.success("Excelente", result.message);
+                        SweetAlert.success('Excelente', result.message);
                     },
                     function (error) {
                         $scope.taskSave = false;
                         $log.error(error);
-                        SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                        SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                     }
                 );
             }
-        }
+        };
     }])
     .controller('TaskUpdateController', ['$scope', '$log', 'sigeTurboUpload', 'ASSETS_SERVER', 'SweetAlert', 'Tasktype', 'Task', function ($scope, $log, sigeTurboUpload, ASSETS_SERVER, SweetAlert, Tasktype, Task) {
-        $scope.message = "Task Update";
+        $scope.message = 'Task Update';
         $scope.assets = ASSETS_SERVER;
         $scope.task = {
             status: 0
@@ -960,7 +923,7 @@ angular.module('Formation.controllers', [])
         $scope.academic = [];
         $scope.taskSave = false;
         $scope.taskFiles = false;
-        $scope.approvedResult = "Aprobando ...";
+        $scope.approvedResult = 'Aprobando ...';
 
         $scope.init = function (task) {
 
@@ -988,12 +951,12 @@ angular.module('Formation.controllers', [])
                     }
                     $scope.taskSave = true;
                     if (task.status) {
-                        $scope.approvedResult = "Aprobada";
+                        $scope.approvedResult = 'Aprobada';
                     }
                 },
                 function (error) {
                     $log.error(error);
-                    $scope.taskSave = false
+                    $scope.taskSave = false;
                 }
             );
 
@@ -1025,12 +988,12 @@ angular.module('Formation.controllers', [])
             }).$promise.then(
                 function (result) {
                     $scope.taskSave = true;
-                    SweetAlert.success("Excelente", result.message);
+                    SweetAlert.success('Excelente', result.message);
                 },
                 function (error) {
                     $scope.taskSave = false;
                     $log.error(error);
-                    SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                    SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                 }
             );
         };
@@ -1038,11 +1001,11 @@ angular.module('Formation.controllers', [])
             $scope.task.taskfiles[$index].deleted = false;
             $scope.task.taskfiles[$index].status = 0;
             sigeTurboUpload.deleteFile($scope.task.taskfiles[$index].file, '/deletetask/?table=taskfiles&id=' + $scope.task.taskfiles[$index].idtaskfile)
-                .success(function (data, status, header, config) {
+                .success(function () {
                     $scope.task.taskfiles[$index].deleted = true;
                     $scope.task.taskfiles[$index].status = 100;
                 })
-                .error(function (data, status, header, config) {
+                .error(function () {
                     $scope.task.taskfiles[$index].deleted = false;
                     $scope.task.taskfiles[$index].status = -1;
                 });
@@ -1052,41 +1015,41 @@ angular.module('Formation.controllers', [])
             if (parseInt(newStatus) !== parseInt(oldStatus)) {
                 if (parseInt(newStatus) == 1 && parseInt($scope.task.statusOld) !== 1) {
                     SweetAlert.swal({
-                            title: "¿Está seguro?",
-                            text: "Una vez active la tarea quedará visible para los padres de familia y se activa el servicio de envío de correo",
-                            type: "warning",
+                            title: '¿Está seguro?',
+                            text: 'Una vez active la tarea quedará visible para los padres de familia y se activa el servicio de envío de correo',
+                            type: 'warning',
                             showCancelButton: true,
-                            confirmButtonColor: "#53BBB4",
-                            confirmButtonText: "Aprobar",
+                            confirmButtonColor: '#53BBB4',
+                            confirmButtonText: 'Aprobar',
                             closeOnConfirm: false
                         },
                         function (isConfirm) {
                             if (isConfirm) {
                                 Task.setApproved({task: $scope.task.idtask, group: $scope.task.group}).$promise.then(
                                     function (data) {
-                                        swal("¡Aprobada!", data.message, "success");
+                                        swal('¡Aprobada!', data.message, 'success');
                                         $scope.task.status = 1;
-                                        $scope.approvedResult = "Aprobada";
+                                        $scope.approvedResult = 'Aprobada';
                                     },
-                                    function (error) {
-                                        swal.close()
+                                    function () {
+                                        swal.close();
                                     }
                                 );
                             }
-                            ;
+
                         });
                 }
             }
-        })
+        });
 
     }])
     .controller('StatisticsController', ['$scope', 'Statistics', function ($scope, Statistics) {
-        $scope.message = "Estadísticas";
+        $scope.message = 'Estadísticas';
         //Academic
         $scope.academic = {
             year: 2017,
             period: 1
-        }
+        };
         //Global Performances
         $scope.performances = Statistics.getGlobalPerformances({
             year: $scope.academic.year,
@@ -1105,37 +1068,37 @@ angular.module('Formation.controllers', [])
         $scope.total = 0;
         $scope.performances.$promise.then(
             function (performances) {
-                angular.forEach(performances, function (performance, key) {
+                angular.forEach(performances, function (performance) {
                     $scope.total = $scope.total + performance.value;
                     switch (performance.label) {
                         case 'DP':
                             $scope.DP = performance.value;
-                            $scope.data.labels.push("DP");
+                            $scope.data.labels.push('DP');
                             $scope.data.datasets[0].data.push(performance.value);
                             $scope.data.datasets[0].backgroundColor.push(performance.color);
                             break;
                         case 'DB':
                             $scope.DB = performance.value;
-                            $scope.data.labels.push("DB");
+                            $scope.data.labels.push('DB');
                             $scope.data.datasets[0].data.push(performance.value);
                             $scope.data.datasets[0].backgroundColor.push(performance.color);
                             break;
                         case 'DA':
                             $scope.DA = performance.value;
-                            $scope.data.labels.push("DA");
+                            $scope.data.labels.push('DA');
                             $scope.data.datasets[0].data.push(performance.value);
                             $scope.data.datasets[0].backgroundColor.push(performance.color);
                             break;
                         case 'DS':
                             $scope.DS = performance.value;
-                            $scope.data.labels.push("DS");
+                            $scope.data.labels.push('DS');
                             $scope.data.datasets[0].data.push(performance.value);
                             $scope.data.datasets[0].backgroundColor.push(performance.color);
                             break;
                     }
                 });
             }
-        )
+        );
         //Searching New Year AND Period
         $scope.change = function (year, period) {
             //Scope Data
@@ -1155,38 +1118,38 @@ angular.module('Formation.controllers', [])
             $scope.total = 0;
             $scope.performances.$promise.then(
                 function (performances) {
-                    angular.forEach(performances, function (performance, key) {
+                    angular.forEach(performances, function (performance) {
                         $scope.total = $scope.total + performance.value;
                         switch (performance.label) {
                             case 'DP':
                                 $scope.DP = performance.value;
-                                $scope.data.labels.push("DP");
+                                $scope.data.labels.push('DP');
                                 $scope.data.datasets[0].data.push(performance.value);
                                 $scope.data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                             case 'DB':
                                 $scope.DB = performance.value;
-                                $scope.data.labels.push("DB");
+                                $scope.data.labels.push('DB');
                                 $scope.data.datasets[0].data.push(performance.value);
                                 $scope.data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                             case 'DA':
                                 $scope.DA = performance.value;
-                                $scope.data.labels.push("DA");
+                                $scope.data.labels.push('DA');
                                 $scope.data.datasets[0].data.push(performance.value);
                                 $scope.data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                             case 'DS':
                                 $scope.DS = performance.value;
-                                $scope.data.labels.push("DS");
+                                $scope.data.labels.push('DS');
                                 $scope.data.datasets[0].data.push(performance.value);
                                 $scope.data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                         }
                     });
                 }
-            )
-        }
+            );
+        };
 
         $scope.options = {
             responsive: true,
@@ -1202,7 +1165,7 @@ angular.module('Formation.controllers', [])
         $scope.academic = {
             year: 2017,
             period: 1
-        }
+        };
 
         $scope.groups = [];
 
@@ -1225,28 +1188,28 @@ angular.module('Formation.controllers', [])
                     angular.forEach(group.data, function (performance) {
                         switch (performance.label) {
                             case 'DP':
-                                data.labels.push("DP");
+                                data.labels.push('DP');
                                 data.datasets[0].data.push(performance.value);
                                 data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                             case 'DB':
-                                data.labels.push("DB");
+                                data.labels.push('DB');
                                 data.datasets[0].data.push(performance.value);
                                 data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                             case 'DA':
-                                data.labels.push("DA");
+                                data.labels.push('DA');
                                 data.datasets[0].data.push(performance.value);
                                 data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                             case 'DS':
-                                data.labels.push("DS");
+                                data.labels.push('DS');
                                 data.datasets[0].data.push(performance.value);
                                 data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                         }
                     });
-                    $scope.groups.push(data)
+                    $scope.groups.push(data);
                 });
 
             },
@@ -1277,35 +1240,35 @@ angular.module('Formation.controllers', [])
                         angular.forEach(group.data, function (performance) {
                             switch (performance.label) {
                                 case 'DP':
-                                    data.labels.push("DP");
+                                    data.labels.push('DP');
                                     data.datasets[0].data.push(performance.value);
                                     data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                                 case 'DB':
-                                    data.labels.push("DB");
+                                    data.labels.push('DB');
                                     data.datasets[0].data.push(performance.value);
                                     data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                                 case 'DA':
-                                    data.labels.push("DA");
+                                    data.labels.push('DA');
                                     data.datasets[0].data.push(performance.value);
                                     data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                                 case 'DS':
-                                    data.labels.push("DS");
+                                    data.labels.push('DS');
                                     data.datasets[0].data.push(performance.value);
                                     data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                             }
                         });
-                        $scope.groups.push(data)
+                        $scope.groups.push(data);
                     });
                 },
                 function (error) {
                     $log.error(error);
                 }
             );
-        }
+        };
 
         $scope.options = {
             responsive: true,
@@ -1322,7 +1285,7 @@ angular.module('Formation.controllers', [])
         $scope.academic = {
             year: 2017,
             period: 1
-        }
+        };
 
         $scope.subjects = [];
 
@@ -1345,28 +1308,28 @@ angular.module('Formation.controllers', [])
                     angular.forEach(subject.data, function (performance) {
                         switch (performance.label) {
                             case 'DP':
-                                data.labels.push("DP");
+                                data.labels.push('DP');
                                 data.datasets[0].data.push(performance.value);
                                 data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                             case 'DB':
-                                data.labels.push("DB");
+                                data.labels.push('DB');
                                 data.datasets[0].data.push(performance.value);
                                 data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                             case 'DA':
-                                data.labels.push("DA");
+                                data.labels.push('DA');
                                 data.datasets[0].data.push(performance.value);
                                 data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                             case 'DS':
-                                data.labels.push("DS");
+                                data.labels.push('DS');
                                 data.datasets[0].data.push(performance.value);
                                 data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                         }
                     });
-                    $scope.subjects.push(data)
+                    $scope.subjects.push(data);
                 });
             },
             function (error) {
@@ -1396,35 +1359,35 @@ angular.module('Formation.controllers', [])
                         angular.forEach(subject.data, function (performance) {
                             switch (performance.label) {
                                 case 'DP':
-                                    data.labels.push("DP");
+                                    data.labels.push('DP');
                                     data.datasets[0].data.push(performance.value);
                                     data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                                 case 'DB':
-                                    data.labels.push("DB");
+                                    data.labels.push('DB');
                                     data.datasets[0].data.push(performance.value);
                                     data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                                 case 'DA':
-                                    data.labels.push("DA");
+                                    data.labels.push('DA');
                                     data.datasets[0].data.push(performance.value);
                                     data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                                 case 'DS':
-                                    data.labels.push("DS");
+                                    data.labels.push('DS');
                                     data.datasets[0].data.push(performance.value);
                                     data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                             }
                         });
-                        $scope.subjects.push(data)
+                        $scope.subjects.push(data);
                     });
                 },
                 function (error) {
                     $log.error(error);
                 }
             );
-        }
+        };
 
         $scope.options = {
             responsive: true,
@@ -1440,7 +1403,7 @@ angular.module('Formation.controllers', [])
         $scope.academic = {
             year: 2016,
             period: 1
-        }
+        };
 
         $scope.areas = [];
 
@@ -1463,28 +1426,28 @@ angular.module('Formation.controllers', [])
                     angular.forEach(area.data, function (performance) {
                         switch (performance.label) {
                             case 'DP':
-                                data.labels.push("DP");
+                                data.labels.push('DP');
                                 data.datasets[0].data.push(performance.value);
                                 data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                             case 'DB':
-                                data.labels.push("DB");
+                                data.labels.push('DB');
                                 data.datasets[0].data.push(performance.value);
                                 data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                             case 'DA':
-                                data.labels.push("DA");
+                                data.labels.push('DA');
                                 data.datasets[0].data.push(performance.value);
                                 data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                             case 'DS':
-                                data.labels.push("DS");
+                                data.labels.push('DS');
                                 data.datasets[0].data.push(performance.value);
                                 data.datasets[0].backgroundColor.push(performance.color);
                                 break;
                         }
                     });
-                    $scope.areas.push(data)
+                    $scope.areas.push(data);
                 });
             },
             function (error) {
@@ -1514,35 +1477,35 @@ angular.module('Formation.controllers', [])
                         angular.forEach(area.data, function (performance) {
                             switch (performance.label) {
                                 case 'DP':
-                                    data.labels.push("DP");
+                                    data.labels.push('DP');
                                     data.datasets[0].data.push(performance.value);
                                     data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                                 case 'DB':
-                                    data.labels.push("DB");
+                                    data.labels.push('DB');
                                     data.datasets[0].data.push(performance.value);
                                     data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                                 case 'DA':
-                                    data.labels.push("DA");
+                                    data.labels.push('DA');
                                     data.datasets[0].data.push(performance.value);
                                     data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                                 case 'DS':
-                                    data.labels.push("DS");
+                                    data.labels.push('DS');
                                     data.datasets[0].data.push(performance.value);
                                     data.datasets[0].backgroundColor.push(performance.color);
                                     break;
                             }
                         });
-                        $scope.areas.push(data)
+                        $scope.areas.push(data);
                     });
                 },
                 function (error) {
                     $log.error(error);
                 }
             );
-        }
+        };
 
         $scope.options = {
             responsive: true,

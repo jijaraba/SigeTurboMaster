@@ -112,8 +112,8 @@ class VisitorsController extends Controller
      */
     public function create(){
         return view('visitors.create')
-            ->withVisitortypes($this->visitortypeRepository->all()->lists('name', 'idvisitortype'))
-            ->withIdentificationtypes($this->identificationtypeRepository->all()->lists('name', 'ididentificationtype'));
+            ->withVisitortypes($this->visitortypeRepository->all()->pluck('name', 'idvisitortype'))
+            ->withIdentificationtypes($this->identificationtypeRepository->all()->pluck('name', 'ididentificationtype'));
     }
 
     /**
@@ -166,8 +166,8 @@ class VisitorsController extends Controller
     public function edit($idvisitor)
     {
         return view('visitors.edit')
-            ->withVisitortypes($this->visitortypeRepository->all()->lists('name', 'idvisitortype'))
-            ->withIdentificationtypes($this->identificationtypeRepository->all()->lists('name', 'ididentificationtype'))
+            ->withVisitortypes($this->visitortypeRepository->all()->pluck('name', 'idvisitortype'))
+            ->withIdentificationtypes($this->identificationtypeRepository->all()->pluck('name', 'ididentificationtype'))
             ->withVisitor($this->visitorRepository->find($idvisitor));
     }
 

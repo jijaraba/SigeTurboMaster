@@ -1,0 +1,15 @@
+{
+  "name": "datepicker",
+  "homepage": "https://github.com/fengyuanchen/datepicker",
+  "version": "0.6.3",
+  "_release": "0.6.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.6.3",
+    "commit": "9b2aa9ae840244a67c7f657e69934fb85877c995"
+  },
+  "_source": "https://github.com/fengyuanchen/datepicker.git",
+  "_target": "^0.6.3",
+  "_originalSource": "fengyuanchen/datepicker",
+  "_direct": true
+}

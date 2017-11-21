@@ -1,11 +1,12 @@
 'use strict';
 //Core
-require('angular')
-require('angular-resource')
-require('angular-sanitize')
-require('angular-filter')
-require('ng-dialog')
-require('tc-angular-chartjs')
+let angular = require('angular');
+let moment = require('moment');
+require('angular-resource');
+require('angular-sanitize');
+require('angular-filter');
+require('ng-dialog');
+require('tc-angular-chartjs');
 
 
 //Core
@@ -36,22 +37,11 @@ angular.module('Formation', [
     'Formation.factories',
     'Formation.directives',
     'Formation.controllers',
-]).constant("moment", moment);
+]).constant('moment', moment);
 
 
 angular.module('Formation').config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');
-}]);
-
-angular.module('Formation').run(['Token', 'sigeTurboStorage', function (Token, sigeTurboStorage) {
-    if (!sigeTurboStorage.getStorage('token')) {
-        Token.getToken().$promise.then(
-            function (data) {
-                sigeTurboStorage.setStorage('user', data.user);
-                sigeTurboStorage.setStorage('token', data.token);
-            }
-        );
-    }
 }]);
 
 //Formation

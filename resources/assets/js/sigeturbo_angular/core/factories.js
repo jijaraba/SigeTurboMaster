@@ -27,8 +27,9 @@ angular.module('Core.factories', [])
             request: function (config) {
                 config.headers = config.headers || {};
                 config.headers = {
+                    'Content-Type': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content,
+                    'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content,
                     'Authorization': 'Bearer ' + document.querySelector('#sigeturboToken').getAttribute('data-token')
                 };
                 return config;
@@ -84,7 +85,7 @@ angular.module('Core.factories', [])
         return self;
     }])
     .factory('Group', ['$resource', function ($resource) {
-        return $resource('/api/v1/groups/:groupId/:action', { groupId: '@id',  action: '@action'}, {
+        return $resource('/api/v1/groups/:groupId/:action', {groupId: '@id', action: '@action'}, {
             all: {
                 method: 'GET',
                 params: {groupId: ''},

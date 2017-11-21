@@ -41,7 +41,8 @@
                                             <input type="checkbox"/>
                                         </li>
                                         <li class="col-10 type">
-                                            <div id="counts" class="attendance-{{ $attendance->type }}-count">{{ $attendance->type }}</div>
+                                            <div id="counts"
+                                                 class="attendance-{{ $attendance->type }}-count">{{ $attendance->type }}</div>
                                         </li>
                                         <li class="col-10 photo">
                                             <div>
@@ -83,16 +84,16 @@
         </section>
     </section>
 @stop
-@section("script")
-    {!! HTML::script('js/' . getCurrentRoute() . '.js') !!}
-@stop
 @section("vendor")
-    {!! HTML::script('js/vendor/vendor.js') !!}
+    {!! HTML::script(mix('js/vendor/vendor.js')) !!}
+@stop
+@section("script")
+    {!! HTML::script(mix('js/angular/' . getCurrentRoute() . '.js')) !!}
 @stop
 @section("socket")
-    {!! HTML::script('js/vendor/socket.io.js') !!}
+    {!! HTML::script(mix('js/vendor/socket.io.js')) !!}
 @stop
 @section("sigeturbo")
-    {!! HTML::script('js/SigeTurbo.js') !!}
-    {!! HTML::script('js/Stream.js') !!}
+    {!! HTML::script(mix('js/SigeTurbo.js')) !!}
+    {!! HTML::script(mix('js/Stream.js')) !!}
 @stop

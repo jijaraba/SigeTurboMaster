@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Lang;
+use SigeTurbo\Category;
 use SigeTurbo\Http\Requests\UserfamilyRequest;
 use SigeTurbo\Repositories\Userfamily\UserfamilyRepositoryInterface;
 
@@ -76,7 +77,7 @@ class UserfamiliesController extends Controller
      */
     public function indexParentsByHomeworks()
     {
-        $data = ['user' => getUser()->iduser,'category' => 13];
+        $data = ['user' => getUser()->iduser,'category' => Category::STUDENT];
         $users =  (array)$this->userfamilyRepository->getUsersByFamily($data);
         return view('userfamilies.indexparentsbyhomeworks')->withUsers($users);
     }
@@ -88,7 +89,7 @@ class UserfamiliesController extends Controller
      */
     public function indexParentsByMonitorings()
     {
-        $data = ['user' => getUser()->iduser, 'category' => 13];
+        $data = ['user' => getUser()->iduser, 'category' => Category::STUDENT];
         $users =  (array)$this->userfamilyRepository->getUsersByFamily($data);
         return view('userfamilies.indexparentsbymonitorings')->withUsers($users);
     }

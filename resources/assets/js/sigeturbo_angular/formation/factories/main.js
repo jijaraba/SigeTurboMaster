@@ -788,4 +788,4 @@ angular.module('Formation.factories', [])
             }
             ,
         });
-    }]);;
+    }]);

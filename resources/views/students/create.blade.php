@@ -116,7 +116,7 @@
                                 <li class="col-25 gutter-5  icon-left">
                                     <i class="fa fa-birthday-cake" aria-hidden="true"></i>
                                     <input name="birth" id="birth" type="text" title="{{ Lang::get('sige.BirthTitle') }}"
-                                           placeholder="Fecha de Nacimiento" value="{{ old("birth") }}" required="true"/>
+                                           placeholder="{{ Lang::get('sige.BirthTitle') }}" data-toggle="birth" value="{{ old("birth") }}" required="true"/>
                                 </li>
                             </ul>
                         </li>

@@ -4,6 +4,6 @@
 angular.module('Communications.filters', []).
 filter('interpolate', ['version', function(version) {
     return function(text) {
-        return String(text).replace(/\%VERSION\%/mg, version);
+        return String(text).replace(/VERSION/mg, version);
     }
 }]);

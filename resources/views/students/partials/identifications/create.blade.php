@@ -13,7 +13,7 @@
         <li class="col-20 gutter-5  icon-left">
             <i class="fa fa-calendar" aria-hidden="true"></i>
             <input name="date" id="date" type="text" value="{{ old('date') }}" title="{{ Lang::get('sige.DateExpeditionTitle') }}"
-                   placeholder="{{ Lang::get('sige.Date') }}"/>
+                   placeholder="{{ Lang::get('sige.Date') }}" data-toggle="date"/>
         </li>
         <li class="col-20 gutter-5 icon-left">
             <i class="fa fa-globe" aria-hidden="true"></i>

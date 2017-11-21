@@ -14,7 +14,7 @@
         <li class="col-20 gutter-5 icon-left">
             <i class="fa fa-calendar" aria-hidden="true"></i>
             <input name="date" id="date" type="text" placeholder="{{ Lang::get('sige.Date') }}"
-                   value="{{ $student->identification->date }}" title="{{ Lang::get('sige.DateExpeditionTitle') }}" />
+                   value="{{ $student->identification->date }}" data-toggle="date" title="{{ Lang::get('sige.DateExpeditionTitle') }}" />
         </li>
         <li class="col-20 gutter-5 icon-left">
             <i class="fa fa-globe" aria-hidden="true"></i>

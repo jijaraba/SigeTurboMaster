@@ -62,7 +62,10 @@ class AttendanceRepository implements AttendanceRepositoryInterface
             'type' => $data['type'],
             'date' => $data['date'],
             'time' => Carbon::now(),
-            'created_by' => getUser()->iduser
+            'created_by' => getUser()->iduser,
+            'updated_by' => getUser()->iduser,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ));
     }
 
@@ -80,7 +83,8 @@ class AttendanceRepository implements AttendanceRepositoryInterface
             'type' => $data['type'],
             'attendance' => $data['attendance'],
             'time' => Carbon::now(),
-            'updated_by' => getUser()->iduser
+            'updated_by' => getUser()->iduser,
+            'updated_at' => Carbon::now(),
         ));
         return $attendance->save();
 

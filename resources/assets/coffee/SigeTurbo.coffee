@@ -77,9 +77,34 @@ SigeTurbo =
         alert "Muy pronto ..."
         false
 
-
       $( "#apps" ).on "change", ->
         window.location.href = '/' + this.value
+
+      #DatePicker
+      $('[data-toggle="starts"]').datepicker({
+        format: 'yyyy-mm-dd',
+        autoHide: true
+      });
+      $('[data-toggle="ends"]').datepicker({
+        format: 'yyyy-mm-dd',
+        autoHide: true
+      });
+      $('[data-toggle="register"]').datepicker({
+        format: 'yyyy-mm-dd',
+        autoHide: true
+      });
+      $('[data-toggle="statusdate"]').datepicker({
+        format: 'yyyy-mm-dd',
+        autoHide: true
+      });
+      $('[data-toggle="date"]').datepicker({
+        format: 'yyyy-mm-dd',
+        autoHide: true
+      });
+      $('[data-toggle="birth"]').datepicker({
+        format: 'yyyy-mm-dd',
+        autoHide: true
+      });
 
     @init();
 

@@ -227,7 +227,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'uses' => 'EnrollmentsController@getenrollments'
     ]);
     //Get Student By Status
-    Route::get('/enrollments/getenrollmentsbystatus1', [
+    Route::get('/enrollments/getenrollmentsbystatus', [
         'as' => 'enrollments.getenrollmentsbystatus',
         'uses' => 'EnrollmentsController@getEnrollmentsByStatus'
     ]);

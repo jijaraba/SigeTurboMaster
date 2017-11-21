@@ -125,9 +125,7 @@ class MonitoringtypeRepository implements MonitoringtypeRepositoryInterface
     {
         return Monitoringtype::whereRaw('idyear = ? AND idperiod = ? AND idgroup = ? AND idsubject = ? AND idnivel = ?', array($data['year'], $data['period'], $data['group'], $data['subject'], $data['nivel']))
             ->orderBy('idmonitoringcategory', 'ASC')
-            ->orderBy('created_at', 'ASC')
-            ->orderBy('idmonitoringcategory', 'ASC')
-            ->get();
+            ->orderBy('created_at', 'ASC')->get();
     }
 
     /**
