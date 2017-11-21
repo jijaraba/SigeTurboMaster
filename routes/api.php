@@ -708,7 +708,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
     ]);
     //Search Families By Year
     Route::get('/families/searchfamilies', [
-        'as' => 'api.v1.families.searchfamilies',
+        'as' => 'families.searchfamilies',
         'uses' => 'FamiliesController@searchFamilies'
     ]);
     //Family

@@ -20,7 +20,8 @@ use SigeTurbo\SMS\Client;
 use SigeTurbo\User;
 
 
-class UsersController extends Controller {
+class UsersController extends Controller
+{
 
     /**
      * @var UserRepositoryInterface
@@ -46,14 +47,14 @@ class UsersController extends Controller {
     }
 
     /**
-	 * Display a listing of the resource.
-	 * GET /users
-	 * @return Response
-	 */
-	public function index()
-	{
-		return response()->json($this->userRepository->all());
-	}
+     * Display a listing of the resource.
+     * GET /users
+     * @return Response
+     */
+    public function index()
+    {
+        return response()->json($this->userRepository->all());
+    }
 
     /**
      * Display a listing of the users with permissions to rating.
@@ -71,32 +72,32 @@ class UsersController extends Controller {
      * @return Response
      */
     public function getallstudents(Request $request)
-    {   
+    {
         //Year
-        $year =  null; 
+        $year = null;
         if (isset($request['year'])) {
             $year = $request['year'];
         }
 
         //Showall
-        $showactives = false; 
+        $showactives = false;
         if (isset($request['showactives'])) {
             $showactives = $request['showactives'];
         }
 
-        return response()->json($this->userRepository->getallstudents($year,$showactives));
+        return response()->json($this->userRepository->getallstudents($year, $showactives));
     }
 
-	/**
-	 * Display the specified resource.
-	 * GET /users/{iduser}
-	 * @param  int  $iduser
-	 * @return Response
-	 */
-	public function show($iduser)
-	{
-		return response()->json($this->userRepository->find($iduser));
-	}
+    /**
+     * Display the specified resource.
+     * GET /users/{iduser}
+     * @param  int $iduser
+     * @return Response
+     */
+    public function show($iduser)
+    {
+        return response()->json($this->userRepository->find($iduser));
+    }
 
 
     /**
@@ -106,13 +107,18 @@ class UsersController extends Controller {
      */
     public function store(UserCreateRequest $request)
     {
-
+        //Username
+        $username = explode("@", $request['email']);
+        dd($username);
+        exit();
+        $request['username'] = '1234';
+        //Password
+        $request['password'] = "sigeturbo_" . str_random(6);
         //Save User
-        $password = "sigeturbo_" . str_random(6);
-        $user = $this->userRepository->store($request,$password);
+        $user = $this->userRepository->store($request);
 
         $data = [];
-        if($user){
+        if ($user) {
             $data['successful'] = true;
             $data['message'] = Lang::get('sige.SuccessSaveMessage');
             $data['last_insert_id'] = $user->iduser;
@@ -139,11 +145,11 @@ class UsersController extends Controller {
     {
 
         //Update user
-        $user = $this->userRepository->update($iduser,$request);
+        $user = $this->userRepository->update($iduser, $request);
 
 
         $data = [];
-        if($user){
+        if ($user) {
             $data['successful'] = true;
             $data['message'] = Lang::get('sige.SuccessUpdateMessage');
             //Delete Cache
@@ -214,8 +220,8 @@ class UsersController extends Controller {
             $data["message"] = Lang::get('sige.CelularMessageSend');
 
             //Send SMS
-            $sms = new Client(getenv('SMS_USER'),getenv('SMS_TOKEN'));
-            $deliveryID = $sms->sendMessage($request["celular"],"SigeTurbo Passcode: " . $passcode);
+            $sms = new Client(getenv('SMS_USER'), getenv('SMS_TOKEN'));
+            $deliveryID = $sms->sendMessage($request["celular"], "SigeTurbo Passcode: " . $passcode);
             $data["deliveryID"] = $deliveryID;
         }
         return response()->json($data);
@@ -262,7 +268,6 @@ class UsersController extends Controller {
         }
         return response()->json($data);
     }
-
 
 
     /**
@@ -372,7 +377,8 @@ class UsersController extends Controller {
      * @param $user
      * @return mixed
      */
-    public function profile($user){
+    public function profile($user)
+    {
         return view('users.profile')->withUser($user);
     }
 }

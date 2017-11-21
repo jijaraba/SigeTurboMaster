@@ -59,7 +59,7 @@ class UserRepository implements UserRepositoryInterface
             'idgender' => $data['idgender'],
             'idreligion' => $data['idreligion'],
             'birth' => $data['birth'],
-            'username' => $data['email'],
+            'username' => $data['username'],
             'password' => Hash::make($data['password']),
             'email' => $data['email'],
             'email_personal' => $data['email_personal'],

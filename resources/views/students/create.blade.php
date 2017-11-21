@@ -91,7 +91,7 @@
                                     <sige-turbo-student-verify-celular ng-model="student.celular" confirmed="0"></sige-turbo-student-verify-celular>
                                     <input name="celular" id="celular" type="hidden" ng-model="student.celular"
                                            ng-value="student.celular" title="{{ Lang::get('sige.CelularTitle') }}"
-                                           ng-init="student.celular='{{ $credential['celular'] }}'"/>
+                                           ng-init="student.celular='{{ $credential["celular"] }}'"/>
                                 </li>
                                 <li class="col-25 gutter-5">
                                     <label class="select-arrow" for="idethnicgroup">
@@ -127,7 +127,7 @@
                         <li class="col-40 gutter-5">
                             <input name="email" id="email" type="text" ng-model="student.email"
                                    ng-value="student.email" title="{{ Lang::get('sige.Email') }}"
-                                   ng-init="student.email='{{ $credential['email'] }}'"
+                                   ng-init="student.email='{{ $credential["email"] }}'"
                                    placeholder="Email Principal" required="true"/>
                         </li>
                         <li class="col-40 gutter-5">
@@ -145,6 +145,8 @@
                         </li>
                     </ul>
                 </fieldset>
+                <input type="hidden" value="{{ $credential["password"] }}" id="password" name="password">
+                <input type="hidden" value="{{ $credential["username"] }}" id="username" name="username">
                 {!! Form::close() !!}
             </section>
         </div>
