@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 'use strict';
 
 /* Financials Directives */
@@ -11,14 +12,14 @@ angular.module('Financials.directives', [])
         return {
             restrict: 'AE',
             scope: {
-                payment: "="
+                payment: '='
             },
             controller: ['$scope', function ($scope) {
                 $scope.showDownload = false;
                 $scope.assets = ASSETS_SERVER;
             }],
             template: require('./views/global/financials/export.html'),
-            link: function ($scope, element, attrs) {
+            link: function ($scope) {
                 $scope.export = function (filename, format) {
                     $scope.showDownload = false;
                     Export.getPaymentsReport({
@@ -28,16 +29,16 @@ angular.module('Financials.directives', [])
                     }).$promise.then(
                         function (result) {
                             $scope.showDownload = true;
-                            $scope.download = $scope.assets + "/export/" + result.file;
+                            $scope.download = $scope.assets + '/export/' + result.file;
                         },
                         function (error) {
                             $log.error(error);
                             $scope.showDownload = false;
                         }
                     );
-                }
+                };
             }
-        }
+        };
     }])
     .directive('sigeTurboFinancialsSearch', ['$log', 'Year', 'Group', 'Statusschooltype', function ($log, Year, Group, Statusschooltype) {
         return {
@@ -84,18 +85,18 @@ angular.module('Financials.directives', [])
 
             }],
             template: require('./views/global/financials/search.html'),
-            link: function ($scope, element, attrs) {
+            link: function ($scope) {
 
                 //Verified Empty Text
                 $scope.isEmpty = function (str) {
                     return typeof str == 'string' && !str.trim() || typeof str == 'undefined' || str === null;
-                }
+                };
 
 
                 //Search
                 $scope.searchForm = function () {
                     $scope.showSearch = true;
-                }
+                };
                 //Watch Year
                 $scope.$watch('search.year', function (newYear) {
                     if (isNaN(newYear)) {
@@ -166,13 +167,13 @@ angular.module('Financials.directives', [])
                 });
 
             }
-        }
+        };
     }])
-    .directive('sigeTurboFinancialsPayments', ['$log', 'Payment', 'TransactionType', function ($log, Payment, TransactionType) {
+    .directive('sigeTurboFinancialsPayments', ['$log', 'Payment', function ($log, Payment) {
         return {
             restrict: 'AE',
             scope: {
-                student: "="
+                student: '='
             },
             controller: ['$scope', function ($scope) {
                 Payment.getPaymentsByStudent({'studentId': $scope.student}).$promise.then(
@@ -186,14 +187,14 @@ angular.module('Financials.directives', [])
 
             }],
             template: require('./views/payments/lists.html'),
-            link: function (scope, element, attrs) {
+            link: function (scope, element) {
 
                 //Show Payment
                 scope.showPayment = function (payment) {
                     element.find('#show_payment_' + payment).show();
-                }
+                };
             }
-        }
+        };
     }])
     .directive('sigeTurboPaymentsPayment', ['$log', 'ASSETS_SERVER', 'SweetAlert', 'Payment', function ($log, ASSETS_SERVER, SweetAlert, Payment) {
         return {
@@ -208,19 +209,19 @@ angular.module('Financials.directives', [])
 
                 $scope.load = 'no';
                 $scope.assets = ASSETS_SERVER;
-                var dateCurrent = moment($scope.serverdate, "YYYY-MM-DD").format('YYYY-MM-DD');
+                var dateCurrent = moment($scope.serverdate, 'YYYY-MM-DD').format('YYYY-MM-DD');
                 $scope.data = {
                     voucher: $scope.payment.voucher,
                     observation: $scope.payment.observation
                 };
 
-                $scope.data['date'] = ($scope.payment.payment_at == null || $scope.payment.payment_at == "") ? dateCurrent : moment($scope.payment.payment_at, "YYYY-MM-DD").format('YYYY-MM-DD');
+                $scope.data['date'] = ($scope.payment.payment_at == null || $scope.payment.payment_at == '') ? dateCurrent : moment($scope.payment.payment_at, 'YYYY-MM-DD').format('YYYY-MM-DD');
 
                 //Config Value By Default
-                var dateDiscountPayment = moment($scope.payment.date1, "YYYY-MM-DD").format('YYYY-MM-DD');
-                var dateNormalPayment = moment($scope.payment.date2, "YYYY-MM-DD").format('YYYY-MM-DD');
-                var dateshortPayment = moment($scope.payment.date1, "YYYY-MM-DD").format('YYYY-MM');
-                var dateshortCurrent = moment($scope.serverdate, "YYYY-MM-DD").format('YYYY-MM');
+                var dateDiscountPayment = moment($scope.payment.date1, 'YYYY-MM-DD').format('YYYY-MM-DD');
+                var dateNormalPayment = moment($scope.payment.date2, 'YYYY-MM-DD').format('YYYY-MM-DD');
+                var dateshortPayment = moment($scope.payment.date1, 'YYYY-MM-DD').format('YYYY-MM');
+                var dateshortCurrent = moment($scope.serverdate, 'YYYY-MM-DD').format('YYYY-MM');
 
 
                 if ($scope.payment.realValue == null) {
@@ -252,42 +253,42 @@ angular.module('Financials.directives', [])
 
             }],
             template: require('./views/payments/payment.html'),
-            link: function ($scope, element, attrs, controllerCalendar) {
+            link: function ($scope) {
 
                 //Verify Payment Pending
                 $scope.verifyPaymentPending = function (payment) {
                     Payment.verifyPaymentPending({payment: payment.idpayment}).$promise.then(
                         function (result) {
                             if (result.payment.aprobado === 'A') {
-                                payment.approved = 'A'
-                                SweetAlert.success("Excelente", result.message);
+                                payment.approved = 'A';
+                                SweetAlert.success('Excelente', result.message);
                             } else if (result.payment.aprobado === 'P') {
-                                payment.approved = 'P'
-                                SweetAlert.error("Error", result.message);
+                                payment.approved = 'P';
+                                SweetAlert.error('Error', result.message);
                             } else if (result.payment.aprobado === 'R' || result.payment.aprobado === null) {
-                                payment.approved = 'R'
-                                SweetAlert.error("Error", result.message);
+                                payment.approved = 'R';
+                                SweetAlert.error('Error', result.message);
                             }
                         },
-                        function (error) {
-                            SweetAlert.error("Error", "No se pudo verificar el pago");
-                            $log.info(payment)
+                        function () {
+                            SweetAlert.error('Error', 'No se pudo verificar el pago');
+                            $log.info(payment);
                         }
                     );
                 };
 
                 $scope.showOptions = function (payment) {
-                    angular.element('#calendar_options_' + payment).fadeIn('fast')
-                }
+                    angular.element('#calendar_options_' + payment).fadeIn('fast');
+                };
 
                 //Short Form
                 $scope.showShort = function (payment) {
-                    angular.element('#calendar_short_' + payment).fadeIn('fast')
-                    angular.element('#calendar_options_' + payment).fadeOut('fast')
-                }
+                    angular.element('#calendar_short_' + payment).fadeIn('fast');
+                    angular.element('#calendar_options_' + payment).fadeOut('fast');
+                };
                 $scope.closeShort = function (payment) {
-                    angular.element('#calendar_short_' + payment).fadeOut('fast')
-                }
+                    angular.element('#calendar_short_' + payment).fadeOut('fast');
+                };
 
 
                 //Long Form
@@ -295,10 +296,10 @@ angular.module('Financials.directives', [])
                     angular.element('#calendar_long_' + payment).fadeIn('fast');
                     angular.element('#calendar_options_' + payment).fadeOut('fast');
                     $scope.load = 'yes';
-                }
+                };
                 $scope.closeLong = function (payment) {
-                    angular.element('#calendar_long_' + payment).fadeOut('fast')
-                }
+                    angular.element('#calendar_long_' + payment).fadeOut('fast');
+                };
 
                 $scope.updatePayment = function (payment) {
                     Payment.updatePaymentShort({
@@ -311,21 +312,21 @@ angular.module('Financials.directives', [])
                         'observation': $scope.data.observation,
                     }).$promise.then(
                         function (result) {
-                            SweetAlert.success("Excelente", result.message);
+                            SweetAlert.success('Excelente', result.message);
                             payment.approved = 'A';
                             payment.idbank = $scope.data.bank;
                         },
                         function (error) {
-                            $log.error(error)
-                            SweetAlert.error("Error", "Error al procesar la operación");
+                            $log.error(error);
+                            SweetAlert.error('Error', 'Error al procesar la operación');
                         }
                     );
-                }
+                };
 
             }
-        }
+        };
     }])
-    .directive('sigeTurboPaymentsCreate', ['$log', 'ASSETS_SERVER', 'SweetAlert', 'moment', 'Enrollment', 'Payment', function ($log, ASSETS_SERVER, SweetAlert, moment, Enrollment, Payment) {
+    .directive('sigeTurboPaymentsCreate', ['$log', 'ASSETS_SERVER', 'SweetAlert', 'Enrollment', 'Payment', function ($log, ASSETS_SERVER, SweetAlert, Enrollment, Payment) {
         return {
             restrict: 'AE',
             scope: {},
@@ -347,8 +348,8 @@ angular.module('Financials.directives', [])
 
                 moment.locale('es', {
                     months: [
-                        "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO",
-                        "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"
+                        'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO',
+                        'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'
                     ]
                 });
 
@@ -359,16 +360,16 @@ angular.module('Financials.directives', [])
                 //Functions
                 $scope.showMethod = function (method) {
                     switch (method) {
-                        case 1:
-                            $scope.showMassive = true;
-                            $scope.showIndividual = false;
-                            break;
-                        case 2:
-                            $scope.showMassive = false;
-                            $scope.showIndividual = true;
-                            break;
+                    case 1:
+                        $scope.showMassive = true;
+                        $scope.showIndividual = false;
+                        break;
+                    case 2:
+                        $scope.showMassive = false;
+                        $scope.showIndividual = true;
+                        break;
                     }
-                }
+                };
 
                 //Save Payment Individual
                 $scope.paymentSaveIndividual = function () {
@@ -393,70 +394,70 @@ angular.module('Financials.directives', [])
                         'type': $scope.payment.type
                     }).$promise.then(
                         function (payment) {
-                            SweetAlert.success("Excelente", payment.message);
+                            SweetAlert.success('Excelente', payment.message);
                         },
-                        function (error) {
-                            SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                        function () {
+                            SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                         }
                     );
-                }
+                };
 
                 //Save Payment Massive
                 $scope.paymentSaveMassive = function () {
 
                     SweetAlert.swal({
-                            title: "¿Está seguro?",
-                            text: "La generación masiva de pagos crea un pago con el concepto seleccionado para cada unos de los estudiantes registrados en ese momento y envía un correo electrónico a cada padre de familia",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#53BBB4",
-                            confirmButtonText: "Generar",
-                            closeOnConfirm: false
-                        },
-                        function (isConfirm) {
-                            if (isConfirm) {
-                                //Save Massive Payment
-                                Payment.setPaymentMassive({
-                                    'concept': $scope.payment.concept,
-                                    'date1': $scope.payment.date1,
-                                    'date2': $scope.payment.date2,
-                                    'date3': $scope.payment.date3,
-                                    'date4': $scope.payment.date4,
-                                    'academic': $scope.payment.academic,
-                                    'year': $scope.payment.year,
-                                    'month': $scope.payment.month,
-                                    'month_name': $scope.months[parseInt($scope.payment.month - 1)],
-                                    'type': $scope.payment.type,
-                                    'exclude': ($scope.payment.exclude) ? $scope.payment.exclude : 0,
-                                }).$promise.then(
-                                    function (payment) {
-                                        SweetAlert.success("Excelente", payment.message + " (" + payment.count + ")");
-                                    },
-                                    function (error) {
-                                        SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
-                                    }
-                                );
-                            }
-                        });
+                        title: '¿Está seguro?',
+                        text: 'La generación masiva de pagos crea un pago con el concepto seleccionado para cada unos de los estudiantes registrados en ese momento y envía un correo electrónico a cada padre de familia',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#53BBB4',
+                        confirmButtonText: 'Generar',
+                        closeOnConfirm: false
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            //Save Massive Payment
+                            Payment.setPaymentMassive({
+                                'concept': $scope.payment.concept,
+                                'date1': $scope.payment.date1,
+                                'date2': $scope.payment.date2,
+                                'date3': $scope.payment.date3,
+                                'date4': $scope.payment.date4,
+                                'academic': $scope.payment.academic,
+                                'year': $scope.payment.year,
+                                'month': $scope.payment.month,
+                                'month_name': $scope.months[parseInt($scope.payment.month - 1)],
+                                'type': $scope.payment.type,
+                                'exclude': ($scope.payment.exclude) ? $scope.payment.exclude : 0,
+                            }).$promise.then(
+                                function (payment) {
+                                    SweetAlert.success('Excelente', payment.message + ' (' + payment.count + ')');
+                                },
+                                function () {
+                                    SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
+                                }
+                            );
+                        }
+                    });
 
-                }
+                };
 
             }],
             template: require('./views/payments/create.html'),
-            link: function ($scope, element, attrs) {
+            link: function ($scope) {
 
                 var currentYear = new moment().locale('es').format('YYYY');
                 var currentMonth = new moment().format('MM');
 
                 $scope.payment.year = currentYear;
                 $scope.payment.month = currentMonth;
-                $scope.payment.concept = "PENSIÓN";
+                $scope.payment.concept = 'PENSIÓN';
 
 
                 //Verified Empty Text
                 $scope.isEmpty = function (str) {
                     return typeof str == 'string' && !str.trim() || typeof str == 'undefined' || str === null;
-                }
+                };
 
                 //Search Student
                 $scope.searchStudent = function () {
@@ -490,7 +491,7 @@ angular.module('Financials.directives', [])
                                     $scope.payment.scholarship = parseFloat(user.scholarship);
                                     //Scholarship
                                     if (parseFloat(user.scholarship) == 1) {
-                                        SweetAlert.warning("Advertencia", "Estudiante con Beca del " + (user.scholarship * 100) + "%.");
+                                        SweetAlert.warning('Advertencia', 'Estudiante con Beca del ' + (user.scholarship * 100) + '%.');
                                     }
                                     if (parseFloat(user.scholarship) > 0) {
                                         $scope.studentWithScholarship = true;
@@ -500,37 +501,37 @@ angular.module('Financials.directives', [])
                                     $scope.enableExample = true;
                                     $scope.enableIndividualButton = 0;
                                     //Change Values
-                                    $scope.payment.date1 = new moment([currentYear, parseInt(currentMonth - 1), 10]).format('YYYY-MM-DD')
+                                    $scope.payment.date1 = new moment([currentYear, parseInt(currentMonth - 1), 10]).format('YYYY-MM-DD');
                                     //Days In Month
-                                    var currentDay = moment([currentYear, currentMonth], "YYYY-MM").daysInMonth()
-                                    $scope.payment.date2 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD')
-                                    $scope.payment.date3 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD')
-                                    $scope.payment.date4 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD')
+                                    var currentDay = moment([currentYear, currentMonth], 'YYYY-MM').daysInMonth();
+                                    $scope.payment.date2 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD');
+                                    $scope.payment.date3 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD');
+                                    $scope.payment.date4 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD');
                                     //Example
                                     if ($scope.enableExample == true) {
                                         if (parseInt($scope.payment.type) == 2) {
                                             if ($scope.studentWithScholarship == true) {
-                                                $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " CON BECA DEL " + ($scope.payment.scholarship * 100) + "% " + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                                $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' CON BECA DEL ' + ($scope.payment.scholarship * 100) + '% ' + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                                             } else {
-                                                $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                                $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                                             }
                                         } else if (parseInt($scope.payment.type) == 1) {
-                                            $scope.payment.result = $scope.payment.concept + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                            $scope.payment.result = $scope.payment.concept + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                                         } else {
-                                            $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                            $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                                         }
                                     }
                                 } else {
-                                    SweetAlert.error("Error", "No existe el estudiante indicado");
+                                    SweetAlert.error('Error', 'No existe el estudiante indicado');
                                     $scope.enableIndividualButton = 1;
                                 }
                             },
-                            function (error) {
+                            function () {
                                 $scope.enableIndividualButton = 1;
                             }
                         );
                     }
-                }
+                };
 
                 //Type
                 $scope.$watch('payment.type', function (newType) {
@@ -538,13 +539,13 @@ angular.module('Financials.directives', [])
 
                         //Asignar Valor
                         if (parseInt(newType) == 2) {
-                            $scope.payment.concept = "PENSIÓN";
+                            $scope.payment.concept = 'PENSIÓN';
                             $scope.payment.value1 = $scope.user.pension_discount - ($scope.user.pension_discount * parseFloat($scope.user.scholarship));
                             $scope.payment.value2 = $scope.user.pension_normal - ($scope.user.pension_normal * parseFloat($scope.user.scholarship));
                             $scope.payment.value3 = $scope.user.pension_expired - ($scope.user.pension_expired * parseFloat($scope.user.scholarship));
                             $scope.payment.value4 = $scope.user.pension_normal - ($scope.user.pension_normal * parseFloat($scope.user.scholarship));
                         } else if (parseInt(newType) == 1) {
-                            $scope.payment.concept = "MATRÍCULA";
+                            $scope.payment.concept = 'MATRÍCULA';
                             $scope.payment.value1 = $scope.user.enrollment;
                             $scope.payment.value2 = $scope.user.enrollment;
                             $scope.payment.value3 = $scope.user.enrollment_expired;
@@ -560,14 +561,14 @@ angular.module('Financials.directives', [])
                         if ($scope.enableExample == true) {
                             if (parseInt($scope.payment.type) == 2) {
                                 if ($scope.studentWithScholarship == true) {
-                                    $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " CON BECA DEL " + ($scope.payment.scholarship * 100) + "% " + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                    $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' CON BECA DEL ' + ($scope.payment.scholarship * 100) + '% ' + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                                 } else {
-                                    $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                    $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                                 }
                             } else if (parseInt($scope.payment.type) == 1) {
-                                $scope.payment.result = $scope.payment.concept + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                $scope.payment.result = $scope.payment.concept + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                             } else {
-                                $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                             }
                         }
                     }
@@ -580,21 +581,21 @@ angular.module('Financials.directives', [])
                         if ($scope.enableExample == true) {
                             if (parseInt($scope.payment.type) == 2) {
                                 if ($scope.studentWithScholarship == true) {
-                                    $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " CON BECA DEL " + ($scope.payment.scholarship * 100) + "% " + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                    $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' CON BECA DEL ' + ($scope.payment.scholarship * 100) + '% ' + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                                 } else {
-                                    $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                    $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                                 }
                             } else if (parseInt($scope.payment.type) == 1) {
-                                $scope.payment.result = $scope.payment.concept + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                $scope.payment.result = $scope.payment.concept + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                             } else {
-                                $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                             }
                         }
                     } else {
                         if (parseInt($scope.payment.type) == 2) {
-                            $scope.payment.concept = "PENSIÓN";
+                            $scope.payment.concept = 'PENSIÓN';
                         } else {
-                            $scope.payment.concept = "MATRÍCULA";
+                            $scope.payment.concept = 'MATRÍCULA';
                         }
                     }
                 });
@@ -605,24 +606,24 @@ angular.module('Financials.directives', [])
                         currentYear = newYear;
                     }
 
-                    $scope.payment.date1 = new moment([currentYear, parseInt(currentMonth - 1), 10]).format('YYYY-MM-DD')
+                    $scope.payment.date1 = new moment([currentYear, parseInt(currentMonth - 1), 10]).format('YYYY-MM-DD');
                     //Days In Month
-                    var currentDay = moment([currentYear, currentMonth], "YYYY-MM").daysInMonth()
-                    $scope.payment.date2 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD')
-                    $scope.payment.date3 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD')
-                    $scope.payment.date4 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD')
+                    var currentDay = moment([currentYear, currentMonth], 'YYYY-MM').daysInMonth();
+                    $scope.payment.date2 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD');
+                    $scope.payment.date3 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD');
+                    $scope.payment.date4 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD');
                     //Example
                     if ($scope.enableExample == true) {
                         if (parseInt($scope.payment.type) == 2) {
                             if ($scope.studentWithScholarship == true) {
-                                $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " CON BECA DEL " + ($scope.payment.scholarship * 100) + "% " + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' CON BECA DEL ' + ($scope.payment.scholarship * 100) + '% ' + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                             } else {
-                                $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                             }
                         } else if (parseInt($scope.payment.type) == 1) {
-                            $scope.payment.result = $scope.payment.concept + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                            $scope.payment.result = $scope.payment.concept + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                         } else {
-                            $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                            $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                         }
                     }
                 });
@@ -632,36 +633,36 @@ angular.module('Financials.directives', [])
                     if (newMonth !== undefined) {
                         currentMonth = newMonth;
                     }
-                    $scope.payment.date1 = new moment([currentYear, parseInt(currentMonth - 1), 10]).format('YYYY-MM-DD')
+                    $scope.payment.date1 = new moment([currentYear, parseInt(currentMonth - 1), 10]).format('YYYY-MM-DD');
                     //Days In Month
-                    var currentDay = moment([currentYear, currentMonth], "YYYY-MM").daysInMonth()
-                    $scope.payment.date2 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD')
-                    $scope.payment.date3 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD')
-                    $scope.payment.date4 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD')
+                    var currentDay = moment([currentYear, currentMonth], 'YYYY-MM').daysInMonth();
+                    $scope.payment.date2 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD');
+                    $scope.payment.date3 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD');
+                    $scope.payment.date4 = new moment([currentYear, parseInt(currentMonth - 1), currentDay]).format('YYYY-MM-DD');
                     //Example
                     if ($scope.enableExample == true) {
                         if (parseInt($scope.payment.type) == 2) {
                             if ($scope.studentWithScholarship == true) {
-                                $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " CON BECA DEL " + ($scope.payment.scholarship * 100) + "% " + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' CON BECA DEL ' + ($scope.payment.scholarship * 100) + '% ' + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                             } else {
-                                $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                                $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                             }
                         } else if (parseInt($scope.payment.type) == 1) {
-                            $scope.payment.result = $scope.payment.concept + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                            $scope.payment.result = $scope.payment.concept + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                         } else {
-                            $scope.payment.result = $scope.payment.concept + " " + $scope.months[parseInt(currentMonth - 1)] + " (" + $scope.payment.student + " - " + $scope.payment.firstname.toUpperCase() + ")"
+                            $scope.payment.result = $scope.payment.concept + ' ' + $scope.months[parseInt(currentMonth - 1)] + ' (' + $scope.payment.student + ' - ' + $scope.payment.firstname.toUpperCase() + ')';
                         }
                     }
                 });
 
             }
-        }
+        };
     }])
     .directive('sigeTurboFinancialsTransactions', ['$log', 'Transaction', 'TransactionType', function ($log, Transaction, TransactionType) {
         return {
             restrict: 'AE',
             scope: {
-                payment: "=",
+                payment: '=',
                 load: '='
             },
             controller: ['$scope', function ($scope) {
@@ -687,7 +688,7 @@ angular.module('Financials.directives', [])
                             $log.error(error);
                         }
                     );
-                }
+                };
 
                 //Get Transaction Types
                 TransactionType.query({}).$promise.then(
@@ -720,10 +721,10 @@ angular.module('Financials.directives', [])
                             $log.error(error);
                         }
                     );
-                }
+                };
             }],
             template: require('./views/payments/transactions/lists.html'),
-            link: function (scope, element, attrs) {
+            link: function (scope) {
                 //Watch Year
                 scope.$watch('load', function (newLoad) {
                     if (newLoad == 'yes') {
@@ -731,15 +732,15 @@ angular.module('Financials.directives', [])
                     }
                 });
             }
-        }
+        };
     }])
     .directive('sigeTurboFinancialsTransactionEdit', ['$log', 'Transaction', 'SweetAlert', 'ASSETS_SERVER', function ($log, Transaction, SweetAlert, ASSETS_SERVER) {
         return {
             restrict: 'AE',
             require: '^sigeTurboFinancialsTransactions',
             scope: {
-                transaction: "=",
-                transactiontypes: "="
+                transaction: '=',
+                transactiontypes: '='
             },
             controller: ['$scope', function ($scope) {
                 $scope.assets = ASSETS_SERVER;
@@ -762,16 +763,16 @@ angular.module('Financials.directives', [])
                         nit: scope.transaction.nit,
                         date: scope.transaction.date,
                     }).$promise.then(
-                        function (value) {
-                            element.find("#transaction_" + scope.transaction.idtransaction).addClass('success');
+                        function () {
+                            element.find('#transaction_' + scope.transaction.idtransaction).addClass('success');
                             controllerTransactions.reload();
                         },
-                        function (error) {
-                            element.find("#transaction_" + scope.transaction.idtransaction).addClass('wrong');
-                            SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                        function () {
+                            element.find('#transaction_' + scope.transaction.idtransaction).addClass('wrong');
+                            SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                         }
                     );
-                }
+                };
 
                 //Delete Transaction
                 scope.deleteTransaction = function () {
@@ -782,21 +783,21 @@ angular.module('Financials.directives', [])
                             controllerTransactions.reload();
                         },
                         function () {
-                            SweetAlert.error("Error", "Se ha presentado un error al borrar la información");
+                            SweetAlert.error('Error', 'Se ha presentado un error al borrar la información');
                         }
-                    )
-                }
+                    );
+                };
 
             }
-        }
+        };
     }])
     .directive('sigeTurboFinancialsTransactionNew', ['$log', 'Transaction', 'TransactionType', 'VoucherConsecutive', 'Responsibleparent', 'Costcenter', 'Enrollment', 'SweetAlert', 'ASSETS_SERVER', 'moment', function ($log, Transaction, TransactionType, VoucherConsecutive, Responsibleparent, Costcenter, Enrollment, SweetAlert, ASSETS_SERVER, moment) {
         return {
             restrict: 'AE',
             require: '^sigeTurboFinancialsTransactions',
             scope: {
-                payment: "=",
-                transactiontypes: "="
+                payment: '=',
+                transactiontypes: '='
             },
             controller: ['$scope', function ($scope) {
 
@@ -815,7 +816,7 @@ angular.module('Financials.directives', [])
                 //Transaction
                 $scope.transaction = {
                     date: moment().format('YYYY-MM-DD')
-                }
+                };
 
                 //Responsible
                 Responsibleparent.getResponsibleparentByStudent({'student': $scope.payment.iduser}).$promise.then(
@@ -856,54 +857,54 @@ angular.module('Financials.directives', [])
                     );
 
 
-                }
+                };
 
                 //Enrollment By Student
                 Enrollment.getEnrollmentsLatestByStudent({'student': $scope.payment.iduser}).$promise.then(
                     function (enrollment) {
                         switch (enrollment.idgroup) {
-                            case 1:
-                            case 2:
-                            case 3:
-                            case 4:
-                            case 5:
-                            case 6:
-                            case 7:
-                            case 8:
-                            case 9:
-                            case 10:
-                                $scope.transaction.costcenter = 10;
-                                break;
-                            case 11:
-                            case 12:
-                            case 13:
-                            case 14:
-                            case 15:
-                            case 16:
-                            case 17:
-                            case 18:
-                            case 19:
-                            case 20:
-                                $scope.transaction.costcenter = 20;
-                                break;
-                            case 21:
-                            case 22:
-                            case 23:
-                            case 24:
-                            case 25:
-                            case 26:
-                            case 27:
-                            case 28:
-                                $scope.transaction.costcenter = 30;
-                                break;
-                            case 29:
-                            case 30:
-                            case 31:
-                            case 32:
-                                $scope.transaction.costcenter = 40;
-                                break;
-                            default:
-                                $scope.transaction.costcenter = 50;
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
+                        case 9:
+                        case 10:
+                            $scope.transaction.costcenter = 10;
+                            break;
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 14:
+                        case 15:
+                        case 16:
+                        case 17:
+                        case 18:
+                        case 19:
+                        case 20:
+                            $scope.transaction.costcenter = 20;
+                            break;
+                        case 21:
+                        case 22:
+                        case 23:
+                        case 24:
+                        case 25:
+                        case 26:
+                        case 27:
+                        case 28:
+                            $scope.transaction.costcenter = 30;
+                            break;
+                        case 29:
+                        case 30:
+                        case 31:
+                        case 32:
+                            $scope.transaction.costcenter = 40;
+                            break;
+                        default:
+                            $scope.transaction.costcenter = 50;
                         }
                     },
                     function (error) {
@@ -933,19 +934,19 @@ angular.module('Financials.directives', [])
                         date: scope.transaction.date,
                         realdate: scope.payment.realdate,
                     }).$promise.then(
-                        function (value) {
+                        function () {
                             controllerTransactions.reload();
                         },
-                        function (error) {
-                            SweetAlert.error("Error", "Se ha presentado un error al guardar la información");
+                        function () {
+                            SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
                         }
                     );
-                }
+                };
 
             }
-        }
+        };
     }])
-    .directive('sigeTurboPaymentsCalendar', ['$log', 'ASSETS_SERVER', 'SweetAlert', 'Bank', 'Payment', function ($log, ASSETS_SERVER, SweetAlert, Bank, Payment) {
+    .directive('sigeTurboPaymentsCalendar', ['$log', 'ASSETS_SERVER', 'SweetAlert', 'Bank', function ($log, ASSETS_SERVER, SweetAlert, Bank) {
         return {
             restrict: 'AE',
             scope: {
@@ -968,10 +969,10 @@ angular.module('Financials.directives', [])
                 );
             }],
             template: require('./views/payments/calendar.html'),
-            link: function ($scope, element, attrs) {
+            link: function () {
 
             }
-        }
+        };
     }
     ])
     .directive('sigeTurboPaymentSearch', ['$log', 'Year', function ($log, Year) {
@@ -1003,17 +1004,17 @@ angular.module('Financials.directives', [])
 
             }],
             template: require('./views/global/payment/search.html'),
-            link: function ($scope, element, attrs) {
+            link: function ($scope) {
 
                 //Verified Empty Text
                 $scope.isEmpty = function (str) {
                     return typeof str == 'string' && !str.trim() || typeof str == 'undefined' || str === null;
-                }
+                };
 
                 //Search
                 $scope.searchForm = function () {
                     $scope.showSearch = true;
-                }
+                };
                 //Watch Year
                 $scope.$watch('search.year', function (newYear) {
                     if (isNaN(newYear)) {
@@ -1066,5 +1067,5 @@ angular.module('Financials.directives', [])
                 });
 
             }
-        }
+        };
     }]);

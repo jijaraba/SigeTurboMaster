@@ -2,10 +2,10 @@
 
 //Core
 let angular = require('angular');
-require('angular-resource')
-require('angular-sanitize')
-require('angular-filter')
-require('tc-angular-chartjs')
+require('angular-resource');
+require('angular-sanitize');
+require('angular-filter');
+require('tc-angular-chartjs');
 
 
 //Core

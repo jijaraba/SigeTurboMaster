@@ -2,11 +2,11 @@
 
 /* Financials Controllers */
 angular.module('Financials.controllers', [])
-    .controller('DashboardController', ["$log", "$scope", 'Payment','$window', '$filter', function ($log, $scope, Payment,$window,$filter) {
+    .controller('DashboardController', ['$log', '$scope', 'Payment','$window', '$filter', function ($log, $scope, Payment,$window,$filter) {
 
         $scope.registry= {
             vouchertype : undefined
-        }
+        };
         //Vouchertypes
         $scope.vouchertypes = [
             {code: '00001', name: 'RECIBO VIRTUAL'},
@@ -19,9 +19,9 @@ angular.module('Financials.controllers', [])
         $scope.exportseat = function ($type) {
             if($scope.registry.vouchertype != undefined && $filter('getValidateDate')($scope.registry.starts) == true && $filter('getValidateDate')($scope.registry.ends) == true){
                 $scope.dataincomplete = false;
-                $window.location.href = "/totxt?vouchertype="+$scope.registry.vouchertype+"&starts="+$scope.registry.starts+"&ends="+$scope.registry.ends+"&type="+$type;
+                $window.location.href = '/totxt?vouchertype='+$scope.registry.vouchertype+'&starts='+$scope.registry.starts+'&ends='+$scope.registry.ends+'&type='+$type;
             }else{
-                $scope.dataincomplete = true
+                $scope.dataincomplete = true;
             }
         };
 
@@ -36,7 +36,7 @@ angular.module('Financials.controllers', [])
             }
         );
     }])
-    .controller('StudentsController', ["$log", "$scope", function ($log, $scope) {
+    .controller('StudentsController', ['$log', '$scope', function ($log, $scope) {
         //Scope
         $scope.search = {};
         $scope.init = function (search) {
@@ -45,13 +45,13 @@ angular.module('Financials.controllers', [])
         $scope.result = {};
 
     }])
-    .controller('TransactionsController', ["$log", "$scope", function ($log, $scope) {
+    .controller('TransactionsController', ['$log', '$scope', function ($log, $scope) {
         //Scope
         $scope.init = function (student) {
             $scope.student = student;
         };
     }])
-    .controller('PaymentsController', ["$log", "$scope", 'Payment', function ($log, $scope, Payment) {
+    .controller('PaymentsController', ['$log', '$scope', function ($log, $scope) {
         //Scope
         $scope.search = {};
         $scope.init = function (search) {
@@ -61,10 +61,10 @@ angular.module('Financials.controllers', [])
 
 
     }])
-    .controller('PaymentsCreateController', ["$log", "$scope", function ($log, $scope) {
+    .controller('PaymentsCreateController', [function () {
 
     }])
-    .controller('PaymentsEditController', ["$log", "$scope", "Payment", 'SweetAlert', function ($log, $scope, Payment, SweetAlert) {
+    .controller('PaymentsEditController', ['$log', '$scope', 'Payment', 'SweetAlert', function ($log, $scope, Payment, SweetAlert) {
         $scope.payment = {};
         //Concepts
         $scope.concepttypes = [
@@ -91,38 +91,38 @@ angular.module('Financials.controllers', [])
         //Functions
         $scope.showOption = function (method) {
             switch (method) {
-                case 1:
-                    $scope.options.option01 = true;
-                    $scope.options.option02 = false;
-                    $scope.options.option03 = false;
-                    $scope.options.option04 = false;
-                    break;
-                case 2:
-                    $scope.options.option01 = false;
-                    $scope.options.option02 = true;
-                    $scope.options.option03 = false;
-                    $scope.options.option04 = false;
-                    break;
-                case 3:
-                    $scope.options.option01 = false;
-                    $scope.options.option02 = false;
-                    $scope.options.option03 = true;
-                    $scope.options.option04 = false;
-                    break;
-                case 4:
-                    $scope.options.option01 = false;
-                    $scope.options.option02 = false;
-                    $scope.options.option03 = false;
-                    $scope.options.option04 = true;
-                    break;
+            case 1:
+                $scope.options.option01 = true;
+                $scope.options.option02 = false;
+                $scope.options.option03 = false;
+                $scope.options.option04 = false;
+                break;
+            case 2:
+                $scope.options.option01 = false;
+                $scope.options.option02 = true;
+                $scope.options.option03 = false;
+                $scope.options.option04 = false;
+                break;
+            case 3:
+                $scope.options.option01 = false;
+                $scope.options.option02 = false;
+                $scope.options.option03 = true;
+                $scope.options.option04 = false;
+                break;
+            case 4:
+                $scope.options.option01 = false;
+                $scope.options.option02 = false;
+                $scope.options.option03 = false;
+                $scope.options.option04 = true;
+                break;
             }
-        }
+        };
 
         $scope.$watch('payment.ispayment', function (newPayment) {
             if (newPayment === 'Y') {
-                $scope.payment.approved = 'A'
+                $scope.payment.approved = 'A';
             } else {
-                $scope.payment.approved = 'N'
+                $scope.payment.approved = 'N';
             }
         });
 
@@ -157,14 +157,14 @@ angular.module('Financials.controllers', [])
                 'value': $scope.payment.value,
             }).$promise.then(
                 function (result) {
-                    SweetAlert.success("Excelente", result.message);
+                    SweetAlert.success('Excelente', result.message);
                 },
                 function (error) {
-                    $log.error(error)
-                    SweetAlert.error("Error", "Error al procesar la operación");
+                    $log.error(error);
+                    SweetAlert.error('Error', 'Error al procesar la operación');
                 }
             );
-        }
+        };
 
     }]);
 

@@ -13,7 +13,7 @@
         @yield("roles")
     </div>
 </div>
-{!! HTML::script('/js/vendor/jquery.js') !!}
-{!! HTML::script('/js/Roles.js') !!}
+{!! HTML::script(mix('/js/vendor/vendor.js')) !!}
+{!! HTML::script(mix('/js/Roles.js')) !!}
 </body>
 </html>
