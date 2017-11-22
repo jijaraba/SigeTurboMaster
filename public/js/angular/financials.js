@@ -70834,7 +70834,7 @@ angular.module('Financials.filters', []).filter('interpolate', ['version', funct
 
 //Core
 
-__webpack_require__("./node_modules/angular/index.js");
+var angular = __webpack_require__("./node_modules/angular/index.js");
 __webpack_require__("./node_modules/angular-resource/index.js");
 __webpack_require__("./node_modules/angular-sanitize/index.js");
 __webpack_require__("./node_modules/angular-filter/index.js");
@@ -70847,16 +70847,7 @@ __webpack_require__("./resources/assets/js/sigeturbo_angular/core/services.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/factories.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/directives.js");
 
-angular.module('Financials', ['ngResource', 'tc.chartjs', 'ngSanitize', 'angular.filter', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Financials.filters', 'Financials.services', 'Financials.factories', 'Financials.directives', 'Financials.controllers']).constant("moment", moment);
-
-angular.module('Financials').run(['Token', 'sigeTurboStorage', function (Token, sigeTurboStorage) {
-    if (!sigeTurboStorage.getStorage('token')) {
-        Token.getToken().$promise.then(function (data) {
-            sigeTurboStorage.setStorage('user', data.user);
-            sigeTurboStorage.setStorage('token', data.token);
-        });
-    }
-}]);
+angular.module('Financials', ['ngResource', 'tc.chartjs', 'ngSanitize', 'angular.filter', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Financials.filters', 'Financials.services', 'Financials.factories', 'Financials.directives', 'Financials.controllers']);
 
 angular.module('Financials').config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');

@@ -1,7 +1,6 @@
 'use strict';
 //Core
 let angular = require('angular');
-let moment = require('moment');
 require('angular-resource');
 require('angular-sanitize');
 require('angular-filter');
@@ -37,7 +36,7 @@ angular.module('Formation', [
     'Formation.factories',
     'Formation.directives',
     'Formation.controllers',
-]).constant('moment', moment);
+]);
 
 
 angular.module('Formation').config(['$httpProvider', function ($httpProvider) {

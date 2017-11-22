@@ -2,7 +2,7 @@
 'use strict';
 /* Formation Controllers */
 angular.module('Formation.controllers', [])
-    .controller('DashboardController', ['$scope', '$log', 'Monitoring', 'Year', 'Indicator', 'ngDialog', function ($scope, $log, Monitoring, Year, Indicator, ngDialog) {
+    .controller('DashboardController', ['$scope', '$log', 'Monitoring', 'Year', function ($scope, $log, Monitoring, Year) {
         $scope.academic = [];
         $scope.performances = [];
 
@@ -77,30 +77,30 @@ angular.module('Formation.controllers', [])
                         angular.forEach(performances, function (performance) {
                             $scope.total = $scope.total + performance.value;
                             switch (performance.label) {
-                                case 'DP':
-                                    $scope.DP = performance.value;
-                                    $scope.data.labels.push('DP');
-                                    $scope.data.datasets[0].data.push(performance.value);
-                                    $scope.data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
-                                case 'DB':
-                                    $scope.DB = performance.value;
-                                    $scope.data.labels.push('DP');
-                                    $scope.data.datasets[0].data.push(performance.value);
-                                    $scope.data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
-                                case 'DA':
-                                    $scope.DA = performance.value;
-                                    $scope.data.labels.push('DP');
-                                    $scope.data.datasets[0].data.push(performance.value);
-                                    $scope.data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
-                                case 'DS':
-                                    $scope.DS = performance.value;
-                                    $scope.data.labels.push('DP');
-                                    $scope.data.datasets[0].data.push(performance.value);
-                                    $scope.data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
+                            case 'DP':
+                                $scope.DP = performance.value;
+                                $scope.data.labels.push('DP');
+                                $scope.data.datasets[0].data.push(performance.value);
+                                $scope.data.datasets[0].backgroundColor.push(performance.color);
+                                break;
+                            case 'DB':
+                                $scope.DB = performance.value;
+                                $scope.data.labels.push('DP');
+                                $scope.data.datasets[0].data.push(performance.value);
+                                $scope.data.datasets[0].backgroundColor.push(performance.color);
+                                break;
+                            case 'DA':
+                                $scope.DA = performance.value;
+                                $scope.data.labels.push('DP');
+                                $scope.data.datasets[0].data.push(performance.value);
+                                $scope.data.datasets[0].backgroundColor.push(performance.color);
+                                break;
+                            case 'DS':
+                                $scope.DS = performance.value;
+                                $scope.data.labels.push('DP');
+                                $scope.data.datasets[0].data.push(performance.value);
+                                $scope.data.datasets[0].backgroundColor.push(performance.color);
+                                break;
                             }
                         });
                     }
@@ -268,38 +268,38 @@ angular.module('Formation.controllers', [])
         $scope.edit = function (registry, $controller) {
             $scope.registry = angular.copy(registry);
             switch ($controller) {
-                case 'GroupDirectorController':
-                    ngDialog.open({
-                        template: require('../directives/views/partials/groupdirector/formgroupdirector.html'),
-                        plain: true,
-                        controller: $controller,
-                        scope: $scope
-                    });
-                    break;
-                case 'AreaManagerController':
-                    ngDialog.open({
-                        template: require('../directives/views/partials/areamanager/formareamanager.html'),
-                        plain: true,
-                        controller: $controller,
-                        scope: $scope
-                    });
-                    break;
-                case 'AcademicController':
-                    ngDialog.open({
-                        template: require('../directives/views/partials/academic/formacademic.html'),
-                        plain: true,
-                        controller: $controller,
-                        scope: $scope
-                    });
-                    break;
-                case 'MonitoringcategorybyyearController':
-                    ngDialog.open({
-                        template: require('../directives/views/partials/monitoringcategorybyyear/formmonitoringcategorybyyear.html'),
-                        plain: true,
-                        controller: $controller,
-                        scope: $scope
-                    });
-                    break;
+            case 'GroupDirectorController':
+                ngDialog.open({
+                    template: require('../directives/views/partials/groupdirector/formgroupdirector.html'),
+                    plain: true,
+                    controller: $controller,
+                    scope: $scope
+                });
+                break;
+            case 'AreaManagerController':
+                ngDialog.open({
+                    template: require('../directives/views/partials/areamanager/formareamanager.html'),
+                    plain: true,
+                    controller: $controller,
+                    scope: $scope
+                });
+                break;
+            case 'AcademicController':
+                ngDialog.open({
+                    template: require('../directives/views/partials/academic/formacademic.html'),
+                    plain: true,
+                    controller: $controller,
+                    scope: $scope
+                });
+                break;
+            case 'MonitoringcategorybyyearController':
+                ngDialog.open({
+                    template: require('../directives/views/partials/monitoringcategorybyyear/formmonitoringcategorybyyear.html'),
+                    plain: true,
+                    controller: $controller,
+                    scope: $scope
+                });
+                break;
             }
         };
 
@@ -320,38 +320,38 @@ angular.module('Formation.controllers', [])
         $scope.form = function (registry, $controller) {
             $scope.registry = (registry) ? registry : {};
             switch ($controller) {
-                case 'GroupDirectorController':
-                    ngDialog.open({
-                        template: require('../directives/views/partials/groupdirector/formgroupdirector.html'),
-                        plain: true,
-                        controller: $controller,
-                        scope: $scope
-                    });
-                    break;
-                case 'AreaManagerController':
-                    ngDialog.open({
-                        template: require('../directives/views/partials/areamanager/formareamanager.html'),
-                        plain: true,
-                        controller: $controller,
-                        scope: $scope
-                    });
-                    break;
-                case 'AcademicController':
-                    ngDialog.open({
-                        template: require('../directives/views/partials/academic/formacademic.html'),
-                        plain: true,
-                        controller: $controller,
-                        scope: $scope
-                    });
-                    break;
-                case 'MonitoringcategorybyyearController':
-                    ngDialog.open({
-                        template: require('../directives/views/partials/monitoringcategorybyyear/formmonitoringcategorybyyear.html'),
-                        plain: true,
-                        controller: $controller,
-                        scope: $scope
-                    });
-                    break;
+            case 'GroupDirectorController':
+                ngDialog.open({
+                    template: require('../directives/views/partials/groupdirector/formgroupdirector.html'),
+                    plain: true,
+                    controller: $controller,
+                    scope: $scope
+                });
+                break;
+            case 'AreaManagerController':
+                ngDialog.open({
+                    template: require('../directives/views/partials/areamanager/formareamanager.html'),
+                    plain: true,
+                    controller: $controller,
+                    scope: $scope
+                });
+                break;
+            case 'AcademicController':
+                ngDialog.open({
+                    template: require('../directives/views/partials/academic/formacademic.html'),
+                    plain: true,
+                    controller: $controller,
+                    scope: $scope
+                });
+                break;
+            case 'MonitoringcategorybyyearController':
+                ngDialog.open({
+                    template: require('../directives/views/partials/monitoringcategorybyyear/formmonitoringcategorybyyear.html'),
+                    plain: true,
+                    controller: $controller,
+                    scope: $scope
+                });
+                break;
             }
         };
     }])
@@ -842,7 +842,7 @@ angular.module('Formation.controllers', [])
     .controller('TaskController', [function () {
 
     }])
-    .controller('TaskNewController', ['$scope', '$log', 'moment', 'SweetAlert', 'Tasktype', 'Task', function ($scope, $log, moment, SweetAlert, Tasktype, Task) {
+    .controller('TaskNewController', ['$scope', '$log', 'SweetAlert', 'Tasktype', 'Task', function ($scope, $log, SweetAlert, Tasktype, Task) {
         $scope.message = 'Task New';
         $scope.task = {
             type: 1,
@@ -1015,29 +1015,29 @@ angular.module('Formation.controllers', [])
             if (parseInt(newStatus) !== parseInt(oldStatus)) {
                 if (parseInt(newStatus) == 1 && parseInt($scope.task.statusOld) !== 1) {
                     SweetAlert.swal({
-                            title: '¿Está seguro?',
-                            text: 'Una vez active la tarea quedará visible para los padres de familia y se activa el servicio de envío de correo',
-                            type: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#53BBB4',
-                            confirmButtonText: 'Aprobar',
-                            closeOnConfirm: false
-                        },
-                        function (isConfirm) {
-                            if (isConfirm) {
-                                Task.setApproved({task: $scope.task.idtask, group: $scope.task.group}).$promise.then(
-                                    function (data) {
-                                        swal('¡Aprobada!', data.message, 'success');
-                                        $scope.task.status = 1;
-                                        $scope.approvedResult = 'Aprobada';
-                                    },
-                                    function () {
-                                        swal.close();
-                                    }
-                                );
-                            }
+                        title: '¿Está seguro?',
+                        text: 'Una vez active la tarea quedará visible para los padres de familia y se activa el servicio de envío de correo',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#53BBB4',
+                        confirmButtonText: 'Aprobar',
+                        closeOnConfirm: false
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            Task.setApproved({task: $scope.task.idtask, group: $scope.task.group}).$promise.then(
+                                function (data) {
+                                    swal('¡Aprobada!', data.message, 'success');
+                                    $scope.task.status = 1;
+                                    $scope.approvedResult = 'Aprobada';
+                                },
+                                function () {
+                                    swal.close();
+                                }
+                            );
+                        }
 
-                        });
+                    });
                 }
             }
         });
@@ -1071,30 +1071,30 @@ angular.module('Formation.controllers', [])
                 angular.forEach(performances, function (performance) {
                     $scope.total = $scope.total + performance.value;
                     switch (performance.label) {
-                        case 'DP':
-                            $scope.DP = performance.value;
-                            $scope.data.labels.push('DP');
-                            $scope.data.datasets[0].data.push(performance.value);
-                            $scope.data.datasets[0].backgroundColor.push(performance.color);
-                            break;
-                        case 'DB':
-                            $scope.DB = performance.value;
-                            $scope.data.labels.push('DB');
-                            $scope.data.datasets[0].data.push(performance.value);
-                            $scope.data.datasets[0].backgroundColor.push(performance.color);
-                            break;
-                        case 'DA':
-                            $scope.DA = performance.value;
-                            $scope.data.labels.push('DA');
-                            $scope.data.datasets[0].data.push(performance.value);
-                            $scope.data.datasets[0].backgroundColor.push(performance.color);
-                            break;
-                        case 'DS':
-                            $scope.DS = performance.value;
-                            $scope.data.labels.push('DS');
-                            $scope.data.datasets[0].data.push(performance.value);
-                            $scope.data.datasets[0].backgroundColor.push(performance.color);
-                            break;
+                    case 'DP':
+                        $scope.DP = performance.value;
+                        $scope.data.labels.push('DP');
+                        $scope.data.datasets[0].data.push(performance.value);
+                        $scope.data.datasets[0].backgroundColor.push(performance.color);
+                        break;
+                    case 'DB':
+                        $scope.DB = performance.value;
+                        $scope.data.labels.push('DB');
+                        $scope.data.datasets[0].data.push(performance.value);
+                        $scope.data.datasets[0].backgroundColor.push(performance.color);
+                        break;
+                    case 'DA':
+                        $scope.DA = performance.value;
+                        $scope.data.labels.push('DA');
+                        $scope.data.datasets[0].data.push(performance.value);
+                        $scope.data.datasets[0].backgroundColor.push(performance.color);
+                        break;
+                    case 'DS':
+                        $scope.DS = performance.value;
+                        $scope.data.labels.push('DS');
+                        $scope.data.datasets[0].data.push(performance.value);
+                        $scope.data.datasets[0].backgroundColor.push(performance.color);
+                        break;
                     }
                 });
             }
@@ -1121,30 +1121,30 @@ angular.module('Formation.controllers', [])
                     angular.forEach(performances, function (performance) {
                         $scope.total = $scope.total + performance.value;
                         switch (performance.label) {
-                            case 'DP':
-                                $scope.DP = performance.value;
-                                $scope.data.labels.push('DP');
-                                $scope.data.datasets[0].data.push(performance.value);
-                                $scope.data.datasets[0].backgroundColor.push(performance.color);
-                                break;
-                            case 'DB':
-                                $scope.DB = performance.value;
-                                $scope.data.labels.push('DB');
-                                $scope.data.datasets[0].data.push(performance.value);
-                                $scope.data.datasets[0].backgroundColor.push(performance.color);
-                                break;
-                            case 'DA':
-                                $scope.DA = performance.value;
-                                $scope.data.labels.push('DA');
-                                $scope.data.datasets[0].data.push(performance.value);
-                                $scope.data.datasets[0].backgroundColor.push(performance.color);
-                                break;
-                            case 'DS':
-                                $scope.DS = performance.value;
-                                $scope.data.labels.push('DS');
-                                $scope.data.datasets[0].data.push(performance.value);
-                                $scope.data.datasets[0].backgroundColor.push(performance.color);
-                                break;
+                        case 'DP':
+                            $scope.DP = performance.value;
+                            $scope.data.labels.push('DP');
+                            $scope.data.datasets[0].data.push(performance.value);
+                            $scope.data.datasets[0].backgroundColor.push(performance.color);
+                            break;
+                        case 'DB':
+                            $scope.DB = performance.value;
+                            $scope.data.labels.push('DB');
+                            $scope.data.datasets[0].data.push(performance.value);
+                            $scope.data.datasets[0].backgroundColor.push(performance.color);
+                            break;
+                        case 'DA':
+                            $scope.DA = performance.value;
+                            $scope.data.labels.push('DA');
+                            $scope.data.datasets[0].data.push(performance.value);
+                            $scope.data.datasets[0].backgroundColor.push(performance.color);
+                            break;
+                        case 'DS':
+                            $scope.DS = performance.value;
+                            $scope.data.labels.push('DS');
+                            $scope.data.datasets[0].data.push(performance.value);
+                            $scope.data.datasets[0].backgroundColor.push(performance.color);
+                            break;
                         }
                     });
                 }
@@ -1187,26 +1187,26 @@ angular.module('Formation.controllers', [])
                     };
                     angular.forEach(group.data, function (performance) {
                         switch (performance.label) {
-                            case 'DP':
-                                data.labels.push('DP');
-                                data.datasets[0].data.push(performance.value);
-                                data.datasets[0].backgroundColor.push(performance.color);
-                                break;
-                            case 'DB':
-                                data.labels.push('DB');
-                                data.datasets[0].data.push(performance.value);
-                                data.datasets[0].backgroundColor.push(performance.color);
-                                break;
-                            case 'DA':
-                                data.labels.push('DA');
-                                data.datasets[0].data.push(performance.value);
-                                data.datasets[0].backgroundColor.push(performance.color);
-                                break;
-                            case 'DS':
-                                data.labels.push('DS');
-                                data.datasets[0].data.push(performance.value);
-                                data.datasets[0].backgroundColor.push(performance.color);
-                                break;
+                        case 'DP':
+                            data.labels.push('DP');
+                            data.datasets[0].data.push(performance.value);
+                            data.datasets[0].backgroundColor.push(performance.color);
+                            break;
+                        case 'DB':
+                            data.labels.push('DB');
+                            data.datasets[0].data.push(performance.value);
+                            data.datasets[0].backgroundColor.push(performance.color);
+                            break;
+                        case 'DA':
+                            data.labels.push('DA');
+                            data.datasets[0].data.push(performance.value);
+                            data.datasets[0].backgroundColor.push(performance.color);
+                            break;
+                        case 'DS':
+                            data.labels.push('DS');
+                            data.datasets[0].data.push(performance.value);
+                            data.datasets[0].backgroundColor.push(performance.color);
+                            break;
                         }
                     });
                     $scope.groups.push(data);
@@ -1239,26 +1239,26 @@ angular.module('Formation.controllers', [])
                         };
                         angular.forEach(group.data, function (performance) {
                             switch (performance.label) {
-                                case 'DP':
-                                    data.labels.push('DP');
-                                    data.datasets[0].data.push(performance.value);
-                                    data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
-                                case 'DB':
-                                    data.labels.push('DB');
-                                    data.datasets[0].data.push(performance.value);
-                                    data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
-                                case 'DA':
-                                    data.labels.push('DA');
-                                    data.datasets[0].data.push(performance.value);
-                                    data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
-                                case 'DS':
-                                    data.labels.push('DS');
-                                    data.datasets[0].data.push(performance.value);
-                                    data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
+                            case 'DP':
+                                data.labels.push('DP');
+                                data.datasets[0].data.push(performance.value);
+                                data.datasets[0].backgroundColor.push(performance.color);
+                                break;
+                            case 'DB':
+                                data.labels.push('DB');
+                                data.datasets[0].data.push(performance.value);
+                                data.datasets[0].backgroundColor.push(performance.color);
+                                break;
+                            case 'DA':
+                                data.labels.push('DA');
+                                data.datasets[0].data.push(performance.value);
+                                data.datasets[0].backgroundColor.push(performance.color);
+                                break;
+                            case 'DS':
+                                data.labels.push('DS');
+                                data.datasets[0].data.push(performance.value);
+                                data.datasets[0].backgroundColor.push(performance.color);
+                                break;
                             }
                         });
                         $scope.groups.push(data);
@@ -1307,26 +1307,26 @@ angular.module('Formation.controllers', [])
                     };
                     angular.forEach(subject.data, function (performance) {
                         switch (performance.label) {
-                            case 'DP':
-                                data.labels.push('DP');
-                                data.datasets[0].data.push(performance.value);
-                                data.datasets[0].backgroundColor.push(performance.color);
-                                break;
-                            case 'DB':
-                                data.labels.push('DB');
-                                data.datasets[0].data.push(performance.value);
-                                data.datasets[0].backgroundColor.push(performance.color);
-                                break;
-                            case 'DA':
-                                data.labels.push('DA');
-                                data.datasets[0].data.push(performance.value);
-                                data.datasets[0].backgroundColor.push(performance.color);
-                                break;
-                            case 'DS':
-                                data.labels.push('DS');
-                                data.datasets[0].data.push(performance.value);
-                                data.datasets[0].backgroundColor.push(performance.color);
-                                break;
+                        case 'DP':
+                            data.labels.push('DP');
+                            data.datasets[0].data.push(performance.value);
+                            data.datasets[0].backgroundColor.push(performance.color);
+                            break;
+                        case 'DB':
+                            data.labels.push('DB');
+                            data.datasets[0].data.push(performance.value);
+                            data.datasets[0].backgroundColor.push(performance.color);
+                            break;
+                        case 'DA':
+                            data.labels.push('DA');
+                            data.datasets[0].data.push(performance.value);
+                            data.datasets[0].backgroundColor.push(performance.color);
+                            break;
+                        case 'DS':
+                            data.labels.push('DS');
+                            data.datasets[0].data.push(performance.value);
+                            data.datasets[0].backgroundColor.push(performance.color);
+                            break;
                         }
                     });
                     $scope.subjects.push(data);
@@ -1358,26 +1358,26 @@ angular.module('Formation.controllers', [])
                         };
                         angular.forEach(subject.data, function (performance) {
                             switch (performance.label) {
-                                case 'DP':
-                                    data.labels.push('DP');
-                                    data.datasets[0].data.push(performance.value);
-                                    data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
-                                case 'DB':
-                                    data.labels.push('DB');
-                                    data.datasets[0].data.push(performance.value);
-                                    data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
-                                case 'DA':
-                                    data.labels.push('DA');
-                                    data.datasets[0].data.push(performance.value);
-                                    data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
-                                case 'DS':
-                                    data.labels.push('DS');
-                                    data.datasets[0].data.push(performance.value);
-                                    data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
+                            case 'DP':
+                                data.labels.push('DP');
+                                data.datasets[0].data.push(performance.value);
+                                data.datasets[0].backgroundColor.push(performance.color);
+                                break;
+                            case 'DB':
+                                data.labels.push('DB');
+                                data.datasets[0].data.push(performance.value);
+                                data.datasets[0].backgroundColor.push(performance.color);
+                                break;
+                            case 'DA':
+                                data.labels.push('DA');
+                                data.datasets[0].data.push(performance.value);
+                                data.datasets[0].backgroundColor.push(performance.color);
+                                break;
+                            case 'DS':
+                                data.labels.push('DS');
+                                data.datasets[0].data.push(performance.value);
+                                data.datasets[0].backgroundColor.push(performance.color);
+                                break;
                             }
                         });
                         $scope.subjects.push(data);
@@ -1425,26 +1425,26 @@ angular.module('Formation.controllers', [])
                     };
                     angular.forEach(area.data, function (performance) {
                         switch (performance.label) {
-                            case 'DP':
-                                data.labels.push('DP');
-                                data.datasets[0].data.push(performance.value);
-                                data.datasets[0].backgroundColor.push(performance.color);
-                                break;
-                            case 'DB':
-                                data.labels.push('DB');
-                                data.datasets[0].data.push(performance.value);
-                                data.datasets[0].backgroundColor.push(performance.color);
-                                break;
-                            case 'DA':
-                                data.labels.push('DA');
-                                data.datasets[0].data.push(performance.value);
-                                data.datasets[0].backgroundColor.push(performance.color);
-                                break;
-                            case 'DS':
-                                data.labels.push('DS');
-                                data.datasets[0].data.push(performance.value);
-                                data.datasets[0].backgroundColor.push(performance.color);
-                                break;
+                        case 'DP':
+                            data.labels.push('DP');
+                            data.datasets[0].data.push(performance.value);
+                            data.datasets[0].backgroundColor.push(performance.color);
+                            break;
+                        case 'DB':
+                            data.labels.push('DB');
+                            data.datasets[0].data.push(performance.value);
+                            data.datasets[0].backgroundColor.push(performance.color);
+                            break;
+                        case 'DA':
+                            data.labels.push('DA');
+                            data.datasets[0].data.push(performance.value);
+                            data.datasets[0].backgroundColor.push(performance.color);
+                            break;
+                        case 'DS':
+                            data.labels.push('DS');
+                            data.datasets[0].data.push(performance.value);
+                            data.datasets[0].backgroundColor.push(performance.color);
+                            break;
                         }
                     });
                     $scope.areas.push(data);
@@ -1476,26 +1476,26 @@ angular.module('Formation.controllers', [])
                         };
                         angular.forEach(area.data, function (performance) {
                             switch (performance.label) {
-                                case 'DP':
-                                    data.labels.push('DP');
-                                    data.datasets[0].data.push(performance.value);
-                                    data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
-                                case 'DB':
-                                    data.labels.push('DB');
-                                    data.datasets[0].data.push(performance.value);
-                                    data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
-                                case 'DA':
-                                    data.labels.push('DA');
-                                    data.datasets[0].data.push(performance.value);
-                                    data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
-                                case 'DS':
-                                    data.labels.push('DS');
-                                    data.datasets[0].data.push(performance.value);
-                                    data.datasets[0].backgroundColor.push(performance.color);
-                                    break;
+                            case 'DP':
+                                data.labels.push('DP');
+                                data.datasets[0].data.push(performance.value);
+                                data.datasets[0].backgroundColor.push(performance.color);
+                                break;
+                            case 'DB':
+                                data.labels.push('DB');
+                                data.datasets[0].data.push(performance.value);
+                                data.datasets[0].backgroundColor.push(performance.color);
+                                break;
+                            case 'DA':
+                                data.labels.push('DA');
+                                data.datasets[0].data.push(performance.value);
+                                data.datasets[0].backgroundColor.push(performance.color);
+                                break;
+                            case 'DS':
+                                data.labels.push('DS');
+                                data.datasets[0].data.push(performance.value);
+                                data.datasets[0].backgroundColor.push(performance.color);
+                                break;
                             }
                         });
                         $scope.areas.push(data);

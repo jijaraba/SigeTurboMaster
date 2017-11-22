@@ -2,7 +2,6 @@
 
 //Core
 let angular = require('angular');
-let moment = require('moment');
 require('angular-resource')
 
 
@@ -30,7 +29,7 @@ angular.module('Communications', [
     'Communications.factories',
     'Communications.directives',
     'Communications.controllers',
-]).constant("moment", moment);
+]);
 
 angular.module('Communications').config(['$httpProvider',function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');

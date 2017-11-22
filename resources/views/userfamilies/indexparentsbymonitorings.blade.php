@@ -70,8 +70,12 @@
                                             @{{ monitoring.ratingperiod | scale:monitoring.idgroup}}
                                         </div>
                                     </li>
-                                    <li class="col-10 gutter-5 value recovery">@{{ monitoring.ratingrecovery | recovery }}</li>
-                                    <li class="col-10 gutter-5 value attendance">@{{ monitoring.attendance | attendance}}</li>
+                                    <li class="col-10 gutter-5 value recovery">@{{ monitoring.ratingrecovery | recovery
+                                        }}
+                                    </li>
+                                    <li class="col-10 gutter-5 value attendance">@{{ monitoring.attendance |
+                                        attendance}}
+                                    </li>
                                     <li class="col-10 gutter-5 detail">
                                         <a href="/parents/monitorings/detail/@{{ monitoring.idyear }}/@{{ monitoring.idperiod }}/@{{ monitoring.idgroup }}/@{{ monitoring.idsubject }}/@{{ monitoring.idnivel }}/@{{ monitoring.iduser }}"
                                            class="fa fa-arrow-right"></a>
@@ -85,12 +89,12 @@
         </section>
     </section>
 @stop
-@section("script")
-    {!! HTML::script('js/' . getCurrentRoute() . '.js') !!}
-@stop
 @section("vendor")
-    {!! HTML::script('js/vendor/vendor.js') !!}
+    {!! HTML::script(mix('js/vendor/vendor.js')) !!}
+@stop
+@section("script")
+    {!! HTML::script(mix('js/angular/' . getCurrentRoute() . '.js')) !!}
 @stop
 @section("sigeturbo")
-    {!! HTML::script('js/SigeTurbo.js') !!}
+    {!! HTML::script(mix('js/SigeTurbo.js')) !!}
 @stop

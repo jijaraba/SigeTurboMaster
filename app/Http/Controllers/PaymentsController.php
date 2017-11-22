@@ -424,67 +424,69 @@ class PaymentsController extends Controller
     public function setPaymentMassive(PaymentMassiveRequest $request)
     {
 
-        DB::beginTransaction();
-        try {
-            //Find Students
-            $student_exclude = explode(",", $request["exclude"]);
-            if ($request["type"] == 1) {
-                //Find Student
-                $count = 0;
-                foreach ($this->enrollmentRepository->getEnrollments($request["academic"], null, [Category::STUDENT], Statusschooltype::STATUS_PREENROLLMENT, [], null, 'ASC', $student_exclude) as $student) {
-                    //Generate Payment
-                    //Find Costs
-                    $cost = $this->costRepository->costByGroup($request["academic"], $student->idgroup);
-                    //Find Family
-                    $family = $this->userfamilyRepository->getFamilyByUser($student->iduser);
-                    //Save Payment Individual
-                    $payment = $this->paymentRepository->setPaymentIndividual($family->family, $this->paymentRepository->configDataPayment($request["academic"], $student->idgroup, $cost, $student, $request));
-                    if ($payment) {
-                        //Send Emails to Parents
-                        $users = $this->userfamilyRepository->getFamilies(null, [$family->family], [Category::FATHER, Category::MOTHER]);
-                        $this->mailer->byUsers('payment_created', $users, $payment);
-                        $count++;
-                    }
-                }
-            } else {
-                //Find Student
-                $count = 0;
-                foreach ($this->enrollmentRepository->getEnrollments($request["academic"], null, [Category::STUDENT], Statusschooltype::STATUS_ACTIVE, [], null, 'ASC', $student_exclude) as $student) {
-                    //Find Costs
-                    $cost = $this->costRepository->costByGroup($request["academic"], $student->idgroup);
-                    //Find Family
-                    $family = $this->userfamilyRepository->getFamilyByUser($student->iduser);
-                    //Put data
-                    $data = $request;
-                    $data["student"] = $student->iduser;
-                    $data["value1"] = ($student->scholarship > 0.00) ? (($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) : $cost->pension_discount;
-                    $data["value2"] = ($student->scholarship > 0.00) ? (($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) : $cost->pension_normal;
-                    $data["value3"] = ($student->scholarship > 0.00) ? ((($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) * 1.03) : $cost->pension_expired;
-                    $data["value4"] = ($student->scholarship > 0.00) ? (($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) : $cost->pension_normal;
-                    $data["firstname"] = $student->firstname;
-                    $data["lastname"] = $student->lastname;
-                    $data["gender"] = $student->gender;
-                    $data["scholarship"] = $student->scholarship;
-
-                    //Save Payment Individual
-                    $payment = $this->paymentRepository->setPaymentIndividual($family->family, $data);
-                    if ($payment) {
-                        //Send Emails to Parents
-                        $users = $this->userfamilyRepository->getFamilies(null, [$family->family], [Category::FATHER, Category::MOTHER]);
-                        $this->mailer->byUsers('payment_created', $users, $payment);
-                        $count++;
-                    }
-
+        //DB::beginTransaction();
+        //try {
+        //Find Students
+        $student_exclude = explode(",", $request["exclude"]);
+        if ($request["type"] == 1) {
+            //Find Student
+            $count = 0;
+            foreach ($this->enrollmentRepository->getEnrollments($request["academic"], null, [Category::STUDENT], Statusschooltype::STATUS_PREENROLLMENT, [], null, 'ASC', $student_exclude) as $student) {
+                //Generate Payment
+                //Find Costs
+                $cost = $this->costRepository->costByGroup($request["academic"], $student->idgroup);
+                //Find Family
+                $family = $this->userfamilyRepository->getFamilyByUser($student->iduser);
+                //Save Payment Individual
+                $payment = $this->paymentRepository->setPaymentIndividual($family->family, $this->paymentRepository->configDataPayment($request["academic"], $student->idgroup, $cost, $student, $request));
+                if ($payment) {
+                    //Send Emails to Parents
+                    $users = $this->userfamilyRepository->getFamilies(null, [$family->family], [Category::FATHER, Category::MOTHER]);
+                    $this->mailer->byUsers('payment_created', $users, $payment);
+                    $count++;
                 }
             }
-            DB::commit();
-            return response()->json(["successful" => true, 'message' => Lang::get('sige.SuccessPaymentsCreated'), 'count' => $count]);
+        } else {
+            //Find Student
+            $count = 0;
+            foreach ($this->enrollmentRepository->getEnrollments($request["academic"], null, [Category::STUDENT], Statusschooltype::STATUS_ACTIVE, [], null, 'ASC', $student_exclude) as $student) {
+                //Find Costs
+                $cost = $this->costRepository->costByGroup($request["academic"], $student->idgroup);
+                //Find Family
+                $family = $this->userfamilyRepository->getFamilyByUser($student->iduser);
+                //Put data
+                $data = $request;
+                $data["student"] = $student->iduser;
+                $data["value1"] = ($student->scholarship > 0.00) ? (($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) : $cost->pension_discount;
+                $data["value2"] = ($student->scholarship > 0.00) ? (($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) : $cost->pension_normal;
+                $data["value3"] = ($student->scholarship > 0.00) ? ((($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) * 1.03) : $cost->pension_expired;
+                $data["value4"] = ($student->scholarship > 0.00) ? (($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) : $cost->pension_normal;
+                $data["firstname"] = $student->firstname;
+                $data["lastname"] = $student->lastname;
+                $data["gender"] = $student->gender;
+                $data["scholarship"] = $student->scholarship;
 
-        } catch (\Exception $e) {
+                //Save Payment Individual
+                $payment = $this->paymentRepository->setPaymentIndividual($family->family, $data);
+                if ($payment) {
+                    //Send Emails to Parents
+                    $users = $this->userfamilyRepository->getFamilies([$family->family], [Category::FATHER, Category::MOTHER]);
+                    if ($users) {
+                        $this->mailer->byUsers('payment_created', $users, $payment);
+                    }
+                    $count++;
+                }
+
+            }
+        }
+        //DB::commit();
+        return response()->json(["successful" => true, 'message' => Lang::get('sige.SuccessPaymentsCreated'), 'count' => $count]);
+
+        /*} catch (\Exception $e) {
             DB::rollback();
             return response()->json(["successful" => false], 300);
             throw $e;
-        }
+        }*/
 
     }
 

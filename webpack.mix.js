@@ -16,6 +16,8 @@ mix
         'bower_components/jquery/dist/jquery.min.js',
         'bower_components/intro.js/minified/intro.min.js',
         'bower_components/sweetalert/dist/sweetalert.min.js',
+        'bower_components/datepicker/dist/datepicker.js',
+        'bower_components/moment/min/moment.min.js',
     ], 'public/js/vendor/vendor.js')
     .version();
 
@@ -23,8 +25,20 @@ mix
 mix
     .scripts([
         'bower_components/socket.io-client/dist/socket.io.js',
-        'bower_components/datepicker/dist/datepicker.js',
-    ], 'public/js/vendor/socket.io.js');
+    ], 'public/js/vendor/socket.io.js')
+    .version();
+
+//enc-base64-min
+mix.scripts([
+    'resources/assets/js/vendor/crypto-js/enc-base64-min.js',
+], 'public/js/vendor/enc-base64-min.js')
+    .version();
+
+//hmac-sha256
+mix.scripts([
+    'resources/assets/js/vendor/crypto-js/hmac-sha256.js',
+], 'public/js/vendor/hmac-sha256.js')
+    .version();
 
 /*
  |--------------------------------------------------------------------------

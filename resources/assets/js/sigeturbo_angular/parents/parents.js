@@ -2,7 +2,6 @@
 
 //Core
 let angular = require('angular');
-let moment = require('moment');
 require('angular-resource')
 require('angular-timer')
 
@@ -31,7 +30,7 @@ angular.module('Parents', [
     'Parents.factories',
     'Parents.directives',
     'Parents.controllers',
-]).constant("moment", moment);
+]);
 
 angular.module('Parents').run(['Token','sigeTurboStorage',function(Token,sigeTurboStorage){
     if (!sigeTurboStorage.getStorage('token')) {

@@ -151,7 +151,7 @@ class UserfamilyRepository implements UserfamilyRepositoryInterface
      * @param array $category
      * @return mixed
      */
-    public function getFamilies($group = [], $family = [], $category = [])
+    public function getFamilies($family = [], $category = [], $group = [])
     {
 
         return Userfamily::select('families.idfamily', 'families.name AS family', 'categories.idcategory AS categoryID', 'categories.name AS category', 'users.iduser', DB::raw('CONCAT_WS(CONVERT(" " USING LATIN1), firstname, lastname) AS fullname'), 'users.firstname', 'users.lastname', 'users.email')

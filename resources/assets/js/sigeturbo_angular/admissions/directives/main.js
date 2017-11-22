@@ -1,5 +1,5 @@
+/* eslint-disable no-undef */
 'use strict';
-import moment from 'moment';
 
 /* Admissions Directives */
 angular.module('Admissions.directives', [])
@@ -35,21 +35,21 @@ angular.module('Admissions.directives', [])
                             function (result) {
                                 if (result.exists) {
                                     SweetAlert.swal({
-                                        title: '¿Desea verificarlo?',
-                                        text: result.message,
-                                        type: 'warning',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#53BBB4',
-                                        confirmButtonText: 'Verificar',
-                                        closeOnConfirm: true
-                                    },
-                                    function (isConfirm) {
-                                        if (isConfirm) {
-                                            $scope.showForm = true;
-                                        } else {
-                                            $scope.showForm = false;
-                                        }
-                                    });
+                                            title: '¿Desea verificarlo?',
+                                            text: result.message,
+                                            type: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#53BBB4',
+                                            confirmButtonText: 'Verificar',
+                                            closeOnConfirm: true
+                                        },
+                                        function (isConfirm) {
+                                            if (isConfirm) {
+                                                $scope.showForm = true;
+                                            } else {
+                                                $scope.showForm = false;
+                                            }
+                                        });
                                 } else {
                                     $scope.showForm = true;
                                 }
@@ -60,20 +60,20 @@ angular.module('Admissions.directives', [])
                         );
                     } else {
                         SweetAlert.swal({
-                            title: '¿Desea cambiarlo?',
-                            text: 'El número ' + $scope.ngModel + ' ya fue verificado.',
-                            type: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#53BBB4',
-                            confirmButtonText: 'Cambiar',
-                            closeOnConfirm: true
-                        },
-                        function (isConfirm) {
-                            if (isConfirm) {
-                                $scope.celularEnable = false;
-                                $scope.confirmed = 0;
-                            }
-                        });
+                                title: '¿Desea cambiarlo?',
+                                text: 'El número ' + $scope.ngModel + ' ya fue verificado.',
+                                type: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#53BBB4',
+                                confirmButtonText: 'Cambiar',
+                                closeOnConfirm: true
+                            },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    $scope.celularEnable = false;
+                                    $scope.confirmed = 0;
+                                }
+                            });
                     }
                 };
 
@@ -164,21 +164,21 @@ angular.module('Admissions.directives', [])
                             function (result) {
                                 if (result.exists) {
                                     SweetAlert.swal({
-                                        title: '¿Desea verificarlo?',
-                                        text: result.message,
-                                        type: 'warning',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#53BBB4',
-                                        confirmButtonText: 'Verificar',
-                                        closeOnConfirm: true
-                                    },
-                                    function (isConfirm) {
-                                        if (isConfirm) {
-                                            $scope.showForm = true;
-                                        } else {
-                                            $scope.showForm = false;
-                                        }
-                                    });
+                                            title: '¿Desea verificarlo?',
+                                            text: result.message,
+                                            type: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#53BBB4',
+                                            confirmButtonText: 'Verificar',
+                                            closeOnConfirm: true
+                                        },
+                                        function (isConfirm) {
+                                            if (isConfirm) {
+                                                $scope.showForm = true;
+                                            } else {
+                                                $scope.showForm = false;
+                                            }
+                                        });
                                 } else {
                                     $scope.showForm = true;
                                 }
@@ -189,20 +189,20 @@ angular.module('Admissions.directives', [])
                         );
                     } else {
                         SweetAlert.swal({
-                            title: '¿Desea cambiarlo?',
-                            text: 'El correo ' + $scope.ngModel + ' ya fue verificado.',
-                            type: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#53BBB4',
-                            confirmButtonText: 'Cambiar',
-                            closeOnConfirm: true
-                        },
-                        function (isConfirm) {
-                            if (isConfirm) {
-                                $scope.emailEnable = false;
-                                $scope.confirmed = 0;
-                            }
-                        });
+                                title: '¿Desea cambiarlo?',
+                                text: 'El correo ' + $scope.ngModel + ' ya fue verificado.',
+                                type: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#53BBB4',
+                                confirmButtonText: 'Cambiar',
+                                closeOnConfirm: true
+                            },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    $scope.emailEnable = false;
+                                    $scope.confirmed = 0;
+                                }
+                            });
                     }
                 };
 
@@ -527,41 +527,41 @@ angular.module('Admissions.directives', [])
                     if ($scope.enrollment.idenrollment == undefined) {
 
                         SweetAlert.swal({
-                            title: '¿Está seguro?',
-                            text: 'Una vez asigne al estudiante la Admisión se genera un cobro por concepto de Matrícula y Pensión. Solo Aplica para el estado: PREMATRICULADO',
-                            type: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#53BBB4',
-                            confirmButtonText: 'Asignar',
-                            closeOnConfirm: false
-                        },
-                        function (isConfirm) {
-                            if (isConfirm) {
-                                //Save Enrollment
-                                Enrollment.save({
-                                    year: $scope.enrollment.idyear,
-                                    group: $scope.enrollment.idgroup,
-                                    student: $scope.user,
-                                    register: $scope.enrollment.register,
-                                    status: $scope.enrollment.idstatusschooltype,
-                                    statusdate: $scope.enrollment.statusdate,
-                                    scholarship: 0,
-                                    reentry: $scope.enrollment.reentry,
-                                    inclusion: $scope.enrollment.inclusion
-                                }).$promise.then(
-                                    function (result) {
-                                        $scope.enrollment.idenrollment = result.enrollment.idenrollment;
-                                        SweetAlert.success('Excelente', result.message);
-                                        //Reload
-                                        $window.location.reload()
-                                    },
-                                    function () {
-                                        SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
-                                    }
-                                );
-                            }
+                                title: '¿Está seguro?',
+                                text: 'Una vez asigne al estudiante la Admisión se genera un cobro por concepto de Matrícula y Pensión. Solo Aplica para el estado: PREMATRICULADO',
+                                type: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#53BBB4',
+                                confirmButtonText: 'Asignar',
+                                closeOnConfirm: false
+                            },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    //Save Enrollment
+                                    Enrollment.save({
+                                        year: $scope.enrollment.idyear,
+                                        group: $scope.enrollment.idgroup,
+                                        student: $scope.user,
+                                        register: $scope.enrollment.register,
+                                        status: $scope.enrollment.idstatusschooltype,
+                                        statusdate: $scope.enrollment.statusdate,
+                                        scholarship: 0,
+                                        reentry: $scope.enrollment.reentry,
+                                        inclusion: $scope.enrollment.inclusion
+                                    }).$promise.then(
+                                        function (result) {
+                                            $scope.enrollment.idenrollment = result.enrollment.idenrollment;
+                                            SweetAlert.success('Excelente', result.message);
+                                            //Reload
+                                            $window.location.reload()
+                                        },
+                                        function () {
+                                            SweetAlert.error('Error', 'Se ha presentado un error al guardar la información');
+                                        }
+                                    );
+                                }
 
-                        });
+                            });
 
                     } else {
                         //Update Enrollment
@@ -1004,18 +1004,18 @@ angular.module('Admissions.directives', [])
                     var $name = '';
                     var $title = '';
                     switch (form) {
-                    case 'conveyor':
-                        $name = 'idconveyor';
-                        $title = 'Editar Conductor';
-                        break;
-                    case 'vehicle':
-                        $name = 'idvehicle';
-                        $title = 'Editar Vehículo';
-                        break;
-                    case 'route':
-                        $name = 'idroute';
-                        $title = 'Editar Ruta';
-                        break;
+                        case 'conveyor':
+                            $name = 'idconveyor';
+                            $title = 'Editar Conductor';
+                            break;
+                        case 'vehicle':
+                            $name = 'idvehicle';
+                            $title = 'Editar Vehículo';
+                            break;
+                        case 'route':
+                            $name = 'idroute';
+                            $title = 'Editar Ruta';
+                            break;
                     }
                     var item = (form == 'route') ? $items : $filter('getByProperty')($name, $id, $items);
                     scope.dialogsforms(form, $title, item);

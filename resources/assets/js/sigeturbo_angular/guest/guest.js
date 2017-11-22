@@ -2,7 +2,6 @@
 
 //Core
 let angular = require('angular');
-let moment = require('moment');
 require('angular-resource')
 require('ng-dialog')
 
@@ -32,7 +31,7 @@ angular.module('Guest', [
     'Guest.factories',
     'Guest.directives',
     'Guest.controllers',
-]).constant('moment', moment);
+]);
 
 
 //Guest

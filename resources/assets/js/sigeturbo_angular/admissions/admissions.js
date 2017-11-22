@@ -2,7 +2,6 @@
 
 //Core
 let angular = require('angular');
-let moment = require('moment');
 require('angular-resource');
 require('angular-filter');
 require('tc-angular-chartjs');
@@ -38,7 +37,7 @@ angular.module('Admissions', [
     'Admissions.factories',
     'Admissions.directives',
     'Admissions.controllers',
-]).constant('moment', moment);
+]);
 
 angular.module('Admissions').config(['$httpProvider',function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');

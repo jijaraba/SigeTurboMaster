@@ -3,7 +3,6 @@
 
 //Core
 let angular = require('angular');
-let moment = require('moment');
 require('angular-resource');
 require('tc-angular-chartjs');
 require('ng-dialog');
@@ -35,7 +34,7 @@ angular.module('Dashboard', [
     'Dashboard.factories',
     'Dashboard.directives',
     'Dashboard.controllers',
-]).constant('moment', moment);
+]);
 
 
 angular.module('Dashboard').config(['$httpProvider', function ($httpProvider) {

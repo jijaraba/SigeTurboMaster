@@ -31,9 +31,9 @@ angular.module('Resources', [
     'Resources.factories',
     'Resources.directives',
     'Resources.controllers',
-]).constant("moment", moment);
+]);
 
-angular.module('Resources').run(['Token','sigeTurboStorage',function(Token,sigeTurboStorage){
+angular.module('Resources').run(['Token', 'sigeTurboStorage', function (Token, sigeTurboStorage) {
     if (!sigeTurboStorage.getStorage('token')) {
         Token.getToken().$promise.then(
             function (data) {
@@ -44,7 +44,7 @@ angular.module('Resources').run(['Token','sigeTurboStorage',function(Token,sigeT
     }
 }]);
 
-angular.module('Resources').config(['$httpProvider',function ($httpProvider) {
+angular.module('Resources').config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');
 }]);
 

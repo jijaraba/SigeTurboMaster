@@ -1,7 +1,7 @@
 'use strict';
 
 //Core
-require('angular')
+let angular = require('angular');
 require('angular-resource')
 require('angular-sanitize')
 require('angular-filter')
@@ -35,20 +35,9 @@ angular.module('Financials', [
     'Financials.factories',
     'Financials.directives',
     'Financials.controllers',
-]).constant("moment", moment);
+]);
 
-angular.module('Financials').run(['Token','sigeTurboStorage',function(Token,sigeTurboStorage){
-    if (!sigeTurboStorage.getStorage('token')) {
-        Token.getToken().$promise.then(
-            function (data) {
-                sigeTurboStorage.setStorage('user', data.user);
-                sigeTurboStorage.setStorage('token', data.token);
-            }
-        );
-    }
-}]);
-
-angular.module('Financials').config(['$httpProvider',function ($httpProvider) {
+angular.module('Financials').config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');
 }]);
 

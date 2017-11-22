@@ -2,14 +2,15 @@
 
 namespace SigeTurbo\Repositories\Userfamily;
 
-interface UserfamilyRepositoryInterface {
+interface UserfamilyRepositoryInterface
+{
     public function all();
     public function find($iduserfamily);
     public function store($data);
     public function getUsersByFamily($user);
     public function getMembersFamilyByUser($user);
-    public function getFamilies($group = [], $family = [], $category = []);
+    public function getFamilies($family = [], $category = [], $group = []);
     public function getFamilyByUser($user);
     public function getFamilyName($user);
-    public function getEmailsByFamily($year,$family);
+    public function getEmailsByFamily($year, $family);
 }
