@@ -237,7 +237,7 @@ INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.evaluationpurchases.index','Admin,Teacher,Academic,Principal,Account,Treasurer,Communicator,Librarian,Nurse,HelpDesk,Assistant',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.exports.students.enrollments','Admin,Teacher,Academic,Principal,RRHH,Discipline,Counseling,AreaManager,HomeroomTeacher,HelpDesk,Admission,Librarian', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.exports.payments.reports','Admin,Account,Treasurer', NOW(), NOW());
-INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.exports.reports.partials','Admin,Parents', NOW(), NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.exports.reports.partials','Admin,Parents,HomeroomTeacher', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.families.searchfamilybyname','Admin,Admissions',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.families.store','Admin,Admissions',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.families.searchfamilies','Admin,Admission',NOW(),NOW());
@@ -420,6 +420,8 @@ INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.weeklyevaluations.index', 'Admin,Academic,Principal,Teacher', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.weeklyevaluations.show', 'Admin,Academic,Principal,Teacher', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.responsibleparents.getresponsibleparentbystudent', 'Admin,Account,Treasurer', NOW(), NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.reports.store', 'Admin,HomeroomTeacher', NOW(), NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.reports.getreportbystudent', 'Admin,HomeroomTeacher', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.routes.store', 'Admin', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.routes.update', 'Admin', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.routebyusers.store', 'Admin', NOW(), NOW());

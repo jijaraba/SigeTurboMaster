@@ -72718,7 +72718,21 @@ module.exports = "<section class=\"upload-container\">\n    <div class=\"upload\
 
 /***/ }),
 
+/***/ "./resources/assets/sass/sigeturbo.scss":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/assets/sass/tasks.scss":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/assets/sass/view/groupdirector.scss":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -72741,7 +72755,9 @@ __webpack_require__("./resources/assets/sass/resources.scss");
 __webpack_require__("./resources/assets/sass/roles.scss");
 __webpack_require__("./resources/assets/sass/tasks.scss");
 __webpack_require__("./resources/assets/sass/inventories.scss");
-module.exports = __webpack_require__("./resources/assets/sass/payments.scss");
+__webpack_require__("./resources/assets/sass/payments.scss");
+__webpack_require__("./resources/assets/sass/sigeturbo.scss");
+module.exports = __webpack_require__("./resources/assets/sass/view/groupdirector.scss");
 
 
 /***/ })

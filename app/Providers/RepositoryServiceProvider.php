@@ -380,6 +380,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'SigeTurbo\Repositories\Transactiontype\TransactiontypeRepository'
         );
         App::bind(
+            'SigeTurbo\Repositories\Report\ReportRepositoryInterface',
+            'SigeTurbo\Repositories\Report\ReportRepository'
+        );
+        App::bind(
             'SigeTurbo\Repositories\Request\RequestRepositoryInterface',
             'SigeTurbo\Repositories\Request\RequestRepository'
         );

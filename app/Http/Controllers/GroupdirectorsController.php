@@ -56,7 +56,7 @@ class GroupdirectorsController extends Controller
             'option' => 'groupdirectors'
         ];
         return view('contracts.init')
-           // ->withPendings($paginator)
+            // ->withPendings($paginator)
             ->withSearch($search);
     }
 
@@ -81,8 +81,8 @@ class GroupdirectorsController extends Controller
     public function getgroupdirectorsbyyear(Request $request)
     {
 
-       $groupdirectors = $this->groupdirectorRepository->getGroupsDirectorsByYearOrGroups($request["yearId"],$request["groupId"]);
-       return response()->json($groupdirectors);
+        $groupdirectors = $this->groupdirectorRepository->getGroupsDirectorsByYearOrGroups($request["yearId"], $request["groupId"]);
+        return response()->json($groupdirectors);
     }
 
     /**

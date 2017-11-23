@@ -1,0 +1,15 @@
+@import "sigeturbo/variables";
+@import "sigeturbo/sigeturbo";
+
+body {
+  width: 100%;
+  display: block;
+  font: {
+    family: $sige-font-family-01;
+    size: 1em;
+    weight: 100;
+  }
+  letter-spacing: -1px;
+  background-color: $sige-global-bgcolor-01;
+  color: $sige-global-color-03;
+}

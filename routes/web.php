@@ -98,6 +98,25 @@ Route::get('/homeworks/detail/{task}/', [
 
 /**
  * ===================================
+ *  Views By Roles
+ * ===================================
+ */
+Route::group(['prefix' => 'view', 'as' => 'view.', 'middleware' => ['auth']], function () {
+
+    /* --- GroupdirectorViewController ---*/
+    Route::get('/groupdirector', [
+        'as' => 'groupdirector.dashboard',
+        'uses' => 'GroupdirectorViewController@index'
+    ]);
+    Route::get('/groupdirector/student/{student}', [
+        'as' => 'groupdirector.student',
+        'uses' => 'GroupdirectorViewController@student'
+    ]);
+
+});
+
+/**
+ * ===================================
  * Authenticated Area
  * ===================================
  */

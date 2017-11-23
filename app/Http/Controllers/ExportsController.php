@@ -2,10 +2,8 @@
 
 namespace SigeTurbo\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Input;
 use SigeTurbo\Report\GenerateReport;
 use SigeTurbo\Repositories\Group\GroupRepositoryInterface;
 use SigeTurbo\Repositories\Task\TaskRepositoryInterface;
@@ -154,14 +152,14 @@ class ExportsController extends Controller
     public function exportTransactionsToTxt(Request $request)
     {
         $content = view('exports.payments.txt')
-            ->withTransactions($this->transactionRepository->getTransactionsToExport($request["vouchertype"],$request["starts"],$request["ends"]));
-        if($request["type"] == "text/plain"){
+            ->withTransactions($this->transactionRepository->getTransactionsToExport($request["vouchertype"], $request["starts"], $request["ends"]));
+        if ($request["type"] == "text/plain") {
             return response($content, 200)
-                ->header('Content-Type', $request["type"].'; charset=UTF-8')
+                ->header('Content-Type', $request["type"] . '; charset=UTF-8')
                 ->header('Content-Encoding', 'UTF-8')
                 ->header('X-Header-App', 'SigeTurbo')
                 ->header('Content-Disposition', sprintf('attachment; filename="%s"', fileName('export')));
-        }else{
+        } else {
             dd("Aun no se puede exportar a excel");
         }
     }

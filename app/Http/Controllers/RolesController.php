@@ -38,8 +38,13 @@ class RolesController extends Controller
         //Redirect by Role
         if ($request['role'] === 'Parents') {
             return redirect()->intended('/parents')->withInput()->with('success', Lang::get('sige.LoggedIn'));
+        } else if ($request['role'] === 'HomeroomTeacher') {
+            return redirect()->route('view.groupdirector.dashboard')->withInput()->with('success', Lang::get('sige.LoggedIn'));
+            return redirect()->action('GroupdirectorController@dashboard')->withInput()->with('success', Lang::get('sige.LoggedIn'));
+        } else {
+            return redirect()->intended('/formation')->withInput()->with('success', Lang::get('sige.LoggedIn'));
         }
-        return redirect()->intended('/formation')->withInput()->with('success', Lang::get('sige.LoggedIn'));
+
 
     }
 

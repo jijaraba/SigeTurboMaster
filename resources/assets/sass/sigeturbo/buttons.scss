@@ -1,0 +1,31 @@
+@import "variables";
+
+button, input[type="button"], a {
+  font: {
+    size: 0.8em;
+  }
+  border-radius: 2px;
+  border: inherit;
+  &.btn {
+    color: white;
+    padding: 10px 5px;
+    width: 130px;
+    display: block;
+    line-height: 15px;
+    vertical-align: middle;
+    text-align: center;
+    &.generate {
+      background-color: $sige-global-bgcolor-08;
+    }
+    &.generated {
+      background-color: $sige-global-bgcolor-11;
+    }
+
+    &.enabled {
+      background-color: $sige-global-bgcolor-08;
+    }
+    &.disabled {
+      background-color: $sige-global-bgcolor-11;
+    }
+  }
+}

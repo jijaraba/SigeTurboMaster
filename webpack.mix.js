@@ -61,6 +61,9 @@ mix
     .sass('resources/assets/sass/tasks.scss', 'public/css')
     .sass('resources/assets/sass/inventories.scss', 'public/css')
     .sass('resources/assets/sass/payments.scss', 'public/css')
+    //New Styles
+    .sass('resources/assets/sass/sigeturbo.scss', 'public/css')
+    .sass('resources/assets/sass/view/groupdirector.scss', 'public/css/view')
     .version();
 
 
@@ -81,7 +84,7 @@ mix
 
 /*
  |--------------------------------------------------------------------------
- | ANGULAR
+ | ANGULAR LEGACY
  | Vendors
  |--------------------------------------------------------------------------
 */
@@ -100,6 +103,17 @@ mix
             ]
         }
     });
+
+/*
+ |--------------------------------------------------------------------------
+ | Vue Components
+ | Vendors
+ |--------------------------------------------------------------------------
+*/
+mix
+    .js('resources/assets/js/sigeturbo/modules/groupdirector/dashboard.js', 'public/js/groupdirector')
+    .js('resources/assets/js/sigeturbo/modules/groupdirector/student.js', 'public/js/groupdirector')
+    .version();
 
 /*
  |--------------------------------------------------------------------------

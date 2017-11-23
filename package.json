@@ -29,7 +29,8 @@
         "ng-annotate-loader": "^0.6.1",
         "ng-dialog": "^1.4.0",
         "tc-angular-chartjs": "^2.1.4",
-        "vue": "^2.5.8"
+        "vue": "^2.5.8",
+        "vue-template-compiler": "^2.5.8"
     },
     "dependencies": {}
 }

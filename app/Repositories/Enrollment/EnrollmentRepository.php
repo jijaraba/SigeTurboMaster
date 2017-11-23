@@ -101,6 +101,7 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
     public function getEnrollments($year, $group = null, $category = [], $types = [], $search = [], $sort = null, $order = 'ASC', $exclude = [])
     {
 
+
         $enrollments = Enrollment::select('users.iduser', 'users.firstname', 'users.lastname', 'users.photo', 'enrollments.idstatusschooltype AS status', 'users.idgender AS gender', 'birth', 'inclusion', 'enrollments.register', 'groups.name AS group', 'statusschooltypes.name AS statusName', 'groups.idgroup', 'enrollments.scholarship')
             ->join('users', function ($join) {
                 $join
@@ -115,15 +116,26 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
                     ->on('enrollments.idstatusschooltype', '=', 'statusschooltypes.idstatusschooltype');
             })
             ->where('enrollments.idyear', '=', $year);
-        if ($group !== null) {
+
+        //Group
+        if (is_scalar($group)) {
             $enrollments->where('groups.idgroup', '=', $group);
         }
-        $enrollments
-            ->whereIn('users.idcategory', $category)
-            ->whereIn('enrollments.idstatusschooltype', $types);
+
+        //Category
+        if (is_array($category) && count($category) > 0) {
+            $enrollments
+                ->whereIn('users.idcategory', $category);
+        }
+
+        //Statusschooltype
+        if (is_array($types) && count($types) > 0) {
+            $enrollments
+                ->whereIn('enrollments.idstatusschooltype', $types);
+        }
 
         //Exclude
-        if ($exclude !== null) {
+        if (is_array($exclude) && count($exclude) > 0) {
             $enrollments
                 ->whereNotIn('users.iduser', $exclude);
         }
@@ -198,7 +210,7 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
      */
     public function getEnrollmentsLatestByStudent($student)
     {
-        return Enrollment::select('users.iduser', 'users.firstname', 'users.lastname', 'groups.idgroup', 'groups.name AS group', 'grades.name AS grade', 'enrollments.scholarship', 'users.idgender')
+        return Enrollment::select('users.iduser', 'users.firstname', 'users.lastname', 'users.photo', 'groups.idgroup', 'groups.name AS group', 'grades.name AS grade', 'enrollments.scholarship', 'users.idgender')
             ->join('users', function ($join) {
                 $join
                     ->on('users.iduser', '=', 'enrollments.iduser');

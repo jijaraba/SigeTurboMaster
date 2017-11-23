@@ -1177,6 +1177,17 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'uses' => 'ResponsibleparentsController@getResponsibleparentByStudent'
     ]);
 
+    /**
+     * ===================================
+     * Reports
+     * ===================================
+     */
+    Route::get('/reports/getreportbystudent', [
+        'as' => 'reports.getreportbystudent',
+        'uses' => 'ReportsController@getReportByStudent'
+    ]);
+    Route::resource('reports', 'ReportsController', array('only' => array('store')));
+
 
     /**
      * ===================================

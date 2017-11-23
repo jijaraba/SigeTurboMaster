@@ -1,11 +1,10 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require('../../bootstrap');
 
 import Vue from 'vue';
 
@@ -15,6 +14,11 @@ import Vue from 'vue';
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import Students from '../../views/groupdirector/Students';
+
 new Vue({
-    el: '#app'
+    el: '#groupdirector-dashboard',
+    components: {
+        'sigeturbo-view-groupdirector-students': Students
+    }
 });

@@ -67026,6 +67026,7 @@ angular.module('Parents.controllers', []).controller('DashboardController', ["$l
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* eslint-disable no-undef */
 
 /* Parents Directives */
 
@@ -67037,7 +67038,7 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
     return {
         restrict: 'AE',
         scope: {
-            payment: "="
+            payment: '='
         },
         controller: ['$scope', function ($scope) {
             $scope.assets = ASSETS_SERVER;
@@ -67057,21 +67058,20 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
             }
         }],
         template: __webpack_require__("./resources/assets/js/sigeturbo_angular/parents/directives/views/payment/transaction.html"),
-        link: function link($scope) {}
+        link: function link() {}
     };
 }]).directive('sigeTurboReportGenerate', ['$log', '$timeout', 'ASSETS_SERVER', 'Export', function ($log, $timeout, ASSETS_SERVER, Export) {
     return {
         restrict: 'AE',
         scope: {
-            student: "@"
+            student: '@'
         },
         controller: ['$scope', function ($scope) {
             $scope.assets = ASSETS_SERVER;
             $scope.showDownload = false;
-            $scope.generateText = "Generar";
+            $scope.generateText = 'Generar';
             $scope.generate = function (filename, format) {
-                $scope.generateText = "Generado";
-                $scope.showDownload = true;
+
                 Export.getPartialReport({
                     'filename': filename,
                     'format': format,
@@ -67079,8 +67079,9 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
                     'period': 1,
                     'student': $scope.student
                 }).$promise.then(function (result) {
-                    $scope.download = $scope.assets + "/export/" + result.file;
+                    $scope.download = $scope.assets + '/export/' + result.file;
                     $timeout(function () {
+                        $scope.generateText = 'Generado';
                         $scope.showDownload = true;
                     }, 2000);
                 }, function (error) {
@@ -67090,18 +67091,18 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
             };
         }],
         template: __webpack_require__("./resources/assets/js/sigeturbo_angular/parents/directives/views/report/generate.html"),
-        link: function link(scope, elem, attr, controllerInstance) {}
+        link: function link() {}
     };
 }]).directive('sigeTurboPaymentCheckout', ['$log', 'Payment', 'ASSETS_SERVER', 'CONVENIO_ID', 'CONVENIO_KEY', function ($log, Payment, ASSETS_SERVER, CONVENIO_ID, CONVENIO_KEY) {
     return {
         restrict: 'AE',
         scope: {
-            payment: "=",
-            transaction: "="
+            payment: '=',
+            transaction: '='
         },
         controller: ['$scope', function ($scope) {
             $scope.assets = ASSETS_SERVER;
-            $scope.transaccionID = $scope.transaction + "-" + $scope.payment.idpayment, $scope.methodValid = false;
+            $scope.transaccionID = $scope.transaction + '-' + $scope.payment.idpayment, $scope.methodValid = false;
             $scope.methodSelected = 'normal';
             $scope.message = 'Seleccionar tipo de pago';
             $scope.payment_ref = [];
@@ -67112,7 +67113,7 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
             $scope.icon_agreement = 'payment_agreement.svg';
         }],
         template: __webpack_require__("./resources/assets/js/sigeturbo_angular/parents/directives/views/payment/checkout.html"),
-        link: function link($scope, element, attrs) {
+        link: function link($scope) {
 
             //Submit Data to CPV
             $scope.submit = function () {
@@ -67120,9 +67121,9 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
                 reg.convenioId = parseInt(CONVENIO_ID);
                 reg.transaccionConvenioId = $scope.transaccionID;
                 reg.referenciaPago1 = $scope.payment.iduser;
-                reg.referenciaPago2 = "";
-                reg.referenciaPago3 = "";
-                reg.referenciaPago4 = "";
+                reg.referenciaPago2 = '';
+                reg.referenciaPago3 = '';
+                reg.referenciaPago4 = '';
                 reg.descripcion = $scope.payment_ref.concept;
                 reg.valor = parseInt($scope.payment_ref.value);
                 reg.urlRespuesta = 'https://sigeturbo.thenewschool.edu.co/parents/payments/respond?transaccionConvenioId={transaccionConvenioId}&transaccionId={transaccionId}&aprobado={aprobado}&ref1={ref1}&valor={valor}&uuid={uuid}';
@@ -67137,7 +67138,7 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
                     'transaccionTNS': $scope.transaccionID,
                     'approved': 'P',
                     'realValue': parseInt($scope.payment_ref.value)
-                }).$promise.then(function (result) {
+                }).$promise.then(function () {
                     $scope.setHash(reg, CONVENIO_KEY);
                     $scope.sendCpv(reg, '#formPaymentCpv');
                 }, function (error) {
@@ -67161,13 +67162,13 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
             };
 
             $scope.getHashForQuery = function (reg, keyHttps) {
-                var text = [reg.convenioId, reg.transaccionConvenioId || ""].join("-");
+                var text = [reg.convenioId, reg.transaccionConvenioId || ''].join('-');
                 return $scope.encodeText(text, keyHttps);
             };
 
             //Calculate hash
             $scope.setHash = function (reg, keyHttps) {
-                var text = [reg.convenioId, reg.transaccionConvenioId || "", reg.referenciaPago1, reg.referenciaPago2 || "", reg.referenciaPago3 || "", reg.referenciaPago4 || "", reg.valor || "", reg.urlRespuesta].join("-");
+                var text = [reg.convenioId, reg.transaccionConvenioId || '', reg.referenciaPago1, reg.referenciaPago2 || '', reg.referenciaPago3 || '', reg.referenciaPago4 || '', reg.valor || '', reg.urlRespuesta].join('-');
                 reg.hash = $scope.encodeText(text, keyHttps);
             };
 
@@ -67180,11 +67181,11 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
              }*/
 
             //Get Method by Default
-            var dateDiscountPayment = moment($scope.payment.date1, "YYYY-MM-DD").format('YYYY-MM-DD');
-            var dateNormalPayment = moment($scope.payment.date2, "YYYY-MM-DD").format('YYYY-MM-DD');
-            var dateCurrent = moment($scope.payment.currentDate, "YYYY-MM-DD").format('YYYY-MM-DD');
-            var dateshortPayment = moment($scope.payment.date1, "YYYY-MM-DD").format('YYYY-MM');
-            var dateshortCurrent = moment($scope.payment.currentDate, "YYYY-MM-DD").format('YYYY-MM');
+            var dateDiscountPayment = moment($scope.payment.date1, 'YYYY-MM-DD').format('YYYY-MM-DD');
+            var dateNormalPayment = moment($scope.payment.date2, 'YYYY-MM-DD').format('YYYY-MM-DD');
+            var dateCurrent = moment($scope.payment.currentDate, 'YYYY-MM-DD').format('YYYY-MM-DD');
+            var dateshortPayment = moment($scope.payment.date1, 'YYYY-MM-DD').format('YYYY-MM');
+            var dateshortCurrent = moment($scope.payment.currentDate, 'YYYY-MM-DD').format('YYYY-MM');
 
             if (dateshortPayment <= dateshortCurrent) {
                 if (dateDiscountPayment >= dateCurrent) {
@@ -67300,7 +67301,7 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
                             $scope.methodValid = true;
                         } else {
                             $scope.methodValid = false;
-                            $scope.message = "No hay pagos con descuento configurados";
+                            $scope.message = 'No hay pagos con descuento configurados';
                         }
                         //Charge Values
                         $scope.payment_ref = {
@@ -67329,7 +67330,7 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
                             $scope.methodValid = true;
                         } else {
                             $scope.methodValid = false;
-                            $scope.message = "No hay pagos configurados";
+                            $scope.message = 'No hay pagos configurados';
                         }
                         //Charge Values
                         $scope.payment_ref = {
@@ -67358,7 +67359,7 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
                             $scope.methodValid = true;
                         } else {
                             $scope.methodValid = false;
-                            $scope.message = "No se han configurado pago con intereses";
+                            $scope.message = 'No se han configurado pago con intereses';
                         }
                         //Charge Values
                         $scope.payment_ref = {
@@ -67396,9 +67397,9 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
                             $scope.methodValid = true;
                         } else {
                             $scope.methodValid = false;
-                            $scope.message = "No hay acuerdos de pago";
+                            $scope.message = 'No hay acuerdos de pago';
                         }
-                        ;
+
                         //Charge Values
                         $scope.payment_ref = {
                             referenciaPago1: $scope.payment.idpayment,
@@ -67419,7 +67420,7 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
                             $scope.methodValid = true;
                         } else {
                             $scope.methodValid = false;
-                            $scope.message = "No hay pagos con descuento configurados";
+                            $scope.message = 'No hay pagos con descuento configurados';
                         }
                         //Charge Values
                         $scope.payment_ref = {
