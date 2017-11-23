@@ -15,7 +15,13 @@
 </head>
 <body>
 <section>
-    @yield('content')
+    <header class="main-header bkg-dark-blue">
+        <section></section>
+    </header>
+    <section class="sige-main-container">
+        @yield('content')
+    </section>
+    <footer></footer>
 </section>
 <div style="display: none" id="serverName" data-server="{{ env("SERVER") }}">{{ env("SERVER") }}</div>
 <div style="display: none" id="sigeturboToken" data-token="{{ getUser()->api_token }}"></div>

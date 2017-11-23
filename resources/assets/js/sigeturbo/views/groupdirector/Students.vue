@@ -2,7 +2,13 @@
     <section>
         <ul>
             <li v-for="enrollment in enrollments">
-                <a v-bind:href="'/view/groupdirector/student/' + enrollment.iduser">{{ enrollment.firstname }}</a>
+                <a v-bind:href="'/view/groupdirector/student/' + enrollment.iduser">
+                    <figure class="big">
+                        <img v-bind:src="assets + '/img/users/' + enrollment.photo"
+                        alt="{{ enrollment.lastname }}"
+                        title="{{ enrollment.lastname }}">
+                    </figure>
+                </a>
             </li>
         </ul>
     </section>

@@ -14,11 +14,20 @@ import Vue from 'vue';
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import Student from '../../views/groupdirector/Student.vue';
+import Student from '../../views/groupdirector/Student';
+import Userfamily from '../../views/userfamily/Userfamily';
+import AttendanceScalar from '../../views/attendance/AttendanceScalar';
+import ObservatorScalar from '../../views/observator/ObservatorScalar';
+import PerformanceByStudent from '../../views/chart/PerformanceByStudent';
 
 new Vue({
     el: '#groupdirector-student',
     components: {
-        'sigeturbo-view-groupdirector-student': Student
+        'sigeturbo-view-groupdirector-student': Student,
+        'sigeturbo-view-groupdirector-members': Userfamily,
+        'sigeturbo-view-groupdirector-attendance': AttendanceScalar,
+        'sigeturbo-view-groupdirector-observator': ObservatorScalar,
+        'sigeturbo-view-groupdirector-performance': PerformanceByStudent,
+
     }
 });

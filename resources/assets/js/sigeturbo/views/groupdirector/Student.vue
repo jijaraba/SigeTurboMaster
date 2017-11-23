@@ -1,11 +1,26 @@
 <template>
-    <section>
-        <ul class="display-horizontal col-20">
-            <li class="col-50">
-                <sigeturbo-report-generate :student="student"></sigeturbo-report-generate>
+    <section class="sige-lists">
+        <ul class="display-horizontal col-100">
+            <li class="col-05 check">
+                <div>
+                    <input type="checkbox">
+                </div>
             </li>
-            <li class="col-50">
-                <sigeturbo-report-enable :student="student" type="partialreport"></sigeturbo-report-enable>
+            <li class="col-05 imagen">
+                <div>
+                    <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                </div>
+            </li>
+            <li class="col-50 gutter-5 name">
+                <div>{{ reportText }}</div>
+            </li>
+            <li class="col-20 gutter-5 action">
+                <sigeturbo-report-generate :year="year" :period="period" :student="student"
+                                           :type="type"></sigeturbo-report-generate>
+            </li>
+            <li class="col-20 gutter-5 action">
+                <sigeturbo-report-enable :year="year" :period="period" :student="student"
+                                         :type="type"></sigeturbo-report-enable>
             </li>
         </ul>
     </section>
@@ -19,14 +34,19 @@
     export default {
 
         props: [
+            'year',
+            'period',
             'student',
+            'type',
         ],
         components: {
             'sigeturbo-report-generate': GenerateReport,
             'sigeturbo-report-enable': EnableReport,
         },
         data: function () {
-            return {}
+            return {
+                reportText: 'Informe (Parcial-Final)'
+            }
         },
         methods: {},
         created() {

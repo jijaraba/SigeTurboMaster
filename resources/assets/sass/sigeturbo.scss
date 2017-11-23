@@ -11,5 +11,84 @@ body {
   }
   letter-spacing: -1px;
   background-color: $sige-global-bgcolor-01;
-  color: $sige-global-color-03;
+  color: $sige-global-color-04;
+}
+
+header {
+  &.main-header {
+    height: 110px;
+    position: relative;
+    max-width: 1500px;
+    display: block;
+    z-index: 101;
+    color: white;
+  }
+}
+
+.sige-main-container {
+  position: relative;
+  max-width: $sige-max-width;
+  height: 100%;
+  top: 10px;
+  margin: 0px auto;
+}
+
+.sige-lists {
+  > ul {
+    > li {
+      font: {
+        size: 0.90em;
+      }
+      &.check {
+        div {
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+          text-align: left;
+          padding-left: 5px;
+        }
+      }
+      &.imagen {
+        div {
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+          text-align: left;
+          padding-left: 5px;
+          > i {
+            font:{
+              size: 1.3em;
+            }
+          }
+        }
+      }
+      &.name {
+        div {
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+          text-align: left;
+          padding-left: 5px;
+        }
+      }
+      &.description {
+        div {
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+          text-align: left;
+          span {
+            display: block;
+            font: {
+              family: $sige-font-family-03;
+              size: 1.1em;
+            }
+          }
+        }
+      }
+      &.action {
+
+      }
+    }
+  }
 }

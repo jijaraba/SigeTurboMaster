@@ -1631,6 +1631,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -19341,32 +19347,7 @@ module.exports = function normalizeComponent (
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-45856fb4\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0&bustCache!./resources/assets/js/sigeturbo/views/groupdirector/Students.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("section", [
-    _c(
-      "ul",
-      _vm._l(_vm.enrollments, function(enrollment) {
-        return _c("li", [
-          _c(
-            "a",
-            {
-              attrs: {
-                href: "/view/groupdirector/student/" + enrollment.iduser
-              }
-            },
-            [_vm._v(_vm._s(enrollment.firstname))]
-          )
-        ])
-      })
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
+module.exports={render:function(){},staticRenderFns:[]}
 if (false) {
   module.hot.accept()
   if (module.hot.data) {

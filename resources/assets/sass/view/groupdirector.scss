@@ -1,5 +1,28 @@
-@import "../sigeturbo/sigeturbo";
+@import "../sigeturbo/variables";
 
 .sige-view-groupdirector {
   padding: 10px;
+}
+
+nav {
+  &.sige-view-groupdirector-nav {
+    margin-top: 20px;
+    width: 300px;
+    > ul {
+      > li {
+        > a {
+          color: $sige-global-color-04;
+          font: {
+            size: 0.8em;
+            family: $sige-font-family-03;
+          }
+          padding-bottom: 7px;
+          &:hover {
+            border-bottom: 1px solid $sige-global-bgcolor-03;
+            color: $sige-global-bgcolor-03;
+          }
+        }
+      }
+    }
+  }
 }

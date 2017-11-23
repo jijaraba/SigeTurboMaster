@@ -96,7 +96,7 @@ class UserfamilyRepository implements UserfamilyRepositoryInterface
         $user = $data['user'];
         $category = null;
         if (isset($data['category']) && $data['category'] != 'null') {
-            $typesearch = (getUser()->role_selected === 'Student') ? 'iduser' : 'idfamily'; //Esta condición nos permite hacer una búsqueda que dependera del Rol Seleccionado del usuario, si la categoría es estudiante, solo devolvera los datos del estudiante, de lo contrario devolvera los demas miembros de la familia que sean estudiantes incluyendo el usuario de la búsqueda
+            $type_search = (getUser()->role_selected === 'Student') ? 'iduser' : 'idfamily';
             $category = $data['category'];
 
             return DB::select("SELECT
@@ -115,7 +115,7 @@ class UserfamilyRepository implements UserfamilyRepositoryInterface
             INNER JOIN families ON families.idfamily = userfamilies.idfamily
             INNER JOIN categories ON categories.idcategory = users.idcategory
           WHERE
-            userfamilies." . $typesearch . " IN (SELECT " . $typesearch . " FROM userfamilies WHERE userfamilies.iduser = $user)
+            userfamilies." . $type_search . " IN (SELECT " . $type_search . " FROM userfamilies WHERE userfamilies.iduser = $user)
             AND users.idstatus IN (1 , 2, 3, 5, 6, 7, 11)
             AND users.idcategory = $category
           GROUP BY users.iduser, userfamilies.idfamily");

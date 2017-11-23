@@ -1,5 +1,5 @@
 <template>
-    <button v-bind:class="(reportEnabled)?'btn enabled':'btn disabled'" @click="enable('partialreport')">{{ enableText
+    <button v-bind:class="(reportEnabled)?'btn enabled':'btn disabled'" @click="enable()">{{ enableText
         }}
     </button>
 </template>
@@ -11,6 +11,8 @@
     export default {
 
         props: [
+            'year',
+            'period',
             'student',
             'type'
         ],
@@ -22,13 +24,13 @@
             }
         },
         methods: {
-            enable(reporttype) {
+            enable() {
                 this.enableText = 'Habilitando...';
                 Reports.save('/api/v1/reports/', {
-                    year: 2017,
-                    period: 1,
+                    year: this.year,
+                    period: this.period,
                     user: this.student,
-                    type: reporttype,
+                    type: this.type,
                 })
                     .then(({data}) => {
                         this.enableText = 'Habilitado';
@@ -43,8 +45,8 @@
         },
         created() {
             Reports.getReportByStudent('/api/v1/reports/getreportbystudent', {
-                year: 2017,
-                period: 1,
+                year: this.year,
+                period: this.period,
                 user: this.student,
                 type: this.type,
             })

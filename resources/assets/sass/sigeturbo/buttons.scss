@@ -1,12 +1,13 @@
 @import "variables";
 
 button, input[type="button"], a {
-  font: {
-    size: 0.8em;
-  }
-  border-radius: 2px;
-  border: inherit;
   &.btn {
+    font: {
+      size: 0.85em;
+      family: $sige-font-family-03;
+    }
+    border-radius: 2px;
+    border: inherit;
     color: white;
     padding: 10px 5px;
     width: 130px;
@@ -16,16 +17,20 @@ button, input[type="button"], a {
     text-align: center;
     &.generate {
       background-color: $sige-global-bgcolor-08;
+      color: $sige-global-color-10;
     }
     &.generated {
-      background-color: $sige-global-bgcolor-11;
+      background-color: $sige-global-bgcolor-10;
+      color: $sige-global-color-09;
     }
 
     &.enabled {
       background-color: $sige-global-bgcolor-08;
+      color: $sige-global-color-10;
     }
     &.disabled {
-      background-color: $sige-global-bgcolor-11;
+      background-color: $sige-global-bgcolor-10;
+      color: $sige-global-color-09;
     }
   }
 }

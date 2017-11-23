@@ -1,8 +1,9 @@
 <template>
     <ul class="display-horizontal col-100">
         <li class="col-50">
-            <a v-bind:class="(showDownload)?'btn generated':'btn generate'" id="checkout"
-               @click="generate('partialreport','pdf')">{{ generateText }}</a>
+            <button v-bind:class="(showDownload)?'btn generated':'btn generate'" id="checkout"
+                    @click="generate('pdf')">{{ generateText }}
+            </button>
         </li>
         <li class="col-50 download">
             <a target="_blank" v-if="showDownload" :href="download">Download</a>
@@ -18,23 +19,26 @@
     export default {
 
         props: [
+            'year',
+            'period',
             'student',
+            'type',
         ],
         data: function () {
             return {
                 showDownload: false,
-                generateText: 'Generar',
+                generateText: 'Visualizar',
                 download: ''
             }
         },
         methods: {
-            generate(filename, format) {
+            generate(format) {
                 this.generateText = 'Generando...';
                 Exports.getPartialReport('/api/v1/exports/reports/partials', {
-                    filename: filename,
+                    filename: this.type,
                     format: format,
-                    year: 2017,
-                    period: 1,
+                    year: this.year,
+                    period: this.period,
                     student: this.student,
                 })
                     .then(({data}) => {
@@ -46,7 +50,7 @@
                     })
                     .catch(error => {
                         this.showDownload = false;
-                        this.generateText = 'Generar';
+                        this.generateText = 'Visualizar';
                         console.log(error);
                     });
             }

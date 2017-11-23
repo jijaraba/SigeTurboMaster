@@ -33,6 +33,9 @@ Route::resource('pages', 'PagesController');
  * ===================================
  */
 Auth::routes();
+Route::get('/', [
+    'uses' => 'Auth\LoginController@login',
+]);
 Route::get('/logout', [
     'as' => 'logout',
     'uses' => 'Auth\LoginController@logout',
