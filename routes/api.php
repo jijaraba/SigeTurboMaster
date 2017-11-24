@@ -1148,6 +1148,14 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'as' => 'exports.reports.partials',
         'uses' => 'ExportsController@exportReportsPartials'
     ]);
+    Route::get('/exports/reports/final', [
+        'as' => 'exports.reports.final',
+        'uses' => 'ExportsController@exportReportsFinal'
+    ]);
+    Route::get('/exports/reports/descriptive', [
+        'as' => 'exports.reports.descriptive',
+        'uses' => 'ExportsController@exportReportsDescriptive'
+    ]);
 
 
     /**

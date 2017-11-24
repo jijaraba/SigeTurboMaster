@@ -13,7 +13,7 @@ class Exports extends Model {
      * @param path
      * @param params
      */
-    static getPartialReport(path, params) {
+    static getReport(path, params) {
         return HTTP.get(path, {
             params: params
         });

@@ -32,7 +32,21 @@
         methods: {
             generate(format) {
                 this.generateText = 'Generando...';
-                Exports.getPartialReport('/api/v1/exports/reports/partials', {
+
+                let path = '';
+                switch (this.type) {
+                    case 'partialreport':
+                        path = '/api/v1/exports/reports/partials';
+                        break;
+                    case 'finalreport':
+                        path = '/api/v1/exports/reports/final';
+                        break;
+                    case 'descriptivereport':
+                        path = '/api/v1/exports/reports/descriptive';
+                        break;
+                }
+
+                Exports.getReport(path, {
                     filename: this.type,
                     format: format,
                     year: this.year,
@@ -42,11 +56,10 @@
                     .then(({data}) => {
                         this.download = this.assets + '/export/' + data.file;
                         let url = this.download
-                        console.log(this.download);
+                        this.generateText = 'Generado';
+                        this.showDownload = true;
                         //Open New Window
                         setTimeout(function () {
-                            this.generateText = 'Generado';
-                            this.showDownload = true;
                             window.open(url, '_blank');
                         }, 1000);
                     })

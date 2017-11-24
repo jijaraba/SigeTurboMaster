@@ -148,6 +148,84 @@ class ExportsController extends Controller
         }
     }
 
+    /**
+     * Display Export Final Reports
+     * GET /exports/final
+     * @param Request $request
+     * @return Response
+     */
+    public function exportReportsFinal(Request $request)
+    {
+        //Generate Report
+        $report = new GenerateReport(env('JASPERSERVER_HOST'), env('JASPERSERVER_PORT'));
+
+        //Global Variables
+        $path = storage_path() . '/sigeturbo/finalreport';
+        $format = $request["format"];
+        $type = "export";
+        $fileName = fileName($request["filename"]);
+        $controls = [
+            'ACADEMIC_YEAR' => $request['year'],
+            'ACADEMIC_PERIOD' => $request['period'],
+            'STUDENT_ID' => $request['student'],
+        ];
+        $pagination = null;
+        if ($request["format"] == "xlsx") {
+            $pagination = true;
+        }
+
+        //Run Report
+        $response = $report->run($path, '/reports/sigeturbo/Finalreport/InformeFinalIndividual', $format, $fileName, $controls, $pagination);
+        if (is_bool($response) === true && $response === true) { //Binary Response
+            //Upload To CDN
+            $cloud = new CloudService();
+            if ($cloud->uploadExport($type, $path, $fileName . '.' . $format)) {
+                return response()->json(['file' => $fileName . '.' . $format]);
+            }
+        } else { //HTML Response
+            echo $response;
+        }
+    }
+
+    /**
+     * Display Export Descriptive Reports
+     * GET /exports/descriptive
+     * @param Request $request
+     * @return Response
+     */
+    public function exportReportsDescriptive(Request $request)
+    {
+        //Generate Report
+        $report = new GenerateReport(env('JASPERSERVER_HOST'), env('JASPERSERVER_PORT'));
+
+        //Global Variables
+        $path = storage_path() . '/sigeturbo/descriptivereport';
+        $format = $request["format"];
+        $type = "export";
+        $fileName = fileName($request["filename"]);
+        $controls = [
+            'ACADEMIC_YEAR' => $request['year'],
+            'ACADEMIC_PERIOD' => $request['period'],
+            'STUDENT_ID' => $request['student'],
+        ];
+        $pagination = null;
+        if ($request["format"] == "xlsx") {
+            $pagination = true;
+        }
+
+        //Run Report
+        $response = $report->run($path, '/reports/sigeturbo/Descriptivereport/InformeDescriptivoIndividual', $format, $fileName, $controls, $pagination);
+        if (is_bool($response) === true && $response === true) { //Binary Response
+            //Upload To CDN
+            $cloud = new CloudService();
+            if ($cloud->uploadExport($type, $path, $fileName . '.' . $format)) {
+                return response()->json(['file' => $fileName . '.' . $format]);
+            }
+        } else { //HTML Response
+            echo $response;
+        }
+    }
+
 
     public function exportTransactionsToTxt(Request $request)
     {
