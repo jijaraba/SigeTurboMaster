@@ -285,7 +285,10 @@ header {
 
 .sige-items {
   > ul {
-    display: inline-flex;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-flow: row wrap;
     > li {
       padding: 10px;
     }
