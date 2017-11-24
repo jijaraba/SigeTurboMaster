@@ -164,6 +164,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        SigeTurbo\SMS\SMSServiceProvider::class,
+        SigeTurbo\Report\ReportServiceProvider::class,
 
         /*
          * Package Service Providers...
