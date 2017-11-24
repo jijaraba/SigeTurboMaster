@@ -19,3 +19,8 @@ nav.sige-view-groupdirector-nav > ul > li > a:hover {
   color: #53BBB4;
 }
 
+nav.sige-view-groupdirector-nav > ul > li > a.active {
+  border-bottom: 1px solid #4cae50;
+  color: #4cae50;
+}
+

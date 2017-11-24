@@ -15,10 +15,182 @@ body {
 }
 
 header {
+  ul#account-info {
+    position: absolute;
+    height: 70px;
+    max-width: $sige-max-width;
+    top: 20px;
+    right: 0;
+    z-index: 101;
+    padding: 10px 30px;
+    margin: 0px auto;
+    left: 0;
+    right: 0;
+    > li {
+      position: relative;
+      height: 100%;
+      float: right;
+      pointer-events: auto;
+      &#notifications {
+        width: 50px;
+        > a {
+          .bell {
+            top: 5px;
+            position: relative;
+            width: 25px;
+            height: 30px;
+            background: {
+              size: 50px 30px;
+              position: 25px 0px;
+              image: url("../images/bells.svg");
+              image: url("../images/bells.svg");
+            }
+            opacity: 0.9;
+            &:hover {
+              background: {
+                size: 50px 30px;
+                position: -50px 0px;
+              }
+              transition: opacity 3s ease;
+            }
+            &.show {
+              background: {
+                size: 50px 30px;
+                position: -50px 0px;
+              }
+              transition: opacity 3s ease;
+            }
+            opacity: 1;
+          }
+          em {
+            color: white;
+            font: {
+              size: 1em;
+              family: $sige-font-family-02;
+              weight: normal;
+            }
+            top: -30px;
+            position: relative;
+            right: -20px;
+            background: $sige-global-bgcolor-10;
+            padding: 0px 6px;
+            border-radius: 3px;
+            border: 1px solid $sige-global-bgcolor-09;
+
+          }
+        }
+      }
+      &#profile {
+        width: 200px;
+        > a {
+          padding-right: 25px;
+          padding-left: 50px;
+          figure {
+            float: left;
+            margin-top: -3px;
+            div#photo {
+              float: left;
+              position: relative;
+              height: 50px;
+              width: 50px;
+              border-radius: 50%;
+              border: 4px solid $sige-global-bgcolor-03;
+              img {
+                border-radius: 50%;
+                display: block;
+                position: relative;
+                z-index: 3;
+              }
+            }
+            figcaption {
+              width: 100px;
+              text-align: left;
+              position: absolute;
+              left: 60px;
+              right: 0;
+              top: 5px;
+              h4 {
+                color: #788189;
+                border: none;
+                padding-bottom: 0px;
+                font: {
+                  size: 1em;
+                  family: $sige-font-family-03;
+                }
+              }
+              em {
+                color: #788189;
+                top: -5px;
+                position: relative;
+                font: {
+                  size: 12px;
+                  family: $sige-font-family-03;
+                  weight: normal;
+                }
+              }
+            }
+          }
+          &:after {
+            display: inline-block;
+            content: "";
+            width: 12px;
+            height: 8px;
+            background: {
+              size: 24px 16px;
+              position: -12px 0px;
+              image: url("../images/arrows.svg");
+            }
+          ;
+            position: absolute;
+            top: 22px;
+            right: 15px;
+            transition: border-color 0.2s ease;
+          }
+        }
+      }
+    }
+  }
+  ul#title {
+    position: absolute;
+    height: 70px;
+    max-width: $sige-max-width;
+    top: 20px;
+    right: 0;
+    z-index: 100;
+    padding: 10px 30px;
+    margin: 0px auto;
+    left: 0;
+    right: 0;
+    line-height: 50px;
+    font-size: 1.7em;
+    font-family: 'Gotham Rounded Bold';
+    text-align: center;
+    color: #B2BBBD;
+  }
+  ul#logo {
+    position: absolute;
+    height: 110px;
+    max-width: $sige-max-width;
+    right: 0;
+    z-index: 100;
+    margin: 0px auto;
+    left: 0;
+    right: 0;
+    line-height: 50px;
+    font-size: 1.7em;
+    font-family: 'Gotham Rounded Bold';
+    text-align: left;
+    color: #B2BBBD;
+    > li {
+      img {
+        width: 90px;
+      }
+    }
+  }
   &.main-header {
     height: 110px;
     position: relative;
-    max-width: 1500px;
+    with: 10%;
     display: block;
     z-index: 101;
     color: white;
@@ -33,7 +205,25 @@ header {
   margin: 0px auto;
 }
 
-.sige-lists {
+.sige-main-container-header {
+  position: relative;
+  max-width: $sige-max-width;
+  height: 100%;
+  margin: 0px auto;
+}
+
+.sige-header {
+  > li {
+    &.logo {
+      float: left;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.sige-item {
   > ul {
     > li {
       font: {
@@ -56,7 +246,7 @@ header {
           text-align: left;
           padding-left: 5px;
           > i {
-            font:{
+            font: {
               size: 1.3em;
             }
           }
@@ -89,6 +279,15 @@ header {
       &.action {
 
       }
+    }
+  }
+}
+
+.sige-items {
+  > ul {
+    display: inline-flex;
+    > li {
+      padding: 10px;
     }
   }
 }

@@ -324,7 +324,7 @@ em {
   font-family: "Gotham Rounded Book";
   font-style: normal;
   src: url(/fonts/GothamRoundedBook.eot?c7a25c1a01a34ed145e02acc35c6de18);
-  src: url(/fonts/GothamRoundedBook.ttf?8251971ed5a6f2e1781b095041dbd1db) format("truetype"), url(/fonts/GothamRoundedBook.otf?e40570a322c8676a5c07b3630c4cfee5) format("opentype"), url(/fonts/GothamRoundedBook.woff?7cc51b9216ba0a2daf70c2e280d5385e) format("woff");
+  src: url(/fonts/GothamRoundedBook.ttf?d31d488d2171c1668c15962fc6cf1ef7) format("truetype"), url(/fonts/GothamRoundedBook.otf?e40570a322c8676a5c07b3630c4cfee5) format("opentype"), url(/fonts/GothamRoundedBook.woff?7cc51b9216ba0a2daf70c2e280d5385e) format("woff");
 }
 
 @font-face {
@@ -379,7 +379,7 @@ em {
   font-family: "Gotham Rounded Book";
   font-style: normal;
   src: url(/fonts/GothamRoundedBook.eot?c7a25c1a01a34ed145e02acc35c6de18);
-  src: url(/fonts/GothamRoundedBook.ttf?8251971ed5a6f2e1781b095041dbd1db) format("truetype"), url(/fonts/GothamRoundedBook.otf?e40570a322c8676a5c07b3630c4cfee5) format("opentype"), url(/fonts/GothamRoundedBook.woff?7cc51b9216ba0a2daf70c2e280d5385e) format("woff");
+  src: url(/fonts/GothamRoundedBook.ttf?d31d488d2171c1668c15962fc6cf1ef7) format("truetype"), url(/fonts/GothamRoundedBook.otf?e40570a322c8676a5c07b3630c4cfee5) format("opentype"), url(/fonts/GothamRoundedBook.woff?7cc51b9216ba0a2daf70c2e280d5385e) format("woff");
 }
 
 @font-face {
@@ -715,6 +715,22 @@ em {
   margin: 10px 0px;
 }
 
+.margin-bottom-05 {
+  margin: 5px 0px;
+}
+
+.margin-bottom-10 {
+  margin: 10px 0px;
+}
+
+.margin-bottom-15 {
+  margin: 10px 0px;
+}
+
+.margin-top-bottom-02 {
+  margin: 2px 0px;
+}
+
 .margin-top-bottom-05 {
   margin: 5px 0px;
 }
@@ -740,12 +756,6 @@ figure {
   background: #53BBB4;
 }
 
-figure > img {
-  width: 100%;
-  text-align: center;
-  border-radius: 50%;
-}
-
 figure.small {
   height: 50px;
   width: 50px;
@@ -758,10 +768,28 @@ figure.normal {
   padding: 4px;
 }
 
+figure.medium {
+  height: 80px;
+  width: 80px;
+  padding: 4px;
+}
+
 figure.big {
   height: 96px;
   width: 96px;
   padding: 4px;
+}
+
+figure > img {
+  width: 100%;
+  text-align: center;
+  border-radius: 50%;
+}
+
+figure figcaption {
+  margin-top: 5px;
+  color: #8d9aa5;
+  font-size: 0.9em;
 }
 
 .rounded-05 {
@@ -878,7 +906,7 @@ h5.header-red {
 p {
   padding: 15px 0px;
   color: #8d9aa5;
-  font-size: 0.95em;
+  font-size: 0.9em;
 }
 
 .clearfix {
@@ -919,7 +947,7 @@ p {
 
 .flash li {
   width: 100%;
-  font-size: 0.85em !important;
+  font-size: 0.8em !important;
   list-style: none;
   margin-bottom: 3px !important;
   margin-top: 5px !important;
@@ -935,7 +963,15 @@ p {
   color: #fff;
   border-radius: 5px;
   padding: 15px;
-  font-family: "Gotham Rounded Bold", Helvetica Neue, Helvetica, sans-serif;
+  font-family: "Gotham Rounded Book", Helvetica Neue, Helvetica, sans-serif;
+}
+
+.flash-error i,
+.flash-success i,
+.flash-notice i,
+.flash-warning i {
+  font-size: 1.3em;
+  margin-left: 5px;
 }
 
 .flash-error {
@@ -951,6 +987,7 @@ p {
 .flash-notice {
   background-color: #E0AB18;
   color: #573D00;
+  font-size: 0.9em;
 }
 
 .flash-warning {
@@ -2584,10 +2621,184 @@ body {
   color: #8d9aa5;
 }
 
+header ul#account-info {
+  position: absolute;
+  height: 70px;
+  max-width: 1100px;
+  top: 20px;
+  right: 0;
+  z-index: 101;
+  padding: 10px 30px;
+  margin: 0px auto;
+  left: 0;
+  right: 0;
+}
+
+header ul#account-info > li {
+  position: relative;
+  height: 100%;
+  float: right;
+  pointer-events: auto;
+}
+
+header ul#account-info > li#notifications {
+  width: 50px;
+}
+
+header ul#account-info > li#notifications > a .bell {
+  top: 5px;
+  position: relative;
+  width: 25px;
+  height: 30px;
+  background-size: 50px 30px;
+  background-position: 25px 0px;
+  background-image: url(/fonts/bells.svg?67d27113d7904f190ecebadb6fe406a3);
+  background-image: url(/fonts/bells.svg?67d27113d7904f190ecebadb6fe406a3);
+  opacity: 0.9;
+  opacity: 1;
+}
+
+header ul#account-info > li#notifications > a .bell:hover {
+  background-size: 50px 30px;
+  background-position: -50px 0px;
+  -webkit-transition: opacity 3s ease;
+  transition: opacity 3s ease;
+}
+
+header ul#account-info > li#notifications > a .bell.show {
+  background-size: 50px 30px;
+  background-position: -50px 0px;
+  -webkit-transition: opacity 3s ease;
+  transition: opacity 3s ease;
+}
+
+header ul#account-info > li#notifications > a em {
+  color: white;
+  font-size: 1em;
+  font-family: "PT Sans Narrow", Helvetica Neue, Helvetica, sans-serif;
+  font-weight: normal;
+  top: -30px;
+  position: relative;
+  right: -20px;
+  background: #da4453;
+  padding: 0px 6px;
+  border-radius: 3px;
+  border: 1px solid #ed5565;
+}
+
+header ul#account-info > li#profile {
+  width: 200px;
+}
+
+header ul#account-info > li#profile > a {
+  padding-right: 25px;
+  padding-left: 50px;
+}
+
+header ul#account-info > li#profile > a figure {
+  float: left;
+  margin-top: -3px;
+}
+
+header ul#account-info > li#profile > a figure div#photo {
+  float: left;
+  position: relative;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 4px solid #53BBB4;
+}
+
+header ul#account-info > li#profile > a figure div#photo img {
+  border-radius: 50%;
+  display: block;
+  position: relative;
+  z-index: 3;
+}
+
+header ul#account-info > li#profile > a figure figcaption {
+  width: 100px;
+  text-align: left;
+  position: absolute;
+  left: 60px;
+  right: 0;
+  top: 5px;
+}
+
+header ul#account-info > li#profile > a figure figcaption h4 {
+  color: #788189;
+  border: none;
+  padding-bottom: 0px;
+  font-size: 1em;
+  font-family: "Gotham Rounded Bold", Helvetica Neue, Helvetica, sans-serif;
+}
+
+header ul#account-info > li#profile > a figure figcaption em {
+  color: #788189;
+  top: -5px;
+  position: relative;
+  font-size: 12px;
+  font-family: "Gotham Rounded Bold", Helvetica Neue, Helvetica, sans-serif;
+  font-weight: normal;
+}
+
+header ul#account-info > li#profile > a:after {
+  display: inline-block;
+  content: "";
+  width: 12px;
+  height: 8px;
+  background-size: 24px 16px;
+  background-position: -12px 0px;
+  background-image: url(/fonts/arrows.svg?eff3ddd2a348525cd969295e4e8f4122);
+  position: absolute;
+  top: 22px;
+  right: 15px;
+  -webkit-transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease;
+}
+
+header ul#title {
+  position: absolute;
+  height: 70px;
+  max-width: 1100px;
+  top: 20px;
+  right: 0;
+  z-index: 100;
+  padding: 10px 30px;
+  margin: 0px auto;
+  left: 0;
+  right: 0;
+  line-height: 50px;
+  font-size: 1.7em;
+  font-family: 'Gotham Rounded Bold';
+  text-align: center;
+  color: #B2BBBD;
+}
+
+header ul#logo {
+  position: absolute;
+  height: 110px;
+  max-width: 1100px;
+  right: 0;
+  z-index: 100;
+  margin: 0px auto;
+  left: 0;
+  right: 0;
+  line-height: 50px;
+  font-size: 1.7em;
+  font-family: 'Gotham Rounded Bold';
+  text-align: left;
+  color: #B2BBBD;
+}
+
+header ul#logo > li img {
+  width: 90px;
+}
+
 header.main-header {
   height: 110px;
   position: relative;
-  max-width: 1500px;
+  with: 10%;
   display: block;
   z-index: 101;
   color: white;
@@ -2601,11 +2812,26 @@ header.main-header {
   margin: 0px auto;
 }
 
-.sige-lists > ul > li {
+.sige-main-container-header {
+  position: relative;
+  max-width: 1100px;
+  height: 100%;
+  margin: 0px auto;
+}
+
+.sige-header > li.logo {
+  float: left;
+}
+
+.sige-header > li.logo img {
+  width: 100%;
+}
+
+.sige-item > ul > li {
   font-size: 0.90em;
 }
 
-.sige-lists > ul > li.check div {
+.sige-item > ul > li.check div {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -2614,7 +2840,7 @@ header.main-header {
   padding-left: 5px;
 }
 
-.sige-lists > ul > li.imagen div {
+.sige-item > ul > li.imagen div {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -2623,11 +2849,11 @@ header.main-header {
   padding-left: 5px;
 }
 
-.sige-lists > ul > li.imagen div > i {
+.sige-item > ul > li.imagen div > i {
   font-size: 1.3em;
 }
 
-.sige-lists > ul > li.name div {
+.sige-item > ul > li.name div {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -2636,7 +2862,7 @@ header.main-header {
   padding-left: 5px;
 }
 
-.sige-lists > ul > li.description div {
+.sige-item > ul > li.description div {
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -2644,9 +2870,19 @@ header.main-header {
   text-align: left;
 }
 
-.sige-lists > ul > li.description div span {
+.sige-item > ul > li.description div span {
   display: block;
   font-family: "Gotham Rounded Bold", Helvetica Neue, Helvetica, sans-serif;
   font-size: 1.1em;
+}
+
+.sige-items > ul {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.sige-items > ul > li {
+  padding: 10px;
 }
 

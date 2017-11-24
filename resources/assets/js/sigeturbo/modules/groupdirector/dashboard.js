@@ -15,10 +15,12 @@ import Vue from 'vue';
  */
 
 import Students from '../../views/groupdirector/Students';
+import PerformanceByGroup from '../../views/chart/PerformanceByGroup';
 
 new Vue({
     el: '#groupdirector-dashboard',
     components: {
-        'sigeturbo-view-groupdirector-students': Students
+        'sigeturbo-view-groupdirector-students': Students,
+        'sigeturbo-view-groupdirector-performance': PerformanceByGroup,
     }
 });

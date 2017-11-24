@@ -137,11 +137,11 @@ return array(
     'October' => 'Octubre',
     'November' => 'Noviembre',
     'December' => 'Diciembre',
-    'Report' => 'Informe',
-    'Reports' => 'Informes',
+    'Report' => 'Reporte',
+    'Reports' => 'Reportes',
     'Generate' => 'Generar',
     'Download' => 'Descargar',
-
+    'HomeroomTeacher' => 'Director de Grupo',
 
     //Roles
     'rolAdmin' => 'Admin',

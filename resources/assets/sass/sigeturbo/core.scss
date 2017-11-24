@@ -290,6 +290,21 @@
   margin: 10px 0px;
 }
 
+.margin-bottom-05 {
+  margin: 5px 0px;
+}
+
+.margin-bottom-10 {
+  margin: 10px 0px;
+}
+
+.margin-bottom-15 {
+  margin: 10px 0px;
+}
+
+.margin-top-bottom-02 {
+  margin: 2px 0px;
+}
 .margin-top-bottom-05 {
   margin: 5px 0px;
 }
@@ -319,11 +334,6 @@ figure {
   cursor: pointer;
   text-align: center;
   background: $sige-global-bgcolor-03;
-  > img {
-    width: 100%;
-    text-align: center;
-    border-radius: 50%;
-  }
   &.small {
     height: 50px;
     width: 50px;
@@ -334,10 +344,27 @@ figure {
     width: 70px;
     padding: 4px;
   }
+  &.medium {
+    height: 80px;
+    width: 80px;
+    padding: 4px;
+  }
   &.big {
     height: 96px;
     width: 96px;
     padding: 4px;
+  }
+  > img {
+    width: 100%;
+    text-align: center;
+    border-radius: 50%;
+  }
+  figcaption {
+    margin-top: 5px;
+    color: $sige-global-color-04;
+    font: {
+      size: 0.9em;
+    }
   }
 }
 
@@ -458,7 +485,7 @@ p {
   padding: 15px 0px;
   color: $sige-global-color-04;
   font: {
-    size: 0.95em;
+    size: 0.9em;
   }
 }
 
@@ -496,7 +523,7 @@ p {
   width: 100%;
   li {
     width: 100%;
-    font-size: 0.85em !important;
+    font-size: 0.8em !important;
     list-style: none;
     margin-bottom: 3px !important;
     margin-top: 5px !important;
@@ -511,7 +538,13 @@ p {
   border-radius: 5px;
   padding: 15px;
   font: {
-    family: $sige-font-family-03;
+    family: $sige-font-family-01;
+  }
+  i {
+    font: {
+      size: 1.3em;
+    }
+    margin-left: 5px;
   }
 }
 
@@ -530,6 +563,9 @@ p {
   @extend %msg;
   background-color: #E0AB18;
   color: $sige-global-bgcolor-29;
+  font: {
+    size: 0.9em;
+  }
 }
 
 .flash-warning {

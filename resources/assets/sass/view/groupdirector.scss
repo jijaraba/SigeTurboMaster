@@ -21,6 +21,10 @@ nav {
             border-bottom: 1px solid $sige-global-bgcolor-03;
             color: $sige-global-bgcolor-03;
           }
+          &.active {
+            border-bottom: 1px solid $sige-global-bgcolor-08;
+            color: $sige-global-bgcolor-08;
+          }
         }
       }
     }

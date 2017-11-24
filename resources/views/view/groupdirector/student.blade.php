@@ -1,9 +1,10 @@
 @extends('layouts/groupdirector')
+@section("title", Lang::get("sige.HomeroomTeacher"))
 @section("content")
     <section id="groupdirector-student">
         <section class="sige-contained padding-05">
             <div class="flash flash-notice">
-                El grupo presenta novedades
+                El grupo <strong>{{ $group->name }}</strong> presenta novedades
             </div>
         </section>
         <section>
@@ -24,9 +25,8 @@
                     <section class="sige-contained rounded-05 bkg-white padding-20">
                         <header>
                             <h4>ESTUDIANTE</h4>
-
                         </header>
-                        <section class="sige-lists margin-top-10">
+                        <section class="sige-item margin-top-10">
                             <ul class="display-horizontal col-100">
                                 <li class="col-20">
                                     <figure class="big">
@@ -46,22 +46,20 @@
                         <hr class="margin-top-bottom-20">
                         <nav class="sige-view-groupdirector-nav">
                             <ul class="display-horizontal">
-                                <li><a href="">{{ mb_strtoupper(Lang::get('sige.Observator')) }}</a></li>
-                                <li><a href="">{{ mb_strtoupper(Lang::get('sige.Monitoring')) }}</a></li>
-                                <li><a href="">{{ mb_strtoupper(Lang::get('sige.Reports')) }}</a></li>
+                                <li><a href="#" class="active">{{ mb_strtoupper(Lang::get('sige.Reports')) }}</a></li>
                             </ul>
                         </nav>
                         <section style="margin-top: 40px">
-                            <header>
+                            <header class="margin-bottom-15">
                                 <h5 class="without-border">PRIMER PERIODO</h5>
                             </header>
                             <sigeturbo-view-groupdirector-student year="2017" period="1"
                                                                   student="{{ $enrollment->iduser }}"
-                                                                  type="parcialreport"></sigeturbo-view-groupdirector-student>
-                            <hr class="margin-top-bottom-05">
+                                                                  type="partialreport"></sigeturbo-view-groupdirector-student>
+                            <hr class="margin-top-bottom-02">
                             <sigeturbo-view-groupdirector-student year="2017" period="1"
                                                                   student="{{ $enrollment->iduser }}"
-                                                                  type="finalreport"></sigeturbo-view-groupdirector-student>
+                                                                  type="{{ $type }}"></sigeturbo-view-groupdirector-student>
                         </section>
                     </section>
                 </section>

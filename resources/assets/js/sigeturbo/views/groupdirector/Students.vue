@@ -1,12 +1,13 @@
 <template>
-    <section>
+    <section class="sige-items">
         <ul>
             <li v-for="enrollment in enrollments">
                 <a v-bind:href="'/view/groupdirector/student/' + enrollment.iduser">
-                    <figure class="big">
-                        <img v-bind:src="assets + '/img/users/' + enrollment.photo"
-                        alt="{{ enrollment.lastname }}"
-                        title="{{ enrollment.lastname }}">
+                    <figure class="medium">
+                        <img :src=" assets + '/img/users/' + enrollment.photo"
+                             :alt="enrollment.lastname"
+                             :title="enrollment.lastname">
+                        <figcaption>{{ enrollment.firstname }}</figcaption>
                     </figure>
                 </a>
             </li>
@@ -17,18 +18,26 @@
 <script>
 
     import Enrollments from '../../models/Enrollments';
+    import assets from "../../core/utils";
 
     export default {
 
+        props: [
+            'group',
+        ],
         data: function () {
             return {
                 enrollments: [],
                 year: 2017,
-                group: 31
+                assets: assets()
             }
         },
         methods: {},
+        mounted(){
+
+        },
         created() {
+            console.log(this.group)
             Enrollments.getEnrollments('/api/v1/enrollments/getenrollments', {
                 year: this.year,
                 group: this.group

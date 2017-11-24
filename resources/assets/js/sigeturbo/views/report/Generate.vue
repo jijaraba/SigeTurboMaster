@@ -1,12 +1,9 @@
 <template>
     <ul class="display-horizontal col-100">
-        <li class="col-50">
+        <li class="col-100">
             <button v-bind:class="(showDownload)?'btn generated':'btn generate'" id="checkout"
                     @click="generate('pdf')">{{ generateText }}
             </button>
-        </li>
-        <li class="col-50 download">
-            <a target="_blank" v-if="showDownload" :href="download">Download</a>
         </li>
     </ul>
 </template>
@@ -43,9 +40,11 @@
                 })
                     .then(({data}) => {
                         this.download = assets + '/export/' + data.file;
+                        //Open New Window
                         setTimeout(function () {
                             this.generateText = 'Generado';
                             this.showDownload = true;
+                            window.open(this.download, '_blank');
                         }, 1000);
                     })
                     .catch(error => {

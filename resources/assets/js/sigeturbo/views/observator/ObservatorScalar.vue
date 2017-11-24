@@ -1,6 +1,6 @@
 <template>
     <section>
-        Observador
+
     </section>
 </template>
 

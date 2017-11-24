@@ -24,7 +24,7 @@
                 data: {
                     labels: ['DP', 'DB', 'DA', 'DS'],
                     datasets: [{
-                        data: [32, 5, 12, 5],
+                        data: [12, 19, 3, 5],
                         backgroundColor: [
                             'rgba(237, 85, 101, 1)',
                             'rgba(252, 110, 81, 1)',

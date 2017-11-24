@@ -1,6 +1,6 @@
 <template>
     <section>
-        Attendance
+
     </section>
 </template>
 

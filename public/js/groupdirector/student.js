@@ -1672,13 +1672,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {
             type: 'doughnut',
             data: {
+                labels: ['DP', 'DB', 'DA', 'DS'],
                 datasets: [{
-                    labels: ['1', '2', '3', '4'],
-                    data: [12, 19, 3, 5],
-                    backgroundColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)']
+                    data: [32, 5, 12, 5],
+                    backgroundColor: ['rgba(237, 85, 101, 1)', 'rgba(252, 110, 81, 1)', 'rgba(47, 157, 163, 1)', 'rgba(160, 212, 104, 1)']
                 }]
             },
-            options: {}
+            options: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
         });
     }
 });
@@ -1736,11 +1740,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            reportText: 'Informe (Parcial-Final)'
+            reportText: 'Final'
         };
     },
     methods: {},
-    created: function created() {}
+    created: function created() {
+        if (this.type == 'partialreport') {
+            this.reportText = "Parcial";
+        } else if (this.type == 'descriptivereport') {
+            this.reportText = 'Descriptivo';
+        } else {
+            this.reportText = "Final";
+        }
+    }
 });
 
 /***/ }),
@@ -1861,9 +1873,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -1894,9 +1903,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var data = _ref.data;
 
                 _this.download = __WEBPACK_IMPORTED_MODULE_1__core_utils__["a" /* default */] + '/export/' + data.file;
+                //Open New Window
                 setTimeout(function () {
                     this.generateText = 'Generado';
                     this.showDownload = true;
+                    window.open(this.download, '_blank');
                 }, 1000);
             }).catch(function (error) {
                 _this.showDownload = false;
@@ -50030,14 +50041,14 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "sige-lists" }, [
+  return _c("section", { staticClass: "sige-item" }, [
     _c("ul", { staticClass: "display-horizontal col-100" }, [
       _vm._m(0, false, false),
       _vm._v(" "),
       _vm._m(1, false, false),
       _vm._v(" "),
       _c("li", { staticClass: "col-50 gutter-5 name" }, [
-        _c("div", [_vm._v(_vm._s(_vm.reportText))])
+        _c("div", [_vm._v("Informe " + _vm._s(_vm.reportText))])
       ]),
       _vm._v(" "),
       _c(
@@ -50115,7 +50126,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [_vm._v("\n    Familiares\n")])
+  return _c("section")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -50137,7 +50148,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("ul", { staticClass: "display-horizontal col-100" }, [
-    _c("li", { staticClass: "col-50" }, [
+    _c("li", { staticClass: "col-100" }, [
       _c(
         "button",
         {
@@ -50151,14 +50162,6 @@ var render = function() {
         },
         [_vm._v(_vm._s(_vm.generateText) + "\n        ")]
       )
-    ]),
-    _vm._v(" "),
-    _c("li", { staticClass: "col-50 download" }, [
-      _vm.showDownload
-        ? _c("a", { attrs: { target: "_blank", href: _vm.download } }, [
-            _vm._v("Download")
-          ])
-        : _vm._e()
     ])
   ])
 }
@@ -50213,7 +50216,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [_vm._v("\n    Attendance\n")])
+  return _c("section")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -50234,7 +50237,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [_vm._v("\n    Observador\n")])
+  return _c("section")
 }
 var staticRenderFns = []
 render._withStripped = true

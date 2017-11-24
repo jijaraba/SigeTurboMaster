@@ -1,5 +1,5 @@
 <template>
-    <section class="sige-lists">
+    <section class="sige-item">
         <ul class="display-horizontal col-100">
             <li class="col-05 check">
                 <div>
@@ -12,7 +12,7 @@
                 </div>
             </li>
             <li class="col-50 gutter-5 name">
-                <div>{{ reportText }}</div>
+                <div>Informe {{ reportText }}</div>
             </li>
             <li class="col-20 gutter-5 action">
                 <sigeturbo-report-generate :year="year" :period="period" :student="student"
@@ -45,11 +45,18 @@
         },
         data: function () {
             return {
-                reportText: 'Informe (Parcial-Final)'
+                reportText: 'Final'
             }
         },
         methods: {},
         created() {
+            if (this.type == 'partialreport') {
+                this.reportText = "Parcial"
+            } else if (this.type == 'descriptivereport') {
+                this.reportText = 'Descriptivo'
+            } else {
+                this.reportText = "Final"
+            }
         }
 
     }

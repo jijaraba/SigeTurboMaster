@@ -10,5 +10,6 @@ interface GroupdirectorRepositoryInterface {
     public function destroy($groupdirector);
     public static function getName($year, $group);
     public static function getGroupsDirectorsByYearOrGroups($year, $group = null);
-    public static function getGroupDirectorByYearAndUser($year, $iduser);
+    public static function getGroupDirectorByYearAndUser($year, $user);
+    public function getGroup($year, $user);
 }

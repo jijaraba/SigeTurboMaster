@@ -46,7 +46,7 @@ class GroupdirectorRepository implements GroupdirectorRepositoryInterface
      * @param $data
      * @return mixed
      */
-    public function update($groupdirector,$data)
+    public function update($groupdirector, $data)
     {
         $groupdirector = Groupdirector::find($groupdirector);
         $groupdirector->fill(array(
@@ -85,8 +85,8 @@ class GroupdirectorRepository implements GroupdirectorRepositoryInterface
                 $join
                     ->on('users.iduser', '=', 'groupdirectors.iduser');
             })
-            ->where('idyear','=',$year)
-            ->where('idgroup','=',$group)
+            ->where('idyear', '=', $year)
+            ->where('idgroup', '=', $group)
             ->get();
     }
 
@@ -99,10 +99,10 @@ class GroupdirectorRepository implements GroupdirectorRepositoryInterface
      */
     public static function getGroupsDirectorsByYearOrGroups($year, $group = null)
     {
-        $groupdirector =  Groupdirector::select(
+        $groupdirector = Groupdirector::select(
             DB::raw("CONCAT_WS(CONVERT(' ' USING latin1),users.lastname,users.firstname) AS Student"), "idyear",
-             'groups.name AS group', 'users.iduser', 'groups.idgroup','groupdirectors.idgroupdirector','users.photo'
-            )
+            'groups.name AS group', 'users.iduser', 'groups.idgroup', 'groupdirectors.idgroupdirector', 'users.photo'
+        )
             ->join('users', function ($join) {
                 $join
                     ->on('users.iduser', '=', 'groupdirectors.iduser');
@@ -111,24 +111,42 @@ class GroupdirectorRepository implements GroupdirectorRepositoryInterface
                 $join
                     ->on('groups.idgroup', '=', 'groupdirectors.idgroup');
             })
-            ->where('idyear','=',$year);
-            if ($group !== null && $group !== "Loading ...") {
-                $groupdirector->where('groups.idgroup', '=', $group);
-            }
-         return  $groupdirector
-                ->orderBy('groups.idgroup', 'ASC')
-                ->get()
-                ;
+            ->where('idyear', '=', $year);
+        if ($group !== null && $group !== "Loading ...") {
+            $groupdirector->where('groups.idgroup', '=', $group);
+        }
+        return $groupdirector
+            ->orderBy('groups.idgroup', 'ASC')
+            ->get();
     }
 
     /**
-     * Get Groups Directors By Year And User
+     * Get Groups Directors By Year And Group
      * @param $year
-     * @param $group
+     * @param $user
      * @return mixed
      */
-    public static function  getGroupDirectorByYearAndUser($year, $user)
+    public static function getGroupDirectorByYearAndUser($year, $user)
     {
-        return  Groupdirector::where('idyear', '=', $year)->where('iduser', '=', $user)->first();
+        return Groupdirector::select('*')
+            ->where('idyear', '=', $year)->where('iduser', '=', $user)
+            ->first();
+    }
+
+    /**
+     * Get Group
+     * @param $year
+     * @param $user
+     * @return mixed
+     */
+    public function getGroup($year, $user)
+    {
+        return Groupdirector::select('groups.*')
+            ->where('idyear', '=', $year)->where('iduser', '=', $user)
+            ->join('groups', function ($join) {
+                $join
+                    ->on('groups.idgroup', '=', 'groupdirectors.idgroup');
+            })
+            ->first();
     }
 }

@@ -141,6 +141,7 @@ return array(
     'Reports' => 'Reports',
     'Generate' => 'Generate',
     'Download' => 'Download',
+    'HomeroomTeacher' => 'Homeroom Teacher',
 
     //Roles
     'rolAdmin' => 'Admin',

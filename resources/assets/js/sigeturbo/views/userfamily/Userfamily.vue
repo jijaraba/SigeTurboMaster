@@ -1,6 +1,6 @@
 <template>
     <section>
-        Familiares
+
     </section>
 </template>
 
