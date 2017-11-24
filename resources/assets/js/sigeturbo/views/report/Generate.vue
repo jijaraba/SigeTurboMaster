@@ -32,7 +32,6 @@
         methods: {
             generate(format) {
                 this.generateText = 'Generando...';
-
                 let path = '';
                 switch (this.type) {
                     case 'partialreport':
