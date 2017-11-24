@@ -35,4 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'rackspace' => [
+        'username'  => env('RACKSPACE_USERNAME'),
+        'key' => env('RACKSPACE_KEY')
+    ],
+
 ];
