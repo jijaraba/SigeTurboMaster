@@ -40,12 +40,14 @@
                     student: this.student,
                 })
                     .then(({data}) => {
-                        this.download = assets + '/export/' + data.file;
+                        this.download = this.assets + '/export/' + data.file;
+                        let url = this.download
+                        console.log(this.download);
                         //Open New Window
                         setTimeout(function () {
                             this.generateText = 'Generado';
                             this.showDownload = true;
-                            window.open(this.download, '_blank');
+                            window.open(url, '_blank');
                         }, 1000);
                     })
                     .catch(error => {
