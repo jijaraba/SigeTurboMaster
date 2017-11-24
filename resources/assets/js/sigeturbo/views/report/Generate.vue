@@ -25,7 +25,8 @@
             return {
                 showDownload: false,
                 generateText: 'Visualizar',
-                download: ''
+                download: '',
+                assets: assets()
             }
         },
         methods: {
