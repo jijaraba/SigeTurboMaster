@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Lang;
 use SigeTurbo\Http\Requests;
 use Illuminate\Pagination\LengthAwarePaginator;
 use SigeTurbo\Http\Requests\ReportRequest;
+use SigeTurbo\Repositories\Groupdirector\GroupdirectorRepositoryInterface;
 use SigeTurbo\Repositories\Report\ReportRepositoryInterface;
 use SigeTurbo\Repositories\Userfamily\UserfamilyRepositoryInterface;
 
@@ -21,16 +22,24 @@ class ReportsController extends Controller
      * @var ReportRepositoryInterface
      */
     private $reportRepository;
+    /**
+     * @var GroupdirectorRepositoryInterface
+     */
+    private $groupdirectorRepository;
 
     /**
      * ReportsController constructor.
      * @param UserfamilyRepositoryInterface $userfamilyRepository
      * @param ReportRepositoryInterface $reportRepository
+     * @param GroupdirectorRepositoryInterface $groupdirectorRepository
      */
-    public function __construct(UserfamilyRepositoryInterface $userfamilyRepository, ReportRepositoryInterface $reportRepository)
+    public function __construct(UserfamilyRepositoryInterface $userfamilyRepository,
+                                ReportRepositoryInterface $reportRepository,
+                                GroupdirectorRepositoryInterface $groupdirectorRepository)
     {
         $this->userfamilyRepository = $userfamilyRepository;
         $this->reportRepository = $reportRepository;
+        $this->groupdirectorRepository = $groupdirectorRepository;
     }
 
     /**
@@ -56,6 +65,9 @@ class ReportsController extends Controller
             $request['page'] = 1;
         }
 
+        //Find Group
+        $group = $this->groupdirectorRepository->getGroup(2017, getUser()->iduser);
+
         $page = LengthAwarePaginator::resolveCurrentPage();
         $perPage = 10;
         $users = $this->userfamilyRepository->getMembersFamilyByUser(getUser()->iduser);
@@ -66,7 +78,8 @@ class ReportsController extends Controller
         return view('reports.reportspartialsbyfamily')
             ->withUsers($paginator)
             ->withSort($sort)
-            ->withOrder($order);
+            ->withOrder($order)
+            ->withGroup($group);
 
     }
 
@@ -100,6 +113,16 @@ class ReportsController extends Controller
     public function getReportByStudent(Request $request)
     {
         return response()->json($this->reportRepository->getReportByStudent($request['year'], $request['period'], $request['user'], $request['type']));
+    }
+
+    /**
+     * Get Report Enabled By Student
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getReportEnabled(Request $request)
+    {
+        return response()->json($this->reportRepository->getReportEnabled($request['year'], $request['period'], $request['user'], $request['type']));
     }
 
 }

@@ -134,9 +134,19 @@ angular.module('Parents.factories', [])
         return $resource('/api/v1/exports/:action', {
             action: '@action'
         }, {
-            getPartialReport: {
+            getReport: {
                 method: 'GET',
                 params: {action: 'reports/partials'}
+            }
+        });
+    }])
+    .factory('Report', ['$resource', function ($resource) {
+        return $resource('/api/v1/reports/:action', {
+            action: '@action'
+        }, {
+            getReportEnabled: {
+                method: 'GET',
+                params: {action: 'getreportenabled'}
             }
         });
     }]);

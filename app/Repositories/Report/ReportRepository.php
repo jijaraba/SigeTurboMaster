@@ -64,4 +64,22 @@ class ReportRepository implements ReportRepositoryInterface
             ->where('type', '=', $type)
             ->get();
     }
+
+    /**
+     * Get Report Enabled
+     * @param $year
+     * @param $period
+     * @param $user
+     * @param $type
+     * @return mixed
+     */
+    public function getReportEnabled($year, $period, $user, $type)
+    {
+        return Report::select('*')
+            ->where('idyear', '=', $year)
+            ->where('idperiod', '=', $period)
+            ->where('iduser', '=', $user)
+            ->where('type', '=', $type)
+            ->first();
+    }
 }

@@ -142,6 +142,10 @@ return array(
     'Generate' => 'Generar',
     'Download' => 'Descargar',
     'HomeroomTeacher' => 'Director de Grupo',
+    'FirstPeriod' => 'Primer Periodo',
+    'SecondPeriod' => 'Segundo Periodo',
+    'ThirdPeriod' => 'Tercer Periodo',
+    'FourthPeriod' => 'Cuarto Periodo',
 
     //Roles
     'rolAdmin' => 'Admin',

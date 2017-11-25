@@ -142,6 +142,10 @@ return array(
     'Generate' => 'Generate',
     'Download' => 'Download',
     'HomeroomTeacher' => 'Homeroom Teacher',
+    'FirstPeriod' => 'First Period',
+    'SecondPeriod' => 'Second Period',
+    'ThirdPeriod' => 'Third Period',
+    'FourthPeriod' => 'Fourth Period',
 
     //Roles
     'rolAdmin' => 'Admin',

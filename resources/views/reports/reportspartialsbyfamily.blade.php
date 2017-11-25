@@ -65,7 +65,7 @@
                                             <div>2017</div>
                                         </li>
                                         <li class="col-15 date">
-                                            <div>PRIMER PERIODO</div>
+                                            <div>{{ mb_strtoupper(Lang::get('sige.FirstPeriod')) }}</div>
                                         </li>
                                         <li class="col-45 concept">
                                             <div title="">INFORME PARCIAL PRIMER PERIODO ({{ $user->iduser }}
@@ -74,7 +74,8 @@
                                         </li>
                                         <li class="col-20 generate">
                                             <sige-turbo-report-generate
-                                                    student="{{ $user->iduser }}"></sige-turbo-report-generate>
+                                                    student="{{ $user->iduser }}"
+                                                    type="partialreport"></sige-turbo-report-generate>
                                         </li>
                                     </ul>
                                 </li>
@@ -102,7 +103,7 @@
                                             <div>2017</div>
                                         </li>
                                         <li class="col-15 date">
-                                            <div>PRIMER PERIODO</div>
+                                            <div>{{ mb_strtoupper(Lang::get('sige.FirstPeriod')) }}</div>
                                         </li>
                                         <li class="col-45 concept">
                                             <div title="">INFORME FINAL PRIMER PERIODO ({{ $user->iduser }}
@@ -110,8 +111,15 @@
                                             </div>
                                         </li>
                                         <li class="col-20 generate">
-                                            <sige-turbo-report-generate
-                                                    student="{{ $user->iduser }}"></sige-turbo-report-generate>
+                                            @if(\SigeTurbo\Repositories\Enrollment\EnrollmentRepository::getEnrollmentLatest($user->iduser)->group < 11)
+                                                <sige-turbo-report-generate
+                                                        student="{{ $user->iduser }}"
+                                                        type="descriptivereport"></sige-turbo-report-generate>
+                                            @else
+                                                <sige-turbo-report-generate
+                                                        student="{{ $user->iduser }}"
+                                                        type="finalreport"></sige-turbo-report-generate>
+                                            @endif
                                         </li>
                                     </ul>
                                 </li>

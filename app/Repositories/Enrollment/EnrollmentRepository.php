@@ -229,6 +229,19 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
     }
 
     /**
+     * Get Latest Enrollment By Student
+     * @param $student
+     * @return mixed
+     */
+    public static function getEnrollmentLatest($student)
+    {
+        return Enrollment::select(DB::raw('max(idgroup) AS "group"'))
+            ->where('iduser', '=', $student)
+            ->first();
+
+    }
+
+    /**
      * Get Enrollments By Student With Cost
      * @param $student
      * @param $year

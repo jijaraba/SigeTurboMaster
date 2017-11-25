@@ -1,6 +1,6 @@
 <ul class="display-horizontal col-100">
     <li class="col-50 {{ (showDownload)?'generated':'generate' }}">
-        <a id="checkout" ng-click="generate('partialreport','pdf')">{{ generateText }}</a>
+        <a id="checkout" ng-click="generate('pdf')">{{ generateText }}</a>
     </li>
     <li class="col-50 download">
         <a target="_blank" ng-if="showDownload" href="{{ download }}">Download</a>
