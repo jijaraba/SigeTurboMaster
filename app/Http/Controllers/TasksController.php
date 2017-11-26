@@ -208,6 +208,7 @@ class TasksController extends Controller
             $starts->forPage($page, $perPage), $starts->count(), $perPage, $page
         );
         $paginator->setPath('/homeworks');
+
         return view('tasks.index')
             ->withTasks($paginator)
             ->withGroups($this->groupRepository->getGroups($this->yearRepository->getCurrentYear()->idyear, $this->periodRepository->getCurrentPeriod()->idperiod)->prepend(['idgroup' => 0, 'name' => 'Todos'])->pluck('name', 'idgroup'))
