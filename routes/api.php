@@ -1194,6 +1194,10 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'as' => 'reports.getreportbystudent',
         'uses' => 'ReportsController@getReportByStudent'
     ]);
+    Route::get('/reports/getreportenabled', [
+        'as' => 'reports.getreportenabled',
+        'uses' => 'ReportsController@getReportEnabled'
+    ]);
     Route::resource('reports', 'ReportsController', array('only' => array('store')));
 
 

@@ -67060,34 +67060,68 @@ angular.module('Parents.directives', []).directive('appVersion', ['version', fun
         template: __webpack_require__("./resources/assets/js/sigeturbo_angular/parents/directives/views/payment/transaction.html"),
         link: function link() {}
     };
-}]).directive('sigeTurboReportGenerate', ['$log', '$timeout', 'ASSETS_SERVER', 'Export', function ($log, $timeout, ASSETS_SERVER, Export) {
+}]).directive('sigeTurboReportGenerate', ['$log', '$timeout', 'ASSETS_SERVER', 'SweetAlert', 'Export', 'Report', function ($log, $timeout, ASSETS_SERVER, SweetAlert, Export, Report) {
     return {
         restrict: 'AE',
         scope: {
-            student: '@'
+            student: '@',
+            type: '@'
         },
         controller: ['$scope', function ($scope) {
+
             $scope.assets = ASSETS_SERVER;
             $scope.showDownload = false;
             $scope.generateText = 'Generar';
-            $scope.generate = function (filename, format) {
+            $scope.generateEnabled = false;
 
-                Export.getPartialReport({
-                    'filename': filename,
-                    'format': format,
-                    'year': 2017,
-                    'period': 1,
-                    'student': $scope.student
-                }).$promise.then(function (result) {
-                    $scope.download = $scope.assets + '/export/' + result.file;
-                    $timeout(function () {
-                        $scope.generateText = 'Generado';
-                        $scope.showDownload = true;
-                    }, 2000);
-                }, function (error) {
-                    $log.error(error);
-                    $scope.showDownload = false;
-                });
+            //Get Report Enabled
+            Report.getReportEnabled({
+                'year': 2017,
+                'period': 1,
+                'user': $scope.student,
+                'type': $scope.type
+            }).$promise.then(function (result) {
+                if (result.idreport) {
+                    $scope.generateEnabled = true;
+                } else {
+                    $scope.generateText = 'Deshabilitado';
+                }
+            }, function (error) {
+                $log.info(error);
+            });
+
+            //Generate Report
+            $scope.generate = function (format) {
+
+                var action = 'reports/partials';
+                if ($scope.type == 'finalreport') {
+                    action = 'reports/final';
+                } else if ($scope.type == 'descriptivereport') {
+                    action = 'reports/descriptivereport';
+                }
+
+                //Enabled
+                if ($scope.generateEnabled) {
+                    Export.getReport({
+                        'action': action,
+                        'filename': $scope.type,
+                        'format': format,
+                        'year': 2017,
+                        'period': 1,
+                        'student': $scope.student
+                    }).$promise.then(function (result) {
+                        $scope.download = $scope.assets + '/export/' + result.file;
+                        $timeout(function () {
+                            $scope.generateText = 'Generado';
+                            $scope.showDownload = true;
+                        }, 2000);
+                    }, function (error) {
+                        $log.error(error);
+                        $scope.showDownload = false;
+                    });
+                } else {
+                    SweetAlert.info('¡Advertencia!', 'Debe solicitar al Director de Grupo que habilite la visualización del Reporte');
+                }
             };
         }],
         template: __webpack_require__("./resources/assets/js/sigeturbo_angular/parents/directives/views/report/generate.html"),
@@ -67473,7 +67507,7 @@ module.exports = "<p class=\"transaction\">\n    <span class=\"{{ payment.approv
 /***/ "./resources/assets/js/sigeturbo_angular/parents/directives/views/report/generate.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"display-horizontal col-100\">\n    <li class=\"col-50 {{ (showDownload)?'generated':'generate' }}\">\n        <a id=\"checkout\" ng-click=\"generate('partialreport','pdf')\">{{ generateText }}</a>\n    </li>\n    <li class=\"col-50 download\">\n        <a target=\"_blank\" ng-if=\"showDownload\" href=\"{{ download }}\">Download</a>\n    </li>\n</ul>";
+module.exports = "<ul class=\"display-horizontal col-100\">\n    <li class=\"col-50 {{ (showDownload)?'generated':'generate' }}\">\n        <a id=\"checkout\" ng-click=\"generate('pdf')\">{{ generateText }}</a>\n    </li>\n    <li class=\"col-50 download\">\n        <a target=\"_blank\" ng-if=\"showDownload\" href=\"{{ download }}\">Download</a>\n    </li>\n</ul>";
 
 /***/ }),
 
@@ -67617,9 +67651,18 @@ angular.module('Parents.factories', [])
     return $resource('/api/v1/exports/:action', {
         action: '@action'
     }, {
-        getPartialReport: {
+        getReport: {
             method: 'GET',
             params: { action: 'reports/partials' }
+        }
+    });
+}]).factory('Report', ['$resource', function ($resource) {
+    return $resource('/api/v1/reports/:action', {
+        action: '@action'
+    }, {
+        getReportEnabled: {
+            method: 'GET',
+            params: { action: 'getreportenabled' }
         }
     });
 }]);

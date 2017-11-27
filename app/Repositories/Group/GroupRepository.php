@@ -35,7 +35,6 @@ class GroupRepository implements GroupRepositoryInterface
      */
     public static function getGroupsForGuest($year = 1995, $period = 1)
     {
-
         return Cache::remember('groups', 1440, function () use ($year, $period) {
             return Group::select('groups.idgroup', 'groups.name')
                 ->join('contracts', 'contracts.idgroup', '=', 'groups.idgroup')

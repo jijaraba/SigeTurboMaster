@@ -16,18 +16,18 @@ angular.module('Parents.directives', [])
             controller: ['$scope', function ($scope) {
                 $scope.assets = ASSETS_SERVER;
                 switch ($scope.payment.approved) {
-                case 'A':
-                    $scope.transactionType = 'TRANSACCIÓN APROBADA';
-                    $scope.message = 'MUCHAS GRACIAS POR SU PAGO';
-                    break;
-                case 'P':
-                    $scope.transactionType = 'TRANSACCIÓN PENDIENTE';
-                    $scope.message = 'TRANSACCIÓN PENDIENTE POR SER APROBADA POR SU ENTIDAD BANCARIA';
-                    break;
-                case 'R':
-                    $scope.transactionType = 'TRANSACCIÓN RECHAZADA';
-                    $scope.message = 'TRANSACCIÓN RECHAZADA POR SU ENTIDAD BANCARIA';
-                    break;
+                    case 'A':
+                        $scope.transactionType = 'TRANSACCIÓN APROBADA';
+                        $scope.message = 'MUCHAS GRACIAS POR SU PAGO';
+                        break;
+                    case 'P':
+                        $scope.transactionType = 'TRANSACCIÓN PENDIENTE';
+                        $scope.message = 'TRANSACCIÓN PENDIENTE POR SER APROBADA POR SU ENTIDAD BANCARIA';
+                        break;
+                    case 'R':
+                        $scope.transactionType = 'TRANSACCIÓN RECHAZADA';
+                        $scope.message = 'TRANSACCIÓN RECHAZADA POR SU ENTIDAD BANCARIA';
+                        break;
                 }
             }],
             template: require('./views/payment/transaction.html'),
@@ -35,37 +35,74 @@ angular.module('Parents.directives', [])
             }
         };
     }])
-    .directive('sigeTurboReportGenerate', ['$log', '$timeout', 'ASSETS_SERVER', 'Export', function ($log, $timeout, ASSETS_SERVER, Export) {
+    .directive('sigeTurboReportGenerate', ['$log', '$timeout', 'ASSETS_SERVER', 'SweetAlert', 'Export', 'Report', function ($log, $timeout, ASSETS_SERVER, SweetAlert, Export, Report) {
         return {
             restrict: 'AE',
             scope: {
-                student: '@'
+                student: '@',
+                type: '@'
             },
             controller: ['$scope', function ($scope) {
+
                 $scope.assets = ASSETS_SERVER;
                 $scope.showDownload = false;
                 $scope.generateText = 'Generar';
-                $scope.generate = function (filename, format) {
+                $scope.generateEnabled = false;
 
-                    Export.getPartialReport({
-                        'filename': filename,
-                        'format': format,
-                        'year': 2017,
-                        'period': 1,
-                        'student': $scope.student,
-                    }).$promise.then(
-                        function (result) {
-                            $scope.download = $scope.assets + '/export/' + result.file;
-                            $timeout(function () {
-                                $scope.generateText = 'Generado';
-                                $scope.showDownload = true;
-                            }, 2000);
-                        },
-                        function (error) {
-                            $log.error(error);
-                            $scope.showDownload = false;
+                //Get Report Enabled
+                Report.getReportEnabled({
+                    'year': 2017,
+                    'period': 1,
+                    'user': $scope.student,
+                    'type': $scope.type
+                }).$promise.then(
+                    function (result) {
+                        if (result.idreport) {
+                            $scope.generateEnabled = true;
+                        } else {
+                            $scope.generateText = 'Deshabilitado';
                         }
-                    );
+                    },
+                    function (error) {
+                        $log.info(error);
+                    }
+                );
+
+                //Generate Report
+                $scope.generate = function (format) {
+
+                    let action = 'reports/partials';
+                    if ($scope.type == 'finalreport') {
+                        action = 'reports/final';
+                    } else if ($scope.type == 'descriptivereport') {
+                        action = 'reports/descriptivereport';
+                    }
+
+                    //Enabled
+                    if ($scope.generateEnabled) {
+                        Export.getReport({
+                            'action': action,
+                            'filename': $scope.type,
+                            'format': format,
+                            'year': 2017,
+                            'period': 1,
+                            'student': $scope.student,
+                        }).$promise.then(
+                            function (result) {
+                                $scope.download = $scope.assets + '/export/' + result.file;
+                                $timeout(function () {
+                                    $scope.generateText = 'Generado';
+                                    $scope.showDownload = true;
+                                }, 2000);
+                            },
+                            function (error) {
+                                $log.error(error);
+                                $scope.showDownload = false;
+                            }
+                        );
+                    } else {
+                        SweetAlert.info('¡Advertencia!', 'Debe solicitar al Director de Grupo que habilite la visualización del Reporte');
+                    }
                 };
             }],
             template: require('./views/report/generate.html'),
@@ -84,7 +121,7 @@ angular.module('Parents.directives', [])
             controller: ['$scope', function ($scope) {
                 $scope.assets = ASSETS_SERVER;
                 $scope.transaccionID = $scope.transaction + '-' + $scope.payment.idpayment,
-                $scope.methodValid = false;
+                    $scope.methodValid = false;
                 $scope.methodSelected = 'normal';
                 $scope.message = 'Seleccionar tipo de pago';
                 $scope.payment_ref = [];
@@ -276,155 +313,155 @@ angular.module('Parents.directives', [])
                     $scope.methodSelected = method;
 
                     switch (method) {
-                    case 'discount':
-                        //Agreement
-                        $scope.agreement = false;
+                        case 'discount':
+                            //Agreement
+                            $scope.agreement = false;
 
-                        if (dateshortPayment <= dateshortCurrent) {
-                            if (dateDiscountPayment < dateCurrent) {
-                                $scope.payment.concept1 = null;
+                            if (dateshortPayment <= dateshortCurrent) {
+                                if (dateDiscountPayment < dateCurrent) {
+                                    $scope.payment.concept1 = null;
+                                }
                             }
-                        }
-                        //Verified Method Discount
-                        if ($scope.payment.concept1 != null) {
-                            $scope.methodValid = true;
-                        } else {
-                            $scope.methodValid = false;
-                            $scope.message = 'No hay pagos con descuento configurados';
-                        }
-                        //Charge Values
-                        $scope.payment_ref = {
-                            referenciaPago1: $scope.payment.idpayment,
-                            concept: $scope.payment.concept1,
-                            observation: $scope.payment.observation1,
-                            value: $scope.payment.value1,
-                            date: $scope.payment.date1
-                        };
-                        //Change Images
-                        $scope.icon_discount = 'payment_discount_active.svg';
-                        $scope.icon_normal = 'payment_normal.svg';
-                        $scope.icon_rate = 'payment_rate.svg';
-                        $scope.icon_agreement = 'payment_agreement.svg';
-                        break;
-                    case 'normal':
-                        //Agreement
-                        $scope.agreement = false;
-
-                        if (dateNormalPayment < dateCurrent) {
-                            $scope.payment.concept2 = null;
-                        }
-
-                        //Verified Method
-                        if ($scope.payment.concept2 != null) {
-                            $scope.methodValid = true;
-                        } else {
-                            $scope.methodValid = false;
-                            $scope.message = 'No hay pagos configurados';
-                        }
-                        //Charge Values
-                        $scope.payment_ref = {
-                            referenciaPago1: $scope.payment.idpayment,
-                            concept: $scope.payment.concept2,
-                            observation: $scope.payment.observation2,
-                            value: $scope.payment.value2,
-                            date: $scope.payment.date2
-                        };
-                        //Change Images
-                        $scope.icon_discount = 'payment_discount.svg';
-                        $scope.icon_normal = 'payment_normal_active.svg';
-                        $scope.icon_rate = 'payment_rate.svg';
-                        $scope.icon_agreement = 'payment_agreement.svg';
-                        break;
-                    case 'rate':
-                        //Agreement
-                        $scope.agreement = false;
-
-                        if (dateNormalPayment > dateCurrent) {
-                            $scope.payment.concept3 = null;
-                        }
-
-                        //Verified Method
-                        if ($scope.payment.concept3 != null) {
-                            $scope.methodValid = true;
-                        } else {
-                            $scope.methodValid = false;
-                            $scope.message = 'No se han configurado pago con intereses';
-                        }
-                        //Charge Values
-                        $scope.payment_ref = {
-                            referenciaPago1: $scope.payment.idpayment,
-                            concept: $scope.payment.concept3,
-                            observation: $scope.payment.observation3,
-                            value: $scope.payment.value3,
-                            date: $scope.payment.date3
-                        };
-                        //Change Images
-                        $scope.icon_discount = 'payment_discount.svg';
-                        $scope.icon_normal = 'payment_normal.svg';
-                        $scope.icon_rate = 'payment_rate_active.svg';
-                        $scope.icon_agreement = 'payment_agreement.svg';
-                        break;
-                    case 'agreement':
-                        //Agreement
-                        $scope.agreement = true;
-
-                        var realValue = 0;
-                        if (dateshortPayment <= dateshortCurrent) {
-                            if (dateDiscountPayment > dateCurrent) {
-                                realValue = $scope.payment.value1;
-                            } else if (dateNormalPayment > dateCurrent) {
-                                realValue = $scope.payment.value2;
+                            //Verified Method Discount
+                            if ($scope.payment.concept1 != null) {
+                                $scope.methodValid = true;
                             } else {
-                                realValue = $scope.payment.value3;
+                                $scope.methodValid = false;
+                                $scope.message = 'No hay pagos con descuento configurados';
                             }
-                        } else {
-                            realValue = $scope.payment.value1;
-                        }
+                            //Charge Values
+                            $scope.payment_ref = {
+                                referenciaPago1: $scope.payment.idpayment,
+                                concept: $scope.payment.concept1,
+                                observation: $scope.payment.observation1,
+                                value: $scope.payment.value1,
+                                date: $scope.payment.date1
+                            };
+                            //Change Images
+                            $scope.icon_discount = 'payment_discount_active.svg';
+                            $scope.icon_normal = 'payment_normal.svg';
+                            $scope.icon_rate = 'payment_rate.svg';
+                            $scope.icon_agreement = 'payment_agreement.svg';
+                            break;
+                        case 'normal':
+                            //Agreement
+                            $scope.agreement = false;
 
-                        //Verified Method
-                        if ($scope.payment.concept4 != null) {
-                            $scope.methodValid = true;
-                        } else {
-                            $scope.methodValid = false;
-                            $scope.message = 'No hay acuerdos de pago';
-                        }
-                        
-                        //Charge Values
-                        $scope.payment_ref = {
-                            referenciaPago1: $scope.payment.idpayment,
-                            concept: $scope.payment.concept4,
-                            observation: $scope.payment.observation4,
-                            value: realValue,
-                            date: $scope.payment.date4
-                        };
-                        //Change Images
-                        $scope.icon_discount = 'payment_discount.svg';
-                        $scope.icon_normal = 'payment_normal.svg';
-                        $scope.icon_rate = 'payment_rate.svg';
-                        $scope.icon_agreement = 'payment_agreement_active.svg';
-                        break;
-                    default:
-                        //Verified Method
-                        if ($scope.payment.concept1 != null) {
-                            $scope.methodValid = true;
-                        } else {
-                            $scope.methodValid = false;
-                            $scope.message = 'No hay pagos con descuento configurados';
-                        }
-                        //Charge Values
-                        $scope.payment_ref = {
-                            referenciaPago1: $scope.payment.idpayment,
-                            concept: $scope.payment.concept1,
-                            observation: $scope.payment.observation1,
-                            value: $scope.payment.value1,
-                            date: $scope.payment.date1
-                        };
-                        //Change Images
-                        $scope.icon_discount = 'payment_discount_active.svg';
-                        $scope.icon_normal = 'payment_normal.svg';
-                        $scope.icon_rate = 'payment_rate.svg';
-                        $scope.icon_agreement = 'payment_agreement.svg';
-                        break;
+                            if (dateNormalPayment < dateCurrent) {
+                                $scope.payment.concept2 = null;
+                            }
+
+                            //Verified Method
+                            if ($scope.payment.concept2 != null) {
+                                $scope.methodValid = true;
+                            } else {
+                                $scope.methodValid = false;
+                                $scope.message = 'No hay pagos configurados';
+                            }
+                            //Charge Values
+                            $scope.payment_ref = {
+                                referenciaPago1: $scope.payment.idpayment,
+                                concept: $scope.payment.concept2,
+                                observation: $scope.payment.observation2,
+                                value: $scope.payment.value2,
+                                date: $scope.payment.date2
+                            };
+                            //Change Images
+                            $scope.icon_discount = 'payment_discount.svg';
+                            $scope.icon_normal = 'payment_normal_active.svg';
+                            $scope.icon_rate = 'payment_rate.svg';
+                            $scope.icon_agreement = 'payment_agreement.svg';
+                            break;
+                        case 'rate':
+                            //Agreement
+                            $scope.agreement = false;
+
+                            if (dateNormalPayment > dateCurrent) {
+                                $scope.payment.concept3 = null;
+                            }
+
+                            //Verified Method
+                            if ($scope.payment.concept3 != null) {
+                                $scope.methodValid = true;
+                            } else {
+                                $scope.methodValid = false;
+                                $scope.message = 'No se han configurado pago con intereses';
+                            }
+                            //Charge Values
+                            $scope.payment_ref = {
+                                referenciaPago1: $scope.payment.idpayment,
+                                concept: $scope.payment.concept3,
+                                observation: $scope.payment.observation3,
+                                value: $scope.payment.value3,
+                                date: $scope.payment.date3
+                            };
+                            //Change Images
+                            $scope.icon_discount = 'payment_discount.svg';
+                            $scope.icon_normal = 'payment_normal.svg';
+                            $scope.icon_rate = 'payment_rate_active.svg';
+                            $scope.icon_agreement = 'payment_agreement.svg';
+                            break;
+                        case 'agreement':
+                            //Agreement
+                            $scope.agreement = true;
+
+                            var realValue = 0;
+                            if (dateshortPayment <= dateshortCurrent) {
+                                if (dateDiscountPayment > dateCurrent) {
+                                    realValue = $scope.payment.value1;
+                                } else if (dateNormalPayment > dateCurrent) {
+                                    realValue = $scope.payment.value2;
+                                } else {
+                                    realValue = $scope.payment.value3;
+                                }
+                            } else {
+                                realValue = $scope.payment.value1;
+                            }
+
+                            //Verified Method
+                            if ($scope.payment.concept4 != null) {
+                                $scope.methodValid = true;
+                            } else {
+                                $scope.methodValid = false;
+                                $scope.message = 'No hay acuerdos de pago';
+                            }
+
+                            //Charge Values
+                            $scope.payment_ref = {
+                                referenciaPago1: $scope.payment.idpayment,
+                                concept: $scope.payment.concept4,
+                                observation: $scope.payment.observation4,
+                                value: realValue,
+                                date: $scope.payment.date4
+                            };
+                            //Change Images
+                            $scope.icon_discount = 'payment_discount.svg';
+                            $scope.icon_normal = 'payment_normal.svg';
+                            $scope.icon_rate = 'payment_rate.svg';
+                            $scope.icon_agreement = 'payment_agreement_active.svg';
+                            break;
+                        default:
+                            //Verified Method
+                            if ($scope.payment.concept1 != null) {
+                                $scope.methodValid = true;
+                            } else {
+                                $scope.methodValid = false;
+                                $scope.message = 'No hay pagos con descuento configurados';
+                            }
+                            //Charge Values
+                            $scope.payment_ref = {
+                                referenciaPago1: $scope.payment.idpayment,
+                                concept: $scope.payment.concept1,
+                                observation: $scope.payment.observation1,
+                                value: $scope.payment.value1,
+                                date: $scope.payment.date1
+                            };
+                            //Change Images
+                            $scope.icon_discount = 'payment_discount_active.svg';
+                            $scope.icon_normal = 'payment_normal.svg';
+                            $scope.icon_rate = 'payment_rate.svg';
+                            $scope.icon_agreement = 'payment_agreement.svg';
+                            break;
                     }
                 };
 

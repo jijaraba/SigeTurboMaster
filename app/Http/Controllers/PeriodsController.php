@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use SigeTurbo\Repositories\Period\PeriodRepositoryInterface;
 
-class PeriodsController extends Controller {
+class PeriodsController extends Controller
+{
     /**
      * @var PeriodRepositoryInterface
      */
@@ -25,25 +26,25 @@ class PeriodsController extends Controller {
 
 
     /**
-	 * Display a listing of the resource.
-	 * GET /periods
-	 * @return Response
-	 */
-	public function index()
-	{
-		return response()->json($this->periodRepository->all());
-	}
+     * Display a listing of the resource.
+     * GET /periods
+     * @return Response
+     */
+    public function index()
+    {
+        return response()->json($this->periodRepository->all());
+    }
 
-	/**
-	 * Display the specified resource.
-	 * GET /periods/{id}
-	 * @param  int  $idperiod
-	 * @return Response
-	 */
-	public function show($idperiod)
-	{
-		return response()->json($this->periodRepository->find($idperiod));
-	}
+    /**
+     * Display the specified resource.
+     * GET /periods/{id}
+     * @param  int $idperiod
+     * @return Response
+     */
+    public function show($idperiod)
+    {
+        return response()->json($this->periodRepository->find($idperiod));
+    }
 
     /**
      * Get Periods By Year
@@ -52,8 +53,8 @@ class PeriodsController extends Controller {
      */
     public function getperiodsbyyear(Request $request)
     {
-        if(Session::get('role') == 'Teacher'){
-            return response()->json($this->periodRepository->getPeriodsByYear($request['year'],getUser()->iduser));
+        if (Session::get('role') == 'Teacher') {
+            return response()->json($this->periodRepository->getPeriodsByYear($request['year'], getUser()->iduser));
         } else {
             return response()->json($this->periodRepository->getPeriodsByYear($request['year']));
         }

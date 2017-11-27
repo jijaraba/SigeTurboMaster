@@ -7,5 +7,6 @@ interface ReportRepositoryInterface
     public function all();
     public function find($idreport);
     public function store($data);
-    public function getReportByStudent($year,$period,$user,$type);
+    public function getReportByStudent($year, $period, $user, $type);
+    public function getReportEnabled($year, $period, $user, $type);
 }
