@@ -23,8 +23,9 @@ angular.module('Core.services', [])
 
             return $http.post(uploadUrl, fd, {
                 transformRequest: angular.identity,
+                sigeJsonContentType: false,
                 headers: {
-                    'Content-Type': undefined,
+                    'X-Force-Content-Type': undefined,
                     'enctype': 'multipart/form-data'
                 }
             });

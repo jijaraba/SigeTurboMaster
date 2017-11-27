@@ -25,13 +25,24 @@ angular.module('Core.factories', [])
     .factory('httpInterceptor', ['$q', '$injector', '$log', '$window', 'sigeTurboStorage', '$location', function ($q, $injector, $log, $window, sigeTurboStorage, $location) {
         return {
             request: function (config) {
+
                 config.headers = config.headers || {};
+
                 config.headers = {
-                    'Content-Type': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest',
                     'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').content,
                     'Authorization': 'Bearer ' + document.querySelector('#sigeturboToken').getAttribute('data-token')
                 };
+
+                if (config.sigeJsonContentType && config.sigeJsonContentType == false) {
+                    console.log("Entré");
+                    config.headers['Content-Type'] = 'application/json111';
+                } else {
+                    config.headers['Content-Type'] = 'application/json';
+                }
+
+                console.log(config);
+
                 return config;
 
             },
