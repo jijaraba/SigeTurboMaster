@@ -14,8 +14,20 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'SigeTurbo\Events\Event' => [
-            'SigeTurbo\Listeners\EventListener',
+        'Illuminate\Database\Events\QueryExecuted' => [
+            'SigeTurbo\Listeners\QueryExecutedListener',
+        ],
+        'Illuminate\Auth\Events\Attempting' => [
+            'SigeTurbo\Listeners\LogAuthenticationAttemptListener',
+        ],
+        'Illuminate\Auth\Events\Logout' => [
+            'SigeTurbo\Listeners\LogSuccessfulLogoutListener',
+        ],
+        'Illuminate\Auth\Events\Login' => [
+            'SigeTurbo\Listeners\LogSuccessfulLoginListener',
+        ],
+        'Illuminate\Foundation\Auth\ResetsPasswords' => [
+            'SigeTurbo\Listeners\PasswordResetSuccessfulListener',
         ],
     ];
 
@@ -28,8 +40,8 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        Event::listen(StatementPrepared::class, function($event){
-           $event->statement->setFetchMode(\PDO::FETCH_ASSOC);
+        Event::listen(StatementPrepared::class, function ($event) {
+            $event->statement->setFetchMode(\PDO::FETCH_ASSOC);
         });
     }
 }

@@ -4,8 +4,6 @@ namespace SigeTurbo\Listeners;
 
 use Illuminate\Auth\Events\Attempting;
 use Illuminate\Http\Request;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class LogAuthenticationAttemptListener
 {

@@ -27,7 +27,7 @@
         {!! Form::button(Lang::get("sige.SignIn"), ['type' => 'submit', 'id'=>'login-button','class' => 'btn btn-aquamarine']) !!}
         {!! Form::close() !!}
         <p>
-            {!! link_to('/password/email',Lang::get('sige.ForgotPassword'),array('id'=>'reminder')) !!}
+            {!! link_to('/password/reset',Lang::get('sige.ForgotPassword'),array('id'=>'reminder')) !!}
         </p>
     </div>
 @stop

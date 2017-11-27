@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en" ng-app="{{ isset($ngmodule) ? ucfirst($ngmodule) : ucfirst(getCurrentRoute()) }}">
+<html lang="{{ app()->getLocale() }}" ng-app="{{ isset($ngmodule) ? ucfirst($ngmodule) : ucfirst(getCurrentRoute()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield("title")</title>
     @yield("sweetCSS")
     @yield("dialogCSS")
@@ -51,14 +52,20 @@
                     @endif
                     <li>{!! link_to_route('settings.points',Lang::get('sige.Points')) !!}</li>
                 </ul>
-                {!! link_to_route('logout',Lang::get('sige.SignOut'),null,array('class' => 'dropdown-secondary', 'id' => 'logout')) !!}
+                <a href="{{ route('logout') }}" class="dropdown-secondary" id="logout"
+                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                    {{ Lang::get('sige.SignOut') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
             </div>
         </li>
     </ul>
     <ul id="breadcrumb" class="display-horizontal">
         <li class="col-10 mobile-logo">
             <a href="{{ URL::route('dashboard') }}">
-                {!! HTML::image('images/sigeturbo.png','Home') !!}
+                {!! HTML::image('images/sigeturbo.svg','Home') !!}
             </a>
         </li>
         <li class="col-80 title">
@@ -76,7 +83,7 @@
             <li id="home" class="sige-nav-module {{ setCurrentModule('dashboard') }}">
                 <a href="{{ URL::route('dashboard') }}" title="{{ Lang::get('sige.Home') }}"
                    data-title="{{ Lang::get('sige.Home') }}">
-                    {!! HTML::image('images/sigeturbo.png','Home') !!}
+                    {!! HTML::image('images/sigeturbo.svg','Home') !!}
                 </a>
             </li>
             <li id="admissions" class="sige-nav-module {{ setCurrentModule('admissions') }}">
@@ -149,9 +156,13 @@
             </li>
             <li id="logout" class="sige-nav-module {{ setCurrentModule('logout') }}"
                 title="{{ Lang::get('sige.SignOut') }}" data-title="{{ Lang::get('sige.SignOut') }}">
-                <a href="{{ URL::route('logout') }}">
-                    <span>{{ Lang::get('sige.SignOut') }}</span>
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                    {{ Lang::get('sige.SignOut') }}
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
             </li>
         </ul>
     </nav>

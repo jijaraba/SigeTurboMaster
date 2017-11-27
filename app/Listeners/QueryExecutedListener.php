@@ -4,8 +4,6 @@ namespace SigeTurbo\Listeners;
 
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class QueryExecutedListener
 {
@@ -22,7 +20,7 @@ class QueryExecutedListener
     /**
      * Handle the event.
      *
-     * @param  QueryExecuted  $event
+     * @param  QueryExecuted $event
      * @return void
      */
     public function handle(QueryExecuted $event)

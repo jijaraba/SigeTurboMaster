@@ -2,6 +2,8 @@
 
 namespace SigeTurbo\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 use SigeTurbo\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -27,13 +29,28 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/home';
 
+
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * Create a new controller instance
+     * LoginController constructor.
      */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function authenticated(Request $request, $user)
+    {
+        $request->session()->flash('success', Lang::get('sige.LoggedIn'));
+    }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+        $request->session()->invalidate();
+        $request->session()->flash('error', Lang::get('sige.LoggedOut'));
+        return redirect('/login');
+    }
+
+
 }

@@ -33,9 +33,6 @@ Route::resource('pages', 'PagesController');
  * ===================================
  */
 Auth::routes();
-Route::get('/', [
-    'uses' => 'Auth\LoginController@login',
-]);
 Route::get('/logout', [
     'as' => 'logout',
     'uses' => 'Auth\LoginController@logout',
@@ -134,6 +131,10 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
 
     /* --- HomeController ---*/
     Route::get('/home', [
+        'as' => 'home',
+        'uses' => 'HomeController@dashboard'
+    ]);
+    Route::get('/', [
         'as' => 'home',
         'uses' => 'HomeController@dashboard'
     ]);

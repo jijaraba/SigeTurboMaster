@@ -3,9 +3,6 @@
 namespace SigeTurbo\Listeners;
 
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use Illuminate\Auth\Events\Attempting;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 
 class PasswordResetSuccessfulListener

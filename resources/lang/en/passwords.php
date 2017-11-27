@@ -18,5 +18,6 @@ return [
     'sent' => 'We have e-mailed your password reset link!',
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that e-mail address.",
-
+    "reminder" => "Need to reset your password?",
+    "help" => "En caso de ser un padre de familia debe especificar el correo al que normalmente le llegan los comunicados de la institución"
 ];

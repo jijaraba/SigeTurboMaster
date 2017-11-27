@@ -2,8 +2,6 @@
 
 namespace SigeTurbo\Events;
 
-use Illuminate\Support\Facades\Auth;
-use SigeTurbo\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
@@ -23,7 +21,7 @@ class Stream extends Event implements ShouldBroadcastNow
     {
         $user = getUser();
         $this->data = [
-            'message' => "<div class='photo'><div><img src='" . getenv("ASSETS_SERVER") . "/img/users/" . $user->photo. "' alt='" . $user->firstname. "' title='" . $user->firstname . "'></div></div><div class='message'><span>". $user->firstname. " " . $data['description'] . " </span></div>"
+            'message' => "<div class='photo'><div><img src='" . getenv("ASSETS_SERVER") . "/img/users/" . $user->photo . "' alt='" . $user->firstname . "' title='" . $user->firstname . "'></div></div><div class='message'><span>" . $user->firstname . " " . $data['description'] . " </span></div>"
         ];
     }
 

@@ -39,7 +39,8 @@
 </head>
 <body>
 <div class="container">
-    <div class="content">
+    <div class="content" style="margin: 0px auto">
+        <img src="/images/sigeturbo.svg" alt="">
         <div class="title">Error 404</div>
     </div>
 </div>

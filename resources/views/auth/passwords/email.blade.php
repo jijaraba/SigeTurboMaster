@@ -1,47 +1,20 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+@extends("layouts.login")
+@section("login")
+    <div class="sige-form-container">
+        @include("layouts.partials.flashmessage")
+        <h2>{{ Lang::get("passwords.reminder") }}</h2>
+        {!! Form::open(['route' => 'password.email']) !!}
+        <ul class="display-horizontal col-100">
+            <li class="col-100">
+                {!! Form::email('email',null,['placeholder' => Lang::get("sige.Email"), 'id' => 'email']) !!}
+                {!! $errors->first('email', '<ul class="errors"><li>:message</li></ul>') !!}
+            </li>
+        </ul>
+        {!! Form::button(Lang::get("sige.Reset"), ['type' => 'submit', 'class' => 'btn btn-aquamarine', 'id' => 'reminder-button']) !!}
+        {!! Form::close() !!}
+        <div class="info" style="margin:10px 0px">
+            <a class="icon icon-info" href="#"></a>
+            <p>{{ Lang::get('passwords.help') }}</p>
         </div>
     </div>
-</div>
-@endsection
+@stop

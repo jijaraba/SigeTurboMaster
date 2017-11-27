@@ -35,8 +35,7 @@ class HomeController extends Controller
     public function dashboard()
     {
         return view('home.dashboard')
-            //->with('attendances',$this->attendanceRepository->getAttendancesAmount())
-            ->with('attendances',[])
+            ->with('attendances',$this->attendanceRepository->getAttendancesAmount())
             ->withYear($this->yearRepository->getCurrentYear()->idyear);
     }
 
