@@ -41,6 +41,7 @@ angular.module('Formation', [
 
 angular.module('Formation').config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 }]);
 
 //Formation

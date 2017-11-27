@@ -973,6 +973,7 @@ angular.module('Formation.controllers', [])
         );
         //Functions
         $scope.Update = function () {
+
             Task.update({
                 'idtask': $scope.task.idtask,
                 'year': $scope.academic.year,

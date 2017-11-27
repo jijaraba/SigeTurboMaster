@@ -79,7 +79,7 @@ angular.module('Formation.factories', [])
                 method: 'PUT'
             },
             remove: {
-                method:'DELETE'
+                method: 'DELETE'
             }
         });
     }])
@@ -178,7 +178,7 @@ angular.module('Formation.factories', [])
     .factory('GroupDirector', ['$resource', function ($resource) {
         return $resource('/api/v1/groupdirectors/:groupdirectorId/:action', {
             groupdirectorId: '@idgroupdirector',
-            yearId: '@id', 
+            yearId: '@id',
             action: '@action'
         }, {
             all: {
@@ -195,14 +195,14 @@ angular.module('Formation.factories', [])
                 method: 'PUT'
             },
             remove: {
-                method:'DELETE'
+                method: 'DELETE'
             }
         });
     }])
     .factory('AreaManager', ['$resource', function ($resource) {
         return $resource('/api/v1/areamanagers/:areamanagerId/:action', {
             areamanagerId: '@idareamanager',
-            yearId: '@id', 
+            yearId: '@id',
             action: '@action'
         }, {
             all: {
@@ -219,7 +219,7 @@ angular.module('Formation.factories', [])
                 method: 'PUT'
             },
             remove: {
-                method:'DELETE'
+                method: 'DELETE'
             }
         });
     }])
@@ -255,12 +255,12 @@ angular.module('Formation.factories', [])
                 params: {action: 'getsubjectsbyyearandperiodandgroup'},
                 isArray: true
             },
-            getSubjectsByYear:{
+            getSubjectsByYear: {
                 method: 'GET',
                 params: {action: 'getsubjectsbyyear'},
                 isArray: true
             },
-            getSubjectWithAreasAndNivels:{
+            getSubjectWithAreasAndNivels: {
                 method: 'GET',
                 params: {action: 'getsubjectwithareasandnivels'},
                 isArray: true
@@ -280,7 +280,7 @@ angular.module('Formation.factories', [])
             getNivelsBySubject: {
                 method: 'GET',
                 params: {
-                    action: 'getnivelsbysubject',subjectId: ''
+                    action: 'getnivelsbysubject', subjectId: ''
                 },
                 isArray: true
             },
@@ -437,11 +437,11 @@ angular.module('Formation.factories', [])
                 method: 'GET',
                 params: {action: 'getmonitoringcategorybyyeardetail'},
                 isArray: true
-            },update: {
+            }, update: {
                 method: 'PUT'
             },
             remove: {
-                method:'DELETE'
+                method: 'DELETE'
             }
 
         });
@@ -533,7 +533,7 @@ angular.module('Formation.factories', [])
             },
             getAchievementsByGroup: {
                 method: 'GET',
-                params: {action: 'getachievementsbygroup'}, 
+                params: {action: 'getachievementsbygroup'},
                 isArray: true
             },
             update: {
@@ -555,7 +555,7 @@ angular.module('Formation.factories', [])
             },
             getContractsByYearAndPeriod: {
                 method: 'GET',
-                params: {action: 'getcontractsbyyearandperiod'}, 
+                params: {action: 'getcontractsbyyearandperiod'},
                 isArray: true
             },
             update: {
@@ -654,9 +654,10 @@ angular.module('Formation.factories', [])
         });
     }])
     .factory('Task', ['$resource', function ($resource) {
+
         return $resource('/api/v1/tasks/:taskId/:action', {
             taskId: '@idtask',
-            action: '@action'
+            action: '@action',
         }, {
             all: {
                 method: 'GET',
@@ -664,7 +665,13 @@ angular.module('Formation.factories', [])
                 isArray: true
             },
             update: {
-                method: 'PUT'
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'asdsds',
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*',
+                    'apiKey': ''
+                }
             },
             getTasks: {
                 method: 'GET',
@@ -776,11 +783,12 @@ angular.module('Formation.factories', [])
                 isArray: true
             }
         });
-    }]).factory('Vote', ['$resource', function ($resource) {
+    }])
+    .factory('Vote', ['$resource', function ($resource) {
         return $resource('/api/v1/vote/:voteId/:action/', {
             voteId: '@idvote',
             action: '@action'
-        },{
+        }, {
             all: {
                 method: 'GET',
                 params: {voteId: ''},
