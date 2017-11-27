@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Be right back.</title>
+        <title>En un momento volvemos</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -39,8 +39,9 @@
     </head>
     <body>
         <div class="container">
-            <div class="content">
-                <div class="title">Be right back.</div>
+            <div class="content" style="margin: 0px auto">
+                <img src="/images/sigeturbo.svg" alt="">
+                <div class="title">En un momento volvemos</div>
             </div>
         </div>
     </body>
