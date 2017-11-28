@@ -5,13 +5,15 @@ body {
   width: 100%;
   display: block;
   font: {
-    family: $sige-font-family-01;
+    family: $sige-font-family-08;
     size: 1em;
     weight: 100;
   }
-  letter-spacing: -1px;
+  letter-spacing: -.025em;
   background-color: $sige-global-bgcolor-01;
   color: $sige-global-color-04;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 header {
@@ -66,7 +68,7 @@ header {
             color: white;
             font: {
               size: 1em;
-              family: $sige-font-family-02;
+              family: $sige-font-family-07;
               weight: normal;
             }
             top: -30px;
@@ -115,7 +117,7 @@ header {
                 padding-bottom: 0px;
                 font: {
                   size: 1em;
-                  family: $sige-font-family-03;
+                  family: $sige-font-family-07;
                 }
               }
               em {
@@ -124,7 +126,7 @@ header {
                 position: relative;
                 font: {
                   size: 12px;
-                  family: $sige-font-family-03;
+                  family: $sige-font-family-07;
                   weight: normal;
                 }
               }
@@ -163,7 +165,7 @@ header {
     right: 0;
     line-height: 50px;
     font-size: 1.7em;
-    font-family: 'Gotham Rounded Bold';
+    font-family: $sige-font-family-07;
     text-align: center;
     color: #B2BBBD;
   }
@@ -178,7 +180,7 @@ header {
     right: 0;
     line-height: 50px;
     font-size: 1.7em;
-    font-family: 'Gotham Rounded Bold';
+    font-family: $sige-font-family-08;
     text-align: left;
     color: #B2BBBD;
     > li {
@@ -287,10 +289,10 @@ header {
   > ul {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     flex-flow: row wrap;
     > li {
-      padding: 10px;
+      padding: 20px;
+      margin-top: 20px;
     }
   }
 }
