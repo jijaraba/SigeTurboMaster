@@ -161,12 +161,17 @@ class TaskRepository implements TaskRepositoryInterface
         //Find Task
         $task = Task::find($task);
         $task->fill(array(
-            'status' => 1,
+            'status' => '1',
             'updated_by' => getUser()->iduser
         ));
         return $task->save();
     }
 
+    /**
+     * Getl Task By ID
+     * @param $task
+     * @return mixed
+     */
     public function getTask($task)
     {
         return Task::select('tasks.*', 'groups.name AS group', 'subjects.name AS subject', 'nivels.name AS nivel', DB::raw("CONCAT_WS(CONVERT(' ' USING latin1),teachers.lastname,teachers.firstname) AS teacher"), 'teachers.photo', 'teachers.email')

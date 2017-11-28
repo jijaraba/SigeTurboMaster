@@ -419,8 +419,6 @@ class TasksController extends Controller
             $data['successful'] = true;
             $data['message'] = Lang::get('sige.SuccessUpdateMessage');
             $data['task'] = $task;
-            //Send Email To Parents
-            //$this->mailer->byParents('task',Task::select('*')->where('idtask','=',$request['task'])->with('taskfiles')->get(),[$request['group']],[],[Category::STUDENT,Category::FATHER,Category::MOTHER]);
         } else {
             $data['unsuccessful'] = true;
             $data['message'] = Lang::get('sige.ErrorUpdateMessage');
