@@ -4,11 +4,14 @@ namespace SigeTurbo\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Lang;
 use SigeTurbo\Category;
 use SigeTurbo\Http\Requests\UserfamilyRequest;
+use SigeTurbo\Repositories\Payment\PaymentRepository;
+use SigeTurbo\Repositories\Payment\PaymentRepositoryInterface;
 use SigeTurbo\Repositories\Userfamily\UserfamilyRepositoryInterface;
 
 
@@ -21,13 +24,19 @@ class UserfamiliesController extends Controller
      * @var UserfamilyRepositoryInterface
      */
     private $userfamilyRepository;
+    /**
+     * @var PaymentRepositoryInterface
+     */
+    private $paymentRepository;
 
     /**
      * @param UserfamilyRepositoryInterface $userfamilyRepository
+     * @param PaymentRepositoryInterface $paymentRepository
      */
-    function __construct(UserfamilyRepositoryInterface $userfamilyRepository)
+    function __construct(UserfamilyRepositoryInterface $userfamilyRepository, PaymentRepositoryInterface $paymentRepository)
     {
         $this->userfamilyRepository = $userfamilyRepository;
+        $this->paymentRepository = $paymentRepository;
     }
 
     /**
@@ -38,7 +47,7 @@ class UserfamiliesController extends Controller
      */
     public function index(Request $request)
     {
-        $users =  $this->userfamilyRepository->getUsersByFamily($request);
+        $users = $this->userfamilyRepository->getUsersByFamily($request);
         return view('userfamilies.index')->withUsers($users);
     }
 
@@ -54,7 +63,7 @@ class UserfamiliesController extends Controller
         $userfamily = $this->userfamilyRepository->store($request);
 
         $data = [];
-        if($userfamily){
+        if ($userfamily) {
             $data['successful'] = true;
             $data['message'] = Lang::get('sige.SuccessSaveMessage');
             $data['family'] = $userfamily;
@@ -73,24 +82,42 @@ class UserfamiliesController extends Controller
     /**
      * Display all members per family.
      * GET /userfamilies
+     * @param Request $request
      * @return Response
      */
-    public function indexParentsByHomeworks()
+    public function indexParentsByHomeworks(Request $request)
     {
-        $data = ['user' => getUser()->iduser,'category' => Category::STUDENT];
-        $users =  (array)$this->userfamilyRepository->getUsersByFamily($data);
+
+        //Verify Payments
+        $payments = $this->paymentRepository->getPaymentsByUser(getUser()->iduser, true, null, 'ASC', true);
+        if (count($payments) > 0) {
+            $request->session()->flash('error', Lang::get('sige.PaymentsPendingTitle'));
+            App::abort(401, 'payments_pending');
+        }
+
+        $data = ['user' => getUser()->iduser, 'category' => Category::STUDENT];
+        $users = (array)$this->userfamilyRepository->getUsersByFamily($data);
         return view('userfamilies.indexparentsbyhomeworks')->withUsers($users);
     }
 
     /**
      * Display all members per family.
      * GET /userfamilies
+     * @param Request $request
      * @return Response
      */
-    public function indexParentsByMonitorings()
+    public function indexParentsByMonitorings(Request $request)
     {
+
+        //Verify Payments
+        $payments = $this->paymentRepository->getPaymentsByUser(getUser()->iduser, true, null, 'ASC', true);
+        if (count($payments) > 0) {
+            $request->session()->flash('error', Lang::get('sige.PaymentsPendingTitle'));
+            App::abort(401, 'payments_pending');
+        }
+
         $data = ['user' => getUser()->iduser, 'category' => Category::STUDENT];
-        $users =  (array)$this->userfamilyRepository->getUsersByFamily($data);
+        $users = (array)$this->userfamilyRepository->getUsersByFamily($data);
         return view('userfamilies.indexparentsbymonitorings')->withUsers($users);
     }
 
@@ -98,12 +125,20 @@ class UserfamiliesController extends Controller
     /**
      * Display all members per family.
      * GET /userfamilies
+     * @param Request $request
      * @return Response
      */
-    public function indexParentsByUpdateInfo()
+    public function indexParentsByUpdateInfo(Request $request)
     {
+        //Verify Payments
+        $payments = $this->paymentRepository->getPaymentsByUser(getUser()->iduser, true, null, 'ASC', true);
+        if (count($payments) > 0) {
+            $request->session()->flash('error', Lang::get('sige.PaymentsPendingTitle'));
+            App::abort(401, 'payments_pending');
+        }
+
         $data = ['user' => getUser()->iduser];
-        $users =  (array)$this->userfamilyRepository->getUsersByFamily($data);
+        $users = (array)$this->userfamilyRepository->getUsersByFamily($data);
         return view('userfamilies.indexparentsbyupdateinfo')->withUsers($users);
     }
 

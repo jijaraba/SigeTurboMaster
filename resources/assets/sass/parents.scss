@@ -758,7 +758,7 @@
           &.generate {
             cursor: pointer;
             a {
-              padding: 12px 18px;
+              padding: 12px 0px;
               background-color: $sige-global-bgcolor-07 !important;
               border-radius: 3px;
               color: $sige-global-color-02;
@@ -772,7 +772,7 @@
           }
           &.generated {
             a {
-              padding: 12px 18px;
+              padding: 12px 0px;
               background-color: $sige-global-bgcolor-11 !important;
               border-radius: 3px;
               color: $sige-global-color-02;

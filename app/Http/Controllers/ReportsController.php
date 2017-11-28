@@ -4,11 +4,14 @@ namespace SigeTurbo\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Lang;
 use SigeTurbo\Http\Requests;
 use Illuminate\Pagination\LengthAwarePaginator;
 use SigeTurbo\Http\Requests\ReportRequest;
 use SigeTurbo\Repositories\Groupdirector\GroupdirectorRepositoryInterface;
+use SigeTurbo\Repositories\Payment\PaymentRepository;
+use SigeTurbo\Repositories\Payment\PaymentRepositoryInterface;
 use SigeTurbo\Repositories\Report\ReportRepositoryInterface;
 use SigeTurbo\Repositories\Userfamily\UserfamilyRepositoryInterface;
 
@@ -26,20 +29,27 @@ class ReportsController extends Controller
      * @var GroupdirectorRepositoryInterface
      */
     private $groupdirectorRepository;
+    /**
+     * @var PaymentRepositoryInterface
+     */
+    private $paymentRepository;
 
     /**
      * ReportsController constructor.
      * @param UserfamilyRepositoryInterface $userfamilyRepository
      * @param ReportRepositoryInterface $reportRepository
      * @param GroupdirectorRepositoryInterface $groupdirectorRepository
+     * @param PaymentRepositoryInterface $paymentRepository
      */
     public function __construct(UserfamilyRepositoryInterface $userfamilyRepository,
                                 ReportRepositoryInterface $reportRepository,
-                                GroupdirectorRepositoryInterface $groupdirectorRepository)
+                                GroupdirectorRepositoryInterface $groupdirectorRepository,
+                                PaymentRepositoryInterface $paymentRepository)
     {
         $this->userfamilyRepository = $userfamilyRepository;
         $this->reportRepository = $reportRepository;
         $this->groupdirectorRepository = $groupdirectorRepository;
+        $this->paymentRepository = $paymentRepository;
     }
 
     /**
@@ -48,6 +58,14 @@ class ReportsController extends Controller
      */
     public function getReportsByFamily(Request $request)
     {
+
+        //Verify Payments
+        $payments = $this->paymentRepository->getPaymentsByUser(getUser()->iduser, true, null, 'ASC', true);
+        if (count($payments) > 0) {
+            $request->session()->flash('error', Lang::get('sige.PaymentsPendingTitle'));
+            App::abort(401, 'payments_pending');
+        }
+
         //Sort
         $sort = 'realdate';
         if (isset($request['sort'])) {

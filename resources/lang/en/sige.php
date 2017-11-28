@@ -246,6 +246,7 @@ return array(
     'Financials' => 'Financials',
     'Transactions' => 'Transactions',
     'PaymentsPendings' => 'Payments Pendings',
+    'PaymentsPendingTitle' => 'Contactarse con Tesorería al 5207270 Ext 206',
 
     //Formation
     'Monitoring' => 'Monitoring',

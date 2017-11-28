@@ -11,7 +11,7 @@ interface PaymentRepositoryInterface
     public function updatePaymentRejected($data);
     public function getPaymentByTransactionID($transactionID);
     public function getPaymentByID($payment);
-    public function getPaymentsByUser($user, $pending = false);
+    public function getPaymentsByUser($user, $pending = false, $sort = null, $order = 'ASC', $excludeCurrentMonth = false);
     public function getPaymentsByUserWithTransactions($user);
     public function getPaymentsPendings();
     public function setPaymentMethod($data);

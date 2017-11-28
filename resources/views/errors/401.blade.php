@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Unauthorized</title>
-
+    <title>{{ config('app.name') }} - Unauthorized</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
+    {!! HTML::style(mix('css/sigeturbo.css')) !!}
     <style>
         html, body {
             height: 100%;
@@ -15,6 +14,7 @@
             padding: 0;
             width: 100%;
             color: #B0BEC5;
+            background-color: white;
             display: table;
             font-weight: 100;
             font-family: 'Lato';
@@ -35,6 +35,11 @@
             font-size: 72px;
             margin-bottom: 40px;
         }
+        .payment {
+            color:#53BBB4;
+            font-size:1.1em;
+            font-family: 'Montserrat Regular';
+        }
     </style>
 </head>
 <body>
@@ -42,6 +47,10 @@
     <div class="content" style="margin: 0px auto">
         <img src="/images/sigeturbo.svg" alt="">
         <div class="title">Unauthorized.</div>
+        @if($exception->getMessage() == "payments_pending")
+            @include('../layouts/partials/flashmessage')
+        @endif
+        <a href="{{route('parents.payments.index')}}" class="payment">Ir Módulo Pagos</a>
     </div>
 </div>
 </body>

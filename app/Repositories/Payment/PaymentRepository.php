@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use SigeTurbo\Payment;
 use SigeTurbo\Repositories\Userfamily\UserfamilyRepository;
+use SigeTurbo\Repositories\Year\YearRepository;
 use SigeTurbo\Statusschooltype;
 use SigeTurbo\Userfamily;
 use SigeTurbo\Visitor;
@@ -42,9 +43,10 @@ class PaymentRepository implements PaymentRepositoryInterface
      * @param bool $pending
      * @param null $sort
      * @param string $order
+     * @param bool $excludeCurrentMonth
      * @return mixed
      */
-    public function getPaymentsByUser($user, $pending = false, $sort = null, $order = 'ASC')
+    public function getPaymentsByUser($user, $pending = false, $sort = null, $order = 'ASC', $excludeCurrentMonth = false)
     {
         $payments = Payment::select('payments.*', 'users.photo', DB::raw('CONCAT_WS(CONVERT(" " USING latin1),users.lastname,users.firstname) AS fullname'), DB::raw('CURDATE() AS current'))
             ->join('users', function ($join) {
@@ -55,7 +57,8 @@ class PaymentRepository implements PaymentRepositoryInterface
             })
             ->where('families.idfamily', '=', DB::raw("(SELECT idfamily FROM userfamilies WHERE userfamilies.iduser = $user LIMIT 1)"));
 
-        //TODO --- Corregir para abarcar cualquier familia
+
+        //Exceptions: Families with multiple children
         switch ($user) {
             case 43754648:
                 $payments->orWhereIn('payments.iduser', [2014067]);
@@ -67,9 +70,19 @@ class PaymentRepository implements PaymentRepositoryInterface
                 $payments->orWhereIn('payments.iduser', [2017003]);
                 break;
         }
+
+        //Payments Pending
         if ($pending) {
             $payments->where('payments.ispayment', '=', 'N');
         }
+
+        //Exclude Current Mont
+        if ($excludeCurrentMonth) {
+            $payments
+                ->where(DB::raw("CONCAT(YEAR(payments.realdate), '-' , MONTH(payments.realdate))"),"<",DB::raw("CONCAT(YEAR(CURDATE()), '-' , MONTH(CURDATE()))"));
+        }
+
+        //Sort
         switch ($sort) {
             case 'realdate':
                 $payments->orderBy('payments.realdate', $order);
@@ -269,6 +282,244 @@ class PaymentRepository implements PaymentRepositoryInterface
         ]);
     }
 
+    /**
+     * Update Payment
+     * @param $idpayment
+     * @param $data
+     * @return mixed
+     */
+    public function update($idpayment, $data)
+    {
+        //Find Payment
+        $payment = Payment::find($idpayment);
+        $payment->fill(array(
+            'method' => $data['method'],
+            'idpaymenttype' => $data['type'],
+            'idfamily' => $data['family'],
+            'iduser' => $data['student'],
+            'ispayment' => $data['ispayment'],
+            'approved' => $data['approved'],
+            'idbank' => $data['bank'],
+            'voucher' => $data['voucher'],
+            'concept1' => $data['concept1'],
+            'date1' => $data['date1'],
+            'value1' => $data['value1'],
+            'observation1' => $data['observation1'],
+            'concept2' => $data['concept2'],
+            'date2' => $data['date2'],
+            'value2' => $data['value2'],
+            'observation2' => $data['observation2'],
+            'concept3' => $data['concept3'],
+            'date3' => $data['date3'],
+            'value3' => $data['value3'],
+            'observation3' => $data['observation3'],
+            'concept4' => $data['concept4'],
+            'date4' => $data['date4'],
+            'value4' => $data['value4'],
+            'observation4' => $data['observation4'],
+            'observation' => $data['observation'],
+            'realValue' => $data['value'],
+            'updated_by' => getUser()->iduser,
+        ));
+        return $payment->save();
+    }
+
+    public function updatePaymentShort($data)
+    {
+        //Find Payment
+        $payment = Payment::find($data['payment']);
+        $payment->fill(array(
+            'ispayment' => 'Y',
+            'approved' => 'A',
+            'idbank' => $data['bank'],
+            'voucher' => $data['voucher'],
+            'realValue' => $data['value'],
+            'method' => $data['method'],
+            'observation' => ($data['observation']) ? $data['observation'] : null,
+            'updated_by' => getUser()->iduser,
+            'payment_at' => ($data["date"]) ? $data["date"] : Carbon::now(),
+        ));
+        return $payment->save();
+    }
+
+    /**
+     * Updated Payment Rejected
+     * @param $data
+     * @return mixed
+     */
+    public function updatePaymentRejected($data)
+    {
+        //Find Payment
+        $payment = Payment::find($data['payment']);
+        $payment->fill(array(
+            'ispayment' => 'N',
+            'approved' => 'N',
+            'method' => 'normal',
+            'transaccionTNS' => null,
+            'hash' => null,
+            'observation' => null,
+            'updated_by' => getUser()->iduser,
+            'updated_at' => Carbon::now(),
+        ));
+        return $payment->save();
+    }
+
+    /**
+     * Get All Payments With Transactions
+     * @param $user
+     * @return mixed
+     */
+    public function getPaymentsByUserWithTransactions($user)
+    {
+        return Payment::select('payments.*')
+            ->where('iduser', '=', $user)
+            ->with('transactions')
+            ->orderBy('payments.realdate', 'DESC')
+            ->get();
+    }
+
+    /**
+     * Get Payments Pendings
+     * @return mixed
+     */
+    public function getPaymentsPendings()
+    {
+        return Payment::select('payments.*')
+            ->whereApproved('P')
+            ->get();
+    }
+
+    /**
+     * Get Payments BY Year AND Month
+     * @param $year
+     * @param $month
+     * @return mixed
+     */
+    public function getPaymentsByYearAndMonth($year, $month)
+    {
+        return Payment::select("payments.*")
+            ->join('users', function ($join) {
+                $join->on('users.iduser', '=', 'payments.iduser');
+            })
+            ->join('enrollments', function ($join) {
+                $join->on('enrollments.iduser', '=', 'users.iduser');
+            })
+            ->join('groups', function ($join) {
+                $join->on('groups.idgroup', '=', 'enrollments.idgroup');
+            })
+            ->whereRaw("YEAR(realdate) = $year AND MONTH(`realdate`) = $month")
+            ->where("enrollments.idyear", '=', 2017)
+            ->whereNotIn("enrollments.idstatusschooltype", Statusschooltype::STATUS_NOT_ACTIVE)
+            ->whereNotIn("enrollments.idstatusschooltype", [13])
+            ->orderBy('groups.order', 'ASC')
+            ->orderBy('users.lastname', 'ASC')
+            ->get();
+    }
+
+    /**
+     * Get Payments Approved For Receipt
+     * @param $year
+     * @param $month
+     * @return mixed
+     */
+    public function getPaymentsApprovedByYearAndMonth($year, $month)
+    {
+        return Payment::select("payments.*")
+            ->whereRaw("YEAR(realdate) = $year AND MONTH(`realdate`) = $month")
+            ->where('isPayment', '=', 'Y')
+            ->whereApproved('A')
+            ->where('idbank', '<>', 1)
+            ->get();
+    }
+
+
+    /**
+     * Get Payments Virtual Approved For Receipt
+     * @param $year
+     * @param $month
+     * @return mixed
+     */
+    public function getPaymentsVirtualApprovedByYearAndMonth($year, $month)
+    {
+        return Payment::select("payments.*")
+            ->whereRaw("YEAR(realdate) = $year AND MONTH(`realdate`) = $month")
+            ->where('isPayment', '=', 'Y')
+            ->whereApproved('A')
+            ->where('idbank', '=', 1)
+            ->get();
+    }
+
+
+    /**
+     * Set RealValue for Pending Payment
+     * @param $payment
+     * @return mixed
+     */
+    private function _setRealValueForPaymentPending($payment)
+    {
+        switch ($payment->method) {
+            case 'discount':
+                return $payment->value1;
+                break;
+            case 'normal':
+                return $payment->value2;
+                break;
+            case 'rate':
+                return $payment->value3;
+                break;
+            case 'agreement':
+                return $payment->value4;
+                break;
+        }
+    }
+
+    /**
+     * @param $year
+     * @param $group
+     * @param $cost
+     * @param $student
+     * @param null $config
+     * @return null
+     */
+    public function configDataPayment($year, $group, $cost, $student, $config = null)
+    {
+        //Put data
+        if ($config !== null) {
+            $data = $config;
+        } else {
+            $data["concept"] = "MATRÍCULA AÑO ACADÉMICO " . $year . "-" . ($year + 1);
+            $data["date1"] = '2017-06-30';
+            $data["date2"] = '2017-07-15';
+            $data["date3"] = '2017-07-16';
+            $data["date4"] = '2017-07-16';
+            $data["academic"] = $year;
+            $data["year"] = Carbon::now()->year;
+            $data["month"] = Carbon::now()->month;
+            $data["month_name"] = getMonthName(Carbon::now()->month);
+            $data["type"] = 1;
+            $data["exclude"] = 0;
+        }
+
+        $data["student"] = $student->iduser;
+        $data["value1"] = $cost->enrollment;
+        $data["value2"] = $cost->enrollment;
+        $data["value3"] = $cost->enrollment_expired;
+        $data["value4"] = $cost->enrollment;
+        $data["firstname"] = $student->firstname;
+        $data["lastname"] = $student->lastname;
+        $data["gender"] = $student->gender;
+        $data["scholarship"] = $student->scholarship;
+        return $data;
+    }
+
+
+    /**
+     * Specify Payment Criteria
+     * @param $number
+     * @param $option
+     * @param $data
+     * @return string
+     */
     private function setConcept($number, $option, $data)
     {
         switch ($number) {
@@ -377,241 +628,6 @@ class PaymentRepository implements PaymentRepositoryInterface
                 }
                 break;
         }
-    }
-
-    /**
-     * Update Payment
-     * @param $idpayment
-     * @param $data
-     * @return mixed
-     */
-    public function update($idpayment, $data)
-    {
-        //Find Payment
-        $payment = Payment::find($idpayment);
-        $payment->fill(array(
-            'method' => $data['method'],
-            'idpaymenttype' => $data['type'],
-            'idfamily' => $data['family'],
-            'iduser' => $data['student'],
-            'ispayment' => $data['ispayment'],
-            'approved' => $data['approved'],
-            'idbank' => $data['bank'],
-            'voucher' => $data['voucher'],
-            'concept1' => $data['concept1'],
-            'date1' => $data['date1'],
-            'value1' => $data['value1'],
-            'observation1' => $data['observation1'],
-            'concept2' => $data['concept2'],
-            'date2' => $data['date2'],
-            'value2' => $data['value2'],
-            'observation2' => $data['observation2'],
-            'concept3' => $data['concept3'],
-            'date3' => $data['date3'],
-            'value3' => $data['value3'],
-            'observation3' => $data['observation3'],
-            'concept4' => $data['concept4'],
-            'date4' => $data['date4'],
-            'value4' => $data['value4'],
-            'observation4' => $data['observation4'],
-            'observation' => $data['observation'],
-            'realValue' => $data['value'],
-            'updated_by' => getUser()->iduser,
-        ));
-        return $payment->save();
-    }
-
-    public function updatePaymentShort($data)
-    {
-        //Find Payment
-        $payment = Payment::find($data['payment']);
-        $payment->fill(array(
-            'ispayment' => 'Y',
-            'approved' => 'A',
-            'idbank' => $data['bank'],
-            'voucher' => $data['voucher'],
-            'realValue' => $data['value'],
-            'method' => $data['method'],
-            'observation' => ($data['observation']) ? $data['observation'] : null,
-            'updated_by' => getUser()->iduser,
-            'payment_at' => ($data["date"]) ? $data["date"] : Carbon::now(),
-        ));
-        return $payment->save();
-    }
-
-    /**
-     * Updated Payment Rejected
-     * @param $data
-     * @return mixed
-     */
-    public function updatePaymentRejected($data)
-    {
-        //Find Payment
-        $payment = Payment::find($data['payment']);
-        $payment->fill(array(
-            'ispayment' => 'N',
-            'approved' => 'N',
-            'method' => 'normal',
-            'transaccionTNS' => null,
-            'hash' => null,
-            'observation' => null,
-            'updated_by' => getUser()->iduser,
-            'updated_at' => Carbon::now(),
-        ));
-        return $payment->save();
-    }
-
-    /**
-     * Get All Payments With Transactions
-     * @param $user
-     * @return mixed
-     */
-    public function getPaymentsByUserWithTransactions($user)
-    {
-        return Payment::select('payments.*')
-            ->where('iduser', '=', $user)
-            ->with('transactions')
-            //->where('isPayment','=','N')
-            //->where('approved','<>','A')
-            ->orderBy('payments.realdate', 'DESC')
-            ->get();
-    }
-
-    /**
-     * Get Payments Pendings
-     * @return mixed
-     */
-    public function getPaymentsPendings()
-    {
-        return Payment::select('payments.*')
-            ->whereApproved('P')
-            ->get();
-    }
-
-    /**
-     * Get Payments BY Year AND Month
-     * @param $year
-     * @param $month
-     * @return mixed
-     */
-    public function getPaymentsByYearAndMonth($year, $month)
-    {
-        return Payment::select("payments.*")
-            ->join('users', function ($join) {
-                $join->on('users.iduser', '=', 'payments.iduser');
-            })
-            ->join('enrollments', function ($join) {
-                $join->on('enrollments.iduser', '=', 'users.iduser');
-            })
-            ->join('groups', function ($join) {
-                $join->on('groups.idgroup', '=', 'enrollments.idgroup');
-            })
-            ->whereRaw("YEAR(realdate) = $year AND MONTH(`realdate`) = $month")
-            //->whereRaw("YEAR(realdate) = $year AND MONTH(`realdate`) IN (6,7)") Solo para Matrícula en Julio
-            ->where("enrollments.idyear", '=', 2017)
-            ->whereNotIn("enrollments.idstatusschooltype", Statusschooltype::STATUS_NOT_ACTIVE)
-            ->whereNotIn("enrollments.idstatusschooltype", [13])
-            //->whereNotIn("payments.idpayment", ['8683'])
-            //->whereNotIn("enrollments.iduser", ['999999999'])
-            ->orderBy('groups.order', 'ASC')
-            ->orderBy('users.lastname', 'ASC')
-            ->get();
-    }
-
-    /**
-     * Get Payments Approved For Receipt
-     * @param $year
-     * @param $month
-     * @return mixed
-     */
-    public function getPaymentsApprovedByYearAndMonth($year, $month)
-    {
-        return Payment::select("payments.*")
-            ->whereRaw("YEAR(realdate) = $year AND MONTH(`realdate`) = $month")
-            ->where('isPayment', '=', 'Y')
-            ->whereApproved('A')
-            ->where('idbank', '<>', 1)
-            ->get();
-    }
-
-
-    /**
-     * Get Payments Virtual Approved For Receipt
-     * @param $year
-     * @param $month
-     * @return mixed
-     */
-    public function getPaymentsVirtualApprovedByYearAndMonth($year, $month)
-    {
-        return Payment::select("payments.*")
-            ->whereRaw("YEAR(realdate) = $year AND MONTH(`realdate`) = $month")
-            ->where('isPayment', '=', 'Y')
-            ->whereApproved('A')
-            ->where('idbank', '=', 1)
-            ->get();
-    }
-
-
-    /**
-     * Set RealValue for Pending Payment
-     * @param $payment
-     * @return mixed
-     */
-    private function _setRealValueForPaymentPending($payment)
-    {
-        switch ($payment->method) {
-            case 'discount':
-                return $payment->value1;
-                break;
-            case 'normal':
-                return $payment->value2;
-                break;
-            case 'rate':
-                return $payment->value3;
-                break;
-            case 'agreement':
-                return $payment->value4;
-                break;
-        }
-    }
-
-    /**
-     * @param $year
-     * @param $group
-     * @param $cost
-     * @param $student
-     * @param null $config
-     * @return null
-     */
-    public function configDataPayment($year, $group, $cost, $student, $config = null)
-    {
-        //Put data
-        if ($config !== null) {
-            $data = $config;
-        } else {
-            $data["concept"] = "MATRÍCULA AÑO ACADÉMICO " . $year . "-" . ($year + 1);
-            $data["date1"] = '2017-06-30';
-            $data["date2"] = '2017-07-15';
-            $data["date3"] = '2017-07-16';
-            $data["date4"] = '2017-07-16';
-            $data["academic"] = $year;
-            $data["year"] = Carbon::now()->year;
-            $data["month"] = Carbon::now()->month;
-            $data["month_name"] = getMonthName(Carbon::now()->month);
-            $data["type"] = 1;
-            $data["exclude"] = 0;
-        }
-
-        $data["student"] = $student->iduser;
-        $data["value1"] = $cost->enrollment;
-        $data["value2"] = $cost->enrollment;
-        $data["value3"] = $cost->enrollment_expired;
-        $data["value4"] = $cost->enrollment;
-        $data["firstname"] = $student->firstname;
-        $data["lastname"] = $student->lastname;
-        $data["gender"] = $student->gender;
-        $data["scholarship"] = $student->scholarship;
-        return $data;
     }
 
 }
