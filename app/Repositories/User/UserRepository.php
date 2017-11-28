@@ -339,7 +339,7 @@ class UserRepository implements UserRepositoryInterface
         $user->fill([
             'celular' => $data["celular"],
             'celular_passcode' => null,
-            'celular_confirmed' => 1,
+            'celular_confirmed' => '1',
             "updated_by" => getUser()->iduser,
             'updated_at' => Carbon::now()
         ]);
@@ -358,7 +358,7 @@ class UserRepository implements UserRepositoryInterface
         $user->fill([
             'email' => $data["email"],
             'email_passcode' => null,
-            'email_confirmed' => 1,
+            'email_confirmed' => '1',
             "updated_by" => getUser()->iduser,
             'updated_at' => Carbon::now()
         ]);
@@ -378,7 +378,7 @@ class UserRepository implements UserRepositoryInterface
         $user->fill([
             'celular' => $data["celular"],
             'celular_passcode' => null,
-            'celular_confirmed' => 1,
+            'celular_confirmed' => '1',
             "updated_by" => getUser()->iduser,
             'updated_at' => Carbon::now()
         ]);
@@ -398,7 +398,7 @@ class UserRepository implements UserRepositoryInterface
         $user->fill([
             'email' => $data["email"],
             'email_passcode' => null,
-            'email_confirmed' => 1,
+            'email_confirmed' => '1',
             "updated_by" => getUser()->iduser,
             'updated_at' => Carbon::now()
         ]);

@@ -19,7 +19,7 @@
                                 <li class="col-70">
                                     <ul class="display-horizontal measurements">
                                         <li class="col-100">
-                                            <ul class="display-horizontal col-100">
+                                            <ul class="display-horizontal col-100" style="display: none">
                                                 <li class="col-100 inclusion-text" style="text-align:center;">
                                                     <h5 class="header-aquamarine">Exportar Asientos</h5>
                                                 </li>
@@ -86,7 +86,7 @@
                             <ul class="display-horizontal">
                                 <li class="col-100">
                                     <sige-turbo-payments-calendar
-                                            payments="payments"></sige-turbo-payments-calendar>
+                                    payments="payments"></sige-turbo-payments-calendar>
                                 </li>
                             </ul>
                         </article>
