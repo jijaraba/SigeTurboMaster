@@ -37,6 +37,9 @@ Route::get('/logout', [
     'as' => 'logout',
     'uses' => 'Auth\LoginController@logout',
 ]);
+Route::match(['get', 'post'], 'register', function(){
+    return redirect('/');
+});
 
 
 /**
