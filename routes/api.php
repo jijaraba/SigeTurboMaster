@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:100,1', 'auth:api', 'permission']], function () {
+Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:300,1', 'auth:api', 'permission']], function () {
 
     /**
      * ===================================
