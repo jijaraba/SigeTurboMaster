@@ -100,7 +100,6 @@ class CloudService
     {
         $this->type = 'task';
         $taskfile = Taskfile::find($data['id']);
-        dd($taskfile);
         if ($taskfile) {
             if (self::delete($taskfile->file)) {
                 //Delete

@@ -1,43 +1,52 @@
 import $ from 'jquery';
 import Datepicker from './datepicker';
-import { LANGUAGES } from './constants';
+import {
+  NAMESPACE,
+  LANGUAGES,
+} from './constants';
+import {
+  isString,
+  isUndefined,
+} from './utilities';
 
-const AnotherDatepicker = $.fn.datepicker;
+if ($.fn) {
+  const AnotherDatepicker = $.fn.datepicker;
 
-$.fn.datepicker = function jQueryDatepicker(option, ...args) {
-  let result;
+  $.fn.datepicker = function jQueryDatepicker(option, ...args) {
+    let result;
 
-  this.each(function each() {
-    const $this = $(this);
-    let data = $this.data('datepicker');
+    this.each((i, element) => {
+      const $element = $(element);
+      let data = $element.data(NAMESPACE);
 
-    if (!data) {
-      if (/destroy/.test(option)) {
-        return;
+      if (!data) {
+        if (/destroy/.test(option)) {
+          return;
+        }
+
+        const options = $.extend({}, $element.data(), $.isPlainObject(option) && option);
+
+        data = new Datepicker(element, options);
+        $element.data(NAMESPACE, data);
       }
 
-      const options = $.extend({}, $this.data(), $.isPlainObject(option) && option);
+      if (isString(option)) {
+        const fn = data[option];
 
-      data = new Datepicker(this, options);
-      $this.data('datepicker', data);
-    }
-
-    if (typeof option === 'string') {
-      const fn = data[option];
-
-      if ($.isFunction(fn)) {
-        result = fn.apply(data, args);
+        if ($.isFunction(fn)) {
+          result = fn.apply(data, args);
+        }
       }
-    }
-  });
+    });
 
-  return typeof result !== 'undefined' ? result : this;
-};
+    return isUndefined(result) ? this : result;
+  };
 
-$.fn.datepicker.Constructor = Datepicker;
-$.fn.datepicker.languages = LANGUAGES;
-$.fn.datepicker.setDefaults = Datepicker.setDefaults;
-$.fn.datepicker.noConflict = function noConflict() {
-  $.fn.datepicker = AnotherDatepicker;
-  return this;
-};
+  $.fn.datepicker.Constructor = Datepicker;
+  $.fn.datepicker.languages = LANGUAGES;
+  $.fn.datepicker.setDefaults = Datepicker.setDefaults;
+  $.fn.datepicker.noConflict = function noConflict() {
+    $.fn.datepicker = AnotherDatepicker;
+    return this;
+  };
+}

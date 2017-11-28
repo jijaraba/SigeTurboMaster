@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use strict';
 
 let Chart = require('chart.js');
@@ -204,29 +205,32 @@ angular.module('Core.directives', [])
 
                 scope.delete = function ($index) {
                     scope.upload.files[$index].status = 0;
-                    sigeTurboUpload.deleteFile(file, '/delete' + scope.type + '?table=' + scope.upload.files[$index].result.data.table + '&id=' + scope.upload.files[$index].result.data.id)
-                        .success(function () {
+                    sigeTurboUpload.deleteFile(file, '/delete' + scope.type + '?table=' + scope.upload.files[$index].result.data.table + '&id=' + scope.upload.files[$index].result.data.id).then(
+                        function () {
                             scope.upload.files[$index].status = 100;
                             scope.upload.files[$index].deleted = true;
-                        })
-                        .error(function () {
+                        },
+                        function () {
                             $log.error(scope.data);
                             scope.upload.files[$index].status = -1;
                             scope.upload.files[$index].deleted = false;
-                        });
+                        }
+                    );
                 };
 
                 //Upload Files
                 scope.upload = function () {
                     angular.forEach(scope.upload.files, function (file, key) {
-                        sigeTurboUpload.uploadFileToUrl(file, '/upload' + scope.type + '?' + scope.type + '=' + scope.id)
-                            .success(function (data) {
+                        sigeTurboUpload.uploadFileToUrl(file, '/upload' + scope.type + '?' + scope.type + '=' + scope.id).then(
+                            function (data) {
                                 scope.upload.files[key].status = 100;
                                 scope.upload.files[key].result = data;
-                            })
-                            .error(function () {
+                            },
+                            function (error) {
+                                $log.log(error);
                                 scope.upload.files[key].status = -1;
-                            });
+                            }
+                        );
                     });
                 };
 

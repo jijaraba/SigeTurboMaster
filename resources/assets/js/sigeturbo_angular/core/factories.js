@@ -34,15 +34,12 @@ angular.module('Core.factories', [])
                     'Authorization': 'Bearer ' + document.querySelector('#sigeturboToken').getAttribute('data-token')
                 };
 
-                if (config.sigeJsonContentType && config.sigeJsonContentType == false) {
-                    console.log("Entré");
-                    config.headers['Content-Type'] = 'application/json111';
+                //Detect Json Content
+                if (config.sigeJsonContentType == false) {
+                    config.headers['Content-Type'] = undefined;
                 } else {
                     config.headers['Content-Type'] = 'application/json';
                 }
-
-                console.log(config);
-
                 return config;
 
             },
