@@ -9,7 +9,7 @@
 @section("dashboard")
     <section class="grid-100" ng-controller="ProviderUpdateController" ng-init="init({{ $provider }})">
         <section class="sige-contained">
-            <a href="{{ URL::route('resources.providers.index', ['sort' => $sort, 'order' => $order, 'page' => $page])}}" class="btn btn-transparent"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
+            <a href="{{ URL::route('resources.providers.index', ['sort' => $sort, 'order' => $order, 'page' => $page])}}" class="btn btn-transparent margin-bottom-20"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
             <section class="sige-purchase-main">
                 <h4>{{ Lang::get('sige.ProviderUpdate') }}</h4>
                 <section class="sige-provider-main">

@@ -13,7 +13,7 @@
         </section>
         <section class="grid-100">
             <div class="sige-contained">
-                <a href="{{ URL::route('formation.observators.index')}}" class="btn btn-transparent"><i
+                <a href="{{ URL::route('formation.observators.index')}}" class="btn btn-transparent margin-bottom-20"><i
                             class="fa fa-arrow-left"></i>Volver</a>
                 <section class="sige-observer-lists">
                     <h4>Observador {{ $student->firstname }}</h4>

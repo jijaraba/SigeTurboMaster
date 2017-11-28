@@ -9,7 +9,7 @@
 @section("dashboard")
     <section class="grid-100" ng-controller="PurchaseNewController">
         <section class="sige-contained">
-            <a href="{{ URL::route('resources.purchases.index')}}" class="btn btn-transparent"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
+            <a href="{{ URL::route('resources.purchases.index')}}" class="btn btn-transparent margin-bottom-20"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
             <section class="sige-purchase-main">
                 <h4>Nueva Compra</h4>
                 <form ng-submit="submitNew()">

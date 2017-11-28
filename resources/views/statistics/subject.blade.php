@@ -9,7 +9,7 @@
 @section("dashboard")
     <section class="grid-100" ng-controller="StatisticsSubjectController">
         <section class="sige-contained statistics">
-            <a href="{{ URL::route('formation.statistics.index')}}" class="btn btn-transparent"><i
+            <a href="{{ URL::route('formation.statistics.index')}}" class="btn btn-transparent margin-bottom-20"><i
                         class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
             <h4>Asignaturas</h4>
             <section class="col-40">

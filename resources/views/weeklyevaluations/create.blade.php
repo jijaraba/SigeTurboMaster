@@ -16,7 +16,7 @@
 @section("dashboard")
     <section class="grid-100" ng-controller="WeeklyevaluationNewController">
         <section class="sige-contained">
-            <a href="{{ URL::route('communications.weeklyevaluations.index')}}" class="btn btn-transparent"><i
+            <a href="{{ URL::route('communications.weeklyevaluations.index')}}" class="btn btn-transparent margin-bottom-20"><i
                         class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
             <section class="sige-evaluation-new">
                 <h4>{{ Lang::get('sige.Weeklyevaluations') }}</h4>

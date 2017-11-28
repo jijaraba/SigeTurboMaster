@@ -11,7 +11,7 @@
         <section class="grid-100">
             <div class="sige-contained">
                 <a href="{{ URL::route('admissions.students.index',['year' => $year,'search' => $search, 'view' => $view, 'sort' => $sort, 'order' => $order, 'page' => $page])}}"
-                   class="btn btn-transparent"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
+                   class="btn btn-transparent margin-bottom-20"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
                 <section class="sige-student-info">
                     <h4>{{ Lang::get('sige.StudentInformationData') }}</h4>
                     @if (count($errors) > 0)

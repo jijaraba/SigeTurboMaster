@@ -5,7 +5,7 @@
     <div class="grid-100" ng-controller="TaskDetailController">
         <section class="sige-contained">
             <a href="{{ URL::route('guest.tasks.index',['sort' => $sort, 'order' => $order, 'page' => $page, 'group' => $group])}}"
-               class="btn btn-transparent"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
+               class="btn btn-transparent margin-bottom-20"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
             <h4>{{ Lang::get('sige.Task') }}</h4>
             <section class="task-list">
                 <ul id="task-list" class="display-horizontal col-100">

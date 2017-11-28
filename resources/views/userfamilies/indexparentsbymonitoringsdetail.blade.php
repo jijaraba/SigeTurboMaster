@@ -10,7 +10,7 @@
     <section>
         <section class="grid-100">
             <section class="sige-contained">
-                <a href="{{ URL::route('parents.monitoring.index')}}" class="btn btn-transparent"><i
+                <a href="{{ URL::route('parents.monitoring.index')}}" class="btn btn-transparent margin-bottom-20"><i
                             class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
                 <h4>Asignatura {{ $subject->name }}</h4>
                 @foreach($monitorings as $monitoring)

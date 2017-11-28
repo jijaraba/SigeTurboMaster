@@ -12,7 +12,7 @@
             <div class="sige-contained">
                 <section class="sige-inventories-verify">
                     <a href="{{ URL::route('resources.inventories.index',[])}}"
-                       class="btn btn-transparent"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
+                       class="btn btn-transparent margin-bottom-20"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
                     <h4>{{ Lang::get('sige.Inventories') }}</h4>
                     <section class="sige-inventories-verify-container">
                         <article>

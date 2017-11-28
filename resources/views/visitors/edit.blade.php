@@ -9,7 +9,7 @@
 @section("dashboard")
     <section class="grid-100" ng-controller="VisitorUpdateController">
         <section class="sige-contained">
-            <a href="{{ URL::route('resources.visitors.index')}}" class="btn btn-transparent"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
+            <a href="{{ URL::route('resources.visitors.index')}}" class="btn btn-transparent margin-bottom-20"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
             <h4>Editar Permiso</h4>
             <section class="sige-visitor-main">
                 <form ng-submit="submitNew()">

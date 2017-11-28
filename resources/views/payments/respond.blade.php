@@ -23,7 +23,7 @@
             <section class="sige-contained">
                 <section class="sige-payments-checkout">
                     <a href="{{ URL::route('parents.payments.index',[])}}"
-                       class="btn btn-transparent"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
+                       class="btn btn-transparent margin-bottom-20"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
                     <h4>Respuesta Pago</h4>
                     <section class="sige-payments-respond">
                         <article>

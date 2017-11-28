@@ -19,7 +19,7 @@
 @section("dashboard")
     <section class="grid-100" ng-controller="StudentsCreateController">
         <div class="sige-contained">
-            <a href="{{ URL::route('admissions.students.index')}}" class="btn btn-transparent"><i
+            <a href="{{ URL::route('admissions.students.index')}}" class="btn btn-transparent margin-bottom-20"><i
                         class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
             <h4>Información Personal</h4>
             @if($errors->any())

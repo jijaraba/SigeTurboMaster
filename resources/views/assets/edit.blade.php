@@ -10,7 +10,7 @@
     <section class="grid-100" ng-controller="AssetUpdateController" ng-init="init({{ json_encode($asset) }})">
         <section class="sige-contained">
             <a href="{{ URL::route('resources.assets.index',['search' => $search,'sort' => $sort, 'order' => $order, 'page' => $page, 'ubication' => $ubication])}}"
-               class="btn btn-transparent"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
+               class="btn btn-transparent margin-bottom-20"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
             <h4>Editar Activo</h4>
             <section class="sige-asset-main">
                 <form ng-submit="submitNew()">

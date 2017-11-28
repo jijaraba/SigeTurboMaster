@@ -11,7 +11,7 @@
         <section class="grid-100">
             <section class="sige-contained">
                 <a href="{{ URL::route('financials.payments.index', ['sort' => $sort, 'order' => $order, 'page' => $page])}}"
-                   class="btn btn-transparent"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
+                   class="btn btn-transparent margin-bottom-20"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
                 <section class="sige-payment-main">
                     <h4 style="border-bottom:none">ACTUALIZAR PAGO</h4>
                     <section class="sige-payments-container">

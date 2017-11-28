@@ -231,6 +231,12 @@ header {
       font: {
         size: 0.90em;
       }
+      > div {
+        font: {
+          size: 0.95em;
+          family: $sige-font-family-01;
+        }
+      }
       &.check {
         div {
           position: relative;

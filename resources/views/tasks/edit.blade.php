@@ -11,7 +11,7 @@
         <section class="grid-100">
             <section class="sige-contained">
                 <a href="{{ URL::route('formation.tasks.index',['sort' => $sort, 'order' => $order, 'page' => $page, 'subject' => $subject])}}"
-                   class="btn btn-transparent"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
+                   class="btn btn-transparent margin-bottom-20"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
                 <section class="sige-task-new">
                     <h4>Actualizar Tarea</h4>
                     <form ng-submit="Update()" name="taskForm" id="taskForm" method="post">

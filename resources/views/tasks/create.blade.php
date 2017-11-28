@@ -10,7 +10,7 @@
     <section ng-controller="TaskNewController">
         <div class="grid-100">
             <div class="sige-contained">
-                <a href="{{ URL::route('formation.tasks.index')}}" class="btn btn-transparent"><i
+                <a href="{{ URL::route('formation.tasks.index')}}" class="btn btn-transparent margin-bottom-20"><i
                             class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
                 <section class="sige-task-new">
                     <h4>Nueva Tarea</h4>
