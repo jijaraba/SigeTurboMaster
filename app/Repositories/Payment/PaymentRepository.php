@@ -79,7 +79,7 @@ class PaymentRepository implements PaymentRepositoryInterface
         //Exclude Current Mont
         if ($excludeCurrentMonth) {
             $payments
-                ->where(DB::raw("CONCAT(YEAR(payments.realdate), '-' , MONTH(payments.realdate))"),"<",DB::raw("CONCAT(YEAR(CURDATE()), '-' , MONTH(CURDATE()))"));
+                ->where(DB::raw("CONVERT(CONCAT(YEAR(payments.realdate), MONTH(payments.realdate)),SIGNED INTEGER)"), "<", DB::raw("CONVERT(CONCAT(YEAR(CURDATE()), MONTH(CURDATE())),SIGNED INTEGER)"));
         }
 
         //Sort
