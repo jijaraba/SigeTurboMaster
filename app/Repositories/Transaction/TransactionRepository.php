@@ -70,7 +70,7 @@ class TransactionRepository implements TransactionRepositoryInterface
             'idtransactiontype' => $data['transactiontype'],
             'idcostcenter' => $data['costcenter'],
             'document' => $data['document'],
-            'reference' => $data['reference'],
+            'reference' => (isset($data['reference']) ? $data['reference'] : 0),
             'description' => $data['description'],
             'nit' => $data['nit'],
             'value' => $data['value'],
@@ -144,9 +144,9 @@ class TransactionRepository implements TransactionRepositoryInterface
      * Get Transaction To Export
      * @return mixed
      */
-    public function getTransactionsToExport($code,$dateinit,$datefinish)
+    public function getTransactionsToExport($code, $dateinit, $datefinish)
     {
-            $select = Transaction::select(DB::raw("CONCAT(RPAD(accounttypes.code,10,' '),LPAD(vouchertypes.code,5,'0'),LPAD(DATE_FORMAT(transactions.date,'%m/%d/%Y'),10,'0'),LPAD(transactions.document,9,'0'),LPAD(transactions.reference,9,'0'),LPAD(transactions.nit,11,' '),RPAD(stringReplace(transactions.description,'ÁÉÍÓÚÑ','AEIOUN'),28,' '),transactiontypes.prefix,LPAD(transactions.value,21,' '),LPAD(transactions.base,21,' '),RPAD(costcenters.code,6,' '),LPAD(transactions.transaction,3,' '),LPAD(transactions.term,4,' ')) AS Asiento"))
+        $select = Transaction::select(DB::raw("CONCAT(RPAD(accounttypes.code,10,' '),LPAD(vouchertypes.code,5,'0'),LPAD(DATE_FORMAT(transactions.date,'%m/%d/%Y'),10,'0'),LPAD(transactions.document,9,'0'),LPAD(transactions.reference,9,'0'),LPAD(transactions.nit,11,' '),RPAD(stringReplace(transactions.description,'ÁÉÍÓÚÑ','AEIOUN'),28,' '),transactiontypes.prefix,LPAD(transactions.value,21,' '),LPAD(transactions.base,21,' '),RPAD(costcenters.code,6,' '),LPAD(transactions.transaction,3,' '),LPAD(transactions.term,4,' ')) AS Asiento"))
             //return Transaction::select(DB::raw("CONCAT(RPAD(accounttypes.code,10,' '),LPAD(vouchertypes.code,5,'0'),LPAD(DATE_FORMAT(transactions.realdate,'%m/%d/%Y'),10,'0'),LPAD(transactions.document,9,'0'),LPAD(transactions.reference,9,'0'),LPAD(transactions.nit,11,' '),RPAD(stringReplace(transactions.description,'ÁÉÍÓÚÑ','AEIOUN'),28,' '),transactiontypes.prefix,LPAD(transactions.value,21,' '),LPAD(transactions.base,21,' '),RPAD(costcenters.code,6,' '),LPAD(transactions.transaction,3,' '),LPAD(transactions.term,4,' ')) AS Asiento"))
             ->join('accounttypes', function ($join) {
                 $join
@@ -170,7 +170,7 @@ class TransactionRepository implements TransactionRepositoryInterface
             ->orderBy('transactions.date', 'ASC')
             ->orderBy('transactions.idpayment', 'ASC')
             ->orderBy('accounttypes.order');
-            return 
+        return
             $select->get();
     }
 }
