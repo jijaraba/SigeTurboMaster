@@ -9,7 +9,9 @@ body {
     size: 1em;
     weight: 100;
   }
-  letter-spacing: -1px;
+  letter-spacing: -.04em;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   background-color: $sige-global-bgcolor-01;
   color: $sige-global-color-03;
 }
@@ -764,7 +766,11 @@ aside {
     }
     a {
       padding: 10px;
-      font-family: $sige-font-family-04;
+      font: {
+        family: $sige-font-family-07;
+        size: 0.95em;
+
+      }
       color: #8d9aa5;
       white-space: nowrap;
       &:hover {
