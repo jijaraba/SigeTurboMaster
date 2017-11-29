@@ -35,9 +35,10 @@
             font-size: 72px;
             margin-bottom: 40px;
         }
+
         .payment {
-            color:#53BBB4;
-            font-size:1.1em;
+            color: #53BBB4;
+            font-size: 1.1em;
             font-family: 'Montserrat Regular';
         }
     </style>
@@ -49,8 +50,8 @@
         <div class="title">Unauthorized.</div>
         @if($exception->getMessage() == "payments_pending")
             @include('../layouts/partials/flashmessage')
+            <a href="{{route('parents.payments.index')}}" class="payment">Ir Módulo Pagos</a>
         @endif
-        <a href="{{route('parents.payments.index')}}" class="payment">Ir Módulo Pagos</a>
     </div>
 </div>
 </body>
