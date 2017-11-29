@@ -30,11 +30,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('sigeturbo:attendances_level01')
             ->timezone('America/Bogota')
             ->weekdays()
-            ->at('08:40');
+            ->at('08:46');
         $schedule->command('sigeturbo:attendances_level02')
             ->timezone('America/Bogota')
             ->weekdays()
-            ->at('08:40');
+            ->at('08:46');
         $schedule->command('sigeturbo:attendances_level03')
             ->timezone('America/Bogota')
             ->weekdays()
