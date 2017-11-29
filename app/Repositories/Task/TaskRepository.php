@@ -66,15 +66,19 @@ class TaskRepository implements TaskRepositoryInterface
             ->whereIn('idperiod', $period)
             ->whereIn('idtasktype', [Task::TASK, Task::TERM, Task::PLAN])
             ->whereRaw("tasks.ends >=  DATE_SUB(NOW(), INTERVAL ? DAY)", array(8));
-        if ($approved == true) {
-            $tasks->where('tasks.status', '=', 1);
+        //Is Approved
+        if (is_bool($approved) && $approved) {
+            $tasks->where('tasks.status', '=', '1');
         }
+        //Subject
         if ($subject !== 0) {
             $tasks->where('subjects.idsubject', '=', $subject);
         }
+        //Group
         if ($group !== 0) {
             $tasks->where('groups.idgroup', '=', $group);
         }
+        //Sort
         switch ($sort) {
             case 'starts':
                 $tasks->orderBy('tasks.starts', $order);
