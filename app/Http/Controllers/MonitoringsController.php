@@ -83,7 +83,7 @@ class MonitoringsController extends Controller
                                 UserRepositoryInterface $userRepository,
                                 GroupdirectorRepositoryInterface $groupdirectorRepository,
                                 AreamanagerRepositoryInterface $areamanagerRepository
-                                )
+    )
     {
         $this->monitoringRepository = $monitoringRepository;
         $this->subjectInterface = $subjectInterface;
@@ -246,9 +246,9 @@ class MonitoringsController extends Controller
     }
 
     /**
-     * Get Monitorings By User
+     * Get Monitorings By Parents
      * @param Request $request
-     * @return
+     * @return \Illuminate\Http\JsonResponse
      */
     public function getMonitoringsForParents(Request $request)
     {
@@ -327,7 +327,7 @@ class MonitoringsController extends Controller
      * @return Response
      */
     public function studentspendigsbymonitoring(Request $request)
-    {   
+    {
         $search = [
             'idyear' => $this->yearRepository->getCurrentYear()->idyear,
             'page' => 1,
@@ -335,7 +335,7 @@ class MonitoringsController extends Controller
             'idperiod' => $this->periodRepository->getCurrentPeriod()->idperiod
         ];
         return view('contracts.init')
-           // ->withPendings($paginator)
+            // ->withPendings($paginator)
             ->withSearch($search);
     }
 
@@ -346,21 +346,41 @@ class MonitoringsController extends Controller
      * @return Response
      */
     public function getstudentspendigsbymonitoring(Request $request)
-    {   
+    {
         switch (getUser()->role_selected) {
-            case 'Teacher':                                                                       
-                    return response()->json($this->userRepository->getStudentsPendigsByMonitorings($request['year'],$request['period'],/*group*/null,/*area*/null,/*teacher*/getUser()->iduser,/*subjectnotin*/[54],/*statusnotin*/[4,7,8,9,10])->toArray());
+            case 'Teacher':
+                return response()->json($this->userRepository->getStudentsPendigsByMonitorings($request['year'], $request['period'],/*group*/
+                    null,/*area*/
+                    null,/*teacher*/
+                    getUser()->iduser,/*subjectnotin*/
+                    [54],/*statusnotin*/
+                    [4, 7, 8, 9, 10])->toArray());
                 break;
             case 'HomeroomTeacher':
-                    $groupdirector =$this->groupdirectorRepository->getGroupDirectorByYearAndUser($request['year'],getUser()->iduser);                                                     
-                    return response()->json($this->userRepository->getStudentsPendigsByMonitorings($request['year'],$request['period'],/*group*/$groupdirector->idgroup,/*area*/null,/*teacher*/null,/*subjectnotin*/[54],/*statusnotin*/[4,7,8,9,10])->toArray());
+                $groupdirector = $this->groupdirectorRepository->getGroupDirectorByYearAndUser($request['year'], getUser()->iduser);
+                return response()->json($this->userRepository->getStudentsPendigsByMonitorings($request['year'], $request['period'],/*group*/
+                    $groupdirector->idgroup,/*area*/
+                    null,/*teacher*/
+                    null,/*subjectnotin*/
+                    [54],/*statusnotin*/
+                    [4, 7, 8, 9, 10])->toArray());
                 break;
             case 'Areamanager':
-                    $areamanager = $this->areamanagerRepository->getAreaManagerByYearAndUser($request['year'],getUser()->iduser);      
-                    return response()->json($this->userRepository->getStudentsPendigsByMonitorings($request['year'],$request['period'],/*group*/null,/*area*/$areamanager->idarea,/*teacher*/null,/*subjectnotin*/[54],/*statusnotin*/[4,7,8,9,10])->toArray());
+                $areamanager = $this->areamanagerRepository->getAreaManagerByYearAndUser($request['year'], getUser()->iduser);
+                return response()->json($this->userRepository->getStudentsPendigsByMonitorings($request['year'], $request['period'],/*group*/
+                    null,/*area*/
+                    $areamanager->idarea,/*teacher*/
+                    null,/*subjectnotin*/
+                    [54],/*statusnotin*/
+                    [4, 7, 8, 9, 10])->toArray());
                 break;
             default :
-                    return response()->json($this->userRepository->getStudentsPendigsByMonitorings($request['year'],$request['period'],/*group*/null,/*area*/null,/*teacher*/null,/*subjectnotin*/[54],/*statusnotin*/[4,7,8,9,10])->toArray());
+                return response()->json($this->userRepository->getStudentsPendigsByMonitorings($request['year'], $request['period'],/*group*/
+                    null,/*area*/
+                    null,/*teacher*/
+                    null,/*subjectnotin*/
+                    [54],/*statusnotin*/
+                    [4, 7, 8, 9, 10])->toArray());
                 break;
         }
     }
