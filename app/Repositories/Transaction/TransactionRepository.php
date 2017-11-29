@@ -74,9 +74,9 @@ class TransactionRepository implements TransactionRepositoryInterface
             'description' => $data['description'],
             'nit' => $data['nit'],
             'value' => $data['value'],
-            'base' => $data['base'],
+            'base' => (!is_null($data['base']) ? $data['base'] : 0.00),
             'transaction' => $data['transaction'],
-            'term' => $data['term'],
+            'term' => (!is_null($data['term']) ? $data['term'] : 0),
             'date' => $data['date'],
             "updated_by" => getUser()->iduser,
             'updated_at' => Carbon::now()
