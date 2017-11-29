@@ -7,35 +7,35 @@
                     <li class="col-20 gutter-5">
                         <label class="select-arrow" for="idyear">
                             <select id="idyear" name="idyear" ng-model="academic.idyear" ng-options="year.idyear as year.name for year in years">
-                                <option value="">Año</option>
+                                <option value="0">Año</option>
                             </select>
                         </label>
                     </li>
                     <li class="col-20 gutter-5">
                         <label class="select-arrow" for="idperiod">
                             <select id="idperiod" name="idperiod" ng-model="academic.idperiod" ng-options="period.idperiod as period.name for period in periods">
-                                <option value="">Periodo</option>
+                                <option value="0">Periodo</option>
                             </select>
                         </label>
                     </li>
                     <li class="col-20 gutter-5">
                         <label class="select-arrow" for="idgroup">
                             <select id="idgroup" name="idgroup" ng-model="academic.idgroup" ng-options="group.idgroup as group.name for group in groups" ng-change="changeGroup(academic.idgroup)">
-                                <option value="">Grupo</option>
+                                <option value="0">Grupo</option>
                             </select>
                         </label>
                     </li>
                     <li class="col-40 gutter-5">
                         <label class="select-arrow" for="idsubject">
                             <select ng-disabled="subjectEnable" id="idsubject" name="idsubject" ng-model="academic.idsubject" ng-options="subject.idsubject as subject.name for subject in subjects">
-                                <option value="">Asignatura</option>
+                                <option value="0">Asignatura</option>
                             </select>
                         </label>
                     </li>
                     <li class="col-20 gutter-5">
                         <label class="select-arrow" for="idnivel">
                             <select id="idnivel" name="idnivel" ng-model="academic.idnivel" ng-options="nivel.idnivel as nivel.name for nivel in nivels">
-                                <option value="">Nivel</option>
+                                <option value="0">Nivel</option>
                             </select>
                         </label>
                     </li>

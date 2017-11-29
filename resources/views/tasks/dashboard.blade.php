@@ -24,23 +24,29 @@
                             </li>
                             <li class="col-30 gutter-5">
                                 <label for="idsubject">{{ Lang::get('sige.Subject') }}: </label>
-                                <label class="select-arrow" for="idsubject">
+                                <label class="select-arrow">
                                     {!! Form::select('subject', $subjects, $subject, ['id' => 'subject','onchange' => 'this.form.submit()']) !!}
                                 </label>
                             </li>
                             <li class="col-25 gutter-5">
                                 <label for="order">Ordenar: </label>
-                                <select name="sort" id="order" onchange="this.form.submit()">
-                                    <option value="group" {{ ($sort == 'group')? 'selected' : '' }}>Grupo</option>
-                                    <option value="subject" {{ ($sort == 'subject')? 'selected' : '' }}>Asignatura
-                                    </option>
-                                    <option value="teacher" {{ ($sort == 'teacher')? 'selected' : '' }}>Docente</option>
-                                    <option value="starts" {{ ($sort == 'starts')? 'selected' : '' }}>Inicio</option>
-                                    <option value="ends" {{ ($sort == 'ends')? 'selected' : '' }}>Termina</option>
-                                    <option value="status" {{ ($sort == 'status')? 'selected' : '' }}>Aprobada</option>
-                                    <option value="created_at" {{ ($sort == 'created_at')? 'selected' : '' }}>Ingreso
-                                    </option>
-                                </select>
+                                <label class="select-arrow">
+                                    <select name="sort" id="order" onchange="this.form.submit()">
+                                        <option value="group" {{ ($sort == 'group')? 'selected' : '' }}>Grupo</option>
+                                        <option value="subject" {{ ($sort == 'subject')? 'selected' : '' }}>Asignatura
+                                        </option>
+                                        <option value="teacher" {{ ($sort == 'teacher')? 'selected' : '' }}>Docente
+                                        </option>
+                                        <option value="starts" {{ ($sort == 'starts')? 'selected' : '' }}>Inicio
+                                        </option>
+                                        <option value="ends" {{ ($sort == 'ends')? 'selected' : '' }}>Termina</option>
+                                        <option value="status" {{ ($sort == 'status')? 'selected' : '' }}>Aprobada
+                                        </option>
+                                        <option value="created_at" {{ ($sort == 'created_at')? 'selected' : '' }}>
+                                            Ingreso
+                                        </option>
+                                    </select>
+                                </label>
                             </li>
                             <li id="reverse" class="col-10 gutter-5">
                                 <label for="order"></label>
