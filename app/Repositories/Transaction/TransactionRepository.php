@@ -70,7 +70,7 @@ class TransactionRepository implements TransactionRepositoryInterface
             'idtransactiontype' => $data['transactiontype'],
             'idcostcenter' => $data['costcenter'],
             'document' => $data['document'],
-            'reference' => (isset($data['reference'] && !is_null($data['reference'])) ? $data['reference'] : 0),
+            'reference' => (!is_null($data['reference']) ? $data['reference'] : 0),
             'description' => $data['description'],
             'nit' => $data['nit'],
             'value' => $data['value'],
