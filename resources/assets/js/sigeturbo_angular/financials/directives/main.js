@@ -791,7 +791,7 @@ angular.module('Financials.directives', [])
             }
         };
     }])
-    .directive('sigeTurboFinancialsTransactionNew', ['$log', 'Transaction', 'TransactionType', 'VoucherConsecutive', 'Responsibleparent', 'Costcenter', 'Enrollment', 'SweetAlert', 'ASSETS_SERVER', 'moment', function ($log, Transaction, TransactionType, VoucherConsecutive, Responsibleparent, Costcenter, Enrollment, SweetAlert, ASSETS_SERVER, moment) {
+    .directive('sigeTurboFinancialsTransactionNew', ['$log', 'Transaction', 'TransactionType', 'VoucherConsecutive', 'Responsibleparent', 'Costcenter', 'Enrollment', 'SweetAlert', 'ASSETS_SERVER', function ($log, Transaction, TransactionType, VoucherConsecutive, Responsibleparent, Costcenter, Enrollment, SweetAlert, ASSETS_SERVER) {
         return {
             restrict: 'AE',
             require: '^sigeTurboFinancialsTransactions',
