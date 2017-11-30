@@ -188,7 +188,7 @@ class WeeklyevaluationsController extends Controller
 
         $weeklyevaluation = $this->weeklyevaluationRepository->find($weeklyevaluation);
         if (!$weeklyevaluation) {
-            redirect()->back();
+            redirect()->route('communications.weeklyevaluations.index');
         }
 
         return view('weeklyevaluations.edit')
