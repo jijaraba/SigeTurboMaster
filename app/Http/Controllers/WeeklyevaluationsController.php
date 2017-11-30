@@ -188,7 +188,7 @@ class WeeklyevaluationsController extends Controller
 
         $weeklyevaluation = $this->weeklyevaluationRepository->find($weeklyevaluation);
         if (!$weeklyevaluation) {
-            redirect()->route('communications.weeklyevaluations.index');
+            App::abort(401, 'Unauthorized');
         }
 
         return view('weeklyevaluations.edit')

@@ -123,7 +123,7 @@ Route::group(['prefix' => 'view', 'as' => 'view.', 'middleware' => ['auth']], fu
  * Authenticated Area
  * ===================================
  */
-Route::group(['prefix' => '', 'middleware' => ['auth','permission']], function () {
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
 
 
     /**
