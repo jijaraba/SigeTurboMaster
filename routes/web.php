@@ -882,7 +882,6 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
      */
     /* --- CommunicationsController ---*/
     Route::get('/communications', [
-        'middleware' => ['auth', 'permission'],
         'as' => 'communications.dashboard',
         'uses' => 'CommunicationsController@index'
     ]);

@@ -39,7 +39,7 @@ class PaymentCreatedJob extends Job implements ShouldQueue
         Mail::send('emails.payment.created', $this->data, function ($message) use ($data) {
             $message
                 ->to($data["user"]["email"], $data['user']["firstname"])
-                ->subject("Pensión Agosto");
+                ->subject("Pensión");
         });
     }
 }

@@ -225,7 +225,7 @@
                                                         <section style="position: relative;background: #f9fafa;padding: 5px;border-radius: 5px; box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);height: 470px;">
                                                             <article style="width: 100%;margin: 0px auto;">
                                                                 <header style="z-index: 1; text-align: center">
-                                                                    <h2 style="padding-top: 20px;border-bottom: none;text-align: center;">PENSIÓN AGOSTO</h2>
+                                                                    <h2 style="padding-top: 20px;border-bottom: none;text-align: center;">PENSIÓN</h2>
                                                                     <img style="text-align:center;margin:0px auto;width: 120px;" src="{{env('ASSETS_SERVER')}}/img/modules/payment_respond.svg"/>
                                                                 </header>
                                                                 <section>

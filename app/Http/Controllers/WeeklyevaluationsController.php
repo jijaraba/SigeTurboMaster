@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use SigeTurbo\Calendar\Calendar;
@@ -80,7 +81,7 @@ class WeeklyevaluationsController extends Controller
 
         $page = LengthAwarePaginator::resolveCurrentPage();
         $perPage = 15;
-        $weeklyevaluations =  $this->weeklyevaluationRepository->getEvaluations($this->yearRepository->getCurrentYear()->idyear, $sort, strtoupper($order));
+        $weeklyevaluations = $this->weeklyevaluationRepository->getEvaluations($this->yearRepository->getCurrentYear()->idyear, $sort, strtoupper($order));
         $paginator = new LengthAwarePaginator(
             $weeklyevaluations->forPage($page, $perPage), $weeklyevaluations->count(), $perPage, $page
         );
@@ -118,7 +119,8 @@ class WeeklyevaluationsController extends Controller
      * Create Evaluation
      * @return Response
      */
-    public function create(){
+    public function create()
+    {
         return view('weeklyevaluations.create')
             ->withUser(getUser());
     }
@@ -182,7 +184,14 @@ class WeeklyevaluationsController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function edit($weeklyevaluation, Request $request){
+    public function edit($weeklyevaluation, Request $request)
+    {
+
+        $weeklyevaluation = $this->weeklyevaluationRepository->find($weeklyevaluation);
+        if (!$weeklyevaluation) {
+            App::abort(401, 'Unauthorized');
+        }
+
         return view('weeklyevaluations.edit')
             ->withWeeklyevaluation($this->weeklyevaluationRepository->find($weeklyevaluation))
             ->withSort($request['sort'])
