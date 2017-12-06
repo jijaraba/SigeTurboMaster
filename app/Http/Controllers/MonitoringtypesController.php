@@ -95,7 +95,7 @@ class MonitoringtypesController extends Controller
             //DB::rollback();
         //}
         //DB::commit();
-        return response()->json($data);
+        //return response()->json($data);
     }
 
 
