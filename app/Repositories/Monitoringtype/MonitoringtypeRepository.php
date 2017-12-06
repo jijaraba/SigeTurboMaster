@@ -55,6 +55,8 @@ class MonitoringtypeRepository implements MonitoringtypeRepositoryInterface
 
 
     /**
+     * @deprecated
+     * @deprecated Use getIndicatorsByConsecutive On IndicatorRepository
      * Get Indicators
      * @param $data
      * @return mixed
@@ -89,6 +91,7 @@ class MonitoringtypeRepository implements MonitoringtypeRepositoryInterface
     /**
      * Destroy Monitoringtype
      * @param $monitoringtype
+     * @return mixed
      */
     public function destroy($monitoringtype)
     {

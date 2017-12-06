@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use SigeTurbo\Events\Stream;
 use SigeTurbo\Http\Requests\MonitoringtypeRequest;
 use SigeTurbo\Monitoringtypeindicator;
+use SigeTurbo\Repositories\Indicator\IndicatorRepositoryInterface;
 use SigeTurbo\Repositories\Monitoringtype\MonitoringtypeRepositoryInterface;
 use SigeTurbo\Subject;
 
@@ -20,14 +21,21 @@ class MonitoringtypesController extends Controller
      * @var MonitoringtypeRepositoryInterface
      */
     private $monitoringtypeRepository;
+    /**
+     * @var IndicatorRepositoryInterface
+     */
+    private $indicatorRepository;
 
     /**
      * MonitoringtypesController constructor.
      * @param MonitoringtypeRepositoryInterface $monitoringtypeRepository
+     * @param IndicatorRepositoryInterface $indicatorRepository
      */
-    public function __construct(MonitoringtypeRepositoryInterface $monitoringtypeRepository)
+    public function __construct(MonitoringtypeRepositoryInterface $monitoringtypeRepository,
+                                IndicatorRepositoryInterface $indicatorRepository)
     {
         $this->monitoringtypeRepository = $monitoringtypeRepository;
+        $this->indicatorRepository = $indicatorRepository;
     }
 
 
@@ -61,18 +69,16 @@ class MonitoringtypesController extends Controller
     public function store(MonitoringtypeRequest $request)
     {
         $data = [];
-        //DB::beginTransaction();
-        //try {
+        DB::beginTransaction();
+        try {
             $monitoringtype = $this->monitoringtypeRepository->store($request);
             if ($monitoringtype) {
                 $data['successful'] = true;
                 $data['message'] = Lang::get('sige.SuccessSaveMessage');
                 $data['last_insert_id'] = $monitoringtype->idmonitoringtype;
                 //Generate Indicators Code
-                $indicators = $this->monitoringtypeRepository->getIndicators($request);
-                dd($indicators);
-                exit();
-                if (count($indicators) <= 0) {
+                $indicators = $this->indicatorRepository->getIndicatorsByConsecutive($request);
+                if (count($data['last_insert_id']) <= 0) {
                     throw new \Exception('Indicators Not Found');
                 }
                 foreach ($indicators as $indicator) {
@@ -91,11 +97,11 @@ class MonitoringtypesController extends Controller
                 $data['unsuccessful'] = true;
                 $data['message'] = Lang::get('sige.ErrorSaveMessage');
             }
-        //} catch (ValidationException $e) {
-            //DB::rollback();
-        //}
-        //DB::commit();
-        //return response()->json($data);
+        } catch (ValidationException $e) {
+            DB::rollback();
+        }
+        DB::commit();
+        return response()->json($data);
     }
 
 

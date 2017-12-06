@@ -291,7 +291,7 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
      */
     public function getEnrollmentsWithGrades($year, $period, $group, $subject, $nivel)
     {
-        return Enrollment::select('enrollments.iduser', DB::raw('ROUND(SUM(monitorings.average),2) AS rating'), 'inclusion')
+        return Enrollment::select('enrollments.iduser', DB::raw('ROUND(SUM(monitorings.average),2) AS rating'), DB::raw('ANY_VALUE(inclusion) AS inclusion'))
             ->join(DB::raw("(SELECT
                         monitorings.idyear AS idyear,
                         monitorings.idperiod,
@@ -299,7 +299,7 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
                         monitorings.idsubject,
                         monitorings.idnivel,
                         monitorings.iduser,
-                        ROUND(AVG(monitorings.`rating`) * monitoringcategorybyyears.percent,2) AS average
+                        ROUND(AVG(monitorings.`rating`) * ANY_VALUE(monitoringcategorybyyears.percent),2) AS average
                     FROM
                         monitorings
                     INNER JOIN

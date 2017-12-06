@@ -2,10 +2,15 @@
 
 namespace SigeTurbo\Repositories\Monitoringtype;
 
-interface MonitoringtypeRepositoryInterface {
+interface MonitoringtypeRepositoryInterface
+{
     public function all();
     public function find($idmonitoringtype);
     public function store($data);
+    /**
+     * @deprecated
+     * @deprecated Use getIndicatorsByConsecutive On IndicatorRepository
+     */
     public function getIndicators($data);
     public function destroy($monitoringtype);
     public function getMonitoringtypesForChart($data);

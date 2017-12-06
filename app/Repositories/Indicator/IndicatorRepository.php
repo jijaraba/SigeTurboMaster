@@ -145,6 +145,36 @@ class IndicatorRepository implements IndicatorRepositoryInterface
     }
 
     /**
+     * Get Indicators By Consecutive
+     * @param $data
+     * @return mixed
+     */
+    public function getIndicatorsByConsecutive($data)
+    {
+        $group = $data['group'];
+        return Indicator::select('indicators.idindicator', 'indicators.indicator')
+            ->join('achievements', function ($join) use ($group) {
+                $join->on('indicators.idachievement', '=', 'achievements.idachievement');
+            })
+            ->where('achievements.idyear', '=', $data['year'])
+            ->where('achievements.idperiod', '=', $data['period'])
+            ->whereIn('achievements.idgrade', function ($query) use ($group) {
+                $query
+                    ->select('grades.idgrade')
+                    ->from('grades')
+                    ->join('groups', function ($join) use ($group) {
+                        $join
+                            ->on('groups.idgrade', '=', 'grades.idgrade');
+                    })->where('groups.idgroup', '=', $group);
+            })
+            ->where('achievements.idsubject', '=', $data['subject'])
+            ->where('achievements.idnivel', '=', $data['nivel'])
+            ->whereIn('consecutive', explode(",", $data['indicators']))
+            ->where('idindicatortype', '=', 1)
+            ->get();
+    }
+
+    /**
      * Get Indicators Pendings By Teacher
      * @param $year
      * @param $period

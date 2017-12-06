@@ -11,5 +11,6 @@ interface IndicatorRepositoryInterface {
     public function updateRecommendation($indicator,$data);
     public function getIndicatorsByGroup($data);
     public function getIndicators($data);
+    public function getIndicatorsByConsecutive($data);
     public function getIndicatorsPendingByTeacher($year = 1995, $period = 1, $user);
 }
