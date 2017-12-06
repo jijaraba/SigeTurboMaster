@@ -61,8 +61,8 @@ class MonitoringtypesController extends Controller
     public function store(MonitoringtypeRequest $request)
     {
         $data = [];
-        DB::beginTransaction();
-        try {
+        //DB::beginTransaction();
+        //try {
             $monitoringtype = $this->monitoringtypeRepository->store($request);
             if ($monitoringtype) {
                 $data['successful'] = true;
@@ -89,10 +89,10 @@ class MonitoringtypesController extends Controller
                 $data['unsuccessful'] = true;
                 $data['message'] = Lang::get('sige.ErrorSaveMessage');
             }
-        } catch (ValidationException $e) {
-            DB::rollback();
-        }
-        DB::commit();
+        //} catch (ValidationException $e) {
+            //DB::rollback();
+        //}
+        //DB::commit();
         return response()->json($data);
     }
 
