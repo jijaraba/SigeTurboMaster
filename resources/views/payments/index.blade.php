@@ -42,8 +42,6 @@
                             <li class="col-40 gutter-5">
                                 <label class="select-arrow" for="order">
                                     <select name="sort" id="order" onchange="this.form.submit()">
-                                        <option value="code" {{ ($sort == 'code')? 'selected' : '' }}>Código</option>
-                                        <option value="provider" {{ ($sort == 'provider')? 'selected' : '' }}>{{ Lang::get('sige.Provider') }}</option>
                                         <option value="status" {{ ($sort == 'status')? 'selected' : '' }}>{{ Lang::get('sige.Approved') }}</option>
                                         <option value="created_at" {{ ($sort == 'created_at')? 'selected' : '' }}>{{ Lang::get('sige.CreatedAt') }}</option>
                                     </select>
