@@ -17,9 +17,6 @@ class CreateAssetTable extends Migration
             $table->increments('idasset');
             $table->integer('idassetcategory')->unsigned();
             $table->integer('idprovider')->unsigned();
-            $table->integer('idubication')->unsigned();
-            $table->integer('idquality')->unsigned();
-            $table->integer('iduser')->unsigned();
             $table->integer('code')->unique();
             $table->string('name');
             $table->string('manufacturer')->nullable();
@@ -41,21 +38,6 @@ class CreateAssetTable extends Migration
             $table->foreign('idprovider')
                 ->references('idprovider')
                 ->on('providers')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            $table->foreign('idubication')
-                ->references('idubication')
-                ->on('ubications')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            $table->foreign('idquality')
-                ->references('idquality')
-                ->on('qualities')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            $table->foreign('iduser')
-                ->references('iduser')
-                ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });

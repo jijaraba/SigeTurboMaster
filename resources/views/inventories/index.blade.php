@@ -29,14 +29,14 @@
                                 <fieldset>
                                     <ul class="display-horizontal col-100">
                                         <li class="col-50 gutter-5 ubication">
-                                            {!! Form::select('idubication', $ubications, Input::old('idubication')) !!}
+                                            {!! Form::select('idubication', $ubications, old('idubication')) !!}
                                         </li>
                                         <li class="col-50 gutter-5 quality">
-                                            {!! Form::select('idquality', $qualities, Input::old('idquality')) !!}
+                                            {!! Form::select('idquality', $qualities, old('idquality')) !!}
                                         </li>
                                         <li class="col-100 gutter-5 code">
                                             <textarea name="code" id="code" rows="2"
-                                                      placeholder="{{ mb_strtoupper(Lang::get('sige.Codes')) }}">{{ Input::old('code') }}</textarea>
+                                                      placeholder="{{ mb_strtoupper(Lang::get('sige.Codes')) }}">{{ old('code') }}</textarea>
                                             {!! $errors->first('code','<ul class="errors"><li>:message</li></ul>') !!}
                                             @if(Session::get('wrong'))
                                                 <ul class="flash">
@@ -46,7 +46,7 @@
                                         </li>
                                         <li class="col-100 gutter-5 observation">
                                             <textarea name="observation" id="observation" rows="2"
-                                                      placeholder="{{ mb_strtoupper(Lang::get('sige.Observation')) }}">{{ Input::old('observation') }}</textarea>
+                                                      placeholder="{{ mb_strtoupper(Lang::get('sige.Observation')) }}">{{  old('observation') }}</textarea>
                                         </li>
                                         <li class="col-100 button">
                                             <button id="save" type="submit"

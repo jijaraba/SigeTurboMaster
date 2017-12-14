@@ -10,7 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "@types/node": "^8.0.56",
+        "@types/node": "^8.5.1",
         "angular": "^1.6.7",
         "angular-filter": "^0.5.17",
         "angular-resource": "^1.6.7",
@@ -19,18 +19,18 @@
         "axios": "^0.16.2",
         "bootstrap-sass": "^3.3.7",
         "coffee-loader": "^0.9.0",
-        "coffeescript": "^2.0.3",
+        "coffeescript": "^2.1.0",
         "cross-env": "^5.0.1",
-        "eslint": "^4.12.1",
+        "eslint": "^4.13.1",
         "jquery": "^3.1.1",
-        "laravel-mix": "^1.7.0",
+        "laravel-mix": "^1.7.2",
         "lodash": "^4.17.4",
-        "moment": "^2.19.3",
+        "moment": "^2.19.4",
         "ng-annotate-loader": "^0.6.1",
         "ng-dialog": "^1.4.0",
         "tc-angular-chartjs": "^2.1.4",
-        "vue": "^2.5.9",
-        "vue-template-compiler": "^2.5.9"
+        "vue": "^2.5.11",
+        "vue-template-compiler": "^2.5.11"
     },
     "dependencies": {
         "chart.js": "^2.7.1"
