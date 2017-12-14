@@ -82,11 +82,11 @@
         </section>
     </section>
 @stop
-@section("script")
-    {!! HTML::script('js/' . getCurrentRoute() . '.js') !!}
-@stop
 @section("vendor")
     {!! HTML::script('js/vendor/vendor.js') !!}
+@stop
+@section("script")
+    {!! HTML::script('js/angular/' . getCurrentRoute() . '.js') !!}
 @stop
 @section("socket")
     {!! HTML::script('js/vendor/socket.io.js') !!}

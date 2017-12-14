@@ -94,6 +94,7 @@ mix
     .js('resources/assets/js/sigeturbo_angular/dashboard/dashboard.js', 'public/js/angular')
     .js('resources/assets/js/sigeturbo_angular/financials/financials.js', 'public/js/angular')
     .js('resources/assets/js/sigeturbo_angular/formation/formation.js', 'public/js/angular')
+    .js('resources/assets/js/sigeturbo_angular/resources/resources.js', 'public/js/angular')
     .js('resources/assets/js/sigeturbo_angular/guest/guest.js', 'public/js/angular')
     .js('resources/assets/js/sigeturbo_angular/parents/parents.js', 'public/js/angular')
     .webpackConfig({
