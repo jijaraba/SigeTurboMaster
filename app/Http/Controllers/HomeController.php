@@ -4,6 +4,7 @@ namespace SigeTurbo\Http\Controllers;
 
 use Illuminate\Http\Request;
 use SigeTurbo\Repositories\Attendance\AttendanceRepositoryInterface;
+use Illuminate\Support\Facades\Lang;
 use SigeTurbo\Repositories\Payment\PaymentRepositoryInterface;
 use SigeTurbo\Repositories\Year\YearRepositoryInterface;
 
