@@ -69,6 +69,12 @@ class PaymentRepository implements PaymentRepositoryInterface
             case 43906017:
                 $payments->orWhereIn('payments.iduser', [2017003]);
                 break;
+            case 1126002323:
+                $payments->orWhereIn('payments.iduser', [74]);
+                break;
+            case 99180805:
+                $payments->orWhereIn('payments.iduser', [74]);
+                break;
         }
 
         //Payments Pending
