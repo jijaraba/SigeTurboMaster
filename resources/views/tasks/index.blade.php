@@ -9,12 +9,12 @@
                 <section class="info">
                     <a class="icon icon-info" href="#"></a>
                     <p>@if (getUser()) {{ getUser()->firstname }}, en los enlaces <a style="color:#53BBB4"
-                                                                                     href="{{ env('ASSETS_SERVER') }}/global/TNSProgramadorTareas2016_3.pdf">PROGRAMADOR
+                                                                                     href="{{ env('ASSETS_SERVER') }}/global/TNSProgramadorTareas2017_2.pdf">PROGRAMADOR
                             DE TAREAS</a> y <a style="color:#53BBB4"
                                                href="{{ env('ASSETS_SERVER') }}/global/TNSRúbricaEvaluaciónTareasV3.pdf">RÚBRICA
                             PARA LA EVALUACIÓN DE TAREAS</a> puede encontrar información relativa a la asignación de
                         tareas y la forma de evaluación. Seleccione @else En los enlaces <a style="color:#53BBB4"
-                                                                                            href="{{ env('ASSETS_SERVER') }}/global/TNSProgramadorTareas2016_2.pdf">PROGRAMADOR
+                                                                                            href="{{ env('ASSETS_SERVER') }}/global/TNSProgramadorTareas2017_2.pdf">PROGRAMADOR
                             DE TAREAS</a> y <a style="color:#53BBB4"
                                                href="{{ env('ASSETS_SERVER') }}/global/TNSRúbricaEvaluaciónTareasV3.pdf">RÚBRICA
                             PARA LA EVALUACIÓN DE TAREAS</a> puede encontrar información relativa a la asignación de
