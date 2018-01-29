@@ -3,6 +3,7 @@
 namespace SigeTurbo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use SigeTurbo\Repositories\Attendance\AttendanceRepositoryInterface;
 use Illuminate\Support\Facades\Lang;
 use SigeTurbo\Repositories\Payment\PaymentRepositoryInterface;
