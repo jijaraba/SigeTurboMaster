@@ -75,7 +75,7 @@ angular.module('Parents.directives', [])
                     if ($scope.type == 'finalreport') {
                         action = 'reports/final';
                     } else if ($scope.type == 'descriptivereport') {
-                        action = 'reports/descriptivereport';
+                        action = 'reports/descriptive';
                     }
 
                     //Enabled
