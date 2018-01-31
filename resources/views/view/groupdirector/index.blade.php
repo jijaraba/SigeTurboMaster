@@ -15,7 +15,7 @@
                     <p>Bienvenido al nuevo aplicativo para Directores de Grupo en donde en una sola pantalla puede
                         visualizar estadísticas y toda la información correspondiente al grupo y cada uno de los
                         estudiantes que hacen parte del mismo.</p>
-                    <button class="btn btn-transparent-gray">Conocer más</button>
+                    <a href="/formation/monitorings" class="btn btn-transparent-gray tooltip" title="Ir a Seguimiento Académico" style="width: 150px">Ir a Seguimientos</a>
                 </section>
             </section>
         </section>
