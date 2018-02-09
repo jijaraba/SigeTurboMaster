@@ -40,7 +40,8 @@ angular.module('Parents.directives', [])
             restrict: 'AE',
             scope: {
                 student: '@',
-                type: '@'
+                type: '@',
+                period: '='
             },
             controller: ['$scope', function ($scope) {
 
@@ -52,7 +53,7 @@ angular.module('Parents.directives', [])
                 //Get Report Enabled
                 Report.getReportEnabled({
                     'year': 2017,
-                    'period': 1,
+                    'period': $scope.period,
                     'user': $scope.student,
                     'type': $scope.type
                 }).$promise.then(
@@ -85,7 +86,7 @@ angular.module('Parents.directives', [])
                             'filename': $scope.type,
                             'format': format,
                             'year': 2017,
-                            'period': 1,
+                            'period': $scope.period,
                             'student': $scope.student,
                         }).$promise.then(
                             function (result) {
