@@ -32388,7 +32388,11 @@ function isSlowBuffer (obj) {
   var undefined;
 
   /** Used as the semantic version number. */
+<<<<<<< HEAD
   var VERSION = '4.17.5';
+=======
+  var VERSION = '4.17.4';
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -32519,6 +32523,10 @@ function isSlowBuffer (obj) {
   /** Used to match property names within property paths. */
   var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
       reIsPlainProp = /^\w*$/,
+<<<<<<< HEAD
+=======
+      reLeadingDot = /^\./,
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
       rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
 
   /**
@@ -32618,8 +32626,13 @@ function isSlowBuffer (obj) {
       reOptMod = rsModifier + '?',
       rsOptVar = '[' + rsVarRange + ']?',
       rsOptJoin = '(?:' + rsZWJ + '(?:' + [rsNonAstral, rsRegional, rsSurrPair].join('|') + ')' + rsOptVar + reOptMod + ')*',
+<<<<<<< HEAD
       rsOrdLower = '\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])',
       rsOrdUpper = '\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])',
+=======
+      rsOrdLower = '\\d*(?:(?:1st|2nd|3rd|(?![123])\\dth)\\b)',
+      rsOrdUpper = '\\d*(?:(?:1ST|2ND|3RD|(?![123])\\dTH)\\b)',
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
       rsSeq = rsOptVar + reOptMod + rsOptJoin,
       rsEmoji = '(?:' + [rsDingbat, rsRegional, rsSurrPair].join('|') + ')' + rsSeq,
       rsSymbol = '(?:' + [rsNonAstral + rsCombo + '?', rsCombo, rsRegional, rsSurrPair, rsAstral].join('|') + ')';
@@ -32827,6 +32840,37 @@ function isSlowBuffer (obj) {
   /*--------------------------------------------------------------------------*/
 
   /**
+<<<<<<< HEAD
+=======
+   * Adds the key-value `pair` to `map`.
+   *
+   * @private
+   * @param {Object} map The map to modify.
+   * @param {Array} pair The key-value pair to add.
+   * @returns {Object} Returns `map`.
+   */
+  function addMapEntry(map, pair) {
+    // Don't return `map.set` because it's not chainable in IE 11.
+    map.set(pair[0], pair[1]);
+    return map;
+  }
+
+  /**
+   * Adds `value` to `set`.
+   *
+   * @private
+   * @param {Object} set The set to modify.
+   * @param {*} value The value to add.
+   * @returns {Object} Returns `set`.
+   */
+  function addSetEntry(set, value) {
+    // Don't return `set.add` because it's not chainable in IE 11.
+    set.add(value);
+    return set;
+  }
+
+  /**
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
    * A faster alternative to `Function#apply`, this function invokes `func`
    * with the `this` binding of `thisArg` and the arguments of `args`.
    *
@@ -33593,6 +33637,7 @@ function isSlowBuffer (obj) {
   }
 
   /**
+<<<<<<< HEAD
    * Gets the value at `key`, unless `key` is "__proto__".
    *
    * @private
@@ -33607,6 +33652,8 @@ function isSlowBuffer (obj) {
   }
 
   /**
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
    * Converts `set` to an array of its values.
    *
    * @private
@@ -35038,7 +35085,11 @@ function isSlowBuffer (obj) {
           if (!cloneableTags[tag]) {
             return object ? value : {};
           }
+<<<<<<< HEAD
           result = initCloneByTag(value, tag, isDeep);
+=======
+          result = initCloneByTag(value, tag, baseClone, isDeep);
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
         }
       }
       // Check for circular references and return its corresponding clone.
@@ -35049,6 +35100,7 @@ function isSlowBuffer (obj) {
       }
       stack.set(value, result);
 
+<<<<<<< HEAD
       if (isSet(value)) {
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
@@ -35065,6 +35117,8 @@ function isSlowBuffer (obj) {
         return result;
       }
 
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
       var keysFunc = isFull
         ? (isFlat ? getAllKeysIn : getAllKeys)
         : (isFlat ? keysIn : keys);
@@ -35992,7 +36046,11 @@ function isSlowBuffer (obj) {
         }
         else {
           var newValue = customizer
+<<<<<<< HEAD
             ? customizer(safeGet(object, key), srcValue, (key + ''), object, source, stack)
+=======
+            ? customizer(object[key], srcValue, (key + ''), object, source, stack)
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
             : undefined;
 
           if (newValue === undefined) {
@@ -36019,8 +36077,13 @@ function isSlowBuffer (obj) {
      *  counterparts.
      */
     function baseMergeDeep(object, source, key, srcIndex, mergeFunc, customizer, stack) {
+<<<<<<< HEAD
       var objValue = safeGet(object, key),
           srcValue = safeGet(source, key),
+=======
+      var objValue = object[key],
+          srcValue = source[key],
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
           stacked = stack.get(srcValue);
 
       if (stacked) {
@@ -36929,6 +36992,23 @@ function isSlowBuffer (obj) {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Creates a clone of `map`.
+     *
+     * @private
+     * @param {Object} map The map to clone.
+     * @param {Function} cloneFunc The function to clone values.
+     * @param {boolean} [isDeep] Specify a deep clone.
+     * @returns {Object} Returns the cloned map.
+     */
+    function cloneMap(map, isDeep, cloneFunc) {
+      var array = isDeep ? cloneFunc(mapToArray(map), CLONE_DEEP_FLAG) : mapToArray(map);
+      return arrayReduce(array, addMapEntry, new map.constructor);
+    }
+
+    /**
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
      * Creates a clone of `regexp`.
      *
      * @private
@@ -36942,6 +37022,23 @@ function isSlowBuffer (obj) {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Creates a clone of `set`.
+     *
+     * @private
+     * @param {Object} set The set to clone.
+     * @param {Function} cloneFunc The function to clone values.
+     * @param {boolean} [isDeep] Specify a deep clone.
+     * @returns {Object} Returns the cloned set.
+     */
+    function cloneSet(set, isDeep, cloneFunc) {
+      var array = isDeep ? cloneFunc(setToArray(set), CLONE_DEEP_FLAG) : setToArray(set);
+      return arrayReduce(array, addSetEntry, new set.constructor);
+    }
+
+    /**
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
      * Creates a clone of the `symbol` object.
      *
      * @private
@@ -38535,7 +38632,11 @@ function isSlowBuffer (obj) {
      */
     function initCloneArray(array) {
       var length = array.length,
+<<<<<<< HEAD
           result = new array.constructor(length);
+=======
+          result = array.constructor(length);
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 
       // Add properties assigned by `RegExp#exec`.
       if (length && typeof array[0] == 'string' && hasOwnProperty.call(array, 'index')) {
@@ -38562,15 +38663,27 @@ function isSlowBuffer (obj) {
      * Initializes an object clone based on its `toStringTag`.
      *
      * **Note:** This function only supports cloning values with tags of
+<<<<<<< HEAD
      * `Boolean`, `Date`, `Error`, `Map`, `Number`, `RegExp`, `Set`, or `String`.
+=======
+     * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
      *
      * @private
      * @param {Object} object The object to clone.
      * @param {string} tag The `toStringTag` of the object to clone.
+<<<<<<< HEAD
      * @param {boolean} [isDeep] Specify a deep clone.
      * @returns {Object} Returns the initialized clone.
      */
     function initCloneByTag(object, tag, isDeep) {
+=======
+     * @param {Function} cloneFunc The function to clone values.
+     * @param {boolean} [isDeep] Specify a deep clone.
+     * @returns {Object} Returns the initialized clone.
+     */
+    function initCloneByTag(object, tag, cloneFunc, isDeep) {
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
       var Ctor = object.constructor;
       switch (tag) {
         case arrayBufferTag:
@@ -38589,7 +38702,11 @@ function isSlowBuffer (obj) {
           return cloneTypedArray(object, isDeep);
 
         case mapTag:
+<<<<<<< HEAD
           return new Ctor;
+=======
+          return cloneMap(object, isDeep, cloneFunc);
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 
         case numberTag:
         case stringTag:
@@ -38599,7 +38716,11 @@ function isSlowBuffer (obj) {
           return cloneRegExp(object);
 
         case setTag:
+<<<<<<< HEAD
           return new Ctor;
+=======
+          return cloneSet(object, isDeep, cloneFunc);
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 
         case symbolTag:
           return cloneSymbol(object);
@@ -38646,6 +38767,7 @@ function isSlowBuffer (obj) {
      * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
      */
     function isIndex(value, length) {
+<<<<<<< HEAD
       var type = typeof value;
       length = length == null ? MAX_SAFE_INTEGER : length;
 
@@ -38653,6 +38775,12 @@ function isSlowBuffer (obj) {
         (type == 'number' ||
           (type != 'symbol' && reIsUint.test(value))) &&
             (value > -1 && value % 1 == 0 && value < length);
+=======
+      length = length == null ? MAX_SAFE_INTEGER : length;
+      return !!length &&
+        (typeof value == 'number' || reIsUint.test(value)) &&
+        (value > -1 && value % 1 == 0 && value < length);
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     }
 
     /**
@@ -39102,11 +39230,19 @@ function isSlowBuffer (obj) {
      */
     var stringToPath = memoizeCapped(function(string) {
       var result = [];
+<<<<<<< HEAD
       if (string.charCodeAt(0) === 46 /* . */) {
         result.push('');
       }
       string.replace(rePropName, function(match, number, quote, subString) {
         result.push(quote ? subString.replace(reEscapeChar, '$1') : (number || match));
+=======
+      if (reLeadingDot.test(string)) {
+        result.push('');
+      }
+      string.replace(rePropName, function(match, number, quote, string) {
+        result.push(quote ? string.replace(reEscapeChar, '$1') : (number || match));
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
       });
       return result;
     });
@@ -42714,11 +42850,17 @@ function isSlowBuffer (obj) {
       function remainingWait(time) {
         var timeSinceLastCall = time - lastCallTime,
             timeSinceLastInvoke = time - lastInvokeTime,
+<<<<<<< HEAD
             timeWaiting = wait - timeSinceLastCall;
 
         return maxing
           ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke)
           : timeWaiting;
+=======
+            result = wait - timeSinceLastCall;
+
+        return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
       }
 
       function shouldInvoke(time) {
@@ -45150,6 +45292,7 @@ function isSlowBuffer (obj) {
      * _.defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
      * // => { 'a': 1, 'b': 2 }
      */
+<<<<<<< HEAD
     var defaults = baseRest(function(object, sources) {
       object = Object(object);
 
@@ -45179,6 +45322,11 @@ function isSlowBuffer (obj) {
       }
 
       return object;
+=======
+    var defaults = baseRest(function(args) {
+      args.push(undefined, customDefaultsAssignIn);
+      return apply(assignInWith, undefined, args);
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     });
 
     /**
@@ -45575,11 +45723,14 @@ function isSlowBuffer (obj) {
      * // => { '1': 'c', '2': 'b' }
      */
     var invert = createInverter(function(result, value, key) {
+<<<<<<< HEAD
       if (value != null &&
           typeof value.toString != 'function') {
         value = nativeObjectToString.call(value);
       }
 
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
       result[value] = key;
     }, constant(identity));
 
@@ -45610,11 +45761,14 @@ function isSlowBuffer (obj) {
      * // => { 'group1': ['a', 'c'], 'group2': ['b'] }
      */
     var invertBy = createInverter(function(result, value, key) {
+<<<<<<< HEAD
       if (value != null &&
           typeof value.toString != 'function') {
         value = nativeObjectToString.call(value);
       }
 
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
       if (hasOwnProperty.call(result, value)) {
         result[value].push(key);
       } else {
@@ -50284,7 +50438,11 @@ if (false) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
+<<<<<<< HEAD
  * Vue.js v2.5.13
+=======
+ * Vue.js v2.5.11
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
  * (c) 2014-2017 Evan You
  * Released under the MIT License.
  */
@@ -50319,8 +50477,11 @@ function isPrimitive (value) {
   return (
     typeof value === 'string' ||
     typeof value === 'number' ||
+<<<<<<< HEAD
     // $flow-disable-line
     typeof value === 'symbol' ||
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     typeof value === 'boolean'
   )
 }
@@ -51644,6 +51805,12 @@ function normalizeProps (options, vm) {
     for (var key in props) {
       val = props[key];
       name = camelize(key);
+<<<<<<< HEAD
+=======
+      if ("development" !== 'production' && isPlainObject(val)) {
+        validatePropObject(name, val, vm);
+      }
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
       res[name] = isPlainObject(val)
         ? val
         : { type: val };
@@ -51659,11 +51826,37 @@ function normalizeProps (options, vm) {
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * Validate whether a prop object keys are valid.
+ */
+var propOptionsRE = /^(type|default|required|validator)$/;
+
+function validatePropObject (
+  propName,
+  prop,
+  vm
+) {
+  for (var key in prop) {
+    if (!propOptionsRE.test(key)) {
+      warn(
+        ("Invalid key \"" + key + "\" in validation rules object for prop \"" + propName + "\"."),
+        vm
+      );
+    }
+  }
+}
+
+/**
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
  * Normalize all injections into Object-based format
  */
 function normalizeInject (options, vm) {
   var inject = options.inject;
+<<<<<<< HEAD
   if (!inject) { return }
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
   var normalized = options.inject = {};
   if (Array.isArray(inject)) {
     for (var i = 0; i < inject.length; i++) {
@@ -51676,7 +51869,11 @@ function normalizeInject (options, vm) {
         ? extend({ from: key }, val)
         : { from: val };
     }
+<<<<<<< HEAD
   } else if (true) {
+=======
+  } else if ("development" !== 'production' && inject) {
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     warn(
       "Invalid value for option \"inject\": expected an Array or an Object, " +
       "but got " + (toRawType(inject)) + ".",
@@ -51818,9 +52015,13 @@ function validateProp (
     observe(value);
     observerState.shouldConvert = prevShouldConvert;
   }
+<<<<<<< HEAD
   if (
     true
   ) {
+=======
+  if (true) {
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     assertProp(prop, key, value, vm, absent);
   }
   return value
@@ -52300,12 +52501,20 @@ function updateListeners (
   remove$$1,
   vm
 ) {
+<<<<<<< HEAD
   var name, def, cur, old, event;
   for (name in on) {
     def = cur = on[name];
     old = oldOn[name];
     event = normalizeEvent(name);
     /* istanbul ignore if */
+=======
+  var name, cur, old, event;
+  for (name in on) {
+    cur = on[name];
+    old = oldOn[name];
+    event = normalizeEvent(name);
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     if (isUndef(cur)) {
       "development" !== 'production' && warn(
         "Invalid handler for event \"" + (event.name) + "\": got " + String(cur),
@@ -52315,7 +52524,11 @@ function updateListeners (
       if (isUndef(cur.fns)) {
         cur = on[name] = createFnInvoker(cur);
       }
+<<<<<<< HEAD
       add(event.name, cur, event.once, event.capture, event.passive, event.params);
+=======
+      add(event.name, cur, event.once, event.capture, event.passive);
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     } else if (cur !== old) {
       old.fns = cur;
       on[name] = old;
@@ -54313,6 +54526,7 @@ function mergeProps (to, from) {
 
 /*  */
 
+<<<<<<< HEAD
 
 
 
@@ -54332,6 +54546,8 @@ function mergeProps (to, from) {
 
 /*  */
 
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 // hooks to be invoked on component VNodes during patch
 var componentVNodeHooks = {
   init: function init (
@@ -54497,11 +54713,14 @@ function createComponent (
     { Ctor: Ctor, propsData: propsData, listeners: listeners, tag: tag, children: children },
     asyncFactory
   );
+<<<<<<< HEAD
 
   // Weex specific: invoke recycle-list optimized @render function for
   // extracting cell-slot template.
   // https://github.com/Hanks10100/weex-native-directive/tree/master/component
   /* istanbul ignore if */
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
   return vnode
 }
 
@@ -54612,6 +54831,7 @@ function _createElement (
   if ("development" !== 'production' &&
     isDef(data) && isDef(data.key) && !isPrimitive(data.key)
   ) {
+<<<<<<< HEAD
     {
       warn(
         'Avoid using non-primitive value as key, ' +
@@ -54619,6 +54839,13 @@ function _createElement (
         context
       );
     }
+=======
+    warn(
+      'Avoid using non-primitive value as key, ' +
+      'use string/number value instead.',
+      context
+    );
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
   }
   // support single function children as default scoped slot
   if (Array.isArray(children) &&
@@ -55296,7 +55523,11 @@ Object.defineProperty(Vue$3.prototype, '$ssrContext', {
   }
 });
 
+<<<<<<< HEAD
 Vue$3.version = '2.5.13';
+=======
+Vue$3.version = '2.5.11';
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 
 /*  */
 
@@ -55871,7 +56102,11 @@ function createPatchFunction (backend) {
         createElm(children[i], insertedVnodeQueue, vnode.elm, null, true);
       }
     } else if (isPrimitive(vnode.text)) {
+<<<<<<< HEAD
       nodeOps.appendChild(vnode.elm, nodeOps.createTextNode(String(vnode.text)));
+=======
+      nodeOps.appendChild(vnode.elm, nodeOps.createTextNode(vnode.text));
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     }
   }
 
@@ -56740,11 +56975,15 @@ function pluckModuleFunction (
 
 function addProp (el, name, value) {
   (el.props || (el.props = [])).push({ name: name, value: value });
+<<<<<<< HEAD
   el.plain = false;
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 }
 
 function addAttr (el, name, value) {
   (el.attrs || (el.attrs = [])).push({ name: name, value: value });
+<<<<<<< HEAD
   el.plain = false;
 }
 
@@ -56752,6 +56991,8 @@ function addAttr (el, name, value) {
 function addRawAttr (el, name, value) {
   el.attrsMap[name] = value;
   el.attrsList.push({ name: name, value: value });
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 }
 
 function addDirective (
@@ -56763,7 +57004,10 @@ function addDirective (
   modifiers
 ) {
   (el.directives || (el.directives = [])).push({ name: name, rawName: rawName, value: value, arg: arg, modifiers: modifiers });
+<<<<<<< HEAD
   el.plain = false;
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 }
 
 function addHandler (
@@ -56836,8 +57080,11 @@ function addHandler (
   } else {
     events[name] = newHandler;
   }
+<<<<<<< HEAD
 
   el.plain = false;
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 }
 
 function getBindingAttr (
@@ -58750,8 +58997,11 @@ var buildRegex = cached(function (delimiters) {
   return new RegExp(open + '((?:.|\\n)+?)' + close, 'g')
 });
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 function parseText (
   text,
   delimiters
@@ -58761,19 +59011,29 @@ function parseText (
     return
   }
   var tokens = [];
+<<<<<<< HEAD
   var rawTokens = [];
   var lastIndex = tagRE.lastIndex = 0;
   var match, index, tokenValue;
+=======
+  var lastIndex = tagRE.lastIndex = 0;
+  var match, index;
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
   while ((match = tagRE.exec(text))) {
     index = match.index;
     // push text token
     if (index > lastIndex) {
+<<<<<<< HEAD
       rawTokens.push(tokenValue = text.slice(lastIndex, index));
       tokens.push(JSON.stringify(tokenValue));
+=======
+      tokens.push(JSON.stringify(text.slice(lastIndex, index)));
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     }
     // tag token
     var exp = parseFilters(match[1].trim());
     tokens.push(("_s(" + exp + ")"));
+<<<<<<< HEAD
     rawTokens.push({ '@binding': exp });
     lastIndex = index + match[0].length;
   }
@@ -58785,6 +59045,14 @@ function parseText (
     expression: tokens.join('+'),
     tokens: rawTokens
   }
+=======
+    lastIndex = index + match[0].length;
+  }
+  if (lastIndex < text.length) {
+    tokens.push(JSON.stringify(text.slice(lastIndex)));
+  }
+  return tokens.join('+')
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 }
 
 /*  */
@@ -58793,8 +59061,13 @@ function transformNode (el, options) {
   var warn = options.warn || baseWarn;
   var staticClass = getAndRemoveAttr(el, 'class');
   if ("development" !== 'production' && staticClass) {
+<<<<<<< HEAD
     var res = parseText(staticClass, options.delimiters);
     if (res) {
+=======
+    var expression = parseText(staticClass, options.delimiters);
+    if (expression) {
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
       warn(
         "class=\"" + staticClass + "\": " +
         'Interpolation inside attributes has been removed. ' +
@@ -58837,8 +59110,13 @@ function transformNode$1 (el, options) {
   if (staticStyle) {
     /* istanbul ignore if */
     if (true) {
+<<<<<<< HEAD
       var res = parseText(staticStyle, options.delimiters);
       if (res) {
+=======
+      var expression = parseText(staticStyle, options.delimiters);
+      if (expression) {
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
         warn(
           "style=\"" + staticStyle + "\": " +
           'Interpolation inside attributes has been removed. ' +
@@ -59290,7 +59568,11 @@ function parse (
     }
   }
 
+<<<<<<< HEAD
   function closeElement (element) {
+=======
+  function endPre (element) {
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     // check pre state
     if (element.pre) {
       inVPre = false;
@@ -59298,10 +59580,13 @@ function parse (
     if (platformIsPreTag(element.tag)) {
       inPre = false;
     }
+<<<<<<< HEAD
     // apply post-transforms
     for (var i = 0; i < postTransforms.length; i++) {
       postTransforms[i](element, options);
     }
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
   }
 
   parseHTML(template, {
@@ -59414,7 +59699,15 @@ function parse (
         currentParent = element;
         stack.push(element);
       } else {
+<<<<<<< HEAD
         closeElement(element);
+=======
+        endPre(element);
+      }
+      // apply post-transforms
+      for (var i$1 = 0; i$1 < postTransforms.length; i$1++) {
+        postTransforms[i$1](element, options);
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
       }
     },
 
@@ -59428,7 +59721,11 @@ function parse (
       // pop stack
       stack.length -= 1;
       currentParent = stack[stack.length - 1];
+<<<<<<< HEAD
       closeElement(element);
+=======
+      endPre(element);
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     },
 
     chars: function chars (text) {
@@ -59460,12 +59757,20 @@ function parse (
         // only preserve whitespace if its not right after a starting tag
         : preserveWhitespace && children.length ? ' ' : '';
       if (text) {
+<<<<<<< HEAD
         var res;
         if (!inVPre && text !== ' ' && (res = parseText(text, delimiters))) {
           children.push({
             type: 2,
             expression: res.expression,
             tokens: res.tokens,
+=======
+        var expression;
+        if (!inVPre && text !== ' ' && (expression = parseText(text, delimiters))) {
+          children.push({
+            type: 2,
+            expression: expression,
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
             text: text
           });
         } else if (text !== ' ' || !children.length || children[children.length - 1].text !== ' ') {
@@ -59546,6 +59851,7 @@ function processRef (el) {
 function processFor (el) {
   var exp;
   if ((exp = getAndRemoveAttr(el, 'v-for'))) {
+<<<<<<< HEAD
     var res = parseFor(exp);
     if (res) {
       extend(el, res);
@@ -59574,6 +59880,28 @@ function parseFor (exp) {
     res.alias = alias;
   }
   return res
+=======
+    var inMatch = exp.match(forAliasRE);
+    if (!inMatch) {
+      "development" !== 'production' && warn$2(
+        ("Invalid v-for expression: " + exp)
+      );
+      return
+    }
+    el.for = inMatch[2].trim();
+    var alias = inMatch[1].trim().replace(stripParensRE, '');
+    var iteratorMatch = alias.match(forIteratorRE);
+    if (iteratorMatch) {
+      el.alias = alias.replace(forIteratorRE, '');
+      el.iterator1 = iteratorMatch[1].trim();
+      if (iteratorMatch[2]) {
+        el.iterator2 = iteratorMatch[2].trim();
+      }
+    } else {
+      el.alias = alias;
+    }
+  }
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 }
 
 function processIf (el) {
@@ -59761,8 +60089,13 @@ function processAttrs (el) {
     } else {
       // literal attribute
       if (true) {
+<<<<<<< HEAD
         var res = parseText(value, delimiters);
         if (res) {
+=======
+        var expression = parseText(value, delimiters);
+        if (expression) {
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
           warn$2(
             name + "=\"" + value + "\": " +
             'Interpolation inside attributes has been removed. ' +
@@ -59931,6 +60264,14 @@ function cloneASTElement (el) {
   return createASTElement(el.tag, el.attrsList.slice(), el.parent)
 }
 
+<<<<<<< HEAD
+=======
+function addRawAttr (el, name, value) {
+  el.attrsMap[name] = value;
+  el.attrsList.push({ name: name, value: value });
+}
+
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
 var model$2 = {
   preTransformNode: preTransformNode
 };
@@ -60169,11 +60510,17 @@ function genHandler (
   var isFunctionExpression = fnExpRE.test(handler.value);
 
   if (!handler.modifiers) {
+<<<<<<< HEAD
     if (isMethodPath || isFunctionExpression) {
       return handler.value
     }
     /* istanbul ignore if */
     return ("function($event){" + (handler.value) + "}") // inline statement
+=======
+    return isMethodPath || isFunctionExpression
+      ? handler.value
+      : ("function($event){" + (handler.value) + "}") // inline statement
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
   } else {
     var code = '';
     var genModifierCode = '';
@@ -60209,7 +60556,10 @@ function genHandler (
       : isFunctionExpression
         ? ("(" + (handler.value) + ")($event)")
         : handler.value;
+<<<<<<< HEAD
     /* istanbul ignore if */
+=======
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     return ("function($event){" + code + handlerCode + "}")
   }
 }
@@ -60687,10 +61037,14 @@ function genProps (props) {
   var res = '';
   for (var i = 0; i < props.length; i++) {
     var prop = props[i];
+<<<<<<< HEAD
     /* istanbul ignore if */
     {
       res += "\"" + (prop.name) + "\":" + (transformSpecialNewlines(prop.value)) + ",";
     }
+=======
+    res += "\"" + (prop.name) + "\":" + (transformSpecialNewlines(prop.value)) + ",";
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
   }
   return res.slice(0, -1)
 }
@@ -60968,9 +61322,13 @@ var createCompiler = createCompilerCreator(function baseCompile (
   options
 ) {
   var ast = parse(template.trim(), options);
+<<<<<<< HEAD
   if (options.optimize !== false) {
     optimize(ast, options);
   }
+=======
+  optimize(ast, options);
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
   var code = generate(ast, options);
   return {
     ast: ast,

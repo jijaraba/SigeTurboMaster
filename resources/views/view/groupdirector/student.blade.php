@@ -14,7 +14,7 @@
                     <p>Bienvenido al nuevo aplicativo para Directores de Grupo en donde en una sola pantalla puede
                         visualizar estadísticas y toda la información correspondiente al grupo y cada uno de los
                         estudiantes que hacen parte del mismo.</p>
-                    <button class="btn btn-transparent-gray">Conocer más</button>
+                    <a href="/formation/monitorings" class="btn btn-transparent-gray tooltip" title="Ir a Seguimiento Académico" style="width: 150px">Ir a Seguimientos</a>
                 </section>
             </section>
         </section>
@@ -49,7 +49,7 @@
                                 <li><a href="#" class="active">{{ mb_strtoupper(Lang::get('sige.Reports')) }}</a></li>
                             </ul>
                         </nav>
-                        <section style="margin-top: 40px">
+                        <section style="margin-top: 25px">
                             <header class="margin-bottom-15">
                                 <h5 class="without-border">PRIMER PERIODO</h5>
                             </header>
@@ -60,6 +60,14 @@
                             <sigeturbo-view-groupdirector-student year="2017" period="1"
                                                                   student="{{ $enrollment->iduser }}"
                                                                   type="{{ $type }}"></sigeturbo-view-groupdirector-student>
+                        </section>
+                        <section style="margin-top: 25px">
+                            <header class="margin-bottom-15">
+                                <h5 class="without-border">SEGUNDO PERIODO</h5>
+                            </header>
+                            <sigeturbo-view-groupdirector-student year="2017" period="2"
+                                                                  student="{{ $enrollment->iduser }}"
+                                                                  type="partialreport"></sigeturbo-view-groupdirector-student>
                         </section>
                     </section>
                 </section>

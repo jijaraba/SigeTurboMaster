@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
     "/js/angular/formation.js": "/js/angular/formation.js?id=b60a44c28fed24e12f13",
     "/js/angular/admissions.js": "/js/angular/admissions.js?id=043a0c0074f2e1cfc044",
+=======
+    "/js/angular/formation.js": "/js/angular/formation.js?id=f9491ce16821b4d49ea4",
+    "/js/angular/admissions.js": "/js/angular/admissions.js?id=93b5f0517c3466b740fc",
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     "/css/login.css": "/css/login.css?id=d200eff3579f11c04016",
     "/css/default.css": "/css/default.css?id=c101ec252197447864ce",
     "/css/dashboard.css": "/css/dashboard.css?id=d9d801d32d504f55f30b",
@@ -15,6 +20,7 @@
     "/css/inventories.css": "/css/inventories.css?id=3fec6e5b280b30a8f156",
     "/css/payments.css": "/css/payments.css?id=5bf70f6eb5b8e27e0fdb",
     "/css/sigeturbo.css": "/css/sigeturbo.css?id=4c59fe7de8815956889c",
+<<<<<<< HEAD
     "/css/view/groupdirector.css": "/css/view/groupdirector.css?id=c3705a1d11231d0236b3",
     "/js/groupdirector/student.js": "/js/groupdirector/student.js?id=a9e99f71ad6bd2c9505c",
     "/js/groupdirector/dashboard.js": "/js/groupdirector/dashboard.js?id=6450d7710dd731780908",
@@ -24,6 +30,17 @@
     "/js/angular/dashboard.js": "/js/angular/dashboard.js?id=5e92024e62f88e75e4d8",
     "/js/angular/guest.js": "/js/angular/guest.js?id=7ac81e984ae2a6554c1d",
     "/js/angular/communications.js": "/js/angular/communications.js?id=7c546318b8788c89effc",
+=======
+    "/css/view/groupdirector.css": "/css/view/groupdirector.css?id=2d765e25a50d106d0de0",
+    "/js/groupdirector/student.js": "/js/groupdirector/student.js?id=16124a14a34265f20ec3",
+    "/js/groupdirector/dashboard.js": "/js/groupdirector/dashboard.js?id=44bf7cf745b334a789a0",
+    "/js/angular/financials.js": "/js/angular/financials.js?id=1fa8ca9be3ca74529070",
+    "/js/angular/resources.js": "/js/angular/resources.js?id=317719aaa5b66d00f385",
+    "/js/angular/parents.js": "/js/angular/parents.js?id=18f5a5868ea9ad7e7d42",
+    "/js/angular/dashboard.js": "/js/angular/dashboard.js?id=7f51ffd96729a96fe764",
+    "/js/angular/guest.js": "/js/angular/guest.js?id=67c0a6476c3540e07a5b",
+    "/js/angular/communications.js": "/js/angular/communications.js?id=63d8298b5a8805360fb3",
+>>>>>>> e8bb6973e1e80f2e1ad1d2930c3302cc339cb848
     "/js/Utils.js": "/js/Utils.js?id=52fe4a018de00061c084",
     "/js/Stream.js": "/js/Stream.js?id=b6053aed6d4877124538",
     "/js/SigeTurbo.js": "/js/SigeTurbo.js?id=4d9e36e95a1212522200",
