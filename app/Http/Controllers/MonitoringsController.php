@@ -24,6 +24,7 @@ use SigeTurbo\Repositories\Areamanager\AreamanagerRepositoryInterface;
 use SigeTurbo\Subject;
 use SigeTurbo\User;
 
+
 class MonitoringsController extends Controller
 {
     /**
