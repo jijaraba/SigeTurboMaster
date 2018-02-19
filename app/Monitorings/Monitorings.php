@@ -13,7 +13,7 @@ class Monitorings
 			SELECT
 				monitorings.idyear,
 				monitorings.idperiod,
-				groups.name as "group",
+				ANY_VALUE(groups.name) as "group",
 				groups.idgroup,
 				users.iduser,
 				CONCAT_WS(CONVERT(" " USING latin1),lastname,firstname) AS student,
@@ -45,7 +45,7 @@ class Monitorings
         $data = (array)DB::SELECT("
           SELECT
                 users.iduser,
-                groups.name AS 'group',
+                ANY_VALUE(groups.name) AS 'group',
                 CONCAT_WS(CONVERT(' ' USING LATIN1),
                     firstname,
                     lastname) AS student,
@@ -55,8 +55,8 @@ class Monitorings
                     ' - ',
                     ADDDATE(CURDATE(),
                         INTERVAL 7 - DAYOFWEEK(CURDATE()) DAY)) AS RangeOfWeek,
-                families.name AS family,
-                families.idfamily,
+                ANY_VALUE(families.name) AS family,
+                ANY_VALUE(families.idfamily) AS idfamily,
                 users.idgender
             FROM
                 monitorings
@@ -75,7 +75,7 @@ class Monitorings
                 AND email IS NOT NULL
             GROUP BY users.iduser
             HAVING amount >= 1
-            ORDER BY groups.idgroup,student");
+            ORDER BY ANY_VALUE(groups.idgroup),student");
         return $data;
     }
 

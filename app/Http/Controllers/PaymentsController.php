@@ -918,7 +918,6 @@ class PaymentsController extends Controller
         $responsible = $this->responsibleparentRepository->getResponsibleByStudent($payment->iduser);
 
         if ($payment->idpaymenttype == 2) {
-            var_dump($payment->idpaymenttype);
             //Save Debit Transaction
             $debit = [
                 'payment' => $payment->idpayment,
@@ -965,7 +964,6 @@ class PaymentsController extends Controller
 
             $isNewStudent = $this->_likematch($this->yearRepository->getCurrentYear()->idyear . '%', $payment->iduser);
             if ($isNewStudent) {
-                var_dump("New");
                 //Save Student card
                 $transactionNew = [
                     'payment' => $payment->idpayment,
