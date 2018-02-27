@@ -59,7 +59,7 @@ angular.module('Parents.controllers', [])
         //Academic
         $scope.academic = {
             year: 2017,
-            period: 1,
+            period: 2,
             user: null
         }
         $scope.years = [];
