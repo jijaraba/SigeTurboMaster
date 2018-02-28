@@ -108,6 +108,56 @@ class PaymentRepository implements PaymentRepositoryInterface
     }
 
     /**
+     * Get Payments Pendings By USER
+     * @param $user
+     * @param bool $pending
+     * @param null $sort
+     * @param string $order
+     * @param bool $excludeCurrentMonth
+     * @return mixed
+     */
+    public function getPaymentsPendingsByUser($user, $pending = false, $sort = null, $order = 'ASC', $excludeCurrentMonth = false)
+    {
+        $payments = Payment::select('payments.*', 'users.photo', DB::raw('CONCAT_WS(CONVERT(" " USING latin1),users.lastname,users.firstname) AS fullname'), DB::raw('CURDATE() AS current'))
+            ->join('users', function ($join) {
+                $join->on('users.iduser', '=', 'payments.iduser');
+            })
+            ->join('families', function ($join) {
+                $join->on('families.idfamily', '=', 'payments.idfamily');
+            })
+            ->where('families.idfamily', '=', DB::raw("(SELECT idfamily FROM userfamilies WHERE userfamilies.iduser = $user LIMIT 1)"));
+
+        //Payments Pending
+        if ($pending) {
+            $payments->where('payments.ispayment', '=', 'N');
+        }
+
+        //Exclude Current Mont
+        if ($excludeCurrentMonth) {
+            $payments
+                ->whereNotIn('payments.realdate', [Carbon::now()->endOfMonth()->toDateTimeString()])
+                ->where(DB::raw("CONVERT(CONCAT(YEAR(payments.realdate), MONTH(payments.realdate)),SIGNED INTEGER)"), "<", DB::raw("CONVERT(CONCAT(YEAR(CURDATE()), MONTH(CURDATE())),SIGNED INTEGER)"));
+        }
+
+        //Sort
+        switch ($sort) {
+            case 'realdate':
+                $payments->orderBy('payments.realdate', $order);
+                break;
+            case 'ispayment':
+                $payments->orderBy('payments.ispayment', $order);
+                break;
+            case 'created_at':
+                $payments->orderBy('payments.created_at', $order);
+                break;
+            default:
+                $payments->orderBy('payments.created_at', $order);
+        }
+        return $payments
+            ->get();
+    }
+
+    /**
      * Get Payments With User Info
      * @param $payment
      * @return mixed

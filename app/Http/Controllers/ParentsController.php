@@ -33,7 +33,7 @@ class ParentsController extends Controller
      */
     public function index(Request $request)
     {
-        $payments = $this->paymentRepository->getPaymentsByUser(getUser()->iduser, true, null, 'ASC', true);
+        $payments = $this->paymentRepository->getPaymentsPendingsByUser(getUser()->iduser, true, null, 'ASC', true);
         if (count($payments) > 0) {
             $request->session()->flash('error', Lang::get('sige.PaymentsPendingTitle'));
             App::abort(401, 'payments_pending');
