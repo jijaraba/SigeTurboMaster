@@ -155,8 +155,8 @@ angular.module('Parents.directives', [])
                         'payment': $scope.payment.idpayment,
                         'method': $scope.methodSelected,
                         'hash': hashforQuery,
+                        'approved': 'N',
                         'transaccionTNS': $scope.transaccionID,
-                        'approved': 'P',
                         'realValue': parseInt($scope.payment_ref.value)
                     }).$promise.then(
                         function () {
