@@ -125,7 +125,7 @@ class PaymentRepository implements PaymentRepositoryInterface
             ->join('families', function ($join) {
                 $join->on('families.idfamily', '=', 'payments.idfamily');
             })
-            ->where('families.idfamily', '=', DB::raw("(SELECT idfamily FROM userfamilies WHERE userfamilies.iduser = $user LIMIT 1)"));
+            ->whereIn('families.idfamily', [DB::raw("(SELECT idfamily FROM userfamilies WHERE userfamilies.iduser = $user)")]);
 
         //Payments Pending
         if ($pending) {

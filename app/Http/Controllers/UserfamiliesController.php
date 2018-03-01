@@ -89,7 +89,7 @@ class UserfamiliesController extends Controller
     {
 
         //Verify Payments
-        $payments = $this->paymentRepository->getPaymentsByUser(getUser()->iduser, true, null, 'ASC', true);
+        $payments = $this->paymentRepository->getPaymentsPendingsByUser(getUser()->iduser, true, null, 'ASC', true);
         if (count($payments) > 0) {
             $request->session()->flash('error', Lang::get('sige.PaymentsPendingTitle'));
             App::abort(401, 'payments_pending');
@@ -110,7 +110,7 @@ class UserfamiliesController extends Controller
     {
 
         //Verify Payments
-        $payments = $this->paymentRepository->getPaymentsByUser(getUser()->iduser, true, null, 'ASC', true);
+        $payments = $this->paymentRepository->getPaymentsPendingsByUser(getUser()->iduser, true, null, 'ASC', true);
         if (count($payments) > 0) {
             $request->session()->flash('error', Lang::get('sige.PaymentsPendingTitle'));
             App::abort(401, 'payments_pending');
@@ -131,7 +131,7 @@ class UserfamiliesController extends Controller
     public function indexParentsByUpdateInfo(Request $request)
     {
         //Verify Payments
-        $payments = $this->paymentRepository->getPaymentsByUser(getUser()->iduser, true, null, 'ASC', true);
+        $payments = $this->paymentRepository->getPaymentsPendingsByUser(getUser()->iduser, true, null, 'ASC', true);
         if (count($payments) > 0) {
             $request->session()->flash('error', Lang::get('sige.PaymentsPendingTitle'));
             App::abort(401, 'payments_pending');
