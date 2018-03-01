@@ -85,7 +85,7 @@ class PaymentRepository implements PaymentRepositoryInterface
         //Exclude Current Mont
         if ($excludeCurrentMonth) {
             $payments
-                ->whereNotIn('payments.realdate', ['2018-01-31'])
+                ->whereNotIn('payments.realdate', [Carbon::now()->endOfMonth()->toDateTimeString()])
                 ->where(DB::raw("CONVERT(CONCAT(YEAR(payments.realdate), MONTH(payments.realdate)),SIGNED INTEGER)"), "<", DB::raw("CONVERT(CONCAT(YEAR(CURDATE()), MONTH(CURDATE())),SIGNED INTEGER)"));
         }
 
