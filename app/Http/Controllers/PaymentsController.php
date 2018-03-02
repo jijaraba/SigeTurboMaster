@@ -470,10 +470,11 @@ class PaymentsController extends Controller
                 $payment = $this->paymentRepository->setPaymentIndividual($family->family, $data);
                 if ($payment) {
                     //Send Emails to Parents
-                    $users = $this->userfamilyRepository->getFamilies([$family->family], [Category::FATHER, Category::MOTHER]);
+                    //TO-DO
+                    /*$users = $this->userfamilyRepository->getFamilies([$family->family], [Category::FATHER, Category::MOTHER]);
                     if ($users) {
                         $this->mailer->byUsers('payment_created', $users, $payment);
-                    }
+                    }*/
                     $count++;
                 }
 
