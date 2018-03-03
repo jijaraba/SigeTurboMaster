@@ -12,5 +12,5 @@ interface UserfamilyRepositoryInterface
     public function getFamilies($family = [], $category = [], $group = []);
     public function getFamilyByUser($user);
     public function getFamilyName($user);
-    public function getEmailsByFamily($year, $family);
+    public function getEmailsByFamily($year, $family = null);
 }

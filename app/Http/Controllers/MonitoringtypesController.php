@@ -78,7 +78,7 @@ class MonitoringtypesController extends Controller
                 $data['last_insert_id'] = $monitoringtype->idmonitoringtype;
                 //Generate Indicators Code
                 $indicators = $this->indicatorRepository->getIndicatorsByConsecutive($request);
-                if (count($data['last_insert_id']) <= 0) {
+                if (count($indicators) <= 0) {
                     throw new \Exception('Indicators Not Found');
                 }
                 foreach ($indicators as $indicator) {

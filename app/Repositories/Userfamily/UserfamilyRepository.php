@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use PDO;
 use SigeTurbo\Category;
 use SigeTurbo\Repositories\Year\YearRepository;
+use SigeTurbo\Statusschooltype;
 use SigeTurbo\Userfamily;
 
 class UserfamilyRepository implements UserfamilyRepositoryInterface
@@ -185,7 +186,7 @@ class UserfamilyRepository implements UserfamilyRepositoryInterface
                         $join->on('groups.idgroup', '=', 'enrollments.idgroup');
                     })
                     ->where('years.idyear', '=', YearRepository::getCurrentYear()->idyear)
-                    ->whereNotIn('enrollments.idstatusschooltype', [4, 10]);
+                    ->whereNotIn('enrollments.idstatusschooltype', Statusschooltype::STATUS_NOT_ACTIVE);
                 //Detect Families
                 if (count($family) > 0) {
                     $query->whereIn('userfamilies.idfamily', $family);
@@ -223,46 +224,59 @@ class UserfamilyRepository implements UserfamilyRepositoryInterface
      * @param $family
      * @return array
      */
-    public function getEmailsByFamily($year, $family)
+    public function getEmailsByFamily($year, $family = null)
     {
-        $data = DB::SELECT("
-            SELECT
-                families.idfamily,
-                families.name AS 'family',
-                categories.name AS 'category',
-                users.iduser,
-                CONCAT_WS(CONVERT( ' ' USING LATIN1), firstname, lastname) AS 'fullname',
-                users.firstname,
-                users.lastname,
-                users.email,
-                users.idgender
-            FROM
-                userfamilies
-                INNER JOIN users ON users.iduser = userfamilies.iduser
-                INNER JOIN families ON families.idfamily = userfamilies.idfamily
-                INNER JOIN categories ON categories.idcategory = users.idcategory
-            WHERE
-                userfamilies.idfamily IN (
-                    SELECT
-                        userfamilies.idfamily
-                    FROM
-                        users
-                        INNER JOIN
-                        enrollments ON enrollments.iduser = users.iduser
-                        INNER JOIN
-                        years ON years.idyear = enrollments.idyear
-                        INNER JOIN
-                        userfamilies ON userfamilies.iduser = enrollments.iduser
-                        INNER JOIN
-                        groups ON groups.idgroup = enrollments.idgroup
-                    WHERE
-                        years.idyear IN ($year)
-                        AND enrollments.idstatusschooltype NOT IN (4 , 10)
-                        AND userfamilies.idfamily IN (?))
-                AND users.idstatus NOT IN (4,10)
-                AND users.email_confirmed = 1",
-            array($family));
-        return $data;
+
+        return Userfamily::select(
+            'families.idfamily',
+            'families.name AS \'family\'',
+            'categories.name AS \'category\'',
+            'users.iduser',
+            DB::raw('CONCAT_WS(CONVERT( \' \' USING LATIN1), firstname, lastname) AS \'fullname\''),
+            'users.firstname',
+            'users.lastname',
+            'users.email',
+            'users.idgender')
+            ->join('users', function ($join) {
+                $join->on('users.iduser', '=', 'userfamilies.iduser');
+            })
+            ->join('families', function ($join) {
+                $join->on('families.idfamily', '=', 'userfamilies.idfamily');
+            })
+            ->join('categories', function ($join) {
+                $join->on('categories.idcategory', '=', 'users.idcategory');
+            })
+            ->whereIn(
+            /**
+             * @param $query
+             */
+                'userfamilies.idfamily', function ($query) use ($year, $family) {
+                $query
+                    ->select('userfamilies.idfamily')
+                    ->from('users')
+                    ->join('enrollments', function ($join) {
+                        $join->on('enrollments.iduser', '=', 'users.iduser');
+                    })
+                    ->join('years', function ($join) {
+                        $join->on('years.idyear', '=', 'enrollments.idyear');
+                    })
+                    ->join('userfamilies', function ($join) {
+                        $join->on('userfamilies.iduser', '=', 'enrollments.iduser');
+                    })
+                    ->join('groups', function ($join) {
+                        $join->on('groups.idgroup', '=', 'enrollments.idgroup');
+                    })
+                    ->where('years.idyear', '=', $year)
+                    ->whereNotIn('enrollments.idstatusschooltype', Statusschooltype::STATUS_NOT_ACTIVE);
+                //Detect Families
+                if (!is_null($family)) {
+                    $query->where('userfamilies.idfamily', '=', $family);
+                }
+                $query->get();
+            })
+            ->whereNotIn('users.idstatus', Statusschooltype::STATUS_NOT_ACTIVE)
+            ->where('users.email_confirmed', '=', 1)
+            ->get();
     }
 
     /**
