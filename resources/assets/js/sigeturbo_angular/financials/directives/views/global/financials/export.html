@@ -2,26 +2,21 @@
     <li class="col-20"></li>
     <li class="col-80">
         <section class="sige-turbo-export">
-            <ul class="display-horizontal col-100 export">
-                <li class="col-40 title">Exportar</li>
-                <li class="col-15">
+            <ul class="display-horizontal export" style="width:280px">
+                <li class="title" style="width:80px">Exportar</li>
+                <li style="width:25px">
                     <a ng-click="export('preform','pdf')">
                         <img ng-src="{{ assets }}/img/modules/export_as_pdf.svg" alt="PDF">
                     </a>
                 </li>
-                <li class="col-15">
+                <li style="width:25px">
                     <a ng-click="export('invoice','pdf')">
                         <img ng-src="{{ assets }}/img/modules/export_as_pdf.svg" alt="PDF">
                     </a>
                 </li>
-                <li class="col-15">
-                    <a ng-click="export('cash_receipt','pdf')">
+                <li style="width:25px">
+                    <a class="tooltip" title="Recibo de Caja" ng-click="export('cash_receipt','pdf')">
                         <img ng-src="{{ assets }}/img/modules/export_as_pdf.svg" alt="PDF">
-                    </a>
-                </li>
-                <li class="col-15">
-                    <a ng-click="export('virtual_receipt','pdf')">
-                        <img ng-src="{{ assets }}/img/modules/export_as_pdf.svg"  alt="PDF">
                     </a>
                 </li>
             </ul>
