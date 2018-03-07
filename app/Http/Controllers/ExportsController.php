@@ -89,7 +89,7 @@ class ExportsController extends Controller
         $format = $request["format"];
         $type = "export";
         $fileName = fileName($request["filename"]);
-        $controls = array('paymentID' => $request['payment']);
+        $controls = array('PAYMENT_ID' => $request['payment']);
         $pagination = null;
         if ($request["format"] == "xlsx") {
             $pagination = true;
