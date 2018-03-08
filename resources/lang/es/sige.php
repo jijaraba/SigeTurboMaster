@@ -84,7 +84,7 @@ return array(
     'PaymenttypeTitle' => 'Tipo de Pago',
     'Codefamily' => 'Código de Familia',
     'IsPayment' => '¿Esta Pago?',
-    'Approved' => '¿Esta Aprovado?',
+    'Approved' => '¿Esta Aprobado?',
     'BankTitle' => 'Banco',
     'VoucherTitle' => 'Comprobate de Pago',
     'RealValue' => 'Valor Real',
