@@ -1684,16 +1684,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             group: this.group,
             user: this.student
         }).then(function (_ref) {
-            var result = _ref.result;
+            var data = _ref.data;
 
-            if (result.length > 0) {
+            if (data.length > 0) {
                 //Assign Values
-                result.forEach(function (stat) {
+                data.forEach(function (stat) {
                     stats.labels.push(stat.label);
                     stats.datasets[0].data.push(stat.value);
                 });
 
-                console.log(stats);
+                console.log(data);
 
                 var ctx = document.getElementById("myChart");
                 var myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {

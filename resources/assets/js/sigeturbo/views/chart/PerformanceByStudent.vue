@@ -44,15 +44,15 @@
                 group: this.group,
                 user: this.student
             })
-                .then(({result}) => {
-                    if (result.length > 0) {
+                .then(({data}) => {
+                    if (data.length > 0) {
                         //Assign Values
-                        result.forEach(function (stat) {
+                        data.forEach(function (stat) {
                             stats.labels.push(stat.label);
                             stats.datasets[0].data.push(stat.value);
                         });
 
-                        console.log(stats);
+                        console.log(data);
 
                         var ctx = document.getElementById("myChart");
                         var myChart = new Chart(ctx, {
