@@ -89,6 +89,6 @@ class Monitorings
      */
     public static function getMonitoringsForParents($year, $period, $group = null, $user)
     {
-        return DB::select("call globalPerformanceByStudentForParents($year,$period,$group,$user)");;
+        return DB::select("call globalPerformanceByStudentForParents($year,$period,$group,$user)");
     }
 }

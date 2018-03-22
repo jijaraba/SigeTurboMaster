@@ -302,6 +302,15 @@ class PaymentsController extends Controller
     }
 
     /**
+     * Get Payments Pendings By User
+     * @return mixed
+     */
+    public function getPaymentsPendingsByUser(Request $request)
+    {
+        return response()->json($this->paymentRepository->getPaymentsPendingsByUser($request['user']));
+    }
+
+    /**
      * Get Payments By User With Transactions
      * @param $student
      * @return mixed

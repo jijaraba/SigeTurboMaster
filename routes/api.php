@@ -858,6 +858,11 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'as' => 'payments.getpaymentspendings',
         'uses' => 'PaymentsController@getPaymentsPendings'
     ]);
+    //Get Payments Pendings
+    Route::get('/payments/getpaymentspendingsbyuser', [
+        'as' => 'payments.getpaymentspendingsbyuser',
+        'uses' => 'PaymentsController@getPaymentsPendingsByUser'
+    ]);
     //Payments
     Route::resource('payments', 'PaymentsController', array('only' => array('index', 'show', 'update')));
 
