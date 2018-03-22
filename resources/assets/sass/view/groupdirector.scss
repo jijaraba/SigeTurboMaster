@@ -6,7 +6,7 @@
 
 nav {
   &.sige-view-groupdirector-nav {
-    margin: 20px;
+    margin: 20px 0px;
     width: 300px;
     > ul {
       > li {
@@ -14,7 +14,7 @@ nav {
           color: $sige-global-color-04;
           font: {
             size: 0.8em;
-            family: $sige-font-family-09;
+            family: $sige-font-family-07;
           }
           padding-bottom: 7px;
           &:hover {
