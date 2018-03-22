@@ -5,6 +5,7 @@ namespace SigeTurbo\Repositories\Monitoring;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use SigeTurbo\Facades\Monitorings;
 use SigeTurbo\Monitoring;
 
 class MonitoringRepository implements MonitoringRepositoryInterface
