@@ -45,7 +45,7 @@
                 user: this.student
             })
                 .then(({stats}) => {
-                    if (data.length > 0) {
+                    if (stats.length > 0) {
                         //Assign Values
                         stats.forEach(function (stat) {
                             stats.labels.push(stat.label);
