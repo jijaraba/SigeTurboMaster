@@ -51149,13 +51149,7 @@ var render = function() {
             staticClass:
               "sige-contained rounded-05 padding-20 bkg-green margin-bottom-10"
           },
-          [
-            _c(
-              "span",
-              { staticStyle: { color: "white", "font-size": "0.9em" } },
-              [_vm._v("Pagos al día")]
-            )
-          ]
+          [_vm._m(1)]
         )
       : _vm._e()
   ])
@@ -51172,6 +51166,19 @@ var staticRenderFns = [
         _vm._v(
           "Por favor informar al padre de familia que debe comunicarse con "
         ),
+        _c("strong", [_vm._v("Tesorería")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "span",
+      { staticStyle: { color: "white", "font-size": "0.9em" } },
+      [
+        _vm._v("El estudiante no cuenta con notificaciones de "),
         _c("strong", [_vm._v("Tesorería")])
       ]
     )

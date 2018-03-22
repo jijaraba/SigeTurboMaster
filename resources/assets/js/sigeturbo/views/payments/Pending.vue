@@ -4,7 +4,7 @@
             <span style="color:white;font-size:0.9em">Por favor informar al padre de familia que debe comunicarse con <strong>Tesorería</strong></span>
         </section>
         <section v-if="!pending" class="sige-contained rounded-05 padding-20 bkg-green margin-bottom-10">
-            <span style="color:white;font-size:0.9em">Pagos al día</span>
+            <span style="color:white;font-size:0.9em">El estudiante no cuenta con notificaciones de <strong>Tesorería</strong></span>
         </section>
     </div>
 </template>
