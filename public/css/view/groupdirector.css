@@ -1,1 +1,26 @@
-.sige-view-groupdirector{padding:10px}nav.sige-view-groupdirector-nav{margin:20px;width:300px}nav.sige-view-groupdirector-nav>ul>li>a{color:#8d9aa5;font-size:.8em;font-family:Montserrat Regular,Helvetica Neue,Helvetica,sans-serif;padding-bottom:7px}nav.sige-view-groupdirector-nav>ul>li>a:hover{border-bottom:1px solid #53bbb4;color:#53bbb4}nav.sige-view-groupdirector-nav>ul>li>a.active{border-bottom:1px solid #4cae50;color:#4cae50}
+.sige-view-groupdirector {
+  padding: 10px;
+}
+
+nav.sige-view-groupdirector-nav {
+  margin: 20px;
+  width: 300px;
+}
+
+nav.sige-view-groupdirector-nav > ul > li > a {
+  color: #8d9aa5;
+  font-size: 0.8em;
+  font-family: "Montserrat Regular", Helvetica Neue, Helvetica, sans-serif;
+  padding-bottom: 7px;
+}
+
+nav.sige-view-groupdirector-nav > ul > li > a:hover {
+  border-bottom: 1px solid #53BBB4;
+  color: #53BBB4;
+}
+
+nav.sige-view-groupdirector-nav > ul > li > a.active {
+  border-bottom: 1px solid #4cae50;
+  color: #4cae50;
+}
+

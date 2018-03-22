@@ -52,6 +52,8 @@
                             stats.datasets[0].data.push(stat.value);
                         });
 
+                        console.log(stats);
+
                         var ctx = document.getElementById("myChart");
                         var myChart = new Chart(ctx, {
                             type: 'doughnut',
