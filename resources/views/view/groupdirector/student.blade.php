@@ -39,7 +39,7 @@
                                 <li class="col-80 description">
                                     <div>
                                         <span>{{ $enrollment->iduser }}</span>
-                                        <span>{{ $enrollment->firstname ." ". $enrollment->lastname }}</span>
+                                        <span>{{ mb_strtoupper($enrollment->firstname ." ". $enrollment->lastname) }}</span>
                                     </div>
                                 </li>
                             </ul>
