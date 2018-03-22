@@ -68,6 +68,10 @@
                             <sigeturbo-view-groupdirector-student year="2017" period="2"
                                                                   student="{{ $enrollment->iduser }}"
                                                                   type="partialreport"></sigeturbo-view-groupdirector-student>
+                            <hr class="margin-top-bottom-02">
+                            <sigeturbo-view-groupdirector-student year="2017" period="2"
+                                                                  student="{{ $enrollment->iduser }}"
+                                                                  type="{{ $type }}"></sigeturbo-view-groupdirector-student>
                         </section>
                     </section>
                 </section>
