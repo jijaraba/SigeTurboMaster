@@ -44,10 +44,10 @@
                 group: this.group,
                 user: this.student
             })
-                .then(({stats}) => {
-                    if (stats.length > 0) {
+                .then(({result}) => {
+                    if (result.length > 0) {
                         //Assign Values
-                        stats.forEach(function (stat) {
+                        result.forEach(function (stat) {
                             stats.labels.push(stat.label);
                             stats.datasets[0].data.push(stat.value);
                         });
