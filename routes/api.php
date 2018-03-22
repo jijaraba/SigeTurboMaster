@@ -461,10 +461,13 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'as' => 'monitorings.getglobalperformances',
         'uses' => 'MonitoringsController@getGlobalPerformances'
     ]);
-
     Route::get('/monitorings/getmonitoringsbyuserforparents', [
         'as' => 'monitorings.getmonitoringsbyuserforparents',
         'uses' => 'MonitoringsController@getMonitoringsForParents'
+    ]);
+    Route::get('/monitorings/getmonitoringsperformancebystudent', [
+        'as' => 'monitorings.getmonitoringsperformancebystudent',
+        'uses' => 'MonitoringsController@getMonitoringsPerformanceByStudent'
     ]);
     //Get Teacher Without Monitoring in Curren Week
     Route::get('/monitorings/getmonitoringsincurrentweek', [

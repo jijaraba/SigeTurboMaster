@@ -289,6 +289,21 @@ class MonitoringsController extends Controller
             ->withSubject($subject);
     }
 
+    /**
+     * Get Monitorings Performance By Student
+     * @param $year
+     * @param $period
+     * @param $group
+     * @param $user
+     * @return
+     * @internal param Request $request
+     */
+    public function getMonitoringsPerformanceByStudent($year, $period, $group, $user)
+    {
+
+        return response()->json($this->monitoringRepository->getMonitoringsPerformanceByStudent($year, $period, $group, $user));
+    }
+
 
     /**
      * Get Monitorings In Current Week By Teacher

@@ -38,7 +38,7 @@
             };
 
 
-            Monitorings.getMonitoringsForParents({
+            Monitorings.getmMonitoringsPerformanceByStudent({
                 year: this.year,
                 period: this.period,
                 group: this.group,

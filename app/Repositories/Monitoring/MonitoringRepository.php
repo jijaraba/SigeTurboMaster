@@ -132,6 +132,19 @@ class MonitoringRepository implements MonitoringRepositoryInterface
         return Monitorings::getMonitoringsForParents($year, $period, $group, $user);
     }
 
+    /**
+     * Get Monitorings Performance By User
+     * @param $year
+     * @param $period
+     * @param $group
+     * @param $user
+     * @return mixed
+     */
+    public function getMonitoringsPerformanceByStudent($year, $period, $group, $user)
+    {
+        return Monitorings::getMonitoringsPerformanceByStudent($year, $period, $group, $user);
+    }
+
 
     /**
      * Get Monitorings Details for Parents

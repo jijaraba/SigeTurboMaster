@@ -13,8 +13,8 @@ class Monitorings extends Model {
      * @param path
      * @param params
      */
-    static getMonitoringsForParents(params) {
-        return HTTP.get('/api/v1/monitorings/getmonitoringsbyuserforparents', {
+    static getmMonitoringsPerformanceByStudent(params) {
+        return HTTP.get('/api/v1/monitorings/getmonitoringsperformancebystudent', {
             params: params
         });
     }
