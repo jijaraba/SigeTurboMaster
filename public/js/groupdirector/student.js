@@ -1821,6 +1821,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -51125,16 +51130,35 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.pending
-    ? _c(
-        "section",
-        {
-          staticClass: "sige-contained rounded-05 padding-20 margin-bottom-10",
-          class: { "bkg-red": _vm.pending, "bkg-white": !_vm.pending }
-        },
-        [_vm._m(0)]
-      )
-    : _vm._e()
+  return _c("div", [
+    _vm.pending
+      ? _c(
+          "section",
+          {
+            staticClass:
+              "sige-contained rounded-05 padding-20 bkg-red margin-bottom-10"
+          },
+          [_vm._m(0)]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    !_vm.pending
+      ? _c(
+          "section",
+          {
+            staticClass:
+              "sige-contained rounded-05 padding-20 bkg-green margin-bottom-10"
+          },
+          [
+            _c(
+              "span",
+              { staticStyle: { color: "white", "font-size": "0.9em" } },
+              [_vm._v("Pagos al día")]
+            )
+          ]
+        )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = [
   function() {
