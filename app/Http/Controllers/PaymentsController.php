@@ -307,7 +307,7 @@ class PaymentsController extends Controller
      */
     public function getPaymentsPendingsByUser(Request $request)
     {
-        return response()->json($this->paymentRepository->getPaymentsPendingsByUser($request['user']));
+        return response()->json($this->paymentRepository->getPaymentsPendingsByUser($request['user'],true));
     }
 
     /**

@@ -51,22 +51,23 @@
                             stats.labels.push(stat.label);
                             stats.datasets[0].data.push(stat.value);
                         });
+
+                        var ctx = document.getElementById("myChart");
+                        var myChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: stats,
+                            options: {
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            }
+
+
+                        });
+
                     }
                 })
                 .catch(error => console.log(error));
-
-            var ctx = document.getElementById("myChart");
-            var myChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: stats,
-                options: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-
-
-            });
 
         }
 
