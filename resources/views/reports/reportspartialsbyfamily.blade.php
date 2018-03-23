@@ -158,6 +158,50 @@
                             @endforeach
                         </ul>
                     </section>
+                    <section class="payment-list">
+                        <ul id="payment-list display-horizontal col-100">
+                            @foreach($users as $user)
+                                <li class="col-100">
+                                    <ul class="display-horizontal col-100 payment">
+                                        <li class="col-05 is_payment">
+                                            <div class="payment-container">
+                                                <img src="{{env('ASSETS_SERVER') . "/img/modules/payment_normal.svg" }}"
+                                                     title=''/>
+                                            </div>
+                                        </li>
+                                        <li class="col-10 photo">
+                                            <div>
+                                                <img src="{{env('ASSETS_SERVER')}}/img/users/{{$user->photo}}"
+                                                     alt="{{ $user->fullname }}" title="{{ $user->fullname }}"/>
+                                            </div>
+                                        </li>
+                                        <li class="col-05 date">
+                                            <div>2017</div>
+                                        </li>
+                                        <li class="col-15 date">
+                                            <div>{{ mb_strtoupper(Lang::get('sige.SecondPeriod')) }}</div>
+                                        </li>
+                                        <li class="col-45 concept">
+                                            <div title="">INFORME FINAL SEGUNDO PERIODO ({{ $user->iduser }}
+                                                - {{ mb_strtoupper($user->fullname) }})
+                                            </div>
+                                        </li>
+                                        <li class="col-20 generate">
+                                            @if(\SigeTurbo\Repositories\Enrollment\EnrollmentRepository::getEnrollmentLatest($user->iduser)->group < 11)
+                                                <sige-turbo-report-generate
+                                                        student="{{ $user->iduser }}"
+                                                        type="descriptivereport" period="2"></sige-turbo-report-generate>
+                                            @else
+                                                <sige-turbo-report-generate
+                                                        student="{{ $user->iduser }}"
+                                                        type="finalreport" period="2"></sige-turbo-report-generate>
+                                            @endif
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </section>
                     <section class="sige-turbo-pagination col-100">
                         {!! $users->appends(['sort' => $sort, 'order' => $order])->render() !!}
                     </section>
