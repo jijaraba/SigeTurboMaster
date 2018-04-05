@@ -29,7 +29,7 @@
                     <li class="col-50 gutter-10">
                         <label class="select-arrow" for="idperiod">
                             <select name="idperiod" id="idperiod" ng-model="academic.period"
-                                    ng-init="academic.period = '1'" ng-change="change(academic.year,academic.period)">
+                                    ng-init="academic.period = '3'" ng-change="change(academic.year,academic.period)">
                                 <option value="1">Primer Periodo</option>
                                 <option value="2">Segundo Periodo</option>
                                 <option value="3">Tercer Periodo</option>
