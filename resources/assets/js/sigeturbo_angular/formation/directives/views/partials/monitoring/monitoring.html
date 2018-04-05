@@ -1,7 +1,23 @@
 <input ng-if="academic.group >= 21" id="monitoringtype1_{{monitoringtype.idmonitoringtype}}"
        title="{{monitoringtype.name}}" class="monitoringtype"
        ng-model="monitoring.rating" type="text" value="" ng-blur="save()"/>
-<select ng-if="academic.group < 21" id="monitoringtype2_{{monitoringtype.idmonitoringtype}}"
+<select ng-if="academic.group < 21 && academic.period == 1" id="monitoringtype2_{{monitoringtype.idmonitoringtype}}"
+        title="{{monitoringtype.name}}" class="monitoringtype"
+        ng-model="monitoring.rating" type="text" value="" ng-blur="save()">
+    <option style="padding-left: 0px;" value="5.00">DS</option>
+    <option style="padding-left: 0px;" value="4.30">DA</option>
+    <option style="padding-left: 0px;" value="3.70">DB</option>
+    <option style="padding-left: 0px;" value="2.99">DP</option>
+</select>
+<select ng-if="academic.group < 21 && academic.period == 2" id="monitoringtype2_{{monitoringtype.idmonitoringtype}}"
+        title="{{monitoringtype.name}}" class="monitoringtype"
+        ng-model="monitoring.rating" type="text" value="" ng-blur="save()">
+    <option style="padding-left: 0px;" value="5.00">DS</option>
+    <option style="padding-left: 0px;" value="4.00">DA</option>
+    <option style="padding-left: 0px;" value="3.5">DB</option>
+    <option style="padding-left: 0px;" value="2.00">DP</option>
+</select>
+<select ng-if="academic.group < 21 && academic.period ==3" id="monitoringtype2_{{monitoringtype.idmonitoringtype}}"
         title="{{monitoringtype.name}}" class="monitoringtype"
         ng-model="monitoring.rating" type="text" value="" ng-blur="save()">
     <option style="padding-left: 0px;" value="5.00">DS+</option>

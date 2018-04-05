@@ -51,7 +51,7 @@ class AttendancesLevel03 extends Command
      */
     public function handle()
     {
-        $users = $this->userRepository->getUsersByRoles('Admin,Principal,Discipline,Admission,HomeroomTeacher,Assistant');
+        $users = $this->userRepository->getUsersByRoles('Admin,Academic,Principal,Discipline,Admission,HomeroomTeacher,Assistant');
         foreach ($users as $user) {
             if ($user) {
                 $data = ['user' => $user, 'attendances' => $this->attendanceRepository->getAttendancesLevel03Today()];
