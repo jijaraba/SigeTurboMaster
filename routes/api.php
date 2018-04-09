@@ -461,10 +461,13 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'as' => 'monitorings.getglobalperformances',
         'uses' => 'MonitoringsController@getGlobalPerformances'
     ]);
-
     Route::get('/monitorings/getmonitoringsbyuserforparents', [
         'as' => 'monitorings.getmonitoringsbyuserforparents',
         'uses' => 'MonitoringsController@getMonitoringsForParents'
+    ]);
+    Route::get('/monitorings/getmonitoringsperformancebystudent', [
+        'as' => 'monitorings.getmonitoringsperformancebystudent',
+        'uses' => 'MonitoringsController@getMonitoringsPerformanceByStudent'
     ]);
     //Get Teacher Without Monitoring in Curren Week
     Route::get('/monitorings/getmonitoringsincurrentweek', [
@@ -857,6 +860,11 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
     Route::get('/payments/getpaymentspendings', [
         'as' => 'payments.getpaymentspendings',
         'uses' => 'PaymentsController@getPaymentsPendings'
+    ]);
+    //Get Payments Pendings
+    Route::get('/payments/getpaymentspendingsbyuser', [
+        'as' => 'payments.getpaymentspendingsbyuser',
+        'uses' => 'PaymentsController@getPaymentsPendingsByUser'
     ]);
     //Payments
     Route::resource('payments', 'PaymentsController', array('only' => array('index', 'show', 'update')));

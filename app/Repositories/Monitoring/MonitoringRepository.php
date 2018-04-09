@@ -5,6 +5,7 @@ namespace SigeTurbo\Repositories\Monitoring;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use SigeTurbo\Facades\Monitorings;
 use SigeTurbo\Monitoring;
 
 class MonitoringRepository implements MonitoringRepositoryInterface
@@ -130,6 +131,19 @@ class MonitoringRepository implements MonitoringRepositoryInterface
     public function getMonitoringsForParents($year, $period, $group, $user)
     {
         return Monitorings::getMonitoringsForParents($year, $period, $group, $user);
+    }
+
+    /**
+     * Get Monitorings Performance By User
+     * @param $year
+     * @param $period
+     * @param $group
+     * @param $user
+     * @return mixed
+     */
+    public function getMonitoringsPerformanceByStudent($year, $period, $group, $user)
+    {
+        return Monitorings::getMonitoringsPerformanceByStudent($year, $period, $group, $user);
     }
 
 

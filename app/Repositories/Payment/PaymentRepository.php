@@ -132,7 +132,7 @@ class PaymentRepository implements PaymentRepositoryInterface
             $payments->where('payments.ispayment', '=', 'N');
         }
 
-        //Exclude Current Mont
+        //Exclude Current Month
         if ($excludeCurrentMonth) {
             $payments
                 ->whereNotIn('payments.realdate', [Carbon::now()->endOfMonth()->toDateTimeString()])

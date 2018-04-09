@@ -265,6 +265,7 @@ INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.monitorings.destroy', 'Admin,Teacher,Academic', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.monitorings.getglobalperformances','Admin,Teacher,Academic,Principal,RRHH,Discipline,Counseling,AreaManager,HomeroomTeacher,Admission',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.monitorings.getmonitoringsbyuserforparents','Admin,Teacher,Parents,Academic,Principal,AreaManager,HomeroomTeacher,Admission,Student',NOW(),NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.monitorings.getmonitoringsperformancebystudent','Admin,Teacher,Parents,Academic,Principal,AreaManager,HomeroomTeacher,Admission,Student',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.monitorings.getmonitoringsincurrentweek','Admin,Teacher,Academic,Principal,Account,Treasurer,Communicator,Librarian,Nurse,RRHH,Discipline,Counseling,AreaManager,HomeroomTeacher',NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.monitorings.getstudentspendigsbymonitoring','Admin,Academic,Principal,Account,Treasurer,AreaManager,HomeroomTeacher,Teacher',NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.monitoringtypes.store', 'Admin,Teacher,Academic', NOW(), NOW());
@@ -311,6 +312,7 @@ INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.payments.getpaymentsbyuserwithtransactions','Admin,Account,Treasurer',NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.payments.setpaymentmethod', 'Admin,Parents', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.payments.getpaymentspendings', 'Admin,Account,Treasurer', NOW(), NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.payments.getpaymentspendingsbyuser', 'Admin,Account,Treasurer,HomeroomTeacher', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.payments.setpaymentagreement', 'Admin,Parents', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.payments.setpaymentindividual', 'Admin,Account,Treasurer', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.payments.setpaymentindividualnew', 'Admin,Account,Treasurer', NOW(), NOW());

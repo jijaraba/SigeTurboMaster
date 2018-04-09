@@ -14,7 +14,8 @@
                     <p>Bienvenido al nuevo aplicativo para Directores de Grupo en donde en una sola pantalla puede
                         visualizar estadísticas y toda la información correspondiente al grupo y cada uno de los
                         estudiantes que hacen parte del mismo.</p>
-                    <a href="/formation/monitorings" class="btn btn-transparent-gray tooltip" title="Ir a Seguimiento Académico" style="width: 150px">Ir a Seguimientos</a>
+                    <a href="/formation/monitorings" class="btn btn-transparent-gray tooltip"
+                       title="Ir a Seguimiento Académico" style="width: 150px">Ir a Seguimientos</a>
                 </section>
             </section>
         </section>
@@ -38,7 +39,7 @@
                                 <li class="col-80 description">
                                     <div>
                                         <span>{{ $enrollment->iduser }}</span>
-                                        <span>{{ $enrollment->firstname ." ". $enrollment->lastname }}</span>
+                                        <span>{{ mb_strtoupper($enrollment->firstname ." ". $enrollment->lastname) }}</span>
                                     </div>
                                 </li>
                             </ul>
@@ -68,31 +69,22 @@
                             <sigeturbo-view-groupdirector-student year="2017" period="2"
                                                                   student="{{ $enrollment->iduser }}"
                                                                   type="partialreport"></sigeturbo-view-groupdirector-student>
+                            <hr class="margin-top-bottom-02">
+                            <sigeturbo-view-groupdirector-student year="2017" period="2"
+                                                                  student="{{ $enrollment->iduser }}"
+                                                                  type="{{ $type }}"></sigeturbo-view-groupdirector-student>
                         </section>
                     </section>
                 </section>
             </li>
             <li class="col-30">
                 <section class="sige-contained padding-05">
+                    <sigeturbo-view-payments-pending
+                            student="{{ $enrollment->iduser }}"></sigeturbo-view-payments-pending>
                     <section class="sige-contained rounded-05 bkg-white padding-20">
-                        <h6 class="center">INTEGRANTES DE LA FAMILIA</h6>
-                        <sigeturbo-view-groupdirector-members></sigeturbo-view-groupdirector-members>
-                    </section>
-                    <section class="sige-contained rounded-05 bkg-white top-10 padding-20">
                         <h6 class="center">DISTRIBUCIÓN DESEMPEÑOS</h6>
-                        <sigeturbo-view-groupdirector-performance></sigeturbo-view-groupdirector-performance>
-                    </section>
-                    <section class="sige-contained rounded-05 bkg-white top-10 padding-20">
-                        <h6 class="center">INTEGRANTES DE LA FAMILIA</h6>
-                        <sigeturbo-view-groupdirector-members></sigeturbo-view-groupdirector-members>
-                    </section>
-                    <section class="sige-contained rounded-05 bkg-white top-10 padding-20">
-                        <h6 class="center">FALTAS DE ASISTENCIA</h6>
-                        <sigeturbo-view-groupdirector-attendance></sigeturbo-view-groupdirector-attendance>
-                    </section>
-                    <section class="sige-contained rounded-05 bkg-white top-10 padding-20">
-                        <h6 class="center">OBSERVACIONES</h6>
-                        <sigeturbo-view-groupdirector-observator></sigeturbo-view-groupdirector-observator>
+                        <sigeturbo-view-groupdirector-performance year="2017" period="2" group="{{ $group->idgroup  }}"
+                                                                  student="{{ $enrollment->iduser }}"></sigeturbo-view-groupdirector-performance>
                     </section>
                 </section>
             </li>

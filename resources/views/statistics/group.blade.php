@@ -16,7 +16,7 @@
                     <li class="col-50 gutter-10">
                         <label class="select-arrow" for="idyear">
                             <select name="idyear" id="idyear" ng-model="academic.year" ng-init="academic.year = '2017'" ng-change="change(academic.year,academic.period)">
-                                <option value="2016">2017-2018</option>
+                                <option value="2017">2017-2018</option>
                                 <option value="2016">2016-2017</option>
                                 <option value="2015">2015-2016</option>
                                 <option value="2014">2014-2015</option>
@@ -26,7 +26,7 @@
                     </li>
                     <li class="col-50 gutter-10">
                         <label class="select-arrow" for="idperiod">
-                            <select name="idperiod" id="idperiod" ng-model="academic.period" ng-init="academic.period = '1'" ng-change="change(academic.year,academic.period)">
+                            <select name="idperiod" id="idperiod" ng-model="academic.period" ng-init="academic.period = '3'" ng-change="change(academic.year,academic.period)">
                                 <option value="1">Primer Periodo</option>
                                 <option value="2">Segundo Periodo</option>
                                 <option value="3">Tercer Periodo</option>
