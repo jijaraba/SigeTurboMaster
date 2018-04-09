@@ -3,7 +3,8 @@
 use Illuminate\Database\Seeder;
 use SigeTurbo\Bloodtype;
 
-class BloodtypesTableSeeder extends Seeder {
+class BloodtypesTableSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.

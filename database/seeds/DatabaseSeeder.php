@@ -13,7 +13,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
         Eloquent::unguard();
         $this->call('AclsTableSeeder');
         $this->command->info('Acls table seeded!');
@@ -29,6 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Countries table seeded!');
         $this->call('DepartmentsTableSeeder');
         $this->command->info('Departments table seeded!');
+        $this->call('TownsTableSeeder');
+        $this->command->info('Towns table seeded!');
         $this->call('EthnicgroupsTableSeeder');
         $this->command->info('Ethnicgroups table seeded!');
         $this->call('GendersTableSeeder');
@@ -122,10 +123,6 @@ class DatabaseSeeder extends Seeder
         //Languages
         $this->call('LanguagesTableSeeder');
         $this->command->info('Languages table seeded!');
-        Model::reguard();
-        //Towns
-        $this->call('TownsTableSeeder');
-        $this->command->info('Towns table seeded!');
         //Paymenttypes
         $this->call('PaymenttypesTableSeeder');
         $this->command->info('Paymenttypes table seeded!');

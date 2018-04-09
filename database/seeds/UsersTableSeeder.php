@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use SigeTurbo\User;
 
-class UsersTableSeeder extends Seeder {
+class UsersTableSeeder extends Seeder
+{
 
 
     /**
@@ -29,8 +31,8 @@ class UsersTableSeeder extends Seeder {
             'firstname' => 'FooBar',
             'lastname' => 'Bar',
             'photo' => 'sigeturbo.jpg',
-            'role' => 'Student',
-            'role_selected' => 'Student',
+            'role' => 'Teacher',
+            'role_selected' => 'Teacher',
             'api_token' => str_random(60),
             'points' => '100',
         ]);
@@ -58,8 +60,8 @@ class UsersTableSeeder extends Seeder {
         ]);
 
         User::create([
-            'iduser' => 99999998,
-            'idcategory' => 27,
+            'iduser' => 2017001,
+            'idcategory' => 13,
             'idstatus' => 1,
             'idmaritalstatus' => 3,
             'idreligion' => 1,
@@ -73,15 +75,15 @@ class UsersTableSeeder extends Seeder {
             'firstname' => 'Bar',
             'lastname' => 'Foo',
             'photo' => 'sigeturbo.jpg',
-            'role' => 'Admin',
-            'role_selected' => 'Admin',
+            'role' => 'Student',
+            'role_selected' => 'Student',
             'api_token' => str_random(60),
             'points' => '100',
         ]);
 
         User::create([
-            'iduser' => 99999999,
-            'idcategory' => 27,
+            'iduser' => 2017002,
+            'idcategory' => 13,
             'idstatus' => 1,
             'idmaritalstatus' => 3,
             'idreligion' => 1,
@@ -95,8 +97,8 @@ class UsersTableSeeder extends Seeder {
             'firstname' => 'FooFoo',
             'lastname' => 'Bar',
             'photo' => 'sigeturbo.jpg',
-            'role' => 'Parents',
-            'role_selected' => 'Parents',
+            'role' => 'Student',
+            'role_selected' => 'Students',
             'api_token' => str_random(60),
             'points' => '100',
         ]);

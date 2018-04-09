@@ -6,7 +6,7 @@
 
 <script>
 
-    import Reports from '../../models/Reports';
+    import Report from '../../models/Report';
 
     export default {
 
@@ -26,7 +26,7 @@
         methods: {
             enable() {
                 this.enableText = 'Habilitando...';
-                Reports.save('/api/v1/reports/', {
+                Report.save('/api/v1/reports/', {
                     year: this.year,
                     period: this.period,
                     user: this.student,
@@ -44,7 +44,7 @@
             }
         },
         created() {
-            Reports.getReportByStudent('/api/v1/reports/getreportbystudent', {
+            Report.getReportByStudent('/api/v1/reports/getreportbystudent', {
                 year: this.year,
                 period: this.period,
                 user: this.student,

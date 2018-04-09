@@ -1,7 +1,7 @@
 import Model from './Model';
 import {HTTP} from '../resources/resources';
 
-class Enrollments extends Model {
+class Enrollment extends Model {
 
     constructor() {
         super();
@@ -17,6 +17,10 @@ class Enrollments extends Model {
         return HTTP.get(path + '/year/' + params.year + '/group/' + params.group);
     }
 
+    static getEnrollmentsByStatus(path, params) {
+        return HTTP.get(path, {params});
+    }
+
 }
 
-export default Enrollments;
+export default Enrollment;

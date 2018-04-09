@@ -2,14 +2,15 @@
 
 use Illuminate\Database\Seeder;
 
-class AssessmentsTableSeeder extends Seeder {
+class AssessmentsTableSeeder extends Seeder
+{
 
-	/**
-	 * Run the database seeds.
-	 * @return void
-	 */
-	public function run()
-	{
-		DB::table('assesments')->delete();
-	}
+    /**
+     * Run the database seeds.
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('assesments')->delete();
+    }
 }

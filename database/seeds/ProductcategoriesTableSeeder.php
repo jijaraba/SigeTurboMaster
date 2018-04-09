@@ -4,14 +4,15 @@
 use Illuminate\Database\Seeder;
 use SigeTurbo\Productcategory;
 
-class ProductcategoriesTableSeeder extends Seeder {
+class ProductcategoriesTableSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.
      * @return void
      */
-	public function run()
-	{
+    public function run()
+    {
         DB::table('productcategories')->delete();
         Productcategory::create([
             'name' => 'Aseo y Limpieza',
@@ -22,6 +23,6 @@ class ProductcategoriesTableSeeder extends Seeder {
         Productcategory::create([
             'name' => 'Mantenimiento',
         ]);
-	}
+    }
 
 }

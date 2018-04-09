@@ -1,4 +1,4 @@
-<i class="fa fa-mobile {{ confirmed | infoConfirmed }}" aria-hidden="true" ng-click="verifyCelular()"></i>
+<span class="{{ confirmed | infoConfirmed }}" ng-click="verifyCelular()"><i class="fa fa-mobile" aria-hidden="true"></i></span>
 <input type="text" ng-model="ngModel" placeholder="Celular" required="true" ng-disabled="celularEnable"/>
 <section class="contextual-verify" ng-if="showForm">
     <header>

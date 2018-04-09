@@ -17,7 +17,7 @@
 
 <script>
 
-    import Enrollments from '../../models/Enrollments';
+    import Enrollment from '../../models/Enrollment';
     import assets from "../../core/utils";
 
     export default {
@@ -37,8 +37,7 @@
 
         },
         created() {
-            console.log(this.group)
-            Enrollments.getEnrollments('/api/v1/enrollments/getenrollments', {
+            Enrollment.getEnrollments('/api/v1/enrollments/getenrollments', {
                 year: this.year,
                 group: this.group
             })

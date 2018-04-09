@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class AcademicsTableSeeder extends Seeder {
+class AcademicsTableSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.
@@ -11,7 +12,6 @@ class AcademicsTableSeeder extends Seeder {
     public function run()
     {
         DB::table('academics')->delete();
-        DB::unprepared(file_get_contents('dummies/sql/academics.sql'));
     }
 
 }

@@ -29,7 +29,6 @@ angular.module('Financials.controllers', [])
         Payment.getPaymentsPendings({}).$promise.then(
             function (payments) {
                 $scope.payments = payments;
-                $log.info(payments);
             },
             function (error) {
                 $log.info(error);

@@ -7,7 +7,7 @@
     @endif
 @stop
 @section("dashboard")
-    <section class="grid-100" ng-controller="DashboardController">
+    <section class="grid-100">
         <section class="sige-contained">
             <h4>Dashboard</h4>
             <div class="sige-dashboard">
@@ -35,7 +35,7 @@
                                                     <a class="btn btn-blue" ng-click="exportseat('text/plain')"
                                                        style="border-radius: 30px;"><i class="fa fa-file-text-o"
                                                                                        aria-hidden="true"></i>
-                                                        <spam style="font-size: 0.71em;">Texto Plano</spam>
+                                                        <span style="font-size: 0.71em;">Texto Plano</span>
                                                     </a>
                                                 </li>
                                                 <li class="col-45 inclusion-text">Comprobante</li>
@@ -85,8 +85,8 @@
                             <h5 class="header-aquamarine">{{ Lang::get('sige.PaymentsPendings') }}</h5>
                             <ul class="display-horizontal">
                                 <li class="col-100">
-                                    <sige-turbo-payments-calendar
-                                    payments="payments"></sige-turbo-payments-calendar>
+                                    <sigeturbo-payments-calendar :payments="{{json_encode($payments,true)}}"
+                                                                 :server-date="{{ $serverdate }}"></sigeturbo-payments-calendar>
                                 </li>
                             </ul>
                         </article>

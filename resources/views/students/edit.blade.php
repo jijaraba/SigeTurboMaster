@@ -36,7 +36,7 @@
                             <li class="col-80 basic">
                                 <ul class="display-horizontal col-100">
                                     <li class="col-20 gutter-5 icon-center">
-                                        <i class="fa fa-user"></i>
+                                        <span><i class="fa fa-user"></i></span>
                                         <input name="iduser" type="text" ng-model="student.user" ng-value="student.user"
                                                ng-init="student.user = '{{$student->iduser}}'" placeholder="Código"
                                                required="true" title="{{ Lang::get('sige.CodeTitle') }}"/>
@@ -67,7 +67,7 @@
                                         </label>
                                     </li>
                                     <li class="col-40 gutter-5 icon-left">
-                                        <i class="fa fa-building" aria-hidden="true"></i>
+                                        <span><i class="fa fa-building" aria-hidden="true"></i></span>
                                         <input name="address" id="address" type="text" value="{{ $student->address }}"
                                                title="{{ Lang::get('sige.AddressTitle') }}"
                                                placeholder="Dirección"
@@ -79,7 +79,7 @@
                                         </label>
                                     </li>
                                     <li class="col-25 gutter-5 icon-left">
-                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                        <span><i class="fa fa-phone" aria-hidden="true"></i></span>
                                         <input name="phone" id="phone" type="text" value="{{ $student->phone }}"
                                                placeholder="Teléfono"
                                                title="{{ Lang::get('sige.Phone') }}"
@@ -114,7 +114,7 @@
                                         </label>
                                     </li>
                                     <li class="col-25 gutter-5 icon-left">
-                                        <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                                        <span><i class="fa fa-birthday-cake" aria-hidden="true"></i></span>
                                         <input name="birth" id="birth" type="text" ng-model="student.birth"
                                                ng-value="student.birth" title="{{ Lang::get('sige.BirthTitle') }}"
                                                ng-init="student.birth = '{{$student->birth}}'"

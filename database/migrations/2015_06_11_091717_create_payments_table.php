@@ -43,14 +43,14 @@ class CreatePaymentsTable extends Migration
             $table->double('realValue', 11, 2)->nullable();
             $table->text('observation')->nullable();
             $table->enum('ispayment', array('N', 'Y'))->default('N');
-            $table->enum('approved', array('N','A', 'R', 'P'))->default('N');
+            $table->enum('approved', array('N', 'A', 'R', 'P'))->default('N');
             $table->date('realdate');
             $table->string('voucher')->nullable();
             $table->integer('payment_by')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->integer('verified_by')->nullable();
-            $table->timestamp('payment_at');
+            $table->timestamp('payment_at')->nullable();
             $table->timestamps();
             $table->foreign('idfamily')
                 ->references('idfamily')

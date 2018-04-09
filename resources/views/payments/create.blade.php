@@ -35,7 +35,7 @@
 
                                 </h2>
                                 <p class="observation"></p>
-                                <sige-turbo-payments-create></sige-turbo-payments-create>
+                                <sigeturbo-payments-create></sigeturbo-payments-create>
                             </section>
                             <footer>
                                 <div>THE NEW SCHOOL</div>

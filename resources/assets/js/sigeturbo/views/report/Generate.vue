@@ -10,7 +10,7 @@
 
 <script>
 
-    import Exports from '../../models/Exports';
+    import Export from '../../models/Export';
     import assets from "../../core/utils";
 
     export default {
@@ -45,7 +45,7 @@
                         break;
                 }
 
-                Exports.getReport(path, {
+                Export.getReport(path, {
                     filename: this.type,
                     format: format,
                     year: this.year,

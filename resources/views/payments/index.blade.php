@@ -22,7 +22,7 @@
                     <section class="search-container">
                         <ul class="display-horizontal col-100">
                             <li class="col-100 gutter-5">
-                                <sige-turbo-payment-search search="search" result="result"></sige-turbo-payment-search>
+                                <sigeturbo-payments-search search="search" result="result"></sigeturbo-payments-search>
                                 <input name="search" ng-model="result" ng-value="result" type="hidden"
                                        value="{{json_encode($search)}}"/>
                             </li>
@@ -31,7 +31,7 @@
                                 <input value="photo" id="images" type="radio" name="view"
                                        {{ ($view == 'photo')? 'checked' : '' }} onclick="this.form.submit()">
                                 <label for="images">
-                                    <div class="fa fa-picture-o"></div>
+                                    <div class="far fa-image"></div>
                                 </label>
                                 <input value="list" id="list" type="radio" name="view"
                                        {{ ($view == 'list')? 'checked' : '' }} onclick="this.form.submit()">
@@ -51,12 +51,12 @@
                                 <input value="asc" id="asc" name="order" type="radio"
                                        {{ ($order == 'asc')? 'checked' : '' }} onclick="this.form.submit()">
                                 <label for="asc">
-                                    <div class="fa fa-sort-alpha-asc"></div>
+                                    <i class="fas fa-sort-alpha-up"></i>
                                 </label>
                                 <input value="desc" id="desc" name="order" type="radio"
                                        {{ ($order == 'desc')? 'checked' : '' }} onclick="this.form.submit()">
                                 <label for="desc">
-                                    <div class="fa fa-sort-alpha-desc"></div>
+                                    <i class="fas fa-sort-alpha-down"></i>
                                 </label>
                             </li>
                         </ul>
@@ -86,9 +86,9 @@
                                             </li>
                                             <li class="payments col-40">
                                                 <div>
-                                                    <sige-turbo-payments-calendar
-                                                            payments="{{json_encode($family->payments,true)}}"
-                                                            serverdate="{{ $serverdate }}"></sige-turbo-payments-calendar>
+                                                    <sigeturbo-payments-calendar
+                                                            :payments="{{json_encode($family->payments,true)}}"
+                                                            :server-date="{{ $serverdate }}"></sigeturbo-payments-calendar>
                                                 </div>
                                             </li>
                                             <li class="col-20 pending">

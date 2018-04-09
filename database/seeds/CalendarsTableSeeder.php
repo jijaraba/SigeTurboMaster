@@ -3,7 +3,8 @@
 use Illuminate\Database\Seeder;
 use SigeTurbo\Calendar;
 
-class CalendarsTableSeeder extends Seeder {
+class CalendarsTableSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.

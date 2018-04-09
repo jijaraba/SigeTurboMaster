@@ -56,7 +56,7 @@
 
 %icon-design {
   position: relative;
-  i {
+  span {
     height: 46px;
     width: 40px;
     background: linear-gradient(to bottom, #fff, $sige-global-bgcolor-25) repeat-x $sige-global-bgcolor-21;
@@ -67,7 +67,7 @@
     text-align: center;
     top: 5px;
     left: 5px;
-    font-size: 1.3em;
+    font-size: 1em;
     color: $sige-global-color-08;
     border: 1px solid $sige-global-bgcolor-26;
   }
@@ -118,7 +118,7 @@
             }
             &.celular {
               position: relative;
-              i {
+              span {
                 height: 46px;
                 width: 40px;
                 border-top-right-radius: 5px;
@@ -150,7 +150,7 @@
       }
       &.email {
         position: relative;
-        i {
+        span {
           height: 46px;
           width: 40px;
           border-top-right-radius: 5px;

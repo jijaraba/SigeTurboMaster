@@ -3,7 +3,8 @@
 use Illuminate\Database\Seeder;
 use SigeTurbo\Family;
 
-class FamiliesTableSeeder extends Seeder {
+class FamiliesTableSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.

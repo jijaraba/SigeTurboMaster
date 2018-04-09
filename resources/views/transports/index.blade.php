@@ -25,7 +25,7 @@
                                 <input value="photo" id="images" type="radio" name="view"
                                         onclick="this.form.submit()">
                                 <label for="images">
-                                    <div class="fa fa-picture-o"></div>
+                                    <div class="far fa-image"></div>
                                 </label>
                                 <input value="list" id="list" type="radio" name="view"
                                         onclick="this.form.submit()">

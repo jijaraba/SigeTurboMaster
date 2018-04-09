@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class AclsTableSeeder extends Seeder {
+class AclsTableSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.

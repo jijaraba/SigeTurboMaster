@@ -3,7 +3,8 @@
 use Illuminate\Database\Seeder;
 use SigeTurbo\Identificationtype;
 
-class IdentificationtypesTableSeeder extends Seeder {
+class IdentificationtypesTableSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.

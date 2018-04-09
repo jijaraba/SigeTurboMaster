@@ -2,14 +2,15 @@
 
 use Illuminate\Database\Seeder;
 
-class TimeintensitiesTableSeeder extends Seeder {
+class TimeintensitiesTableSeeder extends Seeder
+{
 
-	/**
-	 * Run the database seeds.
-	 * @return void
-	 */
-	public function run()
-	{
-		DB::table('timeintensities')->delete();
-	}
+    /**
+     * Run the database seeds.
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('timeintensities')->delete();
+    }
 }

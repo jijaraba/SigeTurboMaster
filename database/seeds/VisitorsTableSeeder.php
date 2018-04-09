@@ -5,12 +5,12 @@ use Illuminate\Database\Seeder;
 class VisitorsTableSeeder extends Seeder
 {
 
-	/**
-	 * Run the database seeds.
-	 * @return void
-	 */
-	public function run()
-	{
-		DB::table('visitors')->delete();
-	}
+    /**
+     * Run the database seeds.
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('visitors')->delete();
+    }
 }

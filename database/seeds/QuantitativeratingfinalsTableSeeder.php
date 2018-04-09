@@ -5,13 +5,13 @@ use Illuminate\Database\Seeder;
 class QuantitativeratingfinalsTableSeeder extends Seeder
 {
 
-	/**
-	 * Run the database seeds.
-	 * @return void
-	 */
-	public function run()
-	{
-		DB::table('quantitativeratingfinals')->delete();
-	}
+    /**
+     * Run the database seeds.
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('quantitativeratingfinals')->delete();
+    }
 
 }

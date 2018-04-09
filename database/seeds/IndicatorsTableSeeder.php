@@ -2,15 +2,16 @@
 
 use Illuminate\Database\Seeder;
 
-class IndicatorsTableSeeder extends Seeder {
+class IndicatorsTableSeeder extends Seeder
+{
 
-	/**
-	 * Run the database seeds.
-	 * @return void
-	 */
-	public function run()
-	{
-		DB::table('indicators')->delete();
-	}
+    /**
+     * Run the database seeds.
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('indicators')->delete();
+    }
 
 }

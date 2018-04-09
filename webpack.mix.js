@@ -14,10 +14,12 @@ let mix = require('laravel-mix');
 mix
     .scripts([
         'bower_components/jquery/dist/jquery.min.js',
-        'bower_components/intro.js/minified/intro.min.js',
-        'bower_components/sweetalert/dist/sweetalert.min.js',
         'bower_components/datepicker/dist/datepicker.js',
+        'bower_components/fontAwesome/svg-with-js/js/fontawesome-all.min.js',
+        'bower_components/intro.js/minified/intro.min.js',
         'bower_components/moment/min/moment.min.js',
+        'bower_components/sweetalert/dist/sweetalert.min.js',
+        'bower_components/tooltipster/dist/js/tooltipster.bundle.min.js',
     ], 'public/js/vendor/vendor.js')
     .version();
 
@@ -112,8 +114,12 @@ mix
  |--------------------------------------------------------------------------
 */
 mix
+    //Group Director
     .js('resources/assets/js/sigeturbo/modules/groupdirector/dashboard.js', 'public/js/groupdirector')
     .js('resources/assets/js/sigeturbo/modules/groupdirector/student.js', 'public/js/groupdirector')
+    //Financials
+    .js('resources/assets/js/sigeturbo/modules/financials/dashboard.js', 'public/js/financials')
+    .js('resources/assets/js/sigeturbo/modules/financials/payments.js', 'public/js/financials')
     .version();
 
 /*

@@ -15,12 +15,12 @@ class AreamanagersTableSeeder extends Seeder
     {
         DB::table('areamanagers')->delete();
         Areamanager::create([
-            'idyear' => 2015,
+            'idyear' => 2017,
             'idarea' => 1,
             'iduser' => 99999997,
         ]);
         Areamanager::create([
-            'idyear' => 2015,
+            'idyear' => 2017,
             'idarea' => 2,
             'iduser' => 99999997,
         ]);

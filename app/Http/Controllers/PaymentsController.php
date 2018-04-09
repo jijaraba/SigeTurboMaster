@@ -778,7 +778,7 @@ class PaymentsController extends Controller
             }
 
             $data['successful'] = false;
-            $data['message'] = "El pago fue rechazado o no sin transacción";
+            $data['message'] = "El pago fue rechazado o sin transacción";
             $data['payment'] = $paymentCPV;
             return response()->json($data, 200);
 

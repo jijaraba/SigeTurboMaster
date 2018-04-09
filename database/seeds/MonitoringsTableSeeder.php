@@ -2,15 +2,16 @@
 
 use Illuminate\Database\Seeder;
 
-class MonitoringsTableSeeder extends Seeder {
+class MonitoringsTableSeeder extends Seeder
+{
 
-	/**
-	 * Run the database seeds.
-	 * @return void
-	 */
-	public function run()
-	{
-		DB::table('monitorings')->delete();
-	}
+    /**
+     * Run the database seeds.
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('monitorings')->delete();
+    }
 
 }

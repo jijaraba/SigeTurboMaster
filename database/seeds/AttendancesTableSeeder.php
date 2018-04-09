@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class AttendancesTableSeeder extends Seeder {
+class AttendancesTableSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.

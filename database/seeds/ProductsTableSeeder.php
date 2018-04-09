@@ -4,14 +4,15 @@
 use Illuminate\Database\Seeder;
 use SigeTurbo\Product;
 
-class ProductsTableSeeder extends Seeder {
+class ProductsTableSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.
      * @return void
      */
-	public function run()
-	{
+    public function run()
+    {
         DB::table('products')->delete();
         Product::create([
             'idproductcategory' => 1,
@@ -41,6 +42,6 @@ class ProductsTableSeeder extends Seeder {
             'vat' => 0.16,
             'unit' => 'Unidad',
         ]);
-	}
+    }
 
 }

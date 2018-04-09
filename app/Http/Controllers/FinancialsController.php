@@ -2,8 +2,10 @@
 
 namespace SigeTurbo\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use SigeTurbo\Http\Requests;
+use SigeTurbo\Repositories\Payment\PaymentRepositoryInterface;
 use SigeTurbo\Repositories\User\UserRepositoryInterface;
 use SigeTurbo\Repositories\Year\YearRepositoryInterface;
 
@@ -17,23 +19,32 @@ class FinancialsController extends Controller
      * @var UserRepositoryInterface
      */
     private $userRepository;
+    /**
+     * @var PaymentRepositoryInterface
+     */
+    private $paymentRepository;
 
     /**
      * FinancialsController constructor.
      * @param YearRepositoryInterface $yearRepository
      * @param UserRepositoryInterface $userRepository
+     * @param PaymentRepositoryInterface $paymentRepository
      */
     public function __construct(YearRepositoryInterface $yearRepository,
-                                UserRepositoryInterface $userRepository)
+                                UserRepositoryInterface $userRepository,
+                                PaymentRepositoryInterface $paymentRepository)
     {
         $this->yearRepository = $yearRepository;
         $this->userRepository = $userRepository;
+        $this->paymentRepository = $paymentRepository;
     }
 
     public function index()
     {
         return view('financials.index')
-            ->withYear($this->yearRepository->getCurrentYear()->idyear);
+            ->withYear($this->yearRepository->getCurrentYear()->idyear)
+            ->withServerdate(Carbon::now()->timestamp)
+            ->withPayments($this->paymentRepository->getPaymentsPendings());
     }
 
     /**

@@ -14,6 +14,20 @@ function getCurrentRoute()
 }
 
 /**
+ * Get Current App
+ * @return mixed
+ */
+function getCurrentApp()
+{
+    $app = explode(".", Route::currentRouteName());
+    if (isset($app[1])) {
+        return $app[1];
+    } else {
+        return 'dashboard';
+    }
+}
+
+/**
  * Set Current Module
  * @param $route
  * @param string $class

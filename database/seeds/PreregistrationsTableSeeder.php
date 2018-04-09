@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-class PreregistrationsTableSeeder extends Seeder {
+class PreregistrationsTableSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.
