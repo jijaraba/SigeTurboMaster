@@ -10,9 +10,13 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Lang;
 use SigeTurbo\Category;
 use SigeTurbo\Http\Requests\UserfamilyRequest;
+use SigeTurbo\Repositories\Enrollment\EnrollmentRepositoryInterface;
 use SigeTurbo\Repositories\Payment\PaymentRepository;
 use SigeTurbo\Repositories\Payment\PaymentRepositoryInterface;
+use SigeTurbo\Repositories\Preregistration\PreregistrationRepositoryInterface;
+use SigeTurbo\Repositories\User\UserRepositoryInterface;
 use SigeTurbo\Repositories\Userfamily\UserfamilyRepositoryInterface;
+use SigeTurbo\Repositories\Year\YearRepositoryInterface;
 
 
 /**
@@ -28,15 +32,44 @@ class UserfamiliesController extends Controller
      * @var PaymentRepositoryInterface
      */
     private $paymentRepository;
+    /**
+     * @var UserRepositoryInterface
+     */
+    private $userRepository;
+    /**
+     * @var PreregistrationRepositoryInterface
+     */
+    private $preregistrationRepository;
+    /**
+     * @var YearRepositoryInterface
+     */
+    private $yearRepository;
+    /**
+     * @var EnrollmentRepositoryInterface
+     */
+    private $enrollmentRepository;
 
     /**
      * @param UserfamilyRepositoryInterface $userfamilyRepository
      * @param PaymentRepositoryInterface $paymentRepository
+     * @param UserRepositoryInterface $userRepository
+     * @param PreregistrationRepositoryInterface $preregistrationRepository
+     * @param YearRepositoryInterface $yearRepository
+     * @param EnrollmentRepositoryInterface $enrollmentRepository
      */
-    function __construct(UserfamilyRepositoryInterface $userfamilyRepository, PaymentRepositoryInterface $paymentRepository)
+    function __construct(UserfamilyRepositoryInterface $userfamilyRepository,
+                         PaymentRepositoryInterface $paymentRepository,
+                         UserRepositoryInterface $userRepository,
+                         PreregistrationRepositoryInterface $preregistrationRepository,
+                         YearRepositoryInterface $yearRepository,
+                         EnrollmentRepositoryInterface $enrollmentRepository)
     {
         $this->userfamilyRepository = $userfamilyRepository;
         $this->paymentRepository = $paymentRepository;
+        $this->userRepository = $userRepository;
+        $this->preregistrationRepository = $preregistrationRepository;
+        $this->yearRepository = $yearRepository;
+        $this->enrollmentRepository = $enrollmentRepository;
     }
 
     /**
@@ -89,7 +122,7 @@ class UserfamiliesController extends Controller
     {
 
         //Verify Payments
-        $payments = $this->paymentRepository->getPaymentsPendingsByUser(getUser()->iduser, true, null, 'ASC', true);
+        $payments = $this->paymentRepository->getPaymentsPendingByUser(getUser()->iduser, true, null, 'ASC', true);
         if (count($payments) > 0) {
             $request->session()->flash('error', Lang::get('sige.PaymentsPendingTitle'));
             App::abort(401, 'payments_pending');
@@ -97,7 +130,7 @@ class UserfamiliesController extends Controller
 
         $data = ['user' => getUser()->iduser, 'category' => Category::STUDENT];
         $users = (array)$this->userfamilyRepository->getUsersByFamily($data);
-        return view('userfamilies.indexparentsbyhomeworks')->withUsers($users);
+        return view('userfamilies.homeworks')->withUsers($users);
     }
 
     /**
@@ -110,7 +143,7 @@ class UserfamiliesController extends Controller
     {
 
         //Verify Payments
-        $payments = $this->paymentRepository->getPaymentsPendingsByUser(getUser()->iduser, true, null, 'ASC', true);
+        $payments = $this->paymentRepository->getPaymentsPendingByUser(getUser()->iduser, true, null, 'ASC', true);
         if (count($payments) > 0) {
             $request->session()->flash('error', Lang::get('sige.PaymentsPendingTitle'));
             App::abort(401, 'payments_pending');
@@ -118,20 +151,21 @@ class UserfamiliesController extends Controller
 
         $data = ['user' => getUser()->iduser, 'category' => Category::STUDENT];
         $users = (array)$this->userfamilyRepository->getUsersByFamily($data);
-        return view('userfamilies.indexparentsbymonitorings')->withUsers($users);
+        return view('userfamilies.monitorings')->withUsers($users);
     }
 
 
     /**
      * Display all members per family.
-     * GET /userfamilies
+     * GET /members
      * @param Request $request
      * @return Response
      */
-    public function indexParentsByUpdateInfo(Request $request)
+    public function members(Request $request)
     {
+
         //Verify Payments
-        $payments = $this->paymentRepository->getPaymentsPendingsByUser(getUser()->iduser, true, null, 'ASC', true);
+        $payments = $this->paymentRepository->getPaymentsPendingByUser(getUser()->iduser, true, null, 'ASC', true);
         if (count($payments) > 0) {
             $request->session()->flash('error', Lang::get('sige.PaymentsPendingTitle'));
             App::abort(401, 'payments_pending');
@@ -139,7 +173,70 @@ class UserfamiliesController extends Controller
 
         $data = ['user' => getUser()->iduser];
         $users = (array)$this->userfamilyRepository->getUsersByFamily($data);
-        return view('userfamilies.indexparentsbyupdateinfo')->withUsers($users);
+        return view('userfamilies.members')
+            ->withUsers($users);
+    }
+
+    /**
+     * Get Info Profile
+     * @param $token
+     * @param Request $request
+     * @return mixed
+     */
+    public function memberProfile($token, Request $request)
+    {
+
+        //Verify Token
+        $user = $this->userRepository->getUserByToken($token);
+
+        //Verify Payments
+        $payments = $this->paymentRepository->getPaymentsPendingByUser(getUser()->iduser, true, null, 'ASC', true);
+        if (count($payments) > 0) {
+            $request->session()->flash('error', Lang::get('sige.PaymentsPendingTitle'));
+            App::abort(401, 'payments_pending');
+        }
+
+        //Verify Preregistration by student
+        $year = $this->yearRepository::getCurrentYear();
+        if (isset($user->iduser) && $user->idcategory == Category::STUDENT) {
+            $preregistration = $this->yearRepository->getCurrentPreregistration();
+            if (isset($preregistration->idyear)) {
+                $enrollment = $this->enrollmentRepository->getEnrollmentByYearAndUser($preregistration->idyear, $user->iduser);
+                if (!isset($enrollment->iduser)) {
+                    $request->session()->flash('error', Lang::get('sige.StudentPreregistrationError', ['student' => $user->firstname, 'year' => $preregistration->name]));
+                    App::abort(401, 'enrollment_error');
+                }
+            } elseif (isset($year->idyear)) {
+                $enrollment = $this->enrollmentRepository->getEnrollmentByYearAndUser($year->idyear, $user->iduser);
+                if (!isset($enrollment->iduser)) {
+                    $request->session()->flash('error', Lang::get('sige.StudentEnrollmentError',['student' => $user->firstname, 'year' => $year->name]));
+                    App::abort(401, 'enrollment_error');
+                }
+            }
+        }
+
+
+        //Get Information By User
+        if (isset($user->iduser)) {
+            $preregistration = $this->preregistrationRepository->getPreregistrationByUser($user->iduser);
+            if (isset($preregistration->iduser)) {
+                return view('userfamilies.profile')
+                    ->withUser($user)
+                    ->withPreregistration($preregistration);
+            } else {
+                //Save Preregistration
+                $preregistration = $this->preregistrationRepository->store($user);
+                return view('userfamilies.profile')
+                    ->withUser($user)
+                    ->withPreregistration($preregistration);
+            }
+        } else {
+            return redirect()
+                ->route('parents.members.index')
+                ->withErrors(Lang::get('sige.ErrorNotUser'));
+
+        }
+
     }
 
     /**
@@ -148,7 +245,8 @@ class UserfamiliesController extends Controller
      * @param  int $iduserfamily
      * @return Response
      */
-    public function show($iduserfamily)
+    public
+    function show($iduserfamily)
     {
         return response()->json($this->userfamilyRepository->find($iduserfamily));
     }
@@ -158,7 +256,8 @@ class UserfamiliesController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function getUsersByFamily(Request $request)
+    public
+    function getUsersByFamily(Request $request)
     {
         return response()->json($this->userfamilyRepository->getUsersByFamily($request));
     }

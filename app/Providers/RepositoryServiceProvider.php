@@ -72,6 +72,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'SigeTurbo\Repositories\Contract\ContractRepository'
         );
         App::bind(
+            'SigeTurbo\Repositories\Concepttype\ConcepttypeRepositoryInterface',
+            'SigeTurbo\Repositories\Concepttype\ConcepttypeRepository'
+        );
+        App::bind(
             'SigeTurbo\Repositories\Preregistration\PreregistrationRepositoryInterface',
             'SigeTurbo\Repositories\Preregistration\PreregistrationRepository'
         );
@@ -162,6 +166,10 @@ class RepositoryServiceProvider extends ServiceProvider
         App::bind(
             'SigeTurbo\Repositories\Payment\PaymentRepositoryInterface',
             'SigeTurbo\Repositories\Payment\PaymentRepository'
+        );
+        App::bind(
+            'SigeTurbo\Repositories\Package\PackageRepositoryInterface',
+            'SigeTurbo\Repositories\Package\PackageRepository'
         );
         App::bind(
             'SigeTurbo\Repositories\Points\PointsRepositoryInterface',

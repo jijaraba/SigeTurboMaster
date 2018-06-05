@@ -204,9 +204,9 @@ class EnrollmentsController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function getEnrollmentsLatestByStudentWithCost(Request $request)
+    public function getEnrollmentLatestByStudentWithCost(Request $request)
     {
-        return response()->json($this->enrollmentRepository->getEnrollmentsLatestByStudentWithCost($request['student'], $request['year'], $request['type']));
+        return response()->json($this->enrollmentRepository->getEnrollmentLatestByStudentWithCost($request['student'], $request['year']));
     }
 
     /**

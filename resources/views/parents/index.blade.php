@@ -26,11 +26,16 @@
     </section>
 @stop
 @section("vendor")
-    {!! HTML::script(mix('js/vendor/vendor.js')) !!}
+    {!! HTML::script(mix('/js/vendor/vendor.js')) !!}
+    {!! HTML::script(mix('/js/Utils.js')) !!}
 @stop
 @section("script")
-    {!! HTML::script(mix('js/angular/' . getCurrentRoute() . '.js')) !!}
+    {!! HTML::script(mix('js/' . getCurrentRoute() . '/' . getCurrentApp() .  '.js')) !!}
+@stop
+@section("socket")
+    {!! HTML::script(mix('js/vendor/socket.io.js')) !!}
 @stop
 @section("sigeturbo")
     {!! HTML::script(mix('js/SigeTurbo.js')) !!}
+    {!! HTML::script(mix('js/Stream.js')) !!}
 @stop

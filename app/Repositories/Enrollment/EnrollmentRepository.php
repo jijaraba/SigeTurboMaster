@@ -238,19 +238,17 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
         return Enrollment::select(DB::raw('max(idgroup) AS "group"'))
             ->where('iduser', '=', $student)
             ->first();
-
     }
 
     /**
      * Get Enrollments By Student With Cost
      * @param $student
      * @param $year
-     * @param $type
      * @return mixed
      */
-    public function getEnrollmentsLatestByStudentWithCost($student, $year, $type)
+    public function getEnrollmentLatestByStudentWithCost($student, $year)
     {
-        $enrollment = Enrollment::select('users.iduser', 'users.firstname', 'users.lastname', 'groups.name AS group', 'grades.name AS grade', 'enrollments.scholarship', 'users.idgender', 'costs.*')
+        $enrollment = Enrollment::select('users.iduser', 'users.firstname', 'users.lastname', 'groups.name AS group', 'grades.idgrade', 'grades.name AS grade', 'enrollments.scholarship', 'users.idgender')
             ->join('users', function ($join) {
                 $join
                     ->on('users.iduser', '=', 'enrollments.iduser');
@@ -263,21 +261,10 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
                 $join
                     ->on('grades.idgrade', '=', 'groups.idgrade');
             })
-            ->join('costs', function ($join) {
-                $join
-                    ->on('costs.idgrade', '=', 'grades.idgrade');
-            })
             ->where('users.iduser', '=', $student)
-            ->where('groups.idgroup', '=', DB::raw("(SELECT max(idgroup) FROM enrollments WHERE iduser = $student)"));
-        if ($type == 1) {
-            $enrollment
-                ->whereIn('enrollments.idstatusschooltype', Statusschooltype::STATUS_PREENROLLMENT);
-        } else {
-            $enrollment
-                ->whereIn('enrollments.idstatusschooltype', Statusschooltype::STATUS_ACTIVE);
-        }
+            ->where('groups.idgroup', '=', DB::raw("(SELECT max(idgroup) FROM enrollments WHERE iduser = $student)"))
+            ->whereIn('enrollments.idstatusschooltype', Statusschooltype::STATUS_ACTIVE);
         return $enrollment
-            ->where('costs.idyear', '=', $year)
             ->first();
     }
 
@@ -509,6 +496,7 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
      * Get Enrollments By Status
      * @param $year
      * @param $status
+     * @return mixed
      */
     public function getEnrollmentsByStatus($year, $status)
     {
@@ -560,5 +548,13 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
             ->orderBy('Student');
         return $enrollments
             ->get();
+    }
+
+    public function getEnrollmentByYearAndUser($year, $student)
+    {
+        return Enrollment::select('*')
+            ->where('idyear', '=', $year)
+            ->where('iduser', '=', $student)
+            ->first();
     }
 }

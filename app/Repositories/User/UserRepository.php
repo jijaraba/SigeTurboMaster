@@ -427,23 +427,23 @@ class UserRepository implements UserRepositoryInterface
      * Get All Students
      * @return mixed
      */
-    public function getallstudents($year = null,$showactives= false)
+    public function getallstudents($year = null, $showactives = false)
     {
-            $users = User::select('users.iduser', 'firstname', 'photo', 'lastname', DB::raw('MAX(idyear) AS Lastyear'), DB::raw('MAX(idgroup) AS Lastgroup'))
+        $users = User::select('users.iduser', 'firstname', 'photo', 'lastname', DB::raw('MAX(idyear) AS Lastyear'), DB::raw('MAX(idgroup) AS Lastgroup'))
             ->join('enrollments', function ($join) {
                 $join
                     ->on('enrollments.iduser', '=', 'users.iduser');
             });
-            if ($year !== null) {
-                $users->where('enrollments.idyear', '=', $year);
-            }
-            if ($showactives !== false) {
-                $users->whereIn('enrollments.idstatusschooltype', [1,6,11,13]);
-            }
-            return $users->where('idcategory', '=', 13)
+        if ($year !== null) {
+            $users->where('enrollments.idyear', '=', $year);
+        }
+        if ($showactives !== false) {
+            $users->whereIn('enrollments.idstatusschooltype', [1, 6, 11, 13]);
+        }
+        return $users->where('idcategory', '=', 13)
             ->groupBy('users.iduser')
-             ->get();
-    }   
+            ->get();
+    }
 
     /**
      * Get Monitorings In Current Week By Teacher
@@ -456,25 +456,32 @@ class UserRepository implements UserRepositoryInterface
      * @param $statusNotIn
      * @return mixed
      */
-    public function getStudentsPendigsByMonitorings($year,$period,$group = null,$area = null ,$teacher =null,$subjectNotIn = [54],$statusNotIn = [4,7,8,9,10])    {
+    public function getStudentsPendingByMonitorings($year, $period, $group = null, $area = null, $teacher = null, $subjectNotIn = [54], $statusNotIn = [4, 7, 8, 9, 10])
+    {
         $select = User::select(
             'contractssummarized.idyear',
             'users.iduser AS User',
-            'groups.idgroup','groups.name AS Groups',
-             DB::raw("CONCAT_WS(CONVERT(' ' USING latin1),users.lastname,users.firstname) AS Student"),
-            'subjects.idsubject','subjects.name AS Subject',
+            'groups.idgroup', 'groups.name AS Groups',
+            DB::raw("CONCAT_WS(CONVERT(' ' USING latin1),users.lastname,users.firstname) AS Student"),
+            'subjects.idsubject', 'subjects.name AS Subject',
             'monitoringsqualified.rating',
             'areas.idarea',
             'areas.name AS Area',
-            'nivelattendances','idteachersnivels',
+            'nivelattendances', 'idteachersnivels',
             'teachers',
             'nivels',
             'users.photo',
-            'statusschooltypes.idstatusschooltype','statusschooltypes.name AS Status'
-            )
-            ->join('enrollments', function ($join) { $join->on('enrollments.iduser', '=', 'users.iduser'); })
-            ->join('groups', function ($join) {  $join->on('groups.idgroup', '=', 'enrollments.idgroup');})
-            ->join('statusschooltypes', function ($join) { $join->on('statusschooltypes.idstatusschooltype', '=', 'enrollments.idstatusschooltype'); })
+            'statusschooltypes.idstatusschooltype', 'statusschooltypes.name AS Status'
+        )
+            ->join('enrollments', function ($join) {
+                $join->on('enrollments.iduser', '=', 'users.iduser');
+            })
+            ->join('groups', function ($join) {
+                $join->on('groups.idgroup', '=', 'enrollments.idgroup');
+            })
+            ->join('statusschooltypes', function ($join) {
+                $join->on('statusschooltypes.idstatusschooltype', '=', 'enrollments.idstatusschooltype');
+            })
             ->join(DB::raw("(SELECT
                   idyear, idgroup, idperiod, contracts.idsubject,
                   GROUP_CONCAT(CAST(contracts.iduser AS CHAR)) AS idusers,
@@ -484,36 +491,37 @@ class UserRepository implements UserRepositoryInterface
                FROM contracts
                 INNER JOIN users ON users.iduser = contracts.iduser
                 INNER JOIN nivels ON nivels.idnivel = contracts.idnivel
-               WHERE idyear = ".$year." AND idperiod = ".$period." GROUP BY idyear,idperiod,idgroup,contracts.idsubject) AS contractssummarized"), function ($join) {
+               WHERE idyear = " . $year . " AND idperiod = " . $period . " GROUP BY idyear,idperiod,idgroup,contracts.idsubject) AS contractssummarized"), function ($join) {
                 $join
                     ->on('contractssummarized.idyear', '=', 'enrollments.idyear')
-                    ->on('contractssummarized.idgroup', '=', 'enrollments.idgroup')
-                    ;
+                    ->on('contractssummarized.idgroup', '=', 'enrollments.idgroup');
             })
             ->leftJoin(DB::raw('(SELECT idyear, idperiod, idgroup, idsubject, idnivel, iduser, rating FROM monitorings
-                 WHERE idyear = '.$year.' AND idperiod = '.$period.' GROUP BY idyear,idperiod,idgroup,idsubject,iduser) AS monitoringsqualified'), function ($join) {
+                 WHERE idyear = ' . $year . ' AND idperiod = ' . $period . ' GROUP BY idyear,idperiod,idgroup,idsubject,iduser) AS monitoringsqualified'), function ($join) {
                 $join
                     ->on('monitoringsqualified.idyear', '=', 'contractssummarized.idyear')
                     ->on('monitoringsqualified.idperiod', '=', 'contractssummarized.idperiod')
                     ->on('monitoringsqualified.idgroup', '=', 'contractssummarized.idgroup')
                     ->on('monitoringsqualified.idsubject', '=', 'contractssummarized.idsubject')
-                    ->on('monitoringsqualified.iduser', '=', 'enrollments.iduser')
-                    ;
+                    ->on('monitoringsqualified.iduser', '=', 'enrollments.iduser');
             })
             ->leftJoin(DB::raw("(SELECT  idyear, idperiod, idgroup, idsubject, idnivel, iduser,CONCAT('[',GROUP_CONCAT(CONCAT('{','idnivel : \"',idnivel,'\"  ,amount :',total,'}')),']') AS 'nivelattendances'
                                 FROM (SELECT  idyear, idperiod, idgroup, idsubject, idnivel, iduser, SUM(attendances.attendance) as total FROM attendances 
-                                WHERE idyear = ".$year." AND idperiod = ".$period." GROUP BY idyear,idperiod,idgroup,iduser,idsubject,idnivel) AS totalattendances 
+                                WHERE idyear = " . $year . " AND idperiod = " . $period . " GROUP BY idyear,idperiod,idgroup,iduser,idsubject,idnivel) AS totalattendances 
                         GROUP BY idyear,idperiod,idgroup,iduser,idsubject) AS attendancesbynivels"), function ($join) {
                 $join
                     ->on('attendancesbynivels.idyear', '=', 'contractssummarized.idyear')
                     ->on('attendancesbynivels.idperiod', '=', 'contractssummarized.idperiod')
                     ->on('attendancesbynivels.idgroup', '=', 'contractssummarized.idgroup')
                     ->on('attendancesbynivels.idsubject', '=', 'contractssummarized.idsubject')
-                    ->on('attendancesbynivels.iduser', '=', 'enrollments.iduser')
-                    ;
+                    ->on('attendancesbynivels.iduser', '=', 'enrollments.iduser');
             })
-            ->join('subjects', function ($join) { $join->on('subjects.idsubject', '=', 'contractssummarized.idsubject');})
-            ->join('areas', function ($join) { $join->on('areas.idarea', '=', 'subjects.idarea');})
+            ->join('subjects', function ($join) {
+                $join->on('subjects.idsubject', '=', 'contractssummarized.idsubject');
+            })
+            ->join('areas', function ($join) {
+                $join->on('areas.idarea', '=', 'subjects.idarea');
+            })
             ->join('academics', function ($join) {
                 $join
                     ->on('academics.idyear', '=', 'contractssummarized.idyear')
@@ -521,27 +529,47 @@ class UserRepository implements UserRepositoryInterface
             })
             ->where('enrollments.idyear', '=', $year)
             ->whereNotIn('enrollments.idstatusschooltype', $statusNotIn);
-            if($group !== null) {
-                $select->where('enrollments.idgroup', '=', $group);
-            }else{
-                $select->where('enrollments.idgroup', '>', 10);
-            }
-            $select->whereRaw('TO_DAYS(academics.print) - TO_DAYS(enrollments.register) >= 30')
+        if ($group !== null) {
+            $select->where('enrollments.idgroup', '=', $group);
+        } else {
+            $select->where('enrollments.idgroup', '>', 10);
+        }
+        $select->whereRaw('TO_DAYS(academics.print) - TO_DAYS(enrollments.register) >= 30')
             ->whereNotIn('contractssummarized.idsubject', $subjectNotIn)
             ->whereNull('monitoringsqualified.rating');
-            if ($area !== null) {
-                $select->where('areas.idarea', '=', $area);
-            }
-            if ($teacher !== null) {
-                $select->where('idteachersnivels', 'like', '%'.$teacher.'%');
-            }
-            $select->orderBy('enrollments.idgroup')
+        if ($area !== null) {
+            $select->where('areas.idarea', '=', $area);
+        }
+        if ($teacher !== null) {
+            $select->where('idteachersnivels', 'like', '%' . $teacher . '%');
+        }
+        $select->orderBy('enrollments.idgroup')
             ->orderBy('Student');
-        /*$resultado['Parametros'] = $select->getBindings();
-        $query = str_replace(array('%', '?'), array('%%', '%s'), $select->toSql());
-        $query = vsprintf($query, $select->getBindings());
-        $resultado['Consulta'] = $query;
-            dd(  $resultado);*/
-           return $select->get();
+        return $select->get();
+    }
+
+    /**
+     * Get User By Token
+     * @param $token
+     * @return mixed
+     */
+    public function getUserByToken($token)
+    {
+        return User::select('users.*', 'identifications.ididentificationtype', 'userfamilies.idfamily', 'identifications.identification', 'identifications.expedition', 'healthinformations.idbloodtype', 'categories.name AS member')
+            ->join('categories', function ($join) {
+                $join->on('categories.idcategory', '=', 'users.idcategory');
+            })
+            ->leftJoin('identifications', function ($join) {
+                $join->on('identifications.iduser', '=', 'users.iduser');
+            })
+            ->leftJoin('healthinformations', function ($join) {
+                $join->on('healthinformations.iduser', '=', 'users.iduser');
+            })
+            ->leftJoin('userfamilies', function ($join) {
+                $join->on('userfamilies.iduser', '=', 'users.iduser');
+            })
+            ->whereToken($token)
+            ->first();
+
     }
 }

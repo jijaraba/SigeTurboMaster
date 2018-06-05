@@ -576,7 +576,7 @@
         > article {
           > ul {
             > li {
-              > div {
+              div.container {
                 cursor: pointer;
                 border: 1px solid $sige-border-color-03;
                 &.global {

@@ -5,7 +5,7 @@
             <option value="parents/homeworks" {{ setCurrentApp('homeworks','selected') }}>{{ Lang::get('sige.Homeworks') }}</option>
             <option value="parents/monitorings" {{ setCurrentApp('monitoring','selected') }}>{{ Lang::get('sige.Monitoring') }}</option>
             <option value="parents/reports" {{ setCurrentApp('reports','selected') }}>{{ Lang::get('sige.Reports') }}</option>
-            <option value="parents/updateinfo" {{ setCurrentApp('updateinfo','selected') }}>{{ Lang::get('sige.Updateinfo') }}</option>
+            <option value="parents/members" {{ setCurrentApp('members','selected') }}>{{ Lang::get('sige.Updateinfo') }}</option>
             <option value="parents/payments" {{ setCurrentApp('payments','selected') }}>{{ Lang::get('sige.Payments') }}</option>
         </select>
     </label>
@@ -30,12 +30,12 @@
         <a href="{{ URL::route('parents.reports.index') }}">
             <span>{{ Lang::get('sige.Reports') }}</span>
         </a>
-        <em>New</em>
     </li>
-    <li class="{{ setCurrentApp('updateinfo','active') }}">
-        <a href="{{ URL::route('parents.updateinfo.index') }}">
+    <li class="{{ setCurrentApp('members','active') }}">
+        <a href="{{ URL::route('parents.members.index') }}">
             <span>{{ Lang::get('sige.Updateinfo') }}</span>
         </a>
+        <em>New</em>
     </li>
     <li class="{{ setCurrentApp('payments','active') }}">
         <a href="{{ URL::route('parents.payments.index') }}">

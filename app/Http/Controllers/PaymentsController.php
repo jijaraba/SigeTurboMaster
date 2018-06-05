@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use SigeTurbo\Accounttype;
 use SigeTurbo\Category;
-use SigeTurbo\Group;
 use SigeTurbo\Http\Requests\PaymentIndividualRequest;
 use SigeTurbo\Http\Requests\PaymentMassiveRequest;
 use SigeTurbo\Http\Requests\PaymentRequest;
@@ -30,6 +29,9 @@ use SigeTurbo\Repositories\Voucherconsecutive\VoucherconsecutiveRepositoryInterf
 use SigeTurbo\Repositories\Year\YearRepositoryInterface;
 use SigeTurbo\Statusschooltype;
 
+/**
+ * @property TransactionRepositoryInterface transactionRepository
+ */
 class PaymentsController extends Controller
 {
     /**
@@ -293,21 +295,21 @@ class PaymentsController extends Controller
     }
 
     /**
-     * Get Payments Pendings
+     * Get Payments Pending
      * @return mixed
      */
-    public function getPaymentsPendings()
+    public function getPaymentsPending()
     {
-        return response()->json($this->paymentRepository->getPaymentsPendings());
+        return response()->json($this->paymentRepository->getPaymentsPending());
     }
 
     /**
-     * Get Payments Pendings By User
+     * Get Payments Pending By User
      * @return mixed
      */
-    public function getPaymentsPendingsByUser(Request $request)
+    public function getPaymentsPendingByUser(Request $request)
     {
-        return response()->json($this->paymentRepository->getPaymentsPendingsByUser($request['user'],true, null, 'ASC', true));
+        return response()->json($this->paymentRepository->getPaymentsPendingByUser($request['user'],true, null, 'ASC', true));
     }
 
     /**

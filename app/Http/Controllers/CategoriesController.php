@@ -2,6 +2,7 @@
 
 namespace SigeTurbo\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use SigeTurbo\Repositories\Category\CategoryRepositoryInterface;
 
@@ -35,6 +36,17 @@ class CategoriesController extends Controller
     public function show($idcategory)
     {
         return response()->json($this->categoryRepository->find($idcategory));
+    }
+
+    /**
+     * Display the specified resource.
+     * GET /categories/getcategorycodebyname
+     * @param Request $request
+     * @return Response
+     */
+    public function getCategoryCodeByName(Request $request)
+    {
+        return response()->json($this->categoryRepository->getCategoryCodeByName($request['category']));
     }
 
 

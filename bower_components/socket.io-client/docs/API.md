@@ -33,12 +33,15 @@
     - [Event: 'pong'](#event-pong)
   - [Class: io.Socket](#socket)
     - [socket.id](#socketid)
+    - [socket.connected](#socketconnected)
+    - [socket.disconnected](#socketdisconnected)
     - [socket.open()](#socketopen)
     - [socket.connect()](#socketconnect)
     - [socket.send([...args][, ack])](#socketsendargs-ack)
     - [socket.emit(eventName[, ...args][, ack])](#socketemiteventname-args-ack)
     - [socket.on(eventName, callback)](#socketoneventname-callback)
     - [socket.compress(value)](#socketcompressvalue)
+    - [socket.binary(value)](#socketbinaryvalue)
     - [socket.close()](#socketclose)
     - [socket.disconnect()](#socketdisconnect)
     - [Event: 'connect'](#event-connect)
@@ -396,6 +399,34 @@ socket.on('connect', () => {
 });
 ```
 
+#### socket.connected
+
+  - _(Boolean)_
+
+Whether or not the socket is connected to the server.
+
+```js
+const socket = io('http://localhost');
+
+socket.on('connect', () => {
+  console.log(socket.connected); // true
+});
+```
+
+#### socket.disconnected
+
+  - _(Boolean)_
+
+Whether or not the socket is disconnected from the server.
+
+```js
+const socket = io('http://localhost');
+
+socket.on('connect', () => {
+  console.log(socket.disconnected); // false
+});
+```
+
 #### socket.open()
 
   - **Returns** `Socket`
@@ -496,6 +527,14 @@ Sets a modifier for a subsequent event emission that the event data will only be
 socket.compress(false).emit('an event', { some: 'data' });
 ```
 
+#### socket.binary(value)
+
+Specifies whether the emitted data contains binary. Increases performance when specified. Can be `true` or `false`.
+
+```js
+socket.binary(false).emit('an event', { some: 'data' });
+```
+
 #### socket.close()
 
   - **Returns** `Socket`
@@ -564,7 +603,11 @@ Fired upon a disconnection.
 
 ```js
 socket.on('disconnect', (reason) => {
-  // ...
+  if (reason === 'io server disconnect') {
+    // the disconnection was initiated by the server, you need to reconnect manually
+    socket.connect();
+  }
+  // else the socket will automatically try to reconnect
 });
 ```
 

@@ -16,7 +16,7 @@ import Vue from 'vue';
 
 import Student from '../../views/groupdirector/Student';
 import Userfamily from '../../views/userfamily/Userfamily';
-import PaymentPending from '../../views/payments/Pending';
+import PaymentPendingStudent from '../../views/payments/Pending/Student';
 import AttendanceScalar from '../../views/attendance/AttendanceScalar';
 import ObservatorScalar from '../../views/observator/ObservatorScalar';
 import PerformanceByStudent from '../../views/chart/PerformanceByStudent';
@@ -29,7 +29,7 @@ new Vue({
         'sigeturbo-view-groupdirector-attendance': AttendanceScalar,
         'sigeturbo-view-groupdirector-observator': ObservatorScalar,
         'sigeturbo-view-groupdirector-performance': PerformanceByStudent,
-        'sigeturbo-view-payments-pending': PaymentPending,
+        'sigeturbo-view-payments-pending': PaymentPendingStudent,
 
     }
 });

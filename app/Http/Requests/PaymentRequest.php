@@ -26,6 +26,7 @@ class PaymentRequest extends Request
         return [
             'method' => 'required',
             'type' => 'required',
+            'package' => 'required|integer',
             'family' => 'required',
             'student' => 'required',
             'ispayment' => 'required',

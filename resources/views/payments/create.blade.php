@@ -18,14 +18,15 @@
     @endif
 @stop
 @section("dashboard")
-    <section ng-controller="PaymentsCreateController">
+    <section>
         <section class="grid-100">
             <section class="sige-contained">
                 <section class="sige-payments-create-form">
                     <a href="{{ URL::route('financials.payments.index',[])}}"
-                       class="btn btn-transparent margin-bottom-20"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
-                    <h4>Respuesta Pago</h4>
-                    <section class="sige-payments-create">
+                       class="btn btn-transparent margin-bottom-20"><i
+                                class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
+                    <h4>Asignación de Pagos</h4>
+                    <section class="sige-financials-create">
                         <article>
                             <header>
                                 <h2>Seleccione Método de Pago</h2>
@@ -38,7 +39,7 @@
                                 <sigeturbo-payments-create></sigeturbo-payments-create>
                             </section>
                             <footer>
-                                <div>THE NEW SCHOOL</div>
+                                <div>{{ mb_strtoupper(config('app.company')) }}</div>
                             </footer>
                         </article>
                     </section>
@@ -48,11 +49,16 @@
     </section>
 @stop
 @section("vendor")
-    {!! HTML::script(mix('js/vendor/vendor.js')) !!}
+    {!! HTML::script(mix('/js/vendor/vendor.js')) !!}
+    {!! HTML::script(mix('/js/Utils.js')) !!}
 @stop
 @section("script")
-    {!! HTML::script(mix('js/angular/' . getCurrentRoute() . '.js')) !!}
+    {!! HTML::script(mix('js/' . getCurrentRoute() . '/' . getCurrentApp() .  '.js')) !!}
+@stop
+@section("socket")
+    {!! HTML::script(mix('js/vendor/socket.io.js')) !!}
 @stop
 @section("sigeturbo")
     {!! HTML::script(mix('js/SigeTurbo.js')) !!}
+    {!! HTML::script(mix('js/Stream.js')) !!}
 @stop

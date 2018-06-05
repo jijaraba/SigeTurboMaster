@@ -44,7 +44,7 @@ class FinancialsController extends Controller
         return view('financials.index')
             ->withYear($this->yearRepository->getCurrentYear()->idyear)
             ->withServerdate(Carbon::now()->timestamp)
-            ->withPayments($this->paymentRepository->getPaymentsPendings());
+            ->withPayments($this->paymentRepository->getPaymentsPending());
     }
 
     /**

@@ -77,8 +77,15 @@ SigeTurbo =
         alert "Muy pronto ..."
         false
 
-      $( "#apps" ).on "change", ->
+      $("#apps").on "change", ->
         window.location.href = '/' + this.value
+
+      #ToolTip
+      $('.tooltip').tooltipster({
+        theme: ['tooltipster-shadow', 'tooltipster-shadow-customized'],
+        maxWidth: 350,
+        contentAsHTML: true
+      })
 
       #DatePicker
       $('[data-toggle="starts"]').datepicker({

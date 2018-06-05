@@ -25,6 +25,7 @@ interface UserRepositoryInterface
     public function getUsersByCategory($category);
     public function getUsersByCategories($categories = []);
     public function getPersonalAcademic();
-    public function getallstudents($year = null,$showactives= false);
-    public function getStudentsPendigsByMonitorings($year,$period,$group = null,$area = null  ,$teacher =null,$subjectNotIn = [54],$statusNotIn = [4,7,8,9,10]);
+    public function getallstudents($year = null, $showactives = false);
+    public function getStudentsPendingByMonitorings($year, $period, $group = null, $area = null, $teacher = null, $subjectNotIn = [54], $statusNotIn = [4, 7, 8, 9, 10]);
+    public function getUserByToken($token);
 }

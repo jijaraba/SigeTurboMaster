@@ -73,23 +73,23 @@
                                     </ul>
                                 </li>
                                 <li class="col-30" id="main_dashboard">
-                                    <article>
-                                        <h5 class="header-aquamarine">&nbsp;</h5>
-                                    </article>
+
                                 </li>
                             </ul>
                         </article>
                     </li>
                     <li class="col-50 secondary_dashboard">
-                        <article>
-                            <h5 class="header-aquamarine">{{ Lang::get('sige.PaymentsPendings') }}</h5>
-                            <ul class="display-horizontal">
-                                <li class="col-100">
-                                    <sigeturbo-payments-calendar :payments="{{json_encode($payments,true)}}"
-                                                                 :server-date="{{ $serverdate }}"></sigeturbo-payments-calendar>
-                                </li>
-                            </ul>
-                        </article>
+                        @if(count($payments)>0)
+                            <article>
+                                <h5 class="header-aquamarine">{{ Lang::get('sige.PaymentsPendings') }}</h5>
+                                <ul class="display-horizontal">
+                                    <li class="col-100">
+                                        <sigeturbo-payments-calendar :payments="{{json_encode($payments,true)}}"
+                                                                     :server-date="{{ $serverdate }}"></sigeturbo-payments-calendar>
+                                    </li>
+                                </ul>
+                            </article>
+                        @endif
                     </li>
                 </ul>
             </div>
@@ -97,10 +97,11 @@
     </section>
 @stop
 @section("vendor")
-    {!! HTML::script(mix('js/vendor/vendor.js')) !!}
+    {!! HTML::script(mix('/js/vendor/vendor.js')) !!}
+    {!! HTML::script(mix('/js/Utils.js')) !!}
 @stop
 @section("script")
-    {!! HTML::script(mix('js/angular/' . getCurrentRoute() . '.js')) !!}
+    {!! HTML::script(mix('js/' . getCurrentRoute() . '/' . getCurrentApp() .  '.js')) !!}
 @stop
 @section("socket")
     {!! HTML::script(mix('js/vendor/socket.io.js')) !!}

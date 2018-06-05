@@ -33,6 +33,13 @@ class Accounttype extends Model
      */
     protected $table = 'accounttypes';
 
+    /**
+     * @return mixed
+     */
+    public function costs()
+    {
+        return $this->hasMany('SigeTurbo\Cost', 'idaccounttype', 'idaccounttype');
+    }
 
     /**
      * @return mixed

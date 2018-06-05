@@ -86,17 +86,20 @@
                         {!! HTML::image('images/sigeturbo.svg','Home') !!}
                     </a>
                 </li>
-                <li id="admissions" class="sige-nav-module {{ setCurrentModule('admissions') }}">
-                    <a href="{{ URL::route('admissions.dashboard') }}" title="{{ Lang::get('sige.Admissions') }}"
-                       data-title="{{ Lang::get('sige.Admissions') }}">
-                        @if(setCurrentModule('admissions') == 'current')
-                            {!! HTML::image('images/modules/admissions_active.svg',Lang::get('sige.Admissions')) !!}
-                        @else
-                            {!! HTML::image('images/modules/admissions.svg',Lang::get('sige.Admissions')) !!}
-                        @endif
-                        <span>{{ Lang::get('sige.Admissions') }}</span>
-                    </a>
-                </li>
+                @can('view',\SigeTurbo\Admission::class)
+                    <li id="admissions" class="sige-nav-module {{ setCurrentModule('admissions') }}">
+                        <a href="{{ URL::route('admissions.dashboard') }}" title="{{ Lang::get('sige.Admissions') }}"
+                           data-title="{{ Lang::get('sige.Admissions') }}">
+                            @if(setCurrentModule('admissions') == 'current')
+                                {!! HTML::image('images/modules/admissions_active.svg',Lang::get('sige.Admissions')) !!}
+                            @else
+                                {!! HTML::image('images/modules/admissions.svg',Lang::get('sige.Admissions')) !!}
+                            @endif
+                            <span>{{ Lang::get('sige.Admissions') }}</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('view',\SigeTurbo\Financial::class)
                 <li id="financials" class="sige-nav-module {{ setCurrentModule('financials') }}">
                     <a href="{{ URL::route('financials.dashboard') }}" title="{{ Lang::get('sige.Financials') }}"
                        data-title="{{ Lang::get('sige.Financials') }}">
@@ -107,8 +110,9 @@
                         @endif
                         <span>{{ Lang::get('sige.Financials') }}</span>
                     </a>
-                    <em>New</em>
                 </li>
+                @endcan
+                @can('view',\SigeTurbo\Formation::class)
                 <li id="formation" class="sige-nav-module {{ setCurrentModule('formation') }}"
                     title="{{ Lang::get('sige.Formation') }}" data-title="{{ Lang::get('sige.Formation') }}">
                     <a href="{{ URL::route('formation.dashboard') }}">
@@ -120,6 +124,8 @@
                         <span>{{ Lang::get('sige.Formation') }}</span>
                     </a>
                 </li>
+                @endcan
+                @can('view',\SigeTurbo\Communication::class)
                 <li id="communications" class="sige-nav-module {{ setCurrentModule('communications') }}"
                     title="{{ Lang::get('sige.Communications') }}" data-title="{{ Lang::get('sige.Communications') }}">
                     <a href="{{ URL::route('communications.dashboard') }}">
@@ -130,7 +136,10 @@
                         @endif
                         <span>{{ Lang::get('sige.Communications') }}</span>
                     </a>
+                    <em>New</em>
                 </li>
+                @endcan
+                @can('view',\SigeTurbo\Parents::class)
                 <li id="parents" class="sige-nav-module {{ setCurrentModule('parents') }}"
                     title="{{ Lang::get('sige.Parents') }}" data-title="{{ Lang::get('sige.Parents') }}">
                     <a href="{{ URL::route('parents.dashboard') }}">
@@ -142,6 +151,7 @@
                         <span>{{ Lang::get('sige.Parents') }}</span>
                     </a>
                 </li>
+                @endcan
                 <li id="roles" class="sige-nav-module {{ setCurrentModule('roles') }}"
                     title="{{ Lang::get('sige.Role') }}"
                     data-title="{{ Lang::get('sige.Role') }}">
@@ -193,7 +203,7 @@
     <div style="display: none" id="serverName" data-server="{{ env("SERVER") }}">{{ env("SERVER") }}</div>
     <div style="display: none" id="sigeturboToken" data-token="{{ getUser()->api_token }}"></div>
 </section>
-@if(getCurrentRoute() == 'financials')
+@if (getCurrentRoute() == 'communications')
     {!! HTML::script(mix('/js/vendor/vendor.js')) !!}
     {!! HTML::script(mix('/js/Utils.js')) !!}
     {!! HTML::script(mix('js/' . getCurrentRoute() . '/' . getCurrentApp() .  '.js')) !!}

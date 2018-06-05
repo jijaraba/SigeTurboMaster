@@ -15,7 +15,7 @@ class User extends Authenticatable
     protected $primaryKey = 'iduser';
     protected $fillable = ['iduser', 'firstname', 'lastname', 'idcategory', 'idstatus', 'idtown', 'address',
         'idstratus', 'phone', 'celular', 'idethnicgroup', 'idmaritalstatus', 'idreligion', 'idgender', 'username', 'email',
-        'password', 'birth', 'email_personal', 'photo', 'role', 'role_selected', 'api_token', 'email_confirmed', 'email_passcode', 'celular_confirmed',
+        'password', 'birth', 'email_personal', 'photo', 'role', 'role_selected', 'api_token', 'token', 'last_change_token', 'email_confirmed', 'email_passcode', 'celular_confirmed',
         'celular_passcode', 'welcome_container', 'first_login', 'created_by', 'updated_by'
     ];
 

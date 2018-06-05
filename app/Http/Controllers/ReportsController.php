@@ -60,7 +60,7 @@ class ReportsController extends Controller
     {
 
         //Verify Payments
-        $payments = $this->paymentRepository->getPaymentsPendingsByUser(getUser()->iduser, true, null, 'ASC', true);
+        $payments = $this->paymentRepository->getPaymentsPendingByUser(getUser()->iduser, true, null, 'ASC', true);
         if (count($payments) > 0) {
             $request->session()->flash('error', Lang::get('sige.PaymentsPendingTitle'));
             App::abort(401, 'payments_pending');

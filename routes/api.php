@@ -83,6 +83,14 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
 
     /**
      * ===================================
+     * Concept types
+     * ===================================
+     */
+    //Global Concepttypes
+    Route::resource('concepttypes', 'ConcepttypesController', array('only' => array('index', 'show')));
+
+    /**
+     * ===================================
      * Contracts
      * ===================================
      */
@@ -91,13 +99,11 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'as' => 'contracts.getcontractsbyyearandperiod',
         'uses' => 'ContractsController@getcontractsbyyearandperiod'
     ]);
-
     //Get Contracts By params
     Route::get('/contracts/getcontractsbyparams', [
         'as' => 'api.v1.contracts.getcontractsbyparams',
         'uses' => 'ContractsController@getContractsByParams'
     ]);
-
     //Global Contracts
     Route::resource('contracts', 'ContractsController', array('only' => array('index', 'show', 'store', 'update')));
 
@@ -175,6 +181,10 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      * Categories
      * ===================================
      */
+    Route::get('/categories/getcategorycodebyname', [
+        'as' => 'categories.getcategorycodebyname',
+        'uses' => 'CategoriesController@getCategoryCodeByName'
+    ]);
     //Category
     Route::resource('categories', 'CategoriesController', array('only' => array('index', 'show')));
 
@@ -189,11 +199,21 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
 
     /**
      * ===================================
+     * Costs Module
+     * ===================================
+     */
+    Route::get('/costs/getcostsbypackage', [
+        'as' => 'costs.getcostsbypackage',
+        'uses' => 'CostsController@getCostsByPackage'
+    ]);
+
+    /**
+     * ===================================
      * Costcenters Module
      * ===================================
      */
     Route::get('/costcenters/getcostcenterbystudent', [
-        'as' => 'api.v1.costcenters.getcostcenterbystudent',
+        'as' => 'costcenters.getcostcenterbystudent',
         'uses' => 'CostcentersController@getCostcenterByStudent'
     ]);
 
@@ -273,9 +293,9 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'uses' => 'EnrollmentsController@getEnrollmentsByStudent'
     ]);
     //Get Enrollments By Student With Cost
-    Route::get('/enrollments/getenrollmentslatestbystudentwithcost', [
-        'as' => 'enrollments.getenrollmentslatestbystudentwithcost',
-        'uses' => 'EnrollmentsController@getEnrollmentsLatestByStudentWithCost'
+    Route::get('/enrollments/getenrollmentlatestbystudentwithcost', [
+        'as' => 'enrollments.getenrollmentlatestbystudentwithcost',
+        'uses' => 'EnrollmentsController@getEnrollmentLatestByStudentWithCost'
     ]);
     //Get Enrollments By Student
     Route::get('/enrollments/getenrollmentslatestbystudent', [
@@ -502,6 +522,17 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
     ]);
     //Academic Nivel
     Route::resource('nivels', 'NivelsController', array('only' => array('index', 'show')));
+
+    /**
+     * ===================================
+     * Packages
+     * ===================================
+     */
+    //Get Packages By Concept
+    Route::get('/packages/getpackagesbyconcept', [
+        'as' => 'packages.getpackagesbyconcept',
+        'uses' => 'PackagesController@getPackagesByConcept'
+    ]);
 
     /**
      * ===================================
@@ -771,6 +802,26 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'as' => 'preregistrations.getpreregistrationbyuser',
         'uses' => 'PreregistrationsController@getpreregistrationbyuser'
     ]);
+    //Save Profile General
+    Route::put('/preregistrations/updateprofilegeneral/{preregistration}', [
+        'as' => 'preregistrations.updateprofilegeneral',
+        'uses' => 'PreregistrationsController@updateProfileGeneral'
+    ]);
+    //Save Profile Medical
+    Route::put('/preregistrations/updateprofilemedical/{preregistration}', [
+        'as' => 'preregistrations.updateprofilemedical',
+        'uses' => 'PreregistrationsController@updateProfileMedical'
+    ]);
+    //Save Profile Additional
+    Route::put('/preregistrations/updateprofileadditional/{preregistration}', [
+        'as' => 'preregistrations.updateprofileadditional',
+        'uses' => 'PreregistrationsController@updateProfileAdditional'
+    ]);
+    //Save Profile Profession
+    Route::put('/preregistrations/updateprofileprofession/{preregistration}', [
+        'as' => 'preregistrations.updateprofileprofession',
+        'uses' => 'PreregistrationsController@updateProfileProfession'
+    ]);
     //Preregistration
     Route::resource('preregistrations', 'PreregistrationsController', array('only' => array('index', 'show', 'store', 'update', 'destroy')));
 
@@ -832,7 +883,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'uses' => 'PaymentsController@setPaymentAgreement'
     ]);
     //Set Payment Individual
-    Route::post('/payments/setpaymentindividual', [
+    Route::post('/payments/setpa}ymentindividual', [
         'as' => 'payments.setpaymentindividual',
         'uses' => 'PaymentsController@setPaymentIndividual'
     ]);
@@ -856,15 +907,15 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'as' => 'payments.updatepaymentshort',
         'uses' => 'PaymentsController@updatePaymentShort'
     ]);
-    //Get Payments Pendings
-    Route::get('/payments/getpaymentspendings', [
-        'as' => 'payments.getpaymentspendings',
-        'uses' => 'PaymentsController@getPaymentsPendings'
+    //Get Payments Pending
+    Route::get('/payments/getpaymentspending', [
+        'as' => 'payments.getpaymentspending',
+        'uses' => 'PaymentsController@getPaymentsPending'
     ]);
-    //Get Payments Pendings
-    Route::get('/payments/getpaymentspendingsbyuser', [
-        'as' => 'payments.getpaymentspendingsbyuser',
-        'uses' => 'PaymentsController@getPaymentsPendingsByUser'
+    //Get Payments Pending
+    Route::get('/payments/getpaymentspendingbyuser', [
+        'as' => 'payments.getpaymentspendingbyuser',
+        'uses' => 'PaymentsController@getPaymentsPendingByUser'
     ]);
     //Payments
     Route::resource('payments', 'PaymentsController', array('only' => array('index', 'show', 'update')));

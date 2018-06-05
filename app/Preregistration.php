@@ -8,7 +8,7 @@ class Preregistration extends Model
 {
 
     protected $primaryKey = 'idpreregistration';
-    protected $fillable = ['iduser', 'idfamily', 'idcategory', 'idreligion', 'ididentificationtype', 'idbloodtype', 'identification', 'expedition', 'firstname', 'lastname', 'address', 'district', 'town', 'phone', 'celular', 'email', 'eps', 'prepaidmedical', 'policynumber', 'medicaltreatment', 'medicaltreatmentdescription', 'equaltreatment', 'takemedication', 'medicationdescription', 'whytakemedication', 'dose', 'isallergic', 'sufferedillness', 'specifyallergic', 'sufferedillnessdescription', 'doctorname', 'doctorphone', 'psychologicalsupport', 'observation', 'educationaloutput', 'responsible', 'profession', 'occupation', 'company', 'phonecompany'];
+    protected $fillable = ['iduser', 'idfamily', 'idcategory', 'idreligion', 'ididentificationtype', 'idbloodtype', 'idmedicalinsurance', 'idprepaidmedical', 'identification', 'expedition', 'firstname', 'lastname', 'address', 'district', 'town', 'phone', 'celular', 'email', 'policynumber', 'medicaltreatment', 'medicaltreatmentdescription', 'equaltreatment', 'takemedication', 'medicationdescription', 'whytakemedication', 'dose', 'isallergic', 'sufferedillness', 'specifyallergic', 'sufferedillnessdescription', 'doctorname', 'doctorphone', 'psychologicalsupport', 'observation', 'educationaloutput', 'responsible', 'profession', 'occupation', 'company', 'phonecompany'];
     protected $hidden = ['created_at', 'updated_at'];
     /**
      * Table Name

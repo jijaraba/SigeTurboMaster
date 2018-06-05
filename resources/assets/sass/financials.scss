@@ -1,5 +1,4 @@
 @import "sigeturbo/variables";
-@import "sigeturbo/sigeturbo";
 
 .status-photo-1 {
   background: $sige-global-bgcolor-04;
@@ -599,7 +598,7 @@
   }
 }
 
-.sige-payments-create {
+.sige-financials-create {
   position: relative;
   background: #f9fafa;
   padding: 5px;
@@ -655,7 +654,7 @@
           }
         }
       }
-      section.methods {
+      section.options {
         margin: 0px auto;
         text-align: center;
         color: $sige-global-color-04;
@@ -663,7 +662,7 @@
         font: {
           size: 0.9em;
         }
-        > .method {
+        > .option-container {
           width: 80%;
           margin: 0px auto;
           > li {
@@ -680,54 +679,6 @@
                 }
               }
             }
-          }
-        }
-        > .container-method {
-          margin-top: 10px;
-          width: 100%;
-          padding: 10px 20px;
-          background: $sige-global-bgcolor-01;
-          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-          li {
-            margin: 3px 0px;
-            &.border {
-              border-top: 1px solid $sige-border-color-06;
-              margin-top: 5px;
-              padding-top: 10px;
-            }
-          }
-          select {
-            background: white;
-          }
-          input {
-            background: white;
-            text-align: center;
-          }
-          textarea {
-            background: white;
-            text-align: center;
-            height: 80px;
-            text-align: left;
-          }
-          p {
-            font: {
-              size: 1em;
-            }
-            line-height: 50px;
-            text-align: left;
-          }
-          h3 {
-            display: block;
-            width: 100%;
-            text-align: center;
-            margin-bottom: 5px;
-          }
-          button {
-            margin: 10px auto;
-          }
-          &.massive {
-          }
-          &.individual {
           }
         }
       }
@@ -749,5 +700,60 @@
         }
       }
     }
+  }
+}
+
+.sige-payments-create-method {
+  padding: 10px 20px;
+  margin: 20px;
+  form {
+    margin: 0px;
+    fieldset {
+      margin: 5px;
+    }
+  }
+  li {
+    margin: 3px 0px;
+    &.border {
+      border-top: 1px solid $sige-border-color-06;
+      margin-top: 5px;
+      padding-top: 10px;
+    }
+  }
+  select {
+    background: white;
+  }
+  input {
+    background: white;
+    text-align: center;
+  }
+  textarea {
+    background: white;
+    text-align: center;
+    height: 80px;
+    text-align: left;
+    font: {
+      size: 1em;
+    }
+  }
+  p {
+    font: {
+      size: 1em;
+    }
+    line-height: 50px;
+    text-align: left;
+  }
+  h3 {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  button {
+    margin: 10px auto;
+  }
+  &.massive {
+  }
+  &.individual {
   }
 }

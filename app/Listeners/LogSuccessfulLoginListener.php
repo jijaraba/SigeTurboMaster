@@ -38,8 +38,20 @@ class LogSuccessfulLoginListener
         $user->last_session = Carbon::now();
         $user->welcome_container = 1;
         $user->email_confirmed = "1";
+        //Assign API Token
         if ($user->api_token == null) {
             $user->api_token = str_random(60);
+        }
+        //Change Global Token
+        if ($user->last_change_token == null) {
+            $user->last_change_token = Carbon::now();
+            $user->token = str_random(70);
+        } else {
+            $end_date = Carbon::parse($user->last_change_token);
+            if ($end_date->diffInDays(Carbon::now()) >= 60) {
+                $user->last_change_token = Carbon::now();
+                $user->token = str_random(70);
+            }
         }
         $user->save();
 

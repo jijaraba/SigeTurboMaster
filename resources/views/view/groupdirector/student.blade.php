@@ -74,6 +74,14 @@
                                                                   student="{{ $enrollment->iduser }}"
                                                                   type="{{ $type }}"></sigeturbo-view-groupdirector-student>
                         </section>
+                        <section style="margin-top: 25px">
+                            <header class="margin-bottom-15">
+                                <h5 class="without-border">TERCER PERIODO</h5>
+                            </header>
+                            <sigeturbo-view-groupdirector-student year="2017" period="3"
+                                                                  student="{{ $enrollment->iduser }}"
+                                                                  type="partialreport"></sigeturbo-view-groupdirector-student>
+                        </section>
                     </section>
                 </section>
             </li>

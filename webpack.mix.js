@@ -79,6 +79,8 @@ mix
     .styles([
         'bower_components/intro.js/minified/introjs.min.css',
         'bower_components/sweetalert/dist/sweetalert.css',
+        'bower_components/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-shadow.min.css',
+        'bower_components/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css',
         'bower_components/datepicker/dist/datepicker.css',
         'node_modules/ng-dialog/css/ngDialog.css',
         'node_modules/ng-dialog/css/ngDialog-theme-default.css',
@@ -102,7 +104,19 @@ mix
     .webpackConfig({
         module: {
             rules: [
-                {test: /\.js$/, loader: ['ng-annotate-loader']}
+                {
+                    test: /\.js$/,
+                    use: [
+                        {
+                            loader: 'ng-annotate-loader',
+                            options: {
+                                ngAnnotate: "ng-annotate-patched",
+                                es6: true,
+                                explicitOnly: false
+                            },
+                        }
+                    ],
+                }
             ]
         }
     });
@@ -114,12 +128,19 @@ mix
  |--------------------------------------------------------------------------
 */
 mix
+//Communications
+    .js('resources/assets/js/sigeturbo/modules/communications/dashboard.js', 'public/js/communications')
     //Group Director
     .js('resources/assets/js/sigeturbo/modules/groupdirector/dashboard.js', 'public/js/groupdirector')
     .js('resources/assets/js/sigeturbo/modules/groupdirector/student.js', 'public/js/groupdirector')
     //Financials
     .js('resources/assets/js/sigeturbo/modules/financials/dashboard.js', 'public/js/financials')
     .js('resources/assets/js/sigeturbo/modules/financials/payments.js', 'public/js/financials')
+    .js('resources/assets/js/sigeturbo/modules/financials/packages.js', 'public/js/financials')
+    //Parents
+    .js('resources/assets/js/sigeturbo/modules/parents/dashboard.js', 'public/js/parents')
+    .js('resources/assets/js/sigeturbo/modules/parents/members.js', 'public/js/parents')
+    .js('resources/assets/js/sigeturbo/modules/parents/profile.js', 'public/js/parents')
     .version();
 
 /*

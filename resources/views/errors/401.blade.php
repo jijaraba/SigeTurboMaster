@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ config('app.name') }} - Unauthorized</title>
+    <title>{{ config('app.name') }} - {{ Lang::get('sige.Unauthorized') }}</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
     {!! HTML::style(mix('css/sigeturbo.css')) !!}
     <style>
@@ -47,10 +47,14 @@
 <div class="container">
     <div class="content" style="margin: 0px auto">
         <img src="/images/sigeturbo.svg" alt="">
-        <div class="title">Unauthorized.</div>
+        <div class="title">{{ Lang::get('sige.Unauthorized') }}</div>
         @if($exception->getMessage() == "payments_pending")
             @include('../layouts/partials/flashmessage')
             <a href="{{route('parents.payments.index')}}" class="payment">Ir Módulo Pagos</a>
+        @endif
+        @if($exception->getMessage() == "enrollment_error")
+            @include('../layouts/partials/flashmessage')
+            <a href="{{URL::previous()}}" class="payment">{{ Lang::get('sige.Back') }}</a>
         @endif
     </div>
 </div>

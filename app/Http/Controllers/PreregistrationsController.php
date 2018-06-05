@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Lang;
+use SigeTurbo\Http\Requests\PreregistrationAdditionalRequest;
+use SigeTurbo\Http\Requests\PreregistrationMedicalRequest;
 use SigeTurbo\Http\Requests\PreregistrationRequest;
 use SigeTurbo\Repositories\Preregistration\PreregistrationRepositoryInterface;
 
@@ -40,6 +42,7 @@ class PreregistrationsController extends Controller
     /**
      * Store a newly created resource in storage.
      * POST /preregistrations
+     * @param PreregistrationRequest $request
      * @return Response
      */
     public function store(PreregistrationRequest $request)
@@ -77,24 +80,24 @@ class PreregistrationsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * PUT /preregistrations/{idpreregistrationrecovery}
-     * @param int $idpreregistrationrecovery
+     * PUT /preregistrations/{preregistration}
+     * @param int $preregistration
      * @param PreregistrationRequest $request
      * @return Response
      */
-    public function update($idpreregistrationrecovery, PreregistrationRequest $request)
+    public function update($preregistration, PreregistrationRequest $request)
     {
         //Update preregistrationrecovery
-        $preregistrationrecovery = $this->preregistrationRepository->update($idpreregistrationrecovery, $request);
+        $preregistration = $this->preregistrationRepository->update($preregistration, $request);
 
         $data = [];
-        if ($preregistrationrecovery) {
+        if ($preregistration) {
             $data['successful'] = true;
             $data['message'] = Lang::get('sige.SuccessUpdateMessage');
-            $data['idquantitativerecovery'] = $idpreregistrationrecovery;
+            $data['preregistration'] = $preregistration;
 
             //Delete Cache
-            Cache::forget('preregistration' . $request['user']);
+            Cache::forget('preregistrations');
 
         } else {
             $data['unsuccessful'] = true;
@@ -105,11 +108,11 @@ class PreregistrationsController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * DELETE /preregistrations/{id}
-     * @param  int $id
+     * DELETE /preregistrations/{preregistration}
+     * @param  int $preregistration
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($preregistration)
     {
         //
     }
@@ -122,6 +125,114 @@ class PreregistrationsController extends Controller
     public function getpreregistrationbyuser(Request $request)
     {
         return response()->json($this->preregistrationRepository->getByUser($request['user']));
+    }
+
+    /**
+     * Update Preregistration General
+     * @param $preregistration
+     * @param PreregistrationRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateProfileGeneral($preregistration, PreregistrationRequest $request)
+    {
+        //Update preregistration
+        $preregistration = $this->preregistrationRepository->updateProfileGeneral($preregistration, $request);
+
+        $data = [];
+        if ($preregistration) {
+            $data['successful'] = true;
+            $data['message'] = Lang::get('sige.SuccessUpdateMessage');
+            $data['preregistration'] = $preregistration;
+
+            //Delete Cache
+            Cache::forget('preregistrations');
+
+        } else {
+            $data['unsuccessful'] = true;
+            $data['message'] = Lang::get('sige.ErrorUpdateMessage');
+        }
+        return response()->json($data);
+    }
+
+    /**
+     * Update Preregistration Medical
+     * @param $preregistration
+     * @param PreregistrationMedicalRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateProfileMedical($preregistration, PreregistrationMedicalRequest $request)
+    {
+        //Update preregistration
+        $preregistration = $this->preregistrationRepository->updateProfileMedical($preregistration, $request);
+
+        $data = [];
+        if ($preregistration) {
+            $data['successful'] = true;
+            $data['message'] = Lang::get('sige.SuccessUpdateMessage');
+            $data['preregistration'] = $preregistration;
+
+            //Delete Cache
+            Cache::forget('preregistrations');
+
+        } else {
+            $data['unsuccessful'] = true;
+            $data['message'] = Lang::get('sige.ErrorUpdateMessage');
+        }
+        return response()->json($data);
+    }
+
+    /**
+     * Update Preregistration Additional
+     * @param $preregistration
+     * @param PreregistrationAdditionalRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateProfileAdditional($preregistration, PreregistrationAdditionalRequest $request)
+    {
+        //Update preregistration
+        $preregistration = $this->preregistrationRepository->updateProfileAdditional($preregistration, $request);
+
+        $data = [];
+        if ($preregistration) {
+            $data['successful'] = true;
+            $data['message'] = Lang::get('sige.SuccessUpdateMessage');
+            $data['preregistration'] = $preregistration;
+
+            //Delete Cache
+            Cache::forget('preregistrations');
+
+        } else {
+            $data['unsuccessful'] = true;
+            $data['message'] = Lang::get('sige.ErrorUpdateMessage');
+        }
+        return response()->json($data);
+    }
+
+    /**
+     * Update Preregistration Profession
+     * @param $preregistration
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateProfileProfession($preregistration, Request $request)
+    {
+        //Update preregistration
+        $preregistration = $this->preregistrationRepository->updateProfileProfession($preregistration, $request);
+
+        $data = [];
+        if ($preregistration) {
+            $data['successful'] = true;
+            $data['message'] = Lang::get('sige.SuccessUpdateMessage');
+            $data['preregistration'] = $preregistration;
+
+            //Delete Cache
+            Cache::forget('preregistrations');
+
+        } else {
+            $data['unsuccessful'] = true;
+            $data['message'] = Lang::get('sige.ErrorUpdateMessage');
+        }
+        return response()->json($data);
     }
 
 }

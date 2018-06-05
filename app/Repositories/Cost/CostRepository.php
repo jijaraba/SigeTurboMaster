@@ -41,5 +41,23 @@ class CostRepository implements CostRepositoryInterface
             ->where('idgrade', '=', DB::raw("(SELECT idgrade FROM groups WHERE groups.idgroup = $group)"))
             ->first();
     }
+
+    public function getCostsByPackage($year, $grade, $type, $package)
+    {
+        return Cost::select('*')
+            ->join('costpackages', function ($join) {
+                $join
+                    ->on('costpackages.idaccounttype', '=', 'costs.idaccounttype');
+            })
+            ->join('packages', function ($join) {
+                $join
+                    ->on('packages.idpackage', '=', 'costpackages.idpackage');
+            })
+            ->where('costs.idyear', '=', $year)
+            ->where('costs.idgrade', '=', $grade)
+            ->where('costs.idconcepttype', '=', $type)
+            ->where('packages.idpackage', '=', $package)
+            ->get();
+    }
 }
 

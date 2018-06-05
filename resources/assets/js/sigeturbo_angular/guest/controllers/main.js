@@ -3,16 +3,22 @@
 /* Guest Controllers */
 angular.module('Guest.controllers', [])
     .controller('TaskController', ['$scope', '$log', 'ngDialog', function ($scope, $log, ngDialog) {
-        ngDialog.open({
+        /*ngDialog.open({
             template: require('../directives/views/partials/tasks/message.html'),
             plain: true,
             scope: $scope
-        });
+        });*/
     }])
     .controller('TaskDetailController', [function () {
 
     }])
-    .controller('PaymentsGuestController', ['$scope', '$log', 'Family', function ($scope, $log, Family) {
+    .controller('PaymentsGuestController', ['$scope', '$log', 'ngDialog', 'Family', function ($scope, $log, ngDialog, Family) {
+
+        ngDialog.open({
+            template: require('../directives/views/partials/costs/message.html'),
+            plain: true,
+            scope: $scope
+        });
 
         //Scope
         $scope.search = {};
@@ -23,27 +29,27 @@ angular.module('Guest.controllers', [])
         };
         $scope.showOption = function (option) {
             switch (option) {
-            case 1:
-                $scope.options = {
-                    gateway: true,
-                    bank: false,
-                    aspans: false,
-                };
-                break;
-            case 2:
-                $scope.options = {
-                    gateway: false,
-                    bank: true,
-                    aspans: false,
-                };
-                break;
-            case 3:
-                $scope.options = {
-                    gateway: false,
-                    bank: false,
-                    aspans: true,
-                };
-                break;
+                case 1:
+                    $scope.options = {
+                        gateway: true,
+                        bank: false,
+                        aspans: false,
+                    };
+                    break;
+                case 2:
+                    $scope.options = {
+                        gateway: false,
+                        bank: true,
+                        aspans: false,
+                    };
+                    break;
+                case 3:
+                    $scope.options = {
+                        gateway: false,
+                        bank: false,
+                        aspans: true,
+                    };
+                    break;
             }
         };
 

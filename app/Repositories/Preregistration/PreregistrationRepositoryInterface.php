@@ -5,8 +5,12 @@ namespace SigeTurbo\Repositories\Preregistration;
 interface PreregistrationRepositoryInterface
 {
     public function all();
-    public function find($idpreregistration);
+    public function find($preregistration);
     public function store($data);
-    public function update($idpreregistration,$data);
-    public function destroy($idpreregistration);
+    public function updateProfileGeneral($preregistration, $data);
+    public function updateProfileMedical($preregistration, $data);
+    public function updateProfileAdditional($preregistration, $data);
+    public function updateProfileProfession($preregistration, $data);
+    public function destroy($preregistration);
+    public function getPreregistrationByUser($user);
 }

@@ -331,6 +331,7 @@ header {
           }
         }
         &#formation {
+          position: relative;
           a {
             position: relative;
             padding: 10px;
@@ -349,9 +350,23 @@ header {
               visibility: hidden;
             }
           }
+          em {
+            position: absolute;
+            top: 10px;
+            left: 25px;
+            background: $sige-global-bgcolor-10;
+            font: {
+              size: 0.7em;
+            }
+            border-radius: 5px;
+            padding: 3px;
+            color: white;
+          }
         }
         &#resources {
+          position: relative;
           a {
+            position: relative;
             padding: 10px;
             border-radius: 5px;
             img {
@@ -368,9 +383,23 @@ header {
               visibility: hidden;
             }
           }
+          em {
+            position: absolute;
+            top: 10px;
+            left: 25px;
+            background: $sige-global-bgcolor-10;
+            font: {
+              size: 0.7em;
+            }
+            border-radius: 5px;
+            padding: 3px;
+            color: white;
+          }
         }
         &#communications {
+          position: relative;
           a {
+            position: relative;
             padding: 10px;
             border-radius: 5px;
             img {
@@ -386,6 +415,18 @@ header {
             span {
               visibility: hidden;
             }
+          }
+          em {
+            position: absolute;
+            top: 10px;
+            left: 25px;
+            background: $sige-global-bgcolor-10;
+            font: {
+              size: 0.7em;
+            }
+            border-radius: 5px;
+            padding: 3px;
+            color: white;
           }
         }
         &#parents {
@@ -791,21 +832,6 @@ aside {
 
 .sige-app-select {
   display: none;
-}
-
-form {
-  margin: 20px 0px;
-  > ul {
-    > li {
-      display: inline-block;
-      > select {
-        width: 100%;
-      }
-      > &:last-child {
-        width: 100%;
-      }
-    }
-  }
 }
 
 footer {
@@ -1790,6 +1816,242 @@ footer {
 
 //*
 //|-----------------------------------------------------------
+//| Dashboard
+//|-----------------------------------------------------------
+//*/
+
+.sige-options-container {
+  position: relative;
+  background: #f9fafa;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  > article {
+    > header {
+      z-index: 1;
+      > h2 {
+        padding-top: 20px;
+        border-bottom: none;
+        text-align: center;
+      }
+      > img {
+        margin: 0px auto;
+        width: 180px;
+        display: block;
+      }
+    }
+    > section {
+      > h2 {
+        padding-top: 10px;
+        border-bottom: none;
+        text-align: center;
+        color: $sige-global-color-04;
+        font: {
+          size: 2.1em;
+        }
+        > span {
+          font: {
+            size: 0.6em;
+          }
+          color: $sige-global-bgcolor-10;
+        }
+      }
+      p {
+        padding: 0px;
+        text-align: center;
+        font: {
+          size: 0.85em;
+        }
+        &.observation {
+          padding-top: 15px;
+        }
+        &.transaction {
+          margin: 25px;
+          color: $sige-global-color-01;
+        }
+        &.message {
+          padding: 5px 0px;
+          font: {
+            size: 0.8em;
+          }
+        }
+      }
+      section.options {
+        margin: 0px auto;
+        text-align: center;
+        color: $sige-global-color-04 !important;
+        font: {
+          size: 0.9em !important;
+        }
+        > .option-container {
+          width: 80%;
+          margin: 0px auto;
+          > li {
+            > a {
+              text-align: center;
+              display: inline-block;
+              height: 200px;
+              width: 200px;
+              span {
+                margin-top: -15px;
+                display: block;
+                color: $sige-global-color-04 !important;
+                font: {
+                  size: 0.9em !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    > footer {
+      bottom: 5px;
+      min-height: inherit;
+      top: inherit;
+      width: 100%;
+      > div {
+        height: 40px;
+        margin: 10px 20px;
+        padding-top: 15px;
+        border-top: 1px solid $sige-border-color-03;
+        color: $sige-global-color-04;
+        text-align: center;
+        font: {
+          size: 0.8em;
+        }
+      }
+    }
+  }
+}
+
+//*
+//|-----------------------------------------------------------
+//| Wizards
+//|-----------------------------------------------------------
+//*/
+
+.sige-wizard-container {
+  text-align: left !important;
+  font: {
+    size: 1em !important;
+  }
+  input[type="text"], input[type="email"] {
+    background: white !important;
+  }
+  input[readonly="readonly"] {
+    color: $sige-global-color-01;
+  }
+  select {
+    background: white !important;
+  }
+  textarea {
+    background: white !important;
+    border-width: 1px !important;
+  }
+  header {
+    > h4 {
+      font: {
+        size: 1.4em
+      }
+    }
+  }
+  section.body {
+    > form {
+      > fieldset {
+        &.step {
+          display: none;
+        }
+        > legend {
+          font: {
+            size: 1.4em;
+          }
+          color: $sige-global-color-04;
+          border-bottom: none;
+        }
+        > ul {
+          > li {
+            h4 {
+              font: {
+                size: 1.1em;
+              }
+              border-bottom: none;
+              padding-bottom: 10px;
+            }
+            p {
+              font: {
+                size: 1em;
+              }
+              text-align: left;
+            }
+            &.icon {
+              > img {
+                margin: 0px auto;
+                display: block;
+                width: 160px !important;
+                height: 160px !important;
+              }
+            }
+            > input {
+              display: block;
+              margin: 0px auto;
+            }
+          }
+        }
+      }
+    }
+  }
+  footer {
+    min-height: initial;
+    width: 100%;
+    position: relative;
+    top: initial;
+    > ul {
+      line-height: 50px;
+      height: 50px;
+      > li {
+        &.previous {
+
+        }
+        &.steps {
+          > ul {
+            > li {
+              > div {
+                background: $sige-global-bgcolor-03;
+                border-radius: 50%;
+                color: $sige-global-color-02;
+                font: {
+                  size: 0.9em;
+                  family: $sige-font-family-03;
+                }
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                width: 30px;
+                cursor: pointer;
+                &.selected {
+                  border: 2px solid #fff;
+                  box-shadow: 0 0 0 3px rgba($sige-global-bgcolor-03, 0.3);
+                  line-height: 25px;
+                }
+              }
+            }
+          }
+        }
+        &.next {
+          input {
+            display: block;
+            margin-top: 5px;
+            float: right;
+          }
+        }
+      }
+    }
+  }
+}
+
+//*
+//|-----------------------------------------------------------
 //| Media Queries
 //|-----------------------------------------------------------
 //*/
@@ -2092,6 +2354,9 @@ footer {
                 visibility: visible;
               }
             }
+            em {
+              left: 90px;
+            }
           }
           &#financials {
             a {
@@ -2115,6 +2380,9 @@ footer {
                 visibility: visible;
               }
             }
+            em {
+              left: 90px;
+            }
           }
           &#resources {
             a {
@@ -2124,6 +2392,9 @@ footer {
               span {
                 visibility: visible;
               }
+            }
+            em {
+              left: 90px;
             }
           }
           &#communications {
@@ -2135,6 +2406,9 @@ footer {
                 visibility: visible;
               }
             }
+            em {
+              left: 90px;
+            }
           }
           &#parents {
             a {
@@ -2144,6 +2418,9 @@ footer {
               span {
                 visibility: visible;
               }
+            }
+            em {
+              left: 90px;
             }
           }
           &#roles {

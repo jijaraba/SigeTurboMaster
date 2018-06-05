@@ -98,37 +98,30 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Families table seeded!');
         $this->call('UserfamiliesTableSeeder');
         $this->command->info('Userfamilies table seeded!');
-        //Resources
         $this->call('StatuspurchasesTableSeeder');
         $this->command->info('Statuspurchases table seeded!');
         $this->call('ProductcategoriesTableSeeder');
         $this->command->info('Productcategories table seeded!');
         $this->call('ProductsTableSeeder');
         $this->command->info('Products table seeded!');
-        //Observertypes
         $this->call('ObservertypesTableSeeder');
         $this->command->info('Observertypes table seeded!');
-        //Tasktypes
         $this->call('TasktypesTableSeeder');
         $this->command->info('Tasktypes table seeded!');
-        //Areamanagers
         $this->call('AreamanagersTableSeeder');
         $this->command->info('Areamanagers table seeded!');
-        //Visitortypes
         $this->call('VisitortypesTableSeeder');
         $this->command->info('Visitortypes table seeded!');
-        //Descriptivereports
         $this->call('DescriptivereportsTableSeeder');
         $this->command->info('Descriptivereports table seeded!');
-        //Languages
         $this->call('LanguagesTableSeeder');
         $this->command->info('Languages table seeded!');
-        //Paymenttypes
         $this->call('PaymenttypesTableSeeder');
         $this->command->info('Paymenttypes table seeded!');
-        //Banks
         $this->call('BanksTableSeeder');
         $this->command->info('Banks table seeded!');
+        $this->call('ConcepttypesTableSeeder');
+        $this->command->info('Concepttypes table seeded!');
         Model::reguard();
     }
 }

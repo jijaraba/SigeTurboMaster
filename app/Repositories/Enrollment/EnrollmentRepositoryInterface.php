@@ -11,7 +11,7 @@ interface EnrollmentRepositoryInterface
     public function getEnrollments($year, $group = null, $category = [], $types = [], $search = null, $sort = null, $order = 'ASC', $exclude = []);
     public function getEnrollmentsByStudent($student);
     public function getEnrollmentsLatestByStudent($student);
-    public function getEnrollmentsLatestByStudentWithCost($student,$year, $type);
+    public function getEnrollmentLatestByStudentWithCost($student, $year);
     public function getEnrollmentsWithGrades($year, $period, $group, $subject, $nivel);
     public function getEnrollmentsWithData($year, $period, $group, $subject, $nivel, $category = 13);
     public function getEnrollmentsWithPartial($year, $period, $group, $subject, $nivel, $category = 13);
@@ -19,5 +19,6 @@ interface EnrollmentRepositoryInterface
     public function getEnrollmentsWithAttendance($year, $period, $group, $subject, $nivel, $date, $category = 13);
     public function getEnrollmentsWithObservers($year, $group, $category = [13], $types = [1, 5, 6, 11]);
     public function getEnrollmentsByStatus($year, $status);
+    public function getEnrollmentByYearAndUser($year, $student);
     public function getEnrollmentAttendacessList($year, $group);
 }

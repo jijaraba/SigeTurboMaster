@@ -26,11 +26,8 @@
                                 <h5 class="header-aquamarine">Información</h5>
                                 <ul class="display-horizontal col-100">
                                     <li class="col-10">
-                                        <p>@{{ payment }}</p>
-                                        <div class="@{{ isPayment | isPayment }}">
-                                            <a href="{{ URL::route('parents.payments.index') }}"
-                                               id="payments">@{{ paymentMessage }}</a>
-                                        </div>
+                                        <sigeturbo-payment-pending-family
+                                                user="{{ getUser()->iduser }}"></sigeturbo-payment-pending-family>
                                     </li>
                                 </ul>
                             </article>

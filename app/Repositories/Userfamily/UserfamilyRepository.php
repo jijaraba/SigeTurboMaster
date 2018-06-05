@@ -107,6 +107,7 @@ class UserfamilyRepository implements UserfamilyRepositoryInterface
             users.photo,
             users.email,
             users.idcategory,
+            users.token,
             categories.name AS 'category',
             userfamilies.idfamily,
             families.name AS family
@@ -129,6 +130,7 @@ class UserfamilyRepository implements UserfamilyRepositoryInterface
             users.photo,
             users.email,
             users.idcategory,
+            users.token,
             categories.name AS 'category',
             userfamilies.idfamily,
             families.name AS family
@@ -236,7 +238,7 @@ class UserfamilyRepository implements UserfamilyRepositoryInterface
             'users.firstname',
             'users.lastname',
             'users.email',
-            'users.idgender')
+            'users.idgender', 'users.token')
             ->join('users', function ($join) {
                 $join->on('users.iduser', '=', 'userfamilies.iduser');
             })

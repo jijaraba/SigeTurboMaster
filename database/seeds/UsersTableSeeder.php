@@ -34,6 +34,7 @@ class UsersTableSeeder extends Seeder
             'role' => 'Teacher',
             'role_selected' => 'Teacher',
             'api_token' => str_random(60),
+            'token' => str_random(70),
             'points' => '100',
         ]);
 
@@ -56,6 +57,7 @@ class UsersTableSeeder extends Seeder
             'role' => 'Admin,Teacher',
             'role_selected' => 'Admin',
             'api_token' => str_random(60),
+            'token' => str_random(70),
             'points' => '100',
         ]);
 
@@ -78,6 +80,7 @@ class UsersTableSeeder extends Seeder
             'role' => 'Student',
             'role_selected' => 'Student',
             'api_token' => str_random(60),
+            'token' => str_random(70),
             'points' => '100',
         ]);
 
@@ -100,6 +103,7 @@ class UsersTableSeeder extends Seeder
             'role' => 'Student',
             'role_selected' => 'Students',
             'api_token' => str_random(60),
+            'token' => str_random(70),
             'points' => '100',
         ]);
 

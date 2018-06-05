@@ -26,6 +26,26 @@ class Payment extends Model {
         return HTTP.post(path, params);
     }
 
+    /**
+     * Verify Payment Pending
+     * @param path
+     * @param params
+     */
+    static savePaymentIndividual(params) {
+        return HTTP.post('/api/v1/payments/setpaymentindividualnew', params);
+    }
+
+    /**
+     * Get Enrollments By Year and Group
+     * @param path
+     * @param params
+     */
+    static getPaymentsPendingByUser(params) {
+        return HTTP.get('/api/v1/payments/getpaymentspendingbyuser', {
+            params: params
+        });
+    }
+
 }
 
 export default Payment;

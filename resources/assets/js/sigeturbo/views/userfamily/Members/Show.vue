@@ -1,0 +1,53 @@
+<template>
+    <section class="sige-student-lists tooltip" title="Hello">
+        <section class="student-list">
+            <ul id="student-list">
+                <template v-for="member in members">
+                    <li>
+                        <a :href="'parents/profile/'+ member.token + '/member'">
+                            <div class="student" id="student" :data-student-id="member.iduser">
+                                <div class="body" :id="'student_'+member.iduser">
+                                    <div class="image normal-background">
+                                        <img class="tooltip" :src="assets + '/img/users/' + member.photo"
+                                             :alt="member.lastname"
+                                             :title="member.lastname +' '+ member.firstname"/>
+                                    </div>
+                                </div>
+                                <div class="lead">
+                                    {{ member.firstname }}
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </li>
+                </template>
+            </ul>
+        </section>
+    </section>
+</template>
+<script>
+
+    import assets from "../../../core/utils";
+
+    export default {
+
+        props: [
+            'members',
+        ],
+        filters: {},
+        components: {},
+        data: function () {
+            return {
+                assets: assets()
+            }
+        },
+        methods: {},
+        watch: {},
+        created() {
+
+        },
+        mounted() {
+        },
+    }
+
+</script>

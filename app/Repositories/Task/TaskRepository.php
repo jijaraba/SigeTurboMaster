@@ -232,6 +232,7 @@ class TaskRepository implements TaskRepositoryInterface
                     ->get();
             })
             ->whereRaw("tasks.ends >=  DATE_SUB(NOW(), INTERVAL ? DAY)", array(8))
+            ->where("tasks.status","=",'1')
             ->orderBy('tasks.ends', 'ASC')
             ->with('taskfiles')
             ->get();

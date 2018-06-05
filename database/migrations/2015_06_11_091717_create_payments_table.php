@@ -16,6 +16,7 @@ class CreatePaymentsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('idpayment');
             $table->integer('idpaymenttype')->unsigned();
+            $table->integer('idpackage')->unsigned();
             $table->integer('idbank')->unsigned();
             $table->integer('idfamily')->unsigned();
             $table->integer('iduser')->unsigned();
@@ -65,6 +66,11 @@ class CreatePaymentsTable extends Migration
             $table->foreign('idpaymenttype')
                 ->references('idpaymenttype')
                 ->on('paymenttypes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('idpackage')
+                ->references('idpackage')
+                ->on('packages')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreign('idbank')

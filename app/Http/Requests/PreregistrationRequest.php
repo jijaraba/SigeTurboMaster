@@ -36,7 +36,6 @@ class PreregistrationRequest extends Request
             'district' => 'required',
             'town' => 'required',
             'email' => 'required',
-            'phone' => 'required',
             'celular' => 'required',
         ];
     }

@@ -108,7 +108,7 @@ class PaymentRepository implements PaymentRepositoryInterface
     }
 
     /**
-     * Get Payments Pendings By USER
+     * Get Payments Pending By USER
      * @param $user
      * @param bool $pending
      * @param null $sort
@@ -116,7 +116,7 @@ class PaymentRepository implements PaymentRepositoryInterface
      * @param bool $excludeCurrentMonth
      * @return mixed
      */
-    public function getPaymentsPendingsByUser($user, $pending = false, $sort = null, $order = 'ASC', $excludeCurrentMonth = false)
+    public function getPaymentsPendingByUser($user, $pending = false, $sort = null, $order = 'ASC', $excludeCurrentMonth = false)
     {
         $payments = Payment::select('payments.*', 'users.photo', DB::raw('CONCAT_WS(CONVERT(" " USING latin1),users.lastname,users.firstname) AS fullname'), DB::raw('CURDATE() AS current'))
             ->join('users', function ($join) {
@@ -315,6 +315,7 @@ class PaymentRepository implements PaymentRepositoryInterface
         $realdate = Carbon::create($data['year'], $data['month'], 1, 0, 0, 0);
         return Payment::create([
             'idpaymenttype' => $data['type'],
+            'idpackage' => $data['package'],
             'idbank' => 1,
             'idfamily' => $family,
             'iduser' => $data['student'],
@@ -440,7 +441,7 @@ class PaymentRepository implements PaymentRepositoryInterface
      * Get Payments Pendings
      * @return mixed
      */
-    public function getPaymentsPendings()
+    public function getPaymentsPending()
     {
         return Payment::select('payments.*')
             ->whereApproved('P')

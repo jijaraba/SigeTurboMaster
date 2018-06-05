@@ -7,7 +7,7 @@
     @endif
 @stop
 @section("dashboard")
-    <section ng-controller="PaymentsController" ng-init="init({{ json_encode($search) }})">
+    <section>
         <section class="grid-100">
             <section class="sige-contained">
                 <section class="sige-financials-payment-register">
@@ -146,10 +146,11 @@
     </section>
 @stop
 @section("vendor")
-    {!! HTML::script(mix('js/vendor/vendor.js')) !!}
+    {!! HTML::script(mix('/js/vendor/vendor.js')) !!}
+    {!! HTML::script(mix('/js/Utils.js')) !!}
 @stop
 @section("script")
-    {!! HTML::script(mix('js/angular/' . getCurrentRoute() . '.js')) !!}
+    {!! HTML::script(mix('js/' . getCurrentRoute() . '/' . getCurrentApp() .  '.js')) !!}
 @stop
 @section("socket")
     {!! HTML::script(mix('js/vendor/socket.io.js')) !!}

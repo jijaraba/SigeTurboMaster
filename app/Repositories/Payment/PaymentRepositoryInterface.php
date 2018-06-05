@@ -12,9 +12,9 @@ interface PaymentRepositoryInterface
     public function getPaymentByTransactionID($transactionID);
     public function getPaymentByID($payment);
     public function getPaymentsByUser($user, $pending = false, $sort = null, $order = 'ASC', $excludeCurrentMonth = false);
-    public function getPaymentsPendingsByUser($user, $pending = false, $sort = null, $order = 'ASC', $excludeCurrentMonth = false);
+    public function getPaymentsPendingByUser($user, $pending = false, $sort = null, $order = 'ASC', $excludeCurrentMonth = false);
     public function getPaymentsByUserWithTransactions($user);
-    public function getPaymentsPendings();
+    public function getPaymentsPending();
     public function setPaymentMethod($data);
     public function setPaymentAgreement($data);
     public function setPaymentIndividual($family, $data);

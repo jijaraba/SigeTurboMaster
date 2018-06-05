@@ -23,7 +23,7 @@
                 <li class="col-33" ng-click="showOption(3)">
                     <img src="https://294347513a062ec6e0b6-8f8f94440e741fa4111c4d620d6f574f.ssl.cf5.rackcdn.com/img/modules/payment_individual.svg"
                          alt="payment">
-                    <span style="text-align: center">DONACIONES ASPANS</span>
+                    <span style="text-align: center">APORTES ASPANS</span>
                 </li>
             </ul>
         </section>
@@ -91,7 +91,7 @@
             </section>
         </section>
         <section class="payments-aspans" ng-if="options.aspans">
-            <h4>Donaciones ASPANS</h4>
+            <h4>Aportes ASPANS</h4>
             <section class="payment-container">
                 <ul class="display-horizontal col-100">
                     <li class="col-30 imagen">
@@ -99,9 +99,9 @@
                              alt="payment">
                     </li>
                     <li class="col-70 body">
-                        <h4>Donaciones ASPANS</h4>
+                        <h4>Aportes ASPANS</h4>
                         <p>
-                            {{ "Realice sus donaciones a la Asociación de Padres de Familia de The New School (ASPANS). " }}
+                            Realice su aporte a la Asociación de Padres de Familia de The New School <strong>(ASPANS)</strong>
                         </p>
                         <a href="https://www.zonapagos.com/t_asopaflia/pagos.asp">Ir Zona Pagos</a>
                     </li>

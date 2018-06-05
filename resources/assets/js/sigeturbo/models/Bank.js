@@ -6,7 +6,6 @@ class Bank extends Model {
         super();
         this.count = 0;
     }
-
 }
 
 export default Bank;

@@ -21,6 +21,10 @@ class Enrollment extends Model {
         return HTTP.get(path, {params});
     }
 
+    static getEnrollmentLatestByStudentWithCost(params) {
+        return HTTP.get('/api/v1/enrollments/getenrollmentlatestbystudentwithcost', {params});
+    }
+
 }
 
 export default Enrollment;

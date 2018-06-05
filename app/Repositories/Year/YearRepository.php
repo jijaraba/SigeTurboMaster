@@ -16,7 +16,7 @@ class YearRepository implements YearRepositoryInterface
     public function all()
     {
         return Cache::remember('years', 1440, function () {
-            return Year::orderBy('idyear', 'DESC')->get();
+            return Year::select('*')->orderBy('idyear', 'DESC')->get();
         });
     }
 
@@ -41,6 +41,19 @@ class YearRepository implements YearRepositoryInterface
         return Year::where('idcalendar', '=', $calendar)
             ->where('ends', '>=', Carbon::today())
             ->where('starts', '<=', Carbon::today())
+            ->first();
+    }
+
+    /**
+     * Get Preregistration
+     * @param int $calendar
+     * @return mixed
+     */
+    public function getCurrentPreregistration($calendar = 2)
+    {
+        return Year::where('idcalendar', '=', $calendar)
+            ->where('preregistration_ends', '>=', Carbon::today())
+            ->where('preregistration_starts', '<=', Carbon::today())
             ->first();
     }
 

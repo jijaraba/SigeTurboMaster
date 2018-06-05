@@ -37,7 +37,7 @@ Route::get('/logout', [
     'as' => 'logout',
     'uses' => 'Auth\LoginController@logout',
 ]);
-Route::match(['get', 'post'], 'register', function(){
+Route::match(['get', 'post'], 'register', function () {
     return redirect('/');
 });
 
@@ -500,6 +500,22 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
         'as' => 'financials.payments.convert.manualreceipt',
         'uses' => 'PaymentsController@paymentsConvertManualReceipt'
     ]);
+    //Payments
+    Route::get('/financials/packages', [
+        'middleware' => ['auth', 'permission'],
+        'as' => 'financials.packages.index',
+        'uses' => 'PackagesController@index'
+    ]);
+    Route::post('/financials/packages', [
+        'middleware' => ['auth', 'permission'],
+        'as' => 'financials.packages.index',
+        'uses' => 'PackagesController@index'
+    ]);
+    Route::get('/financials/packages/create', [
+        'middleware' => ['auth', 'permission'],
+        'as' => 'financials.packages.create',
+        'uses' => 'PackagesController@create'
+    ]);
 
     /**
      * ===================================
@@ -947,10 +963,15 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
         'as' => 'parents.monitoring.detail',
         'uses' => 'MonitoringsController@getMonitoringsDetailForParents'
     ]);
-    Route::get('/parents/updateinfo', [
+    Route::get('/parents/members', [
         'middleware' => ['auth', 'permission'],
-        'as' => 'parents.updateinfo.index',
-        'uses' => 'UserfamiliesController@indexParentsByUpdateInfo'
+        'as' => 'parents.members.index',
+        'uses' => 'UserfamiliesController@members'
+    ]);
+    Route::get('/parents/profile/{token}/member/', [
+        'middleware' => ['auth', 'permission'],
+        'as' => 'parents.profile.member.index',
+        'uses' => 'UserfamiliesController@memberProfile'
     ]);
 
     /* --- PaymentsController ---*/

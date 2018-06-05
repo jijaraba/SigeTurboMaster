@@ -8,7 +8,7 @@ class Year extends Model
 {
 
     protected $primaryKey = 'idyear';
-    protected $fillable = ['idcalendar', 'name', 'prefix', 'starts', 'ends'];
+    protected $fillable = ['idcalendar', 'name', 'prefix', 'starts', 'ends', 'preregistration_starts', 'preregistration_ends'];
     protected $hidden = ['created_at', 'updated_at'];
     /**
      * Table Name
