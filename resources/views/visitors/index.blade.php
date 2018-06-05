@@ -51,11 +51,11 @@
                             <li id="reverse" class="col-20 gutter-5">
                                 <input ng-value="false" ng-model="order.reverse" id="asc" name="type" type="radio">
                                 <label for="asc">
-                                    <div class="fa fa-sort-alpha-asc"></div>
+                                    <div class="fa fa-sort-alpha-up"></div>
                                 </label>
                                 <input ng-value="true" ng-model="order.reverse" id="desc" name="type" type="radio">
                                 <label for="desc">
-                                    <div class="fa fa-sort-alpha-desc"></div>
+                                    <div class="fa fa-sort-alpha-down"></div>
                                 </label>
                             </li>
                         </ul>

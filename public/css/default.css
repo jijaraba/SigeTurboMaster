@@ -3621,7 +3621,7 @@ aside {
 .sige-app-list li em {
   position: absolute;
   top: 10px;
-  left: 95px;
+  left: 100px;
   background: #da4453;
   font-size: .7em;
   border-radius: 5px;
@@ -4755,7 +4755,8 @@ footer .sige-footer-content {
 }
 
 .sige-wizard-container input[type="text"],
-.sige-wizard-container input[type="email"] {
+.sige-wizard-container input[type="email"],
+.sige-wizard-container input[type="number"] {
   background: white !important;
 }
 

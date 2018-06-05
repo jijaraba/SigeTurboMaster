@@ -58,12 +58,12 @@
                                 <input value="asc" id="asc" name="order" type="radio"
                                        {{ ($order == 'asc')? 'checked' : '' }} onclick="this.form.submit()">
                                 <label for="asc">
-                                    <div class="fa fa-sort-alpha-asc"></div>
+                                    <div class="fa fa-sort-alpha-up"></div>
                                 </label>
                                 <input value="desc" id="desc" name="order" type="radio"
                                        {{ ($order == 'desc')? 'checked' : '' }} onclick="this.form.submit()">
                                 <label for="desc">
-                                    <div class="fa fa-sort-alpha-desc"></div>
+                                    <div class="fa fa-sort-alpha-down"></div>
                                 </label>
                             </li>
                         </ul>

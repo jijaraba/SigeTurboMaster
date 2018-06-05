@@ -16,8 +16,8 @@ angular.module('Core', [
     'Core.directives',
     'Core.filters'
 ]);
-require('../core/filters');
 require('../core/services');
+require('../core/filters');
 require('../core/factories');
 require('../core/directives');
 
@@ -32,8 +32,8 @@ angular.module('Admissions', [
     'Core.factories',
     'Core.filters',
     'Core.directives',
-    'Admissions.filters',
     'Admissions.services',
+    'Admissions.filters',
     'Admissions.factories',
     'Admissions.directives',
     'Admissions.controllers',

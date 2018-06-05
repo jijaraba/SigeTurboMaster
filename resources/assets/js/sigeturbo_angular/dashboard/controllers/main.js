@@ -32,7 +32,7 @@ angular.module('Dashboard.controllers', [])
             }
         );
 
-        $scope.options = { 
+        $scope.options = {
             responsive: true,
             elements: {
                 point: {
@@ -56,15 +56,15 @@ angular.module('Dashboard.controllers', [])
         };
 
     }])
-    .controller('ConsentsController', ['$scope', '$log', 'ngDialog','Consenttype', function ($scope, $log,ngDialog,Consenttype) {
+    .controller('ConsentsController', ['$scope', '$log', 'ngDialog', 'Consenttype', function ($scope, $log, ngDialog, Consenttype) {
         $scope.registry = {
-            send : false
+            send: false
         };
-        $scope.close = function($param){
-            if ($param){
-                ngDialog.close() ;
+        $scope.close = function ($param) {
+            if ($param) {
+                ngDialog.close();
                 window.location = '/users/consent';
-            } 
+            }
         };
         Consenttype.all({}).$promise.then(
             function (consenttypes) {
@@ -79,15 +79,15 @@ angular.module('Dashboard.controllers', [])
         $scope.dialogsforms = function ($object) {
             $scope.isvalid = false;
             ////$scope.message = ($object.idconsent) ? "Editar consentimiento" : "Ingresar consetimiento";
-            if($object.idconsent){
+            if ($object.idconsent) {
                 $scope.message = 'Editar consentimiento';
                 $scope.registry = $object;
                 //var $view = '../directives/views/partials/consents/form.html';
-            }else{
+            } else {
                 $scope.registry = {};
                 $scope.registry = {
-                    send : false,
-                    iduser : $object.iduser
+                    send: false,
+                    iduser: $object.iduser
                 };
                 $scope.message = 'Ingresar consetimiento';
                 //var $view = '../directives/views/partials/consents/form.html';
@@ -100,7 +100,7 @@ angular.module('Dashboard.controllers', [])
             });
         };
     }])
-    .controller('ConsentsformController', ['$scope',function ($scope) {
+    .controller('ConsentsformController', ['$scope', function ($scope) {
         $scope.SaveConsent = function () {
             if (!$scope.registry.idconsent) {
                 //Insert Group Director
@@ -110,5 +110,5 @@ angular.module('Dashboard.controllers', [])
                 $scope.registry.send = $scope.isvalid;
             }
         };
-        
+
     }]);

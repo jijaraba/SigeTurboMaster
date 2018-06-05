@@ -1789,9 +1789,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 
 
@@ -1846,14 +1843,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         showMethodMassive: function showMethodMassive() {
             this.showMassive = true;
         },
-        closeMethodMassive: function closeMethodMassive() {
-            this.showMassive = false;
-        },
         showMethodIndividual: function showMethodIndividual() {
             this.showIndividual = true;
         },
-        closeMethodIndividual: function closeMethodIndividual() {
+        close: function close() {
             this.showIndividual = false;
+            this.showMassive = false;
         }
     },
     watch: {},
@@ -1910,6 +1905,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_Enrollment__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Enrollment.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_Cost__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Cost.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_Payment__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Payment.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__filters_string_capitalize__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/capitalize.js");
 //
 //
 //
@@ -2036,6 +2033,108 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -2051,15 +2150,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     props: ['payment', 'years', 'concepttypes', 'months'],
     filters: {
         uppercase: __WEBPACK_IMPORTED_MODULE_1__filters_string_uppercase__["a" /* default */],
-        paymentTotal: __WEBPACK_IMPORTED_MODULE_2__filters_math_paymentTotal__["a" /* default */]
+        paymentTotal: __WEBPACK_IMPORTED_MODULE_2__filters_math_paymentTotal__["a" /* default */],
+        capitalize: __WEBPACK_IMPORTED_MODULE_8__filters_string_capitalize__["a" /* default */]
     },
     components: {},
     data: function data() {
         return {
+            assets: Object(__WEBPACK_IMPORTED_MODULE_7__core_utils__["a" /* default */])(),
             studentWithScholarship: false,
             packages: [],
             user: [],
-            costs: []
+            costs: [],
+            steps: 4,
+            stepSelected: 0
         };
     },
     methods: {
@@ -2154,34 +2257,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 return console.log(error);
             });
         },
-        setStep: function setStep(step) {
-            switch (step) {
-                case 1:
-                    document.getElementById('step-01').style.display = "block";
-                    document.getElementById('step-02').style.display = "none";
-                    document.getElementById('step-03').style.display = "none";
-                    document.getElementById('step-04').style.display = "none";
-                    break;
-                case 2:
-                    document.getElementById('step-01').style.display = "none";
-                    document.getElementById('step-02').style.display = "block";
-                    document.getElementById('step-03').style.display = "none";
-                    document.getElementById('step-04').style.display = "none";
-                    break;
-                case 3:
-                    document.getElementById('step-01').style.display = "none";
-                    document.getElementById('step-02').style.display = "none";
-                    document.getElementById('step-03').style.display = "block";
-                    document.getElementById('step-04').style.display = "none";
-                    break;
-                case 4:
-                    document.getElementById('step-01').style.display = "none";
-                    document.getElementById('step-02').style.display = "none";
-                    document.getElementById('step-03').style.display = "none";
-                    document.getElementById('step-04').style.display = "block";
-                    break;
-            }
-        },
         savePayment: function savePayment() {
             var _this4 = this;
 
@@ -2214,6 +2289,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }).catch(function (error) {
                 return console.log(error);
             });
+        },
+        setStep: function setStep(step) {
+            for (var i = 0; i <= this.steps; i++) {
+                document.getElementById('step-' + i).style.display = "none";
+            }
+            document.getElementById('step-' + step).style.display = "block";
+            //Step Selected
+            this.stepSelected = step;
+        },
+        close: function close() {
+            this.$emit('close');
         }
     },
     watch: {
@@ -36942,564 +37028,554 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "options" }, [
-    _c("ul", { staticClass: "display-horizontal col-70 option-container" }, [
-      _c("li", [
-        _c(
-          "a",
-          {
-            on: {
-              click: function($event) {
-                _vm.showMethodMassive()
+  return _c(
+    "section",
+    { staticClass: "options" },
+    [
+      _c("ul", { staticClass: "display-horizontal col-70 option-container" }, [
+        _c("li", [
+          _c(
+            "a",
+            {
+              on: {
+                click: function($event) {
+                  _vm.showMethodMassive()
+                }
               }
-            }
-          },
-          [
-            _c("img", {
-              attrs: {
-                src: _vm.assets + "/img/modules/payment_massive.svg",
-                alt: "Pago"
+            },
+            [
+              _c("img", {
+                attrs: {
+                  src: _vm.assets + "/img/modules/payment_massive.svg",
+                  alt: "Pago"
+                }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("PAGOS MASIVOS")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c(
+            "a",
+            {
+              on: {
+                click: function($event) {
+                  _vm.showMethodIndividual()
+                }
               }
-            }),
-            _vm._v(" "),
-            _c("span", [_vm._v("PAGOS MASIVOS")])
-          ]
-        )
+            },
+            [
+              _c("img", {
+                attrs: {
+                  src: _vm.assets + "/img/modules/payment_individual.svg",
+                  alt: "Pago"
+                }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("PAGOS INDIVIDUALES")])
+            ]
+          )
+        ])
       ]),
       _vm._v(" "),
-      _c("li", [
-        _c(
-          "a",
-          {
-            on: {
-              click: function($event) {
-                _vm.showMethodIndividual()
-              }
-            }
-          },
-          [
-            _c("img", {
-              attrs: {
-                src: _vm.assets + "/img/modules/payment_individual.svg",
-                alt: "Pago"
-              }
-            }),
-            _vm._v(" "),
-            _c("span", [_vm._v("PAGOS INDIVIDUALES")])
-          ]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _vm.showMassive
-      ? _c(
-          "section",
-          {
-            staticClass: "sige-main-modal",
-            staticStyle: { display: "block", "padding-top": "100px" }
-          },
-          [
-            _c(
-              "section",
-              { staticClass: "modal-content", staticStyle: { width: "800px" } },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "close",
-                    on: {
-                      click: function($event) {
-                        _vm.closeMethodMassive()
-                      }
-                    }
-                  },
-                  [_c("i", { staticClass: "fas fa-window-close fa-lg" })]
-                ),
-                _vm._v(" "),
-                _c(
-                  "section",
-                  { staticClass: "sige-payments-create-method massive" },
-                  [
-                    _c(
-                      "form",
-                      {
-                        attrs: { id: "payment_massive" },
-                        on: {
-                          submit: function($event) {
-                            _vm.paymentSaveMassive()
-                          }
+      _vm.showMassive
+        ? _c(
+            "section",
+            {
+              staticClass: "sige-main-modal",
+              staticStyle: { display: "block", "padding-top": "100px" }
+            },
+            [
+              _c(
+                "section",
+                {
+                  staticClass: "modal-content",
+                  staticStyle: { width: "800px" }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "close",
+                      on: {
+                        click: function($event) {
+                          _vm.closeMethodMassive()
                         }
-                      },
-                      [
-                        _c("fieldset", [
-                          _c("legend", [_vm._v("INFORMACIÓN DEL PAGO MASIVO")]),
-                          _vm._v(" "),
-                          _c(
-                            "ul",
-                            { staticClass: "display-horizontal col-100" },
-                            [
-                              _c("li", { staticClass: "col-50 gutter-5" }, [
-                                _c("span", [_vm._v("AÑO ACADÉMICO")]),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.payment.academic,
-                                        expression: "payment.academic"
-                                      }
-                                    ],
-                                    attrs: { name: "year" },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.payment,
-                                          "academic",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
-                                      }
-                                    }
-                                  },
-                                  _vm._l(_vm.years, function(year) {
-                                    return _c(
-                                      "option",
-                                      { domProps: { value: year.idyear } },
-                                      [_vm._v(_vm._s(year.name))]
-                                    )
-                                  })
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "col-50 gutter-5" })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("fieldset", [
-                          _c(
-                            "ul",
-                            { staticClass: "display-horizontal col-100" },
-                            [
-                              _c("li", { staticClass: "col-20" }, [
-                                _c("span", [_vm._v("AÑO")]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.payment.year,
-                                      expression: "payment.year"
-                                    }
-                                  ],
-                                  attrs: { type: "text", value: "" },
-                                  domProps: { value: _vm.payment.year },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.payment,
-                                        "year",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "col-20" }, [
-                                _c("span", [_vm._v("MES")]),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.payment.month,
-                                        expression: "payment.month"
-                                      }
-                                    ],
-                                    attrs: { name: "month" },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.payment,
-                                          "month",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("option", { attrs: { value: "01" } }, [
-                                      _vm._v("Enero")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "02" } }, [
-                                      _vm._v("Febrero")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "03" } }, [
-                                      _vm._v("Marzo")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "04" } }, [
-                                      _vm._v("Abril")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "05" } }, [
-                                      _vm._v("Mayo")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "06" } }, [
-                                      _vm._v("Junio")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "07" } }, [
-                                      _vm._v("Julio")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "08" } }, [
-                                      _vm._v("Agosto")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "09" } }, [
-                                      _vm._v("Septiembre")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "10" } }, [
-                                      _vm._v("Octubre")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "11" } }, [
-                                      _vm._v("Noviembre")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("option", { attrs: { value: "12" } }, [
-                                      _vm._v("Diciembre")
-                                    ])
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "col-20" }, [
-                                _c("span", [_vm._v("DESCUENTO")]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.payment.date1,
-                                      expression: "payment.date1"
-                                    }
-                                  ],
-                                  attrs: {
-                                    type: "text",
-                                    value: "",
-                                    placeholder: "Fecha Descuento"
-                                  },
-                                  domProps: { value: _vm.payment.date1 },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.payment,
-                                        "date1",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "col-20" }, [
-                                _c("span", [_vm._v("NORMAL")]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.payment.date2,
-                                      expression: "payment.date2"
-                                    }
-                                  ],
-                                  attrs: {
-                                    type: "text",
-                                    value: "",
-                                    placeholder: "Fecha Normal"
-                                  },
-                                  domProps: { value: _vm.payment.date2 },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.payment,
-                                        "date2",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "col-20" }, [
-                                _c("span", [_vm._v("INTERÉS")]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.payment.date3,
-                                      expression: "payment.date3"
-                                    }
-                                  ],
-                                  attrs: {
-                                    type: "text",
-                                    value: "",
-                                    placeholder: "Fecha Intereres"
-                                  },
-                                  domProps: { value: _vm.payment.date3 },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.payment,
-                                        "date3",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "col-30" }, [
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.payment.type,
-                                        expression: "payment.type"
-                                      }
-                                    ],
-                                    attrs: { name: "month", required: "" },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.payment,
-                                          "type",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
-                                      }
-                                    }
-                                  },
-                                  _vm._l(_vm.concepttypes, function(
-                                    concepttype
-                                  ) {
-                                    return _c(
-                                      "option",
-                                      {
-                                        domProps: {
-                                          value: concepttype.idconcepttype
-                                        }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        " +
-                                            _vm._s(concepttype.name) +
-                                            "\n                                    "
-                                        )
-                                      ]
-                                    )
-                                  })
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "col-70" }, [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.payment.concept,
-                                      expression: "payment.concept"
-                                    }
-                                  ],
-                                  staticStyle: { "text-align": "left" },
-                                  attrs: {
-                                    type: "text",
-                                    value: "",
-                                    placeholder: "Concepto de Pago"
-                                  },
-                                  domProps: { value: _vm.payment.concept },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.payment,
-                                        "concept",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("li", { staticClass: "col-100 border" }, [
-                                _c("textarea", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.payment.exclude,
-                                      expression: "payment.exclude"
-                                    }
-                                  ],
-                                  attrs: {
-                                    placeholder:
-                                      "Especificar estudiantes a excluir separados por coma ',' y sin espacios."
-                                  },
-                                  domProps: { value: _vm.payment.exclude },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.payment,
-                                        "exclude",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _vm._m(0),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-aquamarine",
-                              attrs: { value: "Save", type: "submit" }
-                            },
-                            [_vm._v("Generar")]
-                          )
-                        ])
-                      ]
-                    )
-                  ]
-                )
-              ]
-            )
-          ]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.showIndividual
-      ? _c(
-          "section",
-          {
-            staticClass: "sige-main-modal",
-            staticStyle: { display: "block", "padding-top": "100px" }
-          },
-          [
-            _c(
-              "section",
-              {
-                staticClass: "modal-content",
-                staticStyle: { width: "800px", height: "400px" }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "close",
-                    on: {
-                      click: function($event) {
-                        _vm.closeMethodIndividual()
                       }
-                    }
-                  },
-                  [_c("i", { staticClass: "fas fa-window-close fa-lg" })]
-                ),
-                _vm._v(" "),
-                _c("sigeturbo-payment-create-individual", {
-                  attrs: {
-                    payment: _vm.payment,
-                    years: _vm.years,
-                    concepttypes: _vm.concepttypes,
-                    months: _vm.months
-                  }
-                })
-              ],
-              1
-            )
+                    },
+                    [_c("i", { staticClass: "fas fa-window-close fa-lg" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "section",
+                    { staticClass: "sige-payments-create-method massive" },
+                    [
+                      _c(
+                        "form",
+                        {
+                          attrs: { id: "payment_massive" },
+                          on: {
+                            submit: function($event) {
+                              _vm.paymentSaveMassive()
+                            }
+                          }
+                        },
+                        [
+                          _c("fieldset", [
+                            _c("legend", [
+                              _vm._v("INFORMACIÓN DEL PAGO MASIVO")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "ul",
+                              { staticClass: "display-horizontal col-100" },
+                              [
+                                _c("li", { staticClass: "col-50 gutter-5" }, [
+                                  _c("span", [_vm._v("AÑO ACADÉMICO")]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.payment.academic,
+                                          expression: "payment.academic"
+                                        }
+                                      ],
+                                      attrs: { name: "year" },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.payment,
+                                            "academic",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    _vm._l(_vm.years, function(year) {
+                                      return _c(
+                                        "option",
+                                        { domProps: { value: year.idyear } },
+                                        [_vm._v(_vm._s(year.name))]
+                                      )
+                                    })
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("li", { staticClass: "col-50 gutter-5" })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("fieldset", [
+                            _c(
+                              "ul",
+                              { staticClass: "display-horizontal col-100" },
+                              [
+                                _c("li", { staticClass: "col-20" }, [
+                                  _c("span", [_vm._v("AÑO")]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.payment.year,
+                                        expression: "payment.year"
+                                      }
+                                    ],
+                                    attrs: { type: "text", value: "" },
+                                    domProps: { value: _vm.payment.year },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.payment,
+                                          "year",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("li", { staticClass: "col-20" }, [
+                                  _c("span", [_vm._v("MES")]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.payment.month,
+                                          expression: "payment.month"
+                                        }
+                                      ],
+                                      attrs: { name: "month" },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.payment,
+                                            "month",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("option", { attrs: { value: "01" } }, [
+                                        _vm._v("Enero")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "02" } }, [
+                                        _vm._v("Febrero")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "03" } }, [
+                                        _vm._v("Marzo")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "04" } }, [
+                                        _vm._v("Abril")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "05" } }, [
+                                        _vm._v("Mayo")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "06" } }, [
+                                        _vm._v("Junio")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "07" } }, [
+                                        _vm._v("Julio")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "08" } }, [
+                                        _vm._v("Agosto")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "09" } }, [
+                                        _vm._v("Septiembre")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "10" } }, [
+                                        _vm._v("Octubre")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "11" } }, [
+                                        _vm._v("Noviembre")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("option", { attrs: { value: "12" } }, [
+                                        _vm._v("Diciembre")
+                                      ])
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("li", { staticClass: "col-20" }, [
+                                  _c("span", [_vm._v("DESCUENTO")]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.payment.date1,
+                                        expression: "payment.date1"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "text",
+                                      value: "",
+                                      placeholder: "Fecha Descuento"
+                                    },
+                                    domProps: { value: _vm.payment.date1 },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.payment,
+                                          "date1",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("li", { staticClass: "col-20" }, [
+                                  _c("span", [_vm._v("NORMAL")]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.payment.date2,
+                                        expression: "payment.date2"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "text",
+                                      value: "",
+                                      placeholder: "Fecha Normal"
+                                    },
+                                    domProps: { value: _vm.payment.date2 },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.payment,
+                                          "date2",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("li", { staticClass: "col-20" }, [
+                                  _c("span", [_vm._v("INTERÉS")]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.payment.date3,
+                                        expression: "payment.date3"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "text",
+                                      value: "",
+                                      placeholder: "Fecha Intereres"
+                                    },
+                                    domProps: { value: _vm.payment.date3 },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.payment,
+                                          "date3",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("li", { staticClass: "col-30" }, [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.payment.type,
+                                          expression: "payment.type"
+                                        }
+                                      ],
+                                      attrs: { name: "month", required: "" },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.payment,
+                                            "type",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    _vm._l(_vm.concepttypes, function(
+                                      concepttype
+                                    ) {
+                                      return _c(
+                                        "option",
+                                        {
+                                          domProps: {
+                                            value: concepttype.idconcepttype
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                        " +
+                                              _vm._s(concepttype.name) +
+                                              "\n                                    "
+                                          )
+                                        ]
+                                      )
+                                    })
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("li", { staticClass: "col-70" }, [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.payment.concept,
+                                        expression: "payment.concept"
+                                      }
+                                    ],
+                                    staticStyle: { "text-align": "left" },
+                                    attrs: {
+                                      type: "text",
+                                      value: "",
+                                      placeholder: "Concepto de Pago"
+                                    },
+                                    domProps: { value: _vm.payment.concept },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.payment,
+                                          "concept",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("li", { staticClass: "col-100 border" }, [
+                                  _c("textarea", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.payment.exclude,
+                                        expression: "payment.exclude"
+                                      }
+                                    ],
+                                    attrs: {
+                                      placeholder:
+                                        "Especificar estudiantes a excluir separados por coma ',' y sin espacios."
+                                    },
+                                    domProps: { value: _vm.payment.exclude },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.payment,
+                                          "exclude",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm._m(0),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-aquamarine",
+                                attrs: { value: "Save", type: "submit" }
+                              },
+                              [_vm._v("Generar")]
+                            )
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showIndividual
+        ? [
+            _c("sigeturbo-payment-create-individual", {
+              attrs: {
+                payment: _vm.payment,
+                years: _vm.years,
+                concepttypes: _vm.concepttypes,
+                months: _vm.months
+              },
+              on: { close: _vm.close }
+            })
           ]
-        )
-      : _vm._e()
-  ])
+        : _vm._e()
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function() {
@@ -37617,665 +37693,961 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "section",
-    { staticClass: "sige-payments-create-method individual" },
+    {
+      staticClass: "sige-main-modal",
+      staticStyle: { display: "block", "padding-top": "100px" }
+    },
     [
-      _c("ul", { staticClass: "display-horizontal col-100" }, [
-        _c("li", { staticClass: "col-10" }, [
-          _c("ul", { staticClass: "display-vertical" }, [
-            _c(
-              "li",
-              {
-                on: {
-                  click: function($event) {
-                    _vm.setStep(1)
-                  }
-                }
-              },
-              [_vm._v("1")]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                on: {
-                  click: function($event) {
-                    _vm.setStep(2)
-                  }
-                }
-              },
-              [_vm._v("2")]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                on: {
-                  click: function($event) {
-                    _vm.setStep(3)
-                  }
-                }
-              },
-              [_vm._v("3")]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                on: {
-                  click: function($event) {
-                    _vm.setStep(4)
-                  }
-                }
-              },
-              [_vm._v("4")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "col-70" }, [
+      _c(
+        "section",
+        { staticClass: "modal-content", staticStyle: { width: "800px" } },
+        [
           _c(
-            "form",
+            "div",
             {
-              attrs: { id: "payment_individual" },
+              staticClass: "close",
               on: {
-                submit: function($event) {
-                  _vm.paymentSaveIndividual()
+                click: function($event) {
+                  _vm.close()
                 }
               }
             },
-            [
+            [_c("i", { staticClass: "fas fa-window-close fa-lg" })]
+          ),
+          _vm._v(" "),
+          _c("section", { staticClass: "sige-wizard-container padding-30" }, [
+            _c("header", [
+              _c("h4", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("uppercase")(
+                      _vm.$translate.text("sigeturbo.general")
+                    )
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("section", { staticClass: "body" }, [
               _c(
-                "fieldset",
+                "form",
                 {
-                  staticClass: "step",
-                  attrs: { id: "step-01", "data-step": "1" }
+                  on: {
+                    submit: function($event) {
+                      _vm.paymentSaveIndividual($event)
+                    }
+                  }
                 },
                 [
-                  _c("legend", [_vm._v("INFORMACIÓN DEL PAGO INVIDUAL")]),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "welcome",
+                      attrs: { id: "step-0", "data-step": "0" }
+                    },
+                    [
+                      _c("legend", [_vm._v("Welcome")]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/payment_individual_welcome.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.start")
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.setStep(1)
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("ul", { staticClass: "display-horizontal col-100" }, [
-                    _c("li", { staticClass: "col-30 gutter-5" }, [
-                      _c("span", [_vm._v("AÑO ACADÉMICO")]),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-1", "data-step": "1" }
+                    },
+                    [
+                      _c("legend", [_vm._v("INFORMACIÓN DEL PAGO INVIDUAL")]),
                       _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.payment.academic,
-                              expression: "payment.academic"
-                            }
-                          ],
-                          attrs: { name: "year" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.payment,
-                                "academic",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.profession")
+                                )
                               )
-                            }
-                          }
-                        },
-                        _vm._l(_vm.years, function(year) {
-                          return _c(
-                            "option",
-                            { domProps: { value: year.idyear } },
-                            [_vm._v(_vm._s(year.name))]
-                          )
-                        })
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "col-40 gutter-5" }, [
-                      _c("span", [_vm._v("CONCEPTO")]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.payment.type,
-                              expression: "payment.type"
-                            }
-                          ],
-                          attrs: { name: "month", required: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.payment,
-                                "type",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        _vm._l(_vm.concepttypes, function(concepttype) {
-                          return _c(
-                            "option",
-                            { domProps: { value: concepttype.idconcepttype } },
-                            [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(concepttype.name) +
-                                  "\n                                "
-                              )
-                            ]
-                          )
-                        })
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "col-30 gutter-5" }, [
-                      _c("span", [_vm._v("CÓDIGO")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.payment.student,
-                            expression: "payment.student"
-                          }
-                        ],
-                        attrs: {
-                          type: "text",
-                          value: "",
-                          placeholder: "Código Estudiante"
-                        },
-                        domProps: { value: _vm.payment.student },
-                        on: {
-                          blur: function($event) {
-                            _vm.searchStudent()
-                          },
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.payment,
-                              "student",
-                              $event.target.value
                             )
-                          }
-                        }
-                      })
-                    ])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "fieldset",
-                {
-                  staticClass: "class",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "step-02", "data-step": "2" }
-                },
-                [
-                  _c("ul", { staticClass: "display-horizontal col-100" }, [
-                    _c("li", { staticClass: "col-50" }, [
-                      _c("span", [_vm._v("PAQUETE")]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.payment.package,
-                              expression: "payment.package"
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(0)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/payment_individual.svg",
+                              alt: ""
                             }
-                          ],
-                          attrs: { name: "month", required: "" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.payment,
-                                "package",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-30 gutter-5" }, [
+                          _c("span", [_vm._v("AÑO ACADÉMICO")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.payment.academic,
+                                  expression: "payment.academic"
+                                }
+                              ],
+                              attrs: { name: "year" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.payment,
+                                    "academic",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.years, function(year) {
+                              return _c(
+                                "option",
+                                { domProps: { value: year.idyear } },
+                                [_vm._v(_vm._s(year.name))]
                               )
-                            }
-                          }
-                        },
-                        _vm._l(_vm.packages, function(pack, index) {
-                          return _c(
-                            "option",
+                            })
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-40 gutter-5" }, [
+                          _c("span", [_vm._v("CONCEPTO")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
                             {
-                              domProps: {
-                                value: pack.idpackage,
-                                selected: index == 0 ? "selected" : ""
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.payment.type,
+                                  expression: "payment.type"
+                                }
+                              ],
+                              attrs: { name: "month", required: "" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.payment,
+                                    "type",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.concepttypes, function(concepttype) {
+                              return _c(
+                                "option",
+                                {
+                                  domProps: { value: concepttype.idconcepttype }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(concepttype.name) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            })
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-30 gutter-5" }, [
+                          _c("span", [_vm._v("CÓDIGO")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.payment.student,
+                                expression: "payment.student"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              value: "",
+                              placeholder: "Código Estudiante"
+                            },
+                            domProps: { value: _vm.payment.student },
+                            on: {
+                              blur: function($event) {
+                                _vm.searchStudent()
+                              },
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.payment,
+                                  "student",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.next")
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.setStep(2)
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-2", "data-step": "2" }
+                    },
+                    [
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.profession")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(1)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/payment_individual.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-50 gutter-5" }, [
+                          _c("span", [_vm._v("PAQUETE")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.payment.package,
+                                  expression: "payment.package"
+                                }
+                              ],
+                              attrs: { name: "month" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.payment,
+                                    "package",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.packages, function(pack, index) {
+                              return _c(
+                                "option",
+                                {
+                                  domProps: {
+                                    value: pack.idpackage,
+                                    selected: index == 0 ? "selected" : ""
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(pack.name) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            })
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-50 gutter-5" }, [
+                          _c("span", [_vm._v("DESCRIPCIÓN DEL CONCEPTO")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.payment.concept,
+                                expression: "payment.concept"
+                              }
+                            ],
+                            staticStyle: { "text-align": "left" },
+                            attrs: {
+                              type: "text",
+                              value: "",
+                              placeholder: "Concepto de Pago"
+                            },
+                            domProps: { value: _vm.payment.concept },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.payment,
+                                  "concept",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.next")
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.setStep(3)
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-3", "data-step": "3" }
+                    },
+                    [
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.profession")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(2)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/payment_individual.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-20 gutter-5" }, [
+                          _c("span", [_vm._v("AÑO")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.payment.year,
+                                expression: "payment.year"
+                              }
+                            ],
+                            attrs: { type: "number", value: "", min: "1995" },
+                            domProps: { value: _vm.payment.year },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.payment,
+                                  "year",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-20 gutter-5" }, [
+                          _c("span", [_vm._v("MES")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.payment.month,
+                                  expression: "payment.month"
+                                }
+                              ],
+                              attrs: { name: "month" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.payment,
+                                    "month",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
                               }
                             },
                             [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(pack.name) +
-                                  "\n                                "
-                              )
+                              _c("option", { attrs: { value: "01" } }, [
+                                _vm._v("Enero")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "02" } }, [
+                                _vm._v("Febrero")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "03" } }, [
+                                _vm._v("Marzo")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "04" } }, [
+                                _vm._v("Abril")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "05" } }, [
+                                _vm._v("Mayo")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "06" } }, [
+                                _vm._v("Junio")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "07" } }, [
+                                _vm._v("Julio")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "08" } }, [
+                                _vm._v("Agosto")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "09" } }, [
+                                _vm._v("Septiembre")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "10" } }, [
+                                _vm._v("Octubre")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "11" } }, [
+                                _vm._v("Noviembre")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "12" } }, [
+                                _vm._v("Diciembre")
+                              ])
                             ]
                           )
-                        })
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "col-50" }, [
-                      _c("span", [_vm._v("DESCRIPCIÓN DEL CONCEPTO")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.payment.concept,
-                            expression: "payment.concept"
-                          }
-                        ],
-                        staticStyle: { "text-align": "left" },
-                        attrs: {
-                          type: "text",
-                          value: "",
-                          placeholder: "Concepto de Pago"
-                        },
-                        domProps: { value: _vm.payment.concept },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-20 gutter-5" }, [
+                          _c("span", [_vm._v("DESCUENTO")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.payment.date1,
+                                expression: "payment.date1"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              value: "",
+                              placeholder: "Fecha Descuento"
+                            },
+                            domProps: { value: _vm.payment.date1 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.payment,
+                                  "date1",
+                                  $event.target.value
+                                )
+                              }
                             }
-                            _vm.$set(
-                              _vm.payment,
-                              "concept",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "fieldset",
-                {
-                  staticClass: "step",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "step-03", "data-step": "3" }
-                },
-                [
-                  _c("ul", { staticClass: "display-horizontal col-100" }, [
-                    _c("li", { staticClass: "col-20" }, [
-                      _c("span", [_vm._v("AÑO")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.payment.year,
-                            expression: "payment.year"
-                          }
-                        ],
-                        attrs: { type: "number", value: "", min: "1995" },
-                        domProps: { value: _vm.payment.year },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-20 gutter-5" }, [
+                          _c("span", [_vm._v("NORMAL")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.payment.date2,
+                                expression: "payment.date2"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              value: "",
+                              placeholder: "Fecha Normal"
+                            },
+                            domProps: { value: _vm.payment.date2 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.payment,
+                                  "date2",
+                                  $event.target.value
+                                )
+                              }
                             }
-                            _vm.$set(_vm.payment, "year", $event.target.value)
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "col-20" }, [
-                      _c("span", [_vm._v("MES")]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.payment.month,
-                              expression: "payment.month"
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-20 gutter-5" }, [
+                          _c("span", [_vm._v("INTERÉS")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.payment.date3,
+                                expression: "payment.date3"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              value: "",
+                              placeholder: "Fecha Intereres"
+                            },
+                            domProps: { value: _vm.payment.date3 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.payment,
+                                  "date3",
+                                  $event.target.value
+                                )
+                              }
                             }
-                          ],
-                          attrs: { name: "month" },
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.payment,
-                                "month",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-33 gutter-5" }, [
+                          _c("span", [_vm._v("VALOR CON DESCUESTO")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.payment.value1,
+                                expression: "payment.value1"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              value: "",
+                              placeholder: "Valor Descuento"
+                            },
+                            domProps: { value: _vm.payment.value1 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.payment,
+                                  "value1",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-33 gutter-5" }, [
+                          _c("span", [_vm._v("VALOR NORMAL")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.payment.value2,
+                                expression: "payment.value2"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              value: "",
+                              placeholder: "Valor Normal"
+                            },
+                            domProps: { value: _vm.payment.value2 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.payment,
+                                  "value2",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-33 gutter-5" }, [
+                          _c("span", [_vm._v("VALOR CON INTERÉS")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.payment.value3,
+                                expression: "payment.value3"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              value: "",
+                              placeholder: "Valor Intereres"
+                            },
+                            domProps: { value: _vm.payment.value3 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.payment,
+                                  "value3",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.next")
                               )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.setStep(4)
+                              }
                             }
-                          }
-                        },
-                        [
-                          _c("option", { attrs: { value: "01" } }, [
-                            _vm._v("Enero")
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-4", "data-step": "4" }
+                    },
+                    [
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.profession")
+                                )
+                              )
+                            )
                           ]),
                           _vm._v(" "),
-                          _c("option", { attrs: { value: "02" } }, [
-                            _vm._v("Febrero")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "03" } }, [
-                            _vm._v("Marzo")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "04" } }, [
-                            _vm._v("Abril")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "05" } }, [
-                            _vm._v("Mayo")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "06" } }, [
-                            _vm._v("Junio")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "07" } }, [
-                            _vm._v("Julio")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "08" } }, [
-                            _vm._v("Agosto")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "09" } }, [
-                            _vm._v("Septiembre")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "10" } }, [
-                            _vm._v("Octubre")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "11" } }, [
-                            _vm._v("Noviembre")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "12" } }, [
-                            _vm._v("Diciembre")
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "col-20" }, [
-                      _c("span", [_vm._v("DESCUENTO")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.payment.date1,
-                            expression: "payment.date1"
-                          }
-                        ],
-                        attrs: {
-                          type: "text",
-                          value: "",
-                          placeholder: "Fecha Descuento"
-                        },
-                        domProps: { value: _vm.payment.date1 },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                          _vm._m(3)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/payment_individual.svg",
+                              alt: ""
                             }
-                            _vm.$set(_vm.payment, "date1", $event.target.value)
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "col-20" }, [
-                      _c("span", [_vm._v("NORMAL")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.payment.date2,
-                            expression: "payment.date2"
-                          }
-                        ],
-                        attrs: {
-                          type: "text",
-                          value: "",
-                          placeholder: "Fecha Normal"
-                        },
-                        domProps: { value: _vm.payment.date2 },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 guutter border" }, [
+                          _c("span", [_vm._v("RESULTADO")]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.payment.result,
+                                expression: "payment.result"
+                              }
+                            ],
+                            domProps: { value: _vm.payment.result },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.payment,
+                                  "result",
+                                  $event.target.value
+                                )
+                              }
                             }
-                            _vm.$set(_vm.payment, "date2", $event.target.value)
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "col-20" }, [
-                      _c("span", [_vm._v("INTERÉS")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.payment.date3,
-                            expression: "payment.date3"
-                          }
-                        ],
-                        attrs: {
-                          type: "text",
-                          value: "",
-                          placeholder: "Fecha Intereres"
-                        },
-                        domProps: { value: _vm.payment.date3 },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: { type: "button", value: "Generar" },
+                            on: {
+                              click: function($event) {
+                                _vm.savePayment()
+                              }
                             }
-                            _vm.$set(_vm.payment, "date3", $event.target.value)
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "col-33" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.payment.value1,
-                            expression: "payment.value1"
-                          }
-                        ],
-                        attrs: {
-                          type: "text",
-                          value: "",
-                          placeholder: "Valor Descuento"
-                        },
-                        domProps: { value: _vm.payment.value1 },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.payment, "value1", $event.target.value)
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "col-33" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.payment.value2,
-                            expression: "payment.value2"
-                          }
-                        ],
-                        attrs: {
-                          type: "text",
-                          value: "",
-                          placeholder: "Valor Normal"
-                        },
-                        domProps: { value: _vm.payment.value2 },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.payment, "value2", $event.target.value)
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "col-33" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.payment.value3,
-                            expression: "payment.value3"
-                          }
-                        ],
-                        attrs: {
-                          type: "text",
-                          value: "",
-                          placeholder: "Valor Intereres"
-                        },
-                        domProps: { value: _vm.payment.value3 },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.payment, "value3", $event.target.value)
-                          }
-                        }
-                      })
-                    ])
-                  ])
+                          })
+                        ])
+                      ])
+                    ]
+                  )
                 ]
-              ),
-              _vm._v(" "),
-              _c(
-                "fieldset",
-                {
-                  staticClass: "step",
-                  staticStyle: { display: "none" },
-                  attrs: { id: "step-04", "data-step": "4" }
-                },
-                [
+              )
+            ]),
+            _vm._v(" "),
+            _c("footer", [
+              _c("ul", { staticClass: "display-horizontal col-100" }, [
+                _c("li", { staticClass: "col-35 previous" }),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-30 steps" }, [
                   _c("ul", { staticClass: "display-horizontal col-100" }, [
-                    _c("li", { staticClass: "col-100 border" }, [
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.payment.result,
-                            expression: "payment.result"
-                          }
-                        ],
-                        domProps: { value: _vm.payment.result },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.payment, "result", $event.target.value)
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "col-100" }, [
-                      _c("input", {
-                        staticClass: "btn btn-aquamarine",
-                        attrs: { type: "button", value: "Generar" },
+                    _c(
+                      "li",
+                      {
                         on: {
                           click: function($event) {
-                            _vm.savePayment()
+                            _vm.setStep(1)
                           }
                         }
-                      })
-                    ])
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 1 ? "selected" : ""] },
+                          [_vm._v("1")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(2)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 2 ? "selected" : ""] },
+                          [_vm._v("2")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(3)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 3 ? "selected" : ""] },
+                          [_vm._v("3")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(4)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 4 ? "selected" : ""] },
+                          [_vm._v("4")]
+                        )
+                      ]
+                    )
                   ])
-                ]
-              ),
-              _vm._v(" "),
-              _vm._m(0)
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "col-20" }, [_vm._v("Imagen")])
-      ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-35 next" })
+              ])
+            ])
+          ])
+        ]
+      )
     ]
   )
 }
@@ -38284,21 +38656,98 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("fieldset", [
-      _c("section", { staticClass: "info_generic" }, [
-        _c("div", [
-          _c("i", {
-            staticClass: "icon icon-info col-10",
-            attrs: { href: "#" }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "col-90" }, [
-            _vm._v("La "),
-            _c("strong", [_vm._v("generación individual")]),
-            _vm._v(
-              " asigna un pago al estudiante seleccionado. El SigeTurbo identifica el grado del estudiante y asigna los valores respectivos"
-            )
-          ])
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Especificar el "
+          ),
+          _c("strong", [
+            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
+          ]),
+          _vm._v(
+            " del documento del usuario\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Especificar el "
+          ),
+          _c("strong", [
+            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
+          ]),
+          _vm._v(
+            " del documento del usuario\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Especificar el "
+          ),
+          _c("strong", [
+            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
+          ]),
+          _vm._v(
+            " del documento del usuario\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Especificar el "
+          ),
+          _c("strong", [
+            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
+          ]),
+          _vm._v(
+            " del documento del usuario\n                                        "
+          )
         ])
       ])
     ])

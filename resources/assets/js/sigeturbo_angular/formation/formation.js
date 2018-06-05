@@ -15,8 +15,8 @@ angular.module('Core', [
     'Core.directives',
     'Core.filters'
 ]);
-require('../core/filters');
 require('../core/services');
+require('../core/filters');
 require('../core/factories');
 require('../core/directives');
 
@@ -31,8 +31,8 @@ angular.module('Formation', [
     'Core.factories',
     'Core.filters',
     'Core.directives',
-    'Formation.filters',
     'Formation.services',
+    'Formation.filters',
     'Formation.factories',
     'Formation.directives',
     'Formation.controllers',

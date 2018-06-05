@@ -98,15 +98,12 @@
                 </section>
             </section>
         </section>
-        <section v-if="showIndividual" class="sige-main-modal" style="display: block;padding-top: 100px">
-            <section class="modal-content" style="width: 800px; height: 400px">
-                <div class="close" @click="closeMethodIndividual()">
-                    <i class="fas fa-window-close fa-lg"></i>
-                </div>
-                <sigeturbo-payment-create-individual :payment="payment" :years="years"
-                                                     :concepttypes="concepttypes" :months="months"></sigeturbo-payment-create-individual>
-            </section>
-        </section>
+        <template v-if="showIndividual">
+            <sigeturbo-payment-create-individual @close="close" :payment="payment" :years="years"
+                                                 :concepttypes="concepttypes"
+                                                 :months="months"></sigeturbo-payment-create-individual>
+
+        </template>
     </section>
 </template>
 <script>
@@ -164,20 +161,16 @@
             showMethodMassive() {
                 this.showMassive = true;
             },
-            closeMethodMassive() {
-                this.showMassive = false;
-            },
             showMethodIndividual() {
                 this.showIndividual = true;
             },
-            closeMethodIndividual() {
+            close() {
                 this.showIndividual = false;
+                this.showMassive = false;
             },
 
         },
-        watch: {
-
-        },
+        watch: {},
         created() {
 
             //Get Years

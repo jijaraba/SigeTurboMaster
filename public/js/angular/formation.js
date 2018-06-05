@@ -72347,6 +72347,8 @@ angular.module('Core.factories', []).factory('SharedService', ['$rootScope', fun
         $rootScope.$broadcast('handleBroadcast');
     };
     return sharedService;
+}]).factory('version', [function () {
+    return '1.0';
 }]).factory('Token', ['$resource', function ($resource) {
     return $resource('/gettoken', {}, {
         getToken: {
@@ -76745,6 +76747,8 @@ angular.module('Formation.factories', []).factory('Year', ['$resource', function
         }
 
     });
+}]).factory('version', [function () {
+    return '1.0';
 }]).factory('Calendar', ['$resource', function ($resource) {
     return $resource('/api/v1/calendars/:calendarId/:action', {
         calendarId: '@id',
@@ -77502,11 +77506,7 @@ angular.module('Formation.factories', []).factory('Year', ['$resource', function
 
 /* Formation Filters */
 
-angular.module('Formation.filters', []).filter('interpolate', ['version', function (version) {
-    return function (text) {
-        return String(text).replace(/VERSION/mg, version);
-    };
-}]).filter('averageByCategory', function () {
+angular.module('Formation.filters', []).filter('averageByCategory', function () {
     return function (monitorings, rating, category) {
         if (typeof monitorings === 'undefined' && typeof rating === 'undefined' && typeof category === 'undefined') {
             return 0;
@@ -77746,12 +77746,12 @@ __webpack_require__("./node_modules/tc-angular-chartjs/dist/tc-angular-chartjs.m
 
 //Core
 angular.module('Core', ['Core.services', 'Core.factories', 'Core.directives', 'Core.filters']);
-__webpack_require__("./resources/assets/js/sigeturbo_angular/core/filters.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/services.js");
+__webpack_require__("./resources/assets/js/sigeturbo_angular/core/filters.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/factories.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/directives.js");
 
-angular.module('Formation', ['ngResource', 'tc.chartjs', 'ngSanitize', 'ngDialog', 'angular.filter', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Formation.filters', 'Formation.services', 'Formation.factories', 'Formation.directives', 'Formation.controllers']);
+angular.module('Formation', ['ngResource', 'tc.chartjs', 'ngSanitize', 'ngDialog', 'angular.filter', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Formation.services', 'Formation.filters', 'Formation.factories', 'Formation.directives', 'Formation.controllers']);
 
 angular.module('Formation').config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');

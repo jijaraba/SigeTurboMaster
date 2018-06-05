@@ -3,11 +3,12 @@
 'use strict';
 
 /* Core Filters */
-angular.module('Core.filters', []).filter('interpolate', ['version', function (version) {
-    return function (text) {
-        return String(text).replace(/VERSION/mg, version);
-    };
-}])
+angular.module('Core.filters', [])
+    .filter('interpolate', ['version', function (version) {
+        return function (text) {
+            return String(text).replace(/VERSION/mg, version);
+        };
+    }])
     .filter('size', function () {
         return function (size) {
             function round(value, decimals) {
@@ -20,20 +21,20 @@ angular.module('Core.filters', []).filter('interpolate', ['version', function (v
     .filter('fileStatus', function () {
         return function (status) {
             switch (status) {
-            case 0:
-                return 'loading';
-                break;
-            case 100:
-                return 'success';
-                break;
-            case -1:
-                return 'fail';
-                break;
-            case undefined:
-                return '';
-                break;
-            default:
-                return 'loading';
+                case 0:
+                    return 'loading';
+                    break;
+                case 100:
+                    return 'success';
+                    break;
+                case -1:
+                    return 'fail';
+                    break;
+                case undefined:
+                    return '';
+                    break;
+                default:
+                    return 'loading';
             }
         };
     })
@@ -55,14 +56,14 @@ angular.module('Core.filters', []).filter('interpolate', ['version', function (v
     .filter('fileDeleted', function () {
         return function (deleted) {
             switch (deleted) {
-            case true:
-                return 'deleted';
-                break;
-            case false:
-                return '';
-                break;
-            default:
-                return '';
+                case true:
+                    return 'deleted';
+                    break;
+                case false:
+                    return '';
+                    break;
+                default:
+                    return '';
             }
         };
     })
@@ -78,81 +79,81 @@ angular.module('Core.filters', []).filter('interpolate', ['version', function (v
     .filter('monthName', [function () {
         return function (month) {
             switch (month) {
-            case 'January':
-                return 'Enero';
-                break;
-            case 'February':
-                return 'Febrero';
-                break;
-            case 'March':
-                return 'Marzo';
-                break;
-            case 'April':
-                return 'Abril';
-                break;
-            case 'May':
-                return 'Mayo';
-                break;
-            case 'June':
-                return 'Junio';
-                break;
-            case 'July':
-                return 'Julio';
-                break;
-            case 'August':
-                return 'Agosto';
-                break;
-            case 'September':
-                return 'Septiembre';
-                break;
-            case 'October':
-                return 'Octubre';
-                break;
-            case 'November':
-                return 'Noviembre';
-                break;
-            case 'December':
-                return 'Diciembre';
-                break;
-            default:
-                return '';
+                case 'January':
+                    return 'Enero';
+                    break;
+                case 'February':
+                    return 'Febrero';
+                    break;
+                case 'March':
+                    return 'Marzo';
+                    break;
+                case 'April':
+                    return 'Abril';
+                    break;
+                case 'May':
+                    return 'Mayo';
+                    break;
+                case 'June':
+                    return 'Junio';
+                    break;
+                case 'July':
+                    return 'Julio';
+                    break;
+                case 'August':
+                    return 'Agosto';
+                    break;
+                case 'September':
+                    return 'Septiembre';
+                    break;
+                case 'October':
+                    return 'Octubre';
+                    break;
+                case 'November':
+                    return 'Noviembre';
+                    break;
+                case 'December':
+                    return 'Diciembre';
+                    break;
+                default:
+                    return '';
             }
         };
     }])
     .filter('taskType', [function () {
         return function (type) {
             switch (type) {
-            case 1:
-                return 'task';
-                break;
-            case 2:
-                return 'plan';
-                break;
-            case 3:
-                return 'test';
-                break;
-            default :
-                return 'task';
+                case 1:
+                    return 'task';
+                    break;
+                case 2:
+                    return 'plan';
+                    break;
+                case 3:
+                    return 'test';
+                    break;
+                default :
+                    return 'task';
             }
         };
     }])
     .filter('paymentType', [function () {
         return function (type) {
             switch (type) {
-            case 1:
-                return 'MATRÍCULA';
-                break;
-            case 2:
-                return 'PENSIÓN';
-                break;
-            case 3:
-                return 'EXTRACURRICULAR';
-                break;
-            case 4:
-                return 'NIVELACIÓN';
-                break;
-            default :
-                return 'PENSIÓN';
+                case 1:
+                    return 'MATRÍCULA';
+                    break;
+                case 2:
+                    return 'PENSIÓN';
+                    break;
+                case 3:
+                    return 'EXTRACURRICULAR';
+                    break;
+                case 4:
+                    return 'NIVELACIÓN';
+                    break;
+                default :
+                    return 'PENSIÓN';
             }
         };
     }])
@@ -160,16 +161,16 @@ angular.module('Core.filters', []).filter('interpolate', ['version', function (v
         return function (rating, group) {
             if (group < 21) {
                 switch (true) {
-                case (rating >= 4.31 && rating <= 5.00):
-                    return 'DS';
-                case (rating >= 3.71 && rating < 4.31):
-                    return 'DA';
-                case (rating >= 3.00 && rating < 3.71):
-                    return 'DB';
-                case (rating > 0.00 && rating < 3.00):
-                    return 'DP';
-                default:
-                    return 'DP';
+                    case (rating >= 4.31 && rating <= 5.00):
+                        return 'DS';
+                    case (rating >= 3.71 && rating < 4.31):
+                        return 'DA';
+                    case (rating >= 3.00 && rating < 3.71):
+                        return 'DB';
+                    case (rating > 0.00 && rating < 3.00):
+                        return 'DP';
+                    default:
+                        return 'DP';
                 }
             } else {
                 return rating;

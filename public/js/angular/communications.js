@@ -67610,12 +67610,12 @@ __webpack_require__("./node_modules/angular-resource/index.js");
 
 //Core
 angular.module('Core', ['Core.services', 'Core.factories', 'Core.directives', 'Core.filters']);
-__webpack_require__("./resources/assets/js/sigeturbo_angular/core/filters.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/services.js");
+__webpack_require__("./resources/assets/js/sigeturbo_angular/core/filters.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/factories.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/directives.js");
 
-angular.module('Communications', ['ngResource', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Communications.filters', 'Communications.services', 'Communications.factories', 'Communications.directives', 'Communications.controllers']);
+angular.module('Communications', ['ngResource', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Communications.services', 'Communications.filters', 'Communications.factories', 'Communications.directives', 'Communications.controllers']);
 
 angular.module('Communications').config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');
@@ -68302,6 +68302,8 @@ angular.module('Core.factories', []).factory('SharedService', ['$rootScope', fun
         $rootScope.$broadcast('handleBroadcast');
     };
     return sharedService;
+}]).factory('version', [function () {
+    return '1.0';
 }]).factory('Token', ['$resource', function ($resource) {
     return $resource('/gettoken', {}, {
         getToken: {

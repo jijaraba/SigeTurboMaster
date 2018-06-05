@@ -69014,6 +69014,8 @@ angular.module('Core.factories', []).factory('SharedService', ['$rootScope', fun
         $rootScope.$broadcast('handleBroadcast');
     };
     return sharedService;
+}]).factory('version', [function () {
+    return '1.0';
 }]).factory('Token', ['$resource', function ($resource) {
     return $resource('/gettoken', {}, {
         getToken: {
@@ -69625,12 +69627,12 @@ __webpack_require__("./node_modules/ng-dialog/js/ngDialog.js");
 
 //Core
 angular.module('Core', ['Core.services', 'Core.factories', 'Core.directives', 'Core.filters']);
-__webpack_require__("./resources/assets/js/sigeturbo_angular/core/filters.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/services.js");
+__webpack_require__("./resources/assets/js/sigeturbo_angular/core/filters.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/factories.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/directives.js");
 
-angular.module('Guest', ['ngResource', 'ngDialog', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Guest.filters', 'Guest.services', 'Guest.factories', 'Guest.directives', 'Guest.controllers']);
+angular.module('Guest', ['ngResource', 'ngDialog', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Guest.services', 'Guest.filters', 'Guest.factories', 'Guest.directives', 'Guest.controllers']);
 
 //Guest
 __webpack_require__("./resources/assets/js/sigeturbo_angular/guest/filters/main.js");

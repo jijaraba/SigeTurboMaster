@@ -96,7 +96,7 @@ class UserfamilyRepository implements UserfamilyRepositoryInterface
 
         $user = $data['user'];
         $category = null;
-        if (isset($data['category']) && $data['category'] != 'null') {
+        if (isset($data['category']) && $data['category'] != null) {
             $type_search = (getUser()->role_selected === 'Student') ? 'iduser' : 'idfamily';
             $category = $data['category'];
 

@@ -15,8 +15,8 @@ angular.module('Core', [
     'Core.directives',
     'Core.filters'
 ]);
-require('../core/filters');
 require('../core/services');
+require('../core/filters');
 require('../core/factories');
 require('../core/directives');
 
@@ -30,8 +30,8 @@ angular.module('Financials', [
     'Core.factories',
     'Core.filters',
     'Core.directives',
-    'Financials.filters',
     'Financials.services',
+    'Financials.filters',
     'Financials.factories',
     'Financials.directives',
     'Financials.controllers',

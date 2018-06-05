@@ -13,8 +13,8 @@ angular.module('Core', [
     'Core.directives',
     'Core.filters'
 ]);
-require('../core/filters');
 require('../core/services');
+require('../core/filters');
 require('../core/factories');
 require('../core/directives');
 
@@ -26,8 +26,8 @@ angular.module('Guest', [
     'Core.factories',
     'Core.filters',
     'Core.directives',
-    'Guest.filters',
     'Guest.services',
+    'Guest.filters',
     'Guest.factories',
     'Guest.directives',
     'Guest.controllers',

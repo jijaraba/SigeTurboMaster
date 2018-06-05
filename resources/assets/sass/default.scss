@@ -820,7 +820,7 @@ aside {
     em {
       position: absolute;
       top: 10px;
-      left: 95px;
+      left: 100px;
       background: #da4453;
       font-size: .7em;
       border-radius: 5px;
@@ -1936,7 +1936,7 @@ footer {
   font: {
     size: 1em !important;
   }
-  input[type="text"], input[type="email"] {
+  input[type="text"], input[type="email"], input[type="number"]  {
     background: white !important;
   }
   input[readonly="readonly"] {

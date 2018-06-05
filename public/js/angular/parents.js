@@ -68603,6 +68603,8 @@ angular.module('Core.factories', []).factory('SharedService', ['$rootScope', fun
         $rootScope.$broadcast('handleBroadcast');
     };
     return sharedService;
+}]).factory('version', [function () {
+    return '1.0';
 }]).factory('Token', ['$resource', function ($resource) {
     return $resource('/gettoken', {}, {
         getToken: {
@@ -70095,12 +70097,12 @@ __webpack_require__("./node_modules/angular-timer/dist/angular-timer.js");
 
 //Core
 angular.module('Core', ['Core.services', 'Core.factories', 'Core.directives', 'Core.filters']);
-__webpack_require__("./resources/assets/js/sigeturbo_angular/core/filters.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/services.js");
+__webpack_require__("./resources/assets/js/sigeturbo_angular/core/filters.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/factories.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/directives.js");
 
-angular.module('Parents', ['ngResource', 'timer', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Parents.filters', 'Parents.services', 'Parents.factories', 'Parents.directives', 'Parents.controllers']);
+angular.module('Parents', ['ngResource', 'timer', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Parents.services', 'Parents.filters', 'Parents.factories', 'Parents.directives', 'Parents.controllers']);
 
 angular.module('Parents').run(['Token', 'sigeTurboStorage', function (Token, sigeTurboStorage) {
     if (!sigeTurboStorage.getStorage('token')) {

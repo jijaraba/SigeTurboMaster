@@ -2,11 +2,6 @@
 
 /* Formation Filters */
 angular.module('Formation.filters', [])
-    .filter('interpolate', ['version', function (version) {
-        return function (text) {
-            return String(text).replace(/VERSION/mg, version);
-        };
-    }])
     .filter('averageByCategory', function () {
         return function (monitorings, rating, category) {
             if (typeof(monitorings) === 'undefined' && typeof(rating) === 'undefined' && typeof(category) === 'undefined') {

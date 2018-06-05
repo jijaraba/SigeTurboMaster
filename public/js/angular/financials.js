@@ -71377,6 +71377,8 @@ angular.module('Core.factories', []).factory('SharedService', ['$rootScope', fun
         $rootScope.$broadcast('handleBroadcast');
     };
     return sharedService;
+}]).factory('version', [function () {
+    return '1.0';
 }]).factory('Token', ['$resource', function ($resource) {
     return $resource('/gettoken', {}, {
         getToken: {
@@ -73295,12 +73297,12 @@ __webpack_require__("./node_modules/tc-angular-chartjs/dist/tc-angular-chartjs.m
 
 //Core
 angular.module('Core', ['Core.services', 'Core.factories', 'Core.directives', 'Core.filters']);
-__webpack_require__("./resources/assets/js/sigeturbo_angular/core/filters.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/services.js");
+__webpack_require__("./resources/assets/js/sigeturbo_angular/core/filters.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/factories.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/directives.js");
 
-angular.module('Financials', ['ngResource', 'tc.chartjs', 'ngSanitize', 'angular.filter', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Financials.filters', 'Financials.services', 'Financials.factories', 'Financials.directives', 'Financials.controllers']);
+angular.module('Financials', ['ngResource', 'tc.chartjs', 'ngSanitize', 'angular.filter', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Financials.services', 'Financials.filters', 'Financials.factories', 'Financials.directives', 'Financials.controllers']);
 
 angular.module('Financials').config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');

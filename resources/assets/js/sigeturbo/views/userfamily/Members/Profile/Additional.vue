@@ -31,7 +31,7 @@
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
                                             <span class="col-90">
-                                                Especificar el <strong>Tipo de Identificación, El Número y el Lugar de Expedición</strong> del documento del usuario
+                                                Especificar si autoriza la realización de <strong>Salidas Pedagógicas</strong> del estudiante durante el año académico
                                             </span>
                                         </div>
                                     </section>
@@ -62,7 +62,7 @@
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
                                             <span class="col-90">
-                                                Especificar el <strong>Tipo de Identificación, El Número y el Lugar de Expedición</strong> del documento del usuario
+                                                Especificar el nombre completo del responsable económico del estudiante. En caso de ser una empresa por favor especificar el nombre y el NIT.
                                             </span>
                                         </div>
                                     </section>
@@ -91,7 +91,7 @@
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
                                             <span class="col-90">
-                                                Especificar el <strong>Tipo de Identificación, El Número y el Lugar de Expedición</strong> del documento del usuario
+                                                Tiene algún comentario que adicionar a esta actualización de datos que considera que la institución deba tener en cuenta.
                                             </span>
                                         </div>
                                     </section>
@@ -120,7 +120,7 @@
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
                                             <span class="col-90">
-                                                Especificar el <strong>Tipo de Identificación, El Número y el Lugar de Expedición</strong> del documento del usuario
+                                                Confirmar la actualización de la información en nuestro sistema de informacuón (SigeTurbo). Si la información está completa por favor proceder a dar clic en el botón guardar
                                             </span>
                                         </div>
                                     </section>

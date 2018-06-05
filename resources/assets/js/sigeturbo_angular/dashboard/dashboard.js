@@ -15,8 +15,8 @@ angular.module('Core', [
     'Core.directives',
     'Core.filters'
 ]);
-require('../core/filters');
 require('../core/services');
+require('../core/filters');
 require('../core/factories');
 require('../core/directives');
 
@@ -29,8 +29,8 @@ angular.module('Dashboard', [
     'Core.factories',
     'Core.filters',
     'Core.directives',
-    'Dashboard.filters',
     'Dashboard.services',
+    'Dashboard.filters',
     'Dashboard.factories',
     'Dashboard.directives',
     'Dashboard.controllers',

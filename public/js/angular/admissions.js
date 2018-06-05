@@ -71903,12 +71903,12 @@ __webpack_require__("./node_modules/ng-dialog/js/ngDialog.js");
 
 //Core
 angular.module('Core', ['Core.services', 'Core.factories', 'Core.directives', 'Core.filters']);
-__webpack_require__("./resources/assets/js/sigeturbo_angular/core/filters.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/services.js");
+__webpack_require__("./resources/assets/js/sigeturbo_angular/core/filters.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/factories.js");
 __webpack_require__("./resources/assets/js/sigeturbo_angular/core/directives.js");
 
-angular.module('Admissions', ['ngResource', 'tc.chartjs', 'ngDialog', 'ngSanitize', 'angular.filter', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Admissions.filters', 'Admissions.services', 'Admissions.factories', 'Admissions.directives', 'Admissions.controllers']);
+angular.module('Admissions', ['ngResource', 'tc.chartjs', 'ngDialog', 'ngSanitize', 'angular.filter', 'Core.services', 'Core.factories', 'Core.filters', 'Core.directives', 'Admissions.services', 'Admissions.filters', 'Admissions.factories', 'Admissions.directives', 'Admissions.controllers']);
 
 angular.module('Admissions').config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('httpInterceptor');
@@ -74637,6 +74637,8 @@ angular.module('Core.factories', []).factory('SharedService', ['$rootScope', fun
         $rootScope.$broadcast('handleBroadcast');
     };
     return sharedService;
+}]).factory('version', [function () {
+    return '1.0';
 }]).factory('Token', ['$resource', function ($resource) {
     return $resource('/gettoken', {}, {
         getToken: {

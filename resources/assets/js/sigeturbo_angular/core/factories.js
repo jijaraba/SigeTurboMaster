@@ -14,6 +14,9 @@ angular.module('Core.factories', [])
         };
         return sharedService;
     }])
+    .factory('version',[function(){
+        return '1.0';
+    }])
     .factory('Token', ['$resource', function ($resource) {
         return $resource('/gettoken', {}, {
             getToken: {

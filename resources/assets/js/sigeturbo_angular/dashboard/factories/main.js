@@ -59,7 +59,7 @@ angular.module('Dashboard.factories', [])
     }])
     .factory('Consenttype', ['$resource', function ($resource) {
         return $resource('/api/v1/consenttypes/:consenttypeId/:action', {consenttypeId: '@id', action: '@action'}, {
-            all: { 
+            all: {
                 method: 'GET',
                 params: {consenttypeId: ''},
                 isArray: true

@@ -2397,6 +2397,7 @@ module.exports = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_Bloodtype__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Bloodtype.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_Medicalinsurance__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Medicalinsurance.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_Prepaidmedical__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Prepaidmedical.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
 //
 //
 //
@@ -2555,6 +2556,257 @@ module.exports = {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -2576,7 +2828,10 @@ module.exports = {
         return {
             bloodtypes: [],
             medicalinsurances: [],
-            prepaidmedicals: []
+            prepaidmedicals: [],
+            assets: Object(__WEBPACK_IMPORTED_MODULE_6__core_utils__["a" /* default */])(),
+            steps: 9,
+            stepSelected: 0
         };
     },
     methods: {
@@ -2587,32 +2842,42 @@ module.exports = {
             var _this = this;
 
             event.preventDefault();
-            __WEBPACK_IMPORTED_MODULE_2__models_Preregistration__["a" /* default */].updateProfileMedical(this.preregistration.idpreregistration, {
-                bloodtype: this.preregistration.idbloodtype,
-                medicalinsurance: this.preregistration.idmedicalinsurance,
-                prepaidmedical: this.preregistration.idprepaidmedical,
-                policynumber: this.preregistration.policynumber,
-                medicaltreatment: this.preregistration.medicaltreatment,
-                medicaltreatmentdescription: this.preregistration.medicaltreatmentdescription,
-                equaltreatment: this.preregistration.equaltreatment,
-                takemedication: this.preregistration.takemedication,
-                medicationdescription: this.preregistration.medicationdescription,
-                whytakemedication: this.preregistration.whytakemedication,
-                dose: this.preregistration.dose,
-                isallergic: this.preregistration.isallergic,
-                specifyallergic: this.preregistration.specifyallergic,
-                sufferedillness: this.preregistration.sufferedillness,
-                sufferedillnessdescription: this.preregistration.sufferedillnessdescription,
-                doctorname: this.preregistration.doctorname,
-                doctorphone: this.preregistration.doctorphone,
-                psychologicalsupport: this.preregistration.psychologicalsupport
-            }).then(function (_ref) {
-                var data = _ref.data;
+            if (confirm(Object(__WEBPACK_IMPORTED_MODULE_1__filters_string_capitalize__["a" /* default */])(this.$translate.text('sigeturbo.confirm_information')))) {
+                __WEBPACK_IMPORTED_MODULE_2__models_Preregistration__["a" /* default */].updateProfileMedical(this.preregistration.idpreregistration, {
+                    bloodtype: this.preregistration.idbloodtype,
+                    medicalinsurance: this.preregistration.idmedicalinsurance,
+                    prepaidmedical: this.preregistration.idprepaidmedical,
+                    policynumber: this.preregistration.policynumber,
+                    medicaltreatment: this.preregistration.medicaltreatment,
+                    medicaltreatmentdescription: this.preregistration.medicaltreatmentdescription,
+                    equaltreatment: this.preregistration.equaltreatment,
+                    takemedication: this.preregistration.takemedication,
+                    medicationdescription: this.preregistration.medicationdescription,
+                    whytakemedication: this.preregistration.whytakemedication,
+                    dose: this.preregistration.dose,
+                    isallergic: this.preregistration.isallergic,
+                    specifyallergic: this.preregistration.specifyallergic,
+                    sufferedillness: this.preregistration.sufferedillness,
+                    sufferedillnessdescription: this.preregistration.sufferedillnessdescription,
+                    doctorname: this.preregistration.doctorname,
+                    doctorphone: this.preregistration.doctorphone,
+                    psychologicalsupport: this.preregistration.psychologicalsupport
+                }).then(function (_ref) {
+                    var data = _ref.data;
 
-                _this.$emit('close');
-            }).catch(function (error) {
-                return console.log(error);
-            });
+                    _this.$emit('close');
+                }).catch(function (error) {
+                    return console.log(error);
+                });
+            }
+        },
+        setStep: function setStep(step) {
+            for (var i = 0; i <= this.steps; i++) {
+                document.getElementById('step-' + i).style.display = "none";
+            }
+            document.getElementById('step-' + step).style.display = "block";
+            //Step Selected
+            this.stepSelected = step;
         }
     },
     watch: {},
@@ -2655,10 +2920,8 @@ module.exports = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__filters_string_uppercase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/uppercase.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__filters_string_capitalize__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/capitalize.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_Identificationtype__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Identificationtype.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_Religion__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Religion.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_Preregistration__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Preregistration.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_Preregistration__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Preregistration.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
 //
 //
 //
@@ -2829,8 +3092,6 @@ module.exports = {
 //
 //
 //
-
-
 
 
 
@@ -2848,7 +3109,7 @@ module.exports = {
     components: {},
     data: function data() {
         return {
-            assets: Object(__WEBPACK_IMPORTED_MODULE_5__core_utils__["a" /* default */])(),
+            assets: Object(__WEBPACK_IMPORTED_MODULE_3__core_utils__["a" /* default */])(),
             steps: 4,
             stepSelected: 0
         };
@@ -2862,7 +3123,7 @@ module.exports = {
 
             event.preventDefault();
             if (confirm(Object(__WEBPACK_IMPORTED_MODULE_1__filters_string_capitalize__["a" /* default */])(this.$translate.text('sigeturbo.confirm_information')))) {
-                __WEBPACK_IMPORTED_MODULE_4__models_Preregistration__["a" /* default */].updateProfileProfession(this.preregistration.idpreregistration, {
+                __WEBPACK_IMPORTED_MODULE_2__models_Preregistration__["a" /* default */].updateProfileProfession(this.preregistration.idpreregistration, {
                     profession: this.preregistration.profession,
                     occupation: this.preregistration.occupation,
                     company: this.preregistration.company,
@@ -21114,98 +21375,90 @@ var render = function() {
                     ]
                   )
                 ]
-              ),
-              _vm._v(" "),
-              _c("footer", [
-                _c("ul", { staticClass: "display-horizontal col-100" }, [
-                  _c("li", { staticClass: "col-35 previous" }),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "col-30 steps" }, [
-                    _c("ul", { staticClass: "display-horizontal col-100" }, [
-                      _c(
-                        "li",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.setStep(1)
-                            }
+              )
+            ]),
+            _vm._v(" "),
+            _c("footer", [
+              _c("ul", { staticClass: "display-horizontal col-100" }, [
+                _c("li", { staticClass: "col-35 previous" }),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-30 steps" }, [
+                  _c("ul", { staticClass: "display-horizontal col-100" }, [
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(1)
                           }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              class: [_vm.stepSelected == 1 ? "selected" : ""]
-                            },
-                            [_vm._v("1")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.setStep(2)
-                            }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 1 ? "selected" : ""] },
+                          [_vm._v("1")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(2)
                           }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              class: [_vm.stepSelected == 2 ? "selected" : ""]
-                            },
-                            [_vm._v("2")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.setStep(3)
-                            }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 2 ? "selected" : ""] },
+                          [_vm._v("2")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(3)
                           }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              class: [_vm.stepSelected == 3 ? "selected" : ""]
-                            },
-                            [_vm._v("3")]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.setStep(4)
-                            }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 3 ? "selected" : ""] },
+                          [_vm._v("3")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(4)
                           }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              class: [_vm.stepSelected == 4 ? "selected" : ""]
-                            },
-                            [_vm._v("4")]
-                          )
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "col-35 next" })
-                ])
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 4 ? "selected" : ""] },
+                          [_vm._v("4")]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-35 next" })
               ])
             ])
           ])
@@ -21228,13 +21481,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("span", { staticClass: "col-90" }, [
           _vm._v(
-            "\n                                            Especificar el "
+            "\n                                            Especificar la "
           ),
-          _c("strong", [
-            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
-          ]),
+          _c("strong", [_vm._v("Profesión")]),
           _vm._v(
-            " del documento del usuario\n                                        "
+            " del padre de familia para el cual se está actualizando la información en SigeTurbo\n                                        "
           )
         ])
       ])
@@ -21253,13 +21504,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("span", { staticClass: "col-90" }, [
           _vm._v(
-            "\n                                            Especificar el "
+            "\n                                            Especificar la "
           ),
-          _c("strong", [
-            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
-          ]),
+          _c("strong", [_vm._v("Ocupación")]),
           _vm._v(
-            " del documento del usuario\n                                        "
+            " del padre de familia para el cual se está actualizando la información en SigeTurbo\n                                        "
           )
         ])
       ])
@@ -21278,13 +21527,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("span", { staticClass: "col-90" }, [
           _vm._v(
-            "\n                                            Especificar el "
-          ),
-          _c("strong", [
-            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
-          ]),
-          _vm._v(
-            " del documento del usuario\n                                        "
+            "\n                                            Especificar la información de la empresa para la cual trabajo el padre de familia (Opcional). Indicar nombre de la empresa y teléfono\n                                        "
           )
         ])
       ])
@@ -21303,13 +21546,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("span", { staticClass: "col-90" }, [
           _vm._v(
-            "\n                                            Especificar el "
-          ),
-          _c("strong", [
-            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
-          ]),
-          _vm._v(
-            " del documento del usuario\n                                        "
+            "\n                                            Confirmar la actualización de la información en nuestro sistema de informacuón (SigeTurbo). Si la información está completa por favor proceder a dar clic en el botón guardar\n                                        "
           )
         ])
       ])
@@ -21950,13 +22187,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("span", { staticClass: "col-90" }, [
           _vm._v(
-            "\n                                            Especificar el "
+            "\n                                            Especificar si autoriza la realización de "
           ),
-          _c("strong", [
-            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
-          ]),
+          _c("strong", [_vm._v("Salidas Pedagógicas")]),
           _vm._v(
-            " del documento del usuario\n                                        "
+            " del estudiante durante el año académico\n                                        "
           )
         ])
       ])
@@ -21975,13 +22210,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("span", { staticClass: "col-90" }, [
           _vm._v(
-            "\n                                            Especificar el "
-          ),
-          _c("strong", [
-            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
-          ]),
-          _vm._v(
-            " del documento del usuario\n                                        "
+            "\n                                            Especificar el nombre completo del responsable económico del estudiante. En caso de ser una empresa por favor especificar el nombre y el NIT.\n                                        "
           )
         ])
       ])
@@ -22000,13 +22229,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("span", { staticClass: "col-90" }, [
           _vm._v(
-            "\n                                            Especificar el "
-          ),
-          _c("strong", [
-            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
-          ]),
-          _vm._v(
-            " del documento del usuario\n                                        "
+            "\n                                            Tiene algún comentario que adicionar a esta actualización de datos que considera que la institución deba tener en cuenta.\n                                        "
           )
         ])
       ])
@@ -22025,13 +22248,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("span", { staticClass: "col-90" }, [
           _vm._v(
-            "\n                                            Especificar el "
-          ),
-          _c("strong", [
-            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
-          ]),
-          _vm._v(
-            " del documento del usuario\n                                        "
+            "\n                                            Confirmar la actualización de la información en nuestro sistema de informacuón (SigeTurbo). Si la información está completa por favor proceder a dar clic en el botón guardar\n                                        "
           )
         ])
       ])
@@ -23655,681 +23872,119 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("section", { staticClass: "sige-wizard-container padding-30" }, [
-            _c(
-              "form",
-              {
-                on: {
-                  submit: function($event) {
-                    _vm.updateProfileMedical($event)
+            _c("header", [
+              _c("h4", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("uppercase")(
+                      _vm.$translate.text("sigeturbo.general")
+                    )
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("section", { staticClass: "body" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      _vm.updateProfileMedical($event)
+                    }
                   }
-                }
-              },
-              [
-                _c(
-                  "fieldset",
-                  {
-                    staticClass: "step",
-                    attrs: { id: "step-01", "data-step": "1" }
-                  },
-                  [
-                    _c("legend", [
-                      _vm._v(
-                        _vm._s(
-                          _vm._f("uppercase")(
-                            _vm.$translate.text("sigeturbo.medical")
-                          )
-                        )
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("ul", { staticClass: "display-horizontal col-100" }, [
-                      _c("li", { staticClass: "col-25 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text("sigeturbo.blood_type")
-                              )
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.preregistration.idbloodtype,
-                                expression: "preregistration.idbloodtype"
-                              }
-                            ],
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.preregistration,
-                                  "idbloodtype",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
+                },
+                [
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "welcome",
+                      attrs: { id: "step-0", "data-step": "0" }
+                    },
+                    [
+                      _c("legend", [_vm._v("Welcome")]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_health_welcome.svg",
+                              alt: ""
                             }
-                          },
-                          _vm._l(_vm.bloodtypes, function(bloodtype) {
-                            return _c(
-                              "option",
-                              { domProps: { value: bloodtype.idbloodtype } },
-                              [
-                                _vm._v(
-                                  _vm._s(bloodtype.name) +
-                                    "\n                                "
-                                )
-                              ]
-                            )
                           })
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "col-25 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text(
-                                  "sigeturbo.medical_insurance"
-                                )
-                              )
-                            )
-                          )
                         ]),
                         _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.preregistration.idmedicalinsurance,
-                                expression: "preregistration.idmedicalinsurance"
-                              }
-                            ],
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.start")
+                              )
+                            },
                             on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.preregistration,
-                                  "idmedicalinsurance",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
+                              click: function($event) {
+                                _vm.setStep(1)
                               }
                             }
-                          },
-                          _vm._l(_vm.medicalinsurances, function(
-                            medicalinsurance
-                          ) {
-                            return _c(
-                              "option",
-                              {
-                                domProps: {
-                                  value: medicalinsurance.idmedicalinsurance
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(medicalinsurance.name) +
-                                    "\n                                "
-                                )
-                              ]
-                            )
                           })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-1", "data-step": "1" }
+                    },
+                    [
+                      _c("legend", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("uppercase")(
+                              _vm.$translate.text("sigeturbo.step")
+                            )
+                          ) + " 1"
                         )
                       ]),
                       _vm._v(" "),
-                      _c("li", { staticClass: "col-25 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text("sigeturbo.medical_prepaid")
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.blood_type")
+                                )
                               )
                             )
-                          )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(0)
                         ]),
                         _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.preregistration.idprepaidmedical,
-                                expression: "preregistration.idprepaidmedical"
-                              }
-                            ],
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.preregistration,
-                                  "idprepaidmedical",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
+                        _c("li", { staticClass: "col-100 gutter-5 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_health.svg",
+                              alt: ""
                             }
-                          },
-                          _vm._l(_vm.prepaidmedicals, function(prepaidmedical) {
-                            return _c(
-                              "option",
-                              {
-                                domProps: {
-                                  value: prepaidmedical.idprepaidmedical
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(prepaidmedical.name) +
-                                    "\n                                "
-                                )
-                              ]
-                            )
                           })
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "col-25 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text("sigeturbo.policy_number")
-                              )
-                            )
-                          )
                         ]),
                         _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.preregistration.policynumber,
-                              expression: "preregistration.policynumber"
-                            }
-                          ],
-                          attrs: {
-                            type: "text",
-                            title: _vm._f("uppercase")(
-                              _vm.$translate.text("sigeturbo.policy_number")
-                            ),
-                            placeholder: _vm._f("uppercase")(
-                              _vm.$translate.text("sigeturbo.policy_number")
-                            )
-                          },
-                          domProps: { value: _vm.preregistration.policynumber },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.preregistration,
-                                "policynumber",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "col-30 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text(
-                                  "sigeturbo.medical_treatment"
-                                )
-                              )
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.preregistration.medicaltreatment,
-                                expression: "preregistration.medicaltreatment"
-                              }
-                            ],
-                            attrs: { name: "medicaltreatment" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.preregistration,
-                                  "medicaltreatment",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "N" } }, [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("capitalize")(
-                                    _vm.$translate.text("sigeturbo.no")
-                                  )
-                                )
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "Y" } }, [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("capitalize")(
-                                    _vm.$translate.text("sigeturbo.yes")
-                                  )
-                                )
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "col-70 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text(
-                                  "sigeturbo.medical_treatment_description"
-                                )
-                              )
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value:
-                                _vm.preregistration.medicaltreatmentdescription,
-                              expression:
-                                "preregistration.medicaltreatmentdescription"
-                            }
-                          ],
-                          attrs: {
-                            type: "text",
-                            title: _vm._f("uppercase")(
-                              _vm.$translate.text(
-                                "sigeturbo.medical_treatment_description"
-                              )
-                            ),
-                            placeholder: _vm._f("uppercase")(
-                              _vm.$translate.text(
-                                "sigeturbo.medical_treatment_description"
-                              )
-                            )
-                          },
-                          domProps: {
-                            value:
-                              _vm.preregistration.medicaltreatmentdescription
-                          },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.preregistration,
-                                "medicaltreatmentdescription",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "col-30 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text("sigeturbo.equal_treatment")
-                              )
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.preregistration.equaltreatment,
-                                expression: "preregistration.equaltreatment"
-                              }
-                            ],
-                            attrs: { name: "equaltreatment" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.preregistration,
-                                  "equaltreatment",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "N" } }, [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("capitalize")(
-                                    _vm.$translate.text("sigeturbo.no")
-                                  )
-                                )
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "Y" } }, [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("capitalize")(
-                                    _vm.$translate.text("sigeturbo.yes")
-                                  )
-                                )
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "col-30 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text("sigeturbo.take_medication")
-                              )
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.preregistration.takemedication,
-                                expression: "preregistration.takemedication"
-                              }
-                            ],
-                            attrs: { name: "takemedication" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.preregistration,
-                                  "takemedication",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "N" } }, [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("capitalize")(
-                                    _vm.$translate.text("sigeturbo.no")
-                                  )
-                                )
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "Y" } }, [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("capitalize")(
-                                    _vm.$translate.text("sigeturbo.yes")
-                                  )
-                                )
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "col-40 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text(
-                                  "sigeturbo.medication_description"
-                                )
-                              )
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.preregistration.medicationdescription,
-                              expression:
-                                "preregistration.medicationdescription"
-                            }
-                          ],
-                          attrs: {
-                            type: "text",
-                            title: _vm._f("uppercase")(
-                              _vm.$translate.text(
-                                "sigeturbo.medication_description"
-                              )
-                            ),
-                            placeholder: _vm._f("uppercase")(
-                              _vm.$translate.text(
-                                "sigeturbo.medication_description"
-                              )
-                            )
-                          },
-                          domProps: {
-                            value: _vm.preregistration.medicationdescription
-                          },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.preregistration,
-                                "medicationdescription",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "col-100 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text(
-                                  "sigeturbo.why_take_medication"
-                                )
-                              )
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.preregistration.whytakemedication,
-                              expression: "preregistration.whytakemedication"
-                            }
-                          ],
-                          attrs: {
-                            rows: "2",
-                            name: "whytakemedication",
-                            id: "whytakemedication",
-                            placeholder: _vm._f("uppercase")(
-                              _vm.$translate.text(
-                                "sigeturbo.why_take_medication"
-                              )
-                            )
-                          },
-                          domProps: {
-                            value: _vm.preregistration.whytakemedication
-                          },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.preregistration,
-                                "whytakemedication",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "col-100 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text("sigeturbo.dose")
-                              )
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.preregistration.dose,
-                              expression: "preregistration.dose"
-                            }
-                          ],
-                          attrs: {
-                            rows: "2",
-                            name: "dose",
-                            id: "dose",
-                            placeholder: _vm._f("uppercase")(
-                              _vm.$translate.text("sigeturbo.dose")
-                            )
-                          },
-                          domProps: { value: _vm.preregistration.dose },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.preregistration,
-                                "dose",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "li",
-                        {
-                          staticClass: "col-20 gutter-5",
-                          attrs: { id: "isallergic_container" }
-                        },
-                        [
+                        _c("li", { staticClass: "col-25 gutter-5" }, [
                           _c("span", [
                             _vm._v(
                               _vm._s(
                                 _vm._f("uppercase")(
-                                  _vm.$translate.text("sigeturbo.is_allergic")
+                                  _vm.$translate.text("sigeturbo.blood_type")
                                 )
                               )
                             )
@@ -24342,11 +23997,10 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.preregistration.isallergic,
-                                  expression: "preregistration.isallergic"
+                                  value: _vm.preregistration.idbloodtype,
+                                  expression: "preregistration.idbloodtype"
                                 }
                               ],
-                              attrs: { name: "isallergic" },
                               on: {
                                 change: function($event) {
                                   var $$selectedVal = Array.prototype.filter
@@ -24360,7 +24014,378 @@ var render = function() {
                                     })
                                   _vm.$set(
                                     _vm.preregistration,
-                                    "isallergic",
+                                    "idbloodtype",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.bloodtypes, function(bloodtype) {
+                              return _c(
+                                "option",
+                                { domProps: { value: bloodtype.idbloodtype } },
+                                [
+                                  _vm._v(
+                                    _vm._s(bloodtype.name) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            })
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.next")
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.setStep(2)
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-2", "data-step": "2" }
+                    },
+                    [
+                      _c("legend", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("uppercase")(
+                              _vm.$translate.text("sigeturbo.step")
+                            )
+                          ) + " 2"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.medical_insurance"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(1)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_health.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-25 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.medical_insurance"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.preregistration.idmedicalinsurance,
+                                  expression:
+                                    "preregistration.idmedicalinsurance"
+                                }
+                              ],
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.preregistration,
+                                    "idmedicalinsurance",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.medicalinsurances, function(
+                              medicalinsurance
+                            ) {
+                              return _c(
+                                "option",
+                                {
+                                  domProps: {
+                                    value: medicalinsurance.idmedicalinsurance
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(medicalinsurance.name) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            })
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-25 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.medical_prepaid"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.preregistration.idprepaidmedical,
+                                  expression: "preregistration.idprepaidmedical"
+                                }
+                              ],
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.preregistration,
+                                    "idprepaidmedical",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.prepaidmedicals, function(
+                              prepaidmedical
+                            ) {
+                              return _c(
+                                "option",
+                                {
+                                  domProps: {
+                                    value: prepaidmedical.idprepaidmedical
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(prepaidmedical.name) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            })
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-25 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.policy_number")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.preregistration.policynumber,
+                                expression: "preregistration.policynumber"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              title: _vm._f("uppercase")(
+                                _vm.$translate.text("sigeturbo.policy_number")
+                              ),
+                              placeholder: _vm._f("uppercase")(
+                                _vm.$translate.text("sigeturbo.policy_number")
+                              )
+                            },
+                            domProps: {
+                              value: _vm.preregistration.policynumber
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.preregistration,
+                                  "policynumber",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.next")
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.setStep(3)
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-3", "data-step": "3" }
+                    },
+                    [
+                      _c("legend", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("uppercase")(
+                              _vm.$translate.text("sigeturbo.step")
+                            )
+                          ) + " 3"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.medical_treatment"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(2)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_health.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-30 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.medical_treatment"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.preregistration.medicaltreatment,
+                                  expression: "preregistration.medicaltreatment"
+                                }
+                              ],
+                              attrs: { name: "medicaltreatment" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.preregistration,
+                                    "medicaltreatment",
                                     $event.target.multiple
                                       ? $$selectedVal
                                       : $$selectedVal[0]
@@ -24390,365 +24415,1542 @@ var render = function() {
                               ])
                             ]
                           )
-                        ]
-                      ),
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-70 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.medical_treatment_description"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value:
+                                  _vm.preregistration
+                                    .medicaltreatmentdescription,
+                                expression:
+                                  "preregistration.medicaltreatmentdescription"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              title: _vm._f("uppercase")(
+                                _vm.$translate.text(
+                                  "sigeturbo.medical_treatment_description"
+                                )
+                              ),
+                              placeholder: _vm._f("uppercase")(
+                                _vm.$translate.text(
+                                  "sigeturbo.medical_treatment_description"
+                                )
+                              )
+                            },
+                            domProps: {
+                              value:
+                                _vm.preregistration.medicaltreatmentdescription
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.preregistration,
+                                  "medicaltreatmentdescription",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-30 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.equal_treatment"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.preregistration.equaltreatment,
+                                  expression: "preregistration.equaltreatment"
+                                }
+                              ],
+                              attrs: { name: "equaltreatment" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.preregistration,
+                                    "equaltreatment",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "N" } }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("capitalize")(
+                                      _vm.$translate.text("sigeturbo.no")
+                                    )
+                                  )
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Y" } }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("capitalize")(
+                                      _vm.$translate.text("sigeturbo.yes")
+                                    )
+                                  )
+                                )
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.next")
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.setStep(4)
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-4", "data-step": "4" }
+                    },
+                    [
+                      _c("legend", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("uppercase")(
+                              _vm.$translate.text("sigeturbo.step")
+                            )
+                          ) + " 4"
+                        )
+                      ]),
                       _vm._v(" "),
-                      _c("li", { staticClass: "col-80 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.take_medication"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(3)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_health.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-30 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.take_medication"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.preregistration.takemedication,
+                                  expression: "preregistration.takemedication"
+                                }
+                              ],
+                              attrs: { name: "takemedication" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.preregistration,
+                                    "takemedication",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "N" } }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("capitalize")(
+                                      _vm.$translate.text("sigeturbo.no")
+                                    )
+                                  )
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Y" } }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("capitalize")(
+                                      _vm.$translate.text("sigeturbo.yes")
+                                    )
+                                  )
+                                )
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-40 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.medication_description"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value:
+                                  _vm.preregistration.medicationdescription,
+                                expression:
+                                  "preregistration.medicationdescription"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              title: _vm._f("uppercase")(
+                                _vm.$translate.text(
+                                  "sigeturbo.medication_description"
+                                )
+                              ),
+                              placeholder: _vm._f("uppercase")(
+                                _vm.$translate.text(
+                                  "sigeturbo.medication_description"
+                                )
+                              )
+                            },
+                            domProps: {
+                              value: _vm.preregistration.medicationdescription
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.preregistration,
+                                  "medicationdescription",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.why_take_medication"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.preregistration.whytakemedication,
+                                expression: "preregistration.whytakemedication"
+                              }
+                            ],
+                            attrs: {
+                              rows: "2",
+                              name: "whytakemedication",
+                              id: "whytakemedication",
+                              placeholder: _vm._f("uppercase")(
+                                _vm.$translate.text(
+                                  "sigeturbo.why_take_medication"
+                                )
+                              )
+                            },
+                            domProps: {
+                              value: _vm.preregistration.whytakemedication
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.preregistration,
+                                  "whytakemedication",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.dose")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.preregistration.dose,
+                                expression: "preregistration.dose"
+                              }
+                            ],
+                            attrs: {
+                              rows: "2",
+                              name: "dose",
+                              id: "dose",
+                              placeholder: _vm._f("uppercase")(
+                                _vm.$translate.text("sigeturbo.dose")
+                              )
+                            },
+                            domProps: { value: _vm.preregistration.dose },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.preregistration,
+                                  "dose",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.next")
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.setStep(5)
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-5", "data-step": "5" }
+                    },
+                    [
+                      _c("legend", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("uppercase")(
+                              _vm.$translate.text("sigeturbo.step")
+                            )
+                          ) + " 5"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.is_allergic")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(4)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_health.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          {
+                            staticClass: "col-20 gutter-5",
+                            attrs: { id: "isallergic_container" }
+                          },
+                          [
+                            _c("span", [
+                              _vm._v(
+                                _vm._s(
+                                  _vm._f("uppercase")(
+                                    _vm.$translate.text("sigeturbo.is_allergic")
+                                  )
+                                )
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.preregistration.isallergic,
+                                    expression: "preregistration.isallergic"
+                                  }
+                                ],
+                                attrs: { name: "isallergic" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.preregistration,
+                                      "isallergic",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("option", { attrs: { value: "N" } }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm._f("capitalize")(
+                                        _vm.$translate.text("sigeturbo.no")
+                                      )
+                                    )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "Y" } }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm._f("capitalize")(
+                                        _vm.$translate.text("sigeturbo.yes")
+                                      )
+                                    )
+                                  )
+                                ])
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-80 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.specify_allergic"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.preregistration.specifyallergic,
+                                expression: "preregistration.specifyallergic"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              id: "specifyallergic",
+                              title: _vm._f("uppercase")(
+                                _vm.$translate.text(
+                                  "sigeturbo.specify_allergic"
+                                )
+                              ),
+                              placeholder: _vm._f("uppercase")(
                                 _vm.$translate.text(
                                   "sigeturbo.specify_allergic"
                                 )
                               )
-                            )
-                          )
+                            },
+                            domProps: {
+                              value: _vm.preregistration.specifyallergic
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.preregistration,
+                                  "specifyallergic",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
                         ]),
                         _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.preregistration.specifyallergic,
-                              expression: "preregistration.specifyallergic"
-                            }
-                          ],
-                          attrs: {
-                            type: "text",
-                            id: "specifyallergic",
-                            title: _vm._f("uppercase")(
-                              _vm.$translate.text("sigeturbo.specify_allergic")
-                            ),
-                            placeholder: _vm._f("uppercase")(
-                              _vm.$translate.text("sigeturbo.specify_allergic")
-                            )
-                          },
-                          domProps: {
-                            value: _vm.preregistration.specifyallergic
-                          },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.preregistration,
-                                "specifyallergic",
-                                $event.target.value
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.next")
                               )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.setStep(6)
+                              }
                             }
-                          }
-                        })
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-6", "data-step": "6" }
+                    },
+                    [
+                      _c("legend", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("uppercase")(
+                              _vm.$translate.text("sigeturbo.step")
+                            )
+                          ) + " 6"
+                        )
                       ]),
                       _vm._v(" "),
-                      _c("li", { staticClass: "col-40 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text(
-                                  "sigeturbo.suffered_illness"
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.is_allergic")
                                 )
                               )
                             )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(5)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_health.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-40 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.suffered_illness"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.preregistration.sufferedillness,
+                                  expression: "preregistration.sufferedillness"
+                                }
+                              ],
+                              attrs: { name: "sufferedillness" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.preregistration,
+                                    "sufferedillness",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "N" } }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("capitalize")(
+                                      _vm.$translate.text("sigeturbo.no")
+                                    )
+                                  )
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Y" } }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("capitalize")(
+                                      _vm.$translate.text("sigeturbo.yes")
+                                    )
+                                  )
+                                )
+                              ])
+                            ]
                           )
                         ]),
                         _vm._v(" "),
-                        _c(
-                          "select",
-                          {
+                        _c("li", { staticClass: "col-60 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.suffered_illness_description"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.preregistration.sufferedillness,
-                                expression: "preregistration.sufferedillness"
+                                value:
+                                  _vm.preregistration
+                                    .sufferedillnessdescription,
+                                expression:
+                                  "preregistration.sufferedillnessdescription"
                               }
                             ],
-                            attrs: { name: "sufferedillness" },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.preregistration,
-                                  "sufferedillness",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
+                            attrs: {
+                              type: "text",
+                              title: _vm._f("uppercase")(
+                                _vm.$translate.text(
+                                  "sigeturbo.suffered_illness_description"
                                 )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "N" } }, [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("capitalize")(
-                                    _vm.$translate.text("sigeturbo.no")
-                                  )
-                                )
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "Y" } }, [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("capitalize")(
-                                    _vm.$translate.text("sigeturbo.yes")
-                                  )
-                                )
-                              )
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "col-60 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
+                              ),
+                              placeholder: _vm._f("uppercase")(
                                 _vm.$translate.text(
                                   "sigeturbo.suffered_illness_description"
                                 )
                               )
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
+                            },
+                            domProps: {
                               value:
-                                _vm.preregistration.sufferedillnessdescription,
-                              expression:
-                                "preregistration.sufferedillnessdescription"
-                            }
-                          ],
-                          attrs: {
-                            type: "text",
-                            title: _vm._f("uppercase")(
-                              _vm.$translate.text(
-                                "sigeturbo.suffered_illness_description"
-                              )
-                            ),
-                            placeholder: _vm._f("uppercase")(
-                              _vm.$translate.text(
-                                "sigeturbo.suffered_illness_description"
-                              )
-                            )
-                          },
-                          domProps: {
-                            value:
-                              _vm.preregistration.sufferedillnessdescription
-                          },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                                _vm.preregistration.sufferedillnessdescription
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.preregistration,
+                                  "sufferedillnessdescription",
+                                  $event.target.value
+                                )
                               }
-                              _vm.$set(
-                                _vm.preregistration,
-                                "sufferedillnessdescription",
-                                $event.target.value
-                              )
                             }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "col-60 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text("sigeturbo.doctor_name")
-                              )
-                            )
-                          )
+                          })
                         ]),
                         _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.preregistration.doctorname,
-                              expression: "preregistration.doctorname"
-                            }
-                          ],
-                          attrs: {
-                            type: "text",
-                            placeholder: _vm._f("uppercase")(
-                              _vm.$translate.text("sigeturbo.doctor_name")
-                            )
-                          },
-                          domProps: { value: _vm.preregistration.doctorname },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.preregistration,
-                                "doctorname",
-                                $event.target.value
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.next")
                               )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.setStep(7)
+                              }
                             }
-                          }
-                        })
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-7", "data-step": "7" }
+                    },
+                    [
+                      _c("legend", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("uppercase")(
+                              _vm.$translate.text("sigeturbo.step")
+                            )
+                          ) + " 7"
+                        )
                       ]),
                       _vm._v(" "),
-                      _c("li", { staticClass: "col-40 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text("sigeturbo.doctor_phone")
-                              )
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.preregistration.doctorphone,
-                              expression: "preregistration.doctorphone"
-                            }
-                          ],
-                          attrs: {
-                            type: "text",
-                            placeholder: _vm._f("uppercase")(
-                              _vm.$translate.text("sigeturbo.doctor_phone")
-                            )
-                          },
-                          domProps: { value: _vm.preregistration.doctorphone },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.preregistration,
-                                "doctorphone",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "col-100 gutter-5" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(
-                              _vm._f("uppercase")(
-                                _vm.$translate.text(
-                                  "sigeturbo.psychological_support"
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.doctor_name")
                                 )
                               )
                             )
-                          )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(6)
                         ]),
                         _vm._v(" "),
-                        _c(
-                          "select",
-                          {
+                        _c("li", { staticClass: "col-100 gutter-5 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_health.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-60 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.doctor_name")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.preregistration.psychologicalsupport,
-                                expression:
-                                  "preregistration.psychologicalsupport"
+                                value: _vm.preregistration.doctorname,
+                                expression: "preregistration.doctorname"
                               }
                             ],
-                            attrs: { name: "psychologicalsupport" },
+                            attrs: {
+                              type: "text",
+                              placeholder: _vm._f("uppercase")(
+                                _vm.$translate.text("sigeturbo.doctor_name")
+                              )
+                            },
+                            domProps: { value: _vm.preregistration.doctorname },
                             on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
                                 _vm.$set(
                                   _vm.preregistration,
-                                  "psychologicalsupport",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
+                                  "doctorname",
+                                  $event.target.value
                                 )
                               }
                             }
-                          },
-                          [
-                            _c("option", { attrs: { value: "N" } }, [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("capitalize")(
-                                    _vm.$translate.text("sigeturbo.no")
-                                  )
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-40 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.doctor_phone")
                                 )
                               )
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "Y" } }, [
-                              _vm._v(
-                                _vm._s(
-                                  _vm._f("capitalize")(
-                                    _vm.$translate.text("sigeturbo.yes")
-                                  )
-                                )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.preregistration.doctorphone,
+                                expression: "preregistration.doctorphone"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: _vm._f("uppercase")(
+                                _vm.$translate.text("sigeturbo.doctor_phone")
                               )
-                            ])
-                          ]
-                        )
+                            },
+                            domProps: {
+                              value: _vm.preregistration.doctorphone
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.preregistration,
+                                  "doctorphone",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.next")
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.setStep(8)
+                              }
+                            }
+                          })
+                        ])
                       ])
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("fieldset", [
-                  _c("ul", { staticClass: "display-horizontal col-100" }, [
-                    _c("li", { staticClass: "col-100" }, [
-                      _c("input", {
-                        staticClass: "btn btn-aquamarine",
-                        attrs: { type: "submit" },
-                        domProps: {
-                          value: _vm._f("capitalize")(
-                            _vm.$translate.text("sigeturbo.save")
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-8", "data-step": "8" }
+                    },
+                    [
+                      _c("legend", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("uppercase")(
+                              _vm.$translate.text("sigeturbo.step")
+                            )
+                          ) + " 8"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.psychologicalsupport"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(7)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_health.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.psychological_support"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    _vm.preregistration.psychologicalsupport,
+                                  expression:
+                                    "preregistration.psychologicalsupport"
+                                }
+                              ],
+                              attrs: { name: "psychologicalsupport" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.preregistration,
+                                    "psychologicalsupport",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "N" } }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("capitalize")(
+                                      _vm.$translate.text("sigeturbo.no")
+                                    )
+                                  )
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "Y" } }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("capitalize")(
+                                      _vm.$translate.text("sigeturbo.yes")
+                                    )
+                                  )
+                                )
+                              ])
+                            ]
                           )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.next")
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.setStep(9)
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-9", "data-step": "9" }
+                    },
+                    [
+                      _c("legend", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("uppercase")(
+                              _vm.$translate.text("sigeturbo.step")
+                            )
+                          ) + " 9"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.save")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(8)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_health.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: { type: "submit" },
+                            domProps: {
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.save")
+                              )
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("footer", [
+              _c("ul", { staticClass: "display-horizontal col-100" }, [
+                _c("li", { staticClass: "col-25 previous" }),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-50 steps" }, [
+                  _c("ul", { staticClass: "display-horizontal col-100" }, [
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(1)
+                          }
                         }
-                      })
-                    ])
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 1 ? "selected" : ""] },
+                          [_vm._v("1")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(2)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 2 ? "selected" : ""] },
+                          [_vm._v("2")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(3)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 3 ? "selected" : ""] },
+                          [_vm._v("3")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(4)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 4 ? "selected" : ""] },
+                          [_vm._v("4")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(5)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 5 ? "selected" : ""] },
+                          [_vm._v("5")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(6)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 6 ? "selected" : ""] },
+                          [_vm._v("6")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(7)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 7 ? "selected" : ""] },
+                          [_vm._v("7")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(8)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 8 ? "selected" : ""] },
+                          [_vm._v("8")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(9)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 9 ? "selected" : ""] },
+                          [_vm._v("9")]
+                        )
+                      ]
+                    )
                   ])
-                ])
-              ]
-            )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-25 next" })
+              ])
+            ])
           ])
         ]
       )
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v("\n                                            Especificar "),
+          _c("strong", [_vm._v("Tipo de Sangre")]),
+          _vm._v(
+            " del estudiante para el cual se está actualizando la información en el Sistema de Información\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Proporcionar la información de "
+          ),
+          _c("strong", [_vm._v("EPS, Medicina Prepagada y Número de Poliza")]),
+          _vm._v(
+            " con los que cuenta el estudiante para el cual se está actualizando la información\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Especificar si el estudiante tiene algún tratamiento médico que considere que la institución deba conocer\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Indicar si el estudiante para el cual se está ingresando la información en el Sistema de Información toma algún tipo de medicamento\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Especificar en esta opción si el estudiante sufre de algún tipo de alergia. En caso de ser afirmativo, por favor indicar especificar el tipo de alergia\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Especificar si el estudiante sufre de algún tipo de enfermedad o condicion médica que la institución deba conocer\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Especificar el "
+          ),
+          _c("strong", [
+            _vm._v("nombre completo del pediatra y el número de contacto")
+          ]),
+          _vm._v(
+            " en caso de que el estudiante cuente con alguno.\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Especificar si el estudiante tiene "
+          ),
+          _c("strong", [_vm._v("Apoyo Psicológico")]),
+          _vm._v(
+            " que la institución deba conocer.\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Especificar el "
+          ),
+          _c("strong", [
+            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
+          ]),
+          _vm._v(
+            " del documento del usuario\n                                        "
+          )
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 if (false) {

@@ -31,7 +31,7 @@
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
                                             <span class="col-90">
-                                                Especificar el <strong>Tipo de Identificación, El Número y el Lugar de Expedición</strong> del documento del usuario
+                                                Especificar la <strong>Profesión</strong> del padre de familia para el cual se está actualizando la información en SigeTurbo
                                             </span>
                                         </div>
                                     </section>
@@ -60,7 +60,7 @@
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
                                             <span class="col-90">
-                                                Especificar el <strong>Tipo de Identificación, El Número y el Lugar de Expedición</strong> del documento del usuario
+                                                Especificar la <strong>Ocupación</strong> del padre de familia para el cual se está actualizando la información en SigeTurbo
                                             </span>
                                         </div>
                                     </section>
@@ -89,7 +89,7 @@
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
                                             <span class="col-90">
-                                                Especificar el <strong>Tipo de Identificación, El Número y el Lugar de Expedición</strong> del documento del usuario
+                                                Especificar la información de la empresa para la cual trabajo el padre de familia (Opcional). Indicar nombre de la empresa y teléfono
                                             </span>
                                         </div>
                                     </section>
@@ -124,7 +124,7 @@
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
                                             <span class="col-90">
-                                                Especificar el <strong>Tipo de Identificación, El Número y el Lugar de Expedición</strong> del documento del usuario
+                                                Confirmar la actualización de la información en nuestro sistema de informacuón (SigeTurbo). Si la información está completa por favor proceder a dar clic en el botón guardar
                                             </span>
                                         </div>
                                     </section>
@@ -139,31 +139,31 @@
                             </ul>
                         </fieldset>
                     </form>
-                    <footer>
-                        <ul class="display-horizontal col-100">
-                            <li class="col-35 previous"></li>
-                            <li class="col-30 steps">
-                                <ul class="display-horizontal col-100">
-                                    <li @click="setStep(1)">
-                                        <div :class="[stepSelected == 1 ? 'selected' : '']">1</div>
-                                    </li>
-                                    <li @click="setStep(2)">
-                                        <div :class="[stepSelected == 2 ? 'selected' : '']">2</div>
-                                    </li>
-                                    <li @click="setStep(3)">
-                                        <div :class="[stepSelected == 3 ? 'selected' : '']">3</div>
-                                    </li>
-                                    <li @click="setStep(4)">
-                                        <div :class="[stepSelected == 4 ? 'selected' : '']">4</div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="col-35 next">
-
-                            </li>
-                        </ul>
-                    </footer>
                 </section>
+                <footer>
+                    <ul class="display-horizontal col-100">
+                        <li class="col-35 previous"></li>
+                        <li class="col-30 steps">
+                            <ul class="display-horizontal col-100">
+                                <li @click="setStep(1)">
+                                    <div :class="[stepSelected == 1 ? 'selected' : '']">1</div>
+                                </li>
+                                <li @click="setStep(2)">
+                                    <div :class="[stepSelected == 2 ? 'selected' : '']">2</div>
+                                </li>
+                                <li @click="setStep(3)">
+                                    <div :class="[stepSelected == 3 ? 'selected' : '']">3</div>
+                                </li>
+                                <li @click="setStep(4)">
+                                    <div :class="[stepSelected == 4 ? 'selected' : '']">4</div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="col-35 next">
+
+                        </li>
+                    </ul>
+                </footer>
             </section>
         </section>
     </section>
@@ -172,8 +172,6 @@
 
     import uppercase from "../../../../filters/string/uppercase";
     import capitalize from "../../../../filters/string/capitalize";
-    import Identificationtype from "../../../../models/Identificationtype";
-    import Religion from "../../../../models/Religion";
     import Preregistration from "../../../../models/Preregistration";
     import assets from "../../../../core/utils";
 
