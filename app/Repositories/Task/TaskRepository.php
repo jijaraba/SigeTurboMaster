@@ -5,6 +5,7 @@ namespace SigeTurbo\Repositories\Task;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use SigeTurbo\Repositories\Year\YearRepository;
 use SigeTurbo\Task;
 
 class TaskRepository implements TaskRepositoryInterface
@@ -229,10 +230,11 @@ class TaskRepository implements TaskRepositoryInterface
                     ->select(DB::raw("MAX(enrollments.idgroup)"))
                     ->from('enrollments')
                     ->where('enrollments.iduser', '=', $user)
+                    ->where('years.idyear', '=', YearRepository::getCurrentYear(2))
                     ->get();
             })
             ->whereRaw("tasks.ends >=  DATE_SUB(NOW(), INTERVAL ? DAY)", array(8))
-            ->where("tasks.status","=",'1')
+            ->where("tasks.status", "=", '1')
             ->orderBy('tasks.ends', 'ASC')
             ->with('taskfiles')
             ->get();
