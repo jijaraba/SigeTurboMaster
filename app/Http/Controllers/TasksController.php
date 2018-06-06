@@ -239,10 +239,12 @@ class TasksController extends Controller
         return response()->json($this->taskRepository->getTask($taskID));
     }
 
+
     /**
-     * Get Detail Task
+     * Get Detail
      * @param $task
      * @param Request $request
+     * @return mixed
      */
     public function getDetail($task, Request $request)
     {

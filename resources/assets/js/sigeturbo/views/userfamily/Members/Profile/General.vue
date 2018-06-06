@@ -80,7 +80,7 @@
                                 </li>
                                 <li class="col-25 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.identification_type') | uppercase }}</span>
-                                    <select vg-model="preregistration.ididentificationtype">
+                                    <select v-model="preregistration.ididentificationtype">
                                         <option :value="identificationtype.ididentificationtype"
                                                 v-for="identificationtype in identificationtypes">{{
                                             identificationtype.name }}

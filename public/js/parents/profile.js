@@ -26187,9 +26187,35 @@ var render = function() {
                           _c(
                             "select",
                             {
-                              attrs: {
-                                "vg-model":
-                                  "preregistration.ididentificationtype"
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value:
+                                    _vm.preregistration.ididentificationtype,
+                                  expression:
+                                    "preregistration.ididentificationtype"
+                                }
+                              ],
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.preregistration,
+                                    "ididentificationtype",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
                               }
                             },
                             _vm._l(_vm.identificationtypes, function(
