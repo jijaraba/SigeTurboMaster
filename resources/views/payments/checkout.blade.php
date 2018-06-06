@@ -30,8 +30,7 @@
                         <a class="icon icon-info" href="#"></a>
                         <p>{{ getUser()->firstname }}, seleccione el método de pago que más se ajuste a sus
                             necesidades. Recuerde: Los pagos con descuento solo aplican hasta el día <strong>10 de cada
-                                mes</strong>, los pagos con tarjeta de crédito tienen un recargo del
-                            <strong>1.48%</strong>.</p>
+                                mes</strong>.</p>
                     </section>
                     <sige-turbo-payment-checkout payment="payment"
                                                  transaction="transactionID"></sige-turbo-payment-checkout>
