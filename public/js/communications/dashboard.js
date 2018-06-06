@@ -28688,6 +28688,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
 /* harmony default export */ __webpack_exports__["a"] = ({
     en: {
         sigeturbo: {
+            'academic': 'academic',
+            'package_select': 'package select',
             'actives': 'actives',
             'additional': 'additional',
             'address': 'address',
@@ -28756,11 +28758,16 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
             'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
             'notice': 'Prematrícula',
-            'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.'
+            'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
+            'payment_individual_success': 'pago individual generado satisfactoriamente',
+            'parameters': 'parameters',
+            'generate': 'generate'
         }
     },
     es: {
         sigeturbo: {
+            'academic': 'año académico',
+            'package_select': 'seleccionar paquete',
             'actives': 'activos',
             'additional': 'adicional',
             'address': 'dirección',
@@ -28828,7 +28835,10 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
             'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
             'notice': 'Prematrícula',
-            'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.'
+            'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
+            'payment_individual_success': 'pago individual generado satisfactoriamente',
+            'parameters': 'parámetros',
+            'generate': 'generar'
         }
     }
 });

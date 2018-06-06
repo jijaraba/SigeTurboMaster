@@ -337,13 +337,12 @@
                             type: 'success',
                             showConfirmButton: false,
                             timer: 2000
-                        })
-                            .then((result) => {
-                                if (result) {
-                                    this.preregistration.general_completed = 'Y';
-                                    this.$emit('close')
-                                }
-                            });
+                        }).then((result) => {
+                            if (result) {
+                                this.preregistration.general_completed = 'Y';
+                                this.$emit('close')
+                            }
+                        });
                     }).catch(error => console.log(error));
                 }
 

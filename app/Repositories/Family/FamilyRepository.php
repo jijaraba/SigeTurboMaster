@@ -105,8 +105,7 @@ class FamilyRepository implements FamilyRepositoryInterface
         }
 
         return $family
-            ->get()
-            ;
+            ->get();
     }
 
     public static function obtenersintaxisconsulta($objetoiluminate)

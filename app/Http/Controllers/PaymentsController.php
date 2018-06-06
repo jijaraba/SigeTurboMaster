@@ -309,7 +309,7 @@ class PaymentsController extends Controller
      */
     public function getPaymentsPendingByUser(Request $request)
     {
-        return response()->json($this->paymentRepository->getPaymentsPendingByUser($request['user'],true, null, 'ASC', true));
+        return response()->json($this->paymentRepository->getPaymentsPendingByUser($request['user'], true, null, 'ASC', true));
     }
 
     /**
@@ -507,8 +507,7 @@ class PaymentsController extends Controller
      * @param PaymentIndividualRequest $request
      * @return mixed
      */
-    public
-    function setPaymentIndividual(PaymentIndividualRequest $request)
+    public function setPaymentIndividual(PaymentIndividualRequest $request)
     {
         //Find Family
         $family = $this->userfamilyRepository->getFamilyByUser($request['student']);
@@ -558,6 +557,24 @@ class PaymentsController extends Controller
             return response()->json(["successful" => false], 300);
             throw $e;
         }
+    }
+
+    public function setPaymentIndividualByUser()
+    {
+        //Find Family
+        $family = $this->userfamilyRepository->getFamilyByUser(2017002);
+        $data = [];
+        $data["student"] = 2017002;
+        $data["value1"] = ($student->scholarship > 0.00) ? (($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) : $cost->pension_discount;
+        $data["value2"] = ($student->scholarship > 0.00) ? (($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) : $cost->pension_normal;
+        $data["value3"] = ($student->scholarship > 0.00) ? ((($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) * 1.03) : $cost->pension_expired;
+        $data["value4"] = ($student->scholarship > 0.00) ? (($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) : $cost->pension_normal;
+        $data["firstname"] = "Fulano";
+        $data["lastname"] = "Peláez";
+        $data["gender"] = 1;
+        $data["scholarship"] = 0;
+        return response()->json(["successful" => true, 'message' => Lang::get('sige.SuccessPaymentCreated'), 'data' => $data]);
+
     }
 
     /**

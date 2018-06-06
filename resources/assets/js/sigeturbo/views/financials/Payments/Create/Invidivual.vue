@@ -23,15 +23,15 @@
                             </ul>
                         </fieldset>
                         <fieldset class="step" id="step-1" data-step="1">
-                            <legend>INFORMACIÓN DEL PAGO INVIDUAL</legend>
+                            <legend>{{ $translate.text('sigeturbo.step') | uppercase }} 1</legend>
                             <ul class="display-horizontal col-100">
                                 <li class="col-100 gutter-5">
-                                    <h4>{{ $translate.text('sigeturbo.profession') | uppercase }}</h4>
+                                    <h4>{{ $translate.text('sigeturbo.academic') | uppercase }}</h4>
                                     <section class="info_generic aquamarine">
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
                                             <span class="col-90">
-                                                Especificar el <strong>Tipo de Identificación, El Número y el Lugar de Expedición</strong> del documento del usuario
+                                                Especificar el <strong>Año Académico</strong> del cual se desea realizar el cobro ya sea de la <strong>Matrícula, Pensión</strong> o cualquier otro concepto. Luego especificar el código del estudiante.
                                             </span>
                                         </div>
                                     </section>
@@ -66,14 +66,15 @@
                             </ul>
                         </fieldset>
                         <fieldset class="step" id="step-2" data-step="2">
+                            <legend>{{ $translate.text('sigeturbo.step') | uppercase }} 2</legend>
                             <ul class="display-horizontal col-100">
                                 <li class="col-100 gutter-5">
-                                    <h4>{{ $translate.text('sigeturbo.profession') | uppercase }}</h4>
+                                    <h4>{{ $translate.text('sigeturbo.package_select') | uppercase }}</h4>
                                     <section class="info_generic aquamarine">
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
                                             <span class="col-90">
-                                                Especificar el <strong>Tipo de Identificación, El Número y el Lugar de Expedición</strong> del documento del usuario
+                                                Seleccionar el <strong>Paquete</strong> que más se adecúe al cobro que va a realizar según el concepto seleccionado.
                                             </span>
                                         </div>
                                     </section>
@@ -102,14 +103,15 @@
                             </ul>
                         </fieldset>
                         <fieldset class="step" id="step-3" data-step="3">
+                            <legend>{{ $translate.text('sigeturbo.step') | uppercase }} 3</legend>
                             <ul class="display-horizontal col-100">
                                 <li class="col-100 gutter-5">
-                                    <h4>{{ $translate.text('sigeturbo.profession') | uppercase }}</h4>
+                                    <h4>{{ $translate.text('sigeturbo.parameters') | uppercase }}</h4>
                                     <section class="info_generic aquamarine">
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
                                             <span class="col-90">
-                                                Especificar el <strong>Tipo de Identificación, El Número y el Lugar de Expedición</strong> del documento del usuario
+                                                Verificar que los valores de <strong>Año, Fechas y Vsalores</strong> sean los correctos según el paquete seleccionado. Tenga en cuenta que puede realizar cualquier tipo de cambio de estos valores.
                                             </span>
                                         </div>
                                     </section>
@@ -169,14 +171,15 @@
                             </ul>
                         </fieldset>
                         <fieldset class="step" id="step-4" data-step="4">
+                            <legend>{{ $translate.text('sigeturbo.step') | uppercase }} 4</legend>
                             <ul class="display-horizontal col-100">
                                 <li class="col-100 gutter-5">
-                                    <h4>{{ $translate.text('sigeturbo.profession') | uppercase }}</h4>
+                                    <h4>{{ $translate.text('sigeturbo.generate') | uppercase }}</h4>
                                     <section class="info_generic aquamarine">
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
                                             <span class="col-90">
-                                                Especificar el <strong>Tipo de Identificación, El Número y el Lugar de Expedición</strong> del documento del usuario
+                                                Listo, eso es todo. Ahora verifica que la redacción que se ingresará en SigeTurbo sea la correcta en caso contrario por favor cambiar los parámetros previos.
                                             </span>
                                         </div>
                                     </section>
@@ -226,6 +229,7 @@
 </template>
 <script>
 
+    import swal from 'sweetalert2';
     import moment from 'moment';
     import uppercase from '../../../../filters/string/uppercase';
     import paymentTotal from '../../../../filters/math/paymentTotal';
@@ -280,7 +284,11 @@
 
                                 //Scholarship
                                 if (this.payment.scholarship == 1) {
-                                    swal(uppercase(this.$translate.text('sigeturbo.warning')), 'Estudiante con Beca del ' + (this.payment.scholarship * 100) + '%', 'warning');
+                                    swal(uppercase(this.$translate.text('sigeturbo.warning')), 'Estudiante con Beca del ' + (this.payment.scholarship * 100) + '%', 'warning')
+                                        .then((result) => {
+                                            if (result) {
+                                            }
+                                        });
                                 }
                                 if (parseFloat(this.payment.scholarship) > 0) {
                                     this.studentWithScholarship = true;
@@ -291,11 +299,14 @@
                                 this.getCosts(this.payment.package);
 
                             } else {
-                                swal(uppercase(this.$translate.text('sigeturbo.error')), 'No existe el estudiante', 'error');
+                                swal(uppercase(this.$translate.text('sigeturbo.error')), 'No existe el estudiante', 'error')
+                                    .then((result) => {
+                                        if (result) {
+                                        }
+                                    });
                             }
                         }
                     ).catch(error => console.log(error));
-
                 }
             },
             getCosts(pack) {
@@ -314,8 +325,6 @@
                     this.payment.value4 = paymentTotal(this.costs, 'normal');
                     //Set Concept
                     this.setConcept(this.payment.concept);
-
-
                 }).catch(error => console.log(error));
             },
             setConcept(concept) {
@@ -363,8 +372,17 @@
                     month: this.payment.month,
                     month_name: this.months[parseInt(this.payment.month - 1)],
                 }).then(({data}) => {
-                    this.packages = data;
-                    this.payment.package = this.packages[0].idpackage
+                    swal({
+                        title: uppercase(this.$translate.text('sigeturbo.success')),
+                        text: capitalize(this.$translate.text('sigeturbo.payment_individual_success')),
+                        type: 'success',
+                        showConfirmButton: false,
+                        timer: 2000
+                    }).then((result) => {
+                        if (result) {
+                            this.$emit('close')
+                        }
+                    });
                 }).catch(error => console.log(error));
             },
             setStep(step) {
@@ -411,6 +429,9 @@
         created() {
             //Get Packages
             this.getPackages()
+
+            //Hello
+            console.log(this.concepttypes.find(x => x.id === '45').foo);
         },
         mounted() {
         },
