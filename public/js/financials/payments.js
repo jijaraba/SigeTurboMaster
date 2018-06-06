@@ -2219,8 +2219,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this2.costs = data;
                 //Config Values
-                _this2.payment.value1 = Object(__WEBPACK_IMPORTED_MODULE_2__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal');
-                _this2.payment.value2 = Object(__WEBPACK_IMPORTED_MODULE_2__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') - Object(__WEBPACK_IMPORTED_MODULE_2__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'discount');
+                _this2.payment.value1 = Object(__WEBPACK_IMPORTED_MODULE_2__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') - Object(__WEBPACK_IMPORTED_MODULE_2__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'discount');
+                _this2.payment.value2 = Object(__WEBPACK_IMPORTED_MODULE_2__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal');
                 _this2.payment.value3 = Object(__WEBPACK_IMPORTED_MODULE_2__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') + Object(__WEBPACK_IMPORTED_MODULE_2__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'expired');
                 _this2.payment.value4 = Object(__WEBPACK_IMPORTED_MODULE_2__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal');
                 //Set Concept

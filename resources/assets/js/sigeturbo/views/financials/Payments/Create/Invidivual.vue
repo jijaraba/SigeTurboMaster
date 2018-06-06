@@ -308,8 +308,8 @@
                 }).then(({data}) => {
                     this.costs = data;
                     //Config Values
-                    this.payment.value1 = paymentTotal(this.costs, 'normal');
-                    this.payment.value2 = paymentTotal(this.costs, 'normal') - paymentTotal(this.costs, 'discount');
+                    this.payment.value1 = paymentTotal(this.costs, 'normal') - paymentTotal(this.costs, 'discount');
+                    this.payment.value2 = paymentTotal(this.costs, 'normal');
                     this.payment.value3 = paymentTotal(this.costs, 'normal') + paymentTotal(this.costs, 'expired');
                     this.payment.value4 = paymentTotal(this.costs, 'normal');
                     //Set Concept
