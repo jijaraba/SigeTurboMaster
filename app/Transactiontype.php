@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transactiontype extends Model
 {
+
+    CONST DEBIT = 1;
+    CONST CREDIT = 2;
+
     protected $primaryKey = 'idtransactiontype';
     protected $fillable = ['name'];
     protected $hidden = ['created_at', 'updated_at'];

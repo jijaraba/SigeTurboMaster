@@ -5,6 +5,7 @@ namespace SigeTurbo\Repositories\Cost;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use SigeTurbo\Cost;
+use SigeTurbo\Transactiontype;
 
 class CostRepository implements CostRepositoryInterface
 {
@@ -57,6 +58,7 @@ class CostRepository implements CostRepositoryInterface
             ->where('costs.idgrade', '=', $grade)
             ->where('costs.idconcepttype', '=', $type)
             ->where('packages.idpackage', '=', $package)
+            ->where('costpackages.idtransactiontype', '=', Transactiontype::DEBIT)
             ->get();
     }
 }
