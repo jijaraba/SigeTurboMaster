@@ -86,7 +86,9 @@
                                         <li class="col-10 {{ ($payment->ispayment == 'Y')?'detail':'edit' }}">
                                             @if($payment->ispayment == 'Y')
                                                 <a href="{{ URL::route('parents.payments.detailpaymentbyparent',['payment' => $payment->idpayment]) }}"
-                                                   id="detail"><i class="fa fa-long-arrow-right"></i></a>
+                                                   id="detail">
+                                                    <i class="fas fa-arrow-right"></i>
+                                                </a>
                                             @else
                                                 <a href="{{ URL::route('parents.payments.checkout',['payment' => $payment->idpayment]) }}"
                                                    id="checkout">{{ Lang::get('sige.Payment') }}</a>

@@ -92,6 +92,8 @@
         watch: {},
         created() {
 
+            console.log(this.assets);
+
             //Config Value By Default
             let dateDiscountPayment = moment(this.payment.date1, 'YYYY-MM-DD').format('YYYY-MM-DD');
             let dateNormalPayment = moment(this.payment.date2, 'YYYY-MM-DD').format('YYYY-MM-DD');

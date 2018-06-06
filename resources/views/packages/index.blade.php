@@ -66,7 +66,7 @@
                     <section class="payment-list">
                         <ul id="payment-list display-horizontal col-100">
                             @foreach($packages as $package)
-                            <li>Hello</li>
+                            <li></li>
                             @endforeach
                         </ul>
                     </section>

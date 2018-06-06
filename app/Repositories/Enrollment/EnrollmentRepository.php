@@ -263,7 +263,7 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
             })
             ->where('users.iduser', '=', $student)
             ->where('groups.idgroup', '=', DB::raw("(SELECT max(idgroup) FROM enrollments WHERE iduser = $student)"))
-            ->whereIn('enrollments.idstatusschooltype', Statusschooltype::STATUS_ACTIVE);
+            ->whereIn('enrollments.idstatusschooltype', Statusschooltype::STATUS_ACTIVE_WITH_PREENROLLMENT);
         return $enrollment
             ->first();
     }

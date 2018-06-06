@@ -1855,6 +1855,8 @@ module.exports = {
     watch: {},
     created: function created() {
 
+        console.log(this.assets);
+
         //Config Value By Default
         var dateDiscountPayment = __WEBPACK_IMPORTED_MODULE_0_moment___default()(this.payment.date1, 'YYYY-MM-DD').format('YYYY-MM-DD');
         var dateNormalPayment = __WEBPACK_IMPORTED_MODULE_0_moment___default()(this.payment.date2, 'YYYY-MM-DD').format('YYYY-MM-DD');
