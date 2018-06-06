@@ -230,7 +230,7 @@ class TaskRepository implements TaskRepositoryInterface
                     ->select(DB::raw("MAX(enrollments.idgroup)"))
                     ->from('enrollments')
                     ->where('enrollments.iduser', '=', $user)
-                    ->where('years.idyear', '=', YearRepository::getCurrentYear(2))
+                    ->where('enrollments.idyear', '=', YearRepository::getCurrentYear(2))
                     ->get();
             })
             ->whereRaw("tasks.ends >=  DATE_SUB(NOW(), INTERVAL ? DAY)", array(8))
