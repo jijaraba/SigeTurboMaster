@@ -4,11 +4,6 @@
 
 /* Core Filters */
 angular.module('Core.filters', [])
-    .filter('interpolate', ['version', function (version) {
-        return function (text) {
-            return String(text).replace(/VERSION/mg, version);
-        };
-    }])
     .filter('size', function () {
         return function (size) {
             function round(value, decimals) {

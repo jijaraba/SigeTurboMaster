@@ -1888,10 +1888,17 @@ footer {
           margin: 0px auto;
           > li {
             > a {
+              position: relative;
               text-align: center;
               display: inline-block;
               height: 200px;
               width: 200px;
+              div {
+                position: absolute;
+                top: 0px;
+                right: 40px;
+                color: $sige-global-bgcolor-04;
+              }
               span {
                 margin-top: -15px;
                 display: block;
@@ -1899,6 +1906,13 @@ footer {
                 font: {
                   size: 0.9em !important;
                 }
+              }
+            }
+            &.generate {
+              margin: 20px auto;
+              input {
+                display: block;
+                margin: 0px auto;
               }
             }
           }

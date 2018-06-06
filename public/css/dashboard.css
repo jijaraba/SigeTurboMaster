@@ -1281,6 +1281,7 @@ label.select-arrow:hover:before {
 
 .info_generic.aquamarine {
   background: #45AFA8 !important;
+  border-top: none !important;
 }
 
 .info_generic.aquamarine > div > i {
@@ -2350,7 +2351,10 @@ input[type="radio"]:checked + label {
 }
 
 .swal-text {
-  font-family: "Gotham Rounded Book", Helvetica Neue, Helvetica, sans-serif !important;
+  font-family: "Gotham Rounded Light", Helvetica Neue, Helvetica, sans-serif !important;
+  font-size: 15px !important;
+  text-align: center !important;
+  color: #657380 !important;
 }
 
 .swal-button {
@@ -2361,6 +2365,23 @@ input[type="radio"]:checked + label {
   background-color: #53BBB4;
   padding: 10px;
   width: inherit;
+}
+
+.swal2-popup .swal2-title {
+  font-family: "Gotham Rounded Medium", Helvetica Neue, Helvetica, sans-serif !important;
+  color: #657380 !important;
+}
+
+.swal2-popup .swal2-styled.swal2-confirm {
+  background-color: #53BBB4 !important;
+  padding: 10px;
+}
+
+.swal2-popup .swal2-content {
+  font-family: "Gotham Rounded Book", Helvetica Neue, Helvetica, sans-serif !important;
+  font-size: 0.95em !important;
+  text-align: center !important;
+  color: #657380 !important;
 }
 
 .sweet-alert p {

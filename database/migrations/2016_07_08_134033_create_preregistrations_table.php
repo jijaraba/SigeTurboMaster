@@ -34,6 +34,7 @@ class CreatePreregistrationsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('celular');
             $table->string('email');
+            $table->enum('general_completed', ['Y', 'N'])->default('N');
 
             $table->string('policynumber')->nullable();
             $table->enum('medicaltreatment', array('Y', 'N'))->default('N');
@@ -50,15 +51,18 @@ class CreatePreregistrationsTable extends Migration
             $table->string('doctorname')->nullable();
             $table->string('doctorphone')->nullable();
             $table->enum('psychologicalsupport', array('Y', 'N'))->default('N');
+            $table->enum('health_completed', ['Y', 'N'])->default('N');
 
             $table->text('observation')->nullable();
             $table->enum('educationaloutput', array('Y', 'N'))->default('Y');
             $table->string('responsible')->nullable();
+            $table->enum('additional_completed', ['Y', 'N'])->default('N');
 
             $table->string('profession')->nullable();
             $table->string('occupation')->nullable();
             $table->string('company')->nullable();
             $table->string('phonecompany')->nullable();
+            $table->enum('profession_completed', ['Y', 'N'])->default('N');
 
             $table->timestamps();
             $table->foreign('iduser')

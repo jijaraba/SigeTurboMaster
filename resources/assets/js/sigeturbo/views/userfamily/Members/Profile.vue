@@ -4,6 +4,11 @@
             <ul class="display-horizontal col-90 option-container">
                 <li>
                     <a href="#" @click="showProfile($event,'general')">
+                        <template v-if="preregistration.general_completed === 'Y'">
+                            <div class="tooltip" title="Completado">
+                                <i class="fas fa-check-circle fa-3x"></i>
+                            </div>
+                        </template>
                         <img :src='assets+ "/img/modules/profile_info_general1.svg"' alt=""/>
                         <span>{{ $translate.text('sigeturbo.general') | uppercase }}</span>
                     </a>
@@ -11,12 +16,22 @@
                 <template v-if="member.idcategory == category.idcategory">
                     <li>
                         <a href="#" @click="showProfile($event,'medical')">
+                            <template v-if="preregistration.health_completed === 'Y'">
+                                <div class="tooltip" title="Completado">
+                                    <i class="fas fa-check-circle fa-3x"></i>
+                                </div>
+                            </template>
                             <img :src='assets+ "/img/modules/profile_info_health.svg"' alt=""/>
                             <span>{{ $translate.text('sigeturbo.medical') | uppercase }}</span>
                         </a>
                     </li>
                     <li>
                         <a href="#" @click="showProfile($event,'additional')">
+                            <template v-if="preregistration.additional_completed === 'Y'">
+                                <div class="tooltip" title="Completado">
+                                    <i class="fas fa-check-circle fa-3x"></i>
+                                </div>
+                            </template>
                             <img :src='assets+ "/img/modules/profile_info_additional.svg"' alt=""/>
                             <span>{{ $translate.text('sigeturbo.additional') | uppercase }}</span>
                         </a>
@@ -25,10 +40,23 @@
                 <template v-if="member.idcategory !== category.idcategory">
                     <li>
                         <a href="#" @click="showProfile($event,'profession')">
+                            <template v-if="preregistration.profession_completed === 'Y'">
+                                <div class="tooltip" title="Completado">
+                                    <i class="fas fa-check-circle fa-3x"></i>
+                                </div>
+                            </template>
                             <img :src='assets+ "/img/modules/profile_info_profession.svg"' alt=""/>
                             <span>{{ $translate.text('sigeturbo.profession') | uppercase }}</span>
                         </a>
                     </li>
+                </template>
+                <template v-if="member.idcategory == category.idcategory">
+                    <template
+                            v-if="preregistration.general_completed === 'Y' && preregistration.health_completed === 'Y' && preregistration.additional_completed === 'Y'">
+                        <li class="col-100 generate">
+                            <input type="button" class="btn btn-aquamarine" value="Generar Pago">
+                        </li>
+                    </template>
                 </template>
             </ul>
             <template v-if="profile.general">
@@ -52,6 +80,7 @@
 </template>
 <script>
 
+    import swal from 'sweetalert2';
     import assets from "../../../core/utils";
     import Category from "../../../models/Category";
     import ProfileGeneral from './Profile/General';
@@ -59,6 +88,7 @@
     import ProfileAdditional from './Profile/Additional';
     import ProfileProfession from './Profile/Profession';
     import uppercase from "../../../filters/string/uppercase";
+    import capitalize from "../../../filters/string/capitalize";
 
     export default {
 
@@ -68,6 +98,7 @@
         ],
         filters: {
             uppercase: uppercase,
+            capitalize: capitalize,
         },
         components: {
             'sigeturbo-member-profile-general': ProfileGeneral,
@@ -118,6 +149,10 @@
                 this.profile.medical = false;
                 this.profile.additional = false;
                 this.profile.profession = false;
+
+                if (this.preregistration.general_completed == 'Y' && this.preregistration.health_completed == 'Y' && this.preregistration.additional_completed == 'Y') {
+                    swal({title: uppercase(this.$translate.text('sigeturbo.success')), type: 'success', html: capitalize(this.$translate.text('sigeturbo.payment_generate'))})
+                }
             }
         },
         watch: {},

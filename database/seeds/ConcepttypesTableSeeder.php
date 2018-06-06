@@ -13,6 +13,7 @@ class ConcepttypesTableSeeder extends Seeder
     public function run()
     {
         DB::table('accounttypes')->delete();
+        Concepttype::create(array('name' => 'Indefinido','prefix'=>'undefined'));
         Concepttype::create(array('name' => 'Matrícula','prefix'=>'enrollment'));
         Concepttype::create(array('name' => 'Pensión','prefix'=>'pension'));
         Concepttype::create(array('name' => 'Nivelación','prefix'=>'nivelation'));

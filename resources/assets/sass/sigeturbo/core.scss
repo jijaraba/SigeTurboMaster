@@ -802,6 +802,7 @@ label.select-arrow {
   margin-top: 5px;
   &.aquamarine {
     background: $sige-global-bgcolor-04 !important;
+    border-top: none !important;
     > div {
        > i {
          color: $sige-global-color-02 !important;
@@ -1912,9 +1913,13 @@ input[type="radio"]:checked + label {
 
 .swal-text {
   font: {
-    family: $sige-font-family-01 !important;
+    family: $sige-font-family-05 !important;
+    size: 15px !important;
   }
+  text-align: center !important;
+  color: $sige-global-color-01 !important;
 }
+
 .swal-button {
   background-color: $sige-global-color-05;
 }
@@ -1923,6 +1928,27 @@ input[type="radio"]:checked + label {
   background-color: $sige-global-color-05;
   padding: 10px;
   width: inherit;
+}
+
+.swal2-popup .swal2-title {
+  font: {
+    family: $sige-font-family-04 !important;
+  }
+  color: $sige-global-color-01 !important;
+}
+
+.swal2-popup .swal2-styled.swal2-confirm {
+  background-color: $sige-global-color-05 !important;
+  padding: 10px;
+}
+
+.swal2-popup .swal2-content {
+  font: {
+    family: $sige-font-family-01 !important;
+    size: 0.95em !important;
+  }
+  text-align: center !important;
+  color: $sige-global-color-01 !important;
 }
 
 .sweet-alert p {

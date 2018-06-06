@@ -68603,8 +68603,6 @@ angular.module('Core.factories', []).factory('SharedService', ['$rootScope', fun
         $rootScope.$broadcast('handleBroadcast');
     };
     return sharedService;
-}]).factory('version', [function () {
-    return '1.0';
 }]).factory('Token', ['$resource', function ($resource) {
     return $resource('/gettoken', {}, {
         getToken: {
@@ -68711,11 +68709,7 @@ angular.module('Core.factories', []).factory('SharedService', ['$rootScope', fun
 
 /* Core Filters */
 
-angular.module('Core.filters', []).filter('interpolate', ['version', function (version) {
-    return function (text) {
-        return String(text).replace(/VERSION/mg, version);
-    };
-}]).filter('size', function () {
+angular.module('Core.filters', []).filter('size', function () {
     return function (size) {
         function round(value, decimals) {
             return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);

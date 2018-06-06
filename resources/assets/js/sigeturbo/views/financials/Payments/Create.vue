@@ -140,7 +140,7 @@
                     date2: moment([moment().format('YYYY'), parseInt(moment().format('MM') - 1), moment().daysInMonth()]).format('YYYY-MM-DD'),
                     date3: moment([moment().format('YYYY'), parseInt(moment().format('MM') - 1), moment().daysInMonth()]).format('YYYY-MM-DD'),
                     date4: moment([moment().format('YYYY'), parseInt(moment().format('MM') - 1), moment().daysInMonth()]).format('YYYY-MM-DD'),
-                    type: 2,
+                    type: 3,
                     package: 1,
                     value1: 0,
                     value2: 0,

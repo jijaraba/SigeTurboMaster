@@ -111,8 +111,8 @@ mix
                             loader: 'ng-annotate-loader',
                             options: {
                                 ngAnnotate: "ng-annotate-patched",
-                                es6: true,
-                                explicitOnly: false
+                                //es6: true,
+                                //explicitOnly: false
                             },
                         }
                     ],

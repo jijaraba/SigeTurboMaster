@@ -1825,7 +1825,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 date2: __WEBPACK_IMPORTED_MODULE_0_moment___default()([__WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY'), parseInt(__WEBPACK_IMPORTED_MODULE_0_moment___default()().format('MM') - 1), __WEBPACK_IMPORTED_MODULE_0_moment___default()().daysInMonth()]).format('YYYY-MM-DD'),
                 date3: __WEBPACK_IMPORTED_MODULE_0_moment___default()([__WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY'), parseInt(__WEBPACK_IMPORTED_MODULE_0_moment___default()().format('MM') - 1), __WEBPACK_IMPORTED_MODULE_0_moment___default()().daysInMonth()]).format('YYYY-MM-DD'),
                 date4: __WEBPACK_IMPORTED_MODULE_0_moment___default()([__WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY'), parseInt(__WEBPACK_IMPORTED_MODULE_0_moment___default()().format('MM') - 1), __WEBPACK_IMPORTED_MODULE_0_moment___default()().daysInMonth()]).format('YYYY-MM-DD'),
-                type: 2,
+                type: 3,
                 package: 1,
                 value1: 0,
                 value2: 0,
@@ -2231,7 +2231,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         },
         setConcept: function setConcept(concept) {
             if (typeof this.user.iduser !== "undefined") {
-                if (this.payment.type == 2) {
+                if (this.payment.type == 3) {
                     if (this.studentWithScholarship == true) {
                         this.payment.result = concept + ' ' + this.months[parseInt(__WEBPACK_IMPORTED_MODULE_0_moment___default()().format('MM') - 1)] + ' BECA DEL ' + this.payment.scholarship * 100 + '%' + ' (' + this.payment.iduser + ' - ' + this.payment.firstname.toUpperCase() + ')';
                     } else {
@@ -2348,10 +2348,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert__ = __webpack_require__("./node_modules/sweetalert/dist/sweetalert.min.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_sweetalert__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filters_payment_paymentType__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/payment/paymentType.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_Payment__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Payment.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_financials_Payments_Payment_Receipt__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Receipt.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters_payment_paymentType__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/payment/paymentType.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_Payment__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Payment.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_financials_Payments_Payment_Receipt__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Receipt.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
+//
+//
 //
 //
 //
@@ -2384,15 +2386,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     props: ['serverDate', 'payment', 'banks'],
     filters: {
-        paymentType: __WEBPACK_IMPORTED_MODULE_3__filters_payment_paymentType__["a" /* default */]
+        paymentType: __WEBPACK_IMPORTED_MODULE_2__filters_payment_paymentType__["a" /* default */]
     },
     components: {
-        'sigeturbo-payments-receipt': __WEBPACK_IMPORTED_MODULE_5__views_financials_Payments_Payment_Receipt__["a" /* default */]
+        'sigeturbo-payments-receipt': __WEBPACK_IMPORTED_MODULE_4__views_financials_Payments_Payment_Receipt__["a" /* default */]
     },
     data: function data() {
         return {
+            assets: Object(__WEBPACK_IMPORTED_MODULE_5__core_utils__["a" /* default */])(),
             load: 'no',
-            assets: Object(__WEBPACK_IMPORTED_MODULE_2__core_utils__["a" /* default */])(),
             dateCurrent: __WEBPACK_IMPORTED_MODULE_0_moment___default()(this.serverDate).format('YYYY-MM-DD'),
             data: {
                 voucher: this.payment.voucher,
@@ -2400,7 +2402,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 date: this.payment.payment_at == null || this.payment.payment_at == '' ? dateCurrent : __WEBPACK_IMPORTED_MODULE_0_moment___default()(this.payment.payment_at, 'YYYY-MM-DD').format('YYYY-MM-DD')
             },
             receipt: false
-
         };
     },
     methods: {
@@ -2409,7 +2410,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         verifyPaymentPending: function verifyPaymentPending(payment) {
             var _this = this;
 
-            __WEBPACK_IMPORTED_MODULE_4__models_Payment__["a" /* default */].verifyPaymentPending('/api/v1/payments/verifypaymentpending', {
+            __WEBPACK_IMPORTED_MODULE_3__models_Payment__["a" /* default */].verifyPaymentPending('/api/v1/payments/verifypaymentpending', {
                 payment: payment.idpayment
             }).then(function (_ref) {
                 var data = _ref.data;
@@ -38815,9 +38816,11 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm.payment.approved == "N"
-        ? _c("img", {
-            attrs: { src: _vm.assets + "/img/modules/payment_notpayment.svg" }
-          })
+        ? [
+            _c("img", {
+              attrs: { src: _vm.assets + "/img/modules/payment_notpayment.svg" }
+            })
+          ]
         : _vm._e(),
       _vm._v(" "),
       _c(
@@ -38861,7 +38864,7 @@ var render = function() {
           })
         : _vm._e()
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -50022,6 +50025,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'district': 'district',
             'email': 'email',
             'error': 'error',
+            'success': 'sucess',
             'expedition': 'expedition',
             'firstname': 'firstname',
             'general': 'general',
@@ -50072,7 +50076,14 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'fullname': 'fullname',
             'start': 'start',
             'next': 'next',
-            'confirm_information': 'confirm information?'
+            'confirm_information': 'confirm information?',
+            'general_success': 'La información general fue guardada satisfactoriamente',
+            'health_success': 'La información de salud fue guardada satisfactoriamente',
+            'additional_success': 'La información adicional fue guardada satisfactoriamente',
+            'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
+            'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
+            'notice': 'Prematrícula',
+            'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.'
         }
     },
     es: {
@@ -50136,7 +50147,15 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'fullname': 'nombres y apellidos',
             'start': 'inicio',
             'next': 'next',
-            'confirm_information': '¿Confirma que la información ingresada es válida?'
+            'confirm_information': '¿Confirma que la información ingresada es válida?',
+            'success': 'Felicitaciones',
+            'general_success': 'La información general fue guardada satisfactoriamente',
+            'health_success': 'La información de salud fue guardada satisfactoriamente',
+            'additional_success': 'La información adicional fue guardada satisfactoriamente',
+            'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
+            'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
+            'notice': 'Prematrícula',
+            'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.'
         }
     }
 });

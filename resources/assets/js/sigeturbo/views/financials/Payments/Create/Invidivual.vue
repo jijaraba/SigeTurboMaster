@@ -320,7 +320,7 @@
             },
             setConcept(concept) {
                 if (typeof this.user.iduser !== "undefined") {
-                    if (this.payment.type == 2) {
+                    if (this.payment.type == 3) {
                         if (this.studentWithScholarship == true) {
                             this.payment.result = concept + ' ' + this.months[parseInt(moment().format('MM') - 1)] + ' BECA DEL ' + (this.payment.scholarship * 100) + '%' + ' (' + this.payment.iduser + ' - ' + this.payment.firstname.toUpperCase() + ')';
                         } else {

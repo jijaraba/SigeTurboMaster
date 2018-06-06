@@ -166,10 +166,9 @@
 </template>
 <script>
 
+    import swal from 'sweetalert2';
     import uppercase from "../../../../filters/string/uppercase";
     import capitalize from "../../../../filters/string/capitalize";
-    import Identificationtype from "../../../../models/Identificationtype";
-    import Religion from "../../../../models/Religion";
     import Preregistration from "../../../../models/Preregistration";
     import assets from "../../../../core/utils";
 
@@ -203,7 +202,18 @@
                         responsible: this.preregistration.responsible,
                         observation: this.preregistration.observation,
                     }).then(({data}) => {
-                        this.$emit('close')
+                        swal({
+                            title: uppercase(this.$translate.text('sigeturbo.success')),
+                            text: capitalize(this.$translate.text('sigeturbo.additional_success')),
+                            type: 'success',
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then((result) => {
+                            if (result) {
+                                this.preregistration.additional_completed = 'Y';
+                                this.$emit('close')
+                            }
+                        });
                     }).catch(error => console.log(error));
                 }
 

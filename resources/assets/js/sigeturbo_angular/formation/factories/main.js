@@ -16,9 +16,6 @@ angular.module('Formation.factories', [])
 
         });
     }])
-    .factory('version',[function(){
-        return '1.0';
-    }])
     .factory('Calendar', ['$resource', function ($resource) {
         return $resource('/api/v1/calendars/:calendarId/:action', {
             calendarId: '@id',

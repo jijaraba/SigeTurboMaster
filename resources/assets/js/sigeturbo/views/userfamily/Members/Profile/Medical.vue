@@ -408,6 +408,7 @@
 </template>
 <script>
 
+    import swal from 'sweetalert2';
     import uppercase from "../../../../filters/string/uppercase";
     import capitalize from "../../../../filters/string/capitalize";
     import Preregistration from "../../../../models/Preregistration";
@@ -464,7 +465,18 @@
                         doctorphone: this.preregistration.doctorphone,
                         psychologicalsupport: this.preregistration.psychologicalsupport,
                     }).then(({data}) => {
-                        this.$emit('close')
+                        swal({
+                            title: uppercase(this.$translate.text('sigeturbo.success')),
+                            text: capitalize(this.$translate.text('sigeturbo.health_success')),
+                            type: 'success',
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then((result) => {
+                            if (result) {
+                                this.preregistration.health_completed = 'Y';
+                                this.$emit('close');
+                            }
+                        });
                     }).catch(error => console.log(error));
                 }
 

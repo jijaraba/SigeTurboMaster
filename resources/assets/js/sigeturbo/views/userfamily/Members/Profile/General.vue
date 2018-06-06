@@ -280,6 +280,7 @@
 </template>
 <script>
 
+    import swal from 'sweetalert2';
     import uppercase from "../../../../filters/string/uppercase";
     import capitalize from "../../../../filters/string/capitalize";
     import Identificationtype from "../../../../models/Identificationtype";
@@ -330,7 +331,19 @@
                         phone: this.preregistration.phone,
                         celular: this.preregistration.celular,
                     }).then(({data}) => {
-                        this.$emit('close')
+                        swal({
+                            title: uppercase(this.$translate.text('sigeturbo.success')),
+                            text: capitalize(this.$translate.text('sigeturbo.general_success')),
+                            type: 'success',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+                            .then((result) => {
+                                if (result) {
+                                    this.preregistration.general_completed = 'Y';
+                                    this.$emit('close')
+                                }
+                            });
                     }).catch(error => console.log(error));
                 }
 

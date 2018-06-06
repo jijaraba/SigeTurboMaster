@@ -27,14 +27,20 @@
 </template>
 <script>
 
+    import swal from 'sweetalert2';
     import assets from "../../../core/utils";
+    import uppercase from "../../../filters/string/uppercase";
+    import capitalize from "../../../filters/string/capitalize";
 
     export default {
 
         props: [
             'members',
         ],
-        filters: {},
+        filters: {
+            uppercase: uppercase,
+            capitalize: capitalize
+        },
         components: {},
         data: function () {
             return {
@@ -44,7 +50,11 @@
         methods: {},
         watch: {},
         created() {
-
+            swal({
+                title: uppercase(this.$translate.text('sigeturbo.notice')),
+                type: 'info',
+                html: capitalize(this.$translate.text('sigeturbo.members_info'))
+            })
         },
         mounted() {
         },

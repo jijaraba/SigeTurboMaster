@@ -11,6 +11,7 @@ export default {
             'district': 'district',
             'email': 'email',
             'error': 'error',
+            'success': 'sucess',
             'expedition': 'expedition',
             'firstname': 'firstname',
             'general': 'general',
@@ -62,6 +63,13 @@ export default {
             'start': 'start',
             'next': 'next',
             'confirm_information': 'confirm information?',
+            'general_success': 'La información general fue guardada satisfactoriamente',
+            'health_success': 'La información de salud fue guardada satisfactoriamente',
+            'additional_success': 'La información adicional fue guardada satisfactoriamente',
+            'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
+            'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
+            'notice': 'Prematrícula',
+            'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
         }
     },
     es: {
@@ -126,6 +134,14 @@ export default {
             'start': 'inicio',
             'next': 'next',
             'confirm_information': '¿Confirma que la información ingresada es válida?',
+            'success': 'Felicitaciones',
+            'general_success': 'La información general fue guardada satisfactoriamente',
+            'health_success': 'La información de salud fue guardada satisfactoriamente',
+            'additional_success': 'La información adicional fue guardada satisfactoriamente',
+            'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
+            'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
+            'notice': 'Prematrícula',
+            'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
         }
     }
 };

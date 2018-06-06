@@ -90,6 +90,7 @@ class PreregistrationRepository implements PreregistrationRepositoryInterface
             'email' => $data['email'],
             'phone' => ($data['phone'] !== null) ? $data['phone'] : null,
             'celular' => $data['celular'],
+            'general_completed' => 'Y',
         ]);
         return $preregistration->save();
     }
@@ -117,6 +118,7 @@ class PreregistrationRepository implements PreregistrationRepositoryInterface
             'doctorname' => ($data['doctorname'] !== null) ? $data['doctorname'] : null,
             'doctorphone' => ($data['doctorphone'] !== null) ? $data['doctorphone'] : null,
             'psychologicalsupport' => $data['psychologicalsupport'],
+            'health_completed' => 'Y',
         ]);
         return $preregistration->save();
     }
@@ -130,6 +132,7 @@ class PreregistrationRepository implements PreregistrationRepositoryInterface
             'educationaloutput' => $data['educationaloutput'],
             'responsible' => $data['responsible'],
             'observation' => ($data['observation'] !== null) ? $data['observation'] : null,
+            'additional_completed' => 'Y',
         ]);
         return $preregistration->save();
     }
@@ -144,6 +147,7 @@ class PreregistrationRepository implements PreregistrationRepositoryInterface
             'occupation' => ($data['occupation'] !== null) ? $data['occupation'] : null,
             'company' => ($data['company'] !== null) ? $data['company'] : null,
             'phonecompany' => ($data['phone'] !== null) ? $data['phone'] : null,
+            'profession_completed' => 'Y',
         ]);
         return $preregistration->save();
     }

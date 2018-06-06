@@ -6,7 +6,9 @@
         <img v-if="payment.approved == 'R'" :src='assets + "/img/modules/payment_rejected_real.svg"'/>
         <img class="animate-scale" @click="verifyPaymentPending(payment)" v-if="payment.approved == 'P'"
              :src='assets + "/img/modules/payment_pending.svg"'/>
-        <img v-if="payment.approved == 'N'" :src='assets + "/img/modules/payment_notpayment.svg"'/>
+        <template v-if="payment.approved == 'N'">
+            <img  :src="assets + '/img/modules/payment_notpayment.svg'"/>
+        </template>
         <em v-bind:class="(payment.idbank ==1 && payment.approved == 'A')?'virtual':'normal'">
             <i class="fa fa-link" aria-hidden="true"></i>
         </em>
@@ -21,10 +23,10 @@
 
     import moment from 'moment';
     import swal from 'sweetalert';
-    import assets from '../../../../core/utils';
     import paymentType from '../../../../filters/payment/paymentType';
     import Payment from '../../../../models/Payment';
     import PaymentReceipt from '../../../../views/financials/Payments/Payment/Receipt';
+    import assets from "../../../../core/utils";
 
 
     export default {
@@ -42,8 +44,8 @@
         },
         data: function () {
             return {
-                load: 'no',
                 assets: assets(),
+                load: 'no',
                 dateCurrent: moment(this.serverDate).format('YYYY-MM-DD'),
                 data: {
                     voucher: this.payment.voucher,
@@ -52,7 +54,6 @@
                         moment(this.payment.payment_at, 'YYYY-MM-DD').format('YYYY-MM-DD')
                 },
                 receipt: false,
-
             }
         },
         methods: {

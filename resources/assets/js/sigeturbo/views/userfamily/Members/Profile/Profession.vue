@@ -170,6 +170,7 @@
 </template>
 <script>
 
+    import swal from 'sweetalert2';
     import uppercase from "../../../../filters/string/uppercase";
     import capitalize from "../../../../filters/string/capitalize";
     import Preregistration from "../../../../models/Preregistration";
@@ -206,7 +207,18 @@
                         company: this.preregistration.company,
                         phone: this.preregistration.phone,
                     }).then(({data}) => {
-                        this.$emit('close')
+                        swal({
+                            title: uppercase(this.$translate.text('sigeturbo.success')),
+                            text: capitalize(this.$translate.text('sigeturbo.profession_success')),
+                            type: 'success',
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then((result) => {
+                            if (result) {
+                                this.preregistration.profession_completed = 'Y';
+                                this.$emit('close')
+                            }
+                        });
                     }).catch(error => console.log(error));
                 }
 
