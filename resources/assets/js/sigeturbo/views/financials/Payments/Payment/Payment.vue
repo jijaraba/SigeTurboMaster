@@ -50,7 +50,7 @@
                 data: {
                     voucher: this.payment.voucher,
                     observation: this.payment.observation,
-                    date: (this.payment.payment_at == null || this.payment.payment_at == '') ? dateCurrent :
+                    date: (this.payment.payment_at == null || this.payment.payment_at == '') ? this.dateCurrent :
                         moment(this.payment.payment_at, 'YYYY-MM-DD').format('YYYY-MM-DD')
                 },
                 receipt: false,

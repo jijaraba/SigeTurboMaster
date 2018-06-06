@@ -2399,7 +2399,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             data: {
                 voucher: this.payment.voucher,
                 observation: this.payment.observation,
-                date: this.payment.payment_at == null || this.payment.payment_at == '' ? dateCurrent : __WEBPACK_IMPORTED_MODULE_0_moment___default()(this.payment.payment_at, 'YYYY-MM-DD').format('YYYY-MM-DD')
+                date: this.payment.payment_at == null || this.payment.payment_at == '' ? this.dateCurrent : __WEBPACK_IMPORTED_MODULE_0_moment___default()(this.payment.payment_at, 'YYYY-MM-DD').format('YYYY-MM-DD')
             },
             receipt: false
         };
