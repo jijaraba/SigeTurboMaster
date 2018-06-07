@@ -62868,7 +62868,7 @@ var Payment = function (_Model) {
         }
 
         /**
-         * Get Enrollments By Year and Group
+         * Get Payments Pending By User
          * @param path
          * @param params
          */
@@ -62879,6 +62879,18 @@ var Payment = function (_Model) {
             return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/payments/getpaymentspendingbyuser', {
                 params: params
             });
+        }
+
+        /**
+         * Generate Payment By User
+         * @param path
+         * @param params
+         */
+
+    }, {
+        key: 'generatePaymentByUser',
+        value: function generatePaymentByUser(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].post('/api/v1/payments/setpaymentindividualbyuser', params);
         }
     }]);
 

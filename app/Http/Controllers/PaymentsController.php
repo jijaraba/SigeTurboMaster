@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use SigeTurbo\Accounttype;
 use SigeTurbo\Category;
+use SigeTurbo\Concepttype;
 use SigeTurbo\Http\Requests\PaymentIndividualRequest;
 use SigeTurbo\Http\Requests\PaymentMassiveRequest;
 use SigeTurbo\Http\Requests\PaymentRequest;
@@ -22,6 +23,7 @@ use SigeTurbo\Repositories\Enrollment\EnrollmentRepositoryInterface;
 use SigeTurbo\Repositories\Family\FamilyRepositoryInterface;
 use SigeTurbo\Repositories\Payment\PaymentRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
+use SigeTurbo\Repositories\Preregistration\PreregistrationRepositoryInterface;
 use SigeTurbo\Repositories\Responsibleparent\ResponsibleparentRepositoryInterface;
 use SigeTurbo\Repositories\Transaction\TransactionRepositoryInterface;
 use SigeTurbo\Repositories\Userfamily\UserfamilyRepositoryInterface;
@@ -29,9 +31,7 @@ use SigeTurbo\Repositories\Voucherconsecutive\VoucherconsecutiveRepositoryInterf
 use SigeTurbo\Repositories\Year\YearRepositoryInterface;
 use SigeTurbo\Statusschooltype;
 
-/**
- * @property TransactionRepositoryInterface transactionRepository
- */
+
 class PaymentsController extends Controller
 {
     /**
@@ -70,6 +70,14 @@ class PaymentsController extends Controller
      * @var VoucherconsecutiveRepositoryInterface
      */
     private $voucherconsecutiveRepository;
+    /**
+     * @var TransactionRepositoryInterface
+     */
+    private $transactionRepository;
+    /**
+     * @var PreregistrationRepositoryInterface
+     */
+    private $preregistrationRepository;
 
 
     /**
@@ -83,6 +91,7 @@ class PaymentsController extends Controller
      * @param TransactionRepositoryInterface $transactionRepository
      * @param ResponsibleparentRepositoryInterface $responsibleparentRepository
      * @param VoucherconsecutiveRepositoryInterface $voucherconsecutiveRepository
+     * @param PreregistrationRepositoryInterface $preregistrationRepository
      * @internal param YearRepositoryInterface $yearRepository
      */
     function __construct(PaymentRepositoryInterface $paymentRepository,
@@ -94,7 +103,8 @@ class PaymentsController extends Controller
                          CostRepositoryInterface $costRepository,
                          TransactionRepositoryInterface $transactionRepository,
                          ResponsibleparentRepositoryInterface $responsibleparentRepository,
-                         VoucherconsecutiveRepositoryInterface $voucherconsecutiveRepository)
+                         VoucherconsecutiveRepositoryInterface $voucherconsecutiveRepository,
+                         PreregistrationRepositoryInterface $preregistrationRepository)
     {
 
         $this->paymentRepository = $paymentRepository;
@@ -107,6 +117,7 @@ class PaymentsController extends Controller
         $this->transactionRepository = $transactionRepository;
         $this->responsibleparentRepository = $responsibleparentRepository;
         $this->voucherconsecutiveRepository = $voucherconsecutiveRepository;
+        $this->preregistrationRepository = $preregistrationRepository;
     }
 
     /**
@@ -559,21 +570,45 @@ class PaymentsController extends Controller
         }
     }
 
-    public function setPaymentIndividualByUser()
+    /**
+     * Generate Payment Individual By User
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function setPaymentIndividualByUser(Request $request)
     {
-        //Find Family
-        $family = $this->userfamilyRepository->getFamilyByUser(2017002);
-        $data = [];
-        $data["student"] = 2017002;
-        $data["value1"] = ($student->scholarship > 0.00) ? (($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) : $cost->pension_discount;
-        $data["value2"] = ($student->scholarship > 0.00) ? (($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) : $cost->pension_normal;
-        $data["value3"] = ($student->scholarship > 0.00) ? ((($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) * 1.03) : $cost->pension_expired;
-        $data["value4"] = ($student->scholarship > 0.00) ? (($cost->pension_normal) - ($cost->pension_normal * $student->scholarship)) : $cost->pension_normal;
-        $data["firstname"] = "Fulano";
-        $data["lastname"] = "Peláez";
-        $data["gender"] = 1;
-        $data["scholarship"] = 0;
-        return response()->json(["successful" => true, 'message' => Lang::get('sige.SuccessPaymentCreated'), 'data' => $data]);
+
+        //Preregistration Year
+        $year = $this->yearRepository->getCurrentPreregistration();
+        if (isset($year->idyear)) {
+
+            //Get Latest Enrollment With Grade
+            $enrollment = $this->enrollmentRepository->getEnrollmentsLatestByStudent($request['user']);
+
+            //Costs
+            $costs = $this->costRepository->getCostsByPackage($year->idyear, $enrollment->idgrade, Concepttype::ENROLLMENT, 2);
+            //Find Family
+            $family = $this->userfamilyRepository->getFamilyByUser($request['user']);
+            //Set Total Cost
+            $cost = [];
+            $cost["value1"] = costTotal($costs, 'normal') - costTotal($costs, 'discount');
+            $cost["value2"] = costTotal($costs, 'normal');
+            $cost["value3"] = costTotal($costs, 'normal') + costTotal($costs, 'expired');
+            $cost["value4"] = costTotal($costs, 'normal');
+
+            //Generate Payment
+            $payment = $this->paymentRepository->setPaymentIndividual($family->family, $this->paymentRepository->configDataPayment($year->idyear, $enrollment->idgroup, $cost, $enrollment));
+            if (isset($payment)) {
+                //Set Payment Created
+                $this->preregistrationRepository->setPaymentCreated($enrollment->iduser);
+            }
+            //Respond
+            return response()->json(["successful" => true, 'message' => Lang::get('sige.SuccessPaymentCreated'), 'payment' => $payment]);
+
+        } else {
+            return response()->json(["successful" => false, 'message' => 'Not Year'], 300);
+        }
+
 
     }
 

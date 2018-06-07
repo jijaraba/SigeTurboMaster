@@ -14,6 +14,12 @@ class Year extends Model {
         });
     }
 
+    static getCurrentPreregistration(params) {
+        return HTTP.get('/api/v1/years/getcurrentpreregistration', {
+            params: params
+        });
+    }
+
 }
 
 export default Year;

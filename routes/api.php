@@ -405,8 +405,14 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'as' => 'years.getcurrentyear',
         'uses' => 'YearsController@getcurrentyear'
     ]);
+    //Get Current Preregistration
+    Route::get('/years/getcurrentpreregistration/', [
+        'as' => 'years.getcurrentpreregistration',
+        'uses' => 'YearsController@getCurrentPreregistration'
+    ]);
     //Academic Years
     Route::resource('years', 'YearsController', array('only' => array('index', 'show')));
+
 
     /**
      * ===================================
@@ -883,7 +889,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'uses' => 'PaymentsController@setPaymentAgreement'
     ]);
     //Set Payment Individual
-    Route::post('/payments/setpa}ymentindividual', [
+    Route::post('/payments/setpaymentindividual', [
         'as' => 'payments.setpaymentindividual',
         'uses' => 'PaymentsController@setPaymentIndividual'
     ]);
@@ -891,6 +897,11 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
     Route::post('/payments/setpaymentindividualnew', [
         'as' => 'payments.setpaymentindividualnew',
         'uses' => 'PaymentsController@setPaymentIndividualNew'
+    ]);
+    //Set Payment Individual By User
+    Route::post('/payments/setpaymentindividualbyuser', [
+        'as' => 'payments.setpaymentindividualbyuser',
+        'uses' => 'PaymentsController@setPaymentIndividualByUser'
     ]);
     //Set Payment Massive
     Route::post('/payments/setpaymentmassive', [
@@ -1384,6 +1395,11 @@ Route::group(['prefix' => 'v2', 'as' => 'api.v2.', 'middleware' => ['throttle:25
     Route::get('/years/getcurrentyear/', [
         'as' => 'years.getcurrentyear',
         'uses' => 'YearsController@getcurrentyear'
+    ]);
+    //Get Current Preregistration
+    Route::get('/years/getcurrentpreregistration/', [
+        'as' => 'years.getcurrentpreregistration',
+        'uses' => 'YearsController@getCurrentPreregistration'
     ]);
     //Academic Years
     Route::resource('years', 'YearsController', array('only' => array('index')));

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use SigeTurbo\Enrollment;
+use SigeTurbo\Repositories\Year\YearRepository;
 use SigeTurbo\Statusschooltype;
 
 class EnrollmentRepository implements EnrollmentRepositoryInterface
@@ -210,7 +211,10 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
      */
     public function getEnrollmentsLatestByStudent($student)
     {
-        return Enrollment::select('users.iduser', 'users.firstname', 'users.lastname', 'users.photo', 'groups.idgroup', 'groups.name AS group', 'grades.name AS grade', 'enrollments.scholarship', 'users.idgender')
+        //Current Year
+        $year = YearRepository::getCurrentYear()->idyear;
+
+        return Enrollment::select('users.iduser', 'users.firstname', 'users.lastname', 'users.photo', 'groups.idgroup', 'groups.name AS group', 'grades.idgrade', 'grades.name AS grade', 'enrollments.scholarship', 'users.idgender')
             ->join('users', function ($join) {
                 $join
                     ->on('users.iduser', '=', 'enrollments.iduser');
@@ -224,7 +228,7 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
                     ->on('grades.idgrade', '=', 'groups.idgrade');
             })
             ->where('users.iduser', '=', $student)
-            ->where('groups.idgroup', '=', DB::raw("(SELECT max(idgroup) FROM enrollments WHERE iduser = $student)"))
+            ->where('groups.idgroup', '=', DB::raw("(SELECT max(idgroup) FROM enrollments WHERE iduser = $student AND idyear = $year)"))
             ->first();
     }
 

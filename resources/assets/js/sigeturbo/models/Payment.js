@@ -36,7 +36,7 @@ class Payment extends Model {
     }
 
     /**
-     * Get Enrollments By Year and Group
+     * Get Payments Pending By User
      * @param path
      * @param params
      */
@@ -44,6 +44,15 @@ class Payment extends Model {
         return HTTP.get('/api/v1/payments/getpaymentspendingbyuser', {
             params: params
         });
+    }
+
+    /**
+     * Generate Payment By User
+     * @param path
+     * @param params
+     */
+    static generatePaymentByUser(params) {
+        return HTTP.post('/api/v1/payments/setpaymentindividualbyuser', params);
     }
 
 }

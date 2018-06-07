@@ -1629,6 +1629,8 @@ module.exports = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Profile_Profession__ = __webpack_require__("./resources/assets/js/sigeturbo/views/userfamily/Members/Profile/Profession.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__filters_string_uppercase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/uppercase.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__filters_string_capitalize__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/capitalize.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__models_Payment__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Payment.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__models_Year__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Year.js");
 //
 //
 //
@@ -1709,6 +1711,11 @@ module.exports = {
 //
 //
 //
+//
+//
+//
+
+
 
 
 
@@ -1744,7 +1751,8 @@ module.exports = {
                 medical: false,
                 additional: false,
                 profession: false
-            }
+            },
+            preregistrationEnable: false
         };
     },
     methods: {
@@ -1778,22 +1786,77 @@ module.exports = {
             this.profile.additional = false;
             this.profile.profession = false;
 
-            if (this.preregistration.general_completed == 'Y' && this.preregistration.health_completed == 'Y' && this.preregistration.additional_completed == 'Y') {
-                __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()({ title: Object(__WEBPACK_IMPORTED_MODULE_7__filters_string_uppercase__["a" /* default */])(this.$translate.text('sigeturbo.success')), type: 'success', html: Object(__WEBPACK_IMPORTED_MODULE_8__filters_string_capitalize__["a" /* default */])(this.$translate.text('sigeturbo.payment_generate')) });
+            if (this.preregistrationEnable) {
+                if (this.preregistration.general_completed == 'Y' && this.preregistration.health_completed == 'Y' && this.preregistration.additional_completed == 'Y') {
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()({
+                        title: Object(__WEBPACK_IMPORTED_MODULE_7__filters_string_uppercase__["a" /* default */])(this.$translate.text('sigeturbo.success')),
+                        type: 'success',
+                        html: Object(__WEBPACK_IMPORTED_MODULE_8__filters_string_capitalize__["a" /* default */])(this.$translate.text('sigeturbo.payment_generate'))
+                    });
+                }
+            }
+        },
+        generatePayment: function generatePayment() {
+            var _this = this;
+
+            if (this.preregistration.payment_created == 'N') {
+                __WEBPACK_IMPORTED_MODULE_9__models_Payment__["a" /* default */].generatePaymentByUser({
+                    user: this.member.iduser
+                }).then(function (_ref) {
+                    var data = _ref.data;
+
+                    if (data.successful) {
+                        __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()({
+                            title: Object(__WEBPACK_IMPORTED_MODULE_7__filters_string_uppercase__["a" /* default */])(_this.$translate.text('sigeturbo.success')),
+                            type: 'success',
+                            html: Object(__WEBPACK_IMPORTED_MODULE_8__filters_string_capitalize__["a" /* default */])(_this.$translate.text('sigeturbo.payment_generated')),
+                            footer: "<a href='/parents/payments'>Ir a la sección de Pagos Online</a>"
+                        }).then(function (result) {
+                            if (result) {
+                                _this.preregistration.payment_created = 'Y';
+                            }
+                        });
+                    }
+                }).catch(function (error) {
+                    return console.log(error);
+                });
+            } else {
+                __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()({
+                    title: Object(__WEBPACK_IMPORTED_MODULE_7__filters_string_uppercase__["a" /* default */])(this.$translate.text('sigeturbo.warning')),
+                    type: 'warning',
+                    html: Object(__WEBPACK_IMPORTED_MODULE_8__filters_string_capitalize__["a" /* default */])(this.$translate.text('sigeturbo.payment_warning_generated')),
+                    footer: "<a href='/parents/payments'>Ir a la sección de Pagos Online</a>"
+                }).then(function (result) {
+                    if (result) {
+                        _this.preregistration.payment_created = 'Y';
+                    }
+                });
             }
         }
     },
     watch: {},
     created: function created() {
-        var _this = this;
+        var _this2 = this;
 
+        //Get Current Preregistration
+        __WEBPACK_IMPORTED_MODULE_10__models_Year__["a" /* default */].getCurrentPreregistration({}).then(function (_ref2) {
+            var data = _ref2.data;
+
+            if (data.idyear) {
+                _this2.preregistrationEnable = true;
+            }
+        }).catch(function (error) {
+            return console.log(error);
+        });
+
+        //Get Category Code By Name
         __WEBPACK_IMPORTED_MODULE_2__models_Category__["a" /* default */].getCategoryCodeByName({
             category: 'student'
-        }).then(function (_ref) {
-            var data = _ref.data;
+        }).then(function (_ref3) {
+            var data = _ref3.data;
 
-            _this.category = data;
-            _this.show = true;
+            _this2.category = data;
+            _this2.show = true;
         }).catch(function (error) {
             return console.log(error);
         });
@@ -27383,12 +27446,35 @@ var render = function() {
                     ]
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.member.idcategory == _vm.category.idcategory
+                _vm.preregistrationEnable
                   ? [
-                      _vm.preregistration.general_completed === "Y" &&
-                      _vm.preregistration.health_completed === "Y" &&
-                      _vm.preregistration.additional_completed === "Y"
-                        ? [_vm._m(4)]
+                      _vm.member.idcategory == _vm.category.idcategory
+                        ? [
+                            _vm.preregistration.general_completed === "Y" &&
+                            _vm.preregistration.health_completed === "Y" &&
+                            _vm.preregistration.additional_completed === "Y"
+                              ? [
+                                  _c(
+                                    "li",
+                                    { staticClass: "col-100 generate" },
+                                    [
+                                      _c("input", {
+                                        staticClass: "btn btn-aquamarine",
+                                        attrs: {
+                                          type: "button",
+                                          value: "Generar Pago"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.generatePayment()
+                                          }
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              : _vm._e()
+                          ]
                         : _vm._e()
                     ]
                   : _vm._e()
@@ -27489,17 +27575,6 @@ var staticRenderFns = [
       { staticClass: "tooltip", attrs: { title: "Completado" } },
       [_c("i", { staticClass: "fas fa-check-circle fa-3x" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "col-100 generate" }, [
-      _c("input", {
-        staticClass: "btn btn-aquamarine",
-        attrs: { type: "button", value: "Generar Pago" }
-      })
-    ])
   }
 ]
 render._withStripped = true
@@ -40760,6 +40835,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'additional_success': 'La información adicional fue guardada satisfactoriamente',
             'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
             'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
+            'payment_generated': 'Pago de <strong>Matrícula</strong> generado satisfactoriamnete',
+            'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
             'notice': 'Prematrícula',
             'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'payment_individual_success': 'pago individual generado satisfactoriamente',
@@ -40837,6 +40914,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'additional_success': 'La información adicional fue guardada satisfactoriamente',
             'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
             'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
+            'payment_generated': 'Pago de <strong>Matrícula</strong> generado satisfactoriamnete',
+            'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
             'notice': 'Prematrícula',
             'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'payment_individual_success': 'pago individual generado satisfactoriamente',
@@ -41148,6 +41227,106 @@ var MyModel = function () {
 
 /***/ }),
 
+/***/ "./resources/assets/js/sigeturbo/models/Payment.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__resources_resources__ = __webpack_require__("./resources/assets/js/sigeturbo/resources/resources.js");
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var Payment = function (_Model) {
+    _inherits(Payment, _Model);
+
+    function Payment() {
+        _classCallCheck(this, Payment);
+
+        var _this = _possibleConstructorReturn(this, (Payment.__proto__ || Object.getPrototypeOf(Payment)).call(this));
+
+        _this.count = 0;
+        return _this;
+    }
+
+    /**
+     * Get Payments Pending
+     * @param path
+     * @param params
+     */
+
+
+    _createClass(Payment, null, [{
+        key: 'getPaymentsPending',
+        value: function getPaymentsPending(path, params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get(path, params);
+        }
+
+        /**
+         * Verify Payment Pending
+         * @param path
+         * @param params
+         */
+
+    }, {
+        key: 'verifyPaymentPending',
+        value: function verifyPaymentPending(path, params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].post(path, params);
+        }
+
+        /**
+         * Verify Payment Pending
+         * @param path
+         * @param params
+         */
+
+    }, {
+        key: 'savePaymentIndividual',
+        value: function savePaymentIndividual(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].post('/api/v1/payments/setpaymentindividualnew', params);
+        }
+
+        /**
+         * Get Payments Pending By User
+         * @param path
+         * @param params
+         */
+
+    }, {
+        key: 'getPaymentsPendingByUser',
+        value: function getPaymentsPendingByUser(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/payments/getpaymentspendingbyuser', {
+                params: params
+            });
+        }
+
+        /**
+         * Generate Payment By User
+         * @param path
+         * @param params
+         */
+
+    }, {
+        key: 'generatePaymentByUser',
+        value: function generatePaymentByUser(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].post('/api/v1/payments/setpaymentindividualbyuser', params);
+        }
+    }]);
+
+    return Payment;
+}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Payment);
+
+/***/ }),
+
 /***/ "./resources/assets/js/sigeturbo/models/Prepaidmedical.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -41295,6 +41474,58 @@ var Religion = function (_Model) {
 }(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (Religion);
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/models/Year.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__resources_resources__ = __webpack_require__("./resources/assets/js/sigeturbo/resources/resources.js");
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var Year = function (_Model) {
+    _inherits(Year, _Model);
+
+    function Year() {
+        _classCallCheck(this, Year);
+
+        var _this = _possibleConstructorReturn(this, (Year.__proto__ || Object.getPrototypeOf(Year)).call(this));
+
+        _this.count = 0;
+        return _this;
+    }
+
+    _createClass(Year, null, [{
+        key: 'getCurrentYear',
+        value: function getCurrentYear(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/years/getcurrentyear', {
+                params: params
+            });
+        }
+    }, {
+        key: 'getCurrentPreregistration',
+        value: function getCurrentPreregistration(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/years/getcurrentpreregistration', {
+                params: params
+            });
+        }
+    }]);
+
+    return Year;
+}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Year);
 
 /***/ }),
 

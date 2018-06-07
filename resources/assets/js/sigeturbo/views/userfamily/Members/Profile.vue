@@ -50,12 +50,15 @@
                         </a>
                     </li>
                 </template>
-                <template v-if="member.idcategory == category.idcategory">
-                    <template
-                            v-if="preregistration.general_completed === 'Y' && preregistration.health_completed === 'Y' && preregistration.additional_completed === 'Y'">
-                        <li class="col-100 generate">
-                            <input type="button" class="btn btn-aquamarine" value="Generar Pago">
-                        </li>
+                <template v-if="preregistrationEnable">
+                    <template v-if="member.idcategory == category.idcategory">
+                        <template
+                                v-if="preregistration.general_completed === 'Y' && preregistration.health_completed === 'Y' && preregistration.additional_completed === 'Y'">
+                            <li class="col-100 generate">
+                                <input type="button" class="btn btn-aquamarine" value="Generar Pago"
+                                       @click="generatePayment()">
+                            </li>
+                        </template>
                     </template>
                 </template>
             </ul>
@@ -89,6 +92,8 @@
     import ProfileProfession from './Profile/Profession';
     import uppercase from "../../../filters/string/uppercase";
     import capitalize from "../../../filters/string/capitalize";
+    import Payment from "../../../models/Payment";
+    import Year from "../../../models/Year";
 
     export default {
 
@@ -116,7 +121,8 @@
                     medical: false,
                     additional: false,
                     profession: false,
-                }
+                },
+                preregistrationEnable: false
             }
         },
         methods: {
@@ -150,13 +156,59 @@
                 this.profile.additional = false;
                 this.profile.profession = false;
 
-                if (this.preregistration.general_completed == 'Y' && this.preregistration.health_completed == 'Y' && this.preregistration.additional_completed == 'Y') {
-                    swal({title: uppercase(this.$translate.text('sigeturbo.success')), type: 'success', html: capitalize(this.$translate.text('sigeturbo.payment_generate'))})
+                if (this.preregistrationEnable) {
+                    if (this.preregistration.general_completed == 'Y' && this.preregistration.health_completed == 'Y' && this.preregistration.additional_completed == 'Y') {
+                        swal({
+                            title: uppercase(this.$translate.text('sigeturbo.success')),
+                            type: 'success',
+                            html: capitalize(this.$translate.text('sigeturbo.payment_generate')),
+                        })
+                    }
+                }
+            },
+            generatePayment() {
+                if (this.preregistration.payment_created == 'N') {
+                    Payment.generatePaymentByUser({
+                        user: this.member.iduser
+                    }).then(({data}) => {
+                        if (data.successful) {
+                            swal({
+                                title: uppercase(this.$translate.text('sigeturbo.success')),
+                                type: 'success',
+                                html: capitalize(this.$translate.text('sigeturbo.payment_generated')),
+                                footer: "<a href='/parents/payments'>Ir a la sección de Pagos Online</a>"
+                            }).then((result) => {
+                                if (result) {
+                                    this.preregistration.payment_created = 'Y';
+                                }
+                            });
+                        }
+                    }).catch(error => console.log(error));
+                } else {
+                    swal({
+                        title: uppercase(this.$translate.text('sigeturbo.warning')),
+                        type: 'warning',
+                        html: capitalize(this.$translate.text('sigeturbo.payment_warning_generated')),
+                        footer: "<a href='/parents/payments'>Ir a la sección de Pagos Online</a>"
+                    }).then((result) => {
+                        if (result) {
+                            this.preregistration.payment_created = 'Y';
+                        }
+                    });
                 }
             }
         },
         watch: {},
         created() {
+
+            //Get Current Preregistration
+            Year.getCurrentPreregistration({}).then(({data}) => {
+                if (data.idyear) {
+                    this.preregistrationEnable = true;
+                }
+            }).catch(error => console.log(error));
+
+            //Get Category Code By Name
             Category.getCategoryCodeByName({
                 category: 'student'
             }).then(({data}) => {

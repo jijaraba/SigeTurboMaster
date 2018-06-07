@@ -16,7 +16,7 @@ class Preregistration extends Model
         'medicationdescription', 'whytakemedication', 'dose', 'isallergic', 'sufferedillness',
         'specifyallergic', 'sufferedillnessdescription', 'doctorname', 'doctorphone', 'psychologicalsupport',
         'observation', 'educationaloutput', 'responsible', 'profession', 'occupation', 'company', 'phonecompany',
-        'general_completed', 'health_completed', 'additional_completed', 'profession_completed'];
+        'general_completed', 'health_completed', 'additional_completed', 'profession_completed', 'payment_created'];
     protected $hidden = ['created_at', 'updated_at'];
     /**
      * Table Name

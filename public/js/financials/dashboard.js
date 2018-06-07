@@ -47830,6 +47830,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'additional_success': 'La información adicional fue guardada satisfactoriamente',
             'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
             'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
+            'payment_generated': 'Pago de <strong>Matrícula</strong> generado satisfactoriamnete',
+            'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
             'notice': 'Prematrícula',
             'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'payment_individual_success': 'pago individual generado satisfactoriamente',
@@ -47907,6 +47909,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'additional_success': 'La información adicional fue guardada satisfactoriamente',
             'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
             'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
+            'payment_generated': 'Pago de <strong>Matrícula</strong> generado satisfactoriamnete',
+            'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
             'notice': 'Prematrícula',
             'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'payment_individual_success': 'pago individual generado satisfactoriamente',
@@ -48237,7 +48241,7 @@ var Payment = function (_Model) {
         }
 
         /**
-         * Get Enrollments By Year and Group
+         * Get Payments Pending By User
          * @param path
          * @param params
          */
@@ -48248,6 +48252,18 @@ var Payment = function (_Model) {
             return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/payments/getpaymentspendingbyuser', {
                 params: params
             });
+        }
+
+        /**
+         * Generate Payment By User
+         * @param path
+         * @param params
+         */
+
+    }, {
+        key: 'generatePaymentByUser',
+        value: function generatePaymentByUser(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].post('/api/v1/payments/setpaymentindividualbyuser', params);
         }
     }]);
 

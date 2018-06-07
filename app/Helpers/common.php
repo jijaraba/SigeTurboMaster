@@ -608,3 +608,22 @@ function setZero($limit/*limit*/, $number/*value*/)
     }
     return $stringinitial . $number;
 }
+
+
+/**
+ * Get Cost Total
+ * @param $details
+ * @param $type
+ * @return float
+ */
+function costTotal($details, $type)
+{
+    $subtotal = 0;
+    foreach ($details as $detail) {
+        if ($type == $detail->calculated) {
+            $subtotal += ($detail->percentage < 1) ? $detail->value * (1 - $detail->percentage) : $detail->value;
+        }
+    }
+    return round($subtotal);
+
+}

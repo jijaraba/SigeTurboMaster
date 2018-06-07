@@ -31,6 +31,7 @@
     import assets from "../../../core/utils";
     import uppercase from "../../../filters/string/uppercase";
     import capitalize from "../../../filters/string/capitalize";
+    import Year from "../../../models/Year";
 
     export default {
 
@@ -50,11 +51,18 @@
         methods: {},
         watch: {},
         created() {
-            swal({
-                title: uppercase(this.$translate.text('sigeturbo.notice')),
-                type: 'info',
-                html: capitalize(this.$translate.text('sigeturbo.members_info'))
-            })
+            //Get Current Preregistration
+            Year.getCurrentPreregistration({}).then(({data}) => {
+                if (data.idyear) {
+                    swal({
+                        title: uppercase(this.$translate.text('sigeturbo.notice')),
+                        type: 'info',
+                        html: capitalize(this.$translate.text('sigeturbo.members_info'))
+                    }).then((result) => {
+                    });
+                }
+            }).catch(error => console.log(error));
+
         },
         mounted() {
         },

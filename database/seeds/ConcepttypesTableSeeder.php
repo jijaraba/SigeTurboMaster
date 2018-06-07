@@ -17,6 +17,6 @@ class ConcepttypesTableSeeder extends Seeder
         Concepttype::create(array('name' => 'Matrícula','prefix'=>'enrollment'));
         Concepttype::create(array('name' => 'Pensión','prefix'=>'pension'));
         Concepttype::create(array('name' => 'Nivelación','prefix'=>'nivelation'));
-        Concepttype::create(array('name' => 'Extracurricular','prefix'=>'nivelation'));
+        Concepttype::create(array('name' => 'Extracurricular','prefix'=>'extracurricular'));
     }
 }

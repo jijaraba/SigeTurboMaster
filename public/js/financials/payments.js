@@ -1909,6 +1909,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_Payment__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Payment.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__filters_string_capitalize__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/capitalize.js");
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 //
 //
 //
@@ -2168,7 +2170,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             user: [],
             costs: [],
             steps: 4,
-            stepSelected: 0
+            stepSelected: 0,
+            enrollment: this.getConceptTypeByPrefix('enrollment'),
+            pension: this.getConceptTypeByPrefix('pension')
         };
     },
     methods: {
@@ -2190,7 +2194,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                         _this.payment.firstname = data.firstname;
                         _this.payment.lastname = data.lastname;
                         _this.payment.gender = data.idgender;
-                        _this.payment.scholarship = parseInt(data.scholarship);
+                        _this.payment.scholarship = parseFloat(data.scholarship);
 
                         //Scholarship
                         if (_this.payment.scholarship == 1) {
@@ -2229,10 +2233,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this2.costs = data;
                 //Config Values
-                _this2.payment.value1 = Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') - Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'discount');
-                _this2.payment.value2 = Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal');
-                _this2.payment.value3 = Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') + Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'expired');
-                _this2.payment.value4 = Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal');
+                if (_this2.payment.type !== _this2.pension) {
+                    _this2.payment.value1 = Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') - Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'discount');
+                    _this2.payment.value2 = Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal');
+                    _this2.payment.value3 = Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') + Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'expired');
+                    _this2.payment.value4 = Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal');
+                } else {
+                    //Pension
+                    _this2.payment.value1 = Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') - Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'discount') - (Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') - Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'discount')) * _this2.payment.scholarship;
+                    _this2.payment.value2 = Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') - Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') * _this2.payment.scholarship;
+                    _this2.payment.value3 = Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') + Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'expired') - (Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') + Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'expired')) * _this2.payment.scholarship;
+                    _this2.payment.value4 = Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') - Object(__WEBPACK_IMPORTED_MODULE_3__filters_math_paymentTotal__["a" /* default */])(_this2.costs, 'normal') * _this2.payment.scholarship;
+                }
                 //Set Concept
                 _this2.setConcept(_this2.payment.concept);
             }).catch(function (error) {
@@ -2240,10 +2252,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             });
         },
         setConcept: function setConcept(concept) {
-            if (typeof this.user.iduser !== "undefined") {
-                if (this.payment.type == 3) {
+            if (_typeof(this.user.iduser) !== undefined) {
+                if (this.payment.type == this.pension) {
                     if (this.studentWithScholarship == true) {
-                        this.payment.result = concept + ' ' + this.months[parseInt(__WEBPACK_IMPORTED_MODULE_1_moment___default()().format('MM') - 1)] + ' BECA DEL ' + this.payment.scholarship * 100 + '%' + ' (' + this.payment.iduser + ' - ' + this.payment.firstname.toUpperCase() + ')';
+                        this.payment.result = concept + ' ' + this.months[parseInt(__WEBPACK_IMPORTED_MODULE_1_moment___default()().format('MM') - 1)] + ' CON BECA DEL ' + this.payment.scholarship * 100 + '%' + ' (' + this.payment.iduser + ' - ' + this.payment.firstname.toUpperCase() + ')';
                     } else {
                         this.payment.result = concept + ' ' + this.months[parseInt(__WEBPACK_IMPORTED_MODULE_1_moment___default()().format('MM') - 1)] + ' (' + this.payment.iduser + ' - ' + this.payment.firstname.toUpperCase() + ')';
                     }
@@ -2266,6 +2278,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }).catch(function (error) {
                 return console.log(error);
             });
+        },
+        getConceptTypeByPrefix: function getConceptTypeByPrefix(type) {
+            for (var i = 0; i < this.concepttypes.length; i++) {
+                if (this.concepttypes[i].prefix == type) {
+                    return this.concepttypes[i].idconcepttype;
+                }
+            }
         },
         savePayment: function savePayment() {
             var _this4 = this;
@@ -2353,11 +2372,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     created: function created() {
         //Get Packages
         this.getPackages();
-
-        //Hello
-        console.log(this.concepttypes.find(function (x) {
-            return x.id === '45';
-        }).foo);
     },
     mounted: function mounted() {}
 });
@@ -53618,6 +53632,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'additional_success': 'La información adicional fue guardada satisfactoriamente',
             'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
             'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
+            'payment_generated': 'Pago de <strong>Matrícula</strong> generado satisfactoriamnete',
+            'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
             'notice': 'Prematrícula',
             'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'payment_individual_success': 'pago individual generado satisfactoriamente',
@@ -53695,6 +53711,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'additional_success': 'La información adicional fue guardada satisfactoriamente',
             'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
             'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
+            'payment_generated': 'Pago de <strong>Matrícula</strong> generado satisfactoriamnete',
+            'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
             'notice': 'Prematrícula',
             'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'payment_individual_success': 'pago individual generado satisfactoriamente',
@@ -54203,7 +54221,7 @@ var Payment = function (_Model) {
         }
 
         /**
-         * Get Enrollments By Year and Group
+         * Get Payments Pending By User
          * @param path
          * @param params
          */
@@ -54214,6 +54232,18 @@ var Payment = function (_Model) {
             return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/payments/getpaymentspendingbyuser', {
                 params: params
             });
+        }
+
+        /**
+         * Generate Payment By User
+         * @param path
+         * @param params
+         */
+
+    }, {
+        key: 'generatePaymentByUser',
+        value: function generatePaymentByUser(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].post('/api/v1/payments/setpaymentindividualbyuser', params);
         }
     }]);
 
@@ -54257,6 +54287,13 @@ var Year = function (_Model) {
         key: 'getCurrentYear',
         value: function getCurrentYear(params) {
             return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/years/getcurrentyear', {
+                params: params
+            });
+        }
+    }, {
+        key: 'getCurrentPreregistration',
+        value: function getCurrentPreregistration(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/years/getcurrentpreregistration', {
                 params: params
             });
         }

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use SigeTurbo\Concepttype;
 use SigeTurbo\Payment;
 use SigeTurbo\Repositories\Userfamily\UserfamilyRepository;
 use SigeTurbo\Repositories\Year\YearRepository;
@@ -319,21 +320,21 @@ class PaymentRepository implements PaymentRepositoryInterface
             'idbank' => 1,
             'idfamily' => $family,
             'iduser' => $data['student'],
-            'concept1' => $this->setConcept(1, 1, $data),
-            'value1' => $data['value1'],
             'date1' => $data['date1'],
+            'value1' => $data['value1'],
+            'concept1' => $this->setConcept(1, 1, $data),
             'observation1' => $this->setConcept(1, 2, $data),
-            'concept2' => $this->setConcept(2, 1, $data),
-            'value2' => $data['value2'],
             'date2' => $data['date2'],
+            'value2' => $data['value2'],
+            'concept2' => $this->setConcept(2, 1, $data),
             'observation2' => $this->setConcept(2, 2, $data),
-            'concept3' => $this->setConcept(3, 1, $data),
-            'value3' => $data['value3'],
             'date3' => $data['date3'],
+            'value3' => $data['value3'],
+            'concept3' => $this->setConcept(3, 1, $data),
             'observation3' => $this->setConcept(3, 2, $data),
-            'concept4' => $this->setConcept(4, 1, $data),
             'value4' => $data['value4'],
             'date4' => $data['date4'],
+            'concept4' => $this->setConcept(4, 1, $data),
             'observation4' => $this->setConcept(4, 2, $data),
             'created_by' => getUser()->iduser,
             'realdate' => $realdate->lastOfMonth(),
@@ -546,27 +547,28 @@ class PaymentRepository implements PaymentRepositoryInterface
         if ($config !== null) {
             $data = $config;
         } else {
-            $data["concept"] = "MATRÍCULA AÑO ACADÉMICO " . $year . "-" . ($year + 1);
-            $data["date1"] = '2017-06-30';
-            $data["date2"] = '2017-07-15';
-            $data["date3"] = '2017-07-16';
-            $data["date4"] = '2017-07-16';
+            $data["concept"] = "MATRÍCULA " . $year . "-" . ($year + 1);
+            $data["date1"] = $year . '-07-15';
+            $data["date2"] = $year . '-07-15';
+            $data["date3"] = $year . '-07-30';
+            $data["date4"] = $year . '-07-30';
             $data["academic"] = $year;
             $data["year"] = Carbon::now()->year;
             $data["month"] = Carbon::now()->month;
             $data["month_name"] = getMonthName(Carbon::now()->month);
-            $data["type"] = 1;
+            $data["type"] = Concepttype::ENROLLMENT;
+            $data["package"] = 2;
             $data["exclude"] = 0;
         }
 
         $data["student"] = $student->iduser;
-        $data["value1"] = $cost->enrollment;
-        $data["value2"] = $cost->enrollment;
-        $data["value3"] = $cost->enrollment_expired;
-        $data["value4"] = $cost->enrollment;
+        $data["value1"] = $cost['value1'];
+        $data["value2"] = $cost['value2'];
+        $data["value3"] = $cost['value3'];
+        $data["value4"] = $cost['value4'];
         $data["firstname"] = $student->firstname;
         $data["lastname"] = $student->lastname;
-        $data["gender"] = $student->gender;
+        $data["gender"] = $student->idgender;
         $data["scholarship"] = $student->scholarship;
         return $data;
     }
@@ -574,7 +576,7 @@ class PaymentRepository implements PaymentRepositoryInterface
 
     /**
      * Specify Payment Criteria
-     * @param $number
+     * @param $number | Is the number of value
      * @param $option
      * @param $data
      * @return string
@@ -584,22 +586,22 @@ class PaymentRepository implements PaymentRepositoryInterface
         switch ($number) {
             case 1:
                 switch ($data["type"]) {
-                    case 2:
+                    case Concepttype::PENSION:
                         if ($option == 1) {
                             return $data['concept'] . " " . $data['month_name'] . (($data["scholarship"] > 0.00) ? " CON BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
                         } else {
                             return "PAGO " . $data['concept'] . (($data["scholarship"] > 0.00) ? " CON BECA DEL " . $data["scholarship"] * 100 . "% DE " : " DE ") . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
                         }
                         break;
-                    case 1:
+                    case Concepttype::ENROLLMENT:
                         if ($option == 1) {
                             return $data['concept'] . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
                         } else {
                             return "PAGO " . $data['concept'] . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")";
                         }
                         break;
-                    case 3:
                     case 4:
+                    case 5:
                         if ($option == 1) {
                             return $data['concept'] . " " . $data['month_name'] . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
                         } else {
@@ -610,22 +612,22 @@ class PaymentRepository implements PaymentRepositoryInterface
                 break;
             case 2:
                 switch ($data["type"]) {
-                    case 2:
+                    case Concepttype::PENSION:
                         if ($option == 1) {
                             return $data['concept'] . " " . $data['month_name'] . (($data["scholarship"] > 0.00) ? " CON BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
                         } else {
                             return "PAGO " . $data['concept'] . (($data["scholarship"] > 0.00) ? " CON BECA DEL " . $data["scholarship"] * 100 . "% DE " : " DE ") . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
                         }
                         break;
-                    case 1:
+                    case Concepttype::ENROLLMENT:
                         if ($option == 1) {
                             return $data['concept'] . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
                         } else {
                             return "PAGO " . $data['concept'] . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")";
                         }
                         break;
-                    case 3:
                     case 4:
+                    case 5:
                         if ($option == 1) {
                             return $data['concept'] . " " . $data['month_name'] . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
                         } else {
@@ -636,24 +638,24 @@ class PaymentRepository implements PaymentRepositoryInterface
                 break;
             case 3:
                 switch ($data["type"]) {
-                    case 2:
+                    case Concepttype::PENSION:
                         if ($option == 1) {
-                            return $data['concept'] . " " . $data['month_name'] . " CON INTERESES" . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
+                            return $data['concept'] . " " . $data['month_name'] . " CON INTERESES " . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
                         } else {
-                            return "PAGO " . $data['concept'] . " CON INTERESES" . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
+                            return "PAGO " . $data['concept'] . " CON INTERESES " . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
                         }
                         break;
-                    case 1:
+                    case Concepttype::ENROLLMENT:
                         if ($option == 1) {
                             return $data['concept'] . " CON RECARGO " . "(" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
                         } else {
                             return "PAGO " . $data['concept'] . " CON RECARGO" . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")";
                         }
                         break;
-                    case 3:
                     case 4:
+                    case 5:
                         if ($option == 1) {
-                            return $data['concept'] . " " . $data['month_name'] . " CON INTERESES" . "(" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
+                            return $data['concept'] . " " . $data['month_name'] . " CON INTERESES " . "(" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
                         } else {
                             return "PAGO " . $data['concept'] . " CON INTERESES" . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
                         }
@@ -662,24 +664,24 @@ class PaymentRepository implements PaymentRepositoryInterface
                 break;
             case 4:
                 switch ($data["type"]) {
-                    case 2:
+                    case Concepttype::PENSION:
                         if ($option == 1) {
                             return $data['concept'] . " " . $data['month_name'] . " CON ACUERDO DE PAGO" . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
                         } else {
                             return "PAGO " . $data['concept'] . " CON ACUERDO DE PAGO" . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
                         }
                         break;
-                    case 1:
+                    case Concepttype::ENROLLMENT:
                         if ($option == 1) {
                             return $data['concept'] . " CON ACUERDO DE PAGO " . "(" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
                         } else {
                             return "PAGO " . $data['concept'] . " CON ACUERDO DE PAGO" . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")";
                         }
                         break;
-                    case 3:
                     case 4:
+                    case 5:
                         if ($option == 1) {
-                            return $data['concept'] . " " . $data['month_name'] . " CON INTERESES" . "(" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
+                            return $data['concept'] . " " . $data['month_name'] . " CON INTERESES " . "(" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
                         } else {
                             return "PAGO " . $data['concept'] . " CON ACUERDO DE PAGO" . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
                         }

@@ -64,6 +64,8 @@ class CreatePreregistrationsTable extends Migration
             $table->string('phonecompany')->nullable();
             $table->enum('profession_completed', ['Y', 'N'])->default('N');
 
+            $table->enum('payment_created', ['Y', 'N'])->default('N');
+
             $table->timestamps();
             $table->foreign('iduser')
                 ->references('iduser')

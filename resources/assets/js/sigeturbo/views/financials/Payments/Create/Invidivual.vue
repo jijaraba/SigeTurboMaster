@@ -262,7 +262,9 @@
                 user: [],
                 costs: [],
                 steps: 4,
-                stepSelected: 0
+                stepSelected: 0,
+                enrollment: this.getConceptTypeByPrefix('enrollment'),
+                pension: this.getConceptTypeByPrefix('pension'),
             }
         },
         methods: {
@@ -280,7 +282,7 @@
                                 this.payment.firstname = data.firstname;
                                 this.payment.lastname = data.lastname;
                                 this.payment.gender = data.idgender;
-                                this.payment.scholarship = parseInt(data.scholarship);
+                                this.payment.scholarship = parseFloat(data.scholarship);
 
                                 //Scholarship
                                 if (this.payment.scholarship == 1) {
@@ -319,19 +321,26 @@
                 }).then(({data}) => {
                     this.costs = data;
                     //Config Values
-                    this.payment.value1 = paymentTotal(this.costs, 'normal') - paymentTotal(this.costs, 'discount');
-                    this.payment.value2 = paymentTotal(this.costs, 'normal');
-                    this.payment.value3 = paymentTotal(this.costs, 'normal') + paymentTotal(this.costs, 'expired');
-                    this.payment.value4 = paymentTotal(this.costs, 'normal');
+                    if (this.payment.type !== this.pension) {
+                        this.payment.value1 = paymentTotal(this.costs, 'normal') - paymentTotal(this.costs, 'discount');
+                        this.payment.value2 = paymentTotal(this.costs, 'normal');
+                        this.payment.value3 = paymentTotal(this.costs, 'normal') + paymentTotal(this.costs, 'expired');
+                        this.payment.value4 = paymentTotal(this.costs, 'normal');
+                    } else { //Pension
+                        this.payment.value1 = (paymentTotal(this.costs, 'normal') - paymentTotal(this.costs, 'discount')) - ((paymentTotal(this.costs, 'normal') - paymentTotal(this.costs, 'discount')) * this.payment.scholarship);
+                        this.payment.value2 = paymentTotal(this.costs, 'normal') - (paymentTotal(this.costs, 'normal') * this.payment.scholarship);
+                        this.payment.value3 = (paymentTotal(this.costs, 'normal') + paymentTotal(this.costs, 'expired')) - ((paymentTotal(this.costs, 'normal') + paymentTotal(this.costs, 'expired')) * this.payment.scholarship);
+                        this.payment.value4 = paymentTotal(this.costs, 'normal') - (paymentTotal(this.costs, 'normal') * this.payment.scholarship);
+                    }
                     //Set Concept
                     this.setConcept(this.payment.concept);
                 }).catch(error => console.log(error));
             },
             setConcept(concept) {
-                if (typeof this.user.iduser !== "undefined") {
-                    if (this.payment.type == 3) {
+                if (typeof this.user.iduser !== undefined) {
+                    if (this.payment.type == this.pension) {
                         if (this.studentWithScholarship == true) {
-                            this.payment.result = concept + ' ' + this.months[parseInt(moment().format('MM') - 1)] + ' BECA DEL ' + (this.payment.scholarship * 100) + '%' + ' (' + this.payment.iduser + ' - ' + this.payment.firstname.toUpperCase() + ')';
+                            this.payment.result = concept + ' ' + this.months[parseInt(moment().format('MM') - 1)] + ' CON BECA DEL ' + (this.payment.scholarship * 100) + '%' + ' (' + this.payment.iduser + ' - ' + this.payment.firstname.toUpperCase() + ')';
                         } else {
                             this.payment.result = concept + ' ' + this.months[parseInt(moment().format('MM') - 1)] + ' (' + this.payment.iduser + ' - ' + this.payment.firstname.toUpperCase() + ')'
                         }
@@ -348,6 +357,13 @@
                     this.packages = data;
                     this.payment.package = this.packages[0].idpackage
                 }).catch(error => console.log(error));
+            },
+            getConceptTypeByPrefix(type) {
+                for (let i = 0; i < this.concepttypes.length; i++) {
+                    if (this.concepttypes[i].prefix == type) {
+                        return this.concepttypes[i].idconcepttype;
+                    }
+                }
             },
             savePayment() {
                 //Save Payment Individual
@@ -429,9 +445,6 @@
         created() {
             //Get Packages
             this.getPackages()
-
-            //Hello
-            console.log(this.concepttypes.find(x => x.id === '45').foo);
         },
         mounted() {
         },

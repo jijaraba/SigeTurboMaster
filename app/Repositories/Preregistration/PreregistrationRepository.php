@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jijaraba
- * Date: 11/19/17
- * Time: 6:52 PM
- */
 
 namespace SigeTurbo\Repositories\Preregistration;
-
 
 use Illuminate\Support\Facades\Cache;
 use SigeTurbo\Prepaidmedical;
@@ -95,6 +88,12 @@ class PreregistrationRepository implements PreregistrationRepositoryInterface
         return $preregistration->save();
     }
 
+    /**
+     * Update Profile Medical
+     * @param $preregistration
+     * @param $data
+     * @return mixed
+     */
     public function updateProfileMedical($preregistration, $data)
     {
         //Find Preregistration
@@ -124,6 +123,12 @@ class PreregistrationRepository implements PreregistrationRepositoryInterface
     }
 
 
+    /**
+     * Update Profile Additional
+     * @param $preregistration
+     * @param $data
+     * @return mixed
+     */
     public function updateProfileAdditional($preregistration, $data)
     {
         //Find Preregistration
@@ -138,6 +143,12 @@ class PreregistrationRepository implements PreregistrationRepositoryInterface
     }
 
 
+    /**
+     * Update Profile Profession
+     * @param $preregistration
+     * @param $data
+     * @return mixed
+     */
     public function updateProfileProfession($preregistration, $data)
     {
         //Find Preregistration
@@ -173,5 +184,23 @@ class PreregistrationRepository implements PreregistrationRepositoryInterface
         return Preregistration::select('*')
             ->where('iduser', '=', $user)
             ->first();
+    }
+
+    /**
+     * Set Payment Created
+     * @param $user
+     * @return mixed
+     */
+    public function setPaymentCreated($user)
+    {
+        //Find Preregistration By User
+        $preregistration = $this->getPreregistrationByUser($user);
+
+        //Find Preregistration
+        $preregistration = Preregistration::find($preregistration->idpreregistration);
+        $preregistration->fill([
+            'payment_created' => 'Y',
+        ]);
+        return $preregistration->save();
     }
 }

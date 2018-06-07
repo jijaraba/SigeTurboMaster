@@ -286,7 +286,6 @@
   padding: 20px;
 }
 
-
 .padding-30 {
   padding: 30px;
 }
@@ -804,9 +803,9 @@ label.select-arrow {
     background: $sige-global-bgcolor-04 !important;
     border-top: none !important;
     > div {
-       > i {
-         color: $sige-global-color-02 !important;
-       }
+      > i {
+        color: $sige-global-color-02 !important;
+      }
     }
   }
   > div {
@@ -1949,6 +1948,15 @@ input[type="radio"]:checked + label {
   }
   text-align: center !important;
   color: $sige-global-color-01 !important;
+}
+
+.swal2-footer {
+  a {
+    font: {
+      size: 0.9em !important;
+    }
+    color: $sige-global-color-05 !important;
+  }
 }
 
 .sweet-alert p {

@@ -13,4 +13,5 @@ interface PreregistrationRepositoryInterface
     public function updateProfileProfession($preregistration, $data);
     public function destroy($preregistration);
     public function getPreregistrationByUser($user);
+    public function setPaymentCreated($user);
 }

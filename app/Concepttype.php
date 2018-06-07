@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Concepttype extends Model
 {
+    const ENROLLMENT = 2;
+    const PENSION = 3;
+    const NIVELATION = 4;
+    const EXTRACURRICULAR = 5;
+
     protected $primaryKey = 'idconcepttype';
     protected $fillable = ['name', 'prefix'];
     protected $hidden = ['created_at', 'updated_at'];

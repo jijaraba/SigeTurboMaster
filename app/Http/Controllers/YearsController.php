@@ -52,4 +52,13 @@ class YearsController extends Controller
         return response()->json($this->yearRepository->getCurrentYear());
     }
 
+    /**
+     * Get Current Preregistration
+     * @return mixed
+     */
+    public function getCurrentPreregistration()
+    {
+        return response()->json($this->yearRepository->getCurrentPreregistration());
+    }
+
 }

@@ -2384,6 +2384,11 @@ input[type="radio"]:checked + label {
   color: #657380 !important;
 }
 
+.swal2-footer a {
+  font-size: 0.9em !important;
+  color: #53BBB4 !important;
+}
+
 .sweet-alert p {
   font-family: "Gotham Rounded Book", Helvetica Neue, Helvetica, sans-serif;
   font-size: 1em;
