@@ -40,18 +40,18 @@
                                     <img :src='assets+ "/img/modules/profile_info_general1.svg"' alt=""/>
                                 </li>
                                 <li class="col-20 gutter-5">
-                                    <span>{{ $translate.text('sigeturbo.code') | uppercase }}</span>
+                                    <span>{{ $translate.text('sigeturbo.code') | uppercase }} *</span>
                                     <input type="text" v-model="preregistration.iduser"
                                            :placeholder="$translate.text('sigeturbo.code_title') | capitalize" required
                                            readonly>
                                 </li>
                                 <li class="col-40 gutter-5">
-                                    <span>{{ $translate.text('sigeturbo.lastname') | uppercase }}</span>
+                                    <span>{{ $translate.text('sigeturbo.lastname') | uppercase }} *</span>
                                     <input type="text" v-model="preregistration.lastname"
                                            :placeholder="$translate.text('sigeturbo.lastname') | capitalize" required>
                                 </li>
                                 <li class="col-40 gutter-5">
-                                    <span>{{ $translate.text('sigeturbo.firstname') | uppercase }}</span>
+                                    <span>{{ $translate.text('sigeturbo.firstname') | uppercase }} *</span>
                                     <input type="text" v-model="preregistration.firstname"
                                            :placeholder="$translate.text('sigeturbo.firstname') | capitalize" required>
                                 </li>
@@ -79,7 +79,7 @@
                                     <img :src='assets+ "/img/modules/profile_info_general1.svg"' alt=""/>
                                 </li>
                                 <li class="col-25 gutter-5">
-                                    <span>{{ $translate.text('sigeturbo.identification_type') | uppercase }}</span>
+                                    <span>{{ $translate.text('sigeturbo.identification_type') | uppercase }} *</span>
                                     <select v-model="preregistration.ididentificationtype">
                                         <option :value="identificationtype.ididentificationtype"
                                                 v-for="identificationtype in identificationtypes">{{
@@ -88,14 +88,14 @@
                                     </select>
                                 </li>
                                 <li class="col-25 gutter-5">
-                                    <span>{{ $translate.text('sigeturbo.identification') | uppercase }}</span>
+                                    <span>{{ $translate.text('sigeturbo.identification') | uppercase }} *</span>
                                     <input type="text"
                                            v-model="preregistration.identification"
                                            :placeholder="$translate.text('sigeturbo.identification') | uppercase"
                                            required/>
                                 </li>
                                 <li class="col-25 gutter-5">
-                                    <span>{{ $translate.text('sigeturbo.expedition') | uppercase }}</span>
+                                    <span>{{ $translate.text('sigeturbo.expedition') | uppercase }} *</span>
                                     <input type="text"
                                            v-model="preregistration.expedition"
                                            :placeholder="$translate.text('sigeturbo.expedition') | uppercase"

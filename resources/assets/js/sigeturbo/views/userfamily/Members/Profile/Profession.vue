@@ -6,7 +6,7 @@
             </div>
             <section class="sige-wizard-container padding-30">
                 <header>
-                    <h4>{{ $translate.text('sigeturbo.general') | uppercase }}</h4>
+                    <h4>{{ $translate.text('sigeturbo.profession') | uppercase }}</h4>
                 </header>
                 <section class="body">
                     <form @submit="updateProfileProfession($event)">

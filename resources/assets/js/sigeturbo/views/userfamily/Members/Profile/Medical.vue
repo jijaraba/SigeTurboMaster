@@ -6,7 +6,7 @@
             </div>
             <section class="sige-wizard-container padding-30">
                 <header>
-                    <h4>{{ $translate.text('sigeturbo.general') | uppercase }}</h4>
+                    <h4>{{ $translate.text('sigeturbo.medical') | uppercase }}</h4>
                 </header>
                 <section class="body">
                     <form @submit="updateProfileMedical($event)">
@@ -347,7 +347,7 @@
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
                                             <span class="col-90">
-                                                Especificar el <strong>Tipo de Identificación, El Número y el Lugar de Expedición</strong> del documento del usuario
+                                                Confirmar la actualización de la <strong>información médica</strong> del estudiante en nuestro sistema de informacuón (SigeTurbo). Si la información está completa por favor proceder a dar clic en el botón guardar
                                             </span>
                                         </div>
                                     </section>

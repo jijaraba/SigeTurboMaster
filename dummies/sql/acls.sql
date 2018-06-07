@@ -450,7 +450,7 @@ INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.weeklyevaluations.store', 'Admin,Academic,Principal,Teacher', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.weeklyevaluations.update', 'Admin,Academic,Principal,Teacher', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.years.getcurrentyear','Admin,Teacher,Academic,Principal,RRHH,Discipline,Counseling,AreaManager,HomeroomTeacher,Admission,Assistant,Resources',NOW(),NOW());
-INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.years.getcurrentpreregistration','Admin,Teacher,Academic,Principal,RRHH,Discipline,Counseling,AreaManager,HomeroomTeacher,Admission,Assistant,Resources',NOW(),NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.years.getcurrentpreregistration','Admin,Teacher,Academic,Principal,RRHH,Discipline,Counseling,AreaManager,HomeroomTeacher,Admission,Assistant,Resources,Parents',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.years.index','Admin,Teacher,Academic,Principal,RRHH,Discipline,Counseling,AreaManager,HomeroomTeacher,Admission,Treasurer,Account,Assistant,Librarian,Nurse,Resources',NOW(),NOW());
 
 /*####

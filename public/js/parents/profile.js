@@ -24532,7 +24532,7 @@ var render = function() {
                 _vm._v(
                   _vm._s(
                     _vm._f("uppercase")(
-                      _vm.$translate.text("sigeturbo.general")
+                      _vm.$translate.text("sigeturbo.profession")
                     )
                   )
                 )
@@ -26046,7 +26046,7 @@ var render = function() {
                                 _vm._f("uppercase")(
                                   _vm.$translate.text("sigeturbo.code")
                                 )
-                              )
+                              ) + " *"
                             )
                           ]),
                           _vm._v(" "),
@@ -26090,7 +26090,7 @@ var render = function() {
                                 _vm._f("uppercase")(
                                   _vm.$translate.text("sigeturbo.lastname")
                                 )
-                              )
+                              ) + " *"
                             )
                           ]),
                           _vm._v(" "),
@@ -26133,7 +26133,7 @@ var render = function() {
                                 _vm._f("uppercase")(
                                   _vm.$translate.text("sigeturbo.firstname")
                                 )
-                              )
+                              ) + " *"
                             )
                           ]),
                           _vm._v(" "),
@@ -26243,7 +26243,7 @@ var render = function() {
                                     "sigeturbo.identification_type"
                                   )
                                 )
-                              )
+                              ) + " *"
                             )
                           ]),
                           _vm._v(" "),
@@ -26312,7 +26312,7 @@ var render = function() {
                                     "sigeturbo.identification"
                                   )
                                 )
-                              )
+                              ) + " *"
                             )
                           ]),
                           _vm._v(" "),
@@ -26357,7 +26357,7 @@ var render = function() {
                                 _vm._f("uppercase")(
                                   _vm.$translate.text("sigeturbo.expedition")
                                 )
-                              )
+                              ) + " *"
                             )
                           ]),
                           _vm._v(" "),
@@ -27628,7 +27628,7 @@ var render = function() {
                 _vm._v(
                   _vm._s(
                     _vm._f("uppercase")(
-                      _vm.$translate.text("sigeturbo.general")
+                      _vm.$translate.text("sigeturbo.medical")
                     )
                   )
                 )
@@ -29689,13 +29689,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("span", { staticClass: "col-90" }, [
           _vm._v(
-            "\n                                            Especificar el "
+            "\n                                            Confirmar la actualización de la "
           ),
-          _c("strong", [
-            _vm._v("Tipo de Identificación, El Número y el Lugar de Expedición")
-          ]),
+          _c("strong", [_vm._v("información médica")]),
           _vm._v(
-            " del documento del usuario\n                                        "
+            " del estudiante en nuestro sistema de informacuón (SigeTurbo). Si la información está completa por favor proceder a dar clic en el botón guardar\n                                        "
           )
         ])
       ])
