@@ -207,12 +207,15 @@ class EnrollmentRepository implements EnrollmentRepositoryInterface
     /**
      * Get Latest Enrollment By Student
      * @param $student
+     * @param null $year
      * @return mixed
      */
-    public function getEnrollmentsLatestByStudent($student)
+    public function getEnrollmentsLatestByStudent($student, $year = null)
     {
         //Current Year
-        $year = YearRepository::getCurrentYear()->idyear;
+        if (is_null($year)) {
+            $year = YearRepository::getCurrentYear()->idyear;
+        }
 
         return Enrollment::select('users.iduser', 'users.firstname', 'users.lastname', 'users.photo', 'groups.idgroup', 'groups.name AS group', 'grades.idgrade', 'grades.name AS grade', 'enrollments.scholarship', 'users.idgender')
             ->join('users', function ($join) {

@@ -583,7 +583,7 @@ class PaymentsController extends Controller
         if (isset($year->idyear)) {
 
             //Get Latest Enrollment With Grade
-            $enrollment = $this->enrollmentRepository->getEnrollmentsLatestByStudent($request['user']);
+            $enrollment = $this->enrollmentRepository->getEnrollmentsLatestByStudent($request['user'], $year->idyear);
 
             //Costs
             $costs = $this->costRepository->getCostsByPackage($year->idyear, $enrollment->idgrade, Concepttype::ENROLLMENT, 2);
