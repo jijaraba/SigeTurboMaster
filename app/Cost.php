@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cost extends Model
 {
     protected $primaryKey = 'idcost';
-    protected $fillable = ['idyear', 'idgrade', 'enrollment', 'enrollment_expired', 'pension_discount', 'pension_normal', 'pension_expired', 'created_by', 'updated_by'];
+    protected $fillable = ['idyear', 'idgrade', 'idconcepttype', 'idaccounttype', 'idtransactiontype', 'value', 'created_by', 'updated_by'];
     protected $hidden = ['created_at', 'updated_at'];
     /**
      * Table Name
@@ -22,6 +22,7 @@ class Cost extends Model
     {
         return $this->belongsTo('SigeTurbo\Year');
     }
+
     /**
      * @return mixed
      */
@@ -29,4 +30,29 @@ class Cost extends Model
     {
         return $this->belongsTo('SigeTurbo\Grade');
     }
+
+    /**
+     * @return mixed
+     */
+    public function concepttype()
+    {
+        return $this->belongsTo('SigeTurbo\Concepttype');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function accounttype()
+    {
+        return $this->belongsTo('SigeTurbo\Accounttype');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function transactiontype()
+    {
+        return $this->belongsTo('SigeTurbo\Transactiontype');
+    }
+
 }

@@ -41,7 +41,7 @@
                                 </li>
                                 <li class="col-25 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.blood_type') | uppercase }}</span>
-                                    <select v-model="preregistration.idbloodtype">
+                                    <select v-model="preregistration.idbloodtype" required>
                                         <option :value="bloodtype.idbloodtype" v-for="bloodtype in bloodtypes">{{
                                             bloodtype.name }}
                                         </option>
@@ -120,7 +120,7 @@
                                 </li>
                                 <li class="col-30 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.medical_treatment') | uppercase }}</span>
-                                    <select name="medicaltreatment" v-model="preregistration.medicaltreatment">
+                                    <select name="medicaltreatment" v-model="preregistration.medicaltreatment" required>
                                         <option value="N">{{ $translate.text('sigeturbo.no') | capitalize }}</option>
                                         <option value="Y">{{ $translate.text('sigeturbo.yes') | capitalize }}</option>
                                     </select>
@@ -135,7 +135,7 @@
                                 <li class="col-30 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.equal_treatment') | uppercase }}</span>
                                     <select name="equaltreatment"
-                                            v-model="preregistration.equaltreatment">
+                                            v-model="preregistration.equaltreatment" required>
                                         <option value="N">{{ $translate.text('sigeturbo.no') | capitalize }}</option>
                                         <option value="Y">{{ $translate.text('sigeturbo.yes') | capitalize }}</option>
                                     </select>
@@ -167,7 +167,7 @@
                                 <li class="col-30 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.take_medication') | uppercase }}</span>
                                     <select name="takemedication"
-                                            v-model="preregistration.takemedication">
+                                            v-model="preregistration.takemedication" required>
                                         <option value="N">{{ $translate.text('sigeturbo.no') | capitalize }}</option>
                                         <option value="Y">{{ $translate.text('sigeturbo.yes') | capitalize }}</option>
                                     </select>
@@ -216,7 +216,7 @@
                                 </li>
                                 <li class="col-20 gutter-5" id="isallergic_container">
                                     <span>{{ $translate.text('sigeturbo.is_allergic') | uppercase }}</span>
-                                    <select name="isallergic" v-model="preregistration.isallergic">
+                                    <select name="isallergic" v-model="preregistration.isallergic" required>
                                         <option value="N">{{ $translate.text('sigeturbo.no') | capitalize }}</option>
                                         <option value="Y">{{ $translate.text('sigeturbo.yes') | capitalize }}</option>
                                     </select>
@@ -238,7 +238,7 @@
                             <legend>{{ $translate.text('sigeturbo.step') | uppercase }} 6</legend>
                             <ul class="display-horizontal col-100">
                                 <li class="col-100 gutter-5">
-                                    <h4>{{ $translate.text('sigeturbo.is_allergic') | uppercase }}</h4>
+                                    <h4>{{ $translate.text('sigeturbo.suffered_illness') | uppercase }}</h4>
                                     <section class="info_generic aquamarine">
                                         <div>
                                             <i class="fas fa-info-circle fa-2x" style="color:white"></i>
@@ -254,7 +254,7 @@
                                 <li class="col-40 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.suffered_illness') | uppercase }}</span>
                                     <select name="sufferedillness"
-                                            v-model="preregistration.sufferedillness">
+                                            v-model="preregistration.sufferedillness" required>
                                         <option value="N">{{ $translate.text('sigeturbo.no') | capitalize }}</option>
                                         <option value="Y">{{ $translate.text('sigeturbo.yes') | capitalize }}</option>
                                     </select>
@@ -327,7 +327,7 @@
                                 <li class="col-100 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.psychological_support') | uppercase }}</span>
                                     <select name="psychologicalsupport"
-                                            v-model="preregistration.psychologicalsupport">
+                                            v-model="preregistration.psychologicalsupport" required>
                                         <option value="N">{{ $translate.text('sigeturbo.no') | capitalize }}</option>
                                         <option value="Y">{{ $translate.text('sigeturbo.yes') | capitalize }}</option>
                                     </select>

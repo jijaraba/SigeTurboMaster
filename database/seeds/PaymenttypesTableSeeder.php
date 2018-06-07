@@ -14,9 +14,11 @@ class PaymenttypesTableSeeder extends Seeder
     public function run()
     {
         DB::table('paymenttypes')->delete();
+        Paymenttype::create(array('name' => 'Indefinido'));
         Paymenttype::create(array('name' => 'Matrícula'));
         Paymenttype::create(array('name' => 'Pensión'));
         Paymenttype::create(array('name' => 'Extracurricular'));
         Paymenttype::create(array('name' => 'Nivelaciones'));
+        Paymenttype::create(array('name' => 'Validación'));
     }
 }

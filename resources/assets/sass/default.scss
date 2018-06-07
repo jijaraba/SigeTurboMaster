@@ -1950,11 +1950,14 @@ footer {
   font: {
     size: 1em !important;
   }
-  input[type="text"], input[type="email"], input[type="number"]  {
+  input[type="text"], input[type="email"], input[type="number"] {
     background: white !important;
   }
   input[readonly="readonly"] {
     color: $sige-global-color-01;
+  }
+  input[required], select[required], textarea[required] {
+    border-color: rgba($sige-border-color-04,0.6);
   }
   select {
     background: white !important;

@@ -80,7 +80,7 @@
                                 </li>
                                 <li class="col-25 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.identification_type') | uppercase }} *</span>
-                                    <select v-model="preregistration.ididentificationtype">
+                                    <select v-model="preregistration.ididentificationtype" required>
                                         <option :value="identificationtype.ididentificationtype"
                                                 v-for="identificationtype in identificationtypes">{{
                                             identificationtype.name }}
@@ -126,7 +126,7 @@
                                 </li>
                                 <li class="col-25 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.religion') | uppercase }}</span>
-                                    <select v-model="preregistration.idreligion">
+                                    <select v-model="preregistration.idreligion" required>
                                         <option :value="religion.idreligion"
                                                 v-for="religion in religions">{{
                                             religion.name }}

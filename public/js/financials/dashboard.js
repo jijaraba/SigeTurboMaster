@@ -47945,15 +47945,19 @@ function assets() {
 
 function paymentType(type) {
     if (type === 1) {
-        return 'MATRÍCULA';
+        return 'INDEFINIDO';
     } else if (type === 2) {
-        return 'PENSIÓN';
+        return 'MATRÍCULA';
     } else if (type === 3) {
-        return 'EXTRACURRICULAR';
-    } else if (type === 4) {
-        return 'NIVELACIÓN';
-    } else {
         return 'PENSIÓN';
+    } else if (type === 4) {
+        return 'EXTRACURRICULAR';
+    } else if (type === 5) {
+        return 'NIVELACIÓN';
+    } else if (type === 6) {
+        return 'VALIDACIÓN';
+    } else {
+        return 'OTROS';
     }
 }
 

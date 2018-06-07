@@ -25268,7 +25268,7 @@ var render = function() {
                             attrs: {
                               src:
                                 _vm.assets +
-                                "/img/modules/profile_info_health_welcome.svg",
+                                "/img/modules/profile_info_additional_welcome.svg",
                               alt: ""
                             }
                           })
@@ -25333,7 +25333,7 @@ var render = function() {
                             attrs: {
                               src:
                                 _vm.assets +
-                                "/img/modules/profile_info_health.svg",
+                                "/img/modules/profile_info_additional.svg",
                               alt: ""
                             }
                           })
@@ -25366,7 +25366,7 @@ var render = function() {
                               ],
                               attrs: {
                                 name: "educationaloutput",
-                                required: "yes"
+                                required: ""
                               },
                               on: {
                                 change: function($event) {
@@ -25470,7 +25470,7 @@ var render = function() {
                             attrs: {
                               src:
                                 _vm.assets +
-                                "/img/modules/profile_info_health.svg",
+                                "/img/modules/profile_info_additional.svg",
                               alt: ""
                             }
                           })
@@ -25500,7 +25500,8 @@ var render = function() {
                               type: "text",
                               placeholder: _vm._f("uppercase")(
                                 _vm.$translate.text("sigeturbo.responsible")
-                              )
+                              ),
+                              required: ""
                             },
                             domProps: {
                               value: _vm.preregistration.responsible
@@ -25579,7 +25580,7 @@ var render = function() {
                             attrs: {
                               src:
                                 _vm.assets +
-                                "/img/modules/profile_info_health.svg",
+                                "/img/modules/profile_info_additional.svg",
                               alt: ""
                             }
                           })
@@ -25691,7 +25692,7 @@ var render = function() {
                             attrs: {
                               src:
                                 _vm.assets +
-                                "/img/modules/profile_info_health.svg",
+                                "/img/modules/profile_info_additional.svg",
                               alt: ""
                             }
                           })
@@ -26260,6 +26261,7 @@ var render = function() {
                                     "preregistration.ididentificationtype"
                                 }
                               ],
+                              attrs: { required: "" },
                               on: {
                                 change: function($event) {
                                   var $$selectedVal = Array.prototype.filter
@@ -26478,6 +26480,7 @@ var render = function() {
                                   expression: "preregistration.idreligion"
                                 }
                               ],
+                              attrs: { required: "" },
                               on: {
                                 change: function($event) {
                                   var $$selectedVal = Array.prototype.filter
@@ -27752,6 +27755,7 @@ var render = function() {
                                   expression: "preregistration.idbloodtype"
                                 }
                               ],
+                              attrs: { required: "" },
                               on: {
                                 change: function($event) {
                                   var $$selectedVal = Array.prototype.filter
@@ -28122,7 +28126,7 @@ var render = function() {
                                   expression: "preregistration.medicaltreatment"
                                 }
                               ],
-                              attrs: { name: "medicaltreatment" },
+                              attrs: { name: "medicaltreatment", required: "" },
                               on: {
                                 change: function($event) {
                                   var $$selectedVal = Array.prototype.filter
@@ -28249,7 +28253,7 @@ var render = function() {
                                   expression: "preregistration.equaltreatment"
                                 }
                               ],
-                              attrs: { name: "equaltreatment" },
+                              attrs: { name: "equaltreatment", required: "" },
                               on: {
                                 change: function($event) {
                                   var $$selectedVal = Array.prototype.filter
@@ -28384,7 +28388,7 @@ var render = function() {
                                   expression: "preregistration.takemedication"
                                 }
                               ],
-                              attrs: { name: "takemedication" },
+                              attrs: { name: "takemedication", required: "" },
                               on: {
                                 change: function($event) {
                                   var $$selectedVal = Array.prototype.filter
@@ -28670,7 +28674,7 @@ var render = function() {
                                     expression: "preregistration.isallergic"
                                   }
                                 ],
-                                attrs: { name: "isallergic" },
+                                attrs: { name: "isallergic", required: "" },
                                 on: {
                                   change: function($event) {
                                     var $$selectedVal = Array.prototype.filter
@@ -28814,7 +28818,9 @@ var render = function() {
                             _vm._v(
                               _vm._s(
                                 _vm._f("uppercase")(
-                                  _vm.$translate.text("sigeturbo.is_allergic")
+                                  _vm.$translate.text(
+                                    "sigeturbo.suffered_illness"
+                                  )
                                 )
                               )
                             )
@@ -28858,7 +28864,7 @@ var render = function() {
                                   expression: "preregistration.sufferedillness"
                                 }
                               ],
-                              attrs: { name: "sufferedillness" },
+                              attrs: { name: "sufferedillness", required: "" },
                               on: {
                                 change: function($event) {
                                   var $$selectedVal = Array.prototype.filter
@@ -29201,7 +29207,10 @@ var render = function() {
                                     "preregistration.psychologicalsupport"
                                 }
                               ],
-                              attrs: { name: "psychologicalsupport" },
+                              attrs: {
+                                name: "psychologicalsupport",
+                                required: ""
+                              },
                               on: {
                                 change: function($event) {
                                   var $$selectedVal = Array.prototype.filter

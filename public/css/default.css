@@ -4807,6 +4807,12 @@ footer .sige-footer-content {
   color: #657380;
 }
 
+.sige-wizard-container input[required],
+.sige-wizard-container select[required],
+.sige-wizard-container textarea[required] {
+  border-color: rgba(69, 175, 168, 0.6);
+}
+
 .sige-wizard-container select {
   background: white !important;
 }

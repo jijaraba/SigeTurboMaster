@@ -14,7 +14,7 @@
                             <legend>Welcome</legend>
                             <ul class="display-horizontal col-100">
                                 <li>
-                                    <img :src='assets+ "/img/modules/profile_info_health_welcome.svg"' alt=""/>
+                                    <img :src='assets+ "/img/modules/profile_info_additional_welcome.svg"' alt=""/>
                                 </li>
                                 <li class="col-100">
                                     <input @click="setStep(1)" class="btn btn-aquamarine" type="button"
@@ -37,12 +37,12 @@
                                     </section>
                                 </li>
                                 <li class="col-100 gutter-5 icon">
-                                    <img :src='assets+ "/img/modules/profile_info_health.svg"' alt=""/>
+                                    <img :src='assets+ "/img/modules/profile_info_additional.svg"' alt=""/>
                                 </li>
                                 <li class="col-100 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.educational_output') | uppercase }}</span>
                                     <select name="educationaloutput"
-                                            v-model="preregistration.educationaloutput" required="yes">
+                                            v-model="preregistration.educationaloutput" required>
                                         <option value="Y">{{ $translate.text('sigeturbo.yes') | capitalize }}</option>
                                         <option value="N">{{ $translate.text('sigeturbo.no') | capitalize }}</option>
                                     </select>
@@ -68,13 +68,13 @@
                                     </section>
                                 </li>
                                 <li class="col-100 gutter-5 icon">
-                                    <img :src='assets+ "/img/modules/profile_info_health.svg"' alt=""/>
+                                    <img :src='assets+ "/img/modules/profile_info_additional.svg"' alt=""/>
                                 </li>
                                 <li class="col-100 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.responsible') | uppercase }}</span>
                                     <input type="text"
                                            v-model="preregistration.responsible"
-                                           :placeholder="$translate.text('sigeturbo.responsible') | uppercase"/>
+                                           :placeholder="$translate.text('sigeturbo.responsible') | uppercase" required/>
                                 </li>
                                 <li class="col-100">
                                     <input @click="setStep(3)" class="btn btn-aquamarine" type="button"
@@ -97,7 +97,7 @@
                                     </section>
                                 </li>
                                 <li class="col-100 gutter-5 icon">
-                                    <img :src='assets+ "/img/modules/profile_info_health.svg"' alt=""/>
+                                    <img :src='assets+ "/img/modules/profile_info_additional.svg"' alt=""/>
                                 </li>
                                 <li class="col-100 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.observation_additional') | uppercase }}</span>
@@ -126,7 +126,7 @@
                                     </section>
                                 </li>
                                 <li class="col-100 gutter-5 icon">
-                                    <img :src='assets+ "/img/modules/profile_info_health.svg"' alt=""/>
+                                    <img :src='assets+ "/img/modules/profile_info_additional.svg"' alt=""/>
                                 </li>
                                 <li class="col-100">
                                     <input class="btn btn-aquamarine" type="submit"

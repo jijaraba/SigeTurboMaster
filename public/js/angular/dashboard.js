@@ -69260,19 +69260,25 @@ angular.module('Core.filters', []).filter('size', function () {
     return function (type) {
         switch (type) {
             case 1:
-                return 'MATRÍCULA';
+                return 'INDEFINIDO';
                 break;
             case 2:
-                return 'PENSIÓN';
+                return 'MATRÍCULA';
                 break;
             case 3:
-                return 'EXTRACURRICULAR';
+                return 'PENSIÓN';
                 break;
             case 4:
+                return 'EXTRACURRICULAR';
+                break;
+            case 5:
                 return 'NIVELACIÓN';
                 break;
+            case 6:
+                return 'VALIDACIÓN';
+                break;
             default:
-                return 'PENSIÓN';
+                return 'OTROS';
         }
     };
 }]).filter('scale', function () {

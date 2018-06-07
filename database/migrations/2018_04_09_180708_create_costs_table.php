@@ -19,6 +19,7 @@ class CreateCostsTable extends Migration
             $table->integer('idgrade')->unsigned();
             $table->integer('idconcepttype')->unsigned();
             $table->integer('idaccounttype')->unsigned();
+            $table->integer('idtransactiontype')->unsigned();
             $table->double('value', 15, 2);
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
@@ -41,6 +42,11 @@ class CreateCostsTable extends Migration
             $table->foreign('idaccounttype')
                 ->references('idaccounttype')
                 ->on('accounttypes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('idtransactiontype')
+                ->references('idtransactiontype')
+                ->on('transactiontypes')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
