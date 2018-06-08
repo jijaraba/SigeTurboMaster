@@ -43,12 +43,12 @@
         <li class="col-05 reentry">
             <input id="reentry{{enrollment.idenrollment}}" name="reentry{{enrollment.idenrollment}}" type="checkbox"
                    ng-model="enrollment.reentry" ng-value="enrollment.reentry">
-            <label for="reentry{{enrollment.idenrollment}}">
+            <label class="tooltip" title="¿Reingreso?"  for="reentry{{enrollment.idenrollment}}">
                 <i class="fa fa-retweet fa-1x" ></i>
             </label>
         </li>
         <li class="col-07 expand">
-            <a ng-click="showItemsExtended()">
+            <a class="tooltip" title="Mostrar más opciones"  ng-click="showItemsExtended()">
                 {{ showItemsTitle }}
             </a>
         </li>
