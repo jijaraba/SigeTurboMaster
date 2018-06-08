@@ -11,11 +11,10 @@
                 <section class="payments">
                     <div class="payment-title" @click="showPayment()">
                         <span>{{ payment.concept2 }}</span>
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </div>
                     <section class="transactions" :id='"show_payment_"'>
-                        <!--<sige-turbo-financials-transactions load="load"
-                                                            payment="payment"></sige-turbo-financials-transactions>-->
+                        <sigeturbo-financials-transactions-show load="load"
+                                                           payment="payment"></sigeturbo-financials-transactions-show>
                     </section>
                 </section>
             </section>
@@ -24,6 +23,8 @@
 </template>
 <script>
 
+    import FinancialTransactionsShow from '../Transaction/Show';
+
     export default {
 
         props: [
@@ -31,12 +32,14 @@
             'showReceipt'
         ],
         filters: {},
-        components: {},
+        components: {
+            'sigeturbo-financials-transactions': FinancialTransactionsShow
+        },
         data: function () {
             return {}
         },
         methods: {
-            closeReceipt(){
+            closeReceipt() {
                 this.$emit('close', false)
             }
         },

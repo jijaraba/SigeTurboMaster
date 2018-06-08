@@ -88,69 +88,70 @@
                 </li>
                 @can('view',\SigeTurbo\Admission::class)
                     <li id="admissions" class="sige-nav-module {{ setCurrentModule('admissions') }}">
-                        <a href="{{ URL::route('admissions.dashboard') }}" title="{{ Lang::get('sige.Admissions') }}"
+                        <a class="tooltip" href="{{ URL::route('admissions.dashboard') }}"
                            data-title="{{ Lang::get('sige.Admissions') }}">
                             @if(setCurrentModule('admissions') == 'current')
-                                {!! HTML::image('images/modules/admissions_active.svg',Lang::get('sige.Admissions')) !!}
+                                {!! HTML::image('images/modules/admissions_active.svg',Lang::get('sige.Admissions'),['class' => 'tooltip','title'=>Lang::get('sige.Admissions')]) !!}
                             @else
-                                {!! HTML::image('images/modules/admissions.svg',Lang::get('sige.Admissions')) !!}
+                                {!! HTML::image('images/modules/admissions.svg',Lang::get('sige.Admissions'),['class' => 'tooltip','title'=>Lang::get('sige.Admissions')]) !!}
                             @endif
                             <span>{{ Lang::get('sige.Admissions') }}</span>
                         </a>
                     </li>
                 @endcan
                 @can('view',\SigeTurbo\Financial::class)
-                <li id="financials" class="sige-nav-module {{ setCurrentModule('financials') }}">
-                    <a href="{{ URL::route('financials.dashboard') }}" title="{{ Lang::get('sige.Financials') }}"
-                       data-title="{{ Lang::get('sige.Financials') }}">
-                        @if(setCurrentModule('financials') == 'current')
-                            {!! HTML::image('images/modules/financials_active.svg',Lang::get('sige.Financials')) !!}
-                        @else
-                            {!! HTML::image('images/modules/financials.svg',Lang::get('sige.financials')) !!}
-                        @endif
-                        <span>{{ Lang::get('sige.Financials') }}</span>
-                    </a>
-                </li>
+                    <li id="financials" class="sige-nav-module {{ setCurrentModule('financials') }}">
+                        <a class="tooltip" href="{{ URL::route('financials.dashboard') }}"
+                           data-title="{{ Lang::get('sige.Financials') }}">
+                            @if(setCurrentModule('financials') == 'current')
+                                {!! HTML::image('images/modules/financials_active.svg',Lang::get('sige.Financials'),['class' => 'tooltip','title'=>Lang::get('sige.Financials')]) !!}
+                            @else
+                                {!! HTML::image('images/modules/financials.svg',Lang::get('sige.financials'),['class' => 'tooltip','title'=>Lang::get('sige.Financials')]) !!}
+                            @endif
+                            <span>{{ Lang::get('sige.Financials') }}</span>
+                        </a>
+                    </li>
                 @endcan
                 @can('view',\SigeTurbo\Formation::class)
-                <li id="formation" class="sige-nav-module {{ setCurrentModule('formation') }}"
-                    title="{{ Lang::get('sige.Formation') }}" data-title="{{ Lang::get('sige.Formation') }}">
-                    <a href="{{ URL::route('formation.dashboard') }}">
-                        @if(setCurrentModule('formation') == 'current')
-                            {!! HTML::image('images/modules/formation_active.svg',Lang::get('sige.Formation')) !!}
-                        @else
-                            {!! HTML::image('images/modules/formation.svg',Lang::get('sige.Formation')) !!}
-                        @endif
-                        <span>{{ Lang::get('sige.Formation') }}</span>
-                    </a>
-                </li>
+                    <li id="formation" class="sige-nav-module {{ setCurrentModule('formation') }}"
+                        data-title="{{ Lang::get('sige.Formation') }}">
+                        <a class="tooltip" href="{{ URL::route('formation.dashboard') }}">
+                            @if(setCurrentModule('formation') == 'current')
+                                {!! HTML::image('images/modules/formation_active.svg',Lang::get('sige.Formation'),['class' => 'tooltip','title'=>Lang::get('sige.Formation')]) !!}
+                            @else
+                                {!! HTML::image('images/modules/formation.svg',Lang::get('sige.Formation'),['class' => 'tooltip','title'=>Lang::get('sige.Formation')]) !!}
+                            @endif
+                            <span>{{ Lang::get('sige.Formation') }}</span>
+                        </a>
+                    </li>
                 @endcan
                 @can('view',\SigeTurbo\Communication::class)
-                <li id="communications" class="sige-nav-module {{ setCurrentModule('communications') }}"
-                    title="{{ Lang::get('sige.Communications') }}" data-title="{{ Lang::get('sige.Communications') }}">
-                    <a href="{{ URL::route('communications.dashboard') }}">
-                        @if(setCurrentModule('communications') == 'current')
-                            {!! HTML::image('images/modules/communications_active.svg',Lang::get('sige.Communications')) !!}
-                        @else
-                            {!! HTML::image('images/modules/communications.svg',Lang::get('sige.Communications')) !!}
-                        @endif
-                        <span>{{ Lang::get('sige.Communications') }}</span>
-                    </a>
-                    <em>New</em>
-                </li>
+                    <li id="communications" class="sige-nav-module {{ setCurrentModule('communications') }}"
+                        data-title="{{ Lang::get('sige.Communications') }}">
+                        <a href="{{ URL::route('communications.dashboard') }}">
+                            @if(setCurrentModule('communications') == 'current')
+                                {!! HTML::image('images/modules/communications_active.svg',Lang::get('sige.Communications'),['class' => 'tooltip','title'=>Lang::get('sige.Communications')]) !!}
+                            @else
+                                {!! HTML::image('images/modules/communications.svg',Lang::get('sige.Communications'),['class' => 'tooltip','title'=>Lang::get('sige.Communications')]) !!}
+                            @endif
+                            <span>{{ Lang::get('sige.Communications') }}</span>
+                        </a>
+                        <em>New</em>
+                    </li>
                 @endcan
                 @can('view',\SigeTurbo\Parents::class)
-                <li id="parents" class="sige-nav-module {{ setCurrentModule('parents') }}"
-                    title="{{ Lang::get('sige.Parents') }}" data-title="{{ Lang::get('sige.Parents') }}">
-                    <a href="{{ URL::route('parents.dashboard') }}">
-                        @if(setCurrentModule('parents') == 'current')
-                            {!! HTML::image('images/modules/parents_active.svg',Lang::get('sige.Parents')) !!}
-                        @else
-                            {!! HTML::image('images/modules/parents.svg',Lang::get('sige.Parents')) !!}
-                        @endif
-                        <span>{{ Lang::get('sige.Parents') }}</span>
-                    </a>
-                </li>
+                    <li id="parents" class="sige-nav-module {{ setCurrentModule('parents') }}"
+                        data-title="{{ Lang::get('sige.Parents') }}">
+                        <a href="{{ URL::route('parents.dashboard') }}"
+                           title="{{ Lang::get('sige.Parents') }}">
+                            @if(setCurrentModule('parents') == 'current')
+                                {!! HTML::image('images/modules/parents_active.svg',Lang::get('sige.Parents'),['class' => 'tooltip','title'=>Lang::get('sige.Parents')]) !!}
+                            @else
+                                {!! HTML::image('images/modules/parents.svg',Lang::get('sige.Parents'),['class' => 'tooltip','title'=>Lang::get('sige.Parents')]) !!}
+                            @endif
+                            <span>{{ Lang::get('sige.Parents') }}</span>
+                        </a>
+                    </li>
                 @endcan
                 <li id="roles" class="sige-nav-module {{ setCurrentModule('roles') }}"
                     title="{{ Lang::get('sige.Role') }}"

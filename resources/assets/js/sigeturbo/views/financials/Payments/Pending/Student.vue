@@ -11,7 +11,7 @@
 
 <script>
 
-    import Payment from "../../../models/Payment";
+    import Payment from "../../../../models/Payment";
 
     export default {
 

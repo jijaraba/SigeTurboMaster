@@ -43,7 +43,9 @@
         <li class="col-05 reentry">
             <input id="reentry{{enrollment.idenrollment}}" name="reentry{{enrollment.idenrollment}}" type="checkbox"
                    ng-model="enrollment.reentry" ng-value="enrollment.reentry">
-            <label class="fa fa-retweet" for="reentry{{enrollment.idenrollment}}"></label>
+            <label for="reentry{{enrollment.idenrollment}}">
+                <i class="fa fa-retweet fa-1x" ></i>
+            </label>
         </li>
         <li class="col-07 expand">
             <a ng-click="showItemsExtended()">
@@ -52,7 +54,7 @@
         </li>
         <li class="col-05 edit">
             <button type="submit" class="btn btn-aquamarine">
-                <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                <i class="fa fa-pen-square" aria-hidden="true"></i>
             </button>
         </li>
     </ul>
@@ -68,20 +70,25 @@
                 <li class="col-10 inclusion">
                     <input id="inclusion{{enrollment.idenrollment}}" name="inclusion{{enrollment.idenrollment}}" type="checkbox"
                            ng-model="enrollment.inclusion" ng-value="enrollment.inclusion">
-                    <label class="fa fa-child" for="inclusion{{enrollment.idenrollment}}"></label>
+                    <label for="inclusion{{enrollment.idenrollment}}">
+                        <i  class="fa fa-child fa-1x"></i>
+                    </label>
                 </li>
                 <li class="col-15 fieldtrip-text">¿Aprueba las Salidas Pedagógicas?</li>
                 <li class="col-10 fieldtrip">
                     <input id="fieldtrip{{enrollment.isapprovedyear}}" name="fieldtrip{{enrollment.idenrollment}}" type="checkbox"
                            ng-model="enrollment.fieldtrip" ng-value="enrollment.fieldtrip">
-                    <label class="fa fa-bus" for="fieldtrip{{enrollment.idenrollment}}"></label>
+                    <label for="fieldtrip{{enrollment.isapprovedyear}}">
+                        <i class="fa fa-bus fa-1x"></i>
+                    </label>
                 </li>
                 <li class="col-15 isapprovedyear-text">¿El estudiante aprobó  el año?</li>
                 <li class="col-10 isapprovedyear">
                     <input id="isapprovedyear{{enrollment.isapprovedyear}}" name="isapprovedyear{{enrollment.idenrollment}}" type="checkbox"
                     ng-model="enrollment.isapprovedyear" ng-value="enrollment.isapprovedyear">
-                    <!--<label class="fa fa-calendar-check-o" for="inclusion{{enrollment.idenrollment}}"></label>-->
-                    <label class="fa fa-graduation-cap" for="isapprovedyear{{enrollment.idenrollment}}"></label>
+                    <label for="isapprovedyear{{enrollment.isapprovedyear}}">
+                        <i class="fa fa-graduation-cap fa-1x"></i>
+                    </label>
                 </li>
                 <li class="col-100 gutter-5 observation">
                     <textarea name="observation" id="observation" rows="3" ng-model="enrollment.observation" ng-value="enrollment.observation"></textarea>
@@ -91,7 +98,7 @@
         <li class="col-100">
             <ul class="display-horizontal col-100">
                 <li class="col-100">
-                    <section>{{ enrollment.enrollmentlogs }}</section>
+                    <section></section>
                 </li>
             </ul>
         </li>

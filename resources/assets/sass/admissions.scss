@@ -355,9 +355,10 @@
     }
     .enrollment {
       border-bottom: 1px solid $sige-border-color-03;
+      margin-top: 3px;
       &.inclusion {
         background: rgba($sige-global-bgcolor-07, 0.1);
-        border-radius: 10px;
+        border-radius: 5px;
         input {
           background: white;
         }
@@ -401,7 +402,7 @@
             display: none;
           }
           input[type="checkbox"] + label {
-            line-height: 30px;
+            line-height: 45px;
             width: 100%;
             padding: 5px;
             text-align: center;
@@ -421,7 +422,7 @@
             width: 100%;
             padding: 5px;
             text-align: center;
-            line-height: 30px;
+            line-height: 45px;
             font: {
               size: 1.5em;
             }
@@ -454,6 +455,7 @@
         }
         &.edit {
           > button {
+            margin-top: 5px;
             width: 100%;
             padding: 4px;
             font: {
@@ -478,33 +480,38 @@
       border-radius: 5px;
       li {
         padding: 5px;
-        &.scholarship {
-          input {
-            text-align: center;
-            background: white;
-          }
-        }
         &.observation {
           textarea {
             background: white;
+            border: 1px solid $sige-border-color-03;
           }
         }
         &.scholarship-text {
           margin-top: 5px;
           font: {
             size: 0.9em;
-            family: $sige-font-family-05;
+            family: $sige-font-family-01;
+          }
+        }
+        &.scholarship {
+          input {
+            text-align: center;
+            background: white;
           }
         }
         &.inclusion {
+          text-align: center;
           input[type="checkbox"] {
             display: none;
           }
           input[type="checkbox"] + label {
-            width: 100%;
-            padding: 5px;
-            text-align: center;
-            line-height: 30px;
+            height: 45px;
+            width: 60px;
+            display: block;
+            background: white;
+            border-radius: 3px !important;
+            line-height: 45px;
+            border: 1px solid $sige-border-color-03;
             font: {
               size: 1.5em;
             }
@@ -518,7 +525,65 @@
           margin-top: 5px;
           font: {
             size: 0.9em;
-            family: $sige-font-family-05;
+            family: $sige-font-family-01;
+          }
+        }
+        &.fieldtrip-text {
+          margin-top: 5px;
+          font: {
+            size: 0.9em;
+            family: $sige-font-family-01;
+          }
+        }
+        &.fieldtrip {
+          text-align: center;
+          input[type="checkbox"] {
+            display: none;
+          }
+          input[type="checkbox"] + label {
+            height: 45px;
+            width: 60px;
+            display: block;
+            background: white;
+            border-radius: 3px !important;
+            line-height: 45px;
+            border: 1px solid $sige-border-color-03;
+            font: {
+              size: 1.5em;
+            }
+          }
+          input[type="checkbox"]:checked + label {
+            color: $sige-global-bgcolor-07;
+            border-radius: 50%;
+          }
+        }
+        &.isapprovedyear-text {
+          margin-top: 5px;
+          font: {
+            size: 0.9em;
+            family: $sige-font-family-01;
+          }
+        }
+        &.isapprovedyear {
+          text-align: center;
+          input[type="checkbox"] {
+            display: none;
+          }
+          input[type="checkbox"] + label {
+            height: 45px;
+            width: 60px;
+            display: block;
+            background: white;
+            border-radius: 3px !important;
+            line-height: 45px;
+            border: 1px solid $sige-border-color-03;
+            font: {
+              size: 1.5em;
+            }
+          }
+          input[type="checkbox"]:checked + label {
+            color: $sige-global-bgcolor-07;
+            border-radius: 50%;
           }
         }
         &.new {

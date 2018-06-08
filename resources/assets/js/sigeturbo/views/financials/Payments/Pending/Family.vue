@@ -10,8 +10,8 @@
 
 <script>
 
-    import Payment from "../../../models/Payment";
-    import capitalize from "../../../filters/string/capitalize";
+    import Payment from "../../../../models/Payment";
+    import capitalize from "../../../../filters/string/capitalize";
 
     export default {
 
@@ -19,7 +19,7 @@
             "user"
         ],
         filters: {
-          capitalize: capitalize
+            capitalize: capitalize
         },
         components: {},
         data: function () {

@@ -1,5 +1,5 @@
 <template>
-    <section class="sige-student-lists tooltip" title="Hello">
+    <section class="sige-student-lists">
         <section class="student-list">
             <ul id="student-list">
                 <template v-for="member in members">

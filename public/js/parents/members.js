@@ -22894,86 +22894,80 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    { staticClass: "sige-student-lists tooltip", attrs: { title: "Hello" } },
-    [
-      _c("section", { staticClass: "student-list" }, [
-        _c(
-          "ul",
-          { attrs: { id: "student-list" } },
-          [
-            _vm._l(_vm.members, function(member) {
-              return [
-                _c("li", [
-                  _c(
-                    "a",
-                    {
-                      attrs: {
-                        href: "parents/profile/" + member.token + "/member"
-                      }
-                    },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "student",
-                          attrs: {
-                            id: "student",
-                            "data-student-id": member.iduser
-                          }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "body",
-                              attrs: { id: "student_" + member.iduser }
-                            },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "image normal-background" },
-                                [
-                                  _c("img", {
-                                    staticClass: "tooltip",
-                                    attrs: {
-                                      src:
-                                        _vm.assets +
-                                        "/img/users/" +
-                                        member.photo,
-                                      alt: member.lastname,
-                                      title:
-                                        member.lastname + " " + member.firstname
-                                    }
-                                  })
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "lead" }, [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(member.firstname) +
-                                "\n                            "
+  return _c("section", { staticClass: "sige-student-lists" }, [
+    _c("section", { staticClass: "student-list" }, [
+      _c(
+        "ul",
+        { attrs: { id: "student-list" } },
+        [
+          _vm._l(_vm.members, function(member) {
+            return [
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    attrs: {
+                      href: "parents/profile/" + member.token + "/member"
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "student",
+                        attrs: {
+                          id: "student",
+                          "data-student-id": member.iduser
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "body",
+                            attrs: { id: "student_" + member.iduser }
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "image normal-background" },
+                              [
+                                _c("img", {
+                                  staticClass: "tooltip",
+                                  attrs: {
+                                    src:
+                                      _vm.assets + "/img/users/" + member.photo,
+                                    alt: member.lastname,
+                                    title:
+                                      member.lastname + " " + member.firstname
+                                  }
+                                })
+                              ]
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "clearfix" })
-                        ]
-                      )
-                    ]
-                  )
-                ])
-              ]
-            })
-          ],
-          2
-        )
-      ])
-    ]
-  )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "lead" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(member.firstname) +
+                              "\n                            "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "clearfix" })
+                      ]
+                    )
+                  ]
+                )
+              ])
+            ]
+          })
+        ],
+        2
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

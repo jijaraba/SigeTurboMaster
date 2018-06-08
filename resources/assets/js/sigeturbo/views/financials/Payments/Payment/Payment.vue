@@ -1,5 +1,5 @@
 <template>
-    <section v-bind:class="payment.ispayment" class="tooltip is-payment" :title="payment.concept2">
+    <section v-bind:class="payment.ispayment" class="is-payment" :title="payment.concept2">
         <img v-bind:class="(payment.idbank == 1)?'virtual':'normal'" v-if="payment.approved == 'A'"
              @click="verifyPaymentPending(payment)"
              :src='assets + "/img/modules/payment_approved.svg"'/>
@@ -91,8 +91,6 @@
         },
         watch: {},
         created() {
-
-            console.log(this.assets);
 
             //Config Value By Default
             let dateDiscountPayment = moment(this.payment.date1, 'YYYY-MM-DD').format('YYYY-MM-DD');

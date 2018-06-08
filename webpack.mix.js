@@ -79,12 +79,14 @@ mix
     .styles([
         'bower_components/intro.js/minified/introjs.min.css',
         'bower_components/sweetalert/dist/sweetalert.css',
+        'bower_components/tooltipster/dist/css/tooltipster.bundle.min.css',
         'bower_components/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-shadow.min.css',
         'bower_components/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-light.min.css',
         'bower_components/datepicker/dist/datepicker.css',
         'node_modules/ng-dialog/css/ngDialog.css',
         'node_modules/ng-dialog/css/ngDialog-theme-default.css',
-    ], 'public/css/vendor/vendor.css');
+    ], 'public/css/vendor/vendor.css')
+    .version();
 
 /*
  |--------------------------------------------------------------------------

@@ -2394,6 +2394,11 @@ input[type="radio"]:checked + label {
   font-size: 1em;
 }
 
+.tooltipster-sidetip.tooltipster-shadow.tooltipster-shadow-customized .tooltipster-content {
+  font-size: 0.9em;
+  font-family: "Montserrat Medium", Helvetica Neue, Helvetica, sans-serif;
+}
+
 .sige-help-intro {
   position: fixed;
   bottom: 20px;
@@ -3089,11 +3094,12 @@ a.btn.disabled {
 
 .sige-student-enrollments form .enrollment {
   border-bottom: 1px solid #eee;
+  margin-top: 3px;
 }
 
 .sige-student-enrollments form .enrollment.inclusion {
   background: rgba(92, 184, 96, 0.1);
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .sige-student-enrollments form .enrollment.inclusion input {
@@ -3133,7 +3139,7 @@ a.btn.disabled {
 }
 
 .sige-student-enrollments form .enrollment li.reentry input[type="checkbox"] + label {
-  line-height: 30px;
+  line-height: 45px;
   width: 100%;
   padding: 5px;
   text-align: center;
@@ -3152,7 +3158,7 @@ a.btn.disabled {
   width: 100%;
   padding: 5px;
   text-align: center;
-  line-height: 30px;
+  line-height: 45px;
   font-size: 1.5em;
 }
 
@@ -3180,6 +3186,7 @@ a.btn.disabled {
 }
 
 .sige-student-enrollments form .enrollment li.edit > button {
+  margin-top: 5px;
   width: 100%;
   padding: 4px;
   font-size: 1.6em;
@@ -3201,19 +3208,24 @@ a.btn.disabled {
   padding: 5px;
 }
 
-.sige-student-enrollments form .enrollment-extended li.scholarship input {
-  text-align: center;
-  background: white;
-}
-
 .sige-student-enrollments form .enrollment-extended li.observation textarea {
   background: white;
+  border: 1px solid #eee;
 }
 
 .sige-student-enrollments form .enrollment-extended li.scholarship-text {
   margin-top: 5px;
   font-size: 0.9em;
-  font-family: "Gotham Rounded Light", Helvetica Neue, Helvetica, sans-serif;
+  font-family: "Gotham Rounded Book", Helvetica Neue, Helvetica, sans-serif;
+}
+
+.sige-student-enrollments form .enrollment-extended li.scholarship input {
+  text-align: center;
+  background: white;
+}
+
+.sige-student-enrollments form .enrollment-extended li.inclusion {
+  text-align: center;
 }
 
 .sige-student-enrollments form .enrollment-extended li.inclusion input[type="checkbox"] {
@@ -3221,10 +3233,13 @@ a.btn.disabled {
 }
 
 .sige-student-enrollments form .enrollment-extended li.inclusion input[type="checkbox"] + label {
-  width: 100%;
-  padding: 5px;
-  text-align: center;
-  line-height: 30px;
+  height: 45px;
+  width: 60px;
+  display: block;
+  background: white;
+  border-radius: 3px !important;
+  line-height: 45px;
+  border: 1px solid #eee;
   font-size: 1.5em;
 }
 
@@ -3236,7 +3251,67 @@ a.btn.disabled {
 .sige-student-enrollments form .enrollment-extended li.inclusion-text {
   margin-top: 5px;
   font-size: 0.9em;
-  font-family: "Gotham Rounded Light", Helvetica Neue, Helvetica, sans-serif;
+  font-family: "Gotham Rounded Book", Helvetica Neue, Helvetica, sans-serif;
+}
+
+.sige-student-enrollments form .enrollment-extended li.fieldtrip-text {
+  margin-top: 5px;
+  font-size: 0.9em;
+  font-family: "Gotham Rounded Book", Helvetica Neue, Helvetica, sans-serif;
+}
+
+.sige-student-enrollments form .enrollment-extended li.fieldtrip {
+  text-align: center;
+}
+
+.sige-student-enrollments form .enrollment-extended li.fieldtrip input[type="checkbox"] {
+  display: none;
+}
+
+.sige-student-enrollments form .enrollment-extended li.fieldtrip input[type="checkbox"] + label {
+  height: 45px;
+  width: 60px;
+  display: block;
+  background: white;
+  border-radius: 3px !important;
+  line-height: 45px;
+  border: 1px solid #eee;
+  font-size: 1.5em;
+}
+
+.sige-student-enrollments form .enrollment-extended li.fieldtrip input[type="checkbox"]:checked + label {
+  color: #5cb860;
+  border-radius: 50%;
+}
+
+.sige-student-enrollments form .enrollment-extended li.isapprovedyear-text {
+  margin-top: 5px;
+  font-size: 0.9em;
+  font-family: "Gotham Rounded Book", Helvetica Neue, Helvetica, sans-serif;
+}
+
+.sige-student-enrollments form .enrollment-extended li.isapprovedyear {
+  text-align: center;
+}
+
+.sige-student-enrollments form .enrollment-extended li.isapprovedyear input[type="checkbox"] {
+  display: none;
+}
+
+.sige-student-enrollments form .enrollment-extended li.isapprovedyear input[type="checkbox"] + label {
+  height: 45px;
+  width: 60px;
+  display: block;
+  background: white;
+  border-radius: 3px !important;
+  line-height: 45px;
+  border: 1px solid #eee;
+  font-size: 1.5em;
+}
+
+.sige-student-enrollments form .enrollment-extended li.isapprovedyear input[type="checkbox"]:checked + label {
+  color: #5cb860;
+  border-radius: 50%;
 }
 
 .sige-student-enrollments form .enrollment-extended li.new > button {

@@ -1966,6 +1966,18 @@ input[type="radio"]:checked + label {
   }
 }
 
+
+//Tooltipster
+.tooltipster-sidetip.tooltipster-shadow.tooltipster-shadow-customized .tooltipster-box {
+}
+
+.tooltipster-sidetip.tooltipster-shadow.tooltipster-shadow-customized .tooltipster-content {
+  font: {
+    size: 0.9em;
+    family: $sige-font-family-08;
+  }
+}
+
 //*
 //|-----------------------------------------------------------
 //| Help

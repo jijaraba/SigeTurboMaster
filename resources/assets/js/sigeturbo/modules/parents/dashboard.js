@@ -16,7 +16,7 @@ import Vue from 'vue';
 
 import Translate from '../../plugins/Translate';
 import Lang from '../../core/lang';
-import PaymentPendingFamily from '../../views/payments/Pending/Family';
+import PaymentPendingFamily from '../../views/financials/Payments/Pending/Family';
 
 Vue.use(Translate, {
     locale: document.getElementsByTagName('html')[0].getAttribute('lang'),

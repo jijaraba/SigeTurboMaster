@@ -16,7 +16,7 @@ import Vue from 'vue';
 
 import Student from '../../views/groupdirector/Student';
 import Userfamily from '../../views/userfamily/Userfamily';
-import PaymentPendingStudent from '../../views/payments/Pending/Student';
+import PaymentPendingStudent from '../../views/financials/Payments/Pending/Student';
 import AttendanceScalar from '../../views/attendance/AttendanceScalar';
 import ObservatorScalar from '../../views/observator/ObservatorScalar';
 import PerformanceByStudent from '../../views/chart/PerformanceByStudent';

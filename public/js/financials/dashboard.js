@@ -1855,8 +1855,6 @@ module.exports = {
     watch: {},
     created: function created() {
 
-        console.log(this.assets);
-
         //Config Value By Default
         var dateDiscountPayment = __WEBPACK_IMPORTED_MODULE_0_moment___default()(this.payment.date1, 'YYYY-MM-DD').format('YYYY-MM-DD');
         var dateNormalPayment = __WEBPACK_IMPORTED_MODULE_0_moment___default()(this.payment.date2, 'YYYY-MM-DD').format('YYYY-MM-DD');
@@ -1898,6 +1896,7 @@ module.exports = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Transaction_Show__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Show.vue");
 //
 //
 //
@@ -1921,14 +1920,17 @@ module.exports = {
 //
 //
 //
-//
+
+
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 
     props: ['payment', 'showReceipt'],
     filters: {},
-    components: {},
+    components: {
+        'sigeturbo-financials-transactions': __WEBPACK_IMPORTED_MODULE_0__Transaction_Show__["a" /* default */]
+    },
     data: function data() {
         return {};
     },
@@ -1937,6 +1939,150 @@ module.exports = {
             this.$emit('close', false);
         }
     },
+    watch: {},
+    created: function created() {},
+    mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Edit.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+    props: [''],
+    filters: {},
+    components: {},
+    data: function data() {
+        return {};
+    },
+    methods: {},
+    watch: {},
+    created: function created() {},
+    mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/New.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+    props: [''],
+    filters: {},
+    components: {},
+    data: function data() {
+        return {};
+    },
+    methods: {},
+    watch: {},
+    created: function created() {},
+    mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Show.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__New__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/New.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Edit__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Edit.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters_other_currency__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/other/currency.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+    props: ['load', 'payment'],
+    filters: {
+        currency: __WEBPACK_IMPORTED_MODULE_2__filters_other_currency__["a" /* default */]
+    },
+    components: {
+        'sigeturbo-financials-transaction-new': __WEBPACK_IMPORTED_MODULE_0__New__["a" /* default */],
+        'sigeturbo-financials-transaction-edit': __WEBPACK_IMPORTED_MODULE_1__Edit__["a" /* default */]
+    },
+    data: function data() {
+        return {
+            transactions: [],
+            credits: 0,
+            debits: 0
+        };
+    },
+    methods: {},
     watch: {},
     created: function created() {},
     mounted: function mounted() {}
@@ -36456,6 +36602,133 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-35950cfa\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Show.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._l(_vm.transactions, function(transaction) {
+        return _c(
+          "section",
+          { staticClass: "transaction-edit" },
+          [
+            _c("sigeturbo-financials-transaction-edit", {
+              attrs: {
+                transaction: "transaction",
+                transactiontypes: "transactiontypes"
+              }
+            })
+          ],
+          1
+        )
+      }),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "transaction-new" },
+        [
+          _c("sigeturbo-financials-transaction-new", {
+            attrs: { payment: "payment", transactiontypes: "transactiontypes" }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("section", { staticClass: "transaction-totals" }, [
+        _c("ul", { staticClass: "display-horizontal col-60" }, [
+          _c("li", { staticClass: "col-35" }, [
+            _c("span", [_vm._v("CRÉDITO")]),
+            _vm._v(" " + _vm._s(_vm._f("currency")(_vm.credits)))
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "col-35" }, [
+            _c("span", [_vm._v("DÉBITO")]),
+            _vm._v(" " + _vm._s(_vm._f("currency")(_vm.debits)))
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "col-30" }, [
+            _c("span", [_vm._v("DIFERENCIA")]),
+            _vm._v(" " + _vm._s(_vm._f("currency")(_vm.credits - _vm.debits)))
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "clearfix" })
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "transaction-titles" }, [
+      _c("ul", { staticClass: "display-horizontal col-100" }, [
+        _c("li", { staticClass: "col-10 gutter-5 voucher" }, [
+          _vm._v("\n                COMPROBANTE\n            ")
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "col-10 gutter-5" }, [
+          _vm._v("\n                CUENTA\n            ")
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "col-05 gutter-5" }, [
+          _vm._v("\n                ASIENTO\n            ")
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "col-07 gutter-5" }, [
+          _vm._v("\n                DOC.\n            ")
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "col-20 gutter-5" }, [
+          _vm._v("\n                DESCRIPCIÓN\n            ")
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "col-08 gutter-5" }, [
+          _vm._v("\n                VALOR\n            ")
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "col-10 gutter-5" }, [
+          _vm._v("\n                FECHA\n            ")
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "col-10 gutter-5" }, [
+          _vm._v("\n                NIT\n            ")
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "col-05 gutter-5" }, [
+          _vm._v("\n                CENTRO\n            ")
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "col-03 gutter-5 edit" }),
+        _vm._v(" "),
+        _c("li", { staticClass: "col-02 gutter-5 edit" })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-35950cfa", { render: render, staticRenderFns: staticRenderFns })
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-40236377\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/dashboard/Enrollment.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -36511,6 +36784,30 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-58e4be10\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Edit.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", [_vm._v("Edit")])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-58e4be10", { render: render, staticRenderFns: staticRenderFns })
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-98dba5d0\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Payment.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -36524,7 +36821,7 @@ var render = function() {
   return _c(
     "section",
     {
-      staticClass: "tooltip is-payment",
+      staticClass: "is-payment",
       class: _vm.payment.ispayment,
       attrs: { title: _vm.payment.concept2 }
     },
@@ -36676,20 +36973,19 @@ var render = function() {
                   }
                 }
               },
-              [
-                _c("span", [_vm._v(_vm._s(_vm.payment.concept2))]),
-                _vm._v(" "),
-                _c("i", {
-                  staticClass: "fa fa-caret-down",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ]
+              [_c("span", [_vm._v(_vm._s(_vm.payment.concept2))])]
             ),
             _vm._v(" "),
-            _c("section", {
-              staticClass: "transactions",
-              attrs: { id: "show_payment_" }
-            })
+            _c(
+              "section",
+              { staticClass: "transactions", attrs: { id: "show_payment_" } },
+              [
+                _c("sigeturbo-financials-transactions-show", {
+                  attrs: { load: "load", payment: "payment" }
+                })
+              ],
+              1
+            )
           ])
         ])
       ]
@@ -36703,6 +36999,30 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-eecdf76c", { render: render, staticRenderFns: staticRenderFns })
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-f30a57ec\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/New.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", [_vm._v("New")])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-f30a57ec", { render: render, staticRenderFns: staticRenderFns })
   }
 }
 
@@ -47934,6 +48254,46 @@ function assets() {
 
 /***/ }),
 
+/***/ "./resources/assets/js/sigeturbo/filters/other/currency.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ *
+ * 12345 => $12,345.00
+ *
+ * @param {String} symbol
+ * @param {Number} decimals Decimal places
+ * @param {Object} options
+ */
+
+function currency(value, symbol, decimals, options) {
+    var thousandsSeparator, symbolOnLeft, spaceBetweenAmountAndSymbol;
+    var digitsRE = /(\d{3})(?=\d)/g;
+    options = options || {};
+    value = parseFloat(value);
+    if (!isFinite(value) || !value && value !== 0) return '';
+    symbol = symbol != null ? symbol : '$';
+    decimals = decimals != null ? decimals : 2;
+    thousandsSeparator = options.thousandsSeparator != null ? options.thousandsSeparator : ',';
+    symbolOnLeft = options.symbolOnLeft != null ? options.symbolOnLeft : true;
+    spaceBetweenAmountAndSymbol = options.spaceBetweenAmountAndSymbol != null ? options.spaceBetweenAmountAndSymbol : false;
+    var stringified = Math.abs(value).toFixed(decimals);
+    stringified = options.decimalSeparator ? stringified.replace('.', options.decimalSeparator) : stringified;
+    var _int = decimals ? stringified.slice(0, -1 - decimals) : stringified;
+    var i = _int.length % 3;
+    var head = i > 0 ? _int.slice(0, i) + (_int.length > 3 ? thousandsSeparator : '') : '';
+    var _float = decimals ? stringified.slice(-1 - decimals) : '';
+    symbol = spaceBetweenAmountAndSymbol ? symbolOnLeft ? symbol + ' ' : ' ' + symbol : symbol;
+    symbol = symbolOnLeft ? symbol + head + _int.slice(i).replace(digitsRE, '$1' + thousandsSeparator) + _float : head + _int.slice(i).replace(digitsRE, '$1' + thousandsSeparator) + _float + symbol;
+    var sign = value < 0 ? '-' : '';
+    return sign + symbol;
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (currency);
+
+/***/ }),
+
 /***/ "./resources/assets/js/sigeturbo/filters/payment/paymentType.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -48578,6 +48938,171 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-eecdf76c", Component.options)
   } else {
     hotAPI.reload("data-v-eecdf76c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Edit.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_Edit_vue__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Edit.vue");
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58e4be10_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Edit_vue__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-58e4be10\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Edit.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__("./node_modules/vue-loader/lib/runtime/component-normalizer.js");
+var disposed = false
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+
+var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_Edit_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58e4be10_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Edit_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_58e4be10_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Edit_vue__["b" /* staticRenderFns */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Edit.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-58e4be10", Component.options)
+  } else {
+    hotAPI.reload("data-v-58e4be10", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/New.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_New_vue__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/New.vue");
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f30a57ec_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_New_vue__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-f30a57ec\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/New.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__("./node_modules/vue-loader/lib/runtime/component-normalizer.js");
+var disposed = false
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+
+var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_New_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f30a57ec_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_New_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_f30a57ec_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_New_vue__["b" /* staticRenderFns */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/sigeturbo/views/financials/Payments/Transaction/New.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f30a57ec", Component.options)
+  } else {
+    hotAPI.reload("data-v-f30a57ec", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Show.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_Show_vue__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Show.vue");
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_35950cfa_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Show_vue__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-35950cfa\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Show.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__("./node_modules/vue-loader/lib/runtime/component-normalizer.js");
+var disposed = false
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+
+var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_Show_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_35950cfa_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Show_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_35950cfa_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Show_vue__["b" /* staticRenderFns */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Show.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-35950cfa", Component.options)
+  } else {
+    hotAPI.reload("data-v-35950cfa", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

@@ -2394,6 +2394,11 @@ input[type="radio"]:checked + label {
   font-size: 1em;
 }
 
+.tooltipster-sidetip.tooltipster-shadow.tooltipster-shadow-customized .tooltipster-content {
+  font-size: 0.9em;
+  font-family: "Montserrat Medium", Helvetica Neue, Helvetica, sans-serif;
+}
+
 .sige-help-intro {
   position: fixed;
   bottom: 20px;
