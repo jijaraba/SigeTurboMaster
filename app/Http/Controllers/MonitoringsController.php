@@ -284,7 +284,7 @@ class MonitoringsController extends Controller
 
         $monitorings = $this->monitoringRepository->getMonitoringsDetailForParents($year, $period, $group, $subject, $nivel, $user);
         $subject = $this->subjectInterface->find($subject);
-        return view('userfamilies.indexparentsbymonitoringsdetail')
+        return view('userfamilies.monitoringsdetail')
             ->withMonitorings($monitorings)
             ->withSubject($subject);
     }
