@@ -2432,7 +2432,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     data: function data() {
         return {
             assets: Object(__WEBPACK_IMPORTED_MODULE_5__core_utils__["a" /* default */])(),
-            load: 'no',
+            load: false,
             dateCurrent: __WEBPACK_IMPORTED_MODULE_0_moment___default()(this.serverDate).format('YYYY-MM-DD'),
             data: {
                 voucher: this.payment.voucher,
@@ -2552,7 +2552,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     props: ['payment', 'showReceipt'],
     filters: {},
     components: {
-        'sigeturbo-financials-transactions': __WEBPACK_IMPORTED_MODULE_0__Transaction_Show__["a" /* default */]
+        'sigeturbo-financials-transactions-show': __WEBPACK_IMPORTED_MODULE_0__Transaction_Show__["a" /* default */]
     },
     data: function data() {
         return {};
@@ -2651,6 +2651,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__New__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/New.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Edit__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Edit.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters_other_currency__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/other/currency.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_Transactiontype__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Transactiontype.js");
 //
 //
 //
@@ -2707,6 +2708,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+
 
 
 
@@ -2726,13 +2728,41 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     data: function data() {
         return {
             transactions: [],
+            transactiontypes: [],
             credits: 0,
             debits: 0
         };
     },
-    methods: {},
+    methods: {
+        reloadTransactions: function reloadTransactions() {
+            var _this = this;
+
+            //Get Transactions
+            Transaction.getTransactionByPayment({}).then(function (_ref) {
+                var data = _ref.data;
+
+                _this.transactiontypes = data;
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        }
+    },
     watch: {},
-    created: function created() {},
+    created: function created() {
+        var _this2 = this;
+
+        //Get Paymenttypes
+        __WEBPACK_IMPORTED_MODULE_3__models_Transactiontype__["a" /* default */].query('/api/v1/transactiontypes/', {}).then(function (_ref2) {
+            var data = _ref2.data;
+
+            _this2.transactiontypes = data;
+        }).catch(function (error) {
+            return console.log(error);
+        });
+
+        //Reload Transaction
+        this.reloadTransactions();
+    },
     mounted: function mounted() {}
 });
 
@@ -54615,6 +54645,38 @@ var Payment = function (_Model) {
 }(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (Payment);
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/models/Transactiontype.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Model.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var Transactiontype = function (_Model) {
+    _inherits(Transactiontype, _Model);
+
+    function Transactiontype() {
+        _classCallCheck(this, Transactiontype);
+
+        var _this = _possibleConstructorReturn(this, (Transactiontype.__proto__ || Object.getPrototypeOf(Transactiontype)).call(this));
+
+        _this.count = 0;
+        return _this;
+    }
+
+    return Transactiontype;
+}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Transactiontype);
 
 /***/ }),
 

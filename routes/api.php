@@ -934,6 +934,14 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
 
     /**
      * ===================================
+     * Paymenttypes
+     * ===================================
+     */
+    //Paymenttypes
+    Route::resource('paymenttypes', 'PaymenttypesController', array('only' => array('index', 'show')));
+
+    /**
+     * ===================================
      * Product Category
      * ===================================
      */

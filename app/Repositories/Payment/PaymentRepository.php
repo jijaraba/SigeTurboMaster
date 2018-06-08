@@ -548,7 +548,7 @@ class PaymentRepository implements PaymentRepositoryInterface
             $data = $config;
         } else {
             $data["concept"] = "MATRÍCULA " . $year . "-" . ($year + 1);
-            $data["date1"] = $year . '-07-15';
+            $data["date1"] = $year . '-06-27';
             $data["date2"] = $year . '-07-15';
             $data["date3"] = $year . '-07-30';
             $data["date4"] = $year . '-07-30';

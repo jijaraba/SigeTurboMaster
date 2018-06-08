@@ -24,6 +24,6 @@ class TransactiontypesController extends Controller
 
     public function index()
     {
-        return $this->transactiontypeRepository->all();
+        return response()->json($this->transactiontypeRepository->all());
     }
 }

@@ -23,11 +23,11 @@ class TransactiontypeRepository implements TransactiontypeRepositoryInterface
 
     /**
      * Find Transaction Type By ID
-     * @param $idtransactiontype
+     * @param $transactiontype
      * @return mixed
      */
-    public function find($idtransactiontype)
+    public function find($transactiontype)
     {
-        return Transactiontype::find($idtransactiontype);
+        return Transactiontype::find($transactiontype);
     }
 }

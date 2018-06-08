@@ -168,6 +168,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'SigeTurbo\Repositories\Payment\PaymentRepository'
         );
         App::bind(
+            'SigeTurbo\Repositories\Paymenttype\PaymenttypeRepositoryInterface',
+            'SigeTurbo\Repositories\Paymenttype\PaymenttypeRepository'
+        );
+        App::bind(
             'SigeTurbo\Repositories\Package\PackageRepositoryInterface',
             'SigeTurbo\Repositories\Package\PackageRepository'
         );

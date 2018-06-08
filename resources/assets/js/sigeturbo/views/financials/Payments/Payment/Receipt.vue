@@ -33,7 +33,7 @@
         ],
         filters: {},
         components: {
-            'sigeturbo-financials-transactions': FinancialTransactionsShow
+            'sigeturbo-financials-transactions-show': FinancialTransactionsShow
         },
         data: function () {
             return {}

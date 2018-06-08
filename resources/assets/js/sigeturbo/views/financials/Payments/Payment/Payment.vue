@@ -45,7 +45,7 @@
         data: function () {
             return {
                 assets: assets(),
-                load: 'no',
+                load: false,
                 dateCurrent: moment(this.serverDate).format('YYYY-MM-DD'),
                 data: {
                     voucher: this.payment.voucher,

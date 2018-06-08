@@ -59,6 +59,7 @@
     import TransactionNew from './New';
     import TransactionEdit from './Edit';
     import currency from '../../../../filters/other/currency';
+    import Transactiontype from "../../../../models/Transactiontype";
 
     export default {
 
@@ -76,13 +77,31 @@
         data: function () {
             return {
                 transactions: [],
+                transactiontypes: [],
                 credits: 0,
                 debits: 0,
             }
         },
-        methods: {},
+        methods: {
+            reloadTransactions() {
+                //Get Transactions
+                Transaction.getTransactionByPayment({}).then(({data}) => {
+                    this.transactiontypes = data;
+                })
+                    .catch(error => console.log(error));
+            }
+        },
         watch: {},
         created() {
+            //Get Paymenttypes
+            Transactiontype.query('/api/v1/transactiontypes/', {})
+                .then(({data}) => {
+                    this.transactiontypes = data;
+                })
+                .catch(error => console.log(error));
+
+            //Reload Transaction
+            this.reloadTransactions();
         },
         mounted() {
         },

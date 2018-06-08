@@ -77,8 +77,9 @@
                                         attendance}}
                                     </li>
                                     <li class="col-10 gutter-5 detail">
-                                        <a href="/parents/monitorings/detail/@{{ monitoring.idyear }}/@{{ monitoring.idperiod }}/@{{ monitoring.idgroup }}/@{{ monitoring.idsubject }}/@{{ monitoring.idnivel }}/@{{ monitoring.iduser }}"
-                                           class="fa fa-arrow-right"></a>
+                                        <a href="/parents/monitorings/detail/@{{ monitoring.idyear }}/@{{ monitoring.idperiod }}/@{{ monitoring.idgroup }}/@{{ monitoring.idsubject }}/@{{ monitoring.idnivel }}/@{{ monitoring.iduser }}">
+                                            <i class="fa fa-arrow-right"></i>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
