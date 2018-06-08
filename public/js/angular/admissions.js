@@ -71946,19 +71946,25 @@ angular.module('Admissions.controllers', []).controller('DashboardController', [
             backgroundColor: 'rgba(79,193,233,0.5)',
             borderColor: 'rgba(79,193,233,1)',
             borderWidth: 1,
-            data: [42, 151, 119, 34, 8, 8, 3, 28, 15, 7, 13, 2]
+            data: [40, 151, 119, 34, 8, 8, 3, 28, 15, 7, 13, 2]
         }, {
             label: '2016-2017',
             backgroundColor: 'rgba(63,138,191,0.5)',
             borderColor: 'rgba(63,138,191,1)',
             borderWidth: 1,
-            data: [63, 135, 197, 17, 10, 6, 7, 31, 19, 5, 4, 4]
+            data: [62, 134, 197, 17, 10, 6, 7, 31, 19, 5, 4, 4]
         }, {
             label: '2017-2018',
             backgroundColor: 'rgba(255,205,86,0.5)',
             borderColor: 'rgba(255,205,86,1)',
             borderWidth: 1,
-            data: [318, 58, 67, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            data: [306, 58, 67, 18, 11, 10, 11, 22, 6, 6, 2, 3]
+        }, {
+            label: '2018-2019',
+            backgroundColor: 'rgba(255,205,86,0.5)',
+            borderColor: 'rgba(255,205,86,1)',
+            borderWidth: 1,
+            data: [310, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }]
     };
     $scope.options = {
