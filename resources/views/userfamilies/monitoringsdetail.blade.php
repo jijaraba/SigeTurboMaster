@@ -27,7 +27,8 @@
                         </div>
                         <div class="detail">
                             @foreach(json_decode($monitoring->details,true) as $detail)
-                                <input type="text" value="{{ scale($detail['rating'], $monitoring->idgroup) }}"
+                                <input class="tooltip" type="text"
+                                       value="{{ scale($detail['rating'], $monitoring->idgroup) }}"
                                        title="{{ $detail['monitoringtype'] }}">
                             @endforeach
                         </div>
