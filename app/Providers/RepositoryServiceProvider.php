@@ -264,6 +264,14 @@ class RepositoryServiceProvider extends ServiceProvider
             'SigeTurbo\Repositories\Groupdirector\GroupdirectorRepository'
         );
         App::bind(
+            'SigeTurbo\Repositories\Receipt\ReceiptRepositoryInterface',
+            'SigeTurbo\Repositories\Receipt\ReceiptRepository'
+        );
+        App::bind(
+            'SigeTurbo\Repositories\Receiptpayment\ReceiptpaymentRepositoryInterface',
+            'SigeTurbo\Repositories\Receiptpayment\ReceiptpaymentRepository'
+        );
+        App::bind(
             'SigeTurbo\Repositories\Subject\SubjectRepositoryInterface',
             'SigeTurbo\Repositories\Subject\SubjectRepository'
         );

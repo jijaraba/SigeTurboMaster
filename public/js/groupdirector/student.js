@@ -62882,6 +62882,34 @@ var Payment = function (_Model) {
         }
 
         /**
+         * Get Payments By User
+         * @param path
+         * @param params
+         */
+
+    }, {
+        key: 'getPaymentsByUser',
+        value: function getPaymentsByUser(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/users/getpaymentsbyuser', {
+                params: params
+            });
+        }
+
+        /**
+         * Get Payments By Family
+         * @param path
+         * @param params
+         */
+
+    }, {
+        key: 'getPaymentsByFamily',
+        value: function getPaymentsByFamily(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/families/getpaymentsbyfamily', {
+                params: params
+            });
+        }
+
+        /**
          * Generate Payment By User
          * @param path
          * @param params

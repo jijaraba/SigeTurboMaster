@@ -45,8 +45,16 @@ class Family extends Model
     public function payments()
     {
         return $this->hasMany('SigeTurbo\Payment', 'iduser', 'iduser')
-            ->select('payments.*',DB::raw('MONTHNAME(payments.realdate) AS month_name'))
-            ->orderBy('payments.realdate','DESC')
+            ->select('payments.*', DB::raw('MONTHNAME(payments.realdate) AS month_name'), 'receiptpayments.value AS receipt_value', 'receipts.document')
+            ->leftJoin('receiptpayments', function ($join) {
+                $join
+                    ->on('receiptpayments.idpayment', '=', 'payments.idpayment');
+            })
+            ->join('receipts', function ($join) {
+                $join
+                    ->on('receipts.idreceipt', '=', 'receiptpayments.idreceipt');
+            })
+            ->orderBy('payments.realdate', 'DESC')
             ->with('transactions');
     }
 

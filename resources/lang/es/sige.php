@@ -2,6 +2,7 @@
 
 return array(
     'Academicmanagement' => 'Gestión Académica',
+    'Charge' => 'Cobro',
     'Add' => 'Adicionar',
     'AddressTitle' => 'Dirección',
     'Admissions' => 'Admisiones',

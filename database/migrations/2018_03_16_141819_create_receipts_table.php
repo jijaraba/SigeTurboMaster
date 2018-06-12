@@ -17,9 +17,9 @@ class CreateReceiptsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('idreceipt');
             $table->integer('idvouchertype')->unsigned();
-            $table->integer('idcostcenter')->unsigned();
             $table->integer('document');
             $table->date('date');
+            $table->double('value', 11, 3);
             $table->date('realdate')->nullable();
             $table->text('description')->nullable();
             $table->integer('created_by')->nullable();
@@ -28,11 +28,6 @@ class CreateReceiptsTable extends Migration
             $table->foreign('idvouchertype')
                 ->references('idvouchertype')
                 ->on('vouchertypes')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            $table->foreign('idcostcenter')
-                ->references('idcostcenter')
-                ->on('costcenters')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });

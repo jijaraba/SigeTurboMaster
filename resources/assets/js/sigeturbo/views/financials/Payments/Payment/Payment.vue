@@ -15,8 +15,8 @@
         <span class="month" @click="showReceipt(payment.idpayment)"
               style="cursor: pointer">{{ payment.month_name }}</span>
         <span class="type">{{ payment.idpaymenttype | paymentType }}</span>
-        <sigeturbo-payments-receipt @close="closeReceipt" v-if="receipt" :payment="payment"
-                                    show-receipt="receipt"></sigeturbo-payments-receipt>
+        <sigeturbo-payments-receipt @close="closeReceipt" v-if="receipt" :payments="payments"
+                                    show-receipt="receipt" :banks="banks"></sigeturbo-payments-receipt>
     </section>
 </template>
 <script>
@@ -54,6 +54,7 @@
                         moment(this.payment.payment_at, 'YYYY-MM-DD').format('YYYY-MM-DD')
                 },
                 receipt: false,
+                payments: []
             }
         },
         methods: {
@@ -91,6 +92,8 @@
         },
         watch: {},
         created() {
+
+            this.payments.push(this.payment);
 
             //Config Value By Default
             let dateDiscountPayment = moment(this.payment.date1, 'YYYY-MM-DD').format('YYYY-MM-DD');

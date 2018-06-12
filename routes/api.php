@@ -733,6 +733,12 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'as' => 'users.saveemailbycertification',
         'uses' => 'UsersController@saveEmailByCertification'
     ]);
+    //Get Payments
+    Route::get('/users/getpaymentsbyuser', [
+        'as' => 'users.getpaymentsbyuser',
+        'uses' => 'UsersController@getPaymentsByUser'
+    ]);
+
     //User
     Route::resource('users', 'UsersController', array('only' => array('index', 'show', 'store', 'update')));
 
@@ -750,6 +756,11 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
     Route::get('/families/searchfamilies', [
         'as' => 'families.searchfamilies',
         'uses' => 'FamiliesController@searchFamilies'
+    ]);
+    //Get Payments
+    Route::get('/families/getpaymentsbyfamily', [
+        'as' => 'families.getpaymentsbyfamily',
+        'uses' => 'FamiliesController@getPaymentsByFamily'
     ]);
     //Family
     Route::resource('families', 'FamiliesController', array('only' => array('index', 'show', 'store')));
@@ -1051,6 +1062,15 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
 
     /**
      * ===================================
+     * Receipts Module
+     * ===================================
+     */
+    //Receipts
+    Route::resource('receipts', 'ReceiptsController', array('only' => array('store', 'update', 'store')));
+
+
+    /**
+     * ===================================
      * Task types
      * ===================================
      */
@@ -1187,7 +1207,19 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
 
     /**
      * ===================================
-     * Voucherconsecutive Module
+     * Vouchertypes Module
+     * ===================================
+     */
+    Route::get('/vouchertypes/getvouchertypes', [
+        'as' => 'vouchertypes.getvouchertypes',
+        'uses' => 'VouchertypesController@getVouchertypes'
+    ]);
+    //Vouchertypes
+    Route::resource('vouchertypes', 'VouchertypesController', array('only' => array('index')));
+
+    /**
+     * ===================================
+     * Voucherconsecutives Module
      * ===================================
      */
     Route::get('/voucherconsecutives/getvoucherconsecutivebycode', [

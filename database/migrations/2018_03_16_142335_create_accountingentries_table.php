@@ -19,6 +19,7 @@ class CreateAccountingentriesTable extends Migration
             $table->integer('idreceipt')->unsigned();
             $table->integer('idaccounttype')->unsigned();
             $table->integer('idtransactiontype')->unsigned();
+            $table->integer('idcostcenter')->unsigned();
             $table->integer('reference')->default(0);
             $table->double('value', 11, 2);
             $table->double('base', 11, 2);
@@ -43,6 +44,11 @@ class CreateAccountingentriesTable extends Migration
             $table->foreign('idtransactiontype')
                 ->references('idtransactiontype')
                 ->on('transactiontypes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('idcostcenter')
+                ->references('idcostcenter')
+                ->on('costcenters')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });

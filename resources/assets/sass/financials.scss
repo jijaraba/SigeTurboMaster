@@ -30,10 +30,10 @@
 }
 
 .sige-financials-transactions {
-  padding: 20px;
   font: {
-    size: 1em;
+    size: 12px !important;
   }
+  color: $sige-global-color-04;
   header {
     text-align: left;
     position: relative;
@@ -148,7 +148,6 @@
         section {
           > ul {
             > li {
-              padding: 5px 4px;
               input {
                 font: {
                   size: 1em;
@@ -162,6 +161,8 @@
         border-radius: 5px;
         box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
         .new {
+          line-height: 50px;
+          text-align: center;
           i {
             font: {
               size: 1.6em;
@@ -332,11 +333,46 @@
   font: {
     size: 0.9em;
   }
+  color: $sige-global-color-04;
+}
+
+.sige-payments-receipt {
+  margin-top: 20px;
   color: #8D9AA5;
+  font: {
+    size: 0.9em;
+  }
+  > ul.receipt {
+    > li {
+      &.pending {
+        div {
+          text-align: right;
+          margin-right: 10px;
+          line-height: initial;
+          padding: 20px;
+          position: relative;
+        }
+      }
+      &.receipt {
+        a {
+          border-radius: 2px;
+          float: right;
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+          width: 40px !important;
+        }
+      }
+    }
+  }
 }
 
 .payment {
   border-bottom: 1px solid $sige-border-color-03;
+  font: {
+    size: 0.95em;
+  }
   .select {
     > input {
       position: relative;
@@ -387,12 +423,12 @@
       transform: translateY(-50%);
     }
   }
-  .detail {
+  .receipt {
     a {
       padding: 8px 18px;
-      background-color: $sige-global-bgcolor-22 !important;
-      border-radius: 3px;
-      color: $sige-global-color-01;
+      background: $sige-global-bgcolor-07 !important;
+      border-radius: 2px;
+      color: $sige-global-color-02;
       position: relative;
       top: 40%;
       transform: translateY(-50%);
@@ -402,7 +438,7 @@
 
 .payment-calendar {
   font: {
-    size: 0.85em;
+    size: 12px !important;
   }
   margin: 10px;
   > ul {
@@ -410,6 +446,10 @@
       width: 60px;
       float: right;
       margin-bottom: 5px;
+      &.receipt {
+        width: 100px;
+        float: none;
+      }
       section.is-payment {
         border-radius: 5px;
         line-height: initial;
@@ -477,6 +517,72 @@
       text-align: left;
       > select.bank {
         text-align: left;
+      }
+    }
+  }
+}
+
+.payment-calendar-horizontal {
+  max-height: 180px;
+  overflow-y: scroll;
+  > ul {
+    border-bottom: 1px solid $sige-border-color-03;
+    > li {
+      > div {
+        line-height: 45px;
+        height: 45px;
+      }
+      &.icon {
+        > div {
+          > img {
+            width: 40px;
+          }
+        }
+      }
+      &.month {
+        > div {
+          text-align: right;
+          margin-right: 5px;
+        }
+      }
+      &.type {
+        > div {
+          text-align: left;
+          margin-right: 5px;
+        }
+      }
+      &.concept {
+        > div {
+          margin-right: 5px;
+          width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          word-wrap: normal;
+        }
+      }
+      &.value {
+        > div {
+          padding: 0px 5px;
+          text-align: right;
+          margin-right: 5px;
+          font: {
+            size: 1.1em;
+          }
+          input {
+            text-align: right;
+            font: {
+              size: 13px !important;
+            }
+            padding: 8px 12px !important;
+          }
+        }
+      }
+      &.delete {
+        > div {
+          text-align: center;
+          color: $sige-global-bgcolor-03;
+        }
       }
     }
   }

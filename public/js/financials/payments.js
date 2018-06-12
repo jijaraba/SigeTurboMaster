@@ -1619,8 +1619,17 @@ module.exports = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_Bank__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Bank.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__views_financials_Payments_Payment_Payment__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Payment.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__("./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__filters_other_currency__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/other/currency.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_Bank__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Bank.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_financials_Payments_Payment_Payment__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Payment.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_Payment__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Payment.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__filters_payment_charge__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/payment/charge.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__filters_string_capitalize__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/capitalize.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_financials_Payments_Payment_Receipt__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Receipt.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__filters_string_uppercase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/uppercase.js");
 //
 //
 //
@@ -1631,6 +1640,81 @@ module.exports = {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
 
 
 
@@ -1638,29 +1722,104 @@ module.exports = {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 
-    props: ['payments', 'serverDate'],
-    filters: {},
+    props: ['serverDate'],
+    filters: {
+        capitalize: __WEBPACK_IMPORTED_MODULE_7__filters_string_capitalize__["a" /* default */],
+        uppercase: __WEBPACK_IMPORTED_MODULE_9__filters_string_uppercase__["a" /* default */],
+        currency: __WEBPACK_IMPORTED_MODULE_1__filters_other_currency__["a" /* default */],
+        chargeSubtotal: __WEBPACK_IMPORTED_MODULE_6__filters_payment_charge__["a" /* chargeSubtotal */],
+        chargeTotal: __WEBPACK_IMPORTED_MODULE_6__filters_payment_charge__["b" /* chargeTotal */]
+    },
     components: {
-        'sigeturbo-payments-payment': __WEBPACK_IMPORTED_MODULE_1__views_financials_Payments_Payment_Payment__["a" /* default */]
+        'sigeturbo-payments-payment': __WEBPACK_IMPORTED_MODULE_3__views_financials_Payments_Payment_Payment__["a" /* default */],
+        'sigeturbo-payments-receipt': __WEBPACK_IMPORTED_MODULE_8__views_financials_Payments_Payment_Receipt__["a" /* default */]
     },
     data: function data() {
         return {
-            banks: []
+            assets: Object(__WEBPACK_IMPORTED_MODULE_4__core_utils__["a" /* default */])(),
+            banks: [],
+            users: [],
+            user: [],
+            family: 1,
+            receipt: false,
+            payments: []
         };
     },
-    methods: {},
+    methods: {
+        //Get Payments By Student
+        getPaymentsByStudent: function getPaymentsByStudent() {
+            var _this = this;
+
+            //Get Payment By Family
+            __WEBPACK_IMPORTED_MODULE_5__models_Payment__["a" /* default */].getPaymentsByUser({
+                user: this.user
+            }).then(function (_ref) {
+                var data = _ref.data;
+
+                _this.users = data;
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        },
+
+        //Get Payments By Family
+        getPaymentsByFamily: function getPaymentsByFamily() {
+            var _this2 = this;
+
+            //Get Payment By Family
+            __WEBPACK_IMPORTED_MODULE_5__models_Payment__["a" /* default */].getPaymentsByFamily({
+                family: JSON.stringify(this.family)
+            }).then(function (_ref2) {
+                var data = _ref2.data;
+
+                _this2.users = data;
+                //Get Payments Pending
+                for (var i = 0; i < _this2.users.length; i++) {
+                    for (var j = 0; j < _this2.users[i].payments.length; j++) {
+                        if (_this2.users[i].payments[j].ispayment === 'N') {
+                            _this2.payments.push(_this2.users[i].payments[j]);
+                        }
+                    }
+                }
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        },
+        showReceipt: function showReceipt(event) {
+            event.preventDefault();
+            if (this.payments.length > 0) {
+                this.receipt = true;
+            } else {
+                __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()({
+                    title: Object(__WEBPACK_IMPORTED_MODULE_9__filters_string_uppercase__["a" /* default */])(this.$translate.text('sigeturbo.attention')),
+                    text: Object(__WEBPACK_IMPORTED_MODULE_7__filters_string_capitalize__["a" /* default */])(this.$translate.text('sigeturbo.payments_attention')),
+                    type: 'info',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then(function (result) {
+                    if (result) {}
+                });
+            }
+        },
+        closeReceipt: function closeReceipt(receipt) {
+            this.receipt = receipt;
+        }
+    },
     watch: {},
     created: function created() {
-        var _this = this;
+        var _this3 = this;
 
         //Get Banks
-        __WEBPACK_IMPORTED_MODULE_0__models_Bank__["a" /* default */].query('/api/v1/banks/', {}).then(function (_ref) {
-            var data = _ref.data;
+        __WEBPACK_IMPORTED_MODULE_2__models_Bank__["a" /* default */].query('/api/v1/banks/', {}).then(function (_ref3) {
+            var data = _ref3.data;
 
-            _this.banks = data;
+            _this3.banks = data;
         }).catch(function (error) {
             return console.log(error);
         });
+
+        //Get Payments By Family
+        this.getPaymentsByFamily();
     },
     mounted: function mounted() {}
 });
@@ -2378,6 +2537,94 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Detail.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__filters_other_currency__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/other/currency.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters_payment_paymentType__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/payment/paymentType.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filters_payment_charge__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/payment/charge.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+    props: ['payment', 'detail'],
+    filters: {
+        currency: __WEBPACK_IMPORTED_MODULE_1__filters_other_currency__["a" /* default */],
+        paymentType: __WEBPACK_IMPORTED_MODULE_2__filters_payment_paymentType__["a" /* default */],
+        realValue: __WEBPACK_IMPORTED_MODULE_3__filters_payment_charge__["d" /* realValue */]
+    },
+    components: {},
+    data: function data() {
+        return {
+            assets: Object(__WEBPACK_IMPORTED_MODULE_0__core_utils__["a" /* default */])()
+        };
+    },
+    methods: {
+        removePayment: function removePayment(index) {
+            this.$emit('removePayment', index);
+        }
+    },
+    watch: {
+        'payment.realValue': function paymentRealValue(newRealValue) {
+            this.$emit('calculateTotal');
+        }
+    },
+    created: function created() {},
+    mounted: function mounted() {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Payment.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2439,7 +2686,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 observation: this.payment.observation,
                 date: this.payment.payment_at == null || this.payment.payment_at == '' ? this.dateCurrent : __WEBPACK_IMPORTED_MODULE_0_moment___default()(this.payment.payment_at, 'YYYY-MM-DD').format('YYYY-MM-DD')
             },
-            receipt: false
+            receipt: false,
+            payments: []
         };
     },
     methods: {
@@ -2477,6 +2725,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     },
     watch: {},
     created: function created() {
+
+        this.payments.push(this.payment);
 
         //Config Value By Default
         var dateDiscountPayment = __WEBPACK_IMPORTED_MODULE_0_moment___default()(this.payment.date1, 'YYYY-MM-DD').format('YYYY-MM-DD');
@@ -2519,7 +2769,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Transaction_Show__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Show.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__("./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__filters_string_uppercase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/uppercase.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters_other_currency__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/other/currency.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__filters_payment_paymentType__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/payment/paymentType.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__filters_payment_charge__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/payment/charge.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__filters_string_capitalize__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/capitalize.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Transaction_Show__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Show.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Detail__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Detail.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__models_Vouchertype__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Vouchertype.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__filters_string_titlecase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/titlecase.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__models_Receipt__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Receipt.js");
 //
 //
 //
@@ -2543,27 +2805,312 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 
-    props: ['payment', 'showReceipt'],
-    filters: {},
+    props: ['banks', 'payments', 'showReceipt'],
+    filters: {
+        uppercase: __WEBPACK_IMPORTED_MODULE_1__filters_string_uppercase__["a" /* default */],
+        titlecase: __WEBPACK_IMPORTED_MODULE_10__filters_string_titlecase__["a" /* default */],
+        capitalize: __WEBPACK_IMPORTED_MODULE_6__filters_string_capitalize__["a" /* default */],
+        paymentType: __WEBPACK_IMPORTED_MODULE_4__filters_payment_paymentType__["a" /* default */],
+        currency: __WEBPACK_IMPORTED_MODULE_2__filters_other_currency__["a" /* default */],
+        chargeSubtotal: __WEBPACK_IMPORTED_MODULE_5__filters_payment_charge__["a" /* chargeSubtotal */],
+        chargeTotalRealValue: __WEBPACK_IMPORTED_MODULE_5__filters_payment_charge__["c" /* chargeTotalRealValue */]
+    },
     components: {
-        'sigeturbo-financials-transactions-show': __WEBPACK_IMPORTED_MODULE_0__Transaction_Show__["a" /* default */]
+        'sigeturbo-financials-transactions-show': __WEBPACK_IMPORTED_MODULE_7__Transaction_Show__["a" /* default */],
+        'sigeturbo-financials-payment-detail': __WEBPACK_IMPORTED_MODULE_8__Detail__["a" /* default */]
     },
     data: function data() {
-        return {};
+        return {
+            assets: Object(__WEBPACK_IMPORTED_MODULE_3__core_utils__["a" /* default */])(),
+            steps: 3,
+            stepSelected: 0,
+            receipt: {
+                bank: 2,
+                voucher: 2,
+                consecutive: 0,
+                value: Object(__WEBPACK_IMPORTED_MODULE_2__filters_other_currency__["a" /* default */])(Object(__WEBPACK_IMPORTED_MODULE_5__filters_payment_charge__["c" /* chargeTotalRealValue */])(this.payments)),
+                date: moment().format('YYYY-MM-DD')
+            },
+            vouchertypes: [],
+            saveReceiptEnable: true
+        };
     },
     methods: {
+        chargeTotalRealValue: __WEBPACK_IMPORTED_MODULE_5__filters_payment_charge__["c" /* chargeTotalRealValue */],
+        currency: __WEBPACK_IMPORTED_MODULE_2__filters_other_currency__["a" /* default */],
+        titlecase: __WEBPACK_IMPORTED_MODULE_10__filters_string_titlecase__["a" /* default */],
         closeReceipt: function closeReceipt() {
             this.$emit('close', false);
+        },
+        removePayment: function removePayment(index) {
+            this.payments.splice(this.payments.indexOf(index), 1);
+        },
+        setStep: function setStep(step) {
+            for (var i = 0; i <= this.steps; i++) {
+                document.getElementById('step-' + i).style.display = "none";
+            }
+            document.getElementById('step-' + step).style.display = "block";
+            //Step Selected
+            this.stepSelected = step;
+        },
+        calculateTotal: function calculateTotal() {
+            this.receipt.value = Object(__WEBPACK_IMPORTED_MODULE_2__filters_other_currency__["a" /* default */])(Object(__WEBPACK_IMPORTED_MODULE_5__filters_payment_charge__["c" /* chargeTotalRealValue */])(this.payments));
+        },
+        saveReceipt: function saveReceipt() {
+            var _this = this;
+
+            //Config Payments
+            var data = [];
+            this.payments.forEach(function (payment) {
+                data.push({ payment: payment.idpayment, value: payment.realValue, method: payment.method });
+            });
+
+            //Save Receipt
+            __WEBPACK_IMPORTED_MODULE_11__models_Receipt__["a" /* default */].save('/api/v1/receipts/', {
+                bank: this.receipt.bank,
+                voucher: this.receipt.voucher,
+                consecutive: this.receipt.consecutive,
+                value: this.receipt.value,
+                date: this.receipt.date,
+                description: this.receipt.description,
+                payments: data
+            }).then(function (_ref) {
+                var data = _ref.data;
+
+                __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()({
+                    title: Object(__WEBPACK_IMPORTED_MODULE_1__filters_string_uppercase__["a" /* default */])(_this.$translate.text('sigeturbo.success')),
+                    text: Object(__WEBPACK_IMPORTED_MODULE_6__filters_string_capitalize__["a" /* default */])(_this.$translate.text('sigeturbo.receipt_success')),
+                    type: 'success',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then(function (result) {
+                    if (result) {
+                        _this.saveReceiptEnable = false;
+                    }
+                });
+            }).catch(function (error) {
+                return console.log(error);
+            });
         }
     },
-    watch: {},
-    created: function created() {},
+    watch: {
+        'receipt.voucher': function receiptVoucher(newVoucher) {
+            this.receipt.consecutive = this.vouchertypes[newVoucher - 1].consecutive;
+        }
+    },
+    created: function created() {
+        var _this2 = this;
+
+        //Get All Voucher Types
+        __WEBPACK_IMPORTED_MODULE_9__models_Vouchertype__["a" /* default */].getVouchertypes({}).then(function (_ref2) {
+            var data = _ref2.data;
+
+            _this2.vouchertypes = data;
+            for (var i = 0; i < _this2.vouchertypes.length; i++) {
+                _this2.vouchertypes[i].name = Object(__WEBPACK_IMPORTED_MODULE_10__filters_string_titlecase__["a" /* default */])(_this2.vouchertypes[i].name);
+            }
+            //Get First Consecutive
+            _this2.receipt.consecutive = data[1].consecutive;
+        }).catch(function (error) {
+            return console.log(error);
+        });
+    },
     mounted: function mounted() {}
 });
 
@@ -2623,20 +3170,74 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__("./node_modules/moment/moment.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 
-    props: [''],
+    props: ['payment', 'transactiontypes'],
     filters: {},
     components: {},
     data: function data() {
-        return {};
+        return {
+            transaction: {
+                date: __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY-MM-DD')
+            }
+        };
     },
-    methods: {},
+    methods: {
+        changeVoucher: function changeVoucher(code) {}
+    },
     watch: {},
     created: function created() {},
     mounted: function mounted() {}
@@ -2652,6 +3253,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Edit__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Transaction/Edit.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters_other_currency__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/other/currency.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_Transactiontype__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Transactiontype.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_Transaction__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Transaction.js");
 //
 //
 //
@@ -2708,6 +3310,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+
 
 
 
@@ -2728,9 +3331,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     data: function data() {
         return {
             transactions: [],
-            transactiontypes: [],
-            credits: 0,
-            debits: 0
+            transactiontypes: []
         };
     },
     methods: {
@@ -2738,13 +3339,39 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var _this = this;
 
             //Get Transactions
-            Transaction.getTransactionByPayment({}).then(function (_ref) {
+            __WEBPACK_IMPORTED_MODULE_4__models_Transaction__["a" /* default */].getTransactionByPayment({
+                payment: this.payment
+            }).then(function (_ref) {
                 var data = _ref.data;
 
-                _this.transactiontypes = data;
+                _this.transactions = data;
             }).catch(function (error) {
                 return console.log(error);
             });
+        }
+    },
+    computed: {
+        debits: function debits() {
+            var debits = 0;
+            if (this.transactions.length > 0) {
+                this.transactions.map(function (transaction, key) {
+                    if (transaction.itransaction === 1) {
+                        debits = debits + transaction.value;
+                    }
+                }, this);
+            }
+            return debits;
+        },
+        credits: function credits() {
+            var credits = 0;
+            if (this.transactions.length > 0) {
+                this.transactions.map(function (transaction, key) {
+                    if (transaction.itransaction === 2) {
+                        credits = credits + transaction.value;
+                    }
+                }, this);
+            }
+            return credits;
         }
     },
     watch: {},
@@ -41317,36 +41944,301 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "payment-calendar" }, [
+  return _c("section", [
+    _c("section"),
+    _vm._v(" "),
     _c(
-      "ul",
-      { staticClass: "col-100" },
-      _vm._l(_vm.payments, function(payment) {
-        return _c(
-          "li",
-          [
-            _c("sigeturbo-payments-payment", {
+      "section",
+      [
+        _c("section", { staticClass: "payment-list" }, [
+          _c(
+            "ul",
+            { attrs: { id: "payment-list display-horizontal col-100" } },
+            [
+              _vm._l(_vm.users, function(user) {
+                return [
+                  _c("li", { staticClass: "col-100" }, [
+                    _c(
+                      "ul",
+                      { staticClass: "display-horizontal col-100 payment" },
+                      [
+                        _vm._m(0, true),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-10 photo" }, [
+                          _c("div", [
+                            _c("a", { attrs: { href: "" } }, [
+                              _c("img", {
+                                staticClass: "tooltip",
+                                attrs: {
+                                  src: _vm.assets + "/img/users/" + user.photo,
+                                  alt: user.fullname,
+                                  title: user.iduser + " - " + user.fullname
+                                }
+                              })
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-15 family" }, [
+                          _c("div", [_vm._v(_vm._s(user.family))])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "payments col-50" }, [
+                          _c("div", [
+                            _c("section", { staticClass: "payment-calendar" }, [
+                              _c(
+                                "ul",
+                                { staticClass: "col-100" },
+                                _vm._l(user.payments, function(payment) {
+                                  return _c(
+                                    "li",
+                                    [
+                                      _c("sigeturbo-payments-payment", {
+                                        attrs: {
+                                          payment: payment,
+                                          banks: "banks",
+                                          "server-date": _vm.serverDate,
+                                          banks: _vm.banks
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                })
+                              )
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-20 pending" }, [
+                          _c("div", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("currency")(
+                                  _vm._f("chargeSubtotal")(user.payments)
+                                )
+                              )
+                            )
+                          ])
+                        ])
+                      ]
+                    )
+                  ])
+                ]
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("section", { staticClass: "sige-payments-receipt" }, [
+          _c("ul", { staticClass: "display-horizontal col-100 receipt" }, [
+            _c("li", { staticClass: "col-60" }),
+            _vm._v(" "),
+            _c("li", { staticClass: "col-05 receipt" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-purple",
+                  attrs: { href: "", id: "receipt_" + _vm.user.iduser }
+                },
+                [_c("i", { staticClass: "fas fa-envelope fa-lg" })]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "col-05 receipt" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-blue",
+                  attrs: { href: "", id: "receipt_" + _vm.user.iduser }
+                },
+                [_c("i", { staticClass: "fas fa-comment-alt fa-lg" })]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "col-05 receipt" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-green",
+                  attrs: { href: "#", id: "receipt_" + _vm.user.iduser },
+                  on: {
+                    click: function($event) {
+                      _vm.showReceipt($event)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-receipt fa-lg" })]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "col-20 pending" }, [
+              _c("div", [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(
+                      _vm._f("currency")(_vm._f("chargeTotal")(_vm.users))
+                    ) +
+                    "\n                    "
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.receipt
+          ? _c("sigeturbo-payments-receipt", {
               attrs: {
-                payment: payment,
-                banks: "banks",
-                "server-date": _vm.serverDate,
+                payments: _vm.payments,
+                "show-receipt": "receipt",
                 banks: _vm.banks
-              }
+              },
+              on: { close: _vm.closeReceipt }
             })
-          ],
-          1
-        )
-      })
+          : _vm._e()
+      ],
+      1
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-05 select" }, [
+      _c("input", { attrs: { type: "checkbox" } })
+    ])
+  }
+]
 render._withStripped = true
 
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-1970d213", { render: render, staticRenderFns: staticRenderFns })
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-2817b0a2\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Detail.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("ul", { staticClass: "display-horizontal col-100" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "li",
+      { staticClass: "col-05 icon" },
+      [
+        _vm.payment.approved == "N"
+          ? [
+              _c("div", [
+                _c("img", {
+                  attrs: {
+                    src: _vm.assets + "/img/modules/payment_notpayment.svg"
+                  }
+                }),
+                _vm._v(" "),
+                _c("em", { class: _vm.payment.method }, [_vm._v("1")])
+              ])
+            ]
+          : _vm._e()
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("li", { staticClass: "col-10 type" }, [
+      _c("div", [
+        _vm._v(
+          "\n            " +
+            _vm._s(_vm._f("paymentType")(_vm.payment.idpaymenttype)) +
+            "\n        "
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("li", { staticClass: "col-35 concept" }, [
+      _c("div", [
+        _vm._v("\n            " + _vm._s(_vm.payment.concept1) + "\n        ")
+      ])
+    ]),
+    _vm._v(" "),
+    _c("li", { staticClass: "col-15 value" }, [
+      _c("div", [
+        _vm._v(
+          "\n            " +
+            _vm._s(_vm._f("currency")(_vm._f("realValue")(_vm.payment))) +
+            "\n        "
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("li", { staticClass: "col-15 value" }, [
+      _c("div", [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.payment.realValue,
+              expression: "payment.realValue"
+            }
+          ],
+          attrs: { type: "text" },
+          domProps: { value: _vm.payment.realValue },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.payment, "realValue", $event.target.value)
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("li", { staticClass: "col-05 delete" }, [
+      _c(
+        "div",
+        {
+          on: {
+            click: function($event) {
+              _vm.removePayment(_vm.index)
+            }
+          }
+        },
+        [_c("i", { staticClass: "fas fa-minus-square fa-lg" })]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-05 check" }, [
+      _c("div", [_c("input", { attrs: { type: "checkbox" } })])
+    ])
+  }
+]
+render._withStripped = true
+
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2817b0a2", { render: render, staticRenderFns: staticRenderFns })
   }
 }
 
@@ -41374,8 +42266,8 @@ var render = function() {
           [
             _c("sigeturbo-financials-transaction-edit", {
               attrs: {
-                transaction: "transaction",
-                transactiontypes: "transactiontypes"
+                transaction: transaction,
+                transactiontypes: _vm.transactiontypes
               }
             })
           ],
@@ -41388,27 +42280,30 @@ var render = function() {
         { staticClass: "transaction-new" },
         [
           _c("sigeturbo-financials-transaction-new", {
-            attrs: { payment: "payment", transactiontypes: "transactiontypes" }
+            attrs: {
+              payment: _vm.payment,
+              transactiontypes: _vm.transactiontypes
+            }
           })
         ],
         1
       ),
       _vm._v(" "),
       _c("section", { staticClass: "transaction-totals" }, [
-        _c("ul", { staticClass: "display-horizontal col-60" }, [
-          _c("li", { staticClass: "col-35" }, [
-            _c("span", [_vm._v("CRÉDITO")]),
-            _vm._v(" " + _vm._s(_vm._f("currency")(_vm.credits)))
-          ]),
-          _vm._v(" "),
+        _c("ul", { staticClass: "display-horizontal col-50" }, [
           _c("li", { staticClass: "col-35" }, [
             _c("span", [_vm._v("DÉBITO")]),
             _vm._v(" " + _vm._s(_vm._f("currency")(_vm.debits)))
           ]),
           _vm._v(" "),
+          _c("li", { staticClass: "col-35" }, [
+            _c("span", [_vm._v("CRÉDITO")]),
+            _vm._v(" " + _vm._s(_vm._f("currency")(_vm.credits)))
+          ]),
+          _vm._v(" "),
           _c("li", { staticClass: "col-30" }, [
             _c("span", [_vm._v("DIFERENCIA")]),
-            _vm._v(" " + _vm._s(_vm._f("currency")(_vm.credits - _vm.debits)))
+            _vm._v(" " + _vm._s(_vm._f("currency")(_vm.debits - _vm.credits)))
           ])
         ])
       ]),
@@ -42734,7 +43629,11 @@ var render = function() {
       _vm._v(" "),
       _vm.receipt
         ? _c("sigeturbo-payments-receipt", {
-            attrs: { payment: _vm.payment, "show-receipt": "receipt" },
+            attrs: {
+              payments: _vm.payments,
+              "show-receipt": "receipt",
+              banks: _vm.banks
+            },
             on: { close: _vm.closeReceipt }
           })
         : _vm._e()
@@ -42764,67 +43663,833 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "sige-modal" }, [
-    _c(
-      "section",
-      { staticClass: "modal-content", staticStyle: { width: "800px" } },
-      [
-        _c("section", { staticClass: "sige-financials-transactions" }, [
-          _c("header", [
-            _c("h4", [
-              _vm._v("DETALLE DEL PAGO #" + _vm._s(_vm.payment.idpayment))
+  return _c(
+    "section",
+    {
+      staticClass: "sige-main-modal",
+      staticStyle: { display: "block", "padding-top": "100px" }
+    },
+    [
+      _c(
+        "section",
+        {
+          staticClass: "modal-content",
+          staticStyle: { width: "850px", height: "700px" }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "close",
+              on: {
+                click: function($event) {
+                  _vm.closeReceipt()
+                }
+              }
+            },
+            [
+              _c("span", {
+                staticClass: "fa fa-times",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("section", { staticClass: "sige-wizard-container padding-30" }, [
+            _c("header", [
+              _c("h4", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("uppercase")(
+                      _vm.$translate.text("sigeturbo.receipt")
+                    )
+                  )
+                )
+              ])
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "close",
-                on: {
-                  click: function($event) {
-                    _vm.closeReceipt()
+            _c("section", { staticClass: "body" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      _vm.updateProfileAdditional($event)
+                    }
                   }
-                }
-              },
-              [
-                _c("span", {
-                  staticClass: "fa fa-times",
-                  attrs: { "aria-hidden": "true" }
-                })
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("section", { staticClass: "payments" }, [
-            _c(
-              "div",
-              {
-                staticClass: "payment-title",
-                on: {
-                  click: function($event) {
-                    _vm.showPayment()
-                  }
-                }
-              },
-              [_c("span", [_vm._v(_vm._s(_vm.payment.concept2))])]
-            ),
+                },
+                [
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "welcome",
+                      attrs: { id: "step-0", "data-step": "0" }
+                    },
+                    [
+                      _c("legend", [_vm._v("Welcome")]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_additional_welcome.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.start")
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.setStep(1)
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-1", "data-step": "1" }
+                    },
+                    [
+                      _c("legend", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("uppercase")(
+                              _vm.$translate.text("sigeturbo.step")
+                            )
+                          ) + " 1"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.charge_list")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(0)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_additional.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _c(
+                            "section",
+                            { staticClass: "sige-financials-transactions" },
+                            [
+                              _c("section", { staticClass: "payments" }, [
+                                _c(
+                                  "section",
+                                  {
+                                    staticClass: "payment-calendar-horizontal"
+                                  },
+                                  [
+                                    _vm._l(_vm.payments, function(
+                                      payment,
+                                      index
+                                    ) {
+                                      return [
+                                        _c(
+                                          "sigeturbo-financials-payment-detail",
+                                          {
+                                            attrs: {
+                                              payment: payment,
+                                              index: index
+                                            },
+                                            on: {
+                                              removePayment: _vm.removePayment,
+                                              calculateTotal: _vm.calculateTotal
+                                            }
+                                          }
+                                        )
+                                      ]
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "ul",
+                                      {
+                                        staticClass:
+                                          "display-horizontal col-100"
+                                      },
+                                      [
+                                        _vm._m(1),
+                                        _vm._v(" "),
+                                        _vm._m(2),
+                                        _vm._v(" "),
+                                        _vm._m(3),
+                                        _vm._v(" "),
+                                        _vm._m(4),
+                                        _vm._v(" "),
+                                        _vm._m(5),
+                                        _vm._v(" "),
+                                        _c(
+                                          "li",
+                                          { staticClass: "col-15 value" },
+                                          [
+                                            _c("div", [
+                                              _vm._v(
+                                                "\n                                                        " +
+                                                  _vm._s(
+                                                    _vm._f("currency")(
+                                                      _vm._f(
+                                                        "chargeTotalRealValue"
+                                                      )(_vm.payments)
+                                                    )
+                                                  ) +
+                                                  "\n                                                    "
+                                              )
+                                            ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("li", {
+                                          staticClass: "col-05 delete"
+                                        })
+                                      ]
+                                    )
+                                  ],
+                                  2
+                                )
+                              ])
+                            ]
+                          )
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-2", "data-step": "2" }
+                    },
+                    [
+                      _c("legend", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("uppercase")(
+                              _vm.$translate.text("sigeturbo.step")
+                            )
+                          ) + " 2"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.receipt_form")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(6)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_additional.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-20 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.bank")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.receipt.bank,
+                                  expression: "receipt.bank"
+                                }
+                              ],
+                              staticClass: "bank",
+                              attrs: { id: "bank", name: "bank", required: "" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.receipt,
+                                    "bank",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.banks, function(bank) {
+                              return _c(
+                                "option",
+                                { domProps: { value: bank.idbank } },
+                                [_vm._v(_vm._s(bank.name))]
+                              )
+                            })
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-20 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.voucher")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.receipt.voucher,
+                                  expression: "receipt.voucher"
+                                }
+                              ],
+                              staticClass: "voucher",
+                              attrs: {
+                                id: "voucher",
+                                name: "voucher",
+                                required: ""
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.receipt,
+                                    "voucher",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.vouchertypes, function(vouchertype) {
+                              return _c(
+                                "option",
+                                {
+                                  domProps: { value: vouchertype.idvouchertype }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(vouchertype.name) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            })
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-20 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.consecutive")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.receipt.consecutive,
+                                expression: "receipt.consecutive"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder:
+                                "$translate.text('sigeturbo.consecutive') | capitalize",
+                              required: ""
+                            },
+                            domProps: { value: _vm.receipt.consecutive },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.receipt,
+                                  "consecutive",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-20 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.value")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.receipt.value,
+                                expression: "receipt.value"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.value")
+                              ),
+                              required: ""
+                            },
+                            domProps: { value: _vm.receipt.value },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.receipt,
+                                  "value",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-20 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.date")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.receipt.date,
+                                expression: "receipt.date"
+                              }
+                            ],
+                            attrs: {
+                              type: "text",
+                              placeholder: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.date")
+                              ),
+                              required: ""
+                            },
+                            domProps: { value: _vm.receipt.date },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.receipt,
+                                  "date",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 gutter-5" }, [
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text("sigeturbo.description")
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.receipt.description,
+                                expression: "receipt.description"
+                              }
+                            ],
+                            staticClass: "description",
+                            attrs: {
+                              name: "description",
+                              id: "description",
+                              rows: "2",
+                              placeholder: _vm._f("uppercase")(
+                                _vm.$translate.text("sigeturbo.description")
+                              ),
+                              required: ""
+                            },
+                            domProps: { value: _vm.receipt.description },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.receipt,
+                                  "description",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          { staticClass: "col-100" },
+                          [
+                            _vm.saveReceiptEnable
+                              ? [
+                                  _c("input", {
+                                    staticClass: "btn btn-aquamarine",
+                                    attrs: {
+                                      type: "button",
+                                      value: _vm._f("capitalize")(
+                                        _vm.$translate.text("sigeturbo.save")
+                                      )
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.saveReceipt()
+                                      }
+                                    }
+                                  })
+                                ]
+                              : _vm._e(),
+                            _vm._v(" "),
+                            !_vm.saveReceiptEnable
+                              ? [
+                                  _c("input", {
+                                    staticClass: "btn btn-aquamarine",
+                                    attrs: {
+                                      type: "button",
+                                      value: _vm._f("capitalize")(
+                                        _vm.$translate.text("sigeturbo.next")
+                                      )
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.setStep(3)
+                                      }
+                                    }
+                                  })
+                                ]
+                              : _vm._e()
+                          ],
+                          2
+                        )
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-3", "data-step": "3" }
+                    },
+                    [
+                      _c("legend", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("uppercase")(
+                              _vm.$translate.text("sigeturbo.step")
+                            )
+                          ) + " 3"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "section",
+                        { staticClass: "sige-financials-transactions" },
+                        [
+                          _c("section", { staticClass: "payments" }, [
+                            _c(
+                              "section",
+                              {
+                                staticClass: "transactions",
+                                attrs: { id: "show_payment_" }
+                              },
+                              [
+                                _c("sigeturbo-financials-transactions-show", {
+                                  attrs: { load: "load", payment: "payment" },
+                                  on: { calculateTotal: function($event) {} }
+                                })
+                              ],
+                              1
+                            )
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                ]
+              )
+            ]),
             _vm._v(" "),
-            _c(
-              "section",
-              { staticClass: "transactions", attrs: { id: "show_payment_" } },
-              [
-                _c("sigeturbo-financials-transactions-show", {
-                  attrs: { load: "load", payment: "payment" }
-                })
-              ],
-              1
-            )
+            _c("footer", [
+              _c("ul", { staticClass: "display-horizontal col-100" }, [
+                _c("li", { staticClass: "col-35 previous" }),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-30 steps" }, [
+                  _c("ul", { staticClass: "display-horizontal col-100" }, [
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(1)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 1 ? "selected" : ""] },
+                          [_vm._v("1")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(2)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 2 ? "selected" : ""] },
+                          [_vm._v("2")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(3)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 3 ? "selected" : ""] },
+                          [_vm._v("3")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      {
+                        on: {
+                          click: function($event) {
+                            _vm.setStep(4)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { class: [_vm.stepSelected == 4 ? "selected" : ""] },
+                          [_vm._v("4")]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-35 next" })
+              ])
+            ])
           ])
-        ])
-      ]
-    )
-  ])
+        ]
+      )
+    ]
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Seleccione los cobros sobre los cuales desea realizar el "
+          ),
+          _c("strong", [_vm._v("Recibo")]),
+          _vm._v(
+            ". Retire del listado los pagos que no harán parte del recibo e igualmente cambie el valor para los pagos parciales.\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-05 check" }, [_c("div")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-05 icon" }, [_c("div")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-10 type" }, [_c("div")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-35 concept" }, [_c("div")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-15 value" }, [_c("div")])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Diligenciar los cambios que hacen parte del "
+          ),
+          _c("strong", [_vm._v("Recibo")]),
+          _vm._v(". Al momento de seleccionar el "),
+          _c("strong", [_vm._v("Tipo de Comprobante")]),
+          _vm._v(
+            " el listado trae el consecutivo vigente.\n                                        "
+          )
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 if (false) {
@@ -42846,9 +44511,298 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [_vm._v("New")])
+  return _c("section", [
+    _c("ul", { staticClass: "display-horizontal col-100" }, [
+      _c("li", { staticClass: "col-10 gutter-5 voucher" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.transaction.vouchertype,
+              expression: "transaction.vouchertype"
+            }
+          ],
+          attrs: {
+            type: "text",
+            name: "voucher",
+            id: "voucher",
+            placeholder: ""
+          },
+          domProps: { value: _vm.transaction.vouchertype },
+          on: {
+            blur: function($event) {
+              _vm.changeVoucher(_vm.transaction.vouchertype)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.transaction, "vouchertype", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-10 gutter-5" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.transaction.accounttype,
+              expression: "transaction.accounttype"
+            }
+          ],
+          attrs: {
+            type: "text",
+            name: "account",
+            id: "account",
+            placeholder: ""
+          },
+          domProps: { value: _vm.transaction.accounttype },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.transaction, "accounttype", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-05 gutter-5" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.transaction.idtransactiontype,
+                expression: "transaction.idtransactiontype"
+              }
+            ],
+            attrs: {
+              id: "transactiontype",
+              name: "transactiontype",
+              required: ""
+            },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.transaction,
+                  "idtransactiontype",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
+            }
+          },
+          _vm._l(_vm.transactiontypes, function(transactiontype) {
+            return _c(
+              "option",
+              { domProps: { value: transactiontype.idtransactiontype } },
+              [_vm._v(_vm._s(transactiontype.prefix) + "\n                ")]
+            )
+          })
+        )
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-07 gutter-5" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.transaction.document,
+              expression: "transaction.document"
+            }
+          ],
+          attrs: {
+            type: "text",
+            name: "document",
+            id: "document",
+            placeholder: ""
+          },
+          domProps: { value: _vm.transaction.document },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.transaction, "document", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-20 gutter-5" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.transaction.description,
+              expression: "transaction.description"
+            }
+          ],
+          attrs: {
+            type: "text",
+            name: "description",
+            id: "description",
+            placeholder: ""
+          },
+          domProps: { value: _vm.transaction.description },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.transaction, "description", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-08 gutter-5" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.transaction.value,
+              expression: "transaction.value"
+            }
+          ],
+          attrs: { type: "text", name: "value", id: "value", placeholder: "" },
+          domProps: { value: _vm.transaction.value },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.transaction, "value", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-10 gutter-5" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.transaction.date,
+              expression: "transaction.date"
+            }
+          ],
+          attrs: { type: "text", name: "date", id: "date", placeholder: "" },
+          domProps: { value: _vm.transaction.date },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.transaction, "date", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-10 gutter-5" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.transaction.nit,
+              expression: "transaction.nit"
+            }
+          ],
+          attrs: { type: "text", name: "nit", id: "nit", placeholder: "" },
+          domProps: { value: _vm.transaction.nit },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.transaction, "nit", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-05 gutter-5" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.transaction.costcenter,
+              expression: "transaction.costcenter"
+            }
+          ],
+          attrs: {
+            type: "text",
+            name: "costcenter",
+            id: "costcenter",
+            placeholder: ""
+          },
+          domProps: { value: _vm.transaction.costcenter },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.transaction, "costcenter", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-03 new" }, [
+        _c(
+          "div",
+          {
+            on: {
+              click: function($event) {
+                _vm.newTransaction()
+              }
+            }
+          },
+          [
+            _c("i", {
+              staticClass: "fa fa-plus-square fa-lg",
+              attrs: { "aria-hidden": "true" }
+            })
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-02 new" }, [
+      _c("i", { staticClass: "empty", attrs: { "aria-hidden": "true" } })
+    ])
+  }
+]
 render._withStripped = true
 
 if (false) {
@@ -53914,160 +55868,188 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
     en: {
         sigeturbo: {
             'academic': 'academic',
-            'package_select': 'package select',
+            'attention': 'attention',
+            'payments_attention': 'payment attention',
+            'charge_list': 'charge list',
+            'receipt_form': 'receipt form',
+            'consecutive': 'consecutive',
             'actives': 'actives',
+            'description': 'description',
             'additional': 'additional',
+            'additional_success': 'La información adicional fue guardada satisfactoriamente',
             'address': 'address',
             'assistant': 'assistant',
+            'bank': 'bank',
+            'blood_type': 'blood type',
             'celular': 'celular',
             'code': 'code',
             'code_title': 'code',
+            'company': 'company',
+            'company_phone': 'phone',
+            'company_title': 'company',
+            'confirm_information': 'confirm information?',
+            'date': 'date',
             'district': 'district',
+            'doctor_name': 'doctor name',
+            'doctor_phone': 'doctor phone',
+            'dose': 'dose',
+            'educational_output': 'educational output?',
             'email': 'email',
+            'equal_treatment': 'equal treatment?',
             'error': 'error',
-            'success': 'sucess',
             'expedition': 'expedition',
             'firstname': 'firstname',
+            'fullname': 'fullname',
             'general': 'general',
+            'general_success': 'La información general fue guardada satisfactoriamente',
+            'generate': 'generate',
+            'health_success': 'La información de salud fue guardada satisfactoriamente',
             'identification': 'identification',
             'identification_type': 'identification type',
             'internship': 'internship',
+            'is_allergic': 'is allergic?',
             'lastname': 'lastname',
             'medical': 'medical',
-            'payment_status': 'payment status',
-            'pending': 'pending',
-            'phone': 'phone',
-            'psychology': 'psychology',
-            'religion': 'religion',
-            'retired': 'retired',
-            'town': 'town',
-            'warning': 'warning',
-            'save': 'save',
-            'update': 'update',
-            'blood_type': 'blood type',
             'medical_insurance': 'medical insurance',
             'medical_prepaid': 'prepaid medical',
-            'policy_number': 'policy',
             'medical_treatment': 'medical treatment?',
-            'no': 'no',
-            'yes': 'yes',
             'medical_treatment_description': 'medical treatment description',
-            'take_medication': 'take medication?',
-            'equal_treatment': 'equal treatment?',
             'medication_description': 'medication description',
-            'why_take_medication': 'why take medication?',
-            'dose': 'dose',
-            'is_allergic': 'is allergic?',
-            'specify_allergic': 'specify allergic',
-            'suffered_illness': 'suffered illness',
-            'suffered_illness_description': 'suffered illness description',
-            'doctor_name': 'doctor name',
-            'doctor_phone': 'doctor phone',
-            'psychological_support': 'psychological_support?',
-            'educational_output': 'educational output?',
-            'responsible': 'responsible',
-            'observation_additional': 'observation additional',
-            'profession': 'profession',
-            'occupation': 'occupation',
-            'company': 'company',
-            'company_title': 'company',
-            'company_phone': 'phone',
-            'step': 'step',
-            'fullname': 'fullname',
-            'start': 'start',
+            'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'next': 'next',
-            'confirm_information': 'confirm information?',
-            'general_success': 'La información general fue guardada satisfactoriamente',
-            'health_success': 'La información de salud fue guardada satisfactoriamente',
-            'additional_success': 'La información adicional fue guardada satisfactoriamente',
-            'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
+            'no': 'no',
+            'notice': 'Prematrícula',
+            'observation': 'observation',
+            'observation_additional': 'observation additional',
+            'occupation': 'occupation',
+            'package_select': 'package select',
+            'parameters': 'parameters',
             'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
             'payment_generated': 'Pago de <strong>Matrícula</strong> generado satisfactoriamnete',
-            'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
-            'notice': 'Prematrícula',
-            'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'payment_individual_success': 'pago individual generado satisfactoriamente',
-            'parameters': 'parameters',
-            'generate': 'generate'
+            'payment_status': 'payment status',
+            'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
+            'pending': 'pending',
+            'phone': 'phone',
+            'policy_number': 'policy',
+            'profession': 'profession',
+            'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
+            'psychological_support': 'psychological_support?',
+            'psychology': 'psychology',
+            'receipt': 'receipt',
+            'religion': 'religion',
+            'responsible': 'responsible',
+            'retired': 'retired',
+            'save': 'save',
+            'specify_allergic': 'specify allergic',
+            'start': 'start',
+            'step': 'step',
+            'success': 'sucess',
+            'suffered_illness': 'suffered illness',
+            'suffered_illness_description': 'suffered illness description',
+            'take_medication': 'take medication?',
+            'total': 'total',
+            'town': 'town',
+            'update': 'update',
+            'value': 'value',
+            'voucher': 'voucher',
+            'warning': 'warning',
+            'why_take_medication': 'why take medication?',
+            'yes': 'yes',
+            'receipt_success': 'receipt success'
         }
     },
     es: {
         sigeturbo: {
             'academic': 'año académico',
-            'package_select': 'seleccionar paquete',
+            'payments_attention': 'no existen cobros pendientes para realizar un recibo',
+            'description': 'descripción',
+            'charge_list': 'listado de cobros',
+            'receipt_form': 'estructura del recibo',
+            'consecutive': 'consecutivo',
             'actives': 'activos',
             'additional': 'adicional',
+            'additional_success': 'La información adicional fue guardada satisfactoriamente',
             'address': 'dirección',
             'assistant': 'asistente',
+            'bank': 'banco',
+            'blood_type': 'tipo de sangre',
             'celular': 'celular',
             'code': 'código',
             'code_title': 'código',
+            'company': 'empresa',
+            'company_phone': 'teléfono de la empresa',
+            'company_title': 'nombre de la empresa',
+            'confirm_information': '¿Confirma que la información ingresada es válida?',
+            'date': 'fecha',
             'district': 'barrio',
+            'doctor_name': 'pediatra',
+            'doctor_phone': 'teléfono',
+            'dose': 'dosificación',
+            'educational_output': '¿se autoriza la realización de salidas pedagógicas?',
             'email': 'email',
+            'equal_treatment': '¿continúa tratamiento?',
             'error': 'error',
             'expedition': 'expedición',
             'firstname': 'nombres',
+            'fullname': 'nombres y apellidos',
             'general': 'general',
+            'general_success': 'La información general fue guardada satisfactoriamente',
+            'generate': 'generar',
+            'health_success': 'La información de salud fue guardada satisfactoriamente',
             'identification': 'identificación',
             'identification_type': 'tipo de identificación',
             'internship': 'pasantías',
+            'is_allergic': '¿es alérgico?',
             'lastname': 'apellidos',
             'medical': 'médica',
-            'payment_status': 'estado de pagos',
-            'pending': 'pendientes',
-            'phone': 'teléfono',
-            'psychology': 'psicología',
-            'religion': 'religión',
-            'retired': 'retirados',
-            'town': 'municipio',
-            'save': 'guardar',
-            'update': 'actualizar',
-            'blood_type': 'tipo de sangre',
             'medical_insurance': 'eps',
             'medical_prepaid': 'medicina prepagada',
-            'policy_number': 'póliza',
             'medical_treatment': '¿tiene tratamiento médico?',
-            'no': 'no',
-            'yes': 'si',
             'medical_treatment_description': 'descripción del tratamiento médico',
-            'take_medication': '¿toma medicamento?',
-            'equal_treatment': '¿continúa tratamiento?',
             'medication_description': 'descripción del medicamento',
-            'why_take_medication': '¿por qué toma el medicamento?',
-            'dose': 'dosificación',
-            'is_allergic': '¿es alérgico?',
-            'specify_allergic': '¿a qué es alérgico?',
-            'suffered_illness': '¿a sufrido alguna enfermedad?',
-            'suffered_illness_description': 'descripción de la enfermedad',
-            'doctor_name': 'pediatra',
-            'doctor_phone': 'teléfono',
-            'psychological_support': '¿tiene apoyo psicológico?',
-            'educational_output': '¿se autoriza la realización de salidas pedagógicas?',
-            'responsible': 'responsable esconómico',
-            'observation_additional': 'información adicional',
-            'profession': 'profesión',
-            'occupation': 'ocupación',
-            'company': 'empresa',
-            'company_title': 'nombre de la empresa',
-            'company_phone': 'teléfono de la empresa',
-            'step': 'paso',
-            'fullname': 'nombres y apellidos',
-            'start': 'inicio',
+            'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'next': 'next',
-            'confirm_information': '¿Confirma que la información ingresada es válida?',
-            'success': 'Felicitaciones',
-            'general_success': 'La información general fue guardada satisfactoriamente',
-            'health_success': 'La información de salud fue guardada satisfactoriamente',
-            'additional_success': 'La información adicional fue guardada satisfactoriamente',
-            'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
+            'no': 'no',
+            'notice': 'Prematrícula',
+            'attention': 'atención',
+            'observation': 'observación',
+            'observation_additional': 'información adicional',
+            'occupation': 'ocupación',
+            'package_select': 'seleccionar paquete',
+            'parameters': 'parámetros',
             'payment_generate': 'Ya puede generar el pago de la matrícula. Tan solo presione el botón <strong>"Generar Pago"</strong> ubicado más abajo.',
             'payment_generated': 'Pago de <strong>Matrícula</strong> generado satisfactoriamnete',
-            'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
-            'notice': 'Prematrícula',
-            'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'payment_individual_success': 'pago individual generado satisfactoriamente',
-            'parameters': 'parámetros',
-            'generate': 'generar'
+            'payment_status': 'estado de pagos',
+            'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
+            'pending': 'pendientes',
+            'phone': 'teléfono',
+            'policy_number': 'póliza',
+            'profession': 'profesión',
+            'profession_success': 'La información de la profesión fue guardada satisfactoriamente',
+            'psychological_support': '¿tiene apoyo psicológico?',
+            'psychology': 'psicología',
+            'receipt': 'recibo',
+            'religion': 'religión',
+            'responsible': 'responsable esconómico',
+            'retired': 'retirados',
+            'save': 'guardar',
+            'specify_allergic': '¿a qué es alérgico?',
+            'start': 'inicio',
+            'step': 'paso',
+            'success': 'Felicitaciones',
+            'suffered_illness': '¿ha sufrido alguna enfermedad?',
+            'suffered_illness_description': 'descripción de la enfermedad',
+            'take_medication': '¿toma medicamento?',
+            'total': 'total',
+            'town': 'municipio',
+            'update': 'actualizar',
+            'value': 'valor',
+            'voucher': 'comprobante',
+            'why_take_medication': '¿por qué toma el medicamento?',
+            'yes': 'si',
+            'receipt_success': 'recibo guardado satisfactoriamente'
         }
     }
 });
@@ -54149,6 +56131,127 @@ function currency(value, symbol, decimals, options) {
 
 /***/ }),
 
+/***/ "./resources/assets/js/sigeturbo/filters/payment/charge.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = chargeSubtotal;
+/* harmony export (immutable) */ __webpack_exports__["b"] = chargeTotal;
+/* harmony export (immutable) */ __webpack_exports__["d"] = realValue;
+/* harmony export (immutable) */ __webpack_exports__["c"] = chargeTotalRealValue;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__("./node_modules/moment/moment.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
+/**
+ *  Charge Total
+ * 'charges' => 'total'
+ */
+
+
+
+function chargeSubtotal(charges) {
+
+    var total = 0;
+    var dateCurrent = __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY-MM-DD');
+    var yearCurrent = __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY');
+    var monthCurrent = __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('MM');
+
+    charges.forEach(function (charge) {
+        var yearCharge = __WEBPACK_IMPORTED_MODULE_0_moment___default()(charge.realdate, 'YYYY-MM-DD').format("YYYY");
+        var monthCharge = __WEBPACK_IMPORTED_MODULE_0_moment___default()(charge.realdate, 'YYYY-MM-DD').format("YYYY");
+        if (charge.ispayment === 'N') {
+            if (yearCharge <= yearCurrent && monthCharge <= monthCurrent) {
+                if (dateCurrent <= charge.date1) {
+                    total += charge.value1;
+                    charge.realValue = charge.value1;
+                } else if (dateCurrent > charge.date1 && dateCurrent <= charge.date2) {
+                    total += charge.value2;
+                    charge.realValue = charge.value2;
+                } else {
+                    total += charge.value3;
+                    charge.realValue = charge.value3;
+                }
+            } else {
+                total += charge.value1;
+                charge.realValue = charge.value1;
+            }
+        }
+    });
+
+    return total;
+}
+
+function chargeTotal(users) {
+
+    var total = 0;
+    var dateCurrent = __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY-MM-DD');
+    var yearCurrent = __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY');
+    var monthCurrent = __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('MM');
+
+    users.forEach(function (user) {
+        user.payments.forEach(function (charge) {
+            var yearCharge = __WEBPACK_IMPORTED_MODULE_0_moment___default()(charge.realdate, 'YYYY-MM-DD').format("YYYY");
+            var monthCharge = __WEBPACK_IMPORTED_MODULE_0_moment___default()(charge.realdate, 'YYYY-MM-DD').format("YYYY");
+            if (charge.ispayment === 'N') {
+                if (yearCharge <= yearCurrent && monthCharge <= monthCurrent) {
+                    if (dateCurrent <= charge.date1) {
+                        total += charge.value1;
+                        charge.realValue = charge.value1;
+                    } else if (dateCurrent > charge.date1 && dateCurrent <= charge.date2) {
+                        total += charge.value2;
+                        charge.realValue = charge.value2;
+                    } else {
+                        total += charge.value3;
+                        charge.realValue = charge.value3;
+                    }
+                } else {
+                    total += charge.value1;
+                    charge.realValue = charge.value1;
+                }
+            }
+        });
+    });
+    return total;
+}
+
+function realValue(charge) {
+
+    var value = 0;
+    var dateCurrent = __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY-MM-DD');
+    var yearCurrent = __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY');
+    var monthCurrent = __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('MM');
+
+    var yearCharge = __WEBPACK_IMPORTED_MODULE_0_moment___default()(charge.realdate, 'YYYY-MM-DD').format("YYYY");
+    var monthCharge = __WEBPACK_IMPORTED_MODULE_0_moment___default()(charge.realdate, 'YYYY-MM-DD').format("YYYY");
+    if (charge.ispayment === 'N') {
+        if (yearCharge <= yearCurrent && monthCharge <= monthCurrent) {
+            if (dateCurrent <= charge.date1) {
+                value = charge.value1;
+                charge.method = 'discount';
+            } else if (dateCurrent > charge.date1 && dateCurrent <= charge.date2) {
+                value = charge.value2;
+                charge.method = 'normal';
+            } else {
+                value = charge.value3;
+                charge.method = 'expired';
+            }
+        } else {
+            value = charge.value1;
+            charge.method = 'discount';
+        }
+    }
+    return value;
+}
+
+function chargeTotalRealValue(payments) {
+    var total = 0;
+    payments.forEach(function (charge) {
+        total += parseFloat(charge.realValue);
+    });
+    return total;
+}
+
+/***/ }),
+
 /***/ "./resources/assets/js/sigeturbo/filters/payment/paymentType.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -54196,6 +56299,25 @@ function capitalize(value) {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (capitalize);
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/filters/string/titlecase.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * Converts a string to titlecase
+ * 'abc abc' => 'Abc Abc'
+ */
+
+function titlecase(value) {
+    return value.replace(/\w\S*/g, function (value) {
+        return value.charAt(0).toUpperCase() + value.substr(1).toLowerCase();
+    });
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (titlecase);
 
 /***/ }),
 
@@ -54629,6 +56751,34 @@ var Payment = function (_Model) {
         }
 
         /**
+         * Get Payments By User
+         * @param path
+         * @param params
+         */
+
+    }, {
+        key: 'getPaymentsByUser',
+        value: function getPaymentsByUser(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/users/getpaymentsbyuser', {
+                params: params
+            });
+        }
+
+        /**
+         * Get Payments By Family
+         * @param path
+         * @param params
+         */
+
+    }, {
+        key: 'getPaymentsByFamily',
+        value: function getPaymentsByFamily(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/families/getpaymentsbyfamily', {
+                params: params
+            });
+        }
+
+        /**
          * Generate Payment By User
          * @param path
          * @param params
@@ -54645,6 +56795,88 @@ var Payment = function (_Model) {
 }(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (Payment);
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/models/Receipt.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Model.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var Receipt = function (_Model) {
+    _inherits(Receipt, _Model);
+
+    function Receipt() {
+        _classCallCheck(this, Receipt);
+
+        var _this = _possibleConstructorReturn(this, (Receipt.__proto__ || Object.getPrototypeOf(Receipt)).call(this));
+
+        _this.count = 0;
+        return _this;
+    }
+
+    return Receipt;
+}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Receipt);
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/models/Transaction.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__resources_resources__ = __webpack_require__("./resources/assets/js/sigeturbo/resources/resources.js");
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var Transaction = function (_Model) {
+    _inherits(Transaction, _Model);
+
+    function Transaction() {
+        _classCallCheck(this, Transaction);
+
+        var _this = _possibleConstructorReturn(this, (Transaction.__proto__ || Object.getPrototypeOf(Transaction)).call(this));
+
+        _this.count = 0;
+        return _this;
+    }
+
+    /**
+     * Get Payments Pending
+     * @param path
+     * @param params
+     */
+
+
+    _createClass(Transaction, null, [{
+        key: 'getTransactionByPayment',
+        value: function getTransactionByPayment(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/transactions/gettransactionsbypayment/', params);
+        }
+    }]);
+
+    return Transaction;
+}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Transaction);
 
 /***/ }),
 
@@ -54677,6 +56909,56 @@ var Transactiontype = function (_Model) {
 }(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (Transactiontype);
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/models/Vouchertype.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__resources_resources__ = __webpack_require__("./resources/assets/js/sigeturbo/resources/resources.js");
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var Vouchertype = function (_Model) {
+    _inherits(Vouchertype, _Model);
+
+    function Vouchertype() {
+        _classCallCheck(this, Vouchertype);
+
+        var _this = _possibleConstructorReturn(this, (Vouchertype.__proto__ || Object.getPrototypeOf(Vouchertype)).call(this));
+
+        _this.count = 0;
+        return _this;
+    }
+
+    /**
+     * Get All Voucher Types
+     * @param path
+     * @param params
+     */
+
+
+    _createClass(Vouchertype, null, [{
+        key: 'getVouchertypes',
+        value: function getVouchertypes(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/vouchertypes/getvouchertypes/', params);
+        }
+    }]);
+
+    return Vouchertype;
+}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Vouchertype);
 
 /***/ }),
 
@@ -54980,6 +57262,61 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-45a2a856", Component.options)
   } else {
     hotAPI.reload("data-v-45a2a856", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Detail.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_Detail_vue__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Detail.vue");
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2817b0a2_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Detail_vue__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-2817b0a2\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Detail.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__("./node_modules/vue-loader/lib/runtime/component-normalizer.js");
+var disposed = false
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+
+var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_Detail_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2817b0a2_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Detail_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2817b0a2_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Detail_vue__["b" /* staticRenderFns */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/sigeturbo/views/financials/Payments/Payment/Detail.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2817b0a2", Component.options)
+  } else {
+    hotAPI.reload("data-v-2817b0a2", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

@@ -16,7 +16,10 @@ class VouchertypeRepository implements VouchertypeRepositoryInterface
     public function all()
     {
         return Cache::remember('vouchertypes', 1440, function () {
-            return Vouchertype::select('vouchertypes.*')
+            return Vouchertype::select('vouchertypes.*', 'voucherconsecutives.consecutive')
+                ->join('voucherconsecutives', function ($join) {
+                    $join->on('voucherconsecutives.idvouchertype', '=', 'vouchertypes.idvouchertype');
+                })
                 ->get();
         });
     }

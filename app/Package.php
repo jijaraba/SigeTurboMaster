@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     protected $primaryKey = 'idpackage';
-    protected $fillable = ['idconcepttype', 'code', 'name', 'starts', 'ends', 'active', 'created_by', 'updated_by'];
+    protected $fillable = ['idconcepttype', 'code', 'name', 'active', 'created_by', 'updated_by'];
     protected $hidden = ['created_at', 'updated_at'];
     /**
      * Table Name

@@ -12,7 +12,8 @@ use Illuminate\Http\Response;
 use SigeTurbo\Repositories\Userfamily\UserfamilyRepositoryInterface;
 use SigeTurbo\Repositories\Year\YearRepositoryInterface;
 
-class FamiliesController extends Controller {
+class FamiliesController extends Controller
+{
 
     /**
      * @var FamilyRepositoryInterface
@@ -45,26 +46,26 @@ class FamiliesController extends Controller {
         $this->yearRepository = $yearRepository;
     }
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /families
-	 * @return Response
-	 */
-	public function index()
-	{
+    /**
+     * Display a listing of the resource.
+     * GET /families
+     * @return Response
+     */
+    public function index()
+    {
         return response()->json($this->familyRepository->all());
-	}
+    }
 
-	/**
-	 * Display the specified resource.
-	 * GET /families/{idfamily}
-	 * @param  int  $idfamily
-	 * @return Response
-	 */
-	public function show($idfamily)
-	{
+    /**
+     * Display the specified resource.
+     * GET /families/{idfamily}
+     * @param  int $idfamily
+     * @return Response
+     */
+    public function show($idfamily)
+    {
         return response()->json($this->familyRepository->find($idfamily));
-	}
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -78,9 +79,9 @@ class FamiliesController extends Controller {
         $family = $this->familyRepository->store($request);
 
         $data = [];
-        if($family){
+        if ($family) {
             //Save Userfamily
-            $this->userfamilyRepository->store(['user' => $request['student'],'family' => $family->idfamily]);
+            $this->userfamilyRepository->store(['user' => $request['student'], 'family' => $family->idfamily]);
             $data['successful'] = true;
             $data['message'] = Lang::get('sige.SuccessSaveMessage');
             $data['last_insert_id'] = $family->idfamily;
@@ -101,7 +102,8 @@ class FamiliesController extends Controller {
      * @param Request $request
      * @return mixed
      */
-    public function searchfamilybyname(Request $request){
+    public function searchfamilybyname(Request $request)
+    {
         return response()->json($this->familyRepository->searchFamilyByName($request['search']));
     }
 
@@ -109,8 +111,19 @@ class FamiliesController extends Controller {
      * Get Families By Academic Year
      * @return mixed
      */
-    public function searchFamilies(){
+    public function searchFamilies()
+    {
         return response()->json($this->familyRepository->searchFamilies($this->yearRepository->getCurrentYear()->idyear));
+    }
+
+    /**
+     * Get Families By Academic Year
+     * @param Request $request
+     * @return mixed
+     */
+    public function getPaymentsByFamily(Request $request)
+    {
+        return response()->json($this->familyRepository->getPaymentsByFamily($request['family']));
     }
 
 }

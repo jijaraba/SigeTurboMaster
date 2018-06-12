@@ -19,7 +19,6 @@ class UserRepository implements UserRepositoryInterface
      */
     public function all()
     {
-        //return User::select('*')->remember('1440', 'users');
         return Cache::remember('users', 1440, function () {
             return User::all();
         });

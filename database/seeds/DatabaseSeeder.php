@@ -122,6 +122,16 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Banks table seeded!');
         $this->call('ConcepttypesTableSeeder');
         $this->command->info('Concepttypes table seeded!');
+        $this->call('AccounttypesTableSeeder');
+        $this->command->info('Accounttypes table seeded!');
+        $this->call('VouchertypesTableSeeder');
+        $this->command->info('Vouchertypes table seeded!');
+        $this->call('VoucherconsecutivesTableSeeder');
+        $this->command->info('Voucherconsecutives table seeded!');
+        $this->call('TransactiontypesTableSeeder');
+        $this->command->info('Transactiontypes table seeded!');
+        $this->call('PackagesTableSeeder');
+        $this->command->info('Packages table seeded!');
         Model::reguard();
     }
 }

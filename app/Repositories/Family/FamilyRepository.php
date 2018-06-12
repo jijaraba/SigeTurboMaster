@@ -5,6 +5,7 @@ namespace SigeTurbo\Repositories\Family;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use SigeTurbo\Category;
 use SigeTurbo\Family;
 
 class FamilyRepository implements FamilyRepositoryInterface
@@ -108,13 +109,27 @@ class FamilyRepository implements FamilyRepositoryInterface
             ->get();
     }
 
-    public static function obtenersintaxisconsulta($objetoiluminate)
+    /**
+     * Get Payments By Family
+     * @param array $family
+     * @return mixed
+     */
+    public function getpaymentsbyfamily($family)
     {
-        $resultado['Parametros'] = $objetoiluminate->getBindings();
-        $query = str_replace(array('%', '?'), array('%%', '%s'), $objetoiluminate->toSql());
-        $query = vsprintf($query, $objetoiluminate->getBindings());
-        $resultado['Consulta'] = $query;
-        return $resultado;
+        return Family::select('families.idfamily', 'families.name AS family', 'users.iduser', 'users.photo', DB::raw('CONCAT_WS(CONVERT(" " USING latin1),users.lastname,users.firstname) AS fullname'))
+            ->join('userfamilies', function ($join) {
+                $join
+                    ->on('userfamilies.idfamily', '=', 'families.idfamily');
+            })
+            ->join('users', function ($join) {
+                $join
+                    ->on('users.iduser', '=', 'userfamilies.iduser');
+            })
+            ->whereIn('families.idfamily', [$family])
+            ->where('users.idcategory', '=', Category::STUDENT)
+            ->orderBy("families.name", 'ASC')
+            ->with('payments')
+            ->get();
     }
 
     /**
@@ -145,4 +160,5 @@ class FamilyRepository implements FamilyRepositoryInterface
                 ->get();
         });
     }
+
 }

@@ -395,7 +395,7 @@ class PaymentRepository implements PaymentRepositoryInterface
             'realValue' => $data['value'],
             'method' => $data['method'],
             'observation' => ($data['observation']) ? $data['observation'] : null,
-            'transaction' => ($data['transaction']) ? $data['transaction'] : '',
+            'transaccionId' => ($data['transaction']) ? $data['transaction'] : '',
             'updated_by' => getUser()->iduser,
             'payment_at' => ($data["date"]) ? $data["date"] : Carbon::now(),
         ));
@@ -422,6 +422,13 @@ class PaymentRepository implements PaymentRepositoryInterface
             'updated_at' => Carbon::now(),
         ));
         return $payment->save();
+    }
+
+
+    public function getPayments($data)
+    {
+        return Payment::select('*')
+            ->get();
     }
 
     /**

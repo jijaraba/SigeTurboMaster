@@ -9,6 +9,7 @@ interface PaymentRepositoryInterface
     public function update($idpayment, $data);
     public function updatePaymentShort($data);
     public function updatePaymentRejected($data);
+    public function getPayments($data);
     public function getPaymentByTransactionID($transactionID);
     public function getPaymentByID($payment);
     public function getPaymentsByUser($user, $pending = false, $sort = null, $order = 'ASC', $excludeCurrentMonth = false);

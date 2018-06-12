@@ -18,8 +18,6 @@ class CreatePackagesTable extends Migration
             $table->integer('idconcepttype')->unsigned();
             $table->integer('code')->unique();
             $table->string('name');
-            $table->date('starts');
-            $table->date('ends');
             $table->enum('active', ['Y', 'N'])->default('Y');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

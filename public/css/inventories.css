@@ -550,6 +550,10 @@ em {
   width: 20%;
 }
 
+.grid-17 {
+  width: 17%;
+}
+
 .grid-10 {
   width: 10%;
 }
@@ -577,6 +581,10 @@ em {
 
 .col-85 {
   width: 85%;
+}
+
+.col-83 {
+  width: 83%;
 }
 
 .col-80 {
@@ -641,6 +649,10 @@ em {
 
 .col-20 {
   width: 20%;
+}
+
+.col-17 {
+  width: 17%;
 }
 
 .col-15 {
@@ -1124,7 +1136,8 @@ label.select-arrow:hover:before {
 .option.btn-aquamarine,
 .option.option-aquamarine {
   background-color: #53BBB4;
-  border-color: #53BBB4;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .btn.btn-blue,
@@ -1132,7 +1145,8 @@ label.select-arrow:hover:before {
 .option.btn-blue,
 .option.option-blue {
   background-color: #3f8abf;
-  border-color: #3f8abf;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .btn.btn-green,
@@ -1140,7 +1154,8 @@ label.select-arrow:hover:before {
 .option.btn-green,
 .option.option-green {
   background-color: #5cb860;
-  border-bottom: 3px solid #4cae50;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .btn.btn-red,
@@ -1148,7 +1163,8 @@ label.select-arrow:hover:before {
 .option.btn-red,
 .option.option-red {
   background-color: #ed5565;
-  border-color: #ed5565;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .btn.btn-gray,
@@ -1156,7 +1172,8 @@ label.select-arrow:hover:before {
 .option.btn-gray,
 .option.option-gray {
   background-color: #717b85;
-  border-color: #717b85;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .btn.btn-transparent,
@@ -1185,7 +1202,8 @@ label.select-arrow:hover:before {
 .option.btn-transparent-gray,
 .option.option-transparent-gray {
   background-color: transparent;
-  border: 1px solid #656e77;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   width: 120px;
   padding: 10px;
   text-align: center;
@@ -1950,7 +1968,7 @@ fieldset > ul > li > span {
 legend {
   width: 100%;
   display: block;
-  padding: 10px 5px;
+  padding: 5px 5px;
   line-height: 1.1em;
   font-size: 1.4em;
   font-family: "Montserrat Bold", Helvetica Neue, Helvetica, sans-serif;

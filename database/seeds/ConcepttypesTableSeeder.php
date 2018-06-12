@@ -12,11 +12,13 @@ class ConcepttypesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('accounttypes')->delete();
-        Concepttype::create(array('name' => 'Indefinido','prefix'=>'undefined'));
-        Concepttype::create(array('name' => 'Matrícula','prefix'=>'enrollment'));
-        Concepttype::create(array('name' => 'Pensión','prefix'=>'pension'));
-        Concepttype::create(array('name' => 'Nivelación','prefix'=>'nivelation'));
-        Concepttype::create(array('name' => 'Extracurricular','prefix'=>'extracurricular'));
+        DB::table('concepttypes')->delete();
+        Concepttype::create(array('name' => 'Indefinido', 'prefix' => 'undefined'));
+        Concepttype::create(array('name' => 'Matrícula', 'prefix' => 'enrollment'));
+        Concepttype::create(array('name' => 'Pensión', 'prefix' => 'pension'));
+        Concepttype::create(array('name' => 'Extracurricular', 'prefix' => 'extracurricular'));
+        Concepttype::create(array('name' => 'Nivelación', 'prefix' => 'nivelation'));
+        Concepttype::create(array('name' => 'Validación', 'prefix' => 'validation'));
+        Concepttype::create(array('name' => 'Otros', 'prefix' => 'others'));
     }
 }

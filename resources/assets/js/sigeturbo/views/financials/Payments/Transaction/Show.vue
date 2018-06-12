@@ -36,18 +36,18 @@
             </ul>
         </section>
         <section v-for="transaction in transactions" class="transaction-edit">
-            <sigeturbo-financials-transaction-edit transaction="transaction"
-                                                   transactiontypes="transactiontypes"></sigeturbo-financials-transaction-edit>
+            <sigeturbo-financials-transaction-edit :transaction="transaction"
+                                                   :transactiontypes="transactiontypes"></sigeturbo-financials-transaction-edit>
         </section>
         <section class="transaction-new">
-            <sigeturbo-financials-transaction-new payment="payment"
-                                                  transactiontypes="transactiontypes"></sigeturbo-financials-transaction-new>
+            <sigeturbo-financials-transaction-new :payment="payment"
+                                                  :transactiontypes="transactiontypes"></sigeturbo-financials-transaction-new>
         </section>
         <section class="transaction-totals">
-            <ul class="display-horizontal col-60">
-                <li class="col-35"><span>CRÉDITO</span> {{ credits | currency }}</li>
+            <ul class="display-horizontal col-50">
                 <li class="col-35"><span>DÉBITO</span> {{ debits | currency }}</li>
-                <li class="col-30"><span>DIFERENCIA</span> {{ credits - debits | currency }}</li>
+                <li class="col-35"><span>CRÉDITO</span> {{ credits | currency }}</li>
+                <li class="col-30"><span>DIFERENCIA</span> {{ debits - credits | currency }}</li>
             </ul>
         </section>
         <div class="clearfix"></div>
@@ -60,6 +60,7 @@
     import TransactionEdit from './Edit';
     import currency from '../../../../filters/other/currency';
     import Transactiontype from "../../../../models/Transactiontype";
+    import Transaction from "../../../../models/Transaction";
 
     export default {
 
@@ -78,18 +79,44 @@
             return {
                 transactions: [],
                 transactiontypes: [],
-                credits: 0,
-                debits: 0,
             }
         },
         methods: {
             reloadTransactions() {
                 //Get Transactions
-                Transaction.getTransactionByPayment({}).then(({data}) => {
-                    this.transactiontypes = data;
+                Transaction.getTransactionByPayment({
+                    payment: this.payment
+                }).then(({data}) => {
+                    this.transactions = data;
                 })
                     .catch(error => console.log(error));
             }
+        },
+        computed: {
+            debits: function () {
+                let debits = 0;
+                if (this.transactions.length > 0) {
+                    this.transactions.map(function (transaction, key) {
+                        if (transaction.itransaction === 1) {
+                            debits = debits + transaction.value;
+                        }
+                    }, this);
+
+                }
+                return debits;
+            },
+            credits: function () {
+                let credits = 0;
+                if (this.transactions.length > 0) {
+                    this.transactions.map(function (transaction, key) {
+                        if (transaction.itransaction === 2) {
+                            credits = credits + transaction.value;
+                        }
+                    }, this);
+
+                }
+                return credits;
+            },
         },
         watch: {},
         created() {

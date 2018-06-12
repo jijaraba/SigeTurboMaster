@@ -47,6 +47,28 @@ class Payment extends Model {
     }
 
     /**
+     * Get Payments By User
+     * @param path
+     * @param params
+     */
+    static getPaymentsByUser(params) {
+        return HTTP.get('/api/v1/users/getpaymentsbyuser', {
+            params: params
+        });
+    }
+
+    /**
+     * Get Payments By Family
+     * @param path
+     * @param params
+     */
+    static getPaymentsByFamily(params) {
+        return HTTP.get('/api/v1/families/getpaymentsbyfamily', {
+            params: params
+        });
+    }
+
+    /**
      * Generate Payment By User
      * @param path
      * @param params
