@@ -41,4 +41,6 @@ class AccounttypeRepository implements AccounttypeRepositoryInterface
             ->whereCode($code)
             ->first();
     }
+
+
 }

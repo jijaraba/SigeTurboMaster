@@ -1763,6 +1763,31 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/global/Version.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+    props: ['version'],
+    filters: {},
+    components: {},
+    data: function data() {
+        return {};
+    },
+    methods: {},
+    watch: {},
+    created: function created() {},
+    mounted: function mounted() {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/is-buffer/index.js":
 /***/ (function(module, exports) {
 
@@ -19471,6 +19496,30 @@ function normalizeComponent (
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0963fdc4\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/global/Version.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("span", [_vm._v("v" + _vm._s(_vm.version))])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0963fdc4", { render: render, staticRenderFns: staticRenderFns })
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-3ee244fd\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/financials/Packages/Search.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30683,33 +30732,39 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
     en: {
         sigeturbo: {
             'academic': 'academic',
-            'attention': 'attention',
-            'payments_attention': 'payment attention',
-            'charge_list': 'charge list',
-            'receipt_form': 'receipt form',
-            'consecutive': 'consecutive',
+            'account': 'account',
+            'accountingentries': 'accounting entries',
+            'accountingentry': 'accounting entry',
             'actives': 'actives',
-            'description': 'description',
             'additional': 'additional',
             'additional_success': 'La información adicional fue guardada satisfactoriamente',
             'address': 'address',
             'assistant': 'assistant',
+            'attention': 'attention',
             'bank': 'bank',
             'blood_type': 'blood type',
             'celular': 'celular',
+            'charge_list': 'charge list',
             'code': 'code',
             'code_title': 'code',
             'company': 'company',
             'company_phone': 'phone',
             'company_title': 'company',
             'confirm_information': 'confirm information?',
+            'consecutive': 'consecutive',
+            'costcenter': 'center',
             'date': 'date',
+            'debit': 'debit',
+            'credit': 'credit',
+            'difference': 'difference',
+            'description': 'description',
             'district': 'district',
             'doctor_name': 'doctor name',
             'doctor_phone': 'doctor phone',
             'dose': 'dose',
             'educational_output': 'educational output?',
             'email': 'email',
+            'entry': 'entry',
             'equal_treatment': 'equal treatment?',
             'error': 'error',
             'expedition': 'expedition',
@@ -30732,6 +30787,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'medication_description': 'medication description',
             'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'next': 'next',
+            'nit': 'nit',
             'no': 'no',
             'notice': 'Prematrícula',
             'observation': 'observation',
@@ -30744,6 +30800,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'payment_individual_success': 'pago individual generado satisfactoriamente',
             'payment_status': 'payment status',
             'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
+            'payments_attention': 'payment attention',
             'pending': 'pending',
             'phone': 'phone',
             'policy_number': 'policy',
@@ -30752,6 +30809,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'psychological_support': 'psychological_support?',
             'psychology': 'psychology',
             'receipt': 'receipt',
+            'receipt_form': 'receipt form',
+            'receipt_success': 'receipt success',
             'religion': 'religion',
             'responsible': 'responsible',
             'retired': 'retired',
@@ -30770,39 +30829,45 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'voucher': 'voucher',
             'warning': 'warning',
             'why_take_medication': 'why take medication?',
-            'yes': 'yes',
-            'receipt_success': 'receipt success'
+            'yes': 'yes'
         }
     },
     es: {
         sigeturbo: {
             'academic': 'año académico',
-            'payments_attention': 'no existen cobros pendientes para realizar un recibo',
-            'description': 'descripción',
-            'charge_list': 'listado de cobros',
-            'receipt_form': 'estructura del recibo',
-            'consecutive': 'consecutivo',
+            'account': 'cuenta',
+            'accountingentries': 'asientos contables',
+            'accountingentry': 'asiento contable',
             'actives': 'activos',
             'additional': 'adicional',
             'additional_success': 'La información adicional fue guardada satisfactoriamente',
             'address': 'dirección',
             'assistant': 'asistente',
+            'attention': 'atención',
             'bank': 'banco',
             'blood_type': 'tipo de sangre',
             'celular': 'celular',
+            'charge_list': 'listado de cobros',
             'code': 'código',
             'code_title': 'código',
             'company': 'empresa',
             'company_phone': 'teléfono de la empresa',
             'company_title': 'nombre de la empresa',
             'confirm_information': '¿Confirma que la información ingresada es válida?',
+            'consecutive': 'consecutivo',
+            'costcenter': 'centro',
             'date': 'fecha',
+            'debit': 'débito',
+            'credit': 'crédito',
+            'difference': 'diferencia',
+            'description': 'descripción',
             'district': 'barrio',
             'doctor_name': 'pediatra',
             'doctor_phone': 'teléfono',
             'dose': 'dosificación',
             'educational_output': '¿se autoriza la realización de salidas pedagógicas?',
             'email': 'email',
+            'entry': 'asiento',
             'equal_treatment': '¿continúa tratamiento?',
             'error': 'error',
             'expedition': 'expedición',
@@ -30825,9 +30890,9 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'medication_description': 'descripción del medicamento',
             'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'next': 'next',
+            'nit': 'nit',
             'no': 'no',
             'notice': 'Prematrícula',
-            'attention': 'atención',
             'observation': 'observación',
             'observation_additional': 'información adicional',
             'occupation': 'ocupación',
@@ -30838,6 +30903,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'payment_individual_success': 'pago individual generado satisfactoriamente',
             'payment_status': 'estado de pagos',
             'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
+            'payments_attention': 'no existen cobros pendientes para realizar un recibo',
             'pending': 'pendientes',
             'phone': 'teléfono',
             'policy_number': 'póliza',
@@ -30846,6 +30912,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'psychological_support': '¿tiene apoyo psicológico?',
             'psychology': 'psicología',
             'receipt': 'recibo',
+            'receipt_form': 'estructura del recibo',
+            'receipt_success': 'recibo guardado satisfactoriamente',
             'religion': 'religión',
             'responsible': 'responsable esconómico',
             'retired': 'retirados',
@@ -30863,8 +30931,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'value': 'valor',
             'voucher': 'comprobante',
             'why_take_medication': '¿por qué toma el medicamento?',
-            'yes': 'si',
-            'receipt_success': 'recibo guardado satisfactoriamente'
+            'yes': 'si'
         }
     }
 });
@@ -31084,8 +31151,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__plugins_Translate__ = __webpack_require__("./resources/assets/js/sigeturbo/plugins/Translate.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_lang__ = __webpack_require__("./resources/assets/js/sigeturbo/core/lang.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_financials_Packages_Search__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Packages/Search.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_financials_Packages_Create__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Packages/Create.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_global_Version__ = __webpack_require__("./resources/assets/js/sigeturbo/views/global/Version.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_financials_Packages_Search__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Packages/Search.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_financials_Packages_Create__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Packages/Create.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -31107,6 +31175,7 @@ __webpack_require__("./resources/assets/js/sigeturbo/bootstrap.js");
 
 
 
+
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1__plugins_Translate__["a" /* default */], {
     locale: document.getElementsByTagName('html')[0].getAttribute('lang'),
     translates: __WEBPACK_IMPORTED_MODULE_2__core_lang__["a" /* default */]
@@ -31114,10 +31183,13 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1__plu
 
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#financials-packages',
-    data: {},
+    data: {
+        version: '1.0'
+    },
     components: {
-        'sigeturbo-packages-search': __WEBPACK_IMPORTED_MODULE_3__views_financials_Packages_Search__["a" /* default */],
-        'sigeturbo-packages-create': __WEBPACK_IMPORTED_MODULE_4__views_financials_Packages_Create__["a" /* default */]
+        'sigeturbo-packages-search': __WEBPACK_IMPORTED_MODULE_4__views_financials_Packages_Search__["a" /* default */],
+        'sigeturbo-packages-create': __WEBPACK_IMPORTED_MODULE_5__views_financials_Packages_Create__["a" /* default */],
+        'sigeturbo-version': __WEBPACK_IMPORTED_MODULE_3__views_global_Version__["a" /* default */]
     }
 });
 
@@ -31320,6 +31392,61 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-3ee244fd", Component.options)
   } else {
     hotAPI.reload("data-v-3ee244fd", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/views/global/Version.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_Version_vue__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/global/Version.vue");
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0963fdc4_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Version_vue__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0963fdc4\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/global/Version.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__("./node_modules/vue-loader/lib/runtime/component-normalizer.js");
+var disposed = false
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+
+var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_Version_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0963fdc4_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Version_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_0963fdc4_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Version_vue__["b" /* staticRenderFns */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/sigeturbo/views/global/Version.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0963fdc4", Component.options)
+  } else {
+    hotAPI.reload("data-v-0963fdc4", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

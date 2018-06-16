@@ -1,22 +1,41 @@
 <template>
     <section v-bind:class="payment.ispayment" class="is-payment" :title="payment.concept2">
-        <img v-bind:class="(payment.idbank == 1)?'virtual':'normal'" v-if="payment.approved == 'A'"
-             @click="verifyPaymentPending(payment)"
-             :src='assets + "/img/modules/payment_approved.svg"'/>
-        <img v-if="payment.approved == 'R'" :src='assets + "/img/modules/payment_rejected_real.svg"'/>
-        <img class="animate-scale" @click="verifyPaymentPending(payment)" v-if="payment.approved == 'P'"
-             :src='assets + "/img/modules/payment_pending.svg"'/>
-        <template v-if="payment.approved == 'N'">
-            <img  :src="assets + '/img/modules/payment_notpayment.svg'"/>
+        <template v-if="payment.ispayment !== 'P'">
+            <template v-if="payment.approved == 'A'">
+                <img v-bind:class="(payment.idbank == 1)?'virtual':'normal'"
+                     @click="verifyPaymentPending(payment)"
+                     :src='assets + "/img/modules/payment_approved.svg"'/>
+            </template>
+            <img v-if="payment.approved == 'R'" :src='assets + "/img/modules/payment_rejected_real.svg"'/>
+            <template v-if="payment.approved == 'P'">
+                <img class="animate-scale" @click="verifyPaymentPending(payment)"
+                     :src='assets + "/img/modules/payment_pending.svg"'/>
+            </template>
+            <template v-if="payment.approved == 'N'">
+                <img :src="assets + '/img/modules/payment_notpayment.svg'"/>
+            </template>
+        </template>
+        <template v-if="payment.ispayment === 'P'">
+            <img :src="assets + '/img/modules/payment_balance.svg'"/>
+            <em class="receipt blue tooltip"
+                :title="'Valor cancelado: '+ currency(payment.receipt_realvalue)">
+                {{ payment.document }}
+            </em>
         </template>
         <em v-bind:class="(payment.idbank ==1 && payment.approved == 'A')?'virtual':'normal'">
             <i class="fa fa-link" aria-hidden="true"></i>
         </em>
+        <em v-bind:class="(payment.ispayment == 'Y' && payment.approved == 'A')?'receipt':'not_receipt'"
+            :title="'Valor cancelado: '+ currency(payment.receipt_realvalue)">
+            {{ payment.document }}
+        </em>
         <span class="month" @click="showReceipt(payment.idpayment)"
               style="cursor: pointer">{{ payment.month_name }}</span>
         <span class="type">{{ payment.idpaymenttype | paymentType }}</span>
-        <sigeturbo-payments-receipt @close="closeReceipt" v-if="receipt" :payments="payments"
-                                    show-receipt="receipt" :banks="banks"></sigeturbo-payments-receipt>
+        <template v-if="payment.ispayment !== 'Y' && payment.approved !== 'A'">
+            <sigeturbo-payments-receipt @close="closeReceipt" v-if="receipt" :payments="payments"
+                                        show-receipt="receipt" :banks="banks"></sigeturbo-payments-receipt>
+        </template>
     </section>
 </template>
 <script>
@@ -24,6 +43,7 @@
     import moment from 'moment';
     import swal from 'sweetalert';
     import paymentType from '../../../../filters/payment/paymentType';
+    import currency from '../../../../filters/other/currency';
     import Payment from '../../../../models/Payment';
     import PaymentReceipt from '../../../../views/financials/Payments/Payment/Receipt';
     import assets from "../../../../core/utils";
@@ -44,6 +64,7 @@
         },
         data: function () {
             return {
+                currency: currency,
                 assets: assets(),
                 load: false,
                 dateCurrent: moment(this.serverDate).format('YYYY-MM-DD'),

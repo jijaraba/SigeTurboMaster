@@ -16,6 +16,7 @@ import Vue from 'vue';
 
 import Translate from '../../plugins/Translate';
 import Lang from '../../core/lang';
+import Version from '../../views/global/Version';
 import PackagesSearch from '../../views/financials/Packages/Search';
 import PackagesCreate from '../../views/financials/Packages/Create';
 
@@ -26,9 +27,12 @@ Vue.use(Translate, {
 
 new Vue({
     el: '#financials-packages',
-    data: {},
+    data: {
+        version: '1.0'
+    },
     components: {
         'sigeturbo-packages-search': PackagesSearch,
         'sigeturbo-packages-create': PackagesCreate,
+        'sigeturbo-version': Version,
     }
 });

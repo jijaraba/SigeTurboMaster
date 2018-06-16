@@ -14,4 +14,21 @@ class Receiptpayment extends Model
      * @var string
      */
     protected $table = 'receiptpayments';
+
+    /**
+     * @return mixed
+     */
+    public function receipt()
+    {
+        return $this->belongsTo('SigeTurbo\Receipt');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function payment()
+    {
+        return $this->belongsTo('SigeTurbo\Payment');
+    }
+
 }

@@ -102,7 +102,7 @@ class FamiliesController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function searchfamilybyname(Request $request)
+    public function searchFamilyByName(Request $request)
     {
         return response()->json($this->familyRepository->searchFamilyByName($request['search']));
     }

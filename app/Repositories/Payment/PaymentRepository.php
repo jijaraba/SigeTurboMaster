@@ -388,11 +388,12 @@ class PaymentRepository implements PaymentRepositoryInterface
         //Find Payment
         $payment = Payment::find($data['payment']);
         $payment->fill(array(
-            'ispayment' => 'Y',
-            'approved' => 'A',
+            'ispayment' => ($data['ispayment']) ? $data['ispayment'] : 'Y',
+            'approved' => ($data['approved']) ? $data['approved'] : 'A',
             'idbank' => $data['bank'],
             'voucher' => $data['voucher'],
-            'realValue' => $data['value'],
+            'realValue' => $data['real_value'],
+            'receipt_value' => $data['receipt_value'],
             'method' => $data['method'],
             'observation' => ($data['observation']) ? $data['observation'] : null,
             'transaccionId' => ($data['transaction']) ? $data['transaction'] : '',

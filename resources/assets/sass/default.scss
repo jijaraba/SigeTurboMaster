@@ -1043,6 +1043,7 @@ footer {
                 &:before {
                   line-height: 25px;
                 }
+                padding: 3px;
               }
               > div.observer {
                 position: absolute;
@@ -1816,6 +1817,73 @@ footer {
 
 //*
 //|-----------------------------------------------------------
+//| Search
+//|-----------------------------------------------------------
+//*/
+
+.sige-search-list {
+  margin-top: 10px;
+  font: {
+    size: 0.9em;
+  }
+  padding: 10px;
+  float: right;
+  background: $sige-global-bgcolor-27;
+  color: $sige-global-color-04;
+  border-radius: 3px;
+  > form {
+    margin: initial;
+    > ul {
+      > li {
+        position: relative;
+        &.icon-center {
+          @extend %icon-design-radius-right;
+          span {
+            height: 44px;
+            width: 50px;
+          }
+          input {
+            text-align: center;
+            padding-left: 45px;
+            background: $sige-global-bgcolor-28 !important;
+          }
+        }
+        &.icon-left {
+          @extend %icon-design-radius-right;
+          span {
+            height: 44px;
+            width: 50px;
+          }
+          input {
+            text-align: left;
+            padding-left: 45px;
+            background: $sige-global-bgcolor-28 !important;
+          }
+        }
+        &.icon-right {
+          @extend %icon-design-radius-right;
+          span {
+            height: 44px;
+            width: 40px;
+          }
+          button {
+            height: 44px;
+            width: 50px;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+          }
+          input {
+            text-align: left;
+            padding-left: 10px;
+            background: $sige-global-bgcolor-28 !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+//*
+//|-----------------------------------------------------------
 //| Dashboard
 //|-----------------------------------------------------------
 //*/
@@ -1957,7 +2025,7 @@ footer {
     color: $sige-global-color-01;
   }
   input[required], select[required], textarea[required] {
-    border-color: rgba($sige-border-color-04,0.6);
+    border-color: rgba($sige-border-color-04, 0.6);
   }
   select {
     background: white !important;

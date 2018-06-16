@@ -118,12 +118,16 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Languages table seeded!');
         $this->call('PaymenttypesTableSeeder');
         $this->command->info('Paymenttypes table seeded!');
+        $this->call('AccounttypesTableSeeder');
+        $this->command->info('Accounttypes table seeded!');
+        $this->call('CostcentersTableSeeder');
+        $this->command->info('Costcenters table seeded!');
         $this->call('BanksTableSeeder');
         $this->command->info('Banks table seeded!');
         $this->call('ConcepttypesTableSeeder');
         $this->command->info('Concepttypes table seeded!');
-        $this->call('AccounttypesTableSeeder');
-        $this->command->info('Accounttypes table seeded!');
+        $this->call('VouchercategoriesTableSeeder');
+        $this->command->info('Vouchercategories table seeded!');
         $this->call('VouchertypesTableSeeder');
         $this->command->info('Vouchertypes table seeded!');
         $this->call('VoucherconsecutivesTableSeeder');

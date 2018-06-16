@@ -125,8 +125,8 @@ class GroupRepository implements GroupRepositoryInterface
      */
     public static function getLatestGroupByStudent($user)
     {
-        return Group::select("idgroup",'name')
-            ->where('idgroup','=',DB::raw("(SELECT MAX(idgroup) AS idgroup FROM enrollments WHERE iduser = $user)"))
+        return Group::select("idgroup", "idgrade", 'name')
+            ->where('idgroup', '=', DB::raw("(SELECT MAX(idgroup) AS idgroup FROM enrollments WHERE iduser = $user)"))
             ->first();
     }
 }

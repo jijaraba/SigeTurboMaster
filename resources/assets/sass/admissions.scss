@@ -54,25 +54,6 @@
   }
 }
 
-%icon-design {
-  position: relative;
-  span {
-    height: 46px;
-    width: 40px;
-    background: linear-gradient(to bottom, #fff, $sige-global-bgcolor-25) repeat-x $sige-global-bgcolor-21;
-    position: absolute;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    line-height: 45px;
-    text-align: center;
-    top: 5px;
-    left: 5px;
-    font-size: 1em;
-    color: $sige-global-color-08;
-    border: 1px solid $sige-global-bgcolor-26;
-  }
-}
-
 .sige-student-info {
   ul {
     > li {
@@ -220,6 +201,12 @@
         > li {
           &.icon-center {
             @extend %icon-design;
+            span {
+              height: 46px;
+              width: 40px;
+              top: 5px;
+              left: 5px;
+            }
             input {
               text-align: center;
               padding-left: 45px;
@@ -227,6 +214,12 @@
           }
           &.icon-left {
             @extend %icon-design;
+            span {
+              height: 46px;
+              width: 40px;
+              top: 5px;
+              left: 5px;
+            }
             input {
               text-align: left;
               padding-left: 45px;
@@ -234,6 +227,12 @@
           }
           &.icon-right {
             @extend %icon-design;
+            span {
+              height: 46px;
+              width: 40px;
+              top: 5px;
+              left: 5px;
+            }
             input {
               text-align: right;
               padding-left: 45px;

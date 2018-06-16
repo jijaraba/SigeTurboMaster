@@ -23,6 +23,11 @@ class Accounttype extends Model
     const ACCOUNT_GRADOS = 14;
     const ACCOUNT_AGENDAS = 15;
     const ACCOUNT_OTROS = 16;
+    const ACCOUNT_EXTRACURRICULAR = 17;
+    const ACCOUNT_APROVECHAMIENTO = 18;
+    const ACCOUNT_ANTICIPOS = 19;
+    const ACCOUNT_VALIDACIONES = 20;
+    const ACCOUNT_CLIENTES = 21;
 
     protected $primaryKey = 'idaccounttype';
     protected $fillable = ['name'];

@@ -28,6 +28,7 @@ class CreateAccountingentriesTable extends Migration
             $table->integer('nit');
             $table->text('description')->nullable();
             $table->string('prefix')->nullable();
+            $table->date('date');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();

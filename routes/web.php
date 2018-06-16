@@ -470,6 +470,11 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
         'as' => 'financials.payments.index',
         'uses' => 'PaymentsController@index'
     ]);
+    Route::get('/financials/payments/receipts', [
+        'middleware' => ['auth', 'permission'],
+        'as' => 'financials.payments.receipts',
+        'uses' => 'PaymentsController@receipts'
+    ]);
     Route::post('/financials/payments', [
         'middleware' => ['auth', 'permission'],
         'as' => 'financials.payments.index',

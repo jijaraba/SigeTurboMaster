@@ -30,6 +30,7 @@ use SigeTurbo\Repositories\Userfamily\UserfamilyRepositoryInterface;
 use SigeTurbo\Repositories\Voucherconsecutive\VoucherconsecutiveRepositoryInterface;
 use SigeTurbo\Repositories\Year\YearRepositoryInterface;
 use SigeTurbo\Statusschooltype;
+use SigeTurbo\Transactiontype;
 
 
 class PaymentsController extends Controller
@@ -128,6 +129,17 @@ class PaymentsController extends Controller
     public function index()
     {
         return view('payments.index')
+            ->withServerdate(Carbon::now()->format("Y-m-d"));
+    }
+
+    /**
+     * Display a listing of the resource.
+     * GET /payments
+     * @return Response
+     */
+    public function receipts()
+    {
+        return view('payments.receipts')
             ->withServerdate(Carbon::now()->format("Y-m-d"));
     }
 
@@ -565,10 +577,10 @@ class PaymentsController extends Controller
             $family = $this->userfamilyRepository->getFamilyByUser($request['user']);
             //Set Total Cost
             $cost = [];
-            $cost["value1"] = costTotal($costs, 'normal') - costTotal($costs, 'discount');
-            $cost["value2"] = costTotal($costs, 'normal');
-            $cost["value3"] = costTotal($costs, 'normal') + costTotal($costs, 'expired');
-            $cost["value4"] = costTotal($costs, 'normal');
+            $cost["value1"] = costTotal($costs, 'normal', Transactiontype::DEBIT) - costTotal($costs, 'discount', Transactiontype::DEBIT);
+            $cost["value2"] = costTotal($costs, 'normal', Transactiontype::DEBIT);
+            $cost["value3"] = costTotal($costs, 'normal', Transactiontype::DEBIT) + costTotal($costs, 'expired', Transactiontype::CREDIT);
+            $cost["value4"] = costTotal($costs, 'normal', Transactiontype::DEBIT);
 
             //Generate Payment
             $payment = $this->paymentRepository->setPaymentIndividual($family->family, $this->paymentRepository->configDataPayment($year->idyear, $enrollment->idgroup, $cost, $enrollment));
@@ -1383,7 +1395,6 @@ class PaymentsController extends Controller
     private
     function _generateReceipt($payment, $account = [Accounttype::ACCOUNT_BCO_AVVILLAS, Accounttype::ACCOUNT_PENSIONES, Accounttype::ACCOUNT_BCO_AVVILLAS, Accounttype::ACCOUNT_MATRICULA], $type = 'virtual_receipt', $vouchertype = 1)
     {
-        //dd($payment);
         ///Document
         $document = $this->voucherconsecutiveRepository->getCurrentDocumentByType($type);
 
@@ -1637,7 +1648,7 @@ class PaymentsController extends Controller
                 'vouchertype' => $vouchertype,
                 'accounttype' => Accounttype::ACCOUNT_DCTOS,
                 'transactiontype' => 1,
-                'costcenter' => $this->_costCenter($student->idgroup),
+                'costcenter' => costCenter($student->idgroup),
                 'value' => $payment->value2 - $payment->realValue,
                 'base' => 0,
                 'description' => 'DESCUENTO',
@@ -1669,30 +1680,6 @@ class PaymentsController extends Controller
     {
         $pattern = str_replace('%', '.*', preg_quote($pattern, '/'));
         return (bool)preg_match("/^{$pattern}$/i", $subject);
-    }
-
-    /**
-     * Cost Center
-     * @param $group
-     * @return int
-     */
-    private
-    function _costCenter($group)
-    {
-        switch ($group) {
-            case ($group >= 1 && $group <= 10):
-                return 1;
-                break;
-            case ($group >= 11 && $group <= 20):
-                return 2;
-                break;
-            case ($group >= 21 && $group <= 28):
-                return 3;
-                break;
-            case ($group >= 29 && $group <= 32):
-                return 4;
-                break;
-        }
     }
 
 

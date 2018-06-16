@@ -4,6 +4,7 @@ namespace SigeTurbo\Http\Controllers;
 
 use Illuminate\Http\Request;
 use SigeTurbo\Repositories\Cost\CostRepositoryInterface;
+use SigeTurbo\Vouchercategory;
 
 class CostsController extends Controller
 {
@@ -29,6 +30,6 @@ class CostsController extends Controller
      */
     public function getCostsByPackage(Request $request)
     {
-        return response()->json($this->costRepository->getCostsByPackage($request['year'], $request['grade'], $request['type'], $request['package']));
+        return response()->json($this->costRepository->getCostsByPackageAndCategory($request['year'], $request['grade'], $request['type'], $request['package'], Vouchercategory::INVOICE));
     }
 }

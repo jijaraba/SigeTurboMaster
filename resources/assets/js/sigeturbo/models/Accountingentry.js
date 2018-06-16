@@ -1,7 +1,7 @@
 import Model from './Model';
 import {HTTP} from '../resources/resources';
 
-class Transaction extends Model {
+class Accountingentry extends Model {
 
     constructor() {
         super();
@@ -13,10 +13,10 @@ class Transaction extends Model {
      * @param path
      * @param params
      */
-    static getTransactionByPayment(params) {
-        return HTTP.get('/api/v1/transactions/gettransactionsbypayment/', params);
+    static getAccountingentriesByReceipt(params) {
+        return HTTP.get('/api/v1/accountingentries/getaccountingentriesbyreceipt',  {params});
     }
 
 }
 
-export default Transaction;
+export default Accountingentry;

@@ -1181,7 +1181,8 @@ label.select-arrow:hover:before {
 .option.btn-transparent,
 .option.option-transparent {
   background-color: transparent;
-  border: 1px solid #53BBB4;
+  -webkit-box-shadow: 1px 1px 2px rgba(83, 187, 180, 0.5);
+          box-shadow: 1px 1px 2px rgba(83, 187, 180, 0.5);
   width: 120px;
   padding: 10px;
   text-align: center;
@@ -1190,10 +1191,10 @@ label.select-arrow:hover:before {
   border-radius: 3px;
 }
 
-.btn.btn-transparent i,
-.btn.option-transparent i,
-.option.btn-transparent i,
-.option.option-transparent i {
+.btn.btn-transparent em,
+.btn.option-transparent em,
+.option.btn-transparent em,
+.option.option-transparent em {
   margin-right: 10px;
 }
 
@@ -1649,7 +1650,6 @@ input[readonly="readonly"] {
 input[type="submit"],
 button {
   border: none;
-  padding: 10px 20px;
   z-index: 1;
   text-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.3);
   border-radius: 3px;
@@ -2361,6 +2361,31 @@ input[type="radio"]:checked + label {
   100% {
     -webkit-transform: scale(1.2);
             transform: scale(1.2);
+  }
+}
+
+.sigeturbo-animation-row {
+  -webkit-animation: animation-row 2s linear 1s 1 alternate;
+          animation: animation-row 2s linear 1s 1 alternate;
+}
+
+@-webkit-keyframes animation-row {
+  00.0% {
+    background-color: rgba(83, 187, 180, 0.4);
+  }
+
+  100.0% {
+    background-color: inherit;
+  }
+}
+
+@keyframes animation-row {
+  00.0% {
+    background-color: rgba(83, 187, 180, 0.4);
+  }
+
+  100.0% {
+    background-color: inherit;
   }
 }
 

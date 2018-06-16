@@ -70,6 +70,19 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
 
     /**
      * ===================================
+     * Accountingentries
+     * ===================================
+     */
+    //Get Accountingentries By Receipt
+    Route::get('/accountingentries/getaccountingentriesbyreceipt', [
+        'as' => 'accountingentries.getaccountingentriesbyreceipt',
+        'uses' => 'AccountingentriesController@getAccountingentriesByReceipt'
+    ]);
+    //Accountingentries
+    Route::resource('accountingentries', 'AccountingentriesController', array('only' => array('store', 'update', 'destroy')));
+
+    /**
+     * ===================================
      * Attendances
      * ===================================
      */
@@ -750,7 +763,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
     //Search Family by name
     Route::get('/families/searchfamilybyname', [
         'as' => 'families.searchfamilybyname',
-        'uses' => 'FamiliesController@searchfamilybyname'
+        'uses' => 'FamiliesController@searchFamilyByName'
     ]);
     //Search Families By Year
     Route::get('/families/searchfamilies', [
@@ -1065,6 +1078,11 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      * Receipts Module
      * ===================================
      */
+    //Get Observers By Users
+    Route::get('/receipts/getreceiptsbyvouchertype', [
+        'as' => 'receipts.getreceiptsbyvouchertype',
+        'uses' => 'ReceiptsController@getReceiptsByVouchertype'
+    ]);
     //Receipts
     Route::resource('receipts', 'ReceiptsController', array('only' => array('store', 'update', 'store')));
 
@@ -1316,7 +1334,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
      * Transactions
      * ===================================
      */
-    //Get Evaluations By Year
+    //Get Transactions By Payment
     Route::get('/transactions/gettransactionsbypayment', [
         'as' => 'transactions.gettransactionsbypayment',
         'uses' => 'TransactionsController@getTransactionsByPayment'

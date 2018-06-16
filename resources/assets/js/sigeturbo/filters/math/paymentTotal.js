@@ -3,10 +3,10 @@
  * 'subtotals' => 'subtotal'
  */
 
-function paymentTotal(details, type) {
+function paymentTotal(details, method, type) {
     let subtotal = 0;
     details.forEach(function (detail) {
-        if (type == detail.calculated) {
+        if (method == detail.calculated && detail.transactiontype == type) {
             subtotal += (detail.percentage < 1) ? detail.value * (1 - detail.percentage) : detail.value;
         }
     });

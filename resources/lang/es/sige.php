@@ -3,6 +3,8 @@
 return array(
     'Academicmanagement' => 'Gestión Académica',
     'Charge' => 'Cobro',
+    'Receipt' => 'Recibo',
+    'Receipts' => 'Recibos',
     'Add' => 'Adicionar',
     'AddressTitle' => 'Dirección',
     'Admissions' => 'Admisiones',

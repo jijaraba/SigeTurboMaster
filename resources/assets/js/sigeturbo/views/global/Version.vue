@@ -1,12 +1,12 @@
 <template>
-    <section>Edit</section>
+    <span>v{{version}}</span>
 </template>
 <script>
 
     export default {
 
         props: [
-            '',
+            'version',
         ],
         filters: {},
         components: {},

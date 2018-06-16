@@ -4,6 +4,7 @@ namespace SigeTurbo\Repositories\Receipt;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use SigeTurbo\Receipt;
 
 class ReceiptRepository implements ReceiptRepositoryInterface
@@ -42,10 +43,31 @@ class ReceiptRepository implements ReceiptRepositoryInterface
             'document' => $data['consecutive'],
             'date' => $data['date'],
             'realdate' => Carbon::now(),
-            'value' => (float)(str_replace('$', '', str_replace(',', '', $data['value']))),
+            'value' => stringToCurrency($data['value']),
             'description' => $data['description'],
             'created_by' => getUser()->iduser,
             'created_at' => Carbon::now(),
         ]);
+    }
+
+    /**
+     * Get All Receipts By Vouchertype
+     * @param $vouchertype
+     * @return mixed
+     */
+    public function getReceiptsByVouchertype($vouchertype)
+    {
+        return Receipt::select('receipts.*', 'vouchertypes.name AS vouchertype', 'users.iduser', 'users.photo', DB::raw('CONCAT_WS(CONVERT(" " USING latin1),users.lastname,users.firstname) AS fullname'))
+            ->join('vouchertypes', function ($join) {
+                $join
+                    ->on('vouchertypes.idvouchertype', '=', 'receipts.idvouchertype');
+            })
+            ->join('users', function ($join) {
+                $join
+                    ->on('users.iduser', '=', 'receipts.created_by');
+            })
+            ->orderBy('receipts.document','DESC')
+            ->with('receiptpayments')
+            ->get();
     }
 }

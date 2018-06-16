@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Vouchertype extends Model
 {
     protected $primaryKey = 'idvouchertype';
-    protected $fillable = ['name'];
+    protected $fillable = ['idvouchercategory', 'name'];
     protected $hidden = ['created_at', 'updated_at'];
     /**
      * Table Name

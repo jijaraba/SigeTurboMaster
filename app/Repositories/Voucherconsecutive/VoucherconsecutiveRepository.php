@@ -42,6 +42,18 @@ class VoucherconsecutiveRepository implements VoucherconsecutiveRepositoryInterf
     }
 
     /**
+     * Get Consecutive By Voucher Type
+     * @param $voucher
+     * @return mixed
+     */
+    public function getCurrentDocumentByVoucher($voucher)
+    {
+        return Voucherconsecutive::select("voucherconsecutives.*")
+            ->where('idvouchertype', '=', $voucher)
+            ->first();
+    }
+
+    /**
      * Update VoucherConsecutive
      * @param $document
      * @return mixed

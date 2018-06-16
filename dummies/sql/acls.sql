@@ -67,6 +67,7 @@ INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('finan
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('financials.payments.create', 'Admin,Account,Treasurer', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('financials.payments.edit','Admin,Account,Treasurer',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('financials.payments.index','Admin,Account,Treasurer',NOW(),NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('financials.payments.receipts','Admin,Account,Treasurer',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('financials.students.index', 'Admin,Account,Treasurer', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('financials.students.transactions', 'Admin,Account,Treasurer', NOW(), NOW());
 
@@ -182,6 +183,10 @@ INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.achievements.getachievementsbygroup', 'Admin,Teacher,Academic,Principal,AreaManager,Counseling', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.achievements.store', 'Admin,Teacher,Academic', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.achievements.update', 'Admin,Teacher,Academic', NOW(), NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.accountingentries.getaccountingentriesbyreceipt', 'Admin,Account,Treasurer', NOW(), NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.accountingentries.store', 'Admin,Account,Treasurer', NOW(), NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.accountingentries.update', 'Admin,Account,Treasurer', NOW(), NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.accountingentries.destroy', 'Admin,Account,Treasurer', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.areamanagers.destroy','Admin',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.areamanagers.getareamanagersbyyear','Admin',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.areamanagers.store','Admin',NOW(),NOW());
@@ -369,6 +374,7 @@ INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.quantitativerecoveryfinalareas.update', 'Admin', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.receipts.index', 'Admin,Account,Treasurer', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.receipts.store', 'Admin,Account,Treasurer', NOW(), NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.receipts.getreceiptsbyvouchertype', 'Admin,Account,Treasurer', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.religions.index', 'Admin,Teacher,Academic,Parents,Principal', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.reports.getreportbystudent', 'Admin,HomeroomTeacher', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.reports.getreportenabled', 'Admin,HomeroomTeacher,Parents,Student', NOW(), NOW());

@@ -22,6 +22,16 @@ class CreateReceiptpaymentsTable extends Migration
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
+            $table->foreign('idreceipt')
+                ->references('idreceipt')
+                ->on('receipts')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('idpayment')
+                ->references('idpayment')
+                ->on('payments')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

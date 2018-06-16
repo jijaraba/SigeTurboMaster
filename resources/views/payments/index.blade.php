@@ -11,14 +11,14 @@
         <section class="grid-100">
             <section class="sige-contained">
                 <section class="sige-financials-payment-register">
-                    <a class="btn btn-green" href="{{ URL::route('financials.payments.create') }}">
+                    <a class="btn btn-green" href="{{ URL::route('financials.payments.receipts') }}">
                         <i class="fa fa-plus-circle"></i>
-                        <span>{{ Lang::get('sige.Charge') }}</span>
+                        <span>{{ Lang::get('sige.Receipt') }}</span>
                     </a>
                 </section>
                 <section class="sige-payments-lists">
-                    <h4>{{ Lang::get('sige.Payments') }}</h4>
-                    <sigeturbo-payments-calendar></sigeturbo-payments-calendar>
+                    <h4>{{ Lang::get('sige.Receipts') }}</h4>
+                    <sigeturbo-payments-receipts server-date="{{ $serverdate }}"></sigeturbo-payments-receipts>
                 </section>
             </section>
         </section>

@@ -20837,7 +20837,7 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-* sweetalert2 v7.22.0
+* sweetalert2 v7.22.2
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -21096,7 +21096,7 @@ var DismissReason = Object.freeze({
   timer: 'timer'
 });
 
-var version = "7.22.0";
+var version = "7.22.2";
 
 var argsToParams = function argsToParams(args) {
   var params = {};
@@ -21511,12 +21511,11 @@ var globalState = {};
 // Restore previous active (focused) element
 var restoreActiveElement = function restoreActiveElement() {
   if (globalState.previousActiveElement && globalState.previousActiveElement.focus) {
-    var previousActiveElement = globalState.previousActiveElement;
-    globalState.previousActiveElement = null;
     var x = window.scrollX;
     var y = window.scrollY;
-    setTimeout(function () {
-      previousActiveElement.focus && previousActiveElement.focus();
+    globalState.restoreFocusTimeout = setTimeout(function () {
+      globalState.previousActiveElement.focus();
+      globalState.previousActiveElement = null;
     }, 100); // issues/900
     if (typeof x !== 'undefined' && typeof y !== 'undefined') {
       // IE doesn't have scrollX/scrollY support
@@ -22527,6 +22526,9 @@ function _main(userParams) {
     globalState.timeout.stop();
     delete globalState.timeout;
   }
+
+  // clear the restore focus timeout
+  clearTimeout(globalState.restoreFocusTimeout);
 
   var domCache = {
     popup: getPopup(),
@@ -40774,33 +40776,39 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
     en: {
         sigeturbo: {
             'academic': 'academic',
-            'attention': 'attention',
-            'payments_attention': 'payment attention',
-            'charge_list': 'charge list',
-            'receipt_form': 'receipt form',
-            'consecutive': 'consecutive',
+            'account': 'account',
+            'accountingentries': 'accounting entries',
+            'accountingentry': 'accounting entry',
             'actives': 'actives',
-            'description': 'description',
             'additional': 'additional',
             'additional_success': 'La información adicional fue guardada satisfactoriamente',
             'address': 'address',
             'assistant': 'assistant',
+            'attention': 'attention',
             'bank': 'bank',
             'blood_type': 'blood type',
             'celular': 'celular',
+            'charge_list': 'charge list',
             'code': 'code',
             'code_title': 'code',
             'company': 'company',
             'company_phone': 'phone',
             'company_title': 'company',
             'confirm_information': 'confirm information?',
+            'consecutive': 'consecutive',
+            'costcenter': 'center',
             'date': 'date',
+            'debit': 'debit',
+            'credit': 'credit',
+            'difference': 'difference',
+            'description': 'description',
             'district': 'district',
             'doctor_name': 'doctor name',
             'doctor_phone': 'doctor phone',
             'dose': 'dose',
             'educational_output': 'educational output?',
             'email': 'email',
+            'entry': 'entry',
             'equal_treatment': 'equal treatment?',
             'error': 'error',
             'expedition': 'expedition',
@@ -40823,6 +40831,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'medication_description': 'medication description',
             'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'next': 'next',
+            'nit': 'nit',
             'no': 'no',
             'notice': 'Prematrícula',
             'observation': 'observation',
@@ -40835,6 +40844,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'payment_individual_success': 'pago individual generado satisfactoriamente',
             'payment_status': 'payment status',
             'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
+            'payments_attention': 'payment attention',
             'pending': 'pending',
             'phone': 'phone',
             'policy_number': 'policy',
@@ -40843,6 +40853,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'psychological_support': 'psychological_support?',
             'psychology': 'psychology',
             'receipt': 'receipt',
+            'receipt_form': 'receipt form',
+            'receipt_success': 'receipt success',
             'religion': 'religion',
             'responsible': 'responsible',
             'retired': 'retired',
@@ -40861,39 +40873,45 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'voucher': 'voucher',
             'warning': 'warning',
             'why_take_medication': 'why take medication?',
-            'yes': 'yes',
-            'receipt_success': 'receipt success'
+            'yes': 'yes'
         }
     },
     es: {
         sigeturbo: {
             'academic': 'año académico',
-            'payments_attention': 'no existen cobros pendientes para realizar un recibo',
-            'description': 'descripción',
-            'charge_list': 'listado de cobros',
-            'receipt_form': 'estructura del recibo',
-            'consecutive': 'consecutivo',
+            'account': 'cuenta',
+            'accountingentries': 'asientos contables',
+            'accountingentry': 'asiento contable',
             'actives': 'activos',
             'additional': 'adicional',
             'additional_success': 'La información adicional fue guardada satisfactoriamente',
             'address': 'dirección',
             'assistant': 'asistente',
+            'attention': 'atención',
             'bank': 'banco',
             'blood_type': 'tipo de sangre',
             'celular': 'celular',
+            'charge_list': 'listado de cobros',
             'code': 'código',
             'code_title': 'código',
             'company': 'empresa',
             'company_phone': 'teléfono de la empresa',
             'company_title': 'nombre de la empresa',
             'confirm_information': '¿Confirma que la información ingresada es válida?',
+            'consecutive': 'consecutivo',
+            'costcenter': 'centro',
             'date': 'fecha',
+            'debit': 'débito',
+            'credit': 'crédito',
+            'difference': 'diferencia',
+            'description': 'descripción',
             'district': 'barrio',
             'doctor_name': 'pediatra',
             'doctor_phone': 'teléfono',
             'dose': 'dosificación',
             'educational_output': '¿se autoriza la realización de salidas pedagógicas?',
             'email': 'email',
+            'entry': 'asiento',
             'equal_treatment': '¿continúa tratamiento?',
             'error': 'error',
             'expedition': 'expedición',
@@ -40916,9 +40934,9 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'medication_description': 'descripción del medicamento',
             'members_info': 'Debe actualizar la información de todos los <strong>integrantes de la familia</strong> para culminar el proceso de prematrícula y que se habiliten los pagos.',
             'next': 'next',
+            'nit': 'nit',
             'no': 'no',
             'notice': 'Prematrícula',
-            'attention': 'atención',
             'observation': 'observación',
             'observation_additional': 'información adicional',
             'occupation': 'ocupación',
@@ -40929,6 +40947,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'payment_individual_success': 'pago individual generado satisfactoriamente',
             'payment_status': 'estado de pagos',
             'payment_warning_generated': 'El Pago de <strong>Matrícula</strong> ya estaba generado',
+            'payments_attention': 'no existen cobros pendientes para realizar un recibo',
             'pending': 'pendientes',
             'phone': 'teléfono',
             'policy_number': 'póliza',
@@ -40937,6 +40956,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'psychological_support': '¿tiene apoyo psicológico?',
             'psychology': 'psicología',
             'receipt': 'recibo',
+            'receipt_form': 'estructura del recibo',
+            'receipt_success': 'recibo guardado satisfactoriamente',
             'religion': 'religión',
             'responsible': 'responsable esconómico',
             'retired': 'retirados',
@@ -40954,8 +40975,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'value': 'valor',
             'voucher': 'comprobante',
             'why_take_medication': '¿por qué toma el medicamento?',
-            'yes': 'si',
-            'receipt_success': 'recibo guardado satisfactoriamente'
+            'yes': 'si'
         }
     }
 });

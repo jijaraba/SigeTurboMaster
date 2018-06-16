@@ -311,7 +311,7 @@
                     ).catch(error => console.log(error));
                 }
             },
-            getCosts(pack) {
+            getCosts: function (pack) {
                 //Get Costs By Package,Grade And Type
                 Cost.getCostsByPackage({
                     year: this.payment.academic,
@@ -321,16 +321,17 @@
                 }).then(({data}) => {
                     this.costs = data;
                     //Config Values
+
                     if (this.payment.type !== this.pension) {
-                        this.payment.value1 = paymentTotal(this.costs, 'normal') - paymentTotal(this.costs, 'discount');
-                        this.payment.value2 = paymentTotal(this.costs, 'normal');
-                        this.payment.value3 = paymentTotal(this.costs, 'normal') + paymentTotal(this.costs, 'expired');
-                        this.payment.value4 = paymentTotal(this.costs, 'normal');
+                        this.payment.value1 = paymentTotal(this.costs, 'normal', 1) - paymentTotal(this.costs, 'discount', 1);
+                        this.payment.value2 = paymentTotal(this.costs, 'normal', 1);
+                        this.payment.value3 = paymentTotal(this.costs, 'normal', 1) + paymentTotal(this.costs, 'expired', 2);
+                        this.payment.value4 = paymentTotal(this.costs, 'normal', 1);
                     } else { //Pension
-                        this.payment.value1 = (paymentTotal(this.costs, 'normal') - paymentTotal(this.costs, 'discount')) - ((paymentTotal(this.costs, 'normal') - paymentTotal(this.costs, 'discount')) * this.payment.scholarship);
-                        this.payment.value2 = paymentTotal(this.costs, 'normal') - (paymentTotal(this.costs, 'normal') * this.payment.scholarship);
-                        this.payment.value3 = (paymentTotal(this.costs, 'normal') + paymentTotal(this.costs, 'expired')) - ((paymentTotal(this.costs, 'normal') + paymentTotal(this.costs, 'expired')) * this.payment.scholarship);
-                        this.payment.value4 = paymentTotal(this.costs, 'normal') - (paymentTotal(this.costs, 'normal') * this.payment.scholarship);
+                        this.payment.value1 = (paymentTotal(this.costs, 'normal', 1) - paymentTotal(this.costs, 'discount', 1)) - (paymentTotal(this.costs, 'normal', 1) * this.payment.scholarship);
+                        this.payment.value2 = paymentTotal(this.costs, 'normal', 1) - (paymentTotal(this.costs, 'normal', 1) * this.payment.scholarship);
+                        this.payment.value3 = (paymentTotal(this.costs, 'normal', 1) + paymentTotal(this.costs, 'expired', 2)) - (paymentTotal(this.costs, 'normal', 1) * this.payment.scholarship);
+                        this.payment.value4 = paymentTotal(this.costs, 'normal', 1) - (paymentTotal(this.costs, 'normal', 1) * this.payment.scholarship);
                     }
                     //Set Concept
                     this.setConcept(this.payment.concept);

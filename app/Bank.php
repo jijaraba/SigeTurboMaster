@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bank extends Model
 {
     protected $primaryKey = 'idbank';
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'idaccounttype', 'idcostcenter'];
     protected $hidden = ['created_at', 'updated_at'];
     /**
      * Table Name

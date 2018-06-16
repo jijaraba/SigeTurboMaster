@@ -16,6 +16,7 @@ import Vue from 'vue';
 
 import Translate from '../../plugins/Translate';
 import Lang from '../../core/lang';
+import Version from '../../views/global/Version';
 import DashboardEnrollment from '../../views/dashboard/Enrollment';
 import PaymentsCalendar from '../../views/financials/Payments/Calendar';
 
@@ -27,9 +28,12 @@ Vue.use(Translate, {
 
 new Vue({
     el: '#financials-dashboard',
-    data: {},
+    data: {
+        version: '1.0'
+    },
     components: {
         'sigeturbo-dashboard-enrollments': DashboardEnrollment,
         'sigeturbo-payments-calendar': PaymentsCalendar,
+        'sigeturbo-version': Version,
     }
 });

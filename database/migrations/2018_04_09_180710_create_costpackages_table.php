@@ -17,9 +17,11 @@ class CreateCostpackagesTable extends Migration
             $table->increments('idcostpackage');
             $table->integer('idpackage')->unsigned();
             $table->integer('idaccounttype')->unsigned();
+            $table->integer('idvouchercategory')->unsigned()->default(1);
             $table->integer('idtransactiontype')->unsigned();
             $table->double('percentage', 15, 2);
             $table->string('calculated')->nullable();
+            $table->integer('factor')->default(1);
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
@@ -31,6 +33,11 @@ class CreateCostpackagesTable extends Migration
             $table->foreign('idaccounttype')
                 ->references('idaccounttype')
                 ->on('accounttypes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('idvouchercategory')
+                ->references('idvouchercategory')
+                ->on('vouchercategories')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreign('idtransactiontype')

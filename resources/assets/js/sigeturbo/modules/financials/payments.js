@@ -16,7 +16,9 @@ import Vue from 'vue';
 
 import Translate from '../../plugins/Translate';
 import Lang from '../../core/lang';
+import Version from '../../views/global/Version';
 import PaymentsCalendar from '../../views/financials/Payments/Calendar';
+import PaymentsReceipts from '../../views/financials/Payments/Receipts';
 import PaymentsSearch from '../../views/financials/Payments/Seach';
 import PaymentsCreate from '../../views/financials/Payments/Create';
 
@@ -28,10 +30,14 @@ Vue.use(Translate, {
 
 new Vue({
     el: '#financials-payments',
-    data: {},
+    data: {
+        version: '1.0'
+    },
     components: {
         'sigeturbo-payments-calendar': PaymentsCalendar,
+        'sigeturbo-payments-receipts': PaymentsReceipts,
         'sigeturbo-payments-search': PaymentsSearch,
         'sigeturbo-payments-create': PaymentsCreate,
+        'sigeturbo-version': Version,
     }
 });

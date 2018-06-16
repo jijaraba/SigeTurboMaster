@@ -28,6 +28,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'SigeTurbo\Repositories\Academic\AcademicRepository'
         );
         App::bind(
+            'SigeTurbo\Repositories\Accountingentry\AccountingentryRepositoryInterface',
+            'SigeTurbo\Repositories\Accountingentry\AccountingentryRepository'
+        );
+        App::bind(
             'SigeTurbo\Repositories\Accounttype\AccounttypeRepositoryInterface',
             'SigeTurbo\Repositories\Accounttype\AccounttypeRepository'
         );

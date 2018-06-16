@@ -15,8 +15,20 @@ class CreateBanksTable extends Migration
         Schema::create('banks', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('idbank');
+            $table->integer('idaccounttype')->unsigned();
+            $table->integer('idcostcenter')->unsigned();
             $table->string('name');
             $table->timestamps();
+            $table->foreign('idcostcenter')
+                ->references('idcostcenter')
+                ->on('costcenters')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('idaccounttype')
+                ->references('idaccounttype')
+                ->on('accounttypes')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

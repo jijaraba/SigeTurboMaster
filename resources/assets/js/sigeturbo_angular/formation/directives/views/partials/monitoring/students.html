@@ -48,8 +48,10 @@
                                         grades:user.iduser)) }}</em>
                                     <input type="hidden" ng-value="0" ng-model="user.grade" value="0"/>
                                     <div class="image {{ rating.global | performance:'background' }}">
-                                        <div ng-if="user.inclusion == 'Y'" class="inclusion fa fa-child fa-lg"
-                                             title="Inclusión"></div>
+                                        <div ng-if="user.inclusion == 'Y'" class="inclusion"
+                                             title="Inclusión">
+                                            <i class="fa fa-child fa-lg"></i>
+                                        </div>
                                         <img ng-src="{{assets}}/img/users/{{user.photo}}" alt="{{ user.lastname }}"
                                              title="{{ user.lastname}} {{ user.firstname }}"/>
                                         <div ng-if="rating.global > 0"

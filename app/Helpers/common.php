@@ -613,17 +613,51 @@ function setZero($limit/*limit*/, $number/*value*/)
 /**
  * Get Cost Total
  * @param $details
+ * @param $method
  * @param $type
  * @return float
  */
-function costTotal($details, $type)
+function costTotal($details, $method, $type)
 {
     $subtotal = 0;
     foreach ($details as $detail) {
-        if ($type == $detail->calculated) {
+        if ($method == $detail->calculated && $detail->transactiontype == $type) {
             $subtotal += ($detail->percentage < 1) ? $detail->value * (1 - $detail->percentage) : $detail->value;
         }
     }
     return round($subtotal);
 
+}
+
+/**
+ * Convert String To Currency
+ * @param $value
+ * @return float
+ */
+function stringToCurrency($value)
+{
+    return (float)(str_replace('$', '', str_replace(',', '', $value)));
+}
+
+/**
+ * Cost Center
+ * @param $group
+ * @return int
+ */
+function costCenter($group)
+{
+    switch ($group) {
+        case ($group >= 1 && $group <= 10):
+            return \SigeTurbo\Costcenter::PRESCHOOL;
+            break;
+        case ($group >= 11 && $group <= 20):
+            return \SigeTurbo\Costcenter::ELEMENTARYSCHOOL;
+            break;
+        case ($group >= 21 && $group <= 28):
+            return \SigeTurbo\Costcenter::MIDDLESCHOOL;
+            break;
+        case ($group >= 29 && $group <= 32):
+            return \SigeTurbo\Costcenter::HIGHSCHOOL;
+            break;
+    }
 }

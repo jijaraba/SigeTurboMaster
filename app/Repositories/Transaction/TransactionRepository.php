@@ -10,6 +10,10 @@ use SigeTurbo\Transaction;
 class TransactionRepository implements TransactionRepositoryInterface
 {
 
+    /**
+     * Get All Transactions
+     * @return mixed
+     */
     public function all()
     {
         return Cache::remember('transactions', 1440, function () {
@@ -18,9 +22,14 @@ class TransactionRepository implements TransactionRepositoryInterface
         });
     }
 
-    public function find($idtransaction)
+    /**
+     * Find Transaction By ID
+     * @param $transaction
+     * @return mixed
+     */
+    public function find($transaction)
     {
-        return Transaction::find($idtransaction);
+        return Transaction::find($transaction);
     }
 
     /**

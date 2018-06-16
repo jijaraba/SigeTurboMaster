@@ -1,78 +1,79 @@
 <template>
     <section>
-        <section>
-
-        </section>
-        <section>
-            <section class="payment-list">
-                <ul id="payment-list display-horizontal col-100">
-                    <template v-for="user in users">
-                        <li class="col-100">
-                            <ul class="display-horizontal col-100 payment">
-                                <li class="col-05 select">
-                                    <input type="checkbox"/>
-                                </li>
-                                <li class="col-10 photo">
-                                    <div>
-                                        <a href="">
-                                            <img class="tooltip" :src=" assets + '/img/users/' + user.photo"
-                                                 :alt="user.fullname"
-                                                 :title="user.iduser + ' - ' + user.fullname"/>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="col-15 family">
-                                    <div>{{ user.family }}</div>
-                                </li>
-                                <li class="payments col-50">
-                                    <div>
-                                        <section class="payment-calendar">
-                                            <ul class="col-100">
-                                                <li v-for="payment in user.payments">
-                                                    <sigeturbo-payments-payment :payment="payment" banks="banks"
-                                                                                :server-date="serverDate"
-                                                                                :banks="banks"></sigeturbo-payments-payment>
-                                                </li>
-                                            </ul>
-                                        </section>
-                                    </div>
-                                </li>
-                                <li class="col-20 pending">
-                                    <div>{{ user.payments | chargeSubtotal | currency }}</div>
-                                </li>
-                            </ul>
+        <sigeturbo-search-list @result="result"></sigeturbo-search-list>
+        <div class="clearfix"></div>
+        <template v-if="users.length > 0">
+            <section>
+                <section class="payment-list">
+                    <ul id="payment-list" class="display-horizontal col-100">
+                        <template v-for="user in users">
+                            <li class="col-100">
+                                <ul class="display-horizontal col-100 payment">
+                                    <li class="col-05 select">
+                                        <input type="checkbox"/>
+                                    </li>
+                                    <li class="col-10 photo">
+                                        <div>
+                                            <a href="">
+                                                <img class="tooltip" :src=" assets + '/img/users/' + user.photo"
+                                                     :alt="user.fullname"
+                                                     :title="user.iduser + ' - ' + user.fullname"/>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="col-15 family">
+                                        <div>{{ user.family }}</div>
+                                    </li>
+                                    <li class="payments col-50">
+                                        <div>
+                                            <section class="payment-calendar">
+                                                <ul class="col-100">
+                                                    <li v-for="payment in user.payments">
+                                                        <sigeturbo-payments-payment :payment="payment" banks="banks"
+                                                                                    :server-date="serverDate"
+                                                                                    :banks="banks"></sigeturbo-payments-payment>
+                                                    </li>
+                                                </ul>
+                                            </section>
+                                        </div>
+                                    </li>
+                                    <li class="col-20 pending">
+                                        <div>{{ user.payments | chargeSubtotal(serverDate) | currency }}</div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </template>
+                    </ul>
+                </section>
+                <section class="sige-payments-receipt">
+                    <ul class="display-horizontal col-100 receipt">
+                        <li class="col-60"></li>
+                        <li class="col-05 receipt">
+                            <a class="btn btn-purple" href="" :id="'receipt_'+user.iduser">
+                                <i class="fas fa-envelope fa-lg"></i>
+                            </a>
                         </li>
-                    </template>
-                </ul>
+                        <li class="col-05 receipt">
+                            <a class="btn btn-blue" href="" :id="'receipt_'+user.iduser">
+                                <i class="fas fa-comment-alt fa-lg"></i>
+                            </a>
+                        </li>
+                        <li class="col-05 receipt">
+                            <a @click="showReceipt($event)" class="btn btn-green tooltip" title="Recibo" href="#" :id="'receipt_'+user.iduser">
+                                <i class="fas fa-receipt fa-lg"></i>
+                            </a>
+                        </li>
+                        <li class="col-20 pending">
+                            <div>
+                                {{ users | chargeTotal(serverDate) | currency }}
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+                <sigeturbo-payments-receipt @close="closeReceipt" v-if="receipt" :payments="payments"
+                                            show-receipt="receipt" :banks="banks"></sigeturbo-payments-receipt>
             </section>
-            <section class="sige-payments-receipt">
-                <ul class="display-horizontal col-100 receipt">
-                    <li class="col-60"></li>
-                    <li class="col-05 receipt">
-                        <a class="btn btn-purple" href="" :id="'receipt_'+user.iduser">
-                            <i class="fas fa-envelope fa-lg"></i>
-                        </a>
-                    </li>
-                    <li class="col-05 receipt">
-                        <a class="btn btn-blue" href="" :id="'receipt_'+user.iduser">
-                            <i class="fas fa-comment-alt fa-lg"></i>
-                        </a>
-                    </li>
-                    <li class="col-05 receipt">
-                        <a @click="showReceipt($event)" class="btn btn-green" href="#" :id="'receipt_'+user.iduser">
-                            <i class="fas fa-receipt fa-lg"></i>
-                        </a>
-                    </li>
-                    <li class="col-20 pending">
-                        <div>
-                            {{ users | chargeTotal | currency }}
-                        </div>
-                    </li>
-                </ul>
-            </section>
-            <sigeturbo-payments-receipt @close="closeReceipt" v-if="receipt" :payments="payments"
-                                        show-receipt="receipt" :banks="banks"></sigeturbo-payments-receipt>
-        </section>
+        </template>
     </section>
 </template>
 <script>
@@ -87,6 +88,7 @@
     import capitalize from "../../../filters/string/capitalize";
     import PaymentReceipt from '../../../views/financials/Payments/Payment/Receipt';
     import uppercase from "../../../filters/string/uppercase";
+    import SearchCodeGlobal from '../../../views/global/Search/Code/Global';
 
     export default {
 
@@ -102,7 +104,8 @@
         },
         components: {
             'sigeturbo-payments-payment': PaymentsPayment,
-            'sigeturbo-payments-receipt': PaymentReceipt
+            'sigeturbo-payments-receipt': PaymentReceipt,
+            'sigeturbo-search-list': SearchCodeGlobal,
         },
         data: function () {
             return {
@@ -110,7 +113,9 @@
                 banks: [],
                 users: [],
                 user: [],
-                family: 1,
+                category: 1, //Family,
+                family: 0,
+                search: 0,
                 receipt: false,
                 payments: [],
             }
@@ -130,20 +135,20 @@
             getPaymentsByFamily() {
                 //Get Payment By Family
                 Payment.getPaymentsByFamily({
-                    family: JSON.stringify(this.family)
-                })
-                    .then(({data}) => {
+                    family: this.family
+                }).then(({data}) => {
+                    if (data.length > 0) {
                         this.users = data;
                         //Get Payments Pending
                         for (let i = 0; i < this.users.length; i++) {
                             for (let j = 0; j < this.users[i].payments.length; j++) {
-                                if (this.users[i].payments[j].ispayment === 'N') {
+                                if ((this.users[i].payments[j].ispayment === 'N') || (this.users[i].payments[j].ispayment === 'P')) {
                                     this.payments.push(this.users[i].payments[j]);
                                 }
                             }
                         }
-                    })
-                    .catch(error => console.log(error));
+                    }
+                }).catch(error => console.log(error));
             },
             showReceipt(event) {
                 event.preventDefault();
@@ -165,21 +170,26 @@
             closeReceipt(receipt) {
                 this.receipt = receipt;
             },
+            result(data) {
+                //Get Payments By Family
+                if (data.successful) {
+                    if (data.category == 1) {
+                        this.family = data.search;
+                        this.getPaymentsByFamily();
+                    }
+                } else {
+                    this.users = [];
+                }
+            }
         },
         watch: {},
         created: function () {
-
             //Get Banks
             Bank.query('/api/v1/banks/', {})
                 .then(({data}) => {
                     this.banks = data;
                 })
                 .catch(error => console.log(error));
-
-
-            //Get Payments By Family
-            this.getPaymentsByFamily();
-
         },
         mounted() {
         },

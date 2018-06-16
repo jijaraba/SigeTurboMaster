@@ -64,7 +64,6 @@
       }
     }
     > .transactions {
-      margin-top: 25px;
       > .exports {
         width: 500px;
         float: right;
@@ -85,7 +84,7 @@
         section {
           > ul {
             > li {
-              padding: 5px 4px;
+
             }
           }
         }
@@ -123,6 +122,7 @@
         margin-top: 10px;
         height: 45px;
         > ul {
+          padding: 0px 10px;
           background: $sige-global-bgcolor-27;
           border-radius: 5px;
           box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
@@ -144,7 +144,7 @@
           }
         }
       }
-      .transaction-new {
+      .transaction-new, .transaction-edit {
         section {
           > ul {
             > li {
@@ -154,24 +154,38 @@
                 }
                 padding: 12px 8px;
               }
+              select {
+                font: {
+                  size: 1em;
+                }
+                padding: 12px 8px;
+                text-align: center;
+              }
             }
           }
         }
         background: $sige-global-bgcolor-27;
         border-radius: 5px;
         box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
-        .new {
-          line-height: 50px;
+        .type {
           text-align: center;
-          i {
-            font: {
-              size: 1.6em;
+        }
+        .new, .delete, .edit {
+          div {
+            line-height: 50px;
+            text-align: center;
+            cursor: pointer;
+            i {
+              font: {
+                size: 1.6em;
+              }
+              padding-top: 10px;
+              &.empty {
+                display: block;
+                width: 15px;
+              }
             }
-            padding-top: 10px;
-            &.empty {
-              display: block;
-              width: 15px;
-            }
+
           }
           button {
             width: 100%;
@@ -329,6 +343,102 @@
   }
 }
 
+.receipts-list {
+  font: {
+    size: 0.9em;
+  }
+  color: $sige-global-color-04;
+}
+
+.receipt {
+  border-bottom: 1px solid $sige-border-color-03;
+  font: {
+    size: 0.95em;
+  }
+  > .select {
+    > input {
+      position: relative;
+      top: 40%;
+      transform: translateY(-50%);
+    }
+  }
+  > .photo {
+    line-height: normal;
+    div {
+      position: relative;
+      top: 40%;
+      transform: translateY(-50%);
+      text-align: center;
+      margin: 5px auto;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      padding: 2px;
+      background-color: rgba($sige-global-bgcolor-03, 1);
+      > a {
+        > img {
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+  > .vouchertype {
+    > div {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      font: {
+        size: 0.9em;
+      }
+    }
+  }
+  > .document {
+    > div {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+    }
+  }
+  > .payments {
+    > div {
+
+    }
+  }
+  > .pending {
+    > div {
+      text-align: right;
+      margin-right: 10px;
+      line-height: initial;
+      padding: 20px;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  > .receipt-container {
+    > a {
+      padding: 8px 18px;
+      background: $sige-global-bgcolor-07 !important;
+      border-radius: 2px;
+      color: $sige-global-color-02;
+      position: relative;
+      top: 40%;
+      transform: translateY(-50%);
+    }
+  }
+  > .export {
+    > div {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      cursor: pointer;
+      color: $sige-global-bgcolor-10;
+    }
+  }
+}
+
 .payment-list {
   font: {
     size: 0.9em;
@@ -457,7 +567,8 @@
         margin: 0px 2px;
         position: relative;
         > img {
-          width: 40px;
+          width: 55px;
+          height: 55px;
         }
         &.N {
         }
@@ -496,6 +607,27 @@
             top: 0px;
             right: 5px;
           }
+          &.receipt {
+            border: none;
+            padding: 1px;
+            display: block;
+            width: 40px;
+            height: 13px;
+            position: absolute;
+            content: "V";
+            background: $sige-global-bgcolor-04;
+            border-radius: 1px;
+            font: {
+              size: 0.8em;
+              family: $sige-font-family-03;
+            }
+            color: white;
+            bottom: 38px;
+            right: 8px;
+            &.blue {
+              background: $sige-global-bgcolor-05;
+            }
+          }
         }
       }
     }
@@ -523,7 +655,7 @@
 }
 
 .payment-calendar-horizontal {
-  max-height: 180px;
+  max-height: 140px;
   overflow-y: scroll;
   > ul {
     border-bottom: 1px solid $sige-border-color-03;
@@ -534,8 +666,28 @@
       }
       &.icon {
         > div {
+          position: relative;
           > img {
             width: 40px;
+          }
+          > em {
+            line-height: initial;
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            width: 15px;
+            height: 15px;
+            display: block;
+            border-radius: 3px;
+            &.discount {
+              background: $sige-global-bgcolor-05;
+            }
+            &.normal {
+              background: $sige-global-bgcolor-07;
+            }
+            &.expired {
+              background: $sige-global-bgcolor-10;
+            }
           }
         }
       }

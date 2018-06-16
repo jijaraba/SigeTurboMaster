@@ -6,10 +6,22 @@
             </div>
         </li>
         <li class="col-05 icon">
-            <template v-if="payment.approved == 'N'">
+            <template v-if="payment.ispayment == 'N'">
                 <div>
                     <img :src="assets + '/img/modules/payment_notpayment.svg'"/>
-                    <em :class="payment.method">1</em>
+                    <em :class="payment.method"></em>
+                </div>
+            </template>
+            <template v-if="payment.ispayment == 'P'">
+                <div>
+                    <img :src="assets + '/img/modules/payment_partial.svg'"/>
+                    <em :class="payment.method" :title="payment.method"></em>
+                </div>
+            </template>
+            <template v-if="payment.ispayment == 'Y'">
+                <div>
+                    <img :src="assets + '/img/modules/payment_approved.svg'"/>
+                    <em :class="payment.method" :title="payment.method"></em>
                 </div>
             </template>
         </li>
@@ -26,16 +38,16 @@
         </li>
         <li class="col-15 value">
             <div>
-                {{ payment | realValue | currency }}
+                {{ payment | realValue(serverDate) | currency }}
             </div>
         </li>
         <li class="col-15 value">
             <div>
-                <input type="text" v-model="payment.realValue">
+                <input type="text" v-model="payment.receipt_value">
             </div>
         </li>
         <li class="col-05 delete">
-            <div @click="removePayment(index)">
+            <div @click="removePayment()">
                 <i class="fas fa-minus-square fa-lg"></i>
             </div>
         </li>
@@ -43,6 +55,7 @@
 </template>
 <script>
 
+    import moment from 'moment';
     import assets from "../../../../core/utils";
     import currency from "../../../../filters/other/currency";
     import paymentType from "../../../../filters/payment/paymentType";
@@ -52,7 +65,7 @@
 
         props: [
             'payment',
-            'detail',
+            'position',
         ],
         filters: {
             currency: currency,
@@ -63,15 +76,16 @@
         data: function () {
             return {
                 assets: assets(),
+                serverDate: moment().format('YYYY-MM-DD')
             }
         },
         methods: {
-            removePayment(index) {
-                this.$emit('removePayment', index)
+            removePayment() {
+                this.$emit('removePayment', this.payment)
             }
         },
         watch: {
-            'payment.realValue': function (newRealValue) {
+            'payment.receipt_value': function (newReceiptValue) {
                 this.$emit('calculateTotal');
             }
         },

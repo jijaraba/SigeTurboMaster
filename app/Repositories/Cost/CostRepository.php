@@ -43,12 +43,29 @@ class CostRepository implements CostRepositoryInterface
             ->first();
     }
 
-    public function getCostsByPackage($year, $grade, $type, $package)
+    /**
+     * Get Cost By Package And Category
+     * @param $year
+     * @param $grade
+     * @param $type |  Concept Type
+     * @param $package
+     * @param $category | (Invoice|Receipt)
+     * @return mixed
+     */
+    public function getCostsByPackageAndCategory($year, $grade, $type, $package, $category)
     {
-        return Cost::select('*')
+        return Cost::select('accounttypes.idaccounttype', 'accounttypes.name AS accounttype', 'costpackages.idtransactiontype', 'costpackages.idtransactiontype AS transactiontype', 'costs.value', 'costpackages.calculated', 'costpackages.factor')
             ->join('costpackages', function ($join) {
                 $join
                     ->on('costpackages.idaccounttype', '=', 'costs.idaccounttype');
+            })
+            ->join('accounttypes', function ($join) {
+                $join
+                    ->on('accounttypes.idaccounttype', '=', 'costs.idaccounttype');
+            })
+            ->join('vouchercategories', function ($join) {
+                $join
+                    ->on('vouchercategories.idvouchercategory', '=', 'costpackages.idvouchercategory');
             })
             ->join('packages', function ($join) {
                 $join
@@ -58,7 +75,7 @@ class CostRepository implements CostRepositoryInterface
             ->where('costs.idgrade', '=', $grade)
             ->where('costs.idconcepttype', '=', $type)
             ->where('packages.idpackage', '=', $package)
-            ->where('costpackages.idtransactiontype', '=', Transactiontype::DEBIT)
+            ->where('vouchercategories.idvouchercategory', '=', $category)
             ->get();
     }
 }

@@ -20,7 +20,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('idbank')->unsigned();
             $table->integer('idfamily')->unsigned();
             $table->integer('iduser')->unsigned();
-            $table->enum('method', array('discount', 'normal', 'card', 'agreement'))->default('normal');
+            $table->enum('method', array('discount', 'normal', 'expired', 'agreement'))->default('normal');
             $table->string('concept1');
             $table->integer('value1');
             $table->date('date1');
@@ -42,8 +42,9 @@ class CreatePaymentsTable extends Migration
             $table->string('transaccionTNS')->nullable();
             $table->string('hash')->nullable();
             $table->double('realValue', 11, 2)->nullable();
+            $table->double('receipt_value', 11, 2)->nullable();
             $table->text('observation')->nullable();
-            $table->enum('ispayment', array('N', 'Y'))->default('N');
+            $table->enum('ispayment', array('N', 'Y', 'P'))->default('N');
             $table->enum('approved', array('N', 'A', 'R', 'P'))->default('N');
             $table->date('realdate');
             $table->string('voucher')->nullable();

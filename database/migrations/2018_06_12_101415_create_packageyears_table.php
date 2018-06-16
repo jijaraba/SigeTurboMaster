@@ -14,6 +14,7 @@ class CreatePackageyearsTable extends Migration
     public function up()
     {
         Schema::create('packageyears', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('idpackageyear');
             $table->integer('idyear')->unsigned();
             $table->integer('idpackage')->unsigned();

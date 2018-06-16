@@ -186,10 +186,8 @@
             @endif
         </aside>
         <div class="sige-content" id="sige-content">
-        @include("layouts.partials.flashmessage")
-        @yield("content")
-        <!-- ToDo -->
-            <div ui-view="viewDashboard"></div>
+            @include("layouts.partials.flashmessage")
+            @yield("content")
             @yield("dashboard")
         </div>
         <section class="sige-stream-content" id="sigeturbo_stream">
@@ -198,7 +196,9 @@
     </section>
     <footer class="clearfix">
         <div class="sige-footer-content">
-            <div>{{ Lang::get('sige.' . ucfirst(getCurrentRoute())) }}: v<span app-version></span></div>
+            <div>{{ Lang::get('sige.' . ucfirst(getCurrentRoute())) }}:
+                <sigeturbo-version :version="version"></sigeturbo-version>
+            </div>
         </div>
     </footer>
     <div style="display: none" id="serverName" data-server="{{ env("SERVER") }}">{{ env("SERVER") }}</div>

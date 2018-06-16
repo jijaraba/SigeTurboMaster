@@ -43,11 +43,12 @@
                                     <section class="sige-financials-transactions">
                                         <section class="payments">
                                             <section class="payment-calendar-horizontal">
-                                                <template v-for="(payment, index) in payments">
-                                                    <sigeturbo-financials-payment-detail :payment="payment"
+                                                <template v-for="payment, position in payments">
+                                                    <sigeturbo-financials-payment-detail :payments="payments"
+                                                                                         :payment="payment"
                                                                                          @removePayment="removePayment"
                                                                                          @calculateTotal="calculateTotal"
-                                                                                         :index="index"></sigeturbo-financials-payment-detail>
+                                                                                         :position="position"></sigeturbo-financials-payment-detail>
                                                 </template>
                                                 <ul class="display-horizontal col-100">
                                                     <li class="col-05 check">
@@ -88,6 +89,11 @@
                                             </section>
                                         </section>
                                     </section>
+                                </li>
+                                <li class="col-100">
+                                    <input @click="setStep(2)" class="btn btn-aquamarine" type="button"
+                                           :value="$translate.text('sigeturbo.next') | capitalize">
+
                                 </li>
                             </ul>
                         </fieldset>
@@ -159,15 +165,37 @@
                         </fieldset>
                         <fieldset class="step" id="step-3" data-step="3">
                             <legend>{{ $translate.text('sigeturbo.step') | uppercase }} 3</legend>
-                            <section class="sige-financials-transactions">
-                                <section class="payments">
-                                    <section class="transactions" :id='"show_payment_"'>
-                                        <sigeturbo-financials-transactions-show load="load"
-                                                                                payment="payment"
-                                                                                @calculateTotal=""></sigeturbo-financials-transactions-show>
+                            <ul class="display-horizontal col-100">
+                                <li class="col-100">
+                                    <h4>{{ $translate.text('sigeturbo.accountingentries') | uppercase }}</h4>
+                                    <section class="info_generic aquamarine">
+                                        <div>
+                                            <i class="fas fa-info-circle fa-2x" style="color:white"></i>
+                                            <span class="col-90">
+                                                Revisar las <strong>Asientos Contables</strong> generados automáticamente por el sistema, en caso de existir inconsistencias por favor realizar los respectivos cambios.
+                                            </span>
+                                        </div>
                                     </section>
-                                </section>
-                            </section>
+                                </li>
+                                <li class="col-100">
+                                    <section class="sige-financials-transactions">
+                                        <section class="payments">
+                                            <section class="transactions">
+                                                <template v-if="receipt.idreceipt > 0">
+                                                    <sigeturbo-financials-accountingentries-show load="load"
+                                                                                                 :receipt="receipt"
+                                                                                                 @calculateTotal=""></sigeturbo-financials-accountingentries-show>
+                                                </template>
+                                            </section>
+                                        </section>
+                                    </section>
+                                </li>
+                                <li class="col-100">
+                                    <input @click="setStep(4)" class="btn btn-aquamarine" type="button"
+                                           :value="$translate.text('sigeturbo.next') | capitalize">
+
+                                </li>
+                            </ul>
                         </fieldset>
                     </form>
 
@@ -209,12 +237,11 @@
     import paymentType from "../../../../filters/payment/paymentType";
     import {chargeSubtotal, chargeTotalRealValue} from "../../../../filters/payment/charge";
     import capitalize from "../../../../filters/string/capitalize";
-    import FinancialTransactionsShow from '../Transaction/Show';
+    import FinancialAccountingentryShow from '../Accountingentry/Show';
     import FinancialPaymentDetail from './Detail';
     import Vouchertype from "../../../../models/Vouchertype";
     import titlecase from "../../../../filters/string/titlecase";
     import Receipt from "../../../../models/Receipt";
-
 
     export default {
 
@@ -233,7 +260,7 @@
             chargeTotalRealValue: chargeTotalRealValue,
         },
         components: {
-            'sigeturbo-financials-transactions-show': FinancialTransactionsShow,
+            'sigeturbo-financials-accountingentries-show': FinancialAccountingentryShow,
             'sigeturbo-financials-payment-detail': FinancialPaymentDetail,
         },
         data: function () {
@@ -242,6 +269,7 @@
                 steps: 3,
                 stepSelected: 0,
                 receipt: {
+                    idreceipt: 0,
                     bank: 2,
                     voucher: 2,
                     consecutive: 0,
@@ -249,7 +277,8 @@
                     date: moment().format('YYYY-MM-DD'),
                 },
                 vouchertypes: [],
-                saveReceiptEnable: true
+                saveReceiptEnable: true,
+                load: false,
             }
         },
         methods: {
@@ -259,8 +288,9 @@
             closeReceipt() {
                 this.$emit('close', false)
             },
-            removePayment(index) {
-                this.payments.splice(this.payments.indexOf(index), 1);
+            removePayment(position) {
+                this.payments.splice(this.payments.indexOf(position), 1);
+                this.receipt.value = currency(chargeTotalRealValue(this.payments));
             },
             setStep(step) {
                 for (let i = 0; i <= this.steps; i++) {
@@ -278,7 +308,13 @@
                 //Config Payments
                 let data = [];
                 this.payments.forEach(function (payment) {
-                    data.push({payment: payment.idpayment, value: payment.realValue, method: payment.method})
+                    data.push({
+                        payment: payment.idpayment,
+                        receipt_value: payment.receipt_value,
+                        real_value: payment.realValue,
+                        method: payment.method,
+                        ispayment: payment.ispayment,
+                    })
                 });
 
                 //Save Receipt
@@ -300,9 +336,27 @@
                     }).then((result) => {
                         if (result) {
                             this.saveReceiptEnable = false;
+                            //Reload Accountingentry
+                            this.receipt.idreceipt = data.receipt.idreceipt;
+                            this.load = true;
+                            //Get Vouchertypes
+                            this.loadVoucherTypes();
                         }
                     });
                 }).catch(error => console.log(error));
+            },
+            loadVoucherTypes() {
+                //Get All Voucher Types
+                Vouchertype.getVouchertypes({})
+                    .then(({data}) => {
+                        this.vouchertypes = data;
+                        for (let i = 0; i < this.vouchertypes.length; i++) {
+                            this.vouchertypes[i].name = titlecase(this.vouchertypes[i].name);
+                        }
+                        //Get First Consecutive
+                        this.receipt.consecutive = data[1].consecutive;
+                    })
+                    .catch(error => console.log(error));
             }
 
         },
@@ -312,17 +366,7 @@
             }
         },
         created() {
-            //Get All Voucher Types
-            Vouchertype.getVouchertypes({})
-                .then(({data}) => {
-                    this.vouchertypes = data;
-                    for (let i = 0; i < this.vouchertypes.length; i++) {
-                        this.vouchertypes[i].name = titlecase(this.vouchertypes[i].name);
-                    }
-                    //Get First Consecutive
-                    this.receipt.consecutive = data[1].consecutive;
-                })
-                .catch(error => console.log(error));
+            this.loadVoucherTypes();
         },
         mounted() {
         },
