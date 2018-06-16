@@ -133,8 +133,8 @@ class ReceiptsController extends Controller
      */
     public function store(ReceiptRequest $request)
     {
-        DB::beginTransaction();
-        try {
+        //DB::beginTransaction();
+        //try {
             //Preregistration Year
             $year = $this->yearRepository->getCurrentPreregistration();
             if (!isset($year->idyear)) {
@@ -260,12 +260,12 @@ class ReceiptsController extends Controller
                 $data['unsuccessful'] = true;
                 $data['message'] = Lang::get('sige.ErrorSaveMessage');
             }
-            DB::commit();
+            //DB::commit();
             return response()->json($data);
-        } catch (\Exception $e) {
-            DB::rollback();
-            return response()->json(["successful" => false], 300);
-        }
+        //} catch (\Exception $e) {
+         //   DB::rollback();
+          //  return response()->json(["successful" => false], 300);
+        //}
     }
 
 
