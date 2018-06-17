@@ -3744,6 +3744,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_Family__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Family.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__filters_string_uppercase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/uppercase.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
 //
 //
 //
@@ -3758,6 +3760,44 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -3765,14 +3805,28 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* harmony default export */ __webpack_exports__["a"] = ({
 
     props: [],
-    filters: {},
+    filters: {
+        uppercase: __WEBPACK_IMPORTED_MODULE_1__filters_string_uppercase__["a" /* default */]
+    },
     components: {},
     data: function data() {
         return {
-            search: ''
+            showSearchResult: false,
+            search: '',
+            category: 1,
+            results: [],
+            assets: Object(__WEBPACK_IMPORTED_MODULE_2__core_utils__["a" /* default */])()
         };
     },
     methods: {
+        showSearchForm: function showSearchForm() {
+            if (this.search.length > 2) {
+                this.showSearchResult = true;
+            }
+        },
+        closeSearchForm: function closeSearchForm() {
+            this.showSearchResult = false;
+        },
         searchUsers: function searchUsers(event) {
             var _this = this;
 
@@ -3783,17 +3837,44 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }).then(function (_ref) {
                 var data = _ref.data;
 
-                if (data.idfamily) {
-                    _this.$emit('result', { successful: true, category: 1, search: data.idfamily });
-                } else {
+                if (data.idfamily) {} else {
                     _this.$emit('result', { successful: false });
                 }
             }).catch(function (error) {
                 return console.log(error);
             });
+        },
+        selectFamily: function selectFamily(result) {
+            this.$emit('result', { successful: true, category: this.category, search: result });
         }
     },
-    watch: {},
+    watch: {
+        'search': function search(newSearch, oldSearch) {
+            var _this2 = this;
+
+            if (newSearch != oldSearch) {
+                if (newSearch.length > 3) {
+                    if (typeof newSearch != 'undefined') {
+                        if (this.category == 1) {
+                            __WEBPACK_IMPORTED_MODULE_0__models_Family__["a" /* default */].searchFamilyByName({
+                                search: this.search
+                            }).then(function (_ref2) {
+                                var data = _ref2.data;
+
+                                _this2.results = data;
+                            }).catch(function (error) {
+                                return console.log(error);
+                            });
+                        }
+                    } else {
+                        this.users = [];
+                    }
+                } else {
+                    this.users = [];
+                }
+            }
+        }
+    },
     created: function created() {},
     mounted: function mounted() {}
 });
@@ -44976,8 +45057,6 @@ var render = function() {
       [
         _c("ul", { staticClass: "display-horizontal col-100" }, [
           _c("li", { staticClass: "col-100 icon-right" }, [
-            _vm._m(0),
-            _vm._v(" "),
             _c("input", {
               directives: [
                 {
@@ -44987,9 +45066,12 @@ var render = function() {
                   expression: "search"
                 }
               ],
-              attrs: { type: "text" },
+              attrs: { type: "text", debounce: "2000" },
               domProps: { value: _vm.search },
               on: {
+                keyup: function($event) {
+                  _vm.showSearchForm()
+                },
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -44997,11 +45079,178 @@ var render = function() {
                   _vm.search = $event.target.value
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.category,
+                    expression: "category"
+                  }
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.category = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "1" } }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm._f("uppercase")(
+                        _vm.$translate.text("sigeturbo.family")
+                      )
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm._f("uppercase")(
+                        _vm.$translate.text("sigeturbo.student")
+                      )
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "3" } }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm._f("uppercase")(
+                        _vm.$translate.text("sigeturbo.responsible_singular")
+                      )
+                    )
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _vm._m(0)
           ])
         ])
       ]
-    )
+    ),
+    _vm._v(" "),
+    _vm.results.length > 0
+      ? _c(
+          "section",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.showSearchResult,
+                expression: "showSearchResult"
+              }
+            ],
+            staticClass: "sige-search-result padding-10"
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "close",
+                on: {
+                  click: function($event) {
+                    _vm.closeSearchForm()
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fas fa-times",
+                  attrs: { "aria-hidden": "true" }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c("section", { staticClass: "result" }, [
+              _c("ul", { staticClass: "display-horizontal col-100" }, [
+                _c(
+                  "li",
+                  { staticClass: "col-100" },
+                  [
+                    _vm._l(_vm.results, function(result, index) {
+                      return _c(
+                        "ul",
+                        { staticClass: "display-horizontal col-100 users" },
+                        [
+                          _c("li", { staticClass: "col-20 code" }, [
+                            _c(
+                              "div",
+                              {
+                                on: {
+                                  click: function($event) {
+                                    _vm.selectFamily(result.idfamily)
+                                  }
+                                }
+                              },
+                              [_vm._v(_vm._s(result.idfamily))]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("li", { staticClass: "col-30 name" }, [
+                            _c("div", [_vm._v(_vm._s(result.name))])
+                          ]),
+                          _vm._v(" "),
+                          _c("li", { staticClass: "col-50 photo" }, [
+                            _c(
+                              "div",
+                              { staticClass: "photo-container" },
+                              [
+                                _vm._l(result.users, function(user) {
+                                  return [
+                                    _c("div", [
+                                      _c("img", {
+                                        attrs: {
+                                          src:
+                                            _vm.assets +
+                                            "/img/users/" +
+                                            user.photo,
+                                          alt:
+                                            user.lastname +
+                                            " " +
+                                            user.firstname,
+                                          title:
+                                            user.lastname + " " + user.firstname
+                                        }
+                                      })
+                                    ])
+                                  ]
+                                })
+                              ],
+                              2
+                            )
+                          ])
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "clearfix" })
+                  ],
+                  2
+                )
+              ])
+            ])
+          ]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -45009,7 +45258,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("button", { attrs: { type: "submit" } }, [
+    return _c("button", { attrs: { type: "button" } }, [
       _c("i", { staticClass: "fas fa-search fa-lg" })
     ])
   }
@@ -57050,6 +57299,9 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'equal_treatment': 'equal treatment?',
             'error': 'error',
             'expedition': 'expedition',
+            'family': 'family',
+            'student': 'student',
+            'responsible_singular': 'responsible',
             'firstname': 'firstname',
             'fullname': 'fullname',
             'general': 'general',
@@ -57153,6 +57405,9 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'equal_treatment': '¿continúa tratamiento?',
             'error': 'error',
             'expedition': 'expedición',
+            'family': 'familia',
+            'student': 'estudiante',
+            'responsible_singular': 'responsable',
             'firstname': 'nombres',
             'fullname': 'nombres y apellidos',
             'general': 'general',

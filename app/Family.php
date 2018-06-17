@@ -62,6 +62,7 @@ class Family extends Model
     {
         return Static::select('families.idfamily', 'families.name')
             ->where("families.name", 'LIKE', "%$search%")
-            ->first();
+            ->with('users')
+            ->get();
     }
 }

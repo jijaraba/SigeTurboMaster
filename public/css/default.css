@@ -4880,16 +4880,85 @@ footer .sige-footer-content {
 }
 
 .sige-search-list > form > ul > li.icon-right button {
+  top: 0px;
   height: 44px;
   width: 50px;
   -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
           box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+.sige-search-list > form > ul > li.icon-right select {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 120px;
+  font-size: 0.85em;
+  background: white;
+  padding: 12px !important;
+}
+
 .sige-search-list > form > ul > li.icon-right input {
   text-align: left;
-  padding-left: 10px;
+  padding-left: 130px;
   background: #FFFFFF !important;
+}
+
+.sige-search-result {
+  position: absolute;
+  width: 370px;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  background: white;
+  border-radius: 3px;
+  margin-top: 6px;
+  background: white;
+}
+
+.sige-search-result div.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.sige-search-result .result {
+  margin-top: 20px;
+}
+
+.sige-search-result .result > ul > li {
+  line-height: 50px;
+  height: 50px;
+}
+
+.sige-search-result .result > ul > li > ul.users > li.code div {
+  padding: 0px 5px;
+  text-align: right;
+  font-size: 1em;
+  font-family: "Montserrat Medium", Helvetica Neue, Helvetica, sans-serif;
+  color: #53BBB4;
+  text-decoration: underline;
+}
+
+.sige-search-result .result > ul > li > ul.users > li.name div {
+  padding: 0px 5px;
+}
+
+.sige-search-result .result > ul > li > ul.users > li.photo > div.photo-container {
+  overflow: hidden;
+  display: block;
+}
+
+.sige-search-result .result > ul > li > ul.users > li.photo > div.photo-container div {
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid #53BBB4;
+  width: 40px;
+  height: 40px;
+  margin: 3px;
+}
+
+.sige-search-result .result > ul > li > ul.users > li.photo > div.photo-container div img {
+  border-radius: 50%;
 }
 
 .sige-options-container {

@@ -1867,14 +1867,89 @@ footer {
             width: 40px;
           }
           button {
+            top: 0px;
             height: 44px;
             width: 50px;
             box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
           }
+          select {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 120px;
+            font: {
+              size: 0.85em;
+            }
+            background: white;
+            padding: 12px !important;
+          }
           input {
             text-align: left;
-            padding-left: 10px;
+            padding-left: 130px;
             background: $sige-global-bgcolor-28 !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.sige-search-result {
+  position: absolute;
+  width: 370px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  background: white;
+  border-radius: 3px;
+  margin-top: 6px;
+  background: white;
+  div.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .result {
+    margin-top: 20px;
+    > ul {
+      > li {
+        line-height: 50px;
+        height: 50px;
+        > ul.users {
+          > li {
+            &.code {
+              div {
+                padding: 0px 5px;
+                text-align: right;
+                font: {
+                  size: 1em;
+                  family: $sige-font-family-08;
+                }
+                color: $sige-global-color-05;
+                text-decoration: underline;
+              }
+            }
+            &.name {
+              div {
+                padding: 0px 5px;
+              }
+            }
+            &.photo {
+              > div.photo-container {
+                overflow: hidden;
+                display: block;
+                div {
+                  display: inline-block;
+                  border-radius: 50%;
+                  border: 2px solid $sige-global-bgcolor-03;
+                  width: 40px;
+                  height: 40px;
+                  margin: 3px;
+                  img {
+                    border-radius: 50%;
+                  }
+                }
+              }
+            }
           }
         }
       }
