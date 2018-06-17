@@ -19,6 +19,15 @@ class Year extends Model
     /**
      * @return mixed
      */
+    public function payments()
+    {
+        return $this->hasMany('SigeTurbo\Payment', 'idyear', 'idyear');
+    }
+
+
+    /**
+     * @return mixed
+     */
     public function enrollment()
     {
         return $this->hasMany('SigeTurbo\Enrollment', 'idyear', 'idyear');

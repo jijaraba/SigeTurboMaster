@@ -31,6 +31,7 @@ use SigeTurbo\Repositories\Voucherconsecutive\VoucherconsecutiveRepositoryInterf
 use SigeTurbo\Repositories\Year\YearRepositoryInterface;
 use SigeTurbo\Statusschooltype;
 use SigeTurbo\Transactiontype;
+use SigeTurbo\Vouchercategory;
 
 
 class PaymentsController extends Controller
@@ -572,7 +573,7 @@ class PaymentsController extends Controller
             $enrollment = $this->enrollmentRepository->getEnrollmentsLatestByStudent($request['user'], $year->idyear);
 
             //Costs
-            $costs = $this->costRepository->getCostsByPackage($year->idyear, $enrollment->idgrade, Concepttype::ENROLLMENT, 2);
+            $costs = $this->costRepository->getCostsByPackageAndCategory($year->idyear, $enrollment->idgrade, Concepttype::ENROLLMENT, 2, Vouchercategory::INVOICE);
             //Find Family
             $family = $this->userfamilyRepository->getFamilyByUser($request['user']);
             //Set Total Cost

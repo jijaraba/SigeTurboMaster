@@ -9,5 +9,5 @@ interface GroupRepositoryInterface {
     public static function getGroupsForGuest($year = 1995, $period = 1);
     public static function getGroupsForObservator($year = 1995);
     public static function getGroupsByAreaManager($year = 1995, $period = 1, $user = null);
-    public static function getLatestGroupByStudent($user);
+    public static function getLatestGroupByStudent($user, $year = null);
 }

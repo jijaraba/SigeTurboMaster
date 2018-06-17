@@ -78,6 +78,10 @@
           > li {
             &.icon-center {
               @extend %icon-design;
+              span {
+                width: 40px;
+                height: 45px;
+              }
               input {
                 text-align: center;
                 padding-left: 45px;
@@ -85,6 +89,10 @@
             }
             &.icon-left {
               @extend %icon-design;
+              span {
+                width: 40px;
+                height: 45px;
+              }
               input {
                 text-align: left;
                 padding-left: 45px;
@@ -92,6 +100,10 @@
             }
             &.icon-right {
               @extend %icon-design;
+              span {
+                width: 40px;
+                height: 45px;
+              }
               input {
                 text-align: right;
                 padding-left: 45px;
@@ -100,11 +112,11 @@
             &.celular {
               position: relative;
               span {
-                height: 46px;
+                height: 45px;
                 width: 40px;
                 border-top-right-radius: 5px;
                 border-bottom-right-radius: 5px;
-                line-height: 45px;
+                line-height: 4px;
                 text-align: center;
                 position: absolute;
                 top: 5px;

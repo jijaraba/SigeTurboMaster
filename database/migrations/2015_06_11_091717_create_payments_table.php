@@ -15,6 +15,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('idpayment');
+            $table->integer('idyear')->unsigned();
             $table->integer('idpaymenttype')->unsigned();
             $table->integer('idpackage')->unsigned();
             $table->integer('idbank')->unsigned();
@@ -54,14 +55,9 @@ class CreatePaymentsTable extends Migration
             $table->integer('verified_by')->nullable();
             $table->timestamp('payment_at')->nullable();
             $table->timestamps();
-            $table->foreign('idfamily')
-                ->references('idfamily')
-                ->on('families')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-            $table->foreign('iduser')
-                ->references('iduser')
-                ->on('users')
+            $table->foreign('idyear')
+                ->references('idyear')
+                ->on('years')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->foreign('idpaymenttype')
@@ -77,6 +73,16 @@ class CreatePaymentsTable extends Migration
             $table->foreign('idbank')
                 ->references('idbank')
                 ->on('banks')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('idfamily')
+                ->references('idfamily')
+                ->on('families')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('iduser')
+                ->references('iduser')
+                ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });

@@ -315,6 +315,7 @@ class PaymentRepository implements PaymentRepositoryInterface
     {
         $realdate = Carbon::create($data['year'], $data['month'], 1, 0, 0, 0);
         return Payment::create([
+            'idyear' => $data['year'],
             'idpaymenttype' => $data['type'],
             'idpackage' => $data['package'],
             'idbank' => 1,
