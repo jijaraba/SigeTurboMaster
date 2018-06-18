@@ -212,8 +212,10 @@ class ReceiptsController extends Controller
 
                         $group = $this->groupRepository::getLatestGroupByStudent($paymentCurrent->iduser, $paymentCurrent->idyear);
                         $costs = $this->costRepository->getCostsByPackageAndCategory($paymentCurrent->idyear, $group->idgrade, $paymentCurrent->idpaymenttype, $paymentCurrent->idpackage, Vouchercategory::RECEIPT);
-                        $count = sizeof($costs);
+                        $count = count($costs);
                         foreach ($costs as $key => $cost) {
+                            dd($count ." - " . $key);
+                            exit();
                             //Payment With Discount
                             if ($paymentCurrent->method == 'discount') {
                                 if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES) {

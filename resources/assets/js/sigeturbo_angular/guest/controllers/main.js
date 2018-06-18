@@ -3,11 +3,11 @@
 /* Guest Controllers */
 angular.module('Guest.controllers', [])
     .controller('TaskController', ['$scope', '$log', 'ngDialog', function ($scope, $log, ngDialog) {
-        /*ngDialog.open({
+        ngDialog.open({
             template: require('../directives/views/partials/tasks/message.html'),
             plain: true,
             scope: $scope
-        });*/
+        });
     }])
     .controller('TaskDetailController', [function () {
 
