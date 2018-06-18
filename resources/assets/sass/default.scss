@@ -1912,9 +1912,9 @@ footer {
     margin-top: 20px;
     > ul {
       > li {
-        line-height: 50px;
-        height: 50px;
         > ul.users {
+          line-height: 50px;
+          height: 50px;
           > li {
             &.code {
               div {
@@ -1931,6 +1931,10 @@ footer {
             &.name {
               div {
                 padding: 0px 5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block;
               }
             }
             &.photo {

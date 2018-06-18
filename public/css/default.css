@@ -4925,7 +4925,7 @@ footer .sige-footer-content {
   margin-top: 20px;
 }
 
-.sige-search-result .result > ul > li {
+.sige-search-result .result > ul > li > ul.users {
   line-height: 50px;
   height: 50px;
 }
@@ -4941,6 +4941,10 @@ footer .sige-footer-content {
 
 .sige-search-result .result > ul > li > ul.users > li.name div {
   padding: 0px 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .sige-search-result .result > ul > li > ul.users > li.photo > div.photo-container {

@@ -63,6 +63,7 @@ class Family extends Model
         return Static::select('families.idfamily', 'families.name')
             ->where("families.name", 'LIKE', "%$search%")
             ->with('users')
+            ->limit(5)
             ->get();
     }
 }
