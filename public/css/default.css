@@ -4933,10 +4933,9 @@ footer .sige-footer-content {
 .sige-search-result .result > ul > li > ul.users > li.code div {
   padding: 0px 5px;
   text-align: right;
-  font-size: 1em;
+  font-size: 0.9em;
   font-family: "Montserrat Medium", Helvetica Neue, Helvetica, sans-serif;
   color: #53BBB4;
-  text-decoration: underline;
 }
 
 .sige-search-result .result > ul > li > ul.users > li.name div {
@@ -4950,6 +4949,7 @@ footer .sige-footer-content {
 .sige-search-result .result > ul > li > ul.users > li.photo > div.photo-container {
   overflow: hidden;
   display: block;
+  height: 50px;
 }
 
 .sige-search-result .result > ul > li > ul.users > li.photo > div.photo-container div {

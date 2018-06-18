@@ -27,7 +27,7 @@
                                 <div @click="selectFamily(result.idfamily)">{{ result.idfamily }}</div>
                             </li>
                             <li class="col-30 name">
-                                <div>{{ result.name }}</div>
+                                <div class="tooltip" :title="result.name">{{ result.name }}</div>
                             </li>
                             <li class="col-50 photo">
                                 <div class="photo-container">

@@ -45206,7 +45206,14 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("li", { staticClass: "col-30 name" }, [
-                            _c("div", [_vm._v(_vm._s(result.name))])
+                            _c(
+                              "div",
+                              {
+                                staticClass: "tooltip",
+                                attrs: { title: result.name }
+                              },
+                              [_vm._v(_vm._s(result.name))]
+                            )
                           ]),
                           _vm._v(" "),
                           _c("li", { staticClass: "col-50 photo" }, [

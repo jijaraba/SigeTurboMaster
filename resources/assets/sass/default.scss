@@ -1921,11 +1921,10 @@ footer {
                 padding: 0px 5px;
                 text-align: right;
                 font: {
-                  size: 1em;
+                  size: 0.9em;
                   family: $sige-font-family-08;
                 }
                 color: $sige-global-color-05;
-                text-decoration: underline;
               }
             }
             &.name {
@@ -1941,6 +1940,7 @@ footer {
               > div.photo-container {
                 overflow: hidden;
                 display: block;
+                height: 50px;
                 div {
                   display: inline-block;
                   border-radius: 50%;
