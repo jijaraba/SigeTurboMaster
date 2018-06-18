@@ -6,8 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Package extends Model
 {
+
+    const PACKAGE_1101 = 1;
+    const PACKAGE_1102 = 2;
+    const PACKAGE_1103 = 3;
+    const PACKAGE_1104 = 4;
+    const PACKAGE_1105 = 5;
+    const PACKAGE_1106 = 6;
+    const PACKAGE_1107 = 7;
+
     protected $primaryKey = 'idpackage';
-    protected $fillable = ['idconcepttype', 'code', 'name', 'active', 'created_by', 'updated_by'];
+    protected $fillable = ['idconcepttype', 'code', 'name', 'active', 'modifiable', 'created_by', 'updated_by'];
     protected $hidden = ['created_at', 'updated_at'];
     /**
      * Table Name

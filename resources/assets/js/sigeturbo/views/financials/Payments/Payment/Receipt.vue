@@ -375,7 +375,6 @@
                             //Reload Accountingentry
                             this.receipt.idreceipt = data.receipt.idreceipt;
                             this.load = true;
-                            this.$emit('reload');
                             //Get Vouchertypes
                             this.loadVoucherTypes();
                         }

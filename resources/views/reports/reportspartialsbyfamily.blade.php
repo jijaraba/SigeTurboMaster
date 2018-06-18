@@ -257,7 +257,7 @@
                                             <div>2017</div>
                                         </li>
                                         <li class="col-15 date">
-                                            <div>{{ mb_strtoupper(Lang::get('sige.SecondPeriod')) }}</div>
+                                            <div>{{ mb_strtoupper(Lang::get('sige.ThirdPeriod')) }}</div>
                                         </li>
                                         <li class="col-45 concept">
                                             <div title="">INFORME FINAL TERCER PERIODO ({{ $user->iduser }}

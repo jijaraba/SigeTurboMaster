@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use SigeTurbo\Accounttype;
 use SigeTurbo\Http\Requests\ReceiptRequest;
+use SigeTurbo\Package;
 use SigeTurbo\Repositories\Accountingentry\AccountingentryRepositoryInterface;
 use SigeTurbo\Repositories\Accountingentry\AccountingentryRespository;
 use SigeTurbo\Repositories\Accounttype\AccounttypeRepositoryInterface;
@@ -211,14 +212,22 @@ class ReceiptsController extends Controller
 
                         $group = $this->groupRepository::getLatestGroupByStudent($paymentCurrent->iduser, $paymentCurrent->idyear);
                         $costs = $this->costRepository->getCostsByPackageAndCategory($paymentCurrent->idyear, $group->idgrade, $paymentCurrent->idpaymenttype, $paymentCurrent->idpackage, Vouchercategory::RECEIPT);
-                        foreach ($costs as $cost) {
+                        $count = sizeof($costs);
+                        foreach ($costs as $key => $cost) {
                             //Payment With Discount
                             if ($paymentCurrent->method == 'discount') {
                                 if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES) {
                                     if ($cost->idaccounttype == Accounttype::ACCOUNT_PENSIONES) {
                                         $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($cost->value - ($cost->value * $student->scholarship)), $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
                                     } else {
-                                        $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                        //Student New
+                                        if ($paymentCurrent->idpackage == Package::PACKAGE_1102) {
+                                            if ($cost->idaccounttype == Accounttype::ACCOUNT_OTROS || $cost->idaccounttype == Accounttype::ACCOUNT_AGENDAS) {
+
+                                            }
+                                        } else {
+                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                        }
                                     }
                                 }
                             }

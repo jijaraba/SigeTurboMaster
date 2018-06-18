@@ -19,6 +19,7 @@ class CreatePackagesTable extends Migration
             $table->integer('code')->unique();
             $table->string('name');
             $table->enum('active', ['Y', 'N'])->default('Y');
+            $table->enum('modifiable', ['Y', 'N'])->default('N');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();

@@ -10,4 +10,5 @@ interface AccountingentryRepositoryInterface
     public function update($accountingentry, $data);
     public function destroy($accountingentry);
     public function getAccountingentriesByReceipt($receipt);
+    public function getAccountingentriesByReceiptAndAccounttype($receipt, $accounttype);
 }

@@ -2161,7 +2161,6 @@ module.exports = {
 //
 //
 //
-//
 
 
 
@@ -2266,6 +2265,7 @@ module.exports = {
         },
         closeReceipt: function closeReceipt(receipt) {
             this.receipt = receipt;
+            this.getPaymentsByFamily();
         },
         result: function result(data) {
             //Get Payments By Family
@@ -3031,7 +3031,6 @@ module.exports = {
                         //Reload Accountingentry
                         _this.receipt.idreceipt = data.receipt.idreceipt;
                         _this.load = true;
-                        _this.$emit('reload');
                         //Get Vouchertypes
                         _this.loadVoucherTypes();
                     }
@@ -41417,10 +41416,7 @@ var render = function() {
                         "show-receipt": "receipt",
                         banks: _vm.banks
                       },
-                      on: {
-                        close: _vm.closeReceipt,
-                        reload: _vm.getPaymentsByFamily
-                      }
+                      on: { close: _vm.closeReceipt }
                     })
                   : _vm._e()
               ],

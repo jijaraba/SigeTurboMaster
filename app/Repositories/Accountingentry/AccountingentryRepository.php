@@ -111,4 +111,17 @@ class AccountingentryRepository implements AccountingentryRepositoryInterface
     }
 
 
+    /**
+     * Get Accountingentry By Receipt And Accounttype
+     * @param $receipt
+     * @param $accounttype
+     * @return mixed
+     */
+    public function getAccountingentriesByReceiptAndAccounttype($receipt, $accounttype)
+    {
+        return Accountingentry::select('*')
+            ->where('idreceipt', '=', $receipt)
+            ->where('idaccounttype', '=', $accounttype)
+            ->first();
+    }
 }

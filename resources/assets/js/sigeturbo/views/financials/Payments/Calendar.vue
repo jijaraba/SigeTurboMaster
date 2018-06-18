@@ -72,8 +72,7 @@
                     </ul>
                 </section>
                 <sigeturbo-payments-receipt @close="closeReceipt" v-if="receipt" :payments="payments"
-                                            show-receipt="receipt" :banks="banks"
-                                            @reload="getPaymentsByFamily"></sigeturbo-payments-receipt>
+                                            show-receipt="receipt" :banks="banks"></sigeturbo-payments-receipt>
             </section>
         </template>
     </section>
@@ -173,6 +172,7 @@
             },
             closeReceipt(receipt) {
                 this.receipt = receipt;
+                this.getPaymentsByFamily();
             },
             result(data) {
                 //Get Payments By Family
