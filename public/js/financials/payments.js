@@ -43709,11 +43709,17 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("li", { staticClass: "col-15 vouchertype" }, [
-                  _c("div", [_vm._v(_vm._s(receipt.vouchertype))])
+                _c("li", { staticClass: "col-20 vouchertype" }, [
+                  _c("div", [
+                    _vm._v(
+                      _vm._s(receipt.vouchertype) +
+                        ": " +
+                        _vm._s(receipt.description)
+                    )
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("li", { staticClass: "col-15 document" }, [
+                _c("li", { staticClass: "col-10 document" }, [
                   _c("div", [_vm._v(_vm._s(receipt.document))])
                 ]),
                 _vm._v(" "),

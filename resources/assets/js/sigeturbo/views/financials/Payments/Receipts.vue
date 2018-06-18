@@ -16,10 +16,10 @@
                                 </a>
                             </div>
                         </li>
-                        <li class="col-15 vouchertype">
-                            <div>{{ receipt.vouchertype }}</div>
+                        <li class="col-20 vouchertype">
+                            <div>{{ receipt.vouchertype }}: {{ receipt.description }}</div>
                         </li>
-                        <li class="col-15 document">
+                        <li class="col-10 document">
                             <div>{{ receipt.document }}</div>
                         </li>
                         <li class="payments col-25">
