@@ -15,7 +15,11 @@ class BankRepository implements BankRepositoryInterface
     public function all()
     {
         return Cache::remember('banks', 1440, function () {
-            return Bank::all();
+            return Bank::select('banks.*', 'accounttypes.code AS accounttype_code')
+                ->join('accounttypes', function ($join) {
+                    $join->on('accounttypes.idaccounttype', '=', 'banks.idaccounttype');
+                })
+                ->get();
         });
     }
 

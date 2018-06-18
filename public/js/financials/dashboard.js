@@ -2161,6 +2161,7 @@ module.exports = {
 //
 //
 //
+//
 
 
 
@@ -2226,6 +2227,7 @@ module.exports = {
 
             //Get Payment By Family
             this.payments = [];
+            this.users = [];
             __WEBPACK_IMPORTED_MODULE_5__models_Payment__["a" /* default */].getPaymentsByFamily({
                 family: this.family
             }).then(function (_ref2) {
@@ -2909,6 +2911,8 @@ module.exports = {
 //
 //
 //
+//
+//
 
 
 
@@ -3027,6 +3031,7 @@ module.exports = {
                         //Reload Accountingentry
                         _this.receipt.idreceipt = data.receipt.idreceipt;
                         _this.load = true;
+                        _this.$emit('reload');
                         //Get Vouchertypes
                         _this.loadVoucherTypes();
                     }
@@ -41412,7 +41417,10 @@ var render = function() {
                         "show-receipt": "receipt",
                         banks: _vm.banks
                       },
-                      on: { close: _vm.closeReceipt }
+                      on: {
+                        close: _vm.closeReceipt,
+                        reload: _vm.getPaymentsByFamily
+                      }
                     })
                   : _vm._e()
               ],
@@ -43359,7 +43367,14 @@ var render = function() {
                               return _c(
                                 "option",
                                 { domProps: { value: bank.idbank } },
-                                [_vm._v(_vm._s(bank.name))]
+                                [
+                                  _vm._v(
+                                    _vm._s(bank.name) +
+                                      " (" +
+                                      _vm._s(bank.accounttype_code) +
+                                      ")\n                                    "
+                                  )
+                                ]
                               )
                             })
                           )

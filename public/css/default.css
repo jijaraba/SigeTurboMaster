@@ -5092,6 +5092,7 @@ footer .sige-footer-content {
 .sige-wizard-container input[type="email"],
 .sige-wizard-container input[type="number"] {
   background: white !important;
+  font-size: 0.97em;
 }
 
 .sige-wizard-container input[readonly="readonly"] {
@@ -5106,12 +5107,13 @@ footer .sige-footer-content {
 
 .sige-wizard-container select {
   background: white !important;
+  font-size: 0.97em;
 }
 
 .sige-wizard-container textarea {
   background: white !important;
   border-width: 1px !important;
-  font-size: 0.95em !important;
+  font-size: 0.97em !important;
 }
 
 .sige-wizard-container header > h4 {

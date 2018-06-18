@@ -535,8 +535,8 @@ class PaymentsController extends Controller
     function setPaymentIndividualNew(PaymentIndividualRequest $request)
     {
 
-        DB::beginTransaction();
-        try {
+        //DB::beginTransaction();
+        //try {
             //Find Family
             $family = $this->userfamilyRepository->getFamilyByUser($request['student']);
             //Save Payment Individual
@@ -549,11 +549,11 @@ class PaymentsController extends Controller
             //Update Consecutive
             return response()->json(["successful" => true, 'message' => Lang::get('sige.SuccessPaymentCreated'), 'payment' => $payment]);
 
-        } catch (\Exception $e) {
+        /*} catch (\Exception $e) {
             DB::rollback();
             return response()->json(["successful" => false], 300);
             throw $e;
-        }
+        }*/
     }
 
     /**

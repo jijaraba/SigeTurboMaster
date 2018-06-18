@@ -2099,6 +2099,9 @@ footer {
   }
   input[type="text"], input[type="email"], input[type="number"] {
     background: white !important;
+    font: {
+      size: 0.97em;
+    }
   }
   input[readonly="readonly"] {
     color: $sige-global-color-01;
@@ -2108,12 +2111,15 @@ footer {
   }
   select {
     background: white !important;
+    font: {
+      size: 0.97em;
+    }
   }
   textarea {
     background: white !important;
     border-width: 1px !important;
     font: {
-      size: 0.95em !important;
+      size: 0.97em !important;
     }
   }
   header {

@@ -118,7 +118,9 @@
                                 <li class="col-20 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.bank') | uppercase }}</span>
                                     <select id="bank" class="bank" name="bank" v-model="receipt.bank" required>
-                                        <option :value="bank.idbank" v-for="bank in banks">{{ bank.name }}</option>
+                                        <option :value="bank.idbank" v-for="bank in banks">{{ bank.name }} ({{
+                                            bank.accounttype_code }})
+                                        </option>
                                     </select>
                                 </li>
                                 <li class="col-20 gutter-5">
@@ -373,6 +375,7 @@
                             //Reload Accountingentry
                             this.receipt.idreceipt = data.receipt.idreceipt;
                             this.load = true;
+                            this.$emit('reload');
                             //Get Vouchertypes
                             this.loadVoucherTypes();
                         }

@@ -585,7 +585,7 @@ class PaymentRepository implements PaymentRepositoryInterface
 
     /**
      * Specify Payment Criteria
-     * @param $number | Is the number of value
+     * @param $number | Is the number of value (discount=1,normal=2,expired=3,agreement=4)
      * @param $option
      * @param $data
      * @return string
@@ -594,107 +594,86 @@ class PaymentRepository implements PaymentRepositoryInterface
     {
         switch ($number) {
             case 1:
-                switch ($data["type"]) {
-                    case Concepttype::PENSION:
-                        if ($option == 1) {
-                            return $data['concept'] . " " . $data['month_name'] . (($data["scholarship"] > 0.00) ? " CON BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
-                        } else {
-                            return "PAGO " . $data['concept'] . (($data["scholarship"] > 0.00) ? " CON BECA DEL " . $data["scholarship"] * 100 . "% DE " : " DE ") . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
-                        }
-                        break;
-                    case Concepttype::ENROLLMENT:
-                        if ($option == 1) {
-                            return $data['concept'] . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
-                        } else {
-                            return "PAGO " . $data['concept'] . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")";
-                        }
-                        break;
-                    case 4:
-                    case 5:
-                        if ($option == 1) {
-                            return $data['concept'] . " " . $data['month_name'] . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
-                        } else {
-                            return "PAGO " . $data['concept'] . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
-                        }
-                        break;
+                if ($data["type"] == Concepttype::PENSION) {
+                    if ($option == 1) {
+                        return $data['concept'] . " " . $data['month_name'] . (($data["scholarship"] > 0.00) ? " CON BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
+                    } else {
+                        return "PAGO " . $data['concept'] . (($data["scholarship"] > 0.00) ? " CON BECA DEL " . $data["scholarship"] * 100 . "% DE " : " DE ") . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
+                    }
+                } else if ($data["type"] == Concepttype::ENROLLMENT) {
+                    if ($option == 1) {
+                        return $data['concept'] . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
+                    } else {
+                        return "PAGO " . $data['concept'] . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")";
+                    }
+                } else {
+                    if ($option == 1) {
+                        return $data['concept'];
+                    } else {
+                        return "PAGO " . $data['concept'];
+                    }
                 }
-                break;
             case 2:
-                switch ($data["type"]) {
-                    case Concepttype::PENSION:
-                        if ($option == 1) {
-                            return $data['concept'] . " " . $data['month_name'] . (($data["scholarship"] > 0.00) ? " CON BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
-                        } else {
-                            return "PAGO " . $data['concept'] . (($data["scholarship"] > 0.00) ? " CON BECA DEL " . $data["scholarship"] * 100 . "% DE " : " DE ") . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
-                        }
-                        break;
-                    case Concepttype::ENROLLMENT:
-                        if ($option == 1) {
-                            return $data['concept'] . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
-                        } else {
-                            return "PAGO " . $data['concept'] . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")";
-                        }
-                        break;
-                    case 4:
-                    case 5:
-                        if ($option == 1) {
-                            return $data['concept'] . " " . $data['month_name'] . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
-                        } else {
-                            return "PAGO " . $data['concept'] . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
-                        }
-                        break;
+                if ($data["type"] == Concepttype::PENSION) {
+                    if ($option == 1) {
+                        return $data['concept'] . " " . $data['month_name'] . (($data["scholarship"] > 0.00) ? " CON BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
+                    } else {
+                        return "PAGO " . $data['concept'] . (($data["scholarship"] > 0.00) ? " CON BECA DEL " . $data["scholarship"] * 100 . "% DE " : " DE ") . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
+                    }
+                } else if ($data["type"] == Concepttype::ENROLLMENT) {
+                    if ($option == 1) {
+                        return $data['concept'] . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
+                    } else {
+                        return "PAGO " . $data['concept'] . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")";
+                    }
+                } else {
+                    if ($option == 1) {
+                        return $data['concept'];
+                    } else {
+                        return "PAGO " . $data['concept'];
+                    }
                 }
                 break;
             case 3:
-                switch ($data["type"]) {
-                    case Concepttype::PENSION:
-                        if ($option == 1) {
-                            return $data['concept'] . " " . $data['month_name'] . " CON INTERESES " . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
-                        } else {
-                            return "PAGO " . $data['concept'] . " CON INTERESES " . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
-                        }
-                        break;
-                    case Concepttype::ENROLLMENT:
-                        if ($option == 1) {
-                            return $data['concept'] . " CON RECARGO " . "(" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
-                        } else {
-                            return "PAGO " . $data['concept'] . " CON RECARGO" . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")";
-                        }
-                        break;
-                    case 4:
-                    case 5:
-                        if ($option == 1) {
-                            return $data['concept'] . " " . $data['month_name'] . " CON INTERESES " . "(" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
-                        } else {
-                            return "PAGO " . $data['concept'] . " CON INTERESES" . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
-                        }
-                        break;
+                if ($data["type"] == Concepttype::PENSION) {
+                    if ($option == 1) {
+                        return $data['concept'] . " " . $data['month_name'] . " CON INTERESES " . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
+                    } else {
+                        return "PAGO " . $data['concept'] . " CON INTERESES " . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
+                    }
+                } else if ($data["type"] == Concepttype::ENROLLMENT) {
+                    if ($option == 1) {
+                        return $data['concept'] . " CON RECARGO " . "(" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
+                    } else {
+                        return "PAGO " . $data['concept'] . " CON RECARGO" . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")";
+                    }
+                } else {
+                    if ($option == 1) {
+                        return $data['concept'];
+                    } else {
+                        return "PAGO " . $data['concept'];
+                    }
                 }
                 break;
             case 4:
-                switch ($data["type"]) {
-                    case Concepttype::PENSION:
-                        if ($option == 1) {
-                            return $data['concept'] . " " . $data['month_name'] . " CON ACUERDO DE PAGO" . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
-                        } else {
-                            return "PAGO " . $data['concept'] . " CON ACUERDO DE PAGO" . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
-                        }
-                        break;
-                    case Concepttype::ENROLLMENT:
-                        if ($option == 1) {
-                            return $data['concept'] . " CON ACUERDO DE PAGO " . "(" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
-                        } else {
-                            return "PAGO " . $data['concept'] . " CON ACUERDO DE PAGO" . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")";
-                        }
-                        break;
-                    case 4:
-                    case 5:
-                        if ($option == 1) {
-                            return $data['concept'] . " " . $data['month_name'] . " CON INTERESES " . "(" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
-                        } else {
-                            return "PAGO " . $data['concept'] . " CON ACUERDO DE PAGO" . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
-                        }
-                        break;
+                if ($data["type"] == Concepttype::PENSION) {
+                    if ($option == 1) {
+                        return $data['concept'] . " " . $data['month_name'] . " CON ACUERDO DE PAGO" . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " (" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
+                    } else {
+                        return "PAGO " . $data['concept'] . " CON ACUERDO DE PAGO" . (($data["scholarship"] > 0.00) ? " Y BECA DEL " . $data["scholarship"] * 100 . "% " : "") . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")" . " CORRESPONDIENTE AL MES DE " . $data['month_name'];
+                    }
+                } else if ($data["type"] == Concepttype::ENROLLMENT) {
+                    if ($option == 1) {
+                        return $data['concept'] . " CON ACUERDO DE PAGO " . "(" . $data['student'] . " - " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . ")";
+                    } else {
+                        return "PAGO " . $data['concept'] . " CON ACUERDO DE PAGO" . " DE " . (($data['gender'] == 1) ? "EL" : "LA") . " ESTUDIANTE " . mb_strtoupper($data['firstname']) . " " . mb_strtoupper($data['lastname']) . " (" . $data['student'] . ")";
+                    }
+                } else {
+                    if ($option == 1) {
+                        return $data['concept'];
+                    } else {
+                        return "PAGO " . $data['concept'];
+                    }
                 }
                 break;
         }

@@ -72,7 +72,8 @@
                     </ul>
                 </section>
                 <sigeturbo-payments-receipt @close="closeReceipt" v-if="receipt" :payments="payments"
-                                            show-receipt="receipt" :banks="banks"></sigeturbo-payments-receipt>
+                                            show-receipt="receipt" :banks="banks"
+                                            @reload="getPaymentsByFamily"></sigeturbo-payments-receipt>
             </section>
         </template>
     </section>
@@ -136,6 +137,7 @@
             getPaymentsByFamily() {
                 //Get Payment By Family
                 this.payments = [];
+                this.users = [];
                 Payment.getPaymentsByFamily({
                     family: this.family
                 }).then(({data}) => {
