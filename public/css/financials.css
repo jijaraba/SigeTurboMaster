@@ -431,6 +431,16 @@
           transform: translateY(-50%);
 }
 
+.receipt > .receipt > div {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  text-align: center;
+  cursor: pointer;
+  color: #53BBB4;
+}
+
 .receipt > .export > div {
   position: relative;
   top: 50%;
@@ -650,24 +660,28 @@
   overflow-y: scroll;
 }
 
-.payment-calendar-horizontal > ul {
+.payment-calendar-horizontal section > ul {
   border-bottom: 1px solid #eee;
 }
 
-.payment-calendar-horizontal > ul > li > div {
+.payment-calendar-horizontal section > ul > li > div {
   line-height: 45px;
   height: 45px;
 }
 
-.payment-calendar-horizontal > ul > li.icon > div {
+.payment-calendar-horizontal section > ul > li.icon {
   position: relative;
 }
 
-.payment-calendar-horizontal > ul > li.icon > div > img {
+.payment-calendar-horizontal section > ul > li.icon > div {
+  position: relative;
+}
+
+.payment-calendar-horizontal section > ul > li.icon > div > img {
   width: 40px;
 }
 
-.payment-calendar-horizontal > ul > li.icon > div > em {
+.payment-calendar-horizontal section > ul > li.icon > div > em {
   line-height: initial;
   position: absolute;
   bottom: 5px;
@@ -676,31 +690,32 @@
   height: 15px;
   display: block;
   border-radius: 3px;
+  cursor: pointer;
 }
 
-.payment-calendar-horizontal > ul > li.icon > div > em.discount {
+.payment-calendar-horizontal section > ul > li.icon > div > em.discount {
   background: #3f8abf;
 }
 
-.payment-calendar-horizontal > ul > li.icon > div > em.normal {
+.payment-calendar-horizontal section > ul > li.icon > div > em.normal {
   background: #5cb860;
 }
 
-.payment-calendar-horizontal > ul > li.icon > div > em.expired {
+.payment-calendar-horizontal section > ul > li.icon > div > em.expired {
   background: #da4453;
 }
 
-.payment-calendar-horizontal > ul > li.month > div {
+.payment-calendar-horizontal section > ul > li.month > div {
   text-align: right;
   margin-right: 5px;
 }
 
-.payment-calendar-horizontal > ul > li.type > div {
+.payment-calendar-horizontal section > ul > li.type > div {
   text-align: left;
   margin-right: 5px;
 }
 
-.payment-calendar-horizontal > ul > li.concept > div {
+.payment-calendar-horizontal section > ul > li.concept > div {
   margin-right: 5px;
   width: 100%;
   overflow: hidden;
@@ -709,21 +724,75 @@
   word-wrap: normal;
 }
 
-.payment-calendar-horizontal > ul > li.value > div {
+.payment-calendar-horizontal section > ul > li.value > div {
   padding: 0px 5px;
   text-align: right;
   margin-right: 5px;
   font-size: 1.1em;
 }
 
-.payment-calendar-horizontal > ul > li.value > div input {
+.payment-calendar-horizontal section > ul > li.value > div input {
   text-align: right;
   font-size: 13px !important;
   padding: 8px 12px !important;
 }
 
-.payment-calendar-horizontal > ul > li.delete > div {
+.payment-calendar-horizontal section > ul > li.delete > div {
   text-align: center;
+  color: #53BBB4;
+}
+
+.payment-calendar-horizontal section > section.detail-change-method {
+  position: absolute;
+  width: 300px;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  background: white;
+  z-index: 2;
+  font-size: 0.95em;
+}
+
+.payment-calendar-horizontal section > section.detail-change-method > div.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.payment-calendar-horizontal section > section.detail-change-method > ul.detail-change {
+  margin-top: 20px;
+}
+
+.payment-calendar-horizontal section > section.detail-change-method > ul.detail-change > li > ul {
+  line-height: 30px;
+  height: 30px;
+}
+
+.payment-calendar-horizontal section > section.detail-change-method > ul.detail-change > li > ul > li.value {
+  padding: 0px 5px;
+  text-align: right;
+}
+
+.payment-calendar-horizontal section > section.detail-change-method > ul.detail-change > li > ul > li > em {
+  margin-top: 7px;
+  width: 15px;
+  height: 15px;
+  display: block;
+  border-radius: 3px;
+}
+
+.payment-calendar-horizontal section > section.detail-change-method > ul.detail-change > li > ul > li > em.discount {
+  background: #3f8abf;
+}
+
+.payment-calendar-horizontal section > section.detail-change-method > ul.detail-change > li > ul > li > em.normal {
+  background: #5cb860;
+}
+
+.payment-calendar-horizontal section > section.detail-change-method > ul.detail-change > li > ul > li > em.expired {
+  background: #da4453;
+}
+
+.payment-calendar-horizontal section > section.detail-change-method > ul.detail-change > li > ul > li > a {
   color: #53BBB4;
 }
 

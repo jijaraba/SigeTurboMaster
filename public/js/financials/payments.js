@@ -2930,6 +2930,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters_other_currency__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/other/currency.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filters_payment_paymentType__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/payment/paymentType.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__filters_payment_charge__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/payment/charge.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__filters_string_uppercase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/uppercase.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__filters_string_capitalize__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/capitalize.js");
 //
 //
 //
@@ -2985,6 +2987,47 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -2998,19 +3041,51 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     props: ['payment', 'position'],
     filters: {
         currency: __WEBPACK_IMPORTED_MODULE_2__filters_other_currency__["a" /* default */],
+        uppercase: __WEBPACK_IMPORTED_MODULE_5__filters_string_uppercase__["a" /* default */],
+        capitalize: __WEBPACK_IMPORTED_MODULE_6__filters_string_capitalize__["a" /* default */],
         paymentType: __WEBPACK_IMPORTED_MODULE_3__filters_payment_paymentType__["a" /* default */],
         realValue: __WEBPACK_IMPORTED_MODULE_4__filters_payment_charge__["d" /* realValue */]
     },
     components: {},
     data: function data() {
         return {
+            showDetailChange: false,
             assets: Object(__WEBPACK_IMPORTED_MODULE_1__core_utils__["a" /* default */])(),
             serverDate: __WEBPACK_IMPORTED_MODULE_0_moment___default()().format('YYYY-MM-DD')
         };
     },
     methods: {
+        changeValue: function changeValue(event, option) {
+            event.preventDefault();
+            switch (option) {
+                case 1:
+                    this.payment.method = 'discount';
+                    this.payment.real_method = 'discount';
+                    this.payment.receipt_value = this.payment.value1;
+                    this.payment.realValue = this.payment.value1;
+                    break;
+                case 2:
+                    this.payment.method = 'normal';
+                    this.payment.real_method = 'normal';
+                    this.payment.receipt_value = this.payment.value2;
+                    this.payment.realValue = this.payment.value1;
+                    break;
+                case 3:
+                    this.payment.method = 'expired';
+                    this.payment.real_method = 'expired';
+                    this.payment.receipt_value = this.payment.value3;
+                    this.payment.realValue = this.payment.value1;
+                    break;
+            }
+        },
         removePayment: function removePayment() {
             this.$emit('removePayment', this.payment);
+        },
+        showDetailChangeForm: function showDetailChangeForm() {
+            this.showDetailChange = true;
+        },
+        closeDetailChangeForm: function closeDetailChangeForm() {
+            this.showDetailChange = false;
         }
     },
     watch: {
@@ -3433,6 +3508,32 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3510,11 +3611,19 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             //Config Payments
             var data = [];
             this.payments.forEach(function (payment) {
+                var value_real = 0;
+                if (payment.real_method == 'discount') {
+                    value_real = payment.value1;
+                } else if (payment.real_method == 'normal') {
+                    value_real = payment.value2;
+                } else if (payment.real_method == 'expired') {
+                    value_real = payment.value3;
+                }
                 data.push({
                     payment: payment.idpayment,
                     receipt_value: payment.receipt_value,
-                    real_value: payment.realValue,
-                    method: payment.method,
+                    real_value: value_real,
+                    method: payment.real_method,
                     ispayment: payment.ispayment
                 });
             });
@@ -3595,6 +3704,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_Bank__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Bank.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__models_Receipt__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Receipt.js");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -42911,132 +43025,318 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("ul", { staticClass: "display-horizontal col-100" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "li",
-      { staticClass: "col-05 icon" },
-      [
-        _vm.payment.ispayment == "N"
-          ? [
-              _c("div", [
-                _c("img", {
-                  attrs: {
-                    src: _vm.assets + "/img/modules/payment_notpayment.svg"
-                  }
-                }),
-                _vm._v(" "),
-                _c("em", { class: _vm.payment.method })
-              ])
-            ]
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.payment.ispayment == "P"
-          ? [
-              _c("div", [
-                _c("img", {
-                  attrs: {
-                    src: _vm.assets + "/img/modules/payment_partial.svg"
-                  }
-                }),
-                _vm._v(" "),
-                _c("em", {
-                  class: _vm.payment.method,
-                  attrs: { title: _vm.payment.method }
-                })
-              ])
-            ]
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.payment.ispayment == "Y"
-          ? [
-              _c("div", [
-                _c("img", {
-                  attrs: {
-                    src: _vm.assets + "/img/modules/payment_approved.svg"
-                  }
-                }),
-                _vm._v(" "),
-                _c("em", {
-                  class: _vm.payment.method,
-                  attrs: { title: _vm.payment.method }
-                })
-              ])
-            ]
-          : _vm._e()
-      ],
-      2
-    ),
-    _vm._v(" "),
-    _c("li", { staticClass: "col-10 type" }, [
-      _c("div", [
-        _vm._v(
-          "\n            " +
-            _vm._s(_vm._f("paymentType")(_vm.payment.idpaymenttype)) +
-            "\n        "
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("li", { staticClass: "col-35 concept" }, [
-      _c("div", [
-        _vm._v("\n            " + _vm._s(_vm.payment.concept1) + "\n        ")
-      ])
-    ]),
-    _vm._v(" "),
-    _c("li", { staticClass: "col-15 value" }, [
-      _c("div", [
-        _vm._v(
-          "\n            " +
-            _vm._s(
-              _vm._f("currency")(
-                _vm._f("realValue")(_vm.payment, _vm.serverDate)
-              )
-            ) +
-            "\n        "
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("li", { staticClass: "col-15 value" }, [
-      _c("div", [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.payment.receipt_value,
-              expression: "payment.receipt_value"
-            }
-          ],
-          attrs: { type: "text" },
-          domProps: { value: _vm.payment.receipt_value },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.payment, "receipt_value", $event.target.value)
-            }
-          }
-        })
-      ])
-    ]),
-    _vm._v(" "),
-    _c("li", { staticClass: "col-05 delete" }, [
+  return _c("section", [
+    _c("ul", { staticClass: "display-horizontal col-100" }, [
+      _vm._m(0),
+      _vm._v(" "),
       _c(
-        "div",
-        {
-          on: {
-            click: function($event) {
-              _vm.removePayment()
+        "li",
+        { staticClass: "col-05 icon" },
+        [
+          _vm.payment.ispayment == "N"
+            ? [
+                _c("div", [
+                  _c("img", {
+                    attrs: {
+                      src: _vm.assets + "/img/modules/payment_notpayment.svg"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("em", {
+                    class: {
+                      discount: _vm.payment.real_method == "discount",
+                      normal: _vm.payment.real_method == "normal",
+                      expired: _vm.payment.real_method == "expired"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.showDetailChangeForm()
+                      }
+                    }
+                  })
+                ])
+              ]
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.payment.ispayment == "P"
+            ? [
+                _c("div", [
+                  _c("img", {
+                    attrs: {
+                      src: _vm.assets + "/img/modules/payment_partial.svg"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("em", {
+                    class: {
+                      discount: _vm.payment.real_method == "discount",
+                      normal: _vm.payment.real_method == "normal",
+                      expired: _vm.payment.real_method == "expired"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.showDetailChangeForm()
+                      }
+                    }
+                  })
+                ])
+              ]
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.payment.ispayment == "Y"
+            ? [
+                _c("div", [
+                  _c("img", {
+                    attrs: {
+                      src: _vm.assets + "/img/modules/payment_approved.svg"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("em", {
+                    class: {
+                      discount: _vm.payment.real_method == "discount",
+                      normal: _vm.payment.real_method == "normal",
+                      expired: _vm.payment.real_method == "expired"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.showDetailChangeForm()
+                      }
+                    }
+                  })
+                ])
+              ]
+            : _vm._e()
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-10 type" }, [
+        _c("div", [
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm._f("paymentType")(_vm.payment.idpaymenttype)) +
+              "\n            "
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-35 concept" }, [
+        _c("div", [
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.payment.concept1) +
+              "\n            "
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-15 value" }, [
+        _c("div", [
+          _vm._v(
+            "\n                " +
+              _vm._s(
+                _vm._f("currency")(
+                  _vm._f("realValue")(_vm.payment, _vm.serverDate)
+                )
+              ) +
+              "\n            "
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-15 value" }, [
+        _c("div", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.payment.receipt_value,
+                expression: "payment.receipt_value"
+              }
+            ],
+            attrs: { type: "text" },
+            domProps: { value: _vm.payment.receipt_value },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.payment, "receipt_value", $event.target.value)
+              }
             }
-          }
-        },
-        [_c("i", { staticClass: "fas fa-minus-square fa-lg" })]
-      )
-    ])
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "col-05 delete" }, [
+        _c(
+          "div",
+          {
+            on: {
+              click: function($event) {
+                _vm.removePayment()
+              }
+            }
+          },
+          [_c("i", { staticClass: "fas fa-minus-square fa-lg" })]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm.showDetailChange
+      ? _c("section", { staticClass: "detail-change-method padding-20" }, [
+          _c(
+            "div",
+            {
+              staticClass: "close",
+              on: {
+                click: function($event) {
+                  _vm.closeDetailChangeForm()
+                }
+              }
+            },
+            [
+              _c("i", {
+                staticClass: "fas fa-times",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("ul", { staticClass: "display-horizontal detail-change" }, [
+            _c("li", { staticClass: "col-100" }, [
+              _c("ul", { staticClass: "display-horizontal col-100" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-35" }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm._f("uppercase")(
+                        _vm.$translate.text("sigeturbo.discount")
+                      )
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-35 value" }, [
+                  _vm._v(_vm._s(_vm._f("currency")(_vm.payment.value1)))
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-20" }, [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          _vm.changeValue($event, 1)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("capitalize")(
+                            _vm.$translate.text("sigeturbo.change")
+                          )
+                        )
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "col-100" }, [
+              _c("ul", { staticClass: "display-horizontal col-100" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-35" }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm._f("uppercase")(
+                        _vm.$translate.text("sigeturbo.normal")
+                      )
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-35 value" }, [
+                  _vm._v(_vm._s(_vm._f("currency")(_vm.payment.value2)))
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-20" }, [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          _vm.changeValue($event, 2)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("capitalize")(
+                            _vm.$translate.text("sigeturbo.change")
+                          )
+                        )
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "col-100" }, [
+              _c("ul", { staticClass: "display-horizontal col-100" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-35" }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm._f("uppercase")(
+                        _vm.$translate.text("sigeturbo.expired")
+                      )
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-35 value" }, [
+                  _vm._v(_vm._s(_vm._f("currency")(_vm.payment.value3)))
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-20" }, [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          _vm.changeValue($event, 3)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("capitalize")(
+                            _vm.$translate.text("sigeturbo.change")
+                          )
+                        )
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -43046,6 +43346,30 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "col-05 check" }, [
       _c("div", [_c("input", { attrs: { type: "checkbox" } })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-10" }, [
+      _c("em", { staticClass: "discount" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-10" }, [
+      _c("em", { staticClass: "normal" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-10" }, [
+      _c("em", { staticClass: "expired" })
     ])
   }
 ]
@@ -43385,7 +43709,7 @@ var render = function() {
                   _c("div", [_vm._v(_vm._s(receipt.document))])
                 ]),
                 _vm._v(" "),
-                _c("li", { staticClass: "payments col-30" }, [
+                _c("li", { staticClass: "payments col-25" }, [
                   _c("div", [
                     _c("section", { staticClass: "payment-calendar" }, [
                       _c(
@@ -43426,7 +43750,9 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(1, true)
+                _vm._m(1, true),
+                _vm._v(" "),
+                _vm._m(2, true)
               ])
             ])
           ]
@@ -43443,6 +43769,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "col-05 select" }, [
       _c("input", { attrs: { type: "checkbox" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-05 receipt" }, [
+      _c("div", [_c("i", { staticClass: "fas fa-receipt fa-2x" })])
     ])
   },
   function() {
@@ -45445,18 +45779,14 @@ var render = function() {
                                     staticClass: "payment-calendar-horizontal"
                                   },
                                   [
-                                    _vm._l(_vm.payments, function(
-                                      payment,
-                                      position
-                                    ) {
+                                    _vm._l(_vm.payments, function(payment) {
                                       return [
                                         _c(
                                           "sigeturbo-financials-payment-detail",
                                           {
                                             attrs: {
                                               payments: _vm.payments,
-                                              payment: payment,
-                                              position: position
+                                              payment: payment
                                             },
                                             on: {
                                               removePayment: _vm.removePayment,
@@ -45467,48 +45797,50 @@ var render = function() {
                                       ]
                                     }),
                                     _vm._v(" "),
-                                    _c(
-                                      "ul",
-                                      {
-                                        staticClass:
-                                          "display-horizontal col-100"
-                                      },
-                                      [
-                                        _vm._m(1),
-                                        _vm._v(" "),
-                                        _vm._m(2),
-                                        _vm._v(" "),
-                                        _vm._m(3),
-                                        _vm._v(" "),
-                                        _vm._m(4),
-                                        _vm._v(" "),
-                                        _vm._m(5),
-                                        _vm._v(" "),
-                                        _c(
-                                          "li",
-                                          { staticClass: "col-15 value" },
-                                          [
-                                            _c("div", [
-                                              _vm._v(
-                                                "\n                                                        " +
-                                                  _vm._s(
-                                                    _vm._f("currency")(
-                                                      _vm._f(
-                                                        "chargeTotalRealValue"
-                                                      )(_vm.payments)
-                                                    )
-                                                  ) +
-                                                  "\n                                                    "
-                                              )
-                                            ])
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c("li", {
-                                          staticClass: "col-05 delete"
-                                        })
-                                      ]
-                                    )
+                                    _c("section", [
+                                      _c(
+                                        "ul",
+                                        {
+                                          staticClass:
+                                            "display-horizontal col-100"
+                                        },
+                                        [
+                                          _vm._m(1),
+                                          _vm._v(" "),
+                                          _vm._m(2),
+                                          _vm._v(" "),
+                                          _vm._m(3),
+                                          _vm._v(" "),
+                                          _vm._m(4),
+                                          _vm._v(" "),
+                                          _vm._m(5),
+                                          _vm._v(" "),
+                                          _c(
+                                            "li",
+                                            { staticClass: "col-15 value" },
+                                            [
+                                              _c("div", [
+                                                _vm._v(
+                                                  "\n                                                            " +
+                                                    _vm._s(
+                                                      _vm._f("currency")(
+                                                        _vm._f(
+                                                          "chargeTotalRealValue"
+                                                        )(_vm.payments)
+                                                      )
+                                                    ) +
+                                                    "\n                                                        "
+                                                )
+                                              ])
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("li", {
+                                            staticClass: "col-05 delete"
+                                          })
+                                        ]
+                                      )
+                                    ])
                                   ],
                                   2
                                 )
@@ -46012,6 +46344,73 @@ var render = function() {
                         ])
                       ])
                     ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "fieldset",
+                    {
+                      staticClass: "step",
+                      attrs: { id: "step-4", "data-step": "4" }
+                    },
+                    [
+                      _c("legend", [
+                        _vm._v(
+                          _vm._s(
+                            _vm._f("uppercase")(
+                              _vm.$translate.text("sigeturbo.step")
+                            )
+                          ) + " 4"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("ul", { staticClass: "display-horizontal col-100" }, [
+                        _c("li", { staticClass: "col-100" }, [
+                          _c("h4", [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("uppercase")(
+                                  _vm.$translate.text(
+                                    "sigeturbo.generate_receipt"
+                                  )
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(8)
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100 icon" }, [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                _vm.assets +
+                                "/img/modules/profile_info_additional.svg",
+                              alt: ""
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "col-100" }, [
+                          _vm._m(9),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "btn btn-aquamarine",
+                            attrs: {
+                              type: "button",
+                              value: _vm._f("capitalize")(
+                                _vm.$translate.text("sigeturbo.generate")
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.generateReceipt()
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
                   )
                 ]
               )
@@ -46205,6 +46604,47 @@ var staticRenderFns = [
         ])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "info_generic aquamarine" }, [
+      _c("div", [
+        _c("i", {
+          staticClass: "fas fa-info-circle fa-2x",
+          staticStyle: { color: "white" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "col-90" }, [
+          _vm._v(
+            "\n                                            Listo. Ya se se puede generar el "
+          ),
+          _c("strong", [_vm._v("Recibo")]),
+          _vm._v(" correspondiente al pago realizado por el "),
+          _c("strong", [_vm._v("Padre de Familia")]),
+          _vm._v(
+            ". El recibo es generado en formato PDF\n                                        "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticStyle: {
+          margin: "10px auto",
+          color: "#53BBB4",
+          "text-align": "center"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-receipt fa-5x" })]
+    )
   }
 ]
 render._withStripped = true
@@ -57272,6 +57712,10 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
     en: {
         sigeturbo: {
             'academic': 'academic',
+            'discount': 'discount',
+            'normal': 'normal',
+            'expired': 'expired',
+            'change': 'change',
             'account': 'account',
             'accountingentries': 'accounting entries',
             'accountingentry': 'accounting entry',
@@ -57378,6 +57822,10 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
     es: {
         sigeturbo: {
             'academic': 'año académico',
+            'discount': 'descuento',
+            'normal': 'normal',
+            'expired': 'interés',
+            'change': 'cambiar',
             'account': 'cuenta',
             'accountingentries': 'asientos contables',
             'accountingentry': 'asiento contable',
@@ -57589,23 +58037,23 @@ function chargeSubtotal(charges, serverDate) {
                     total += charge.value1;
                     charge.realValue = charge.value1;
                     charge.receipt_value = charge.value1;
-                    charge.method = 'discount';
+                    //charge.method = 'discount';
                 } else if (dateCurrent.isAfter(charge.date1) && dateCurrent.isSameOrBefore(charge.date2)) {
                     total += charge.value2;
                     charge.realValue = charge.value2;
                     charge.receipt_value = charge.value2;
-                    charge.method = 'normal';
+                    //charge.method = 'normal';
                 } else {
                     total += charge.value3;
                     charge.realValue = charge.value3;
                     charge.receipt_value = charge.value3;
-                    charge.method = 'expired';
+                    //charge.method = 'expired';
                 }
             } else {
                 total += charge.value1;
                 charge.realValue = charge.value1;
                 charge.receipt_value = charge.value1;
-                charge.method = 'discount';
+                //charge.method = 'discount';
             }
         } else if (charge.ispayment === 'P') {
             total += charge.realValue - charge.receipt_realvalue;
@@ -57630,23 +58078,23 @@ function chargeTotal(users, serverDate) {
                         total += charge.value1;
                         charge.realValue = charge.value1;
                         charge.receipt_value = charge.value1;
-                        charge.method = 'discount';
+                        //charge.method = 'discount';
                     } else if (dateCurrent.isAfter(charge.date1) && dateCurrent.isSameOrBefore(charge.date2)) {
                         total += charge.value2;
                         charge.realValue = charge.value2;
                         charge.receipt_value = charge.value2;
-                        charge.method = 'normal';
+                        //charge.method = 'normal';
                     } else {
                         total += charge.value3;
                         charge.realValue = charge.value3;
                         charge.receipt_value = charge.value3;
-                        charge.method = 'expired';
+                        //charge.method = 'expired';
                     }
                 } else {
                     total += charge.value1;
                     charge.realValue = charge.value1;
                     charge.receipt_value = charge.value1;
-                    charge.method = 'discount';
+                    //charge.method = 'discount';
                 }
             } else if (charge.ispayment === 'P') {
                 total += charge.realValue - charge.receipt_realvalue;
@@ -57666,17 +58114,17 @@ function realValue(charge, serverDate) {
         if (dateCharge.isSameOrBefore(dateCurrent, 'year') && dateCharge.isSameOrBefore(dateCurrent, 'month')) {
             if (dateCurrent.isSameOrBefore(charge.date1)) {
                 value = charge.value1;
-                charge.method = 'discount';
+                //charge.method = 'discount';
             } else if (dateCurrent.isAfter(charge.date1) && dateCurrent.isSameOrBefore(charge.date2)) {
                 value = charge.value2;
-                charge.method = 'normal';
+                //charge.method = 'normal';
             } else {
                 value = charge.value3;
-                charge.method = 'expired';
+                //charge.method = 'expired';
             }
         } else {
             value = charge.value1;
-            charge.method = 'discount';
+            //charge.method = 'discount';
         }
     } else if (charge.ispayment === 'P') {
         value = charge.realValue;

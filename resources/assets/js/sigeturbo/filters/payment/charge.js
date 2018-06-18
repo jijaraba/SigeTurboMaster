@@ -18,23 +18,23 @@ export function chargeSubtotal(charges, serverDate) {
                     total += charge.value1;
                     charge.realValue = charge.value1;
                     charge.receipt_value = charge.value1;
-                    charge.method = 'discount';
+                    //charge.method = 'discount';
                 } else if (dateCurrent.isAfter(charge.date1) && dateCurrent.isSameOrBefore(charge.date2)) {
                     total += charge.value2;
                     charge.realValue = charge.value2;
                     charge.receipt_value = charge.value2;
-                    charge.method = 'normal';
+                    //charge.method = 'normal';
                 } else {
                     total += charge.value3;
                     charge.realValue = charge.value3;
                     charge.receipt_value = charge.value3;
-                    charge.method = 'expired';
+                    //charge.method = 'expired';
                 }
             } else {
                 total += charge.value1;
                 charge.realValue = charge.value1;
                 charge.receipt_value = charge.value1;
-                charge.method = 'discount';
+                //charge.method = 'discount';
             }
         } else if (charge.ispayment === 'P') {
             total += (charge.realValue - charge.receipt_realvalue);
@@ -59,23 +59,23 @@ export function chargeTotal(users, serverDate) {
                         total += charge.value1;
                         charge.realValue = charge.value1;
                         charge.receipt_value = charge.value1;
-                        charge.method = 'discount';
+                        //charge.method = 'discount';
                     } else if (dateCurrent.isAfter(charge.date1) && dateCurrent.isSameOrBefore(charge.date2)) {
                         total += charge.value2;
                         charge.realValue = charge.value2;
                         charge.receipt_value = charge.value2;
-                        charge.method = 'normal';
+                        //charge.method = 'normal';
                     } else {
                         total += charge.value3;
                         charge.realValue = charge.value3;
                         charge.receipt_value = charge.value3;
-                        charge.method = 'expired';
+                        //charge.method = 'expired';
                     }
                 } else {
                     total += charge.value1;
                     charge.realValue = charge.value1;
                     charge.receipt_value = charge.value1;
-                    charge.method = 'discount';
+                    //charge.method = 'discount';
                 }
             } else if (charge.ispayment === 'P') {
                 total += (charge.realValue - charge.receipt_realvalue);
@@ -95,17 +95,17 @@ export function realValue(charge, serverDate) {
         if (dateCharge.isSameOrBefore(dateCurrent, 'year') && dateCharge.isSameOrBefore(dateCurrent, 'month')) {
             if (dateCurrent.isSameOrBefore(charge.date1)) {
                 value = charge.value1;
-                charge.method = 'discount';
+                //charge.method = 'discount';
             } else if (dateCurrent.isAfter(charge.date1) && dateCurrent.isSameOrBefore(charge.date2)) {
                 value = charge.value2;
-                charge.method = 'normal';
+                //charge.method = 'normal';
             } else {
                 value = charge.value3;
-                charge.method = 'expired';
+                //charge.method = 'expired';
             }
         } else {
             value = charge.value1;
-            charge.method = 'discount';
+            //charge.method = 'discount';
         }
     } else if (charge.ispayment === 'P') {
         value = charge.realValue;

@@ -22,7 +22,7 @@
                         <li class="col-15 document">
                             <div>{{ receipt.document }}</div>
                         </li>
-                        <li class="payments col-30">
+                        <li class="payments col-25">
                             <div>
                                 <section class="payment-calendar">
                                     <ul class="col-100">
@@ -37,6 +37,11 @@
                         </li>
                         <li class="col-20 pending">
                             <div>{{ receipt.receiptpayments | chargeTotalRealValue | currency }}</div>
+                        </li>
+                        <li class="col-05 receipt">
+                            <div>
+                                <i class="fas fa-receipt fa-2x"></i>
+                            </div>
                         </li>
                         <li class="col-05 export">
                             <div>

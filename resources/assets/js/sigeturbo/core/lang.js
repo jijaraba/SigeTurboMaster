@@ -2,6 +2,10 @@ export default {
     en: {
         sigeturbo: {
             'academic': 'academic',
+            'discount': 'discount',
+            'normal': 'normal',
+            'expired': 'expired',
+            'change': 'change',
             'account': 'account',
             'accountingentries': 'accounting entries',
             'accountingentry': 'accounting entry',
@@ -108,6 +112,10 @@ export default {
     es: {
         sigeturbo: {
             'academic': 'año académico',
+            'discount': 'descuento',
+            'normal': 'normal',
+            'expired': 'interés',
+            'change': 'cambiar',
             'account': 'cuenta',
             'accountingentries': 'asientos contables',
             'accountingentry': 'asiento contable',

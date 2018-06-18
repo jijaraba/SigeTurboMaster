@@ -43,49 +43,50 @@
                                     <section class="sige-financials-transactions">
                                         <section class="payments">
                                             <section class="payment-calendar-horizontal">
-                                                <template v-for="payment, position in payments">
+                                                <template v-for="payment in payments">
                                                     <sigeturbo-financials-payment-detail :payments="payments"
                                                                                          :payment="payment"
                                                                                          @removePayment="removePayment"
-                                                                                         @calculateTotal="calculateTotal"
-                                                                                         :position="position"></sigeturbo-financials-payment-detail>
+                                                                                         @calculateTotal="calculateTotal"></sigeturbo-financials-payment-detail>
                                                 </template>
-                                                <ul class="display-horizontal col-100">
-                                                    <li class="col-05 check">
-                                                        <div>
+                                                <section>
+                                                    <ul class="display-horizontal col-100">
+                                                        <li class="col-05 check">
+                                                            <div>
 
-                                                        </div>
-                                                    </li>
-                                                    <li class="col-05 icon">
-                                                        <div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="col-05 icon">
+                                                            <div>
 
-                                                        </div>
-                                                    </li>
-                                                    <li class="col-10 type">
-                                                        <div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="col-10 type">
+                                                            <div>
 
-                                                        </div>
-                                                    </li>
+                                                            </div>
+                                                        </li>
 
-                                                    <li class="col-35 concept">
-                                                        <div>
+                                                        <li class="col-35 concept">
+                                                            <div>
 
-                                                        </div>
-                                                    </li>
-                                                    <li class="col-15 value">
-                                                        <div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="col-15 value">
+                                                            <div>
 
-                                                        </div>
-                                                    </li>
-                                                    <li class="col-15 value">
-                                                        <div>
-                                                            {{ payments | chargeTotalRealValue | currency }}
-                                                        </div>
-                                                    </li>
-                                                    <li class="col-05 delete">
+                                                            </div>
+                                                        </li>
+                                                        <li class="col-15 value">
+                                                            <div>
+                                                                {{ payments | chargeTotalRealValue | currency }}
+                                                            </div>
+                                                        </li>
+                                                        <li class="col-05 delete">
 
-                                                    </li>
-                                                </ul>
+                                                        </li>
+                                                    </ul>
+                                                </section>
                                             </section>
                                         </section>
                                     </section>
@@ -197,8 +198,33 @@
                                 </li>
                             </ul>
                         </fieldset>
+                        <fieldset class="step" id="step-4" data-step="4">
+                            <legend>{{ $translate.text('sigeturbo.step') | uppercase }} 4</legend>
+                            <ul class="display-horizontal col-100">
+                                <li class="col-100">
+                                    <h4>{{ $translate.text('sigeturbo.generate_receipt') | uppercase }}</h4>
+                                    <section class="info_generic aquamarine">
+                                        <div>
+                                            <i class="fas fa-info-circle fa-2x" style="color:white"></i>
+                                            <span class="col-90">
+                                                Listo. Ya se se puede generar el <strong>Recibo</strong> correspondiente al pago realizado por el <strong>Padre de Familia</strong>. El recibo es generado en formato PDF
+                                            </span>
+                                        </div>
+                                    </section>
+                                </li>
+                                <li class="col-100 icon">
+                                    <img :src='assets+ "/img/modules/profile_info_additional.svg"' alt=""/>
+                                </li>
+                                <li class="col-100">
+                                    <div style="margin: 10px auto;color:#53BBB4;text-align:center">
+                                        <i class="fas fa-receipt fa-5x"></i>
+                                    </div>
+                                    <input @click="generateReceipt()" class="btn btn-aquamarine" type="button"
+                                           :value="$translate.text('sigeturbo.generate') | capitalize">
+                                </li>
+                            </ul>
+                        </fieldset>
                     </form>
-
                 </section>
                 <footer>
                     <ul class="display-horizontal col-100">
@@ -308,11 +334,19 @@
                 //Config Payments
                 let data = [];
                 this.payments.forEach(function (payment) {
+                    let value_real = 0;
+                    if (payment.real_method == 'discount') {
+                        value_real = payment.value1;
+                    } else if (payment.real_method == 'normal') {
+                        value_real = payment.value2;
+                    } else if (payment.real_method == 'expired') {
+                        value_real = payment.value3;
+                    }
                     data.push({
                         payment: payment.idpayment,
                         receipt_value: payment.receipt_value,
-                        real_value: payment.realValue,
-                        method: payment.method,
+                        real_value: value_real,
+                        method: payment.real_method,
                         ispayment: payment.ispayment,
                     })
                 });

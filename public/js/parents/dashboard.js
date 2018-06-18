@@ -30475,6 +30475,10 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
     en: {
         sigeturbo: {
             'academic': 'academic',
+            'discount': 'discount',
+            'normal': 'normal',
+            'expired': 'expired',
+            'change': 'change',
             'account': 'account',
             'accountingentries': 'accounting entries',
             'accountingentry': 'accounting entry',
@@ -30581,6 +30585,10 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
     es: {
         sigeturbo: {
             'academic': 'año académico',
+            'discount': 'descuento',
+            'normal': 'normal',
+            'expired': 'interés',
+            'change': 'cambiar',
             'account': 'cuenta',
             'accountingentries': 'asientos contables',
             'accountingentry': 'asiento contable',

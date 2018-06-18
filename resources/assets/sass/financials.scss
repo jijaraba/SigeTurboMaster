@@ -427,6 +427,16 @@
       transform: translateY(-50%);
     }
   }
+  > .receipt {
+    > div {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      cursor: pointer;
+      color: $sige-global-color-05;
+    }
+  }
   > .export {
     > div {
       position: relative;
@@ -657,83 +667,136 @@
 .payment-calendar-horizontal {
   max-height: 140px;
   overflow-y: scroll;
-  > ul {
-    border-bottom: 1px solid $sige-border-color-03;
-    > li {
-      > div {
-        line-height: 45px;
-        height: 45px;
-      }
-      &.icon {
+  section {
+    > ul {
+      border-bottom: 1px solid $sige-border-color-03;
+      > li {
         > div {
+          line-height: 45px;
+          height: 45px;
+        }
+        &.icon {
           position: relative;
-          > img {
-            width: 40px;
-          }
-          > em {
-            line-height: initial;
-            position: absolute;
-            bottom: 5px;
-            right: 10px;
-            width: 15px;
-            height: 15px;
-            display: block;
-            border-radius: 3px;
-            &.discount {
-              background: $sige-global-bgcolor-05;
+          > div {
+            position: relative;
+            > img {
+              width: 40px;
             }
-            &.normal {
-              background: $sige-global-bgcolor-07;
-            }
-            &.expired {
-              background: $sige-global-bgcolor-10;
+            > em {
+              line-height: initial;
+              position: absolute;
+              bottom: 5px;
+              right: 10px;
+              width: 15px;
+              height: 15px;
+              display: block;
+              border-radius: 3px;
+              cursor: pointer;
+              &.discount {
+                background: $sige-global-bgcolor-05;
+              }
+              &.normal {
+                background: $sige-global-bgcolor-07;
+              }
+              &.expired {
+                background: $sige-global-bgcolor-10;
+              }
             }
           }
         }
-      }
-      &.month {
-        > div {
-          text-align: right;
-          margin-right: 5px;
-        }
-      }
-      &.type {
-        > div {
-          text-align: left;
-          margin-right: 5px;
-        }
-      }
-      &.concept {
-        > div {
-          margin-right: 5px;
-          width: 100%;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          word-wrap: normal;
-        }
-      }
-      &.value {
-        > div {
-          padding: 0px 5px;
-          text-align: right;
-          margin-right: 5px;
-          font: {
-            size: 1.1em;
-          }
-          input {
+        &.month {
+          > div {
             text-align: right;
+            margin-right: 5px;
+          }
+        }
+        &.type {
+          > div {
+            text-align: left;
+            margin-right: 5px;
+          }
+        }
+        &.concept {
+          > div {
+            margin-right: 5px;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-wrap: normal;
+          }
+        }
+        &.value {
+          > div {
+            padding: 0px 5px;
+            text-align: right;
+            margin-right: 5px;
             font: {
-              size: 13px !important;
+              size: 1.1em;
             }
-            padding: 8px 12px !important;
+            input {
+              text-align: right;
+              font: {
+                size: 13px !important;
+              }
+              padding: 8px 12px !important;
+            }
+          }
+        }
+        &.delete {
+          > div {
+            text-align: center;
+            color: $sige-global-bgcolor-03;
           }
         }
       }
-      &.delete {
-        > div {
-          text-align: center;
-          color: $sige-global-bgcolor-03;
+    }
+    > section.detail-change-method {
+      position: absolute;
+      width: 300px;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      background: white;
+      z-index: 2;
+      font: {
+        size: 0.95em;
+      }
+      > div.close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+      > ul.detail-change {
+        margin-top: 20px;
+        > li {
+          > ul {
+            line-height: 30px;
+            height: 30px;
+            > li {
+              &.value {
+                padding: 0px 5px;
+                text-align: right;
+              }
+              > em {
+                margin-top: 7px;
+                width: 15px;
+                height: 15px;
+                display: block;
+                border-radius: 3px;
+                &.discount {
+                  background: $sige-global-bgcolor-05;
+                }
+                &.normal {
+                  background: $sige-global-bgcolor-07;
+                }
+                &.expired {
+                  background: $sige-global-bgcolor-10;
+                }
+              }
+              > a {
+                color: $sige-global-bgcolor-03;
+              }
+            }
+          }
         }
       }
     }
