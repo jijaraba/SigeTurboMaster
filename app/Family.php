@@ -51,7 +51,7 @@ class Family extends Model
                 $join->on('receiptpayments.idpayment', '=', 'payments.idpayment');
             })
             ->orderBy('payments.realdate', 'DESC')
-            ->limit(14)
+            ->limit(20)
             ->with('transactions');
     }
 
