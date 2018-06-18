@@ -59,7 +59,8 @@
                             </a>
                         </li>
                         <li class="col-05 receipt">
-                            <a @click="showReceipt($event)" class="btn btn-green tooltip" title="Recibo" href="#" :id="'receipt_'+user.iduser">
+                            <a @click="showReceipt($event)" class="btn btn-green tooltip" title="Recibo" href="#"
+                               :id="'receipt_'+user.iduser">
                                 <i class="fas fa-receipt fa-lg"></i>
                             </a>
                         </li>
@@ -134,6 +135,7 @@
             //Get Payments By Family
             getPaymentsByFamily() {
                 //Get Payment By Family
+                this.payments = [];
                 Payment.getPaymentsByFamily({
                     family: this.family
                 }).then(({data}) => {

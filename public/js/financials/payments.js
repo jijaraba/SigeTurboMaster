@@ -2072,6 +2072,7 @@ module.exports = {
 //
 //
 //
+//
 
 
 
@@ -2136,6 +2137,7 @@ module.exports = {
             var _this2 = this;
 
             //Get Payment By Family
+            this.payments = [];
             __WEBPACK_IMPORTED_MODULE_5__models_Payment__["a" /* default */].getPaymentsByFamily({
                 family: this.family
             }).then(function (_ref2) {
