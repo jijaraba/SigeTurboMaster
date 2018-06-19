@@ -43009,7 +43009,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "section",
-      { staticStyle: { "overflow-y": "scroll", height: "163px" } },
+      { staticStyle: { "overflow-y": "scroll", "max-height": "108px" } },
       _vm._l(_vm.accountingentries, function(accountingentry) {
         return _c(
           "section",

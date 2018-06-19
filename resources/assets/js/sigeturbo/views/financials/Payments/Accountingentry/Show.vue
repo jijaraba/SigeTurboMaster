@@ -29,7 +29,7 @@
                 </li>
             </ul>
         </section>
-        <section style="overflow-y: scroll; height: 163px">
+        <section style="overflow-y: scroll; max-height: 163px;max-height: 108px">
             <section v-for="accountingentry in accountingentries" class="transaction-edit">
                 <sigeturbo-financials-transaction-edit :accountingentry="accountingentry"
                                                        :transactiontypes="transactiontypes"
