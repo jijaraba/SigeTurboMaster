@@ -1,60 +1,8 @@
 <template>
     <section class="receipts-list">
-        <ul id="receipts-list" class="display-horizontal col-100">
-            <template v-for="receipt in receipts">
-                <li class="col-100">
-                    <ul class="display-horizontal col-100 receipt">
-                        <li class="col-05 select">
-                            <input type="checkbox"/>
-                        </li>
-                        <li class="col-10 photo">
-                            <div>
-                                <a href="">
-                                    <img class="tooltip" :src=" assets + '/img/users/' + receipt.photo"
-                                         :alt="receipt.fullname"
-                                         :title="receipt.iduser + ' - ' + receipt.fullname"/>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="col-05 document">
-                            <div>{{ receipt.document }}</div>
-                        </li>
-                        <li class="col-15 vouchertype">
-                            <div>{{ receipt.vouchertype }}: {{ receipt.description }}</div>
-                        </li>
-                        <li class="payments col-30">
-                            <div>
-                                <section class="payment-calendar">
-                                    <ul class="col-100">
-                                        <li v-for="payment in receipt.receiptpayments">
-                                            <sigeturbo-payments-payment :payment="payment" banks="banks"
-                                                                        :server-date="serverDate"
-                                                                        :banks="banks"></sigeturbo-payments-payment>
-                                        </li>
-                                    </ul>
-                                </section>
-                            </div>
-                        </li>
-                        <li class="col-10 date">
-                            <div>{{ receipt.date }}</div>
-                        </li>
-                        <li class="col-15 pending">
-                            <div>{{ receipt.receiptpayments | chargeTotalRealValue | currency }}</div>
-                        </li>
-                        <li class="col-05 receipt">
-                            <div>
-                                <i class="fas fa-receipt fa-2x"></i>
-                            </div>
-                        </li>
-                        <li class="col-05 export">
-                            <div>
-                                <i class="fas fa-file-pdf fa-2x"></i>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            </template>
-        </ul>
+        <template v-for="receipt in receipts">
+            <sigeturbo-receipt-show :server-date="serverDate" :banks="banks" :receipt="receipt"></sigeturbo-receipt-show>
+        </template>
     </section>
 </template>
 <script>
@@ -64,10 +12,10 @@
     import uppercase from "../../../filters/string/uppercase";
     import titlecase from "../../../filters/string/titlecase";
     import {chargeSubtotal, chargeTotal, chargeTotalRealValue} from "../../../filters/payment/charge";
-    import PaymentsPayment from '../../../views/financials/Payments/Payment/Payment';
     import assets from "../../../core/utils";
     import Bank from "../../../models/Bank";
     import Receipt from "../../../models/Receipt";
+    import ReceiptShow from "../../../views/financials/Payments/Receipt/Show";
 
     export default {
 
@@ -84,7 +32,7 @@
             chargeTotalRealValue: chargeTotalRealValue,
         },
         components: {
-            'sigeturbo-payments-payment': PaymentsPayment,
+            'sigeturbo-receipt-show': ReceiptShow,
         },
         data: function () {
             return {

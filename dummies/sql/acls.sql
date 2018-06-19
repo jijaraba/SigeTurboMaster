@@ -367,9 +367,9 @@ INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.qualitativerecoveryfinalareas.update', 'Admin', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.quantitativerecoveries.destroy', 'Admin,Teacher,Academic', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.quantitativerecoveries.getrecoverybyuser','Admin,Teacher,Academic,Principal,AreaManager,HomeroomTeacher,Admission,Counseling',NOW(),NOW());
-INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.quantitativerecoveries.show', 'Admin,Teacher,Academic,Principal', NOW(), NOW());
-INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.quantitativerecoveries.store', 'Admin,Teacher,Academic', NOW(), NOW());
-INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.quantitativerecoveries.update', 'Admin,Teacher,Academic', NOW(), NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.quantitativerecoveries.show', 'Admin,Teacher,Academic,Principal,AreaManager', NOW(), NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.quantitativerecoveries.store', 'Admin,Teacher,Academic,Areamanager', NOW(), NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.quantitativerecoveries.update', 'Admin,Teacher,Academic,AreaManager', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.quantitativerecoveryfinalareas.store', 'Admin', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.quantitativerecoveryfinalareas.update', 'Admin', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.receipts.index', 'Admin,Account,Treasurer', NOW(), NOW());

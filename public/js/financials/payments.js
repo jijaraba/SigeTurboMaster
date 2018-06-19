@@ -3700,6 +3700,133 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Receipt/Show.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__views_financials_Payments_Payment_Payment__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Payment.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__views_financials_Payments_Accountingentry_Show__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Accountingentry/Show.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filters_payment_charge__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/payment/charge.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__filters_other_currency__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/other/currency.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__filters_string_uppercase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/uppercase.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+    props: ['receipt', 'banks', 'serverDate'],
+    filters: {
+        chargeTotalRealValue: __WEBPACK_IMPORTED_MODULE_3__filters_payment_charge__["c" /* chargeTotalRealValue */],
+        currency: __WEBPACK_IMPORTED_MODULE_4__filters_other_currency__["a" /* default */],
+        uppercase: __WEBPACK_IMPORTED_MODULE_5__filters_string_uppercase__["a" /* default */]
+    },
+    components: {
+        'sigeturbo-payments-payment': __WEBPACK_IMPORTED_MODULE_1__views_financials_Payments_Payment_Payment__["a" /* default */],
+        'sigeturbo-accountingentry-show': __WEBPACK_IMPORTED_MODULE_2__views_financials_Payments_Accountingentry_Show__["a" /* default */]
+    },
+    data: function data() {
+        return {
+            showAccountingentry: false,
+            assets: Object(__WEBPACK_IMPORTED_MODULE_0__core_utils__["a" /* default */])(),
+            load: true
+        };
+    },
+    methods: {
+        showAccountingentryForm: function showAccountingentryForm() {
+            this.showAccountingentry = true;
+        },
+        closeAccountingentryForm: function closeAccountingentryForm() {
+            this.showAccountingentry = false;
+        }
+    },
+    watch: {},
+    created: function created() {},
+    mounted: function mounted() {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Receipts.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3709,62 +3836,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters_string_uppercase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/uppercase.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filters_string_titlecase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/titlecase.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__filters_payment_charge__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/payment/charge.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_financials_Payments_Payment_Payment__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Payment/Payment.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_Bank__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Bank.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__models_Receipt__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Receipt.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_Bank__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Bank.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_Receipt__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Receipt.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_financials_Payments_Receipt_Show__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Receipt/Show.vue");
 //
 //
 //
@@ -3797,11 +3872,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         chargeTotalRealValue: __WEBPACK_IMPORTED_MODULE_4__filters_payment_charge__["c" /* chargeTotalRealValue */]
     },
     components: {
-        'sigeturbo-payments-payment': __WEBPACK_IMPORTED_MODULE_5__views_financials_Payments_Payment_Payment__["a" /* default */]
+        'sigeturbo-receipt-show': __WEBPACK_IMPORTED_MODULE_8__views_financials_Payments_Receipt_Show__["a" /* default */]
     },
     data: function data() {
         return {
-            assets: Object(__WEBPACK_IMPORTED_MODULE_6__core_utils__["a" /* default */])(),
+            assets: Object(__WEBPACK_IMPORTED_MODULE_5__core_utils__["a" /* default */])(),
             receipts: [],
             vouchertype: 'all'
         };
@@ -3810,7 +3885,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         loadReceipts: function loadReceipts() {
             var _this = this;
 
-            __WEBPACK_IMPORTED_MODULE_8__models_Receipt__["a" /* default */].getReceiptsByVouchertype({
+            __WEBPACK_IMPORTED_MODULE_7__models_Receipt__["a" /* default */].getReceiptsByVouchertype({
                 vouchertype: this.vouchertype
             }).then(function (_ref) {
                 var data = _ref.data;
@@ -3826,7 +3901,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         var _this2 = this;
 
         //Get Banks
-        __WEBPACK_IMPORTED_MODULE_7__models_Bank__["a" /* default */].query('/api/v1/banks/', {}).then(function (_ref2) {
+        __WEBPACK_IMPORTED_MODULE_6__models_Bank__["a" /* default */].query('/api/v1/banks/', {}).then(function (_ref2) {
             var data = _ref2.data;
 
             _this2.banks = data;
@@ -43685,132 +43760,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "receipts-list" }, [
-    _c(
-      "ul",
-      {
-        staticClass: "display-horizontal col-100",
-        attrs: { id: "receipts-list" }
-      },
-      [
-        _vm._l(_vm.receipts, function(receipt) {
-          return [
-            _c("li", { staticClass: "col-100" }, [
-              _c("ul", { staticClass: "display-horizontal col-100 receipt" }, [
-                _vm._m(0, true),
-                _vm._v(" "),
-                _c("li", { staticClass: "col-10 photo" }, [
-                  _c("div", [
-                    _c("a", { attrs: { href: "" } }, [
-                      _c("img", {
-                        staticClass: "tooltip",
-                        attrs: {
-                          src: _vm.assets + "/img/users/" + receipt.photo,
-                          alt: receipt.fullname,
-                          title: receipt.iduser + " - " + receipt.fullname
-                        }
-                      })
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "col-05 document" }, [
-                  _c("div", [_vm._v(_vm._s(receipt.document))])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "col-15 vouchertype" }, [
-                  _c("div", [
-                    _vm._v(
-                      _vm._s(receipt.vouchertype) +
-                        ": " +
-                        _vm._s(receipt.description)
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "payments col-30" }, [
-                  _c("div", [
-                    _c("section", { staticClass: "payment-calendar" }, [
-                      _c(
-                        "ul",
-                        { staticClass: "col-100" },
-                        _vm._l(receipt.receiptpayments, function(payment) {
-                          return _c(
-                            "li",
-                            [
-                              _c("sigeturbo-payments-payment", {
-                                attrs: {
-                                  payment: payment,
-                                  banks: "banks",
-                                  "server-date": _vm.serverDate,
-                                  banks: _vm.banks
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        })
-                      )
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "col-10 date" }, [
-                  _c("div", [_vm._v(_vm._s(receipt.date))])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "col-15 pending" }, [
-                  _c("div", [
-                    _vm._v(
-                      _vm._s(
-                        _vm._f("currency")(
-                          _vm._f("chargeTotalRealValue")(
-                            receipt.receiptpayments
-                          )
-                        )
-                      )
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _vm._m(1, true),
-                _vm._v(" "),
-                _vm._m(2, true)
-              ])
-            ])
-          ]
-        })
-      ],
-      2
-    )
-  ])
+  return _c(
+    "section",
+    { staticClass: "receipts-list" },
+    [
+      _vm._l(_vm.receipts, function(receipt) {
+        return [
+          _c("sigeturbo-receipt-show", {
+            attrs: {
+              "server-date": _vm.serverDate,
+              banks: _vm.banks,
+              receipt: receipt
+            }
+          })
+        ]
+      })
+    ],
+    2
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "col-05 select" }, [
-      _c("input", { attrs: { type: "checkbox" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "col-05 receipt" }, [
-      _c("div", [_c("i", { staticClass: "fas fa-receipt fa-2x" })])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "col-05 export" }, [
-      _c("div", [_c("i", { staticClass: "fas fa-file-pdf fa-2x" })])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 if (false) {
@@ -44930,6 +44899,212 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-45a2a856", { render: render, staticRenderFns: staticRenderFns })
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5d8725e9\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Receipt/Show.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", [
+    _c(
+      "ul",
+      {
+        staticClass: "display-horizontal col-100",
+        attrs: { id: "receipts-list" }
+      },
+      [
+        [
+          _c("li", { staticClass: "col-100" }, [
+            _c("ul", { staticClass: "display-horizontal col-100 receipt" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("li", { staticClass: "col-10 photo" }, [
+                _c("div", [
+                  _c("a", { attrs: { href: "" } }, [
+                    _c("img", {
+                      staticClass: "tooltip",
+                      attrs: {
+                        src: _vm.assets + "/img/users/" + _vm.receipt.photo,
+                        alt: _vm.receipt.fullname,
+                        title: _vm.receipt.iduser + " - " + _vm.receipt.fullname
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "col-05 document" }, [
+                _c("div", [_vm._v(_vm._s(_vm.receipt.document))])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "col-20 vouchertype" }, [
+                _c("div", [
+                  _vm._v(
+                    _vm._s(_vm.receipt.vouchertype) +
+                      ": " +
+                      _vm._s(_vm.receipt.description)
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "payments col-35" }, [
+                _c("div", [
+                  _c("section", { staticClass: "payment-calendar" }, [
+                    _c(
+                      "ul",
+                      { staticClass: "col-100" },
+                      _vm._l(_vm.receipt.receiptpayments, function(payment) {
+                        return _c(
+                          "li",
+                          [
+                            _c("sigeturbo-payments-payment", {
+                              attrs: {
+                                payment: payment,
+                                banks: "banks",
+                                "server-date": _vm.serverDate,
+                                banks: _vm.banks
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      })
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "col-15 pending" }, [
+                _c("div", [
+                  _vm._v(
+                    _vm._s(
+                      _vm._f("currency")(
+                        _vm._f("chargeTotalRealValue")(
+                          _vm.receipt.receiptpayments
+                        )
+                      )
+                    )
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "col-05 receipt" }, [
+                _c(
+                  "div",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.showAccountingentryForm()
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-receipt fa-2x" })]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(1)
+            ])
+          ])
+        ]
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _vm.showAccountingentry
+      ? _c(
+          "section",
+          {
+            staticClass: "sige-main-modal",
+            staticStyle: { display: "block", "padding-top": "100px" }
+          },
+          [
+            _c(
+              "section",
+              { staticClass: "modal-content", staticStyle: { width: "900px" } },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "close",
+                    on: {
+                      click: function($event) {
+                        _vm.closeAccountingentryForm()
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-window-close fa-lg" })]
+                ),
+                _vm._v(" "),
+                _c("section", { staticClass: "padding-30" }, [
+                  _c("h4", [
+                    _vm._v(
+                      _vm._s(
+                        _vm._f("uppercase")(
+                          _vm.$translate.text("sigeturbo.accountingentries")
+                        )
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "section",
+                    { staticClass: "sige-financials-transactions" },
+                    [
+                      _c("section", { staticClass: "payments" }, [
+                        _c(
+                          "section",
+                          { staticClass: "transactions" },
+                          [
+                            _c("sigeturbo-accountingentry-show", {
+                              attrs: { load: _vm.load, receipt: _vm.receipt }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-05 select" }, [
+      _c("input", { attrs: { type: "checkbox" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-05 export" }, [
+      _c("div", [_c("i", { staticClass: "fas fa-file-pdf fa-2x" })])
+    ])
+  }
+]
+render._withStripped = true
+
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5d8725e9", { render: render, staticRenderFns: staticRenderFns })
   }
 }
 
@@ -59588,6 +59763,61 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-eecdf76c", Component.options)
   } else {
     hotAPI.reload("data-v-eecdf76c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/views/financials/Payments/Receipt/Show.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_Show_vue__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Receipt/Show.vue");
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5d8725e9_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Show_vue__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5d8725e9\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/financials/Payments/Receipt/Show.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__("./node_modules/vue-loader/lib/runtime/component-normalizer.js");
+var disposed = false
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+
+var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_Show_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5d8725e9_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Show_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_5d8725e9_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Show_vue__["b" /* staticRenderFns */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/sigeturbo/views/financials/Payments/Receipt/Show.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5d8725e9", Component.options)
+  } else {
+    hotAPI.reload("data-v-5d8725e9", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

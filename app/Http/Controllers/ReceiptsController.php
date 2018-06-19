@@ -227,7 +227,7 @@ class ReceiptsController extends Controller
                             //Payment With Discount
                             if ($paymentCurrent->method == 'discount') {
                                 if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES) {
-                                    if ($cost->idaccounttype == Accounttype::ACCOUNT_PENSIONES) {
+                                    if ($cost->idaccounttype == Accounttype::ACCOUNT_PENSIONES || $paymentCurrent->idpackage == Package::PACKAGE_1107 || $paymentCurrent->idpackage == Package::PACKAGE_1112) {
                                         //ADVANCE PENSION
                                         if ($paymentCurrent->idpackage == Package::PACKAGE_1107 || $paymentCurrent->idpackage == Package::PACKAGE_1112) {
                                             if ($cost->idaccounttype == Accounttype::ACCOUNT_DCTOS) {
@@ -274,7 +274,7 @@ class ReceiptsController extends Controller
                             //Payment Normal
                             if ($paymentCurrent->method == 'normal') {
                                 if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES && $cost->idaccounttype != Accounttype::ACCOUNT_DCTOS) {
-                                    if ($cost->idaccounttype == Accounttype::ACCOUNT_PENSIONES) {
+                                    if ($cost->idaccounttype == Accounttype::ACCOUNT_PENSIONES  || $paymentCurrent->idpackage == Package::PACKAGE_1107 || $paymentCurrent->idpackage == Package::PACKAGE_1112) {
                                         //ADVANCE PENSION
                                         if ($paymentCurrent->idpackage == Package::PACKAGE_1107 || $paymentCurrent->idpackage == Package::PACKAGE_1112) {
                                             if ($cost->idaccounttype == Accounttype::ACCOUNT_DCTOS) {
@@ -322,7 +322,7 @@ class ReceiptsController extends Controller
                             if ($paymentCurrent->method == 'expired') {
                                 if ($cost->idaccounttype != Accounttype::ACCOUNT_DCTOS) {
 
-                                    if ($cost->idaccounttype == Accounttype::ACCOUNT_PENSIONES) {
+                                    if ($cost->idaccounttype == Accounttype::ACCOUNT_PENSIONES  || $paymentCurrent->idpackage == Package::PACKAGE_1107 || $paymentCurrent->idpackage == Package::PACKAGE_1112) {
                                         //ADVANCE PENSION
                                         if ($paymentCurrent->idpackage == Package::PACKAGE_1107 || $paymentCurrent->idpackage == Package::PACKAGE_1112) {
                                             if ($cost->idaccounttype == Accounttype::ACCOUNT_DCTOS) {
