@@ -18,6 +18,7 @@ use SigeTurbo\Http\Requests\PaymentRequest;
 use SigeTurbo\Http\Requests\PaymentRespondRequest;
 use SigeTurbo\Http\Requests\PaymentShortRequest;
 use SigeTurbo\Mailer\MailerInterface;
+use SigeTurbo\Package;
 use SigeTurbo\Repositories\Cost\CostRepositoryInterface;
 use SigeTurbo\Repositories\Enrollment\EnrollmentRepositoryInterface;
 use SigeTurbo\Repositories\Family\FamilyRepositoryInterface;
@@ -573,7 +574,7 @@ class PaymentsController extends Controller
             $enrollment = $this->enrollmentRepository->getEnrollmentsLatestByStudent($request['user'], $year->idyear);
 
             //Costs
-            $costs = $this->costRepository->getCostsByPackageAndCategory($year->idyear, $enrollment->idgrade, Concepttype::ENROLLMENT, 2, Vouchercategory::INVOICE);
+            $costs = $this->costRepository->getCostsByPackageAndCategory($year->idyear, $enrollment->idgrade, Concepttype::ENROLLMENT, Package::PACKAGE_1105, Vouchercategory::INVOICE);
             //Find Family
             $family = $this->userfamilyRepository->getFamilyByUser($request['user']);
             //Set Total Cost
