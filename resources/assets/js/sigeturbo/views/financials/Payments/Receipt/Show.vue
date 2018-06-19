@@ -19,10 +19,10 @@
                         <li class="col-05 document">
                             <div>{{ receipt.document }}</div>
                         </li>
-                        <li class="col-20 vouchertype">
+                        <li class="col-25 vouchertype">
                             <div>{{ receipt.vouchertype | titlecase }}: {{ receipt.description | titlecase }}</div>
                         </li>
-                        <li class="payments col-35">
+                        <li class="payments col-30">
                             <div>
                                 <section class="payment-calendar">
                                     <ul class="col-100">

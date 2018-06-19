@@ -44949,7 +44949,7 @@ var render = function() {
                 _c("div", [_vm._v(_vm._s(_vm.receipt.document))])
               ]),
               _vm._v(" "),
-              _c("li", { staticClass: "col-20 vouchertype" }, [
+              _c("li", { staticClass: "col-25 vouchertype" }, [
                 _c("div", [
                   _vm._v(
                     _vm._s(_vm._f("titlecase")(_vm.receipt.vouchertype)) +
@@ -44959,7 +44959,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("li", { staticClass: "payments col-35" }, [
+              _c("li", { staticClass: "payments col-30" }, [
                 _c("div", [
                   _c("section", { staticClass: "payment-calendar" }, [
                     _c(
