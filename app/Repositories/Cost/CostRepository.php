@@ -54,7 +54,7 @@ class CostRepository implements CostRepositoryInterface
      */
     public function getCostsByPackageAndCategory($year, $grade, $type, $package, $category)
     {
-        return Cost::select('accounttypes.idaccounttype', 'accounttypes.name AS accounttype', 'costpackages.idtransactiontype', 'costpackages.idtransactiontype AS transactiontype', 'costs.value', 'costpackages.calculated', 'costpackages.factor')
+        return Cost::select('accounttypes.idaccounttype', 'accounttypes.name AS accounttype', 'costpackages.idtransactiontype', 'costpackages.idtransactiontype AS transactiontype', DB::raw('(costs.value * costpackages.factor) * costpackages.percentage AS value'), 'costpackages.calculated', 'costpackages.factor', 'costpackages.percentage')
             ->join('costpackages', function ($join) {
                 $join
                     ->on('costpackages.idaccounttype', '=', 'costs.idaccounttype');

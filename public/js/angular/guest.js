@@ -69895,7 +69895,7 @@ module.exports = "<section style=\"width: 100%;text-align: center;font-size:0.9e
 /***/ "./resources/assets/js/sigeturbo_angular/guest/directives/views/partials/tasks/message.html":
 /***/ (function(module, exports) {
 
-module.exports = "<section style=\"width: 100%;text-align: center;font-size:0.9em\">\n    <h2>Recuperaciones 2017-2018</h2>\n    <h5>Tercer Periodo Periodo</h5>\n    <p><a style=\"color:#657380;border:1px solid #657380;padding: 10px;border-radius: 5px\"\n          href=\"https://294347513a062ec6e0b6-8f8f94440e741fa4111c4d620d6f574f.ssl.cf5.rackcdn.com/global/TNSRecuperaciones2017_03V1.pdf\">Descargar\n        Archivo</a></p>\n</section>";
+module.exports = "<section style=\"width: 100%;text-align: center;font-size:0.9em\">\n    <h2>Recuperaciones 2017-2018</h2>\n    <h5>Tercer Periodo Periodo</h5>\n    <p><a style=\"color:#657380;border:1px solid #657380;padding: 10px;border-radius: 5px\"\n          href=\"https://294347513a062ec6e0b6-8f8f94440e741fa4111c4d620d6f574f.ssl.cf5.rackcdn.com/global/TNSRecuperaciones2017_03V2.pdf\">Descargar\n        Archivo</a></p>\n</section>";
 
 /***/ }),
 

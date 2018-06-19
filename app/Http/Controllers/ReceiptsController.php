@@ -17,6 +17,7 @@ use SigeTurbo\Repositories\Bank\BankRepositoryInterface;
 use SigeTurbo\Repositories\Cost\CostRepositoryInterface;
 use SigeTurbo\Repositories\Enrollment\EnrollmentRepositoryInterface;
 use SigeTurbo\Repositories\Group\GroupRepositoryInterface;
+use SigeTurbo\Repositories\Package\PackageRepositoryInterface;
 use SigeTurbo\Repositories\Payment\PaymentRepositoryInterface;
 use SigeTurbo\Repositories\Receipt\ReceiptRepositoryInterface;
 use SigeTurbo\Repositories\Receiptpayment\ReceiptpaymentRepositoryInterface;
@@ -81,6 +82,10 @@ class ReceiptsController extends Controller
      * @var GroupRepositoryInterface
      */
     private $groupRepository;
+    /**
+     * @var PackageRepositoryInterface
+     */
+    private $packageRepository;
 
     /**
      * ReceiptsController constructor.
@@ -97,6 +102,7 @@ class ReceiptsController extends Controller
      * @param CostRepositoryInterface $costRepository
      * @param YearRepositoryInterface $yearRepository
      * @param GroupRepositoryInterface $groupRepository
+     * @param PackageRepositoryInterface $packageRepository
      */
     public function __construct(ReceiptRepositoryInterface $receiptRepository,
                                 PaymentRepositoryInterface $paymentRepository,
@@ -110,7 +116,8 @@ class ReceiptsController extends Controller
                                 AccounttypeRepositoryInterface $accounttypeRepository,
                                 CostRepositoryInterface $costRepository,
                                 YearRepositoryInterface $yearRepository,
-                                GroupRepositoryInterface $groupRepository)
+                                GroupRepositoryInterface $groupRepository,
+                                PackageRepositoryInterface $packageRepository)
     {
         $this->receiptRepository = $receiptRepository;
         $this->paymentRepository = $paymentRepository;
@@ -125,6 +132,7 @@ class ReceiptsController extends Controller
         $this->costRepository = $costRepository;
         $this->yearRepository = $yearRepository;
         $this->groupRepository = $groupRepository;
+        $this->packageRepository = $packageRepository;
     }
 
     /**
@@ -209,8 +217,9 @@ class ReceiptsController extends Controller
                          * Create Accountingentry By Payment
                          */
                         //Get Group By Student
-
                         $group = $this->groupRepository::getLatestGroupByStudent($paymentCurrent->iduser, $paymentCurrent->idyear);
+                        $package = $this->packageRepository->find($paymentCurrent->idpackage);
+                        //Get Costs
                         $costs = $this->costRepository->getCostsByPackageAndCategory($paymentCurrent->idyear, $group->idgrade, $paymentCurrent->idpaymenttype, $paymentCurrent->idpackage, Vouchercategory::RECEIPT);
                         $countCosts = count($costs);
                         $totalPackage = 0;
@@ -220,7 +229,7 @@ class ReceiptsController extends Controller
                                 if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES) {
                                     if ($cost->idaccounttype == Accounttype::ACCOUNT_PENSIONES) {
                                         //ADVANCE PENSION
-                                        if ($paymentCurrent->idpackage == Package::PACKAGE_1107) {
+                                        if ($paymentCurrent->idpackage == Package::PACKAGE_1107 || $paymentCurrent->idpackage == Package::PACKAGE_1112) {
                                             if ($cost->idaccounttype == Accounttype::ACCOUNT_DCTOS) {
                                                 $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
                                             } else {
@@ -267,7 +276,7 @@ class ReceiptsController extends Controller
                                 if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES && $cost->idaccounttype != Accounttype::ACCOUNT_DCTOS) {
                                     if ($cost->idaccounttype == Accounttype::ACCOUNT_PENSIONES) {
                                         //ADVANCE PENSION
-                                        if ($paymentCurrent->idpackage == Package::PACKAGE_1107) {
+                                        if ($paymentCurrent->idpackage == Package::PACKAGE_1107 || $paymentCurrent->idpackage == Package::PACKAGE_1112) {
                                             if ($cost->idaccounttype == Accounttype::ACCOUNT_DCTOS) {
                                                 $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
                                             } else {
@@ -315,7 +324,7 @@ class ReceiptsController extends Controller
 
                                     if ($cost->idaccounttype == Accounttype::ACCOUNT_PENSIONES) {
                                         //ADVANCE PENSION
-                                        if ($paymentCurrent->idpackage == Package::PACKAGE_1107) {
+                                        if ($paymentCurrent->idpackage == Package::PACKAGE_1107 || $paymentCurrent->idpackage == Package::PACKAGE_1112) {
                                             if ($cost->idaccounttype == Accounttype::ACCOUNT_DCTOS) {
                                                 $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
                                             } else {
