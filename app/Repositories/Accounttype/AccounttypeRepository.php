@@ -27,7 +27,9 @@ class AccounttypeRepository implements AccounttypeRepositoryInterface
      */
     public function find($accounttype)
     {
-        return Accounttype::find($accounttype);
+        return Accounttype::select('accounttypes.*', 'accounttypes.name AS accounttype')
+            ->where('idaccounttype', '=', $accounttype)
+            ->first();
     }
 
     /**
@@ -37,7 +39,7 @@ class AccounttypeRepository implements AccounttypeRepositoryInterface
      */
     public function findAccountByCode($code)
     {
-        return Accounttype::select('*')
+        return Accounttype::select('accounttypes.*', 'accounttypes.name AS accounttype')
             ->whereCode($code)
             ->first();
     }

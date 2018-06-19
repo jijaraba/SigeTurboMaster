@@ -314,7 +314,7 @@
             currency: currency,
             titlecase: titlecase,
             closeReceipt() {
-                this.$emit('close', false)
+                this.$emit('closeReceipt',false)
             },
             removePayment(position) {
                 this.payments.splice(this.payments.indexOf(position), 1);

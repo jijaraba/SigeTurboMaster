@@ -2161,6 +2161,7 @@ module.exports = {
 //
 //
 //
+//
 
 
 
@@ -2265,6 +2266,9 @@ module.exports = {
         },
         closeReceipt: function closeReceipt(receipt) {
             this.receipt = receipt;
+            this.reload();
+        },
+        reload: function reload() {
             this.getPaymentsByFamily();
         },
         result: function result(data) {
@@ -2594,6 +2598,7 @@ module.exports = {
         },
         closeReceipt: function closeReceipt(receipt) {
             this.receipt = receipt;
+            this.$emit('reload');
         }
     },
     watch: {},
@@ -2967,7 +2972,7 @@ module.exports = {
         currency: __WEBPACK_IMPORTED_MODULE_2__filters_other_currency__["a" /* default */],
         titlecase: __WEBPACK_IMPORTED_MODULE_10__filters_string_titlecase__["a" /* default */],
         closeReceipt: function closeReceipt() {
-            this.$emit('close', false);
+            this.$emit('closeReceipt', false);
         },
         removePayment: function removePayment(position) {
             this.payments.splice(this.payments.indexOf(position), 1);
@@ -41297,7 +41302,8 @@ var render = function() {
                                                       "server-date":
                                                         _vm.serverDate,
                                                       banks: _vm.banks
-                                                    }
+                                                    },
+                                                    on: { reload: _vm.reload }
                                                   }
                                                 )
                                               ],
@@ -41416,7 +41422,7 @@ var render = function() {
                         "show-receipt": "receipt",
                         banks: _vm.banks
                       },
-                      on: { close: _vm.closeReceipt }
+                      on: { closeReceipt: _vm.closeReceipt }
                     })
                   : _vm._e()
               ],
@@ -42751,7 +42757,7 @@ var render = function() {
                     "show-receipt": "receipt",
                     banks: _vm.banks
                   },
-                  on: { close: _vm.closeReceipt }
+                  on: { closeReceipt: _vm.closeReceipt }
                 })
               : _vm._e()
           ]

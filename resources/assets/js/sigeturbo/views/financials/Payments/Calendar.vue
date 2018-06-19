@@ -31,7 +31,8 @@
                                                     <li v-for="payment in user.payments">
                                                         <sigeturbo-payments-payment :payment="payment" banks="banks"
                                                                                     :server-date="serverDate"
-                                                                                    :banks="banks"></sigeturbo-payments-payment>
+                                                                                    :banks="banks"
+                                                                                    @reload="reload"></sigeturbo-payments-payment>
                                                     </li>
                                                 </ul>
                                             </section>
@@ -71,7 +72,7 @@
                         </li>
                     </ul>
                 </section>
-                <sigeturbo-payments-receipt @close="closeReceipt" v-if="receipt" :payments="payments"
+                <sigeturbo-payments-receipt @closeReceipt="closeReceipt" v-if="receipt" :payments="payments"
                                             show-receipt="receipt" :banks="banks"></sigeturbo-payments-receipt>
             </section>
         </template>
@@ -172,6 +173,9 @@
             },
             closeReceipt(receipt) {
                 this.receipt = receipt;
+                this.reload();
+            },
+            reload() {
                 this.getPaymentsByFamily();
             },
             result(data) {

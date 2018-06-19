@@ -2073,6 +2073,7 @@ module.exports = {
 //
 //
 //
+//
 
 
 
@@ -2177,6 +2178,9 @@ module.exports = {
         },
         closeReceipt: function closeReceipt(receipt) {
             this.receipt = receipt;
+            this.reload();
+        },
+        reload: function reload() {
             this.getPaymentsByFamily();
         },
         result: function result(data) {
@@ -3219,6 +3223,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
         closeReceipt: function closeReceipt(receipt) {
             this.receipt = receipt;
+            this.$emit('reload');
         }
     },
     watch: {},
@@ -3592,7 +3597,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         currency: __WEBPACK_IMPORTED_MODULE_2__filters_other_currency__["a" /* default */],
         titlecase: __WEBPACK_IMPORTED_MODULE_10__filters_string_titlecase__["a" /* default */],
         closeReceipt: function closeReceipt() {
-            this.$emit('close', false);
+            this.$emit('closeReceipt', false);
         },
         removePayment: function removePayment(position) {
             this.payments.splice(this.payments.indexOf(position), 1);
@@ -3708,6 +3713,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_Bank__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Bank.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__models_Receipt__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Receipt.js");
+//
+//
+//
 //
 //
 //
@@ -42680,7 +42688,8 @@ var render = function() {
                                                       "server-date":
                                                         _vm.serverDate,
                                                       banks: _vm.banks
-                                                    }
+                                                    },
+                                                    on: { reload: _vm.reload }
                                                   }
                                                 )
                                               ],
@@ -42799,7 +42808,7 @@ var render = function() {
                         "show-receipt": "receipt",
                         banks: _vm.banks
                       },
-                      on: { close: _vm.closeReceipt }
+                      on: { closeReceipt: _vm.closeReceipt }
                     })
                   : _vm._e()
               ],
@@ -43705,7 +43714,11 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("li", { staticClass: "col-20 vouchertype" }, [
+                _c("li", { staticClass: "col-05 document" }, [
+                  _c("div", [_vm._v(_vm._s(receipt.document))])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-15 vouchertype" }, [
                   _c("div", [
                     _vm._v(
                       _vm._s(receipt.vouchertype) +
@@ -43715,11 +43728,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("li", { staticClass: "col-10 document" }, [
-                  _c("div", [_vm._v(_vm._s(receipt.document))])
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "payments col-25" }, [
+                _c("li", { staticClass: "payments col-30" }, [
                   _c("div", [
                     _c("section", { staticClass: "payment-calendar" }, [
                       _c(
@@ -43746,7 +43755,11 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("li", { staticClass: "col-20 pending" }, [
+                _c("li", { staticClass: "col-10 date" }, [
+                  _c("div", [_vm._v(_vm._s(receipt.date))])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "col-15 pending" }, [
                   _c("div", [
                     _vm._v(
                       _vm._s(
@@ -45359,7 +45372,7 @@ var render = function() {
                     "show-receipt": "receipt",
                     banks: _vm.banks
                   },
-                  on: { close: _vm.closeReceipt }
+                  on: { closeReceipt: _vm.closeReceipt }
                 })
               : _vm._e()
           ]

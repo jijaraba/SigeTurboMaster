@@ -212,20 +212,37 @@ class ReceiptsController extends Controller
 
                         $group = $this->groupRepository::getLatestGroupByStudent($paymentCurrent->iduser, $paymentCurrent->idyear);
                         $costs = $this->costRepository->getCostsByPackageAndCategory($paymentCurrent->idyear, $group->idgrade, $paymentCurrent->idpaymenttype, $paymentCurrent->idpackage, Vouchercategory::RECEIPT);
-                        $count = count($costs);
+                        $countCosts = count($costs);
+                        $totalPackage = 0;
                         foreach ($costs as $key => $cost) {
-                            dd($count ." - " . $key);
-                            exit();
                             //Payment With Discount
                             if ($paymentCurrent->method == 'discount') {
                                 if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES) {
                                     if ($cost->idaccounttype == Accounttype::ACCOUNT_PENSIONES) {
                                         $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($cost->value - ($cost->value * $student->scholarship)), $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
                                     } else {
-                                        //Student New
+
+                                        //Student New (PACKAGE_1102)
                                         if ($paymentCurrent->idpackage == Package::PACKAGE_1102) {
                                             if ($cost->idaccounttype == Accounttype::ACCOUNT_OTROS || $cost->idaccounttype == Accounttype::ACCOUNT_AGENDAS) {
-
+                                                $totalPackage += $cost->value;
+                                                if ($countCosts == ($key + 1)) {
+                                                    $accounttype = $this->accounttypeRepository->find(Accounttype::ACCOUNT_OTROS);
+                                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, $totalPackage, $accounttype, Transactiontype::CREDIT, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                                }
+                                            } else {
+                                                $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                            }
+                                        } else if ($paymentCurrent->idpackage == Package::PACKAGE_1103 || $paymentCurrent->idpackage == Package::PACKAGE_1105 || $paymentCurrent->idpackage == Package::PACKAGE_1107) {
+                                            //Advance (PACKAGE_1103 - PACKAGE_1105 - PACKAGE_1107)
+                                            if ($cost->idaccounttype == Accounttype::ACCOUNT_DCTOS) {
+                                                $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                            } else {
+                                                $totalPackage += $cost->value;
+                                                if ($countCosts == ($key + 1)) {
+                                                    $accounttype = $this->accounttypeRepository->find(Accounttype::ACCOUNT_ANTICIPOS);
+                                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, $totalPackage, $accounttype, Transactiontype::CREDIT, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                                }
                                             }
                                         } else {
                                             $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
@@ -239,17 +256,68 @@ class ReceiptsController extends Controller
                                     if ($cost->idaccounttype == Accounttype::ACCOUNT_PENSIONES) {
                                         $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($cost->value - ($cost->value * $student->scholarship)), $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
                                     } else {
-                                        $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+
+                                        //Student New (PACKAGE_1102)
+                                        if ($paymentCurrent->idpackage == Package::PACKAGE_1102) {
+                                            if ($cost->idaccounttype == Accounttype::ACCOUNT_OTROS || $cost->idaccounttype == Accounttype::ACCOUNT_AGENDAS) {
+                                                $totalPackage += $cost->value;
+                                                if ($countCosts == ($key + 1)) {
+                                                    $accounttype = $this->accounttypeRepository->find(Accounttype::ACCOUNT_OTROS);
+                                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, $totalPackage, $accounttype, Transactiontype::CREDIT, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                                }
+                                            } else {
+                                                $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                            }
+                                        } else if ($paymentCurrent->idpackage == Package::PACKAGE_1103 || $paymentCurrent->idpackage == Package::PACKAGE_1105 || $paymentCurrent->idpackage == Package::PACKAGE_1107) {
+                                            //Advance (PACKAGE_1103 - PACKAGE_1105 - PACKAGE_1107)
+                                            if ($cost->idaccounttype == Accounttype::ACCOUNT_DCTOS) {
+                                                $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                            } else {
+                                                $totalPackage += $cost->value;
+                                                if ($countCosts == ($key + 1)) {
+                                                    $accounttype = $this->accounttypeRepository->find(Accounttype::ACCOUNT_ANTICIPOS);
+                                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, $totalPackage, $accounttype, Transactiontype::CREDIT, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                                }
+                                            }
+                                        } else {
+                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                        }
                                     }
                                 }
                             }
                             //Payment Expired
                             if ($paymentCurrent->method == 'expired') {
                                 if ($cost->idaccounttype != Accounttype::ACCOUNT_DCTOS) {
+
                                     if ($cost->idaccounttype == Accounttype::ACCOUNT_PENSIONES) {
                                         $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($cost->value - ($cost->value * $student->scholarship)), $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
                                     } else {
-                                        $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+
+                                        //Student New (PACKAGE_1102)
+                                        if ($paymentCurrent->idpackage == Package::PACKAGE_1102) {
+                                            if ($cost->idaccounttype == Accounttype::ACCOUNT_OTROS || $cost->idaccounttype == Accounttype::ACCOUNT_AGENDAS) {
+                                                $totalPackage += $cost->value;
+                                                if ($countCosts == ($key + 1)) {
+                                                    $accounttype = $this->accounttypeRepository->find(Accounttype::ACCOUNT_OTROS);
+                                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, $totalPackage, $accounttype, Transactiontype::CREDIT, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                                }
+                                            } else {
+                                                $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                            }
+                                        } else if ($paymentCurrent->idpackage == Package::PACKAGE_1103 || $paymentCurrent->idpackage == Package::PACKAGE_1105 || $paymentCurrent->idpackage == Package::PACKAGE_1107) {
+                                            //Advance (PACKAGE_1103 - PACKAGE_1105 - PACKAGE_1107)
+                                            if ($cost->idaccounttype == Accounttype::ACCOUNT_DCTOS) {
+                                                $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                            } else {
+                                                $totalPackage += $cost->value;
+                                                if ($countCosts == ($key + 1)) {
+                                                    $accounttype = $this->accounttypeRepository->find(Accounttype::ACCOUNT_ANTICIPOS);
+                                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, $totalPackage, $accounttype, Transactiontype::CREDIT, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                                }
+                                            }
+                                        } else {
+                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                        }
                                     }
                                 }
                             }

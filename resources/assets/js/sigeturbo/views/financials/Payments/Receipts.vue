@@ -16,13 +16,13 @@
                                 </a>
                             </div>
                         </li>
-                        <li class="col-20 vouchertype">
-                            <div>{{ receipt.vouchertype }}: {{ receipt.description }}</div>
-                        </li>
-                        <li class="col-10 document">
+                        <li class="col-05 document">
                             <div>{{ receipt.document }}</div>
                         </li>
-                        <li class="payments col-25">
+                        <li class="col-15 vouchertype">
+                            <div>{{ receipt.vouchertype }}: {{ receipt.description }}</div>
+                        </li>
+                        <li class="payments col-30">
                             <div>
                                 <section class="payment-calendar">
                                     <ul class="col-100">
@@ -35,7 +35,10 @@
                                 </section>
                             </div>
                         </li>
-                        <li class="col-20 pending">
+                        <li class="col-10 date">
+                            <div>{{ receipt.date }}</div>
+                        </li>
+                        <li class="col-15 pending">
                             <div>{{ receipt.receiptpayments | chargeTotalRealValue | currency }}</div>
                         </li>
                         <li class="col-05 receipt">

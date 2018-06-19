@@ -398,6 +398,17 @@
       top: 50%;
       transform: translateY(-50%);
       text-align: center;
+      font: {
+        family: $sige-font-family-04;
+      }
+    }
+  }
+  > .date {
+    > div {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
     }
   }
   > .payments {

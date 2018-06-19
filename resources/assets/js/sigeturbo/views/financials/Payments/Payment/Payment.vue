@@ -33,7 +33,7 @@
               style="cursor: pointer">{{ payment.month_name }}</span>
         <span class="type">{{ payment.idpaymenttype | paymentType }}</span>
         <template v-if="payment.ispayment !== 'Y' && payment.approved !== 'A'">
-            <sigeturbo-payments-receipt @close="closeReceipt" v-if="receipt" :payments="payments"
+            <sigeturbo-payments-receipt @closeReceipt="closeReceipt" v-if="receipt" :payments="payments"
                                         show-receipt="receipt" :banks="banks"></sigeturbo-payments-receipt>
         </template>
     </section>
@@ -108,6 +108,7 @@
             },
             closeReceipt(receipt) {
                 this.receipt = receipt;
+                this.$emit('reload');
             },
 
         },
