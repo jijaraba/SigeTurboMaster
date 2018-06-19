@@ -3710,6 +3710,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filters_payment_charge__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/payment/charge.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__filters_other_currency__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/other/currency.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__filters_string_uppercase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/uppercase.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__filters_string_titlecase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/titlecase.js");
 //
 //
 //
@@ -3784,6 +3785,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+
 
 
 
@@ -3799,7 +3801,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     filters: {
         chargeTotalRealValue: __WEBPACK_IMPORTED_MODULE_3__filters_payment_charge__["c" /* chargeTotalRealValue */],
         currency: __WEBPACK_IMPORTED_MODULE_4__filters_other_currency__["a" /* default */],
-        uppercase: __WEBPACK_IMPORTED_MODULE_5__filters_string_uppercase__["a" /* default */]
+        uppercase: __WEBPACK_IMPORTED_MODULE_5__filters_string_uppercase__["a" /* default */],
+        titlecase: __WEBPACK_IMPORTED_MODULE_6__filters_string_titlecase__["a" /* default */]
     },
     components: {
         'sigeturbo-payments-payment': __WEBPACK_IMPORTED_MODULE_1__views_financials_Payments_Payment_Payment__["a" /* default */],
@@ -44949,9 +44952,9 @@ var render = function() {
               _c("li", { staticClass: "col-20 vouchertype" }, [
                 _c("div", [
                   _vm._v(
-                    _vm._s(_vm.receipt.vouchertype) +
+                    _vm._s(_vm._f("titlecase")(_vm.receipt.vouchertype)) +
                       ": " +
-                      _vm._s(_vm.receipt.description)
+                      _vm._s(_vm._f("titlecase")(_vm.receipt.description))
                   )
                 ])
               ]),

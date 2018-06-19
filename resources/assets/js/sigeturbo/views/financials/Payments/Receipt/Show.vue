@@ -20,7 +20,7 @@
                             <div>{{ receipt.document }}</div>
                         </li>
                         <li class="col-20 vouchertype">
-                            <div>{{ receipt.vouchertype }}: {{ receipt.description }}</div>
+                            <div>{{ receipt.vouchertype | titlecase }}: {{ receipt.description | titlecase }}</div>
                         </li>
                         <li class="payments col-35">
                             <div>
@@ -80,6 +80,7 @@
     import {chargeTotalRealValue} from "../../../../filters/payment/charge";
     import currency from "../../../../filters/other/currency";
     import uppercase from "../../../../filters/string/uppercase";
+    import titlecase from "../../../../filters/string/titlecase";
 
 
     export default {
@@ -92,7 +93,8 @@
         filters: {
             chargeTotalRealValue: chargeTotalRealValue,
             currency: currency,
-            uppercase: uppercase
+            uppercase: uppercase,
+            titlecase: titlecase,
         },
         components: {
             'sigeturbo-payments-payment': PaymentsPayment,
