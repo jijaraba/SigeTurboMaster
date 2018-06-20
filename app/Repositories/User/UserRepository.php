@@ -63,6 +63,7 @@ class UserRepository implements UserRepositoryInterface
             'email' => $data['email'],
             'email_personal' => $data['email_personal'],
             'api_token' => str_random(60),
+            'token' => str_random(70),
             "created_by" => getUser()->iduser,
             'created_at' => Carbon::now(),
         ));

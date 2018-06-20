@@ -235,6 +235,10 @@ class ReceiptsController extends Controller
                             if ((integer)$account > 0) {
                                 foreach ($costs as $cost) {
                                     if ($cost->idaccounttype == $account) {
+
+                                        /**
+                                         * DETECT METHOD (discount - normal - expired)
+                                         */
                                         if ($paymentCurrent->method == 'discount') {
                                             if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES) {
                                                 if ($package->idconcepttype == Concepttype::PENSION) {
@@ -276,45 +280,20 @@ class ReceiptsController extends Controller
                                     }
                                 }
 
-                                /**
-                                 * Method
-                                 */
-                                if ($paymentCurrent->method == 'discount') {
-                                    if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES) {
-                                        if ($package->idconcepttype == Concepttype::PENSION) {
-                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($cost->value - ($cost->value * $student->scholarship)), $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
-                                        } else {
-                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
-                                        }
-                                    }
+                                $accounttype = $this->accounttypeRepository->find($struct_internal[0]);
+                                if ($package->idconcepttype == Concepttype::PENSION) {
+                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($totalAccount - ($totalAccount * $student->scholarship)), $accounttype, Transactiontype::CREDIT, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                } else {
+                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, $totalAccount, $accounttype, Transactiontype::CREDIT, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
                                 }
-                                if ($paymentCurrent->method == 'normal') {
-                                    if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES && $cost->idaccounttype != Accounttype::ACCOUNT_DCTOS) {
-                                        if ($package->idconcepttype == Concepttype::PENSION) {
-                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($cost->value - ($cost->value * $student->scholarship)), $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
-                                        } else {
-                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
-                                        }
-                                    }
-                                }
-                                if ($paymentCurrent->method == 'expired') {
-                                    if ($cost->idaccounttype != Accounttype::ACCOUNT_DCTOS) {
-                                        if ($package->idconcepttype == Concepttype::PENSION) {
-                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($cost->value - ($cost->value * $student->scholarship)), $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
-                                        } else {
-                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
-                                        }
-                                    }
-                                }
+
                             }
                         }
 
+                        //return response()->json($data);
 
-                        return response()->json($data);
-
-
-                        $countCosts = count($costs);
-                        $totalPackage = 0;
+                        //$countCosts = count($costs);
+                        //$totalPackage = 0;
 
                         /*
                         foreach ($costs as $key => $cost) {
