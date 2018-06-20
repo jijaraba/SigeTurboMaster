@@ -4905,7 +4905,7 @@ footer .sige-footer-content {
 
 .sige-search-result {
   position: absolute;
-  width: 370px;
+  width: 400px;
   -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
           box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   z-index: 2;
@@ -4926,8 +4926,10 @@ footer .sige-footer-content {
 }
 
 .sige-search-result .result > ul > li > ul.users {
-  line-height: 50px;
-  height: 50px;
+  line-height: 55px;
+  height: 55px;
+  border: 1px solid #eee;
+  padding: 3px 0px;
 }
 
 .sige-search-result .result > ul > li > ul.users > li.code div {
@@ -4936,6 +4938,7 @@ footer .sige-footer-content {
   font-size: 0.9em;
   font-family: "Montserrat Medium", Helvetica Neue, Helvetica, sans-serif;
   color: #53BBB4;
+  cursor: pointer;
 }
 
 .sige-search-result .result > ul > li > ul.users > li.name div {

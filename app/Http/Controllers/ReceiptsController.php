@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use SigeTurbo\Accounttype;
+use SigeTurbo\Concepttype;
 use SigeTurbo\Http\Requests\ReceiptRequest;
 use SigeTurbo\Package;
 use SigeTurbo\Repositories\Accountingentry\AccountingentryRepositoryInterface;
@@ -206,13 +207,17 @@ class ReceiptsController extends Controller
                         'value' => $payment['receipt_value'],
                     ];
                     if ($this->receiptpaymentRepository->store($receiptData)) {
-                        //Create Accountingentry By Bank
+
+                        /**
+                         * Create Accountingentry By Bank
+                         */
                         if ($first) {
                             //Bank
                             $accounttype = $this->accounttypeRepository->find($this->bankRepository->find($request['bank'])->idaccounttype);
                             $this->_generateAccountingEntryByPayments($receipt->idreceipt, $request['value'], $accounttype, Transactiontype::DEBIT, 1, $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, false, $first);
                             $first = false;
                         }
+
                         /**
                          * Create Accountingentry By Payment
                          */
@@ -221,8 +226,97 @@ class ReceiptsController extends Controller
                         $package = $this->packageRepository->find($paymentCurrent->idpackage);
                         //Get Costs
                         $costs = $this->costRepository->getCostsByPackageAndCategory($paymentCurrent->idyear, $group->idgrade, $paymentCurrent->idpaymenttype, $paymentCurrent->idpackage, Vouchercategory::RECEIPT);
+                        //Explode Struct
+                        $struct_receipt = explode('|', $package->struct_receipt);
+
+                        $data = [];
+                        foreach ($struct_receipt as $account) {
+
+                            if ((integer)$account > 0) {
+                                foreach ($costs as $cost) {
+                                    if ($cost->idaccounttype == $account) {
+                                        if ($paymentCurrent->method == 'discount') {
+                                            if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES) {
+                                                if ($package->idconcepttype == Concepttype::PENSION) {
+                                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($cost->value - ($cost->value * $student->scholarship)), $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                                } else {
+                                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                                }
+                                            }
+                                        }
+                                        if ($paymentCurrent->method == 'normal') {
+                                            if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES && $cost->idaccounttype != Accounttype::ACCOUNT_DCTOS) {
+                                                if ($package->idconcepttype == Concepttype::PENSION) {
+                                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($cost->value - ($cost->value * $student->scholarship)), $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                                } else {
+                                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                                }
+                                            }
+                                        }
+                                        if ($paymentCurrent->method == 'expired') {
+                                            if ($cost->idaccounttype != Accounttype::ACCOUNT_DCTOS) {
+                                                if ($package->idconcepttype == Concepttype::PENSION) {
+                                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($cost->value - ($cost->value * $student->scholarship)), $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                                } else {
+                                                    $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } else {
+                                //Calculate Value
+                                $struct_internal = explode('+', str_replace("*", "", $account));
+                                $totalAccount = 0;
+                                foreach ($struct_internal as $account) {
+                                    foreach ($costs as $cost) {
+                                        if ($cost->idaccounttype == $account) {
+                                            $totalAccount += $cost->value;
+                                        }
+                                    }
+                                }
+
+                                /**
+                                 * Method
+                                 */
+                                if ($paymentCurrent->method == 'discount') {
+                                    if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES) {
+                                        if ($package->idconcepttype == Concepttype::PENSION) {
+                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($cost->value - ($cost->value * $student->scholarship)), $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                        } else {
+                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                        }
+                                    }
+                                }
+                                if ($paymentCurrent->method == 'normal') {
+                                    if ($cost->idaccounttype != Accounttype::ACCOUNT_INTERESES && $cost->idaccounttype != Accounttype::ACCOUNT_DCTOS) {
+                                        if ($package->idconcepttype == Concepttype::PENSION) {
+                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($cost->value - ($cost->value * $student->scholarship)), $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                        } else {
+                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                        }
+                                    }
+                                }
+                                if ($paymentCurrent->method == 'expired') {
+                                    if ($cost->idaccounttype != Accounttype::ACCOUNT_DCTOS) {
+                                        if ($package->idconcepttype == Concepttype::PENSION) {
+                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, ($cost->value - ($cost->value * $student->scholarship)), $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                        } else {
+                                            $this->_generateAccountingEntryByPayments($receipt->idreceipt, $cost->value, $cost, $cost->idtransactiontype, \costCenter($group->idgroup), $paymentCurrent->iduser, $request['date'], $paymentCurrent->realdate, true, $first);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+
+                        return response()->json($data);
+
+
                         $countCosts = count($costs);
                         $totalPackage = 0;
+
+                        /*
                         foreach ($costs as $key => $cost) {
                             //Payment With Discount
                             if ($paymentCurrent->method == 'discount') {
@@ -366,7 +460,7 @@ class ReceiptsController extends Controller
                                     }
                                 }
                             }
-                        }
+                        }*/
                     }
                 }
             }
@@ -383,12 +477,13 @@ class ReceiptsController extends Controller
             $data['unsuccessful'] = true;
             $data['message'] = Lang::get('sige.ErrorSaveMessage');
         }
-        //DB::commit();
+
+//DB::commit();
         return response()->json($data);
-        //} catch (\Exception $e) {
-        //   DB::rollback();
-        //  return response()->json(["successful" => false], 300);
-        //}
+//} catch (\Exception $e) {
+//   DB::rollback();
+//  return response()->json(["successful" => false], 300);
+//}
     }
 
 
@@ -405,7 +500,8 @@ class ReceiptsController extends Controller
      * @param $findResponsible
      * @param $first
      */
-    private function _generateAccountingEntryByPayments($receipt, $value, $accounttype, $transactiontype, $costcenter, $user, $date, $realdate, $findResponsible, $first)
+    private
+    function _generateAccountingEntryByPayments($receipt, $value, $accounttype, $transactiontype, $costcenter, $user, $date, $realdate, $findResponsible, $first)
     {
         //Responsible
         $responsible = 0;
@@ -439,7 +535,8 @@ class ReceiptsController extends Controller
      * @param $first
      * @return string
      */
-    private function _generateDescription($accounttype, $user, $realdate, $first)
+    private
+    function _generateDescription($accounttype, $user, $realdate, $first)
     {
         if (Accounttype::ACCOUNT_PENSIONES == $accounttype->idaccounttype) {
             //Find Student
@@ -461,7 +558,8 @@ class ReceiptsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getReceiptsByVouchertype(Request $request)
+    public
+    function getReceiptsByVouchertype(Request $request)
     {
         return response()->json($this->receiptRepository->getReceiptsByVouchertype($request['vouchertype']));
     }

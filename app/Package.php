@@ -21,7 +21,7 @@ class Package extends Model
     const PACKAGE_1112 = 12;
 
     protected $primaryKey = 'idpackage';
-    protected $fillable = ['idconcepttype', 'code', 'name', 'active', 'modifiable', 'process', 'created_by', 'updated_by'];
+    protected $fillable = ['idconcepttype', 'code', 'name', 'active', 'modifiable', 'process', 'struct_invoice', 'struct_receipt', 'created_by', 'updated_by'];
     protected $hidden = ['created_at', 'updated_at'];
     /**
      * Table Name

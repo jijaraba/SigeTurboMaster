@@ -8,8 +8,10 @@ class Concepttype extends Model
 {
     const ENROLLMENT = 2;
     const PENSION = 3;
-    const NIVELATION = 4;
-    const EXTRACURRICULAR = 5;
+    const EXTRACURRICULAR = 4;
+    const NIVELATION = 5;
+    const VALIDATION = 6;
+    const OTHERS = 7;
 
     protected $primaryKey = 'idconcepttype';
     protected $fillable = ['name', 'prefix'];

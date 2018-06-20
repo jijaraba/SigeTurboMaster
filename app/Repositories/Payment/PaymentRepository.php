@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use SigeTurbo\Concepttype;
+use SigeTurbo\Package;
 use SigeTurbo\Payment;
 use SigeTurbo\Repositories\Userfamily\UserfamilyRepository;
 use SigeTurbo\Repositories\Year\YearRepository;
@@ -566,7 +567,7 @@ class PaymentRepository implements PaymentRepositoryInterface
             $data["month"] = Carbon::now()->month;
             $data["month_name"] = getMonthName(Carbon::now()->month);
             $data["type"] = Concepttype::ENROLLMENT;
-            $data["package"] = 2;
+            $data["package"] = Package::PACKAGE_1105;
             $data["exclude"] = 0;
         }
 
