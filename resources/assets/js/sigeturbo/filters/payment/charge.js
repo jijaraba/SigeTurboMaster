@@ -116,7 +116,7 @@ export function realValue(charge, serverDate) {
 export function chargeTotalRealValue(payments) {
     let total = 0;
     payments.forEach(function (charge) {
-        total += parseFloat(charge.receipt_value);
+        total += parseFloat(charge.receipt_realvalue);
     });
     return total;
 }
