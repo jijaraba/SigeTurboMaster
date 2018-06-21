@@ -3824,10 +3824,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         closeAccountingentryForm: function closeAccountingentryForm() {
             this.showAccountingentry = false;
         },
-        getReceiptReport: function getReceiptReport() {
+        getReceiptReport: function getReceiptReport(filename, format) {
             var _this = this;
 
             __WEBPACK_IMPORTED_MODULE_7__models_Export__["a" /* default */].getReceiptReport({
+                filename: filename,
+                format: format,
                 document: this.receipt.document,
                 vouchertype: this.vouchertype
             }).then(function (_ref) {
@@ -45041,7 +45043,7 @@ var render = function() {
                   {
                     on: {
                       click: function($event) {
-                        _vm.getReceiptReport()
+                        _vm.getReceiptReport("cash_receipt", "pdf")
                       }
                     }
                   },

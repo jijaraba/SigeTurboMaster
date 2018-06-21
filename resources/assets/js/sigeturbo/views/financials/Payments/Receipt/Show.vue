@@ -44,7 +44,7 @@
                             </div>
                         </li>
                         <li class="col-05 export">
-                            <div @click="getReceiptReport()">
+                            <div @click="getReceiptReport('cash_receipt','pdf')">
                                 <i class="fas fa-file-pdf fa-2x"></i>
                             </div>
                         </li>
@@ -115,8 +115,10 @@
             closeAccountingentryForm() {
                 this.showAccountingentry = false;
             },
-            getReceiptReport() {
+            getReceiptReport(filename, format) {
                 Export.getReceiptReport({
+                    filename: filename,
+                    format: format,
                     document: this.receipt.document,
                     vouchertype: this.vouchertype,
                 }).then(({data}) => {
