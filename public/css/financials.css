@@ -757,6 +757,7 @@
 .payment-calendar-horizontal section > ul > li.delete > div {
   text-align: center;
   color: #53BBB4;
+  cursor: pointer;
 }
 
 .payment-calendar-horizontal section > section.detail-change-method {

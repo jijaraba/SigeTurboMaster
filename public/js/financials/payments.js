@@ -45014,7 +45014,7 @@ var render = function() {
                   _vm._v(
                     _vm._s(
                       _vm._f("currency")(
-                        _vm._f("chargeTotalRealValue")(
+                        _vm._f("chargeTotalReceiptRealValue")(
                           _vm.receipt.receiptpayments
                         )
                       )
@@ -58250,6 +58250,7 @@ function currency(value, symbol, decimals, options) {
 /* harmony export (immutable) */ __webpack_exports__["b"] = chargeTotal;
 /* harmony export (immutable) */ __webpack_exports__["d"] = realValue;
 /* harmony export (immutable) */ __webpack_exports__["c"] = chargeTotalRealValue;
+/* unused harmony export chargeTotalReceiptRealValue */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__("./node_modules/moment/moment.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /**
@@ -58368,6 +58369,14 @@ function realValue(charge, serverDate) {
 }
 
 function chargeTotalRealValue(payments) {
+    var total = 0;
+    payments.forEach(function (charge) {
+        total += parseFloat(charge.receipt_value);
+    });
+    return total;
+}
+
+function chargeTotalReceiptRealValue(payments) {
     var total = 0;
     payments.forEach(function (charge) {
         total += parseFloat(charge.receipt_realvalue);

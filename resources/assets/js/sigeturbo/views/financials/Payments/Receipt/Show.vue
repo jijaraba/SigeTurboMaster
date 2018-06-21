@@ -36,7 +36,7 @@
                             </div>
                         </li>
                         <li class="col-15 pending">
-                            <div>{{ receipt.receiptpayments | chargeTotalRealValue | currency }}</div>
+                            <div>{{ receipt.receiptpayments | chargeTotalReceiptRealValue | currency }}</div>
                         </li>
                         <li class="col-05 receipt">
                             <div @click="showAccountingentryForm()">
