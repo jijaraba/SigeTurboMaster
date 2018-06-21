@@ -58739,8 +58739,8 @@ var Exports = function (_Model) {
 
     }, {
         key: 'getReceiptReport',
-        value: function getReceiptReport(path, params) {
-            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get(path, {
+        value: function getReceiptReport(params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/exports/receipts/reports/', {
                 params: params
             });
         }

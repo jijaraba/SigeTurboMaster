@@ -24,8 +24,8 @@ class Exports extends Model {
      * @param path
      * @param params
      */
-    static getReceiptReport(path, params) {
-        return HTTP.get(path, {
+    static getReceiptReport(params) {
+        return HTTP.get('/api/v1/exports/receipts/reports/', {
             params: params
         });
     }
