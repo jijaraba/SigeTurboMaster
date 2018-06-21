@@ -120,7 +120,7 @@
                     filename: filename,
                     format: format,
                     document: this.receipt.document,
-                    vouchertype: this.vouchertype,
+                    vouchertype: this.receipt.idvouchertype,
                 }).then(({data}) => {
                     this.download = this.assets + '/export/' + data.file;
                     let url = this.download

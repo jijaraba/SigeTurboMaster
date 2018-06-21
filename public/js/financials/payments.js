@@ -3831,7 +3831,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 filename: filename,
                 format: format,
                 document: this.receipt.document,
-                vouchertype: this.vouchertype
+                vouchertype: this.receipt.idvouchertype
             }).then(function (_ref) {
                 var data = _ref.data;
 
