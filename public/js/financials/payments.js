@@ -3050,7 +3050,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         uppercase: __WEBPACK_IMPORTED_MODULE_5__filters_string_uppercase__["a" /* default */],
         capitalize: __WEBPACK_IMPORTED_MODULE_6__filters_string_capitalize__["a" /* default */],
         paymentType: __WEBPACK_IMPORTED_MODULE_3__filters_payment_paymentType__["a" /* default */],
-        realValue: __WEBPACK_IMPORTED_MODULE_4__filters_payment_charge__["d" /* realValue */]
+        realValue: __WEBPACK_IMPORTED_MODULE_4__filters_payment_charge__["e" /* realValue */]
     },
     components: {},
     data: function data() {
@@ -3802,6 +3802,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     props: ['receipt', 'banks', 'serverDate'],
     filters: {
         chargeTotalRealValue: __WEBPACK_IMPORTED_MODULE_3__filters_payment_charge__["c" /* chargeTotalRealValue */],
+        chargeTotalReceiptRealValue: __WEBPACK_IMPORTED_MODULE_3__filters_payment_charge__["d" /* chargeTotalReceiptRealValue */],
         currency: __WEBPACK_IMPORTED_MODULE_4__filters_other_currency__["a" /* default */],
         uppercase: __WEBPACK_IMPORTED_MODULE_5__filters_string_uppercase__["a" /* default */],
         titlecase: __WEBPACK_IMPORTED_MODULE_6__filters_string_titlecase__["a" /* default */]
@@ -58248,9 +58249,9 @@ function currency(value, symbol, decimals, options) {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = chargeSubtotal;
 /* harmony export (immutable) */ __webpack_exports__["b"] = chargeTotal;
-/* harmony export (immutable) */ __webpack_exports__["d"] = realValue;
+/* harmony export (immutable) */ __webpack_exports__["e"] = realValue;
 /* harmony export (immutable) */ __webpack_exports__["c"] = chargeTotalRealValue;
-/* unused harmony export chargeTotalReceiptRealValue */
+/* harmony export (immutable) */ __webpack_exports__["d"] = chargeTotalReceiptRealValue;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__("./node_modules/moment/moment.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /**

@@ -77,7 +77,7 @@
     import assets from "../../../../core/utils";
     import PaymentsPayment from '../../../../views/financials/Payments/Payment/Payment';
     import AccountingentryShow from '../../../../views/financials/Payments/Accountingentry/Show';
-    import {chargeTotalRealValue} from "../../../../filters/payment/charge";
+    import {chargeTotalRealValue, chargeTotalReceiptRealValue} from "../../../../filters/payment/charge";
     import currency from "../../../../filters/other/currency";
     import uppercase from "../../../../filters/string/uppercase";
     import titlecase from "../../../../filters/string/titlecase";
@@ -93,6 +93,7 @@
         ],
         filters: {
             chargeTotalRealValue: chargeTotalRealValue,
+            chargeTotalReceiptRealValue: chargeTotalReceiptRealValue,
             currency: currency,
             uppercase: uppercase,
             titlecase: titlecase,
