@@ -727,6 +727,10 @@
           > div {
             text-align: left;
             margin-right: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
           }
         }
         &.concept {
