@@ -603,6 +603,10 @@
               size: 0.8em;
             }
             color: $sige-global-color-04;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
           }
           &.month {
             color: $sige-global-bgcolor-03;

@@ -594,6 +594,10 @@
 .payment-calendar > ul > li section.is-payment > span.type {
   font-size: 0.8em;
   color: #8d9aa5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .payment-calendar > ul > li section.is-payment > span.month {
