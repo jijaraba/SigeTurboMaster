@@ -79,7 +79,7 @@ class ExportsController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function exportPaymentsReports(Request $request)
+    public function exportReceiptsReports(Request $request)
     {
         //Generate Report
         $report = new GenerateReport(env('JASPERSERVER_HOST'), env('JASPERSERVER_PORT'));
@@ -89,14 +89,14 @@ class ExportsController extends Controller
         $format = $request["format"];
         $type = "export";
         $fileName = fileName($request["filename"]);
-        $controls = array('PAYMENT_ID' => $request['payment']);
+        $controls = array('DOCUMENT_ID' => $request['document'], 'VOUCHERTYPE_ID' => $request['vouchertype']);
         $pagination = null;
         if ($request["format"] == "xlsx") {
             $pagination = true;
         }
 
         //Run Report
-        $response = $report->run($path, $this->configPaymentsReport($request['filename']), $format, $fileName, $controls, $pagination);
+        $response = $report->run($path, $this->configReceiptsReport($request['filename']), $format, $fileName, $controls, $pagination);
         if (is_bool($response) === true && $response === true) { //Binary Response
             //Upload To CDN
             $cloud = new CloudService();
@@ -243,11 +243,11 @@ class ExportsController extends Controller
     }
 
     /**
-     * Config Payments Reports
+     * Config Receipts Reports
      * @param $filename
      * @return string
      */
-    private function configPaymentsReport($filename)
+    private function configReceiptsReport($filename)
     {
         //Config Report
         switch ($filename) {

@@ -62623,7 +62623,7 @@ var Exports = function (_Model) {
     }
 
     /**
-     * Get Enrollments By Year and Group
+     * Get Report
      * @param path
      * @param params
      */
@@ -62632,6 +62632,20 @@ var Exports = function (_Model) {
     _createClass(Exports, null, [{
         key: 'getReport',
         value: function getReport(path, params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get(path, {
+                params: params
+            });
+        }
+
+        /**
+         * Get
+         * @param path
+         * @param params
+         */
+
+    }, {
+        key: 'getReceiptReport',
+        value: function getReceiptReport(path, params) {
             return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get(path, {
                 params: params
             });

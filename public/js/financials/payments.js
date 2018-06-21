@@ -3711,6 +3711,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__filters_other_currency__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/other/currency.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__filters_string_uppercase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/uppercase.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__filters_string_titlecase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/titlecase.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_Export__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Export.js");
 //
 //
 //
@@ -3785,6 +3786,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+
 
 
 
@@ -3821,6 +3823,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
         closeAccountingentryForm: function closeAccountingentryForm() {
             this.showAccountingentry = false;
+        },
+        getReceiptReport: function getReceiptReport() {
+            var _this = this;
+
+            __WEBPACK_IMPORTED_MODULE_7__models_Export__["a" /* default */].getReceiptReport({
+                document: this.receipt.document,
+                vouchertype: this.vouchertype
+            }).then(function (_ref) {
+                var data = _ref.data;
+
+                _this.download = _this.assets + '/export/' + data.file;
+                var url = _this.download;
+                //Open New Window
+                setTimeout(function () {
+                    window.open(url, '_blank');
+                }, 1000);
+            }).catch(function (error) {
+                return console.log(error);
+            });
         }
     },
     watch: {},
@@ -45014,7 +45035,19 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(1)
+              _c("li", { staticClass: "col-05 export" }, [
+                _c(
+                  "div",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.getReceiptReport()
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-file-pdf fa-2x" })]
+                )
+              ])
             ])
           ])
         ]
@@ -45091,14 +45124,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "col-05 select" }, [
       _c("input", { attrs: { type: "checkbox" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "col-05 export" }, [
-      _c("div", [_c("i", { staticClass: "fas fa-file-pdf fa-2x" })])
     ])
   }
 ]
@@ -58659,6 +58684,72 @@ var Enrollment = function (_Model) {
 }(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (Enrollment);
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/models/Export.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__resources_resources__ = __webpack_require__("./resources/assets/js/sigeturbo/resources/resources.js");
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var Exports = function (_Model) {
+    _inherits(Exports, _Model);
+
+    function Exports() {
+        _classCallCheck(this, Exports);
+
+        var _this = _possibleConstructorReturn(this, (Exports.__proto__ || Object.getPrototypeOf(Exports)).call(this));
+
+        _this.count = 0;
+        return _this;
+    }
+
+    /**
+     * Get Report
+     * @param path
+     * @param params
+     */
+
+
+    _createClass(Exports, null, [{
+        key: 'getReport',
+        value: function getReport(path, params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get(path, {
+                params: params
+            });
+        }
+
+        /**
+         * Get
+         * @param path
+         * @param params
+         */
+
+    }, {
+        key: 'getReceiptReport',
+        value: function getReceiptReport(path, params) {
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get(path, {
+                params: params
+            });
+        }
+    }]);
+
+    return Exports;
+}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Exports);
 
 /***/ }),
 

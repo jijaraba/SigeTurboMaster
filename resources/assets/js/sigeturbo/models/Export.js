@@ -9,11 +9,22 @@ class Exports extends Model {
     }
 
     /**
-     * Get Enrollments By Year and Group
+     * Get Report
      * @param path
      * @param params
      */
     static getReport(path, params) {
+        return HTTP.get(path, {
+            params: params
+        });
+    }
+
+    /**
+     * Get
+     * @param path
+     * @param params
+     */
+    static getReceiptReport(path, params) {
         return HTTP.get(path, {
             params: params
         });

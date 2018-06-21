@@ -253,7 +253,7 @@ INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.evaluationpurchases.index','Admin,Teacher,Academic,Principal,Account,Treasurer,Communicator,Librarian,Nurse,HelpDesk,Assistant',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.evaluationpurchases.show','Admin,Teacher,Academic,Principal,Account,Treasurer,Communicator,HelpDesk,Assistant',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.evaluationpurchases.store','Admin,Teacher,Academic,Principal,Account,Treasurer,Communicator,HelpDesk,Assistant',NOW(),NOW());
-INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.exports.payments.reports','Admin,Account,Treasurer', NOW(), NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.exports.receipts.reports','Admin,Account,Treasurer', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.exports.reports.descriptive','Admin,Parents,HomeroomTeacher', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.exports.reports.final','Admin,Parents,HomeroomTeacher', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('api.v1.exports.reports.partials','Admin,Parents,HomeroomTeacher', NOW(), NOW());

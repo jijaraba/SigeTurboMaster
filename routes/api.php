@@ -1268,9 +1268,9 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.', 'middleware' => ['throttle:25
         'as' => 'exports.students.enrollments',
         'uses' => 'ExportsController@exportStudentEnrollments'
     ]);
-    Route::get('/exports/payments/reports', [
-        'as' => 'exports.payments.reports',
-        'uses' => 'ExportsController@exportPaymentsReports'
+    Route::get('/exports/receipts/reports', [
+        'as' => 'exports.receipts.reports',
+        'uses' => 'ExportsController@exportReceiptsReports'
     ]);
     Route::get('/exports/reports/partials', [
         'as' => 'exports.reports.partials',

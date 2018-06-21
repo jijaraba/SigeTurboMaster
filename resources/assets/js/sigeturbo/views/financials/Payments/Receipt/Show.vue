@@ -44,7 +44,7 @@
                             </div>
                         </li>
                         <li class="col-05 export">
-                            <div>
+                            <div @click="getReceiptReport()">
                                 <i class="fas fa-file-pdf fa-2x"></i>
                             </div>
                         </li>
@@ -81,6 +81,7 @@
     import currency from "../../../../filters/other/currency";
     import uppercase from "../../../../filters/string/uppercase";
     import titlecase from "../../../../filters/string/titlecase";
+    import Export from "../../../../models/Export";
 
 
     export default {
@@ -114,6 +115,19 @@
             closeAccountingentryForm() {
                 this.showAccountingentry = false;
             },
+            getReceiptReport() {
+                Export.getReceiptReport({
+                    document: this.receipt.document,
+                    vouchertype: this.vouchertype,
+                }).then(({data}) => {
+                    this.download = this.assets + '/export/' + data.file;
+                    let url = this.download
+                    //Open New Window
+                    setTimeout(function () {
+                        window.open(url, '_blank');
+                    }, 1000);
+                }).catch(error => console.log(error));
+            }
         },
         watch: {},
         created() {
