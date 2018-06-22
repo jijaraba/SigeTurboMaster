@@ -452,15 +452,17 @@ class ReceiptsController extends Controller
                 $data['successful'] = true;
                 $data['message'] = Lang::get('sige.SuccessSaveMessage');
                 $data['receipt'] = $receipt;
-                //Delete Cache
-                Cache::forget('receipts');
-                Cache::forget('voucherconsecutives');
-                Cache::forget('vouchertypes');
 
                 //Update Consecutive Document
                 if (isset($request['setdocument']) && !$request['setdocument']) {
                     $this->voucherconsecutiveRepository->updateDocumentByID($document->idvoucherconsecutive);
                 }
+
+                //Delete Cache
+                Cache::forget('receipts');
+                Cache::forget('voucherconsecutives');
+                Cache::forget('vouchertypes');
+
 
             } else {
                 $data['unsuccessful'] = true;
