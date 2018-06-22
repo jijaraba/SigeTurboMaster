@@ -3543,6 +3543,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3576,6 +3579,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     },
     data: function data() {
         return {
+            documentChecked: false,
             assets: Object(__WEBPACK_IMPORTED_MODULE_3__core_utils__["a" /* default */])(),
             steps: 3,
             stepSelected: 0,
@@ -3645,6 +3649,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 value: this.receipt.value,
                 date: this.receipt.date,
                 description: this.receipt.description,
+                setdocument: this.documentChecked,
                 payments: data
             }).then(function (_ref) {
                 var data = _ref.data;
@@ -46270,7 +46275,7 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _c("li", { staticClass: "col-20 gutter-5" }, [
+                        _c("li", { staticClass: "col-20 gutter-5 document" }, [
                           _c("span", [
                             _vm._v(
                               _vm._s(
@@ -46309,7 +46314,50 @@ var render = function() {
                                 )
                               }
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "document-checked" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.documentChecked,
+                                  expression: "documentChecked"
+                                }
+                              ],
+                              attrs: { type: "checkbox" },
+                              domProps: {
+                                checked: Array.isArray(_vm.documentChecked)
+                                  ? _vm._i(_vm.documentChecked, null) > -1
+                                  : _vm.documentChecked
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.documentChecked,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        (_vm.documentChecked = $$a.concat([
+                                          $$v
+                                        ]))
+                                    } else {
+                                      $$i > -1 &&
+                                        (_vm.documentChecked = $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1)))
+                                    }
+                                  } else {
+                                    _vm.documentChecked = $$c
+                                  }
+                                }
+                              }
+                            })
+                          ])
                         ]),
                         _vm._v(" "),
                         _c("li", { staticClass: "col-20 gutter-5" }, [

@@ -2168,6 +2168,23 @@ footer {
                 height: 160px !important;
               }
             }
+            &.document {
+              position: relative;
+              > div.document-checked {
+                position: absolute;
+                width: 40px;
+                height: 44px;
+                background: $sige-global-bgcolor-03;
+                top: 5px;
+                right: 5px;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                padding: 10px;
+                input[type="checkbox"] {
+                  border: none;
+                }
+              }
+            }
             > input {
               display: block;
               margin: 0px auto;

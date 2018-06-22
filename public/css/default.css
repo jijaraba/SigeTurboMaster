@@ -5151,6 +5151,26 @@ footer .sige-footer-content {
   height: 160px !important;
 }
 
+.sige-wizard-container section.body > form > fieldset > ul > li.document {
+  position: relative;
+}
+
+.sige-wizard-container section.body > form > fieldset > ul > li.document > div.document-checked {
+  position: absolute;
+  width: 40px;
+  height: 44px;
+  background: #53BBB4;
+  top: 5px;
+  right: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 10px;
+}
+
+.sige-wizard-container section.body > form > fieldset > ul > li.document > div.document-checked input[type="checkbox"] {
+  border: none;
+}
+
 .sige-wizard-container section.body > form > fieldset > ul > li > input {
   display: block;
   margin: 0px auto;

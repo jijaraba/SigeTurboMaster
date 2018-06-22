@@ -2425,7 +2425,7 @@ module.exports = {
         uppercase: __WEBPACK_IMPORTED_MODULE_5__filters_string_uppercase__["a" /* default */],
         capitalize: __WEBPACK_IMPORTED_MODULE_6__filters_string_capitalize__["a" /* default */],
         paymentType: __WEBPACK_IMPORTED_MODULE_3__filters_payment_paymentType__["a" /* default */],
-        realValue: __WEBPACK_IMPORTED_MODULE_4__filters_payment_charge__["d" /* realValue */]
+        realValue: __WEBPACK_IMPORTED_MODULE_4__filters_payment_charge__["e" /* realValue */]
     },
     components: {},
     data: function data() {
@@ -2918,6 +2918,9 @@ module.exports = {
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2951,6 +2954,7 @@ module.exports = {
     },
     data: function data() {
         return {
+            documentChecked: false,
             assets: Object(__WEBPACK_IMPORTED_MODULE_3__core_utils__["a" /* default */])(),
             steps: 3,
             stepSelected: 0,
@@ -3020,6 +3024,7 @@ module.exports = {
                 value: this.receipt.value,
                 date: this.receipt.date,
                 description: this.receipt.description,
+                setdocument: this.documentChecked,
                 payments: data
             }).then(function (_ref) {
                 var data = _ref.data;
@@ -43449,7 +43454,7 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _c("li", { staticClass: "col-20 gutter-5" }, [
+                        _c("li", { staticClass: "col-20 gutter-5 document" }, [
                           _c("span", [
                             _vm._v(
                               _vm._s(
@@ -43488,7 +43493,50 @@ var render = function() {
                                 )
                               }
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "document-checked" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.documentChecked,
+                                  expression: "documentChecked"
+                                }
+                              ],
+                              attrs: { type: "checkbox" },
+                              domProps: {
+                                checked: Array.isArray(_vm.documentChecked)
+                                  ? _vm._i(_vm.documentChecked, null) > -1
+                                  : _vm.documentChecked
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.documentChecked,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        (_vm.documentChecked = $$a.concat([
+                                          $$v
+                                        ]))
+                                    } else {
+                                      $$i > -1 &&
+                                        (_vm.documentChecked = $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1)))
+                                    }
+                                  } else {
+                                    _vm.documentChecked = $$c
+                                  }
+                                }
+                              }
+                            })
+                          ])
                         ]),
                         _vm._v(" "),
                         _c("li", { staticClass: "col-20 gutter-5" }, [
@@ -55405,9 +55453,9 @@ function currency(value, symbol, decimals, options) {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = chargeSubtotal;
 /* harmony export (immutable) */ __webpack_exports__["b"] = chargeTotal;
-/* harmony export (immutable) */ __webpack_exports__["d"] = realValue;
+/* harmony export (immutable) */ __webpack_exports__["e"] = realValue;
 /* harmony export (immutable) */ __webpack_exports__["c"] = chargeTotalRealValue;
-/* unused harmony export chargeTotalReceiptRealValue */
+/* harmony export (immutable) */ __webpack_exports__["d"] = chargeTotalReceiptRealValue;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__("./node_modules/moment/moment.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /**

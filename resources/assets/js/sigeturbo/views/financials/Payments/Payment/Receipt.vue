@@ -132,10 +132,13 @@
                                         </option>
                                     </select>
                                 </li>
-                                <li class="col-20 gutter-5">
+                                <li class="col-20 gutter-5 document">
                                     <span>{{ $translate.text('sigeturbo.consecutive') | uppercase }}</span>
                                     <input type="text" v-model="receipt.consecutive"
                                            placeholder="$translate.text('sigeturbo.consecutive') | capitalize" required>
+                                    <div class="document-checked">
+                                        <input type="checkbox" v-model="documentChecked">
+                                    </div>
                                 </li>
                                 <li class="col-20 gutter-5">
                                     <span>{{ $translate.text('sigeturbo.value') | uppercase }}</span>
@@ -293,6 +296,7 @@
         },
         data: function () {
             return {
+                documentChecked: false,
                 assets: assets(),
                 steps: 3,
                 stepSelected: 0,
@@ -314,7 +318,7 @@
             currency: currency,
             titlecase: titlecase,
             closeReceipt() {
-                this.$emit('closeReceipt',false)
+                this.$emit('closeReceipt', false)
             },
             removePayment(position) {
                 this.payments.splice(this.payments.indexOf(position), 1);
@@ -361,6 +365,7 @@
                     value: this.receipt.value,
                     date: this.receipt.date,
                     description: this.receipt.description,
+                    setdocument: this.documentChecked,
                     payments: data,
                 }).then(({data}) => {
                     swal({
