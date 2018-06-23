@@ -56,8 +56,9 @@ class AccountingentriesController extends Controller
         //Find Costcenter
         if (isset($request['costcenter']) && $request['costcenter'] == '') {
             $request['costcenter'] = 1;
+        } else {
+            $request['costcenter'] = $this->costcenterRepository->findCostcenterByCode($request['costcenter'])->idcostcenter;
         }
-        $request['costcenter'] = $this->costcenterRepository->findCostcenterByCode($request['costcenter'])->idcostcenter;
 
         //Save Accountingentry
         $accountingentry = $this->accountingentryRepository->store($request);
