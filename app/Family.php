@@ -50,6 +50,8 @@ class Family extends Model
                             FROM receiptpayments INNER JOIN receipts ON receipts.idreceipt = receiptpayments.idreceipt  GROUP BY idpayment) AS receiptpayments'), function ($join) {
                 $join->on('receiptpayments.idpayment', '=', 'payments.idpayment');
             })
+            ->orderBy('payments.idyear', 'ASC')
+            ->orderBy('payments.idpaymenttype', 'ASC')
             ->orderBy('payments.realdate', 'DESC')
             ->limit(20)
             ->with('transactions');

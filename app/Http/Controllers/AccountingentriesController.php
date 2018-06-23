@@ -54,6 +54,9 @@ class AccountingentriesController extends Controller
         //Find Accounttype
         $request['accounttype'] = $this->accounttypeRepository->findAccountByCode($request['accounttype'])->idaccounttype;
         //Find Costcenter
+        if (isset($request['costcenter']) && $request['costcenter'] == '') {
+            $request['costcenter'] = 1;
+        }
         $request['costcenter'] = $this->costcenterRepository->findCostcenterByCode($request['costcenter'])->idcostcenter;
 
         //Save Accountingentry
