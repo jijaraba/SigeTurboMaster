@@ -167,7 +167,7 @@
                 }
             },
             generatePayment() {
-                if (this.preregistration.payment_created == 'N') {
+                if (this.preregistration.payment_created == 'N' && this.preregistration.payment_created !== undefined) {
                     Payment.generatePaymentByUser({
                         user: this.member.iduser
                     }).then(({data}) => {
@@ -200,6 +200,10 @@
         },
         watch: {},
         created() {
+
+            if (this.preregistration.payment_created == undefined) {
+                this.preregistration.payment_created = 'N';
+            }
 
             //Get Current Preregistration
             Year.getCurrentPreregistration({}).then(({data}) => {

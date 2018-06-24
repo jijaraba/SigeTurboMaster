@@ -16,6 +16,7 @@ import Vue from 'vue';
 
 import Translate from '../../plugins/Translate';
 import Lang from '../../core/lang';
+import Version from '../../views/global/Version';
 import PaymentPendingFamily from '../../views/financials/Payments/Pending/Family';
 
 Vue.use(Translate, {
@@ -25,8 +26,11 @@ Vue.use(Translate, {
 
 new Vue({
     el: '#parents-dashboard',
-    data: {},
+    data: {
+        version: '1.0'
+    },
     components: {
-        'sigeturbo-payment-pending-family': PaymentPendingFamily
+        'sigeturbo-payment-pending-family': PaymentPendingFamily,
+        'sigeturbo-version': Version,
     }
 });

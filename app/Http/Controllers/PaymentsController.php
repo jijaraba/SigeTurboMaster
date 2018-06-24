@@ -272,8 +272,7 @@ class PaymentsController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public
-    function getPaymentsByUser(Request $request)
+    public function getPaymentsByUser(Request $request)
     {
         $pending = false;
         if (isset($request["pending"]) && $request["pending"] == "true") {
@@ -286,8 +285,7 @@ class PaymentsController extends Controller
      * Get Payments Pending
      * @return mixed
      */
-    public
-    function getPaymentsPending()
+    public function getPaymentsPending()
     {
         return response()->json($this->paymentRepository->getPaymentsPending());
     }
@@ -296,8 +294,7 @@ class PaymentsController extends Controller
      * Get Payments Pending By User
      * @return mixed
      */
-    public
-    function getPaymentsPendingByUser(Request $request)
+    public function getPaymentsPendingByUser(Request $request)
     {
         return response()->json($this->paymentRepository->getPaymentsPendingByUser($request['user'], true, null, 'ASC', true));
     }
@@ -307,8 +304,7 @@ class PaymentsController extends Controller
      * @param $student
      * @return mixed
      */
-    public
-    function getPaymentsByUserWithTransactions($student)
+    public function getPaymentsByUserWithTransactions($student)
     {
         return response()->json($this->paymentRepository->getPaymentsByUserWithTransactions($student));
     }
@@ -317,8 +313,7 @@ class PaymentsController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public
-    function getPaymentsByFamily(Request $request)
+    public function getPaymentsByFamily(Request $request)
     {
         //Sort
         $sort = 'realdate';
@@ -356,8 +351,7 @@ class PaymentsController extends Controller
      * @param $payment
      * @return
      */
-    public
-    function checkout($payment)
+    public function checkout($payment)
     {
         return view('payments.checkout')
             ->withPayment($this->paymentRepository->getPaymentByID($payment))
@@ -369,8 +363,7 @@ class PaymentsController extends Controller
      * @param $payment
      * @return mixed
      */
-    public
-    function detailPaymentByParent($payment)
+    public function detailPaymentByParent($payment)
     {
         return view('payments.detailbyparents')
             ->withPayment($this->paymentRepository->getPaymentByID($payment));
@@ -381,8 +374,7 @@ class PaymentsController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public
-    function setPaymentMethod(Request $request)
+    public function setPaymentMethod(Request $request)
     {
         //Save Payment Method
         $payment = $this->paymentRepository->setPaymentMethod($request);
@@ -404,8 +396,7 @@ class PaymentsController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public
-    function setPaymentAgreement(Request $request)
+    public function setPaymentAgreement(Request $request)
     {
         //Save Payment Agreement
         $payment = $this->paymentRepository->setPaymentAgreement($request);
@@ -428,8 +419,7 @@ class PaymentsController extends Controller
      * @return mixed
      * @throws \Exception
      */
-    public
-    function setPaymentMassive(PaymentMassiveRequest $request)
+    public function setPaymentMassive(PaymentMassiveRequest $request)
     {
 
         //DB::beginTransaction();
@@ -504,8 +494,7 @@ class PaymentsController extends Controller
      * @param PaymentIndividualRequest $request
      * @return mixed
      */
-    public
-    function setPaymentIndividual(PaymentIndividualRequest $request)
+    public function setPaymentIndividual(PaymentIndividualRequest $request)
     {
         //Find Family
         $family = $this->userfamilyRepository->getFamilyByUser($request['student']);
@@ -532,8 +521,7 @@ class PaymentsController extends Controller
      * @param PaymentIndividualRequest $request
      * @return mixed
      */
-    public
-    function setPaymentIndividualNew(PaymentIndividualRequest $request)
+    public function setPaymentIndividualNew(PaymentIndividualRequest $request)
     {
 
         DB::beginTransaction();
@@ -562,8 +550,7 @@ class PaymentsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public
-    function setPaymentIndividualByUser(Request $request)
+    public function setPaymentIndividualByUser(Request $request)
     {
 
         //Preregistration Year
@@ -605,8 +592,7 @@ class PaymentsController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public
-    function paymentsConvert(Request $request)
+    public function paymentsConvert(Request $request)
     {
 
         //Search Payments
@@ -641,8 +627,7 @@ class PaymentsController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public
-    function paymentsConvertVirtualReceipt(Request $request)
+    public function paymentsConvertVirtualReceipt(Request $request)
     {
         DB::beginTransaction();
         try {
@@ -669,8 +654,7 @@ class PaymentsController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public
-    function paymentsConvertManualReceipt(Request $request)
+    public function paymentsConvertManualReceipt(Request $request)
     {
 
         DB::beginTransaction();
@@ -697,8 +681,7 @@ class PaymentsController extends Controller
      * @return mixed
      * @throws \Exception
      */
-    public
-    function respond(PaymentRespondRequest $request)
+    public function respond(PaymentRespondRequest $request)
     {
 
 
@@ -759,8 +742,7 @@ class PaymentsController extends Controller
      * @return mixed
      * @throws \Exception
      */
-    public
-    function verifyPaymentPending(Request $request)
+    public function verifyPaymentPending(Request $request)
     {
         //Get Payment By ID
         $payment = $this->paymentRepository->find($request['payment']);
@@ -852,8 +834,7 @@ class PaymentsController extends Controller
      * Generate Invoice
      * @param $payment
      */
-    private
-    function _generateInvoice($payment)
+    private function _generateInvoice($payment)
     {
         ///Document
         $document = $this->voucherconsecutiveRepository->getCurrentDocumentByType('invoice');
@@ -1394,8 +1375,7 @@ class PaymentsController extends Controller
      * @param array $account
      * @param string $type
      */
-    private
-    function _generateReceipt($payment, $account = [Accounttype::ACCOUNT_BCO_AVVILLAS, Accounttype::ACCOUNT_PENSIONES, Accounttype::ACCOUNT_BCO_AVVILLAS, Accounttype::ACCOUNT_MATRICULA], $type = 'virtual_receipt', $vouchertype = 1)
+    private function _generateReceipt($payment, $account = [Accounttype::ACCOUNT_BCO_AVVILLAS, Accounttype::ACCOUNT_PENSIONES, Accounttype::ACCOUNT_BCO_AVVILLAS, Accounttype::ACCOUNT_MATRICULA], $type = 'virtual_receipt', $vouchertype = 1)
     {
         ///Document
         $document = $this->voucherconsecutiveRepository->getCurrentDocumentByType($type);

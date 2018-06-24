@@ -16,6 +16,7 @@ import Vue from 'vue';
 
 import Translate from '../../plugins/Translate';
 import Lang from '../../core/lang';
+import Version from '../../views/global/Version';
 import UserfamilyMembersShow from '../../views/userfamily/Members/Show';
 
 Vue.use(Translate, {
@@ -25,8 +26,11 @@ Vue.use(Translate, {
 
 new Vue({
     el: '#parents-members',
-    data: {},
+    data: {
+        version: '1.0'
+    },
     components: {
-        'sigeturbo-family-members': UserfamilyMembersShow
+        'sigeturbo-family-members': UserfamilyMembersShow,
+        'sigeturbo-version': Version,
     }
 });

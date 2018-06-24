@@ -224,7 +224,8 @@
                                     <div style="margin: 10px auto;color:#53BBB4;text-align:center">
                                         <i class="fas fa-receipt fa-5x"></i>
                                     </div>
-                                    <input @click="generateReceipt()" class="btn btn-aquamarine" type="button"
+                                    <input @click="getReceiptReport('cash_receipt','pdf')" class="btn btn-aquamarine"
+                                           type="button"
                                            :value="$translate.text('sigeturbo.generate') | capitalize">
                                 </li>
                             </ul>
@@ -273,6 +274,7 @@
     import Vouchertype from "../../../../models/Vouchertype";
     import titlecase from "../../../../filters/string/titlecase";
     import Receipt from "../../../../models/Receipt";
+    import Export from "../../../../models/Export";
 
     export default {
 
@@ -379,6 +381,8 @@
                             this.saveReceiptEnable = false;
                             //Reload Accountingentry
                             this.receipt.idreceipt = data.receipt.idreceipt;
+                            this.receipt.document = data.receipt.document;
+                            this.receipt.voucher = data.receipt.idvouchertype;
                             this.load = true;
                             //Get Vouchertypes
                             this.loadVoucherTypes();
@@ -395,9 +399,28 @@
                             this.vouchertypes[i].name = titlecase(this.vouchertypes[i].name);
                         }
                         //Get First Consecutive
-                        this.receipt.consecutive = data[1].consecutive;
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].idvouchertype == this.receipt.voucher) {
+                                this.receipt.consecutive = data[i].consecutive;
+                            }
+                        }
                     })
                     .catch(error => console.log(error));
+            },
+            getReceiptReport(filename, format) {
+                Export.getReceiptReport({
+                    filename: filename,
+                    format: format,
+                    document: this.receipt.document,
+                    vouchertype: this.receipt.voucher,
+                }).then(({data}) => {
+                    this.download = this.assets + '/export/' + data.file;
+                    let url = this.download
+                    //Open New Window
+                    setTimeout(function () {
+                        window.open(url, '_blank');
+                    }, 1000);
+                }).catch(error => console.log(error));
             }
 
         },

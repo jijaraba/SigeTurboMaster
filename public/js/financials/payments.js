@@ -3285,6 +3285,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__models_Vouchertype__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Vouchertype.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__filters_string_titlecase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/titlecase.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__models_Receipt__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Receipt.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__models_Export__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Export.js");
 //
 //
 //
@@ -3546,6 +3547,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+
 
 
 
@@ -3665,6 +3668,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         _this.saveReceiptEnable = false;
                         //Reload Accountingentry
                         _this.receipt.idreceipt = data.receipt.idreceipt;
+                        _this.receipt.document = data.receipt.document;
+                        _this.receipt.voucher = data.receipt.idvouchertype;
                         _this.load = true;
                         //Get Vouchertypes
                         _this.loadVoucherTypes();
@@ -3686,7 +3691,32 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     _this2.vouchertypes[i].name = Object(__WEBPACK_IMPORTED_MODULE_10__filters_string_titlecase__["a" /* default */])(_this2.vouchertypes[i].name);
                 }
                 //Get First Consecutive
-                _this2.receipt.consecutive = data[1].consecutive;
+                for (var _i = 0; _i < data.length; _i++) {
+                    if (data[_i].idvouchertype == _this2.receipt.voucher) {
+                        _this2.receipt.consecutive = data[_i].consecutive;
+                    }
+                }
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        },
+        getReceiptReport: function getReceiptReport(filename, format) {
+            var _this3 = this;
+
+            __WEBPACK_IMPORTED_MODULE_12__models_Export__["a" /* default */].getReceiptReport({
+                filename: filename,
+                format: format,
+                document: this.receipt.document,
+                vouchertype: this.receipt.voucher
+            }).then(function (_ref3) {
+                var data = _ref3.data;
+
+                _this3.download = _this3.assets + '/export/' + data.file;
+                var url = _this3.download;
+                //Open New Window
+                setTimeout(function () {
+                    window.open(url, '_blank');
+                }, 1000);
             }).catch(function (error) {
                 return console.log(error);
             });
@@ -46688,7 +46718,7 @@ var render = function() {
                             },
                             on: {
                               click: function($event) {
-                                _vm.generateReceipt()
+                                _vm.getReceiptReport("cash_receipt", "pdf")
                               }
                             }
                           })
