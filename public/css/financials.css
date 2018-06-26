@@ -931,6 +931,11 @@
   max-width: 100%;
 }
 
+.sige-costs-container {
+  font-size: 1em;
+  color: #8d9aa5;
+}
+
 .sige-financials-create {
   position: relative;
   background: #f9fafa;

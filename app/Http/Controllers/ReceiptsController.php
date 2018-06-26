@@ -4,6 +4,7 @@ namespace SigeTurbo\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
@@ -490,8 +491,7 @@ class ReceiptsController extends Controller
      * @param $findResponsible
      * @param $first
      */
-    private
-    function _generateAccountingEntryByPayments($receipt, $value, $accounttype, $transactiontype, $costcenter, $user, $date, $realdate, $findResponsible, $first)
+    private function _generateAccountingEntryByPayments($receipt, $value, $accounttype, $transactiontype, $costcenter, $user, $date, $realdate, $findResponsible, $first)
     {
         //Responsible
         $responsible = 0;
@@ -525,8 +525,7 @@ class ReceiptsController extends Controller
      * @param $first
      * @return string
      */
-    private
-    function _generateDescription($accounttype, $user, $realdate, $first)
+    private function _generateDescription($accounttype, $user, $realdate, $first)
     {
         if (Accounttype::ACCOUNT_PENSIONES == $accounttype->idaccounttype) {
             //Find Student
@@ -548,10 +547,21 @@ class ReceiptsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public
-    function getReceiptsByVouchertype(Request $request)
+    public function getReceiptsByVouchertype(Request $request)
     {
-        return response()->json($this->receiptRepository->getReceiptsByVouchertype($request['vouchertype']));
+
+        //page
+        if (!isset($request['page'])) {
+            $request['page'] = 1;
+        }
+        $page = LengthAwarePaginator::resolveCurrentPage();
+        $perPage = 25;
+        $receipts = $this->receiptRepository->getReceiptsByVouchertype($request['vouchertype']);
+        $paginator = new LengthAwarePaginator(
+            $receipts->forPage($page, $perPage), $receipts->count(), $perPage, $page
+        );
+        $paginator->setPath('financials/payments');
+        return response()->json($paginator);
     }
 
 }

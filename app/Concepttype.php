@@ -14,7 +14,7 @@ class Concepttype extends Model
     const OTHERS = 7;
 
     protected $primaryKey = 'idconcepttype';
-    protected $fillable = ['name', 'prefix'];
+    protected $fillable = ['name', 'prefix', 'enable'];
     protected $hidden = ['created_at', 'updated_at'];
     /**
      * Table Name

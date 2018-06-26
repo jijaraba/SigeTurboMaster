@@ -16,6 +16,7 @@ class CreatePaymenttypesTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('idpaymenttype');
             $table->string('name');
+            $table->enum('enable', ['Y', 'N'])->default('Y');
             $table->timestamps();
         });
     }

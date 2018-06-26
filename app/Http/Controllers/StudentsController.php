@@ -252,7 +252,6 @@ class StudentsController extends Controller
         $page = LengthAwarePaginator::resolveCurrentPage();
         $perPage = 25;
         $students = $this->enrollmentRepository->getEnrollments($search["year"], $group, [Category::STUDENT], $search["status"], $search, $sort, strtoupper($order));
-        //dd($students);
         $paginator = new LengthAwarePaginator(
             $students->forPage($page, $perPage), $students->count(), $perPage, $page
         );

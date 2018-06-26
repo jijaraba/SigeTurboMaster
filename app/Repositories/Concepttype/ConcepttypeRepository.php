@@ -16,7 +16,9 @@ class ConcepttypeRepository implements ConcepttypeRepositoryInterface
     public function all()
     {
         return Cache::remember('concepttypes', 1440, function () {
-            return Concepttype::all();
+            return Concepttype::select('*')
+                ->whereEnable('Y')
+                ->get();
         });
     }
 

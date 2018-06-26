@@ -1,8 +1,12 @@
 <template>
-    <section class="receipts-list">
-        <template v-for="receipt in receipts">
-            <sigeturbo-receipt-show :server-date="serverDate" :banks="banks" :receipt="receipt"></sigeturbo-receipt-show>
-        </template>
+    <section>
+        <section class="receipts-list">
+            <template v-for="receipt in receipts">
+                <sigeturbo-receipt-show :server-date="serverDate" :banks="banks"
+                                        :receipt="receipt"></sigeturbo-receipt-show>
+            </template>
+        </section>
+        <section></section>
     </section>
 </template>
 <script>
@@ -46,7 +50,7 @@
                 Receipt.getReceiptsByVouchertype({
                     vouchertype: this.vouchertype
                 }).then(({data}) => {
-                    this.receipts = data;
+                    this.receipts = data.data;
                 }).catch(error => console.log(error));
             }
         },

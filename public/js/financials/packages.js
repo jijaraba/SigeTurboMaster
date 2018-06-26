@@ -1624,6 +1624,8 @@ module.exports = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filters_string_capitalize__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/capitalize.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_financials_Packages_Create_Cost__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Packages/Create/Cost.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_Year__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Year.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_Model__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Model.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_Concepttype__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Concepttype.js");
 //
 //
 //
@@ -1650,6 +1652,17 @@ module.exports = {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -1673,6 +1686,8 @@ module.exports = {
             assets: Object(__WEBPACK_IMPORTED_MODULE_0__core_utils__["a" /* default */])(),
             showCost: false,
             years: [],
+            grades: [],
+            concepttypes: [],
             cost: {
                 academic: 2017
             }
@@ -1707,6 +1722,24 @@ module.exports = {
         }).catch(function (error) {
             return console.log(error);
         });
+
+        //Get Grades
+        __WEBPACK_IMPORTED_MODULE_5__models_Model__["a" /* default */].query('/api/v1/grades/', {}).then(function (_ref3) {
+            var data = _ref3.data;
+
+            _this.grades = data;
+        }).catch(function (error) {
+            return console.log(error);
+        });
+
+        //Get Concepttypes
+        __WEBPACK_IMPORTED_MODULE_6__models_Concepttype__["a" /* default */].query('/api/v1/concepttypes/', {}).then(function (_ref4) {
+            var data = _ref4.data;
+
+            _this.concepttypes = data;
+        }).catch(function (error) {
+            return console.log(error);
+        });
     },
     mounted: function mounted() {}
 });
@@ -1717,18 +1750,68 @@ module.exports = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__filters_string_capitalize__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/capitalize.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__filters_string_uppercase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/uppercase.js");
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 
-    props: [],
-    filters: {},
+    props: ['years', 'year', 'grades', 'concepttypes'],
+    filters: {
+        capitalize: __WEBPACK_IMPORTED_MODULE_0__filters_string_capitalize__["a" /* default */],
+        uppercase: __WEBPACK_IMPORTED_MODULE_1__filters_string_uppercase__["a" /* default */]
+    },
     components: {},
     data: function data() {
-        return {};
+        return {
+            cost: {
+                year: this.year,
+                grade: 1,
+                concepttype: 2
+            }
+        };
     },
     methods: {},
     watch: {},
@@ -19554,7 +19637,177 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [_vm._v("Cost")])
+  return _c("section", { staticClass: "sige-costs-container" }, [
+    _c("section", { staticClass: "header" }, [
+      _c("form", [
+        _c("fieldset", [
+          _c("ul", { staticClass: "display-horizontal col-100" }, [
+            _c("li", { staticClass: "col-30 gutter-5" }, [
+              _c("span", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("uppercase")(_vm.$translate.text("sigeturbo.year"))
+                  )
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.cost.year,
+                      expression: "cost.year"
+                    }
+                  ],
+                  attrs: { id: "year", name: "year", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.cost,
+                        "year",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.years, function(year) {
+                  return _c("option", { domProps: { value: year.idyear } }, [
+                    _vm._v(_vm._s(year.name) + "\n                            ")
+                  ])
+                })
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "col-30 gutter-5" }, [
+              _c("span", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("uppercase")(_vm.$translate.text("sigeturbo.grade"))
+                  )
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.cost.grade,
+                      expression: "cost.grade"
+                    }
+                  ],
+                  attrs: { id: "grade", name: "grade", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.cost,
+                        "grade",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.grades, function(grade) {
+                  return _c("option", { domProps: { value: grade.idgrade } }, [
+                    _vm._v(
+                      _vm._s(grade.name) + "\n                            "
+                    )
+                  ])
+                })
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "col-40 gutter-5" }, [
+              _c("span", [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("uppercase")(
+                      _vm.$translate.text("sigeturbo.concept_type")
+                    )
+                  )
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.cost.concepttype,
+                      expression: "cost.concepttype"
+                    }
+                  ],
+                  attrs: {
+                    id: "concepttype",
+                    name: "concepttype",
+                    required: ""
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.cost,
+                        "concepttype",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.concepttypes, function(concepttype) {
+                  return _c(
+                    "option",
+                    { domProps: { value: concepttype.idconcepttype } },
+                    [
+                      _vm._v(
+                        _vm._s(concepttype.name) +
+                          "\n                            "
+                      )
+                    ]
+                  )
+                })
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -19578,52 +19831,54 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "options" }, [
-    _c("ul", { staticClass: "display-horizontal col-70 option-container" }, [
-      _c("li", [
-        _c(
-          "a",
-          {
-            on: {
-              click: function($event) {
-                _vm.showOptionPackage()
+  return _c("section", [
+    _c("section", { staticClass: "options" }, [
+      _c("ul", { staticClass: "display-horizontal col-70 option-container" }, [
+        _c("li", [
+          _c(
+            "a",
+            {
+              on: {
+                click: function($event) {
+                  _vm.showOptionPackage()
+                }
               }
-            }
-          },
-          [
-            _c("img", {
-              attrs: {
-                src: _vm.assets + "/img/modules/payment_massive.svg",
-                alt: "Pago"
+            },
+            [
+              _c("img", {
+                attrs: {
+                  src: _vm.assets + "/img/modules/payment_massive.svg",
+                  alt: "Pago"
+                }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("PAQUETES DE COBRO")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c(
+            "a",
+            {
+              on: {
+                click: function($event) {
+                  _vm.showOptionCost()
+                }
               }
-            }),
-            _vm._v(" "),
-            _c("span", [_vm._v("PAQUETES DE COBRO")])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("li", [
-        _c(
-          "a",
-          {
-            on: {
-              click: function($event) {
-                _vm.showOptionCost()
-              }
-            }
-          },
-          [
-            _c("img", {
-              attrs: {
-                src: _vm.assets + "/img/modules/payment_individual.svg",
-                alt: "Pago"
-              }
-            }),
-            _vm._v(" "),
-            _c("span", [_vm._v("COSTOS POR GRADO")])
-          ]
-        )
+            },
+            [
+              _c("img", {
+                attrs: {
+                  src: _vm.assets + "/img/modules/payment_individual.svg",
+                  alt: "Pago"
+                }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("COSTOS POR GRADO")])
+            ]
+          )
+        ])
       ])
     ]),
     _vm._v(" "),
@@ -19655,11 +19910,37 @@ var render = function() {
                   [_c("i", { staticClass: "fas fa-window-close fa-lg" })]
                 ),
                 _vm._v(" "),
-                _c("sigeturbo-packages-create-cost", {
-                  attrs: { years: _vm.years }
-                })
-              ],
-              1
+                _c(
+                  "section",
+                  { staticClass: "sige-wizard-container padding-30" },
+                  [
+                    _c("h4", [
+                      _vm._v(
+                        _vm._s(
+                          _vm._f("uppercase")(
+                            _vm.$translate.text("sigeturbo.costs")
+                          )
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "section",
+                      [
+                        _c("sigeturbo-packages-create-cost", {
+                          attrs: {
+                            years: _vm.years,
+                            year: _vm.cost.academic,
+                            grades: _vm.grades,
+                            concepttypes: _vm.concepttypes
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]
+                )
+              ]
             )
           ]
         )
@@ -30750,6 +31031,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'celular': 'celular',
             'charge_list': 'charge list',
             'code': 'code',
+            'cost': 'cost',
+            'costs': 'costs',
             'code_title': 'code',
             'company': 'company',
             'company_phone': 'phone',
@@ -30836,7 +31119,13 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'voucher': 'voucher',
             'warning': 'warning',
             'why_take_medication': 'why take medication?',
-            'yes': 'yes'
+            'yes': 'yes',
+            'year': 'year',
+            'years': 'years',
+            'grade': 'grade',
+            'grades': 'grades',
+            'concept_type': 'concept',
+            'concept_types': 'concepts'
         }
     },
     es: {
@@ -30861,6 +31150,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'charge_list': 'listado de cobros',
             'code': 'código',
             'code_title': 'código',
+            'cost': 'costo',
+            'costs': 'costos',
             'company': 'empresa',
             'company_phone': 'teléfono de la empresa',
             'company_title': 'nombre de la empresa',
@@ -30945,7 +31236,13 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'value': 'valor',
             'voucher': 'comprobante',
             'why_take_medication': '¿por qué toma el medicamento?',
-            'yes': 'si'
+            'yes': 'si',
+            'year': 'año',
+            'years': 'años',
+            'grade': 'grado',
+            'grades': 'grados',
+            'concept_type': 'concepto',
+            'concept_types': 'conceptos'
         }
     }
 });
@@ -30997,6 +31294,38 @@ function uppercase(value) {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (uppercase);
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/models/Concepttype.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Model.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var Concepttype = function (_Model) {
+    _inherits(Concepttype, _Model);
+
+    function Concepttype() {
+        _classCallCheck(this, Concepttype);
+
+        var _this = _possibleConstructorReturn(this, (Concepttype.__proto__ || Object.getPrototypeOf(Concepttype)).call(this));
+
+        _this.count = 0;
+        return _this;
+    }
+
+    return Concepttype;
+}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Concepttype);
 
 /***/ }),
 

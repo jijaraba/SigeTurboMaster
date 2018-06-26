@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Paymenttype extends Model
 {
     protected $primaryKey = 'idpaymenttype';
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'enable'];
     protected $hidden = ['created_at', 'updated_at'];
     /**
      * Table Name

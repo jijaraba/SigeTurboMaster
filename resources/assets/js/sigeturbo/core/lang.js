@@ -20,6 +20,8 @@ export default {
             'celular': 'celular',
             'charge_list': 'charge list',
             'code': 'code',
+            'cost': 'cost',
+            'costs': 'costs',
             'code_title': 'code',
             'company': 'company',
             'company_phone': 'phone',
@@ -107,6 +109,12 @@ export default {
             'warning': 'warning',
             'why_take_medication': 'why take medication?',
             'yes': 'yes',
+            'year': 'year',
+            'years': 'years',
+            'grade': 'grade',
+            'grades': 'grades',
+            'concept_type': 'concept',
+            'concept_types': 'concepts',
         }
     },
     es: {
@@ -131,6 +139,8 @@ export default {
             'charge_list': 'listado de cobros',
             'code': 'código',
             'code_title': 'código',
+            'cost': 'costo',
+            'costs': 'costos',
             'company': 'empresa',
             'company_phone': 'teléfono de la empresa',
             'company_title': 'nombre de la empresa',
@@ -216,6 +226,12 @@ export default {
             'voucher': 'comprobante',
             'why_take_medication': '¿por qué toma el medicamento?',
             'yes': 'si',
+            'year': 'año',
+            'years': 'años',
+            'grade': 'grado',
+            'grades': 'grados',
+            'concept_type': 'concepto',
+            'concept_types': 'conceptos',
         }
     }
 };

@@ -18,6 +18,7 @@ class Concepttypes extends Migration
             $table->increments('idconcepttype');
             $table->string('name');
             $table->string('prefix');
+            $table->enum('enable', ['Y', 'N'])->default('Y');
             $table->timestamps();
         });
     }
