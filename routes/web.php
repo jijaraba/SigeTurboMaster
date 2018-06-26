@@ -127,6 +127,14 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
 
 
     /**
+     * Export RTF
+     */
+    Route::get('/export/rtf', [
+        'as' => 'export.rtf',
+        'uses' => 'ExportsController@exportRTF'
+    ]);
+
+    /**
      * ===================================
      * Dashboard Module
      * ===================================

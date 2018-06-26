@@ -242,6 +242,33 @@ class ExportsController extends Controller
         }
     }
 
+    public function exportRTF()
+    {
+        $deadline = mktime(0, 0, 0, date('m'), date('d') + 14, date('Y'));
+
+        $vars = array('date' => date("F d, Y"),
+            'fullname' => 'John Coggeshall',
+            'address' => '1210 Hancock',
+            'cityinfo' => 'Flint, MI 49449',
+            'prefix' => 'Mr.',
+            'lastname' => 'Coggeshall',
+            'jobtitle' => 'PHP Developer',
+            'wage' => '$5,000',
+            'location' => 'Somewhere, MI',
+            'responddate' => date('F, d, Y', $deadline));
+
+        $new_rtf = __populateRTF($vars, "pagare.rtf");
+        $fr = fopen('output.rtf', 'w');
+        fwrite($fr, $new_rtf);
+        fclose($fr);
+
+        //Export
+        header("Content-type: application/msword");
+        header("Content-disposition: inline;      filename=joboffer.rtf");
+        header("Content-length: " . strlen($new_rtf));
+        echo $new_rtf;
+    }
+
     /**
      * Config Receipts Reports
      * @param $filename
@@ -283,5 +310,28 @@ class ExportsController extends Controller
             return '/reports/sigeturbo/Partialreport/informeParcialNivel2y3_Individual_SinLogo';
         }
     }
+
+    private function __populateRTF($vars, $doc_file)
+    {
+
+        $replacements = ['\\' => "\\\\",
+            '{' => "\{",
+            '}' => "\}"];
+
+        $document = file_get_contents($doc_file);
+        if (!$document) {
+            return false;
+        }
+
+        foreach ($vars as $key => $value) {
+            $search = "%%" . strtoupper($key) . "%%";
+            foreach ($replacements as $orig => $replace) {
+                $value = str_replace($orig, $replace, $value);
+            }
+            $document = str_replace($search, $value, $document);
+        }
+        return $document;
+    }
+
 
 }
