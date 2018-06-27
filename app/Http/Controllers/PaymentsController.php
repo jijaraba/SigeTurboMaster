@@ -710,14 +710,14 @@ class PaymentsController extends Controller
                 //Verify Payment Approved
                 if ($paymentCPV['aprobado'] == 'A') {
                     //Generate Receipt
-                    DB::beginTransaction();
+                    /*DB::beginTransaction();
                     try {
                         $this->_generateReceipt($payment);
                         DB::commit();
                     } catch (\Exception $e) {
                         DB::rollback();
                         throw $e;
-                    }
+                    }*/
                 }
                 //Send Email
                 $this->mailer->byRoles('payment_accepted', $payment, ['Admin', 'Treasurer', 'Account']);

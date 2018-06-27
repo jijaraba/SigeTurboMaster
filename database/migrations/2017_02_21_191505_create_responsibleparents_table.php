@@ -17,6 +17,7 @@ class CreateResponsibleparentsTable extends Migration
             $table->increments('idresponsibleparent');
             $table->integer('iduser')->unsigned();
             $table->integer('responsible');
+            $table->string('responsible_name')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
