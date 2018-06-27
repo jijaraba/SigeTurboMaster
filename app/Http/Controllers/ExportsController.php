@@ -335,7 +335,7 @@ class ExportsController extends Controller
             foreach ($replacements as $orig => $replace) {
                 $value = str_replace($orig, $replace, $value);
             }
-            $document = str_replace($search, mb_strtoupper(mb_convert_encoding($value, 'ISO-8859-15', 'utf-8')), $document);
+            $document = str_replace($search, mb_convert_encoding($value, 'ISO-8859-15', 'utf-8'), $document);
         }
         return $document;
     }
