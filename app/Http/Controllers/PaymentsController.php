@@ -694,14 +694,14 @@ class PaymentsController extends Controller
         $body['transaccionConvenioId'] = $payment->transaccionTNS;
         $body['hash'] = $payment->hash;
 
-        $response = $client->post('https://www.pagosvirtualesavvillas.com.co/personal/pagos/consultar/', [
+        /*$response = $client->post('https://www.pagosvirtualesavvillas.com.co/personal/pagos/consultar/', [
             'body' => json_encode($body),
             'headers' => [
                 'Accept' => 'application/json',
                 "Content-type" => "application/json; charset=utf-8"
             ]
         ]);
-        $paymentCPV = json_decode($response->getBody(), true);
+        $paymentCPV = json_decode($response->getBody(), true);*/
 
         if ($payment->ispayment == 'N') {
             if ($this->paymentRepository->setPaymentStatus($payment->idpayment, $request, $paymentCPV)) {
