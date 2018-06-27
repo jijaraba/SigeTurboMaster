@@ -555,7 +555,7 @@ class ReceiptsController extends Controller
             $request['page'] = 1;
         }
         $page = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 25;
+        $perPage = 50;
         $receipts = $this->receiptRepository->getReceiptsByVouchertype($request['vouchertype']);
         $paginator = new LengthAwarePaginator(
             $receipts->forPage($page, $perPage), $receipts->count(), $perPage, $page
