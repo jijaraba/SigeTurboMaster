@@ -703,6 +703,10 @@ class PaymentsController extends Controller
         ]);
         $paymentCPV = json_decode($response->getBody(), true);
 
+
+        dd($paymentCPV);
+        exit();
+
         if ($payment->ispayment == 'N') {
             if ($this->paymentRepository->setPaymentStatus($payment->idpayment, $request, $paymentCPV)) {
                 //Find Payment
