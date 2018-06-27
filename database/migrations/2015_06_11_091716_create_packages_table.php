@@ -21,8 +21,8 @@ class CreatePackagesTable extends Migration
             $table->enum('active', ['Y', 'N'])->default('Y');
             $table->enum('modifiable', ['Y', 'N'])->default('N');
             $table->enum('process', ['normal', 'advance'])->default('normal');
-            $table->string('struct_invoice');
-            $table->string('struct_receipt');
+            $table->string('struct_invoice')->nullable();
+            $table->string('struct_receipt')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();

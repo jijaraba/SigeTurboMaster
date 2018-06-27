@@ -129,7 +129,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     /**
      * Export RTF
      */
-    Route::get('/export/rtf', [
+    Route::get('/export/rtf/{filename}/{student}', [
         'as' => 'export.rtf',
         'uses' => 'ExportsController@exportRTF'
     ]);

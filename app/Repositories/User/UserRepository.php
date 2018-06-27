@@ -570,6 +570,202 @@ class UserRepository implements UserRepositoryInterface
             })
             ->whereToken($token)
             ->first();
-
     }
+
+    public function getUserInfo($user)
+    {
+        return DB::select("
+            SELECT 
+                users.iduser AS iduser,
+                groups.name AS `groups`,
+                CONCAT_WS(CONVERT(' ' USING LATIN1),
+                        users.lastname,
+                        users.firstname) AS 'student_name',
+                towns.name AS town,
+                users.birth AS student_birth,
+                (YEAR(CURRENT_DATE) - YEAR(users.birth)) - (RIGHT(CURRENT_DATE, 5) < RIGHT(users.birth, 5)) AS student_age,
+                CASE
+                    WHEN identificationtypes.name IS NULL THEN 'No Existe Registro'
+                    ELSE identificationtypes.name
+                END AS student_identificationtype,
+                CASE
+                    WHEN identifications.identification IS NULL THEN 'No Existe Registro'
+                    ELSE identifications.identification
+                END AS identification,
+                CASE
+                    WHEN identifications.expedition IS NULL THEN 'No Existe REgistro'
+                    ELSE identifications.expedition
+                END AS student_expedition,
+                responsibleparents.responsible AS 'student_responsible',
+                CASE
+                    WHEN
+                        CONCAT_WS(CONVERT( ' ' USING LATIN1),
+                                responsibledata.lastname,
+                                responsibledata.firstname) = ''
+                            AND responsibleparents.responsible IS NULL
+                    THEN
+                        'NO SE HA ASIGNADO RESPONSABLE ECONOMICO A ESTE ESTUDIANTE'
+                    WHEN
+                        CONCAT_WS(CONVERT(' ' USING LATIN1),
+                                responsibledata.lastname,
+                                responsibledata.firstname) = ''
+                            AND responsibleparents.responsible IS NOT NULL
+                    THEN
+                        'ESTA CEDULA NO EXISTE EN LA BASE DE DATOS'
+                    ELSE CONCAT_WS(CONVERT( ' ' USING LATIN1),
+                            responsibledata.lastname,
+                            responsibledata.firstname)
+                END AS 'responsible_name',
+                mothers.iduser AS 'mother_identification',
+                IF(CONCAT_WS(CONVERT(' ' USING LATIN1),
+                            mothers.lastname,
+                            mothers.firstname) = ''
+                        OR CONCAT_WS(CONVERT( ' ' USING LATIN1),
+                            mothers.lastname,
+                            mothers.firstname) IS NULL,
+                    'No Existe Registro',
+                    CONCAT_WS(CONVERT( ' ' USING LATIN1),
+                            mothers.lastname,
+                            mothers.firstname)) AS mother_fullname,
+                IF(mothers.phone = ''
+                        OR mothers.phone IS NULL,
+                    'No existe Registro',
+                    mothers.phone) AS 'mother_phone',
+                IF(mothers.celular = ''
+                        OR mothers.celular IS NULL,
+                    'No existe Registro',
+                    mothers.celular) AS 'mother_celular',
+                IF(mothers.email = ''
+                        OR mothers.email IS NULL,
+                    'No existe registro',
+                    mothers.email) AS 'mother_email',
+                IF(CAST(mothers.birth AS CHAR) = ''
+                        OR CAST(mothers.birth AS CHAR) IS NULL,
+                    'No existe registro',
+                    CAST(mothers.birth AS CHAR)) AS 'mother_birth',
+                IF(CAST(mothers.birth AS CHAR) = ''
+                        OR CAST(mothers.birth AS CHAR) IS NULL,
+                    'No existe registro',
+                    (YEAR(CURRENT_DATE) - YEAR(mothers.birth)) - (RIGHT(CURRENT_DATE, 5) < RIGHT(mothers.birth, 5))) AS 'mother_age',
+                CASE
+                    WHEN identificationtypesmother.name IS NULL THEN 'No Existe Registro'
+                    ELSE identificationtypesmother.name
+                END AS 'mother_identification_type',
+                CASE
+                    WHEN identificationsmother.identification IS NULL THEN 'No Existe Registro'
+                    ELSE identificationsmother.identification
+                END AS 'mother_identification',
+                CASE
+                    WHEN identificationsmother.expedition IS NULL THEN 'No Existe Registro'
+                    ELSE identificationsmother.expedition
+                END AS 'mother_expedition',
+                fathers.iduser AS 'father_identification',
+                IF(CONCAT_WS(CONVERT(' ' USING LATIN1),
+                            fathers.lastname,
+                            fathers.firstname) = ''
+                        OR CONCAT_WS(CONVERT( ' ' USING LATIN1),
+                            fathers.lastname,
+                            fathers.firstname) IS NULL,
+                    'No Existe Registro',
+                    CONCAT_WS(CONVERT( ' ' USING LATIN1),
+                            fathers.lastname,
+                            fathers.firstname)) AS father_name,
+                IF(fathers.phone = ''
+                        OR fathers.phone IS NULL,
+                    'No existe registro',
+                    fathers.phone) AS 'father_phone',
+                IF(fathers.celular = ''
+                        OR fathers.celular IS NULL,
+                    'No existe registro',
+                    fathers.celular) AS 'father_celular',
+                IF(fathers.email = ''
+                        OR fathers.email IS NULL,
+                    'No existe registro',
+                    fathers.email) AS 'father_email',
+                IF(CAST(fathers.birth AS CHAR) = ''
+                        OR CAST(fathers.birth AS CHAR) IS NULL,
+                    'No existe registro',
+                    CAST(fathers.birth AS CHAR)) AS 'father_birth',
+                IF(CAST(fathers.birth AS CHAR) = ''
+                        OR CAST(fathers.birth AS CHAR) IS NULL,
+                    'No existe registro',
+                    (YEAR(CURRENT_DATE) - YEAR(fathers.birth)) - (RIGHT(CURRENT_DATE, 5) < RIGHT(fathers.birth, 5))) AS 'father_age',
+                CASE
+                    WHEN identificationtypesfather.name IS NULL THEN 'No Existe Registro'
+                    ELSE identificationtypesfather.name
+                END AS 'father_identification_type',
+                CASE
+                    WHEN identificationsfather.identification IS NULL THEN 'No Existe Registro'
+                    ELSE identificationsfather.identification
+                END AS 'father_identification',
+                CASE
+                    WHEN identificationsfather.expedition IS NULL THEN 'No Existe Registro'
+                    ELSE identificationsfather.expedition
+                END AS 'father_expedition',
+                statusschooltypes.name AS 'status',
+                'Medellín' AS city,
+                'Sociedad Civil El Nuevo Colegio S.A.' AS school_name
+            FROM
+                users
+                    INNER JOIN
+                enrollments ON enrollments.iduser = users.iduser
+                    INNER JOIN
+                towns ON towns.idtown = users.idtown
+                    INNER JOIN
+                `groups` ON groups.idgroup = enrollments.idgroup
+                    LEFT JOIN
+                identifications ON identifications.iduser = users.iduser
+                    LEFT JOIN
+                identificationtypes ON identifications.ididentificationtype = identificationtypes.ididentificationtype
+                    INNER JOIN
+                statusschooltypes ON statusschooltypes.idstatusschooltype = enrollments.idstatusschooltype
+                    LEFT JOIN
+                userfamilies ON users.iduser = userfamilies.iduser
+                    LEFT JOIN
+                families ON families.idfamily = userfamilies.idfamily
+                    LEFT JOIN
+                (SELECT 
+                    userfamilies.idfamily,
+                        ANY_VALUE(users.iduser) AS iduser,
+                        IF(SUM(IF(users.idgender = 1, users.iduser, 0)) = 0, NULL, SUM(IF(users.idgender = 1, users.iduser, 0))) AS father,
+                        IF(SUM(IF(users.idgender = 2, users.iduser, 0)) = 0, NULL, SUM(IF(users.idgender = 2, users.iduser, 0))) AS mother
+                FROM
+                    userfamilies
+                INNER JOIN users ON users.iduser = userfamilies.iduser
+                WHERE
+                    users.idcategory IN (27 , 28)
+                        OR userfamilies.idfamily IN (SELECT 
+                            idfamily
+                        FROM
+                            userfamilies
+                        WHERE
+                            userfamilies.iduser IN (43578652 , 98549388, 43746806, 63494412, 43757560, 43826243, 52892811, 43727769, 43870654, 42683099, 3507641, 1019032009, 43092198))
+                        AND users.idcategory <> 13
+                GROUP BY userfamilies.idfamily) AS whithparents ON whithparents.idfamily = userfamilies.idfamily
+                    LEFT JOIN
+                users AS mothers ON mothers.iduser = whithparents.Mother
+                    LEFT JOIN
+                users AS fathers ON fathers.iduser = whithparents.father
+                    LEFT JOIN
+                identifications AS identificationsmother ON identificationsmother.iduser = mothers.iduser
+                    LEFT JOIN
+                identifications AS identificationsfather ON identificationsfather.iduser = fathers.iduser
+                    LEFT JOIN
+                identificationtypes AS identificationtypesmother ON identificationsmother.ididentificationtype = identificationtypesmother.ididentificationtype
+                    LEFT JOIN
+                identificationtypes AS identificationtypesfather ON identificationsfather.ididentificationtype = identificationtypesfather.ididentificationtype
+                    LEFT JOIN
+                responsibleparents ON responsibleparents.iduser = users.iduser
+                    LEFT JOIN
+                users AS responsibledata ON responsibleparents.responsible = responsibledata.iduser
+            WHERE
+                enrollments.idyear = 2017
+                    AND enrollments.idstatusschooltype IN (1 , 6, 11, 13)
+                    AND enrollments.iduser = $user
+            ORDER BY groups.idgroup , student_name LIMIT 1;
+        ");
+    }
+
 }
+
+

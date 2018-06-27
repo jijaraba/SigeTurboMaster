@@ -125,6 +125,7 @@ class UsersController extends Controller
             $data['password'] = $password;
             //Delete Cache
             Cache::forget('users');
+            Cache::forget('families');
             //Event
             event(new Stream(['description' => "created a new student: " . $user->firstname . " " . $user->lastname]));
         } else {
@@ -154,6 +155,7 @@ class UsersController extends Controller
             $data['message'] = Lang::get('sige.SuccessUpdateMessage');
             //Delete Cache
             Cache::forget('users');
+            Cache::forget('families');
 
         } else {
             $data['unsuccessful'] = true;

@@ -150,6 +150,7 @@ return array(
     'PaymentAccepted' => 'PAGO REALIZADO',
     'PaymentAcceptedTitle' => 'Pago Realizado',
     'PaymentAgreement' => 'Payment With Agreement',
+    'PaymentExpired' => 'Payment Expired',
     'PaymentCreated' => 'Pago Generado',
     'PaymentCreatedTitle' => 'Pago de Pensión Generada',
     'PaymentDiscount' => 'Payment with Discount',

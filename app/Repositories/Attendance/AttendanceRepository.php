@@ -116,7 +116,7 @@ class AttendanceRepository implements AttendanceRepositoryInterface
             'attendances.idsubject',
             'attendances.idnivel',
             'attendances.iduser',
-            DB::raw('groups.name AS Groups'),
+            DB::raw("groups.name AS 'groups'"),
             DB::raw('CONCAT_WS(CONVERT(" " USING latin1),users.lastname,users.firstname) AS student'),
             DB::raw('subjects.name AS subject'),
             DB::raw('nivels.name AS nivel'),

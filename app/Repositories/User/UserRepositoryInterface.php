@@ -28,4 +28,5 @@ interface UserRepositoryInterface
     public function getallstudents($year = null, $showactives = false);
     public function getStudentsPendingByMonitorings($year, $period, $group = null, $area = null, $teacher = null, $subjectNotIn = [54], $statusNotIn = [4, 7, 8, 9, 10]);
     public function getUserByToken($token);
+    public function getUserInfo($user);
 }
