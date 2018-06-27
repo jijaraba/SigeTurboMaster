@@ -266,7 +266,7 @@ class ExportsController extends Controller
         fclose($fr);
 
         //Export
-        header("Content-type: application/msword");
+        header("Content-type: application/rtf; charset=utf-8");
         header("Content-disposition: inline;      filename=pagare_" . $student . ".rtf");
         header("Content-length: " . strlen($new_rtf));
         echo $new_rtf;

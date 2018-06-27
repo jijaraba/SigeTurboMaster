@@ -626,7 +626,7 @@ class UserRepository implements UserRepositoryInterface
                     'No Existe Registro',
                     CONCAT_WS(CONVERT( ' ' USING LATIN1),
                             mothers.lastname,
-                            mothers.firstname)) AS mother_fullname,
+                            mothers.firstname)) AS mother_name,
                 IF(mothers.phone = ''
                         OR mothers.phone IS NULL,
                     'No existe Registro',
@@ -654,7 +654,7 @@ class UserRepository implements UserRepositoryInterface
                 CASE
                     WHEN identificationsmother.identification IS NULL THEN 'No Existe Registro'
                     ELSE identificationsmother.identification
-                END AS 'mother_identification',
+                END AS 'mother_identification2',
                 CASE
                     WHEN identificationsmother.expedition IS NULL THEN 'No Existe Registro'
                     ELSE identificationsmother.expedition
@@ -697,13 +697,13 @@ class UserRepository implements UserRepositoryInterface
                 CASE
                     WHEN identificationsfather.identification IS NULL THEN 'No Existe Registro'
                     ELSE identificationsfather.identification
-                END AS 'father_identification',
+                END AS 'father_identification2',
                 CASE
                     WHEN identificationsfather.expedition IS NULL THEN 'No Existe Registro'
                     ELSE identificationsfather.expedition
                 END AS 'father_expedition',
                 statusschooltypes.name AS 'status',
-                'Medellín' AS city,
+                'MEDELLIN' AS city,
                 'Sociedad Civil El Nuevo Colegio S.A.' AS school_name
             FROM
                 users
