@@ -685,55 +685,9 @@ class PaymentsController extends Controller
     {
 
 
-        //Get Payment By TransactionID
-        $payment = $this->paymentRepository->getPaymentByTransactionID($request['transaccionConvenioId']);
+        return "OK";
 
-        //Verified Payment By CPV
-        $client = new Client();
-        $body['convenioId'] = 4300;
-        $body['transaccionConvenioId'] = $payment->transaccionTNS;
-        $body['hash'] = $payment->hash;
 
-        /*$response = $client->post('https://www.pagosvirtualesavvillas.com.co/personal/pagos/consultar/', [
-            'body' => json_encode($body),
-            'headers' => [
-                'Accept' => 'application/json',
-                "Content-type" => "application/json; charset=utf-8"
-            ]
-        ]);
-        $paymentCPV = json_decode($response->getBody(), true);*/
-
-        if ($payment->ispayment == 'N') {
-            if ($this->paymentRepository->setPaymentStatus($payment->idpayment, $request, $paymentCPV)) {
-                //Find Payment
-                $payment = $this->paymentRepository->find($payment->idpayment);
-                //Verify Payment Approved
-                if ($paymentCPV['aprobado'] == 'A') {
-                    //Generate Receipt
-                    /*DB::beginTransaction();
-                    try {
-                        $this->_generateReceipt($payment);
-                        DB::commit();
-                    } catch (\Exception $e) {
-                        DB::rollback();
-                        throw $e;
-                    }*/
-                }
-                //Send Email
-                $this->mailer->byRoles('payment_accepted', $payment, ['Admin', 'Treasurer', 'Account']);
-                //Return view
-                return view('payments.respond')
-                    ->withPayment($this->paymentRepository->find($payment->idpayment));
-            } else {
-                return view('payments.respond')
-                    ->withPayment($payment)
-                    ->withStatus(['payment' => false]);
-            }
-        } else {
-            return view('payments.respond')
-                ->withPayment($payment)
-                ->withStatus(['payment' => true]);
-        }
     }
 
     /**
