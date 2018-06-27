@@ -631,6 +631,10 @@ class UserRepository implements UserRepositoryInterface
                         OR mothers.phone IS NULL,
                     'No existe Registro',
                     mothers.phone) AS 'mother_phone',
+                IF(mothers.address = ''
+                        OR mothers.address IS NULL,
+                    'No existe registro',
+                    mothers.address) AS 'mother_address',
                 IF(mothers.celular = ''
                         OR mothers.celular IS NULL,
                     'No existe Registro',
@@ -674,6 +678,10 @@ class UserRepository implements UserRepositoryInterface
                         OR fathers.phone IS NULL,
                     'No existe registro',
                     fathers.phone) AS 'father_phone',
+                IF(fathers.address = ''
+                        OR fathers.address IS NULL,
+                    'No existe registro',
+                    fathers.address) AS 'father_address',
                 IF(fathers.celular = ''
                         OR fathers.celular IS NULL,
                     'No existe registro',

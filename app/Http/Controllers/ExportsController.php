@@ -260,6 +260,9 @@ class ExportsController extends Controller
 
         $user = $this->userRepository->getUserInfo($student);
 
+        //dd($user);
+        //exit();
+
         $new_rtf = $this->populateRTF($user[0], "$filename.rtf");
         $fr = fopen('output.rtf', 'w');
         fwrite($fr, $new_rtf);
@@ -267,7 +270,7 @@ class ExportsController extends Controller
 
         //Export
         header("Content-type: application/rtf; charset=utf-8");
-        header("Content-disposition: inline;      filename=pagare_" . $student . ".rtf");
+        header("Content-disposition: inline;      filename=$filename" . "_" . $student . ".rtf");
         header("Content-length: " . strlen($new_rtf));
         echo $new_rtf;
     }
@@ -332,7 +335,7 @@ class ExportsController extends Controller
             foreach ($replacements as $orig => $replace) {
                 $value = str_replace($orig, $replace, $value);
             }
-            $document = str_replace($search, mb_convert_encoding($value, 'ISO-8859-15', 'utf-8'), $document);
+            $document = str_replace($search, mb_strtoupper(mb_convert_encoding($value, 'ISO-8859-15', 'utf-8')), $document);
         }
         return $document;
     }
