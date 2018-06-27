@@ -260,6 +260,9 @@ class ExportsController extends Controller
 
         $user = $this->userRepository->getUserInfo($student);
 
+        dd($user);
+        exit();
+
         $new_rtf = $this->populateRTF($user[0], "$filename.rtf");
         $fr = fopen('output.rtf', 'w');
         fwrite($fr, $new_rtf);

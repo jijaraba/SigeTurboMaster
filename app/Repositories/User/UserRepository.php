@@ -616,7 +616,7 @@ class UserRepository implements UserRepositoryInterface
                             responsibledata.lastname,
                             responsibledata.firstname)
                 END AS 'responsible_name',
-                mothers.iduser AS 'mother_identification',
+                mothers.iduser AS 'mother_identification2',
                 IF(CONCAT_WS(CONVERT(' ' USING LATIN1),
                             mothers.lastname,
                             mothers.firstname) = ''
@@ -654,12 +654,12 @@ class UserRepository implements UserRepositoryInterface
                 CASE
                     WHEN identificationsmother.identification IS NULL THEN 'No Existe Registro'
                     ELSE identificationsmother.identification
-                END AS 'mother_identification2',
+                END AS 'mother_identification',
                 CASE
                     WHEN identificationsmother.expedition IS NULL THEN 'No Existe Registro'
                     ELSE identificationsmother.expedition
                 END AS 'mother_expedition',
-                fathers.iduser AS 'father_identification',
+                fathers.iduser AS 'father_identification2',
                 IF(CONCAT_WS(CONVERT(' ' USING LATIN1),
                             fathers.lastname,
                             fathers.firstname) = ''
@@ -697,7 +697,7 @@ class UserRepository implements UserRepositoryInterface
                 CASE
                     WHEN identificationsfather.identification IS NULL THEN 'No Existe Registro'
                     ELSE identificationsfather.identification
-                END AS 'father_identification2',
+                END AS 'father_identification',
                 CASE
                     WHEN identificationsfather.expedition IS NULL THEN 'No Existe Registro'
                     ELSE identificationsfather.expedition
