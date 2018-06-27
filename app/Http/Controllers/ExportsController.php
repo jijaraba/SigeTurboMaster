@@ -260,9 +260,6 @@ class ExportsController extends Controller
 
         $user = $this->userRepository->getUserInfo($student);
 
-        dd($user);
-        exit();
-
         $new_rtf = $this->populateRTF($user[0], "$filename.rtf");
         $fr = fopen('output.rtf', 'w');
         fwrite($fr, $new_rtf);
@@ -335,7 +332,7 @@ class ExportsController extends Controller
             foreach ($replacements as $orig => $replace) {
                 $value = str_replace($orig, $replace, $value);
             }
-            $document = str_replace($search, $value, $document);
+            $document = str_replace($search, mb_convert_encoding($value, 'ISO-8859-15', 'utf-8'), $document);
         }
         return $document;
     }
