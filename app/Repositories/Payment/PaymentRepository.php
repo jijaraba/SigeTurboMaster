@@ -484,6 +484,7 @@ class PaymentRepository implements PaymentRepositoryInterface
             })
             ->whereRaw("YEAR(realdate) = $year AND MONTH(`realdate`) = $month")
             ->where("enrollments.idyear", '=', $academic)
+            ->where("payments.idyear", '=', $academic)
             ->whereNotIn("enrollments.idstatusschooltype", Statusschooltype::STATUS_NOT_ACTIVE)
             ->whereNotIn("enrollments.idstatusschooltype", [13])
             ->whereIn("payments.idpaymenttype", $concepttype)
