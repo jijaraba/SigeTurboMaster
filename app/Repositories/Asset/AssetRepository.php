@@ -149,7 +149,7 @@ class AssetRepository implements AssetRepositoryInterface
     public function getAssetWithUbicationByCode($code)
     {
         return Asset::select('assets.*', 'ubications.name AS ubication', DB::raw('CONCAT_WS(CONVERT(" " USING latin1),users.lastname,users.firstname) AS responsible'), 'users.photo')
-            ->join('inventories', function ($join)  {
+            ->join('inventories', function ($join) {
                 $join
                     ->on('inventories.idasset', '=', 'assets.idasset')
                     ->where('inventories.idinventorytype', '=', 4);

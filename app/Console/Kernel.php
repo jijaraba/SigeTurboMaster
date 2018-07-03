@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('sigeturbo:attendances_level01')
+        /*$schedule->command('sigeturbo:attendances_level01')
             ->timezone('America/Bogota')
             ->weekdays()
             ->at('08:40');
@@ -39,7 +39,7 @@ class Kernel extends ConsoleKernel
             ->timezone('America/Bogota')
             ->weekdays()
             ->at('07:40');
-        //->dailyAt('21:01');
+        //->dailyAt('21:01');*/
     }
 
     /**

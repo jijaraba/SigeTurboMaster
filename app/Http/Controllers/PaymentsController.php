@@ -596,7 +596,6 @@ class PaymentsController extends Controller
     {
 
         //Search Payments
-        //Testing
         $payments = $this->paymentRepository->getPaymentsByYearAndMonth($request["year"], $request["month"]);
         foreach ($payments as $payment) {
             //Generate Invoice
