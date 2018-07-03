@@ -2,6 +2,8 @@
 
 namespace SigeTurbo\Repositories\Payment;
 
+use SigeTurbo\Concepttype;
+
 interface PaymentRepositoryInterface
 {
     public function all();
@@ -21,7 +23,7 @@ interface PaymentRepositoryInterface
     public function setPaymentIndividual($family, $data);
     public function setPaymentStatus($payment, $data, $dataCPV);
     public function verifyPaymentPending($payment, $dataCPV);
-    public function getPaymentsByYearAndMonth($year, $month);
+    public function getPaymentsByYearAndMonth($academic, $year, $month, $concepttype = [Concepttype::ENROLLMENT,Concepttype::PENSION]);
     public function getPaymentsApprovedByYearAndMonth($year, $month);
     public function getPaymentsVirtualApprovedByYearAndMonth($year, $month);
     public function configDataPayment($year, $group, $cost, $student, $config = null);

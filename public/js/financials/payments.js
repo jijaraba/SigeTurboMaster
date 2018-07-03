@@ -2839,6 +2839,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             //Save Payment Individual
             __WEBPACK_IMPORTED_MODULE_7__models_Payment__["a" /* default */].savePaymentIndividual({
+                academic: this.payment.academic,
                 student: this.payment.student,
                 firstname: this.payment.firstname,
                 lastname: this.payment.lastname,

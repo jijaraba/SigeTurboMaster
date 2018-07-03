@@ -596,7 +596,7 @@ class PaymentsController extends Controller
     {
 
         //Search Payments
-        $payments = $this->paymentRepository->getPaymentsByYearAndMonth($request["year"], $request["month"]);
+        $payments = $this->paymentRepository->getPaymentsByYearAndMonth($request["academic"], $request["year"], $request["month"]);
         foreach ($payments as $payment) {
             //Generate Invoice
             $this->_generateInvoiceExtended($payment);
@@ -605,7 +605,7 @@ class PaymentsController extends Controller
         /*DB::beginTransaction();
         try {
             //Search Payments
-            $payments = $this->paymentRepository->getPaymentsByYearAndMonth($request["year"], $request["month"]);
+            $payments = $this->paymentRepository->getPaymentsByYearAndMonth($request["academic"],$request["year"], $request["month"]);
             foreach ($payments as $payment) {
                 //Generate Invoice
                 $this->_generateInvoice($payment);
@@ -943,8 +943,7 @@ class PaymentsController extends Controller
      * Generate Invoice
      * @param $payment
      */
-    private
-    function _generateInvoiceExtended($payment)
+    private function _generateInvoiceExtended($payment)
     {
         //Document
         $document = $this->voucherconsecutiveRepository->getCurrentDocumentByType('invoice');
@@ -1656,8 +1655,7 @@ class PaymentsController extends Controller
      * @param string $subject
      * @return bool
      */
-    private
-    function _likematch($pattern, $subject)
+    private function _likematch($pattern, $subject)
     {
         $pattern = str_replace('%', '.*', preg_quote($pattern, '/'));
         return (bool)preg_match("/^{$pattern}$/i", $subject);
@@ -1669,8 +1667,7 @@ class PaymentsController extends Controller
      * @param $bank
      * @return array
      */
-    private
-    function _getAccounts($bank)
+    private function _getAccounts($bank)
     {
         switch ($bank) {
             case 1:

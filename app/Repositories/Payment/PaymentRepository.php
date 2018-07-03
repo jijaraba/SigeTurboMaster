@@ -319,7 +319,7 @@ class PaymentRepository implements PaymentRepositoryInterface
     {
         $realdate = Carbon::create($data['year'], $data['month'], 1, 0, 0, 0);
         return Payment::create([
-            'idyear' => $data['year'],
+            'idyear' => $data['academic'],
             'idpaymenttype' => $data['type'],
             'idpackage' => $data['package'],
             'idbank' => 1,
@@ -464,11 +464,13 @@ class PaymentRepository implements PaymentRepositoryInterface
 
     /**
      * Get Payments BY Year AND Month
+     * @param $academic
      * @param $year
      * @param $month
+     * @param array $concepttype
      * @return mixed
      */
-    public function getPaymentsByYearAndMonth($year, $month)
+    public function getPaymentsByYearAndMonth($academic, $year, $month, $concepttype = [Concepttype::ENROLLMENT, Concepttype::PENSION])
     {
         return Payment::select("payments.*")
             ->join('users', function ($join) {
@@ -481,9 +483,10 @@ class PaymentRepository implements PaymentRepositoryInterface
                 $join->on('groups.idgroup', '=', 'enrollments.idgroup');
             })
             ->whereRaw("YEAR(realdate) = $year AND MONTH(`realdate`) = $month")
-            ->where("enrollments.idyear", '=', 2017)
+            ->where("enrollments.idyear", '=', $academic)
             ->whereNotIn("enrollments.idstatusschooltype", Statusschooltype::STATUS_NOT_ACTIVE)
             ->whereNotIn("enrollments.idstatusschooltype", [13])
+            ->whereIn("payments.idpaymenttype", $concepttype)
             ->orderBy('groups.order', 'ASC')
             ->orderBy('users.lastname', 'ASC')
             ->get();

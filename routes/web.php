@@ -501,7 +501,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::get('/financials/payments/convert', [
         'middleware' => ['auth', 'permission'],
         'as' => 'financials.payments.convert',
-        'uses' => 'PaymentsController@paymentsConvert'
+        'uses' => 'ReceiptsController@paymentsConvertToReceipt'
     ]);
     Route::get('/financials/payments/convert/virtualreceipt', [
         'middleware' => ['auth', 'permission'],

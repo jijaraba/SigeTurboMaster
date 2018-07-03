@@ -369,6 +369,7 @@
             savePayment() {
                 //Save Payment Individual
                 Payment.savePaymentIndividual({
+                    academic: this.payment.academic,
                     student: this.payment.student,
                     firstname: this.payment.firstname,
                     lastname: this.payment.lastname,
