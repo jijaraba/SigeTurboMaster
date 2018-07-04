@@ -48,7 +48,7 @@ class Family extends Model
         return $this->hasMany('SigeTurbo\Payment', 'iduser', 'iduser')
             ->select('payments.*', DB::raw('CASE WHEN CURDATE()<= date1 THEN "discount" WHEN CURDATE()> date1 && CURDATE()<= date2 THEN "normal" ELSE "expired" END AS real_method'), DB::raw('MONTHNAME(payments.realdate) AS month_name'), 'receiptpayments.value AS receipt_realvalue', 'receiptpayments.document')
             ->leftJoin(DB::raw("(SELECT idpayment,GROUP_CONCAT(CAST(receipts.document AS CHAR) ORDER BY document SEPARATOR '-') AS document,GROUP_CONCAT(CAST(receiptpayments.value AS CHAR) ORDER BY document SEPARATOR '-') AS partial,SUM(receiptpayments.value) as value
-                            FROM receiptpayments  INNER JOIN receipts ON receipts.idreceipt = receiptpayments.idreceipt  GROUP BY idpayment) AS receiptpayments"), function ($join) {
+                            FROM receiptpayments INNER JOIN receipts ON receipts.idreceipt = receiptpayments.idreceipt WHERE receipts.idvouchertype <> $vouchertype  GROUP BY idpayment) AS receiptpayments"), function ($join) {
                 $join->on('receiptpayments.idpayment', '=', 'payments.idpayment');
             })
             ->orderBy('payments.idyear', 'DESC')

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use SigeTurbo\Receipt;
+use SigeTurbo\Vouchertype;
 
 class ReceiptRepository implements ReceiptRepositoryInterface
 {
@@ -66,6 +67,7 @@ class ReceiptRepository implements ReceiptRepositoryInterface
                 $join
                     ->on('users.iduser', '=', 'receipts.created_by');
             })
+            ->where('receipts.idvouchertype','<>',Vouchertype::INVOICE)
             ->orderBy('receipts.document','DESC')
             ->with('receiptpayments')
             ->get();
