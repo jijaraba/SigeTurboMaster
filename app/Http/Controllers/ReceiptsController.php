@@ -367,20 +367,22 @@ class ReceiptsController extends Controller
             ///Document
             $document = $this->voucherconsecutiveRepository->getCurrentDocumentByVoucher(Vouchertype::INVOICE);
 
+            //Find Student
+            $student = $this->enrollmentRepository->getEnrollmentsLatestByStudent($payment->iduser, $payment->idyear);
+            $lastname = explode(" ", $student->lastname);
+            $firstname = explode(" ", $student->firstname);
+
+
             //Save Receipt
             $receiptData = [
                 'voucher' => Vouchertype::INVOICE,
                 'consecutive' => $document->consecutive,
                 'date' => $year . "-" . $month . "-1",
                 'value' => $payment->value2,
-                'description' => 'MATRÍCULA'
+                'description' => ($payment->idpaymenttype == Concepttype::ENROLLMENT ? mb_strtoupper($lastname[0]) . " " . mb_strtoupper($firstname[0]) : "P" . setZero(2, $month) . " " . mb_strtoupper($lastname[0]) . " " . mb_strtoupper($firstname[0]))
             ];
             $receipt = $this->receiptRepository->store($receiptData);
             if ($receipt) {
-
-                //Find Student
-                $student = $this->enrollmentRepository->getEnrollmentsLatestByStudent($payment->iduser, $payment->idyear);
-
 
                 //Create Receipt Payment
                 $receiptData = [
