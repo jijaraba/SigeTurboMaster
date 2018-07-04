@@ -25,6 +25,9 @@ class StatusesTableSeeder extends Seeder
         Status::create(array('name' => 'Promovido'));
         Status::create(array('name' => 'Asistente'));
         Status::create(array('name' => 'Pendiente Promoción'));
+        Status::create(array('name' => 'Pasantía Psicología'));
+        Status::create(array('name' => 'Prematriculado'));
+        Status::create(array('name' => 'Pasantía Psicología Retirada'));
     }
 
 }

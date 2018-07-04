@@ -25,6 +25,8 @@ class StatusschooltypesTableSeeder extends Seeder
         Statusschooltype::create(array('name' => 'Promovido', 'duration' => 0));
         Statusschooltype::create(array('name' => 'Asistente', 'duration' => 0));
         Statusschooltype::create(array('name' => 'Pendiente Promoción', 'duration' => 0));
+        Statusschooltype::create(array('name' => 'Prematriculado', 'duration' => 0));
+        Statusschooltype::create(array('name' => 'Pasantía Psicología Retirada', 'duration' => 0));
     }
 
 }
