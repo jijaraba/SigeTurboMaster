@@ -3903,6 +3903,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_Bank__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Bank.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_Receipt__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Receipt.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_financials_Payments_Receipt_Show__ = __webpack_require__("./resources/assets/js/sigeturbo/views/financials/Payments/Receipt/Show.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__views_global_Search_Receipt_Global__ = __webpack_require__("./resources/assets/js/sigeturbo/views/global/Search/Receipt/Global.vue");
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 //
 //
 //
@@ -3914,6 +3917,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -3939,13 +3949,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         chargeTotalRealValue: __WEBPACK_IMPORTED_MODULE_4__filters_payment_charge__["c" /* chargeTotalRealValue */]
     },
     components: {
-        'sigeturbo-receipt-show': __WEBPACK_IMPORTED_MODULE_8__views_financials_Payments_Receipt_Show__["a" /* default */]
+        'sigeturbo-receipt-show': __WEBPACK_IMPORTED_MODULE_8__views_financials_Payments_Receipt_Show__["a" /* default */],
+        'sigeturbo-search-list': __WEBPACK_IMPORTED_MODULE_9__views_global_Search_Receipt_Global__["a" /* default */]
     },
     data: function data() {
         return {
             assets: Object(__WEBPACK_IMPORTED_MODULE_5__core_utils__["a" /* default */])(),
             receipts: [],
-            vouchertype: 'all'
+            vouchertype: 2,
+            document: 'all'
         };
     },
     methods: {
@@ -3953,7 +3965,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             var _this = this;
 
             __WEBPACK_IMPORTED_MODULE_7__models_Receipt__["a" /* default */].getReceiptsByVouchertype({
-                vouchertype: this.vouchertype
+                vouchertype: this.vouchertype,
+                document: this.document
             }).then(function (_ref) {
                 var data = _ref.data;
 
@@ -3961,6 +3974,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }).catch(function (error) {
                 return console.log(error);
             });
+        },
+        result: function result(data) {
+            if (data.successful) {
+                this.document = 'all';
+                if (data.document.length !== 0 && _typeof(data.document) !== undefined) {
+                    this.document = data.document;
+                }
+                this.vouchertype = data.voucher;
+                this.loadReceipts();
+            } else {
+                this.receipts = [];
+            }
         }
     },
     watch: {},
@@ -4145,6 +4170,71 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             }
         }
     },
+    created: function created() {},
+    mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/global/Search/Receipt/Global.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_Family__ = __webpack_require__("./resources/assets/js/sigeturbo/models/Family.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__filters_string_uppercase__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/uppercase.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_utils__ = __webpack_require__("./resources/assets/js/sigeturbo/core/utils.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filters_string_capitalize__ = __webpack_require__("./resources/assets/js/sigeturbo/filters/string/capitalize.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+    props: [],
+    filters: {
+        uppercase: __WEBPACK_IMPORTED_MODULE_1__filters_string_uppercase__["a" /* default */],
+        capitalize: __WEBPACK_IMPORTED_MODULE_3__filters_string_capitalize__["a" /* default */]
+    },
+    components: {},
+    data: function data() {
+        return {
+            voucher: 2,
+            document: '',
+            results: [],
+            assets: Object(__WEBPACK_IMPORTED_MODULE_2__core_utils__["a" /* default */])()
+        };
+    },
+    methods: {
+        searchReceipts: function searchReceipts(event) {
+            event.preventDefault();
+            this.$emit('result', { successful: true, voucher: this.voucher, document: this.document });
+        }
+    },
+    watch: {},
     created: function created() {},
     mounted: function mounted() {}
 });
@@ -43827,28 +43917,46 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [
-    _c(
-      "section",
-      { staticClass: "receipts-list" },
-      [
-        _vm._l(_vm.receipts, function(receipt) {
-          return [
-            _c("sigeturbo-receipt-show", {
-              attrs: {
-                "server-date": _vm.serverDate,
-                banks: _vm.banks,
-                receipt: receipt
-              }
-            })
-          ]
-        })
-      ],
-      2
-    ),
-    _vm._v(" "),
-    _c("section")
-  ])
+  return _c(
+    "section",
+    [
+      _c("sigeturbo-search-list", { on: { result: _vm.result } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "clearfix" }),
+      _vm._v(" "),
+      _c(
+        "section",
+        [
+          _vm.receipts.length > 0
+            ? [
+                _c(
+                  "section",
+                  { staticClass: "receipts-list" },
+                  [
+                    _vm._l(_vm.receipts, function(receipt) {
+                      return [
+                        _c("sigeturbo-receipt-show", {
+                          attrs: {
+                            "server-date": _vm.serverDate,
+                            banks: _vm.banks,
+                            receipt: receipt
+                          }
+                        })
+                      ]
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("section")
+              ]
+            : _vm._e()
+        ],
+        2
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -44970,6 +45078,153 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-45a2a856", { render: render, staticRenderFns: staticRenderFns })
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4621e44d\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/global/Search/Receipt/Global.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", { staticClass: "sige-search-list col-50" }, [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            _vm.searchReceipts($event)
+          }
+        }
+      },
+      [
+        _c("ul", { staticClass: "display-horizontal col-100" }, [
+          _c("li", { staticClass: "col-100 icon-right" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.document,
+                  expression: "document"
+                }
+              ],
+              attrs: {
+                type: "text",
+                placeholder: _vm._f("capitalize")(
+                  _vm.$translate.text("sigeturbo.receipt_document_help")
+                )
+              },
+              domProps: { value: _vm.document },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.document = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.voucher,
+                    expression: "voucher"
+                  }
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.voucher = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "1" } }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm._f("uppercase")(
+                        _vm.$translate.text("sigeturbo.receipt_virtual")
+                      )
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm._f("uppercase")(
+                        _vm.$translate.text("sigeturbo.receipt_manual")
+                      )
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "3" } }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm._f("uppercase")(
+                        _vm.$translate.text("sigeturbo.receipt_invoice")
+                      )
+                    )
+                  )
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "4" } }, [
+                  _vm._v(
+                    _vm._s(
+                      _vm._f("uppercase")(
+                        _vm.$translate.text("sigeturbo.receipt_advance")
+                      )
+                    )
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { attrs: { type: "submit" } }, [
+      _c("i", { staticClass: "fas fa-search fa-lg" })
+    ])
+  }
+]
+render._withStripped = true
+
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4621e44d", { render: render, staticRenderFns: staticRenderFns })
   }
 }
 
@@ -58123,6 +58378,11 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'receipt': 'receipt',
             'receipt_form': 'receipt form',
             'receipt_success': 'receipt success',
+            'receipt_virtual': 'receipt virtual',
+            'receipt_manual': 'receipt manual',
+            'receipt_invoice': 'invoice',
+            'receipt_advance': 'advance',
+            'receipt_document_help': 'document (exam: 1,2 - 1-5 - 1..)',
             'religion': 'religion',
             'responsible': 'responsible',
             'retired': 'retired',
@@ -58241,6 +58501,11 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'receipt': 'recibo',
             'receipt_form': 'estructura del recibo',
             'receipt_success': 'recibo guardado satisfactoriamente',
+            'receipt_virtual': 'recibo virtual',
+            'receipt_manual': 'recibo manual',
+            'receipt_invoice': 'venta',
+            'receipt_advance': 'anticipo',
+            'receipt_document_help': 'documento (eje: 1,2 - 1-5 - 1..)',
             'religion': 'religión',
             'responsible': 'responsable esconómico',
             'retired': 'retirados',
@@ -59241,7 +59506,7 @@ var Receipt = function (_Model) {
     _createClass(Receipt, null, [{
         key: 'getReceiptsByVouchertype',
         value: function getReceiptsByVouchertype(params) {
-            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/receipts/getreceiptsbyvouchertype/', params);
+            return __WEBPACK_IMPORTED_MODULE_1__resources_resources__["a" /* HTTP */].get('/api/v1/receipts/getreceiptsbyvouchertype/', { params: params });
         }
     }]);
 
@@ -60192,6 +60457,61 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-c3f14e3c", Component.options)
   } else {
     hotAPI.reload("data-v-c3f14e3c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/sigeturbo/views/global/Search/Receipt/Global.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_Global_vue__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/sigeturbo/views/global/Search/Receipt/Global.vue");
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4621e44d_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Global_vue__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4621e44d\",\"hasScoped\":false,\"optionsId\":\"0\",\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/sigeturbo/views/global/Search/Receipt/Global.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__("./node_modules/vue-loader/lib/runtime/component-normalizer.js");
+var disposed = false
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+
+var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_cacheDirectory_true_presets_env_modules_false_targets_browsers_2_uglify_true_plugins_transform_object_rest_spread_transform_runtime_polyfill_false_helpers_false_node_modules_vue_loader_lib_selector_type_script_index_0_Global_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4621e44d_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Global_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_4621e44d_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Global_vue__["b" /* staticRenderFns */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/sigeturbo/views/global/Search/Receipt/Global.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4621e44d", Component.options)
+  } else {
+    hotAPI.reload("data-v-4621e44d", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

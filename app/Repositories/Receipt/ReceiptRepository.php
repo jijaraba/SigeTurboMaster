@@ -54,11 +54,12 @@ class ReceiptRepository implements ReceiptRepositoryInterface
     /**
      * Get All Receipts By Vouchertype
      * @param $vouchertype
+     * @param $document
      * @return mixed
      */
-    public function getReceiptsByVouchertype($vouchertype)
+    public function getReceiptsByVouchertype($vouchertype, $document)
     {
-        return Receipt::select('receipts.*', 'vouchertypes.name AS vouchertype', 'users.iduser', 'users.photo', DB::raw('CONCAT_WS(CONVERT(" " USING latin1),users.lastname,users.firstname) AS fullname'))
+        $receipt = Receipt::select('receipts.*', 'vouchertypes.name AS vouchertype', 'users.iduser', 'users.photo', DB::raw('CONCAT_WS(CONVERT(" " USING latin1),users.lastname,users.firstname) AS fullname'))
             ->join('vouchertypes', function ($join) {
                 $join
                     ->on('vouchertypes.idvouchertype', '=', 'receipts.idvouchertype');
@@ -67,8 +68,42 @@ class ReceiptRepository implements ReceiptRepositoryInterface
                 $join
                     ->on('users.iduser', '=', 'receipts.created_by');
             })
-            ->where('receipts.idvouchertype','<>',Vouchertype::INVOICE)
-            ->orderBy('receipts.document','DESC')
+            ->where('receipts.idvouchertype', '=', $vouchertype);
+
+        //Find Document
+        if ($document <> 'all') {
+            if (count(explode(',', $document)) > 1) {
+                $documents = explode(',', $document);
+                $first = true;
+                foreach ($documents as $doc) {
+                    if (count(explode('-', $doc)) > 1) {
+                        $docs = explode('-', $doc);
+                        $receipt
+                            ->whereRaw('document BETWEEN ' . $docs[0] . ' AND ' . $docs[1] . '');
+                    } else {
+                        if ($first) {
+                            $receipt
+                                ->where('document', '=', $doc);
+                            $first = false;
+                        } else {
+                            $receipt
+                                ->orWhere('document', '=', $doc);
+                        }
+
+                    }
+                }
+            } else if (count(explode('-', $document)) > 1) {
+                $documents = explode('-', $document);
+                $receipt
+                    ->whereRaw('document BETWEEN ' . $documents[0] . ' AND ' . $documents[1] . '');
+            } else {
+                $receipt
+                    ->where('document', '=', $document);
+            }
+        }
+
+        return $receipt
+            ->orderBy('receipts.document', 'DESC')
             ->with('receiptpayments')
             ->get();
     }

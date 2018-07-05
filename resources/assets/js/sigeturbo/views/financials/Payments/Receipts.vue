@@ -1,12 +1,18 @@
 <template>
     <section>
-        <section class="receipts-list">
-            <template v-for="receipt in receipts">
-                <sigeturbo-receipt-show :server-date="serverDate" :banks="banks"
-                                        :receipt="receipt"></sigeturbo-receipt-show>
+        <sigeturbo-search-list @result="result"></sigeturbo-search-list>
+        <div class="clearfix"></div>
+        <section>
+            <template v-if="receipts.length > 0">
+                <section class="receipts-list">
+                    <template v-for="receipt in receipts">
+                        <sigeturbo-receipt-show :server-date="serverDate" :banks="banks"
+                                                :receipt="receipt"></sigeturbo-receipt-show>
+                    </template>
+                </section>
+                <section></section>
             </template>
         </section>
-        <section></section>
     </section>
 </template>
 <script>
@@ -20,6 +26,7 @@
     import Bank from "../../../models/Bank";
     import Receipt from "../../../models/Receipt";
     import ReceiptShow from "../../../views/financials/Payments/Receipt/Show";
+    import SearchReceiptGlobal from '../../../views/global/Search/Receipt/Global';
 
     export default {
 
@@ -37,21 +44,36 @@
         },
         components: {
             'sigeturbo-receipt-show': ReceiptShow,
+            'sigeturbo-search-list': SearchReceiptGlobal,
         },
         data: function () {
             return {
                 assets: assets(),
                 receipts: [],
-                vouchertype: 'all'
+                vouchertype: 2,
+                document: 'all',
             }
         },
         methods: {
             loadReceipts() {
                 Receipt.getReceiptsByVouchertype({
-                    vouchertype: this.vouchertype
+                    vouchertype: this.vouchertype,
+                    document: this.document,
                 }).then(({data}) => {
                     this.receipts = data.data;
                 }).catch(error => console.log(error));
+            },
+            result(data) {
+                if (data.successful) {
+                    this.document = 'all';
+                    if (data.document.length !== 0 && typeof data.document !== undefined) {
+                        this.document = data.document;
+                    }
+                    this.vouchertype = data.voucher;
+                    this.loadReceipts();
+                } else {
+                    this.receipts = [];
+                }
             }
         },
         watch: {},

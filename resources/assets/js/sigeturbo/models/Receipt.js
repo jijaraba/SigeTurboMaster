@@ -14,7 +14,7 @@ class Receipt extends Model {
      * @param params
      */
     static getReceiptsByVouchertype(params) {
-        return HTTP.get('/api/v1/receipts/getreceiptsbyvouchertype/', params);
+        return HTTP.get('/api/v1/receipts/getreceiptsbyvouchertype/', {params});
     }
 
 }
