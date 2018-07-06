@@ -10,5 +10,5 @@ interface TransactionRepositoryInterface
     public function update($transaction, $data);
     public function destroy($transaction);
     public function getTransactionsByPayment($payment);
-    public function getTransactionsToExport($code,$dateinit,$datefinish);
+    public function getTransactionsToExport($code,$date_from,$date_to);
 }

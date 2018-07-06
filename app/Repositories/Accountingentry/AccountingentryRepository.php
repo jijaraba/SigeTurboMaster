@@ -124,4 +124,77 @@ class AccountingentryRepository implements AccountingentryRepositoryInterface
             ->where('idaccounttype', '=', $accounttype)
             ->first();
     }
+
+    /**
+     * Get Transaction To Export
+     * @return mixed
+     */
+    public function getTransactionsToExport($code, $dateinit, $datefinish)
+    {
+        $select = Transaction::select(DB::raw("CONCAT(RPAD(accounttypes.code,10,' '),LPAD(vouchertypes.code,5,'0'),LPAD(DATE_FORMAT(transactions.date,'%m/%d/%Y'),10,'0'),LPAD(transactions.document,9,'0'),LPAD(transactions.reference,9,'0'),LPAD(transactions.nit,11,' '),RPAD(stringReplace(transactions.description,'ÁÉÍÓÚÑ','AEIOUN'),28,' '),transactiontypes.prefix,LPAD(transactions.value,21,' '),LPAD(transactions.base,21,' '),RPAD(costcenters.code,6,' '),LPAD(transactions.transaction,3,' '),LPAD(transactions.term,4,' ')) AS Asiento"))
+            //return Transaction::select(DB::raw("CONCAT(RPAD(accounttypes.code,10,' '),LPAD(vouchertypes.code,5,'0'),LPAD(DATE_FORMAT(transactions.realdate,'%m/%d/%Y'),10,'0'),LPAD(transactions.document,9,'0'),LPAD(transactions.reference,9,'0'),LPAD(transactions.nit,11,' '),RPAD(stringReplace(transactions.description,'ÁÉÍÓÚÑ','AEIOUN'),28,' '),transactiontypes.prefix,LPAD(transactions.value,21,' '),LPAD(transactions.base,21,' '),RPAD(costcenters.code,6,' '),LPAD(transactions.transaction,3,' '),LPAD(transactions.term,4,' ')) AS Asiento"))
+            ->join('accounttypes', function ($join) {
+                $join
+                    ->on('accounttypes.idaccounttype', '=', 'transactions.idaccounttype');
+            })
+            ->join('vouchertypes', function ($join) {
+                $join
+                    ->on('vouchertypes.idvouchertype', '=', 'transactions.idvouchertype');
+            })
+            ->join('transactiontypes', function ($join) {
+                $join
+                    ->on('transactiontypes.idtransactiontype', '=', 'transactions.idtransactiontype');
+            })
+            ->join('costcenters', function ($join) {
+                $join
+                    ->on('costcenters.idcostcenter', '=', 'transactions.idcostcenter');
+            })
+            ->whereIn('vouchertypes.code', [$code])
+            ->whereBetween('transactions.date', array($dateinit, $datefinish))
+            ->orderBy('vouchertypes.code', 'ASC')
+            ->orderBy('transactions.date', 'ASC')
+            ->orderBy('transactions.idpayment', 'ASC')
+            ->orderBy('accounttypes.order');
+        return
+            $select->get();
+    }
+
+    /**
+     * Get AccountingEntries To Export
+     * @param $code
+     * @param $date_from
+     * @param $date_to
+     * @return mixed
+     */
+    public function getAccountingentriesToExport($code, $date_from, $date_to)
+    {
+        $select = Accountingentry::select(DB::raw("CONCAT(RPAD(accounttypes.code,10,' '),LPAD(vouchertypes.code,5,'0'),LPAD(DATE_FORMAT(receipts.date,'%m/%d/%Y'),10,'0'),LPAD(receipts.document,9,'0'),LPAD(accountingentries.reference,9,'0'),LPAD(accountingentries.nit,11,' '),RPAD(stringReplace(accountingentries.description,'ÁÉÍÓÚÑ','AEIOUN'),28,' '),transactiontypes.prefix,LPAD(accountingentries.value,21,' '),LPAD(accountingentries.base,21,' '),RPAD(costcenters.code,6,' '),LPAD(accountingentries.transaction,3,' '),LPAD(accountingentries.term,4,' ')) AS Asiento"))
+            ->join('receipts', function ($join) {
+                $join
+                    ->on('receipts.idreceipt', '=', 'accountingentries.idreceipt');
+            })
+            ->join('accounttypes', function ($join) {
+                $join
+                    ->on('accounttypes.idaccounttype', '=', 'accountingentries.idaccounttype');
+            })
+            ->join('vouchertypes', function ($join) {
+                $join
+                    ->on('vouchertypes.idvouchertype', '=', 'receipts.idvouchertype');
+            })
+            ->join('transactiontypes', function ($join) {
+                $join
+                    ->on('transactiontypes.idtransactiontype', '=', 'accountingentries.idtransactiontype');
+            })
+            ->join('costcenters', function ($join) {
+                $join
+                    ->on('costcenters.idcostcenter', '=', 'accountingentries.idcostcenter');
+            })
+            ->whereIn('vouchertypes.code', [$code])
+            ->whereBetween('receipts.date', array($date_from, $date_to))
+            ->orderBy('vouchertypes.code', 'ASC')
+            ->orderBy('receipts.document', 'ASC')
+            ->orderBy('accounttypes.order');
+        return
+            $select->get();
+    }
 }

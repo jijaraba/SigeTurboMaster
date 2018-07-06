@@ -64,6 +64,7 @@ INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('finan
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('financials.payments.convert','Admin',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('financials.payments.convert.manualreceipt','Admin',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('financials.payments.convert.virtualreceipt','Admin',NOW(),NOW());
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('financials.receipts.export','Admin,Account,Treasurer',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('financials.payments.create', 'Admin,Account,Treasurer', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('financials.payments.edit','Admin,Account,Treasurer',NOW(),NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('financials.payments.index','Admin,Account,Treasurer',NOW(),NOW());

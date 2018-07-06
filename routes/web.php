@@ -513,6 +513,11 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
         'as' => 'financials.payments.convert.manualreceipt',
         'uses' => 'PaymentsController@paymentsConvertManualReceipt'
     ]);
+    //Export Accountingentries
+    Route::get('/financials/receipts/export/{type}', [
+        'as' => 'financials.receipts.export',
+        'uses' => 'ExportsController@exportAccountingentries'
+    ]);
     //Payments
     Route::get('/financials/packages', [
         'middleware' => ['auth', 'permission'],
@@ -1038,14 +1043,5 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
         'uses' => 'ConsentsController@index'
     ]);
 
-    /**
-     * ===================================
-     * Export
-     * ===================================
-     */
-    Route::get('/totxt', [
-        'as' => 'totxt',
-        'uses' => 'ExportsController@exportTransactionsToTxt'
-    ]);
 
 });

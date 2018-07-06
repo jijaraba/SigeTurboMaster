@@ -5,6 +5,7 @@ namespace SigeTurbo\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use SigeTurbo\Report\GenerateReport;
+use SigeTurbo\Repositories\Accountingentry\AccountingentryRepositoryInterface;
 use SigeTurbo\Repositories\Group\GroupRepositoryInterface;
 use SigeTurbo\Repositories\Task\TaskRepositoryInterface;
 use SigeTurbo\Repositories\Transaction\TransactionRepositoryInterface;
@@ -29,6 +30,10 @@ class ExportsController extends Controller
      * @var UserRepositoryInterface
      */
     private $userRepository;
+    /**
+     * @var AccountingentryRepositoryInterface
+     */
+    private $accountingentryRepository;
 
     /**
      * ExportsController constructor.
@@ -36,16 +41,19 @@ class ExportsController extends Controller
      * @param TransactionRepositoryInterface $transactionRepository
      * @param GroupRepositoryInterface $groupRepository
      * @param UserRepositoryInterface $userRepository
+     * @param AccountingentryRepositoryInterface $accountingentryRepository
      */
     public function __construct(TaskRepositoryInterface $taskRepository,
                                 TransactionRepositoryInterface $transactionRepository,
                                 GroupRepositoryInterface $groupRepository,
-                                UserRepositoryInterface $userRepository)
+                                UserRepositoryInterface $userRepository,
+                                AccountingentryRepositoryInterface $accountingentryRepository)
     {
         $this->taskRepository = $taskRepository;
         $this->transactionRepository = $transactionRepository;
         $this->groupRepository = $groupRepository;
         $this->userRepository = $userRepository;
+        $this->accountingentryRepository = $accountingentryRepository;
     }
 
     /**
@@ -242,6 +250,27 @@ class ExportsController extends Controller
         if ($request["type"] == "text/plain") {
             return response($content, 200)
                 ->header('Content-Type', $request["type"] . '; charset=UTF-8')
+                ->header('Content-Encoding', 'UTF-8')
+                ->header('X-Header-App', 'SigeTurbo')
+                ->header('Content-Disposition', sprintf('attachment; filename="%s"', fileName('export')));
+        } else {
+            dd("Aun no se puede exportar a excel");
+        }
+    }
+
+    /**
+     * Export Receipts With Accountingentries
+     * @param $type
+     * @param Request $request
+     * @return mixed
+     */
+    public function exportAccountingentries($type, Request $request)
+    {
+        $content = view('exports.payments.txt')
+            ->withTransactions($this->accountingentryRepository->getAccountingentriesToExport($request["vouchertype"], $request["starts"], $request["ends"]));
+        if ($type == "txt") {
+            return response($content, 200)
+                ->header('Content-Type', 'text/plain; charset=UTF-8')
                 ->header('Content-Encoding', 'UTF-8')
                 ->header('X-Header-App', 'SigeTurbo')
                 ->header('Content-Disposition', sprintf('attachment; filename="%s"', fileName('export')));
