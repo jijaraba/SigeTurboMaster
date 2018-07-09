@@ -80,7 +80,10 @@ class UploadsController extends Controller
     {
         if ($request->file('photo')->isValid()) {
             $cloud = new CloudService();
-            if ($response = $cloud->uploadUserPhoto($request->file('photo'), $request['user'])) {
+            $response = $cloud->uploadUserPhoto($request->file('photo'), $request['user']);
+            dd($response);
+            exit();
+            if ($response) {
                 return response()->json(['status' => $response->successful, 'data' => ['photo' => $response->photo]]);
             }
         }
