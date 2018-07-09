@@ -1770,6 +1770,37 @@ module.exports = {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -24099,18 +24130,79 @@ var render = function() {
                           { staticClass: "display-horizontal col-100" },
                           [
                             _c("li", { staticClass: "col-100 gutter-5" }, [
-                              _c("input", {
-                                staticStyle: {
-                                  "font-size": "1.2em",
-                                  padding: "10px 0"
-                                },
-                                attrs: {
-                                  type: "file",
-                                  name: "image",
-                                  accept: "image/*"
-                                },
-                                on: { change: _vm.setImage }
-                              })
+                              _c("h4", [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("uppercase")(
+                                      _vm.$translate.text(
+                                        "sigeturbo.photo_select"
+                                      )
+                                    )
+                                  )
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "section",
+                                { staticClass: "info_generic aquamarine" },
+                                [
+                                  _c("div", [
+                                    _c("i", {
+                                      staticClass: "fas fa-info-circle fa-2x",
+                                      staticStyle: { color: "white" }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "col-90" }, [
+                                      _vm._v(
+                                        "\n                                            Seleccionar la foto para el estudiante "
+                                      ),
+                                      _c("strong", [
+                                        _vm._v(_vm._s(_vm.fullname))
+                                      ]),
+                                      _vm._v(
+                                        ". Solo pueden ser publicados imágenes con extensión: jpeg,png,svg\n                                        "
+                                      )
+                                    ])
+                                  ])
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("li", { staticClass: "col-100 gutter-5" }, [
+                              _c(
+                                "section",
+                                { staticClass: "upload-container" },
+                                [
+                                  _c("div", { staticClass: "upload" }, [
+                                    _c("input", {
+                                      staticStyle: {
+                                        "font-size": "1em",
+                                        padding: "10px 0"
+                                      },
+                                      attrs: {
+                                        type: "file",
+                                        name: "image",
+                                        accept: "image/*"
+                                      },
+                                      on: { change: _vm.setImage }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("capitalize")(
+                                            _vm.$translate.text(
+                                              "sigeturbo.upload"
+                                            )
+                                          )
+                                        )
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._m(0)
+                                ]
+                              )
                             ])
                           ]
                         )
@@ -24138,6 +24230,48 @@ var render = function() {
                           "ul",
                           { staticClass: "display-horizontal col-100" },
                           [
+                            _c("li", { staticClass: "col-100 gutter-5" }, [
+                              _c("h4", [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("uppercase")(
+                                      _vm.$translate.text(
+                                        "sigeturbo.photo_edit"
+                                      )
+                                    )
+                                  )
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "section",
+                                { staticClass: "info_generic aquamarine" },
+                                [
+                                  _c("div", [
+                                    _c("i", {
+                                      staticClass: "fas fa-info-circle fa-2x",
+                                      staticStyle: { color: "white" }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "col-90" }, [
+                                      _vm._v(
+                                        "\n                                            Realizar los ajustes necesarios para la foto del estudiante "
+                                      ),
+                                      _c("strong", [
+                                        _vm._v(_vm._s(_vm.fullname))
+                                      ]),
+                                      _vm._v(
+                                        ". Una vez la imagen quede marcada en el área deseada dar clic en el botón "
+                                      ),
+                                      _c("strong", [_vm._v("Crop")]),
+                                      _vm._v(" y luego "),
+                                      _c("strong", [_vm._v("Upload")])
+                                    ])
+                                  ])
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
                             _c("li", { staticClass: "col-100 gutter-5" }, [
                               _c(
                                 "section",
@@ -24169,7 +24303,7 @@ var render = function() {
                                                   _c("sigeturbo-cropper", {
                                                     ref: "cropper",
                                                     attrs: {
-                                                      "aspect-ratio": "1",
+                                                      "aspect-ratio": 1,
                                                       guides: true,
                                                       "view-mode": 2,
                                                       "drag-mode": "crop",
@@ -24280,9 +24414,7 @@ var render = function() {
                                                         _c("img", {
                                                           staticStyle: {
                                                             width: "180px",
-                                                            height: "180px",
-                                                            border:
-                                                              "1px solid gray"
+                                                            height: "180px"
                                                           },
                                                           attrs: {
                                                             src: _vm.cropImg,
@@ -24460,7 +24592,18 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "drop-zone", attrs: { id: "drop_zone" } }, [
+      _c("i", { staticClass: "fa fa-plus-circle fa-3x" }),
+      _vm._v(" "),
+      _c("span", [_vm._v("Arrastrar foto")])
+    ])
+  }
+]
 render._withStripped = true
 
 if (false) {
@@ -35528,6 +35671,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'academic': 'academic',
             'upload': 'upload',
             'uploading': 'uploading ...',
+            'photo_select': 'select photo',
+            'photo_edit': 'edit photo',
             'account': 'account',
             'accountingentries': 'accounting entries',
             'accountingentry': 'accounting entry',
@@ -35654,6 +35799,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'academic': 'año académico',
             'upload': 'upload',
             'uploading': 'uploading ...',
+            'photo_select': 'seleccionar foto',
+            'photo_edit': 'organizar foto',
             'account': 'cuenta',
             'accountingentries': 'asientos contables',
             'accountingentry': 'asiento contable',

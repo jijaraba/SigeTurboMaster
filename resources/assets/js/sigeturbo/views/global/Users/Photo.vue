@@ -32,15 +32,46 @@
                                 <legend>{{ $translate.text('sigeturbo.step') | uppercase }} 1</legend>
                                 <ul class="display-horizontal col-100">
                                     <li class="col-100 gutter-5">
-                                        <input type="file" name="image" accept="image/*"
-                                               style="font-size: 1.2em; padding: 10px 0;"
-                                               @change="setImage"/>
+                                        <h4>{{ $translate.text('sigeturbo.photo_select') | uppercase }}</h4>
+                                        <section class="info_generic aquamarine">
+                                            <div>
+                                                <i class="fas fa-info-circle fa-2x" style="color:white"></i>
+                                                <span class="col-90">
+                                                Seleccionar la foto para el estudiante <strong>{{ fullname }}</strong>. Solo pueden ser publicados imágenes con extensión: jpeg,png,svg
+                                            </span>
+                                            </div>
+                                        </section>
+                                    </li>
+                                    <li class="col-100 gutter-5">
+                                        <section class="upload-container">
+                                            <div class="upload">
+                                                <input type="file" name="image" accept="image/*"
+                                                       style="font-size: 1em; padding: 10px 0;"
+                                                       @change="setImage"/>
+                                                <span>{{ $translate.text('sigeturbo.upload') | capitalize }}</span>
+                                            </div>
+                                            <div class="drop-zone" id="drop_zone">
+                                                <i class="fa fa-plus-circle fa-3x"></i>
+                                                <span>Arrastrar foto</span>
+                                            </div>
+                                        </section>
                                     </li>
                                 </ul>
                             </fieldset>
                             <fieldset class="step" id="step-2" data-step="2">
                                 <legend>{{ $translate.text('sigeturbo.step') | uppercase }} 2</legend>
                                 <ul class="display-horizontal col-100">
+                                    <li class="col-100 gutter-5">
+                                        <h4>{{ $translate.text('sigeturbo.photo_edit') | uppercase }}</h4>
+                                        <section class="info_generic aquamarine">
+                                            <div>
+                                                <i class="fas fa-info-circle fa-2x" style="color:white"></i>
+                                                <span class="col-90">
+                                                Realizar los ajustes necesarios para la foto del estudiante <strong>{{ fullname }}</strong>. Una vez la imagen quede marcada en el área deseada dar clic en el botón <strong>Crop</strong> y luego <strong>Upload</strong>
+                                            </span>
+                                            </div>
+                                        </section>
+                                    </li>
                                     <li class="col-100 gutter-5">
                                         <section class="sige-photo-upload-container">
                                             <ul class="display-horizontal col-100">
@@ -49,9 +80,9 @@
                                                         <li class="col-100">
                                                             <sigeturbo-cropper
                                                                     ref='cropper'
-                                                                    aspect-ratio=1
+                                                                    :aspect-ratio=1
                                                                     :guides="true"
-                                                                    :view-mode="2"
+                                                                    :view-mode=2
                                                                     drag-mode="crop"
                                                                     preview=".preview"
                                                                     :auto-crop-area="1"
@@ -88,7 +119,7 @@
                                                         <ul class="display-horizontal col-100">
                                                             <li class="col-100">
                                                                 <img :src="cropImg"
-                                                                     style="width: 180px; height: 180px; border: 1px solid gray"
+                                                                     style="width: 180px; height: 180px;"
                                                                      alt="Cropped Image"/>
                                                             </li>
                                                             <li class="col-100">
