@@ -162,7 +162,7 @@ class CloudService
         $this->type = 'photo';
         $this->file = $file;
         $this->fileName = photoName($user, $this->file->getClientOriginalExtension());
-        $this->path = storage_path() . '/files/users/photo';
+        $this->path = storage_path() . '/files/users/photo/';
         $this->file->move($this->path, $this->fileName);
         if (self::upload()) {
             $user = User::find($user);
