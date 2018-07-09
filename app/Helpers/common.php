@@ -114,6 +114,21 @@ function fileName($type = 'task', $extension = null)
 }
 
 /**
+ * Photo Name
+ * @param string $user
+ * @param null $extension
+ * @return string
+ */
+function photoName($user, $extension = null)
+{
+    if ($extension == null) {
+        return sha1($user . rand(1, 200));
+    } else {
+        return sha1($user . rand(1, 200)) . "." . $extension;
+    }
+}
+
+/**
  * Get File Size
  * @param $size
  * @return float

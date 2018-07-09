@@ -49,14 +49,14 @@ class UploadsController extends Controller
     public function uploadConsent(UploadRequest $request)
     {
         if ($request->file('file')->isValid()) {
-           if(($request['consent'] !== 'false' ) ){
+            if (($request['consent'] !== 'false')) {
                 $cloud = new CloudService();
                 if ($consentfile = $cloud->uploadConsent($request->file('file'))) {
-                return response()->json(['status' => true, 'data' => ['table' => 'consents', 'id' => $consentfile->idtaskfile]]);
+                    return response()->json(['status' => true, 'data' => ['table' => 'consents', 'id' => $consentfile->idtaskfile]]);
                 }
-           }else{
+            } else {
                 return response()->json(['status' => true]);
-           }
+            }
         }
         return response()->json(['status' => false]);
     }
@@ -69,4 +69,22 @@ class UploadsController extends Controller
         }
         return response()->json(['status' => false]);
     }
+
+    /**
+     * Upload Users Photo
+     * GET /upload/user/photo
+     * @param UploadRequest $request
+     * @return Response
+     */
+    public function uploadUserPhoto(UploadRequest $request)
+    {
+        if ($request->file('photo')->isValid()) {
+            $cloud = new CloudService();
+            if ($response = $cloud->uploadUserPhoto($request->file('photo'), $request['user'])) {
+                return response()->json(['status' => true]);
+            }
+        }
+        return response()->json(['status' => false]);
+    }
+
 }

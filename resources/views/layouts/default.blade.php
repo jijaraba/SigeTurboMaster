@@ -83,7 +83,7 @@
                 <li id="home" class="sige-nav-module {{ setCurrentModule('dashboard') }}">
                     <a href="{{ URL::route('dashboard') }}" title="{{ Lang::get('sige.Home') }}"
                        data-title="{{ Lang::get('sige.Home') }}">
-                        {!! HTML::image('images/sigeturbo.svg','Home') !!}
+                        {!! HTML::image('images/sigeturbo.svg','Home',['id'=>'sigeturbo_logo']) !!}
                     </a>
                 </li>
                 @can('view',\SigeTurbo\Admission::class)

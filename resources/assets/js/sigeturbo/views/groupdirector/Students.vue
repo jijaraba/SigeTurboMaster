@@ -18,7 +18,7 @@
 <script>
 
     import Enrollment from '../../models/Enrollment';
-    import assets from "../../core/utils";
+    import {assets} from "../../core/utils";
 
     export default {
 

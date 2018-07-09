@@ -269,9 +269,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="col-35 next">
-
-                        </li>
+                        <li class="col-35 next"></li>
                     </ul>
                 </footer>
             </section>
@@ -286,7 +284,7 @@
     import Identificationtype from "../../../../models/Identificationtype";
     import Religion from "../../../../models/Religion";
     import Preregistration from "../../../../models/Preregistration";
-    import assets from "../../../../core/utils";
+    import {assets} from "../../../../core/utils";
 
     export default {
 

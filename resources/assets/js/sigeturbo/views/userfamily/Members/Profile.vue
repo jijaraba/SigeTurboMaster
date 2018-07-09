@@ -84,7 +84,7 @@
 <script>
 
     import swal from 'sweetalert2';
-    import assets from "../../../core/utils";
+    import {assets} from "../../../core/utils";
     import Category from "../../../models/Category";
     import ProfileGeneral from './Profile/General';
     import ProfileMedical from './Profile/Medical';

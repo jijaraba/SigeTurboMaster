@@ -265,7 +265,7 @@
     import swal from 'sweetalert2';
     import uppercase from "../../../../filters/string/uppercase";
     import currency from "../../../../filters/other/currency";
-    import assets from "../../../../core/utils";
+    import {assets} from "../../../../core/utils";
     import paymentType from "../../../../filters/payment/paymentType";
     import {chargeSubtotal, chargeTotalRealValue} from "../../../../filters/payment/charge";
     import capitalize from "../../../../filters/string/capitalize";

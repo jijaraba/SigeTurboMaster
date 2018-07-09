@@ -21,9 +21,8 @@
 </template>
 <script>
 
-    import Family from "../../../../models/Family";
     import uppercase from "../../../../filters/string/uppercase";
-    import assets from "../../../../core/utils";
+    import {assets} from "../../../../core/utils";
     import capitalize from "../../../../filters/string/capitalize";
 
     export default {

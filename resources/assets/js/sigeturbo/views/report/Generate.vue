@@ -11,7 +11,7 @@
 <script>
 
     import Export from '../../models/Export';
-    import assets from "../../core/utils";
+    import {assets} from "../../core/utils";
 
     export default {
 

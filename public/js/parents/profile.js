@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 16);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1768,7 +1768,7 @@ module.exports = {
     },
     data: function data() {
         return {
-            assets: Object(__WEBPACK_IMPORTED_MODULE_1__core_utils__["a" /* default */])(),
+            assets: Object(__WEBPACK_IMPORTED_MODULE_1__core_utils__["a" /* assets */])(),
             category: [],
             show: false,
             profile: {
@@ -2089,7 +2089,7 @@ module.exports = {
     components: {},
     data: function data() {
         return {
-            assets: Object(__WEBPACK_IMPORTED_MODULE_4__core_utils__["a" /* default */])(),
+            assets: Object(__WEBPACK_IMPORTED_MODULE_4__core_utils__["a" /* assets */])(),
             steps: 4,
             stepSelected: 0
         };
@@ -2433,8 +2433,6 @@ module.exports = {
 //
 //
 //
-//
-//
 
 
 
@@ -2455,7 +2453,7 @@ module.exports = {
     components: {},
     data: function data() {
         return {
-            assets: Object(__WEBPACK_IMPORTED_MODULE_6__core_utils__["a" /* default */])(),
+            assets: Object(__WEBPACK_IMPORTED_MODULE_6__core_utils__["a" /* assets */])(),
             identificationtypes: [],
             religions: [],
             steps: 6,
@@ -2986,7 +2984,7 @@ module.exports = {
             bloodtypes: [],
             medicalinsurances: [],
             prepaidmedicals: [],
-            assets: Object(__WEBPACK_IMPORTED_MODULE_7__core_utils__["a" /* default */])(),
+            assets: Object(__WEBPACK_IMPORTED_MODULE_7__core_utils__["a" /* assets */])(),
             steps: 9,
             stepSelected: 0
         };
@@ -3280,7 +3278,7 @@ module.exports = {
     components: {},
     data: function data() {
         return {
-            assets: Object(__WEBPACK_IMPORTED_MODULE_4__core_utils__["a" /* default */])(),
+            assets: Object(__WEBPACK_IMPORTED_MODULE_4__core_utils__["a" /* assets */])(),
             steps: 4,
             stepSelected: 0
         };
@@ -20866,7 +20864,7 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-* sweetalert2 v7.22.2
+* sweetalert2 v7.25.0
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -21125,7 +21123,7 @@ var DismissReason = Object.freeze({
   timer: 'timer'
 });
 
-var version = "7.22.2";
+var version = "7.25.0";
 
 var argsToParams = function argsToParams(args) {
   var params = {};
@@ -21284,7 +21282,7 @@ var getPopup = function getPopup() {
 
 var getIcons = function getIcons() {
   var popup = getPopup();
-  return popup.querySelectorAll('.' + swalClasses.icon);
+  return Array.prototype.slice.call(popup.querySelectorAll('.' + swalClasses.icon));
 };
 
 var getTitle = function getTitle() {
@@ -21535,21 +21533,23 @@ var undoIOSfix = function undoIOSfix() {
   }
 };
 
+var RESTORE_FOCUS_TIMEOUT = 100;
+
 var globalState = {};
 
 // Restore previous active (focused) element
 var restoreActiveElement = function restoreActiveElement() {
-  if (globalState.previousActiveElement && globalState.previousActiveElement.focus) {
-    var x = window.scrollX;
-    var y = window.scrollY;
-    globalState.restoreFocusTimeout = setTimeout(function () {
+  var x = window.scrollX;
+  var y = window.scrollY;
+  globalState.restoreFocusTimeout = setTimeout(function () {
+    if (globalState.previousActiveElement && globalState.previousActiveElement.focus) {
       globalState.previousActiveElement.focus();
       globalState.previousActiveElement = null;
-    }, 100); // issues/900
-    if (typeof x !== 'undefined' && typeof y !== 'undefined') {
-      // IE doesn't have scrollX/scrollY support
-      window.scrollTo(x, y);
     }
+  }, RESTORE_FOCUS_TIMEOUT); // issues/900
+  if (typeof x !== 'undefined' && typeof y !== 'undefined') {
+    // IE doesn't have scrollX/scrollY support
+    window.scrollTo(x, y);
   }
 };
 
@@ -21573,7 +21573,7 @@ var close = function close(onClose, onAfterClose) {
   var removePopupAndResetState = function removePopupAndResetState() {
     if (!isToast()) {
       restoreActiveElement();
-      window.removeEventListener('keydown', globalState.keydownHandler, { capture: true });
+      globalState.keydownTarget.removeEventListener('keydown', globalState.keydownHandler, { capture: globalState.keydownListenerCapture });
       globalState.keydownHandlerAdded = false;
     }
 
@@ -21683,6 +21683,8 @@ var defaultParams = {
   allowOutsideClick: true,
   allowEscapeKey: true,
   allowEnterKey: true,
+  stopKeydownPropagation: true,
+  keydownListenerCapture: false,
   showConfirmButton: true,
   showCancelButton: false,
   preConfirm: null,
@@ -21836,9 +21838,8 @@ function withGlobalDefaults(ParentSwal) {
  * @param mixinParams
  */
 function mixin(mixinParams) {
-  var Swal = this;
-  return withNoNewKeyword(function (_Swal) {
-    inherits(MixinSwal, _Swal);
+  return withNoNewKeyword(function (_ref) {
+    inherits(MixinSwal, _ref);
 
     function MixinSwal() {
       classCallCheck(this, MixinSwal);
@@ -21852,7 +21853,7 @@ function mixin(mixinParams) {
       }
     }]);
     return MixinSwal;
-  }(Swal));
+  }(this));
 }
 
 // private global state for the queue feature
@@ -21966,6 +21967,7 @@ var staticMethods = Object.freeze({
 	getTitle: getTitle,
 	getContent: getContent,
 	getImage: getImage,
+	getIcons: getIcons,
 	getButtonsWrapper: getButtonsWrapper,
 	getActions: getActions,
 	getConfirmButton: getConfirmButton,
@@ -21983,6 +21985,42 @@ var staticMethods = Object.freeze({
 	getTimerLeft: getTimerLeft
 });
 
+// https://github.com/Riim/symbol-polyfill/blob/master/index.js
+
+var _Symbol = typeof Symbol === 'function' ? Symbol : function () {
+  var idCounter = 0;
+  function _Symbol(key) {
+    return '__' + key + '_' + Math.floor(Math.random() * 1e9) + '_' + ++idCounter + '__';
+  }
+  _Symbol.iterator = _Symbol('Symbol.iterator');
+  return _Symbol;
+}();
+
+// WeakMap polyfill, needed for Android 4.4
+// Related issue: https://github.com/sweetalert2/sweetalert2/issues/1071
+// http://webreflection.blogspot.fi/2015/04/a-weakmap-polyfill-in-20-lines-of-code.html
+
+var WeakMap$1 = typeof WeakMap === 'function' ? WeakMap : function (s, dP, hOP) {
+  function WeakMap() {
+    dP(this, s, { value: _Symbol('WeakMap') });
+  }
+  WeakMap.prototype = {
+    'delete': function del(o) {
+      delete o[this[s]];
+    },
+    get: function get(o) {
+      return o[this[s]];
+    },
+    has: function has(o) {
+      return hOP.call(o, this[s]);
+    },
+    set: function set(o, v) {
+      dP(o, this[s], { configurable: true, value: v });
+    }
+  };
+  return WeakMap;
+}(_Symbol('WeakMap'), Object.defineProperty, {}.hasOwnProperty);
+
 /**
  * This module containts `WeakMap`s for each effectively-"private  property" that a `swal` has.
  * For example, to set the private property "foo" of `this` to "bar", you can `privateProps.foo.set(this, 'bar')`
@@ -21993,43 +22031,10 @@ var staticMethods = Object.freeze({
  *   then we can use that language feature.
  */
 
-// WeakMap polyfill, needed for Android 4.4
-// Related issue: https://github.com/sweetalert2/sweetalert2/issues/1071
-if (typeof window !== 'undefined' && typeof window.WeakMap !== 'function') {
-  // https://github.com/Riim/symbol-polyfill/blob/master/index.js
-  var idCounter = 0;
-  window.Symbol = function _Symbol(key) {
-    return '__' + key + '_' + Math.floor(Math.random() * 1e9) + '_' + ++idCounter + '__';
-  };
-  Symbol.iterator = Symbol('Symbol.iterator');
-
-  // http://webreflection.blogspot.fi/2015/04/a-weakmap-polyfill-in-20-lines-of-code.html
-  window.WeakMap = function (s, dP, hOP) {
-    function WeakMap() {
-      dP(this, s, { value: Symbol('WeakMap') });
-    }
-    WeakMap.prototype = {
-      'delete': function del(o) {
-        delete o[this[s]];
-      },
-      get: function get(o) {
-        return o[this[s]];
-      },
-      has: function has(o) {
-        return hOP.call(o, this[s]);
-      },
-      set: function set(o, v) {
-        dP(o, this[s], { configurable: true, value: v });
-      }
-    };
-    return WeakMap;
-  }(Symbol('WeakMap'), Object.defineProperty, {}.hasOwnProperty);
-}
-
 var privateProps = {
-  promise: new WeakMap(),
-  innerParams: new WeakMap(),
-  domCache: new WeakMap()
+  promise: new WeakMap$1(),
+  innerParams: new WeakMap$1(),
+  domCache: new WeakMap$1()
 };
 
 /**
@@ -22530,7 +22535,7 @@ var openPopup = function openPopup(params) {
     fixScrollbar();
     iOSfix();
   }
-  if (!globalState.previousActiveElement) {
+  if (!isToast() && !globalState.previousActiveElement) {
     globalState.previousActiveElement = document.activeElement;
   }
   if (params.onOpen !== null && typeof params.onOpen === 'function') {
@@ -22830,7 +22835,9 @@ function _main(userParams) {
     };
 
     var keydownHandler = function keydownHandler(e, innerParams) {
-      e.stopPropagation();
+      if (innerParams.stopKeydownPropagation) {
+        e.stopPropagation();
+      }
 
       var arrowKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Left', 'Right', 'Up', 'Down' // IE11
       ];
@@ -22885,7 +22892,7 @@ function _main(userParams) {
     };
 
     if (globalState.keydownHandlerAdded) {
-      window.removeEventListener('keydown', globalState.keydownHandler, { capture: true });
+      globalState.keydownTarget.removeEventListener('keydown', globalState.keydownHandler, { capture: globalState.keydownListenerCapture });
       globalState.keydownHandlerAdded = false;
     }
 
@@ -22893,7 +22900,9 @@ function _main(userParams) {
       globalState.keydownHandler = function (e) {
         return keydownHandler(e, innerParams);
       };
-      window.addEventListener('keydown', globalState.keydownHandler, { capture: true });
+      globalState.keydownTarget = innerParams.keydownListenerCapture ? window : domCache.popup;
+      globalState.keydownListenerCapture = innerParams.keydownListenerCapture;
+      globalState.keydownTarget.addEventListener('keydown', globalState.keydownHandler, { capture: globalState.keydownListenerCapture });
       globalState.keydownHandlerAdded = true;
     }
 
@@ -40829,10 +40838,6 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
     en: {
         sigeturbo: {
             'academic': 'academic',
-            'discount': 'discount',
-            'normal': 'normal',
-            'expired': 'expired',
-            'change': 'change',
             'account': 'account',
             'accountingentries': 'accounting entries',
             'accountingentry': 'accounting entry',
@@ -40845,22 +40850,27 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'bank': 'bank',
             'blood_type': 'blood type',
             'celular': 'celular',
+            'change': 'change',
+            'change_photo': 'change photo',
             'charge_list': 'charge list',
             'code': 'code',
-            'cost': 'cost',
-            'costs': 'costs',
             'code_title': 'code',
             'company': 'company',
             'company_phone': 'phone',
             'company_title': 'company',
+            'concept_type': 'concept',
+            'concept_types': 'concepts',
             'confirm_information': 'confirm information?',
             'consecutive': 'consecutive',
+            'cost': 'cost',
             'costcenter': 'center',
+            'costs': 'costs',
+            'credit': 'credit',
             'date': 'date',
             'debit': 'debit',
-            'credit': 'credit',
-            'difference': 'difference',
             'description': 'description',
+            'difference': 'difference',
+            'discount': 'discount',
             'district': 'district',
             'doctor_name': 'doctor name',
             'doctor_phone': 'doctor phone',
@@ -40871,14 +40881,15 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'equal_treatment': 'equal treatment?',
             'error': 'error',
             'expedition': 'expedition',
+            'expired': 'expired',
             'family': 'family',
-            'student': 'student',
-            'responsible_singular': 'responsible',
             'firstname': 'firstname',
             'fullname': 'fullname',
             'general': 'general',
             'general_success': 'La información general fue guardada satisfactoriamente',
             'generate': 'generate',
+            'grade': 'grade',
+            'grades': 'grades',
             'health_success': 'La información de salud fue guardada satisfactoriamente',
             'identification': 'identification',
             'identification_type': 'identification type',
@@ -40895,6 +40906,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'next': 'next',
             'nit': 'nit',
             'no': 'no',
+            'normal': 'normal',
             'notice': 'Prematrícula',
             'observation': 'observation',
             'observation_additional': 'observation additional',
@@ -40915,20 +40927,22 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'psychological_support': 'psychological_support?',
             'psychology': 'psychology',
             'receipt': 'receipt',
-            'receipt_form': 'receipt form',
-            'receipt_success': 'receipt success',
-            'receipt_virtual': 'receipt virtual',
-            'receipt_manual': 'receipt manual',
-            'receipt_invoice': 'invoice',
             'receipt_advance': 'advance',
             'receipt_document_help': 'document (exam: 1,2 - 1-5 - 1..)',
+            'receipt_form': 'receipt form',
+            'receipt_invoice': 'invoice',
+            'receipt_manual': 'receipt manual',
+            'receipt_success': 'receipt success',
+            'receipt_virtual': 'receipt virtual',
             'religion': 'religion',
             'responsible': 'responsible',
+            'responsible_singular': 'responsible',
             'retired': 'retired',
             'save': 'save',
             'specify_allergic': 'specify allergic',
             'start': 'start',
             'step': 'step',
+            'student': 'student',
             'success': 'sucess',
             'suffered_illness': 'suffered illness',
             'suffered_illness_description': 'suffered illness description',
@@ -40940,22 +40954,14 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'voucher': 'voucher',
             'warning': 'warning',
             'why_take_medication': 'why take medication?',
-            'yes': 'yes',
             'year': 'year',
             'years': 'years',
-            'grade': 'grade',
-            'grades': 'grades',
-            'concept_type': 'concept',
-            'concept_types': 'concepts'
+            'yes': 'yes'
         }
     },
     es: {
         sigeturbo: {
             'academic': 'año académico',
-            'discount': 'descuento',
-            'normal': 'normal',
-            'expired': 'interés',
-            'change': 'cambiar',
             'account': 'cuenta',
             'accountingentries': 'asientos contables',
             'accountingentry': 'asiento contable',
@@ -40968,22 +40974,27 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'bank': 'banco',
             'blood_type': 'tipo de sangre',
             'celular': 'celular',
+            'change': 'cambiar',
+            'change_photo': 'cambiar foto',
             'charge_list': 'listado de cobros',
             'code': 'código',
             'code_title': 'código',
-            'cost': 'costo',
-            'costs': 'costos',
             'company': 'empresa',
             'company_phone': 'teléfono de la empresa',
             'company_title': 'nombre de la empresa',
+            'concept_type': 'concepto',
+            'concept_types': 'conceptos',
             'confirm_information': '¿Confirma que la información ingresada es válida?',
             'consecutive': 'consecutivo',
+            'cost': 'costo',
             'costcenter': 'centro',
+            'costs': 'costos',
+            'credit': 'crédito',
             'date': 'fecha',
             'debit': 'débito',
-            'credit': 'crédito',
-            'difference': 'diferencia',
             'description': 'descripción',
+            'difference': 'diferencia',
+            'discount': 'descuento',
             'district': 'barrio',
             'doctor_name': 'pediatra',
             'doctor_phone': 'teléfono',
@@ -40994,14 +41005,15 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'equal_treatment': '¿continúa tratamiento?',
             'error': 'error',
             'expedition': 'expedición',
+            'expired': 'interés',
             'family': 'familia',
-            'student': 'estudiante',
-            'responsible_singular': 'responsable',
             'firstname': 'nombres',
             'fullname': 'nombres y apellidos',
             'general': 'general',
             'general_success': 'La información general fue guardada satisfactoriamente',
             'generate': 'generar',
+            'grade': 'grado',
+            'grades': 'grados',
             'health_success': 'La información de salud fue guardada satisfactoriamente',
             'identification': 'identificación',
             'identification_type': 'tipo de identificación',
@@ -41018,6 +41030,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'next': 'next',
             'nit': 'nit',
             'no': 'no',
+            'normal': 'normal',
             'notice': 'Prematrícula',
             'observation': 'observación',
             'observation_additional': 'información adicional',
@@ -41038,20 +41051,22 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'psychological_support': '¿tiene apoyo psicológico?',
             'psychology': 'psicología',
             'receipt': 'recibo',
-            'receipt_form': 'estructura del recibo',
-            'receipt_success': 'recibo guardado satisfactoriamente',
-            'receipt_virtual': 'recibo virtual',
-            'receipt_manual': 'recibo manual',
-            'receipt_invoice': 'venta',
             'receipt_advance': 'anticipo',
             'receipt_document_help': 'documento (eje: 1,2 - 1-5 - 1..)',
+            'receipt_form': 'estructura del recibo',
+            'receipt_invoice': 'venta',
+            'receipt_manual': 'recibo manual',
+            'receipt_success': 'recibo guardado satisfactoriamente',
+            'receipt_virtual': 'recibo virtual',
             'religion': 'religión',
             'responsible': 'responsable esconómico',
+            'responsible_singular': 'responsable',
             'retired': 'retirados',
             'save': 'guardar',
             'specify_allergic': '¿a qué es alérgico?',
             'start': 'inicio',
             'step': 'paso',
+            'student': 'estudiante',
             'success': 'Felicitaciones',
             'suffered_illness': '¿ha sufrido alguna enfermedad?',
             'suffered_illness_description': 'descripción de la enfermedad',
@@ -41062,13 +41077,9 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'value': 'valor',
             'voucher': 'comprobante',
             'why_take_medication': '¿por qué toma el medicamento?',
-            'yes': 'si',
             'year': 'año',
             'years': 'años',
-            'grade': 'grado',
-            'grades': 'grados',
-            'concept_type': 'concepto',
-            'concept_types': 'conceptos'
+            'yes': 'si'
         }
     }
 });
@@ -41079,11 +41090,30 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = assets;
+/* unused harmony export each */
+/**
+ * Assets
+ * @returns {string}
+ */
 function assets() {
     return 'https://294347513a062ec6e0b6-8f8f94440e741fa4111c4d620d6f574f.ssl.cf5.rackcdn.com';
 }
 
-/* harmony default export */ __webpack_exports__["a"] = (assets);
+/**
+ * Each
+ * @param arr
+ * @param callback
+ * @returns {*}
+ */
+function each(arr, callback) {
+    var length = arr.length;
+    var i = void 0;
+    for (i = 0; i < length; i++) {
+        callback.call(arr, arr[i], i, arr);
+    }
+    return arr;
+}
 
 /***/ }),
 
@@ -42128,7 +42158,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 16:
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./resources/assets/js/sigeturbo/modules/parents/profile.js");

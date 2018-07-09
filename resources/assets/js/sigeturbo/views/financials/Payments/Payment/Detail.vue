@@ -95,7 +95,7 @@
 <script>
 
     import moment from 'moment';
-    import assets from "../../../../core/utils";
+    import {assets} from "../../../../core/utils";
     import currency from "../../../../filters/other/currency";
     import paymentType from "../../../../filters/payment/paymentType";
     import {realValue} from "../../../../filters/payment/charge";

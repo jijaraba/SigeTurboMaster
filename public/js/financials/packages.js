@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1683,7 +1683,7 @@ module.exports = {
     },
     data: function data() {
         return {
-            assets: Object(__WEBPACK_IMPORTED_MODULE_0__core_utils__["a" /* default */])(),
+            assets: Object(__WEBPACK_IMPORTED_MODULE_0__core_utils__["a" /* assets */])(),
             showCost: false,
             years: [],
             grades: [],
@@ -31013,10 +31013,6 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
     en: {
         sigeturbo: {
             'academic': 'academic',
-            'discount': 'discount',
-            'normal': 'normal',
-            'expired': 'expired',
-            'change': 'change',
             'account': 'account',
             'accountingentries': 'accounting entries',
             'accountingentry': 'accounting entry',
@@ -31029,22 +31025,27 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'bank': 'bank',
             'blood_type': 'blood type',
             'celular': 'celular',
+            'change': 'change',
+            'change_photo': 'change photo',
             'charge_list': 'charge list',
             'code': 'code',
-            'cost': 'cost',
-            'costs': 'costs',
             'code_title': 'code',
             'company': 'company',
             'company_phone': 'phone',
             'company_title': 'company',
+            'concept_type': 'concept',
+            'concept_types': 'concepts',
             'confirm_information': 'confirm information?',
             'consecutive': 'consecutive',
+            'cost': 'cost',
             'costcenter': 'center',
+            'costs': 'costs',
+            'credit': 'credit',
             'date': 'date',
             'debit': 'debit',
-            'credit': 'credit',
-            'difference': 'difference',
             'description': 'description',
+            'difference': 'difference',
+            'discount': 'discount',
             'district': 'district',
             'doctor_name': 'doctor name',
             'doctor_phone': 'doctor phone',
@@ -31055,14 +31056,15 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'equal_treatment': 'equal treatment?',
             'error': 'error',
             'expedition': 'expedition',
+            'expired': 'expired',
             'family': 'family',
-            'student': 'student',
-            'responsible_singular': 'responsible',
             'firstname': 'firstname',
             'fullname': 'fullname',
             'general': 'general',
             'general_success': 'La información general fue guardada satisfactoriamente',
             'generate': 'generate',
+            'grade': 'grade',
+            'grades': 'grades',
             'health_success': 'La información de salud fue guardada satisfactoriamente',
             'identification': 'identification',
             'identification_type': 'identification type',
@@ -31079,6 +31081,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'next': 'next',
             'nit': 'nit',
             'no': 'no',
+            'normal': 'normal',
             'notice': 'Prematrícula',
             'observation': 'observation',
             'observation_additional': 'observation additional',
@@ -31099,20 +31102,22 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'psychological_support': 'psychological_support?',
             'psychology': 'psychology',
             'receipt': 'receipt',
-            'receipt_form': 'receipt form',
-            'receipt_success': 'receipt success',
-            'receipt_virtual': 'receipt virtual',
-            'receipt_manual': 'receipt manual',
-            'receipt_invoice': 'invoice',
             'receipt_advance': 'advance',
             'receipt_document_help': 'document (exam: 1,2 - 1-5 - 1..)',
+            'receipt_form': 'receipt form',
+            'receipt_invoice': 'invoice',
+            'receipt_manual': 'receipt manual',
+            'receipt_success': 'receipt success',
+            'receipt_virtual': 'receipt virtual',
             'religion': 'religion',
             'responsible': 'responsible',
+            'responsible_singular': 'responsible',
             'retired': 'retired',
             'save': 'save',
             'specify_allergic': 'specify allergic',
             'start': 'start',
             'step': 'step',
+            'student': 'student',
             'success': 'sucess',
             'suffered_illness': 'suffered illness',
             'suffered_illness_description': 'suffered illness description',
@@ -31124,22 +31129,14 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'voucher': 'voucher',
             'warning': 'warning',
             'why_take_medication': 'why take medication?',
-            'yes': 'yes',
             'year': 'year',
             'years': 'years',
-            'grade': 'grade',
-            'grades': 'grades',
-            'concept_type': 'concept',
-            'concept_types': 'concepts'
+            'yes': 'yes'
         }
     },
     es: {
         sigeturbo: {
             'academic': 'año académico',
-            'discount': 'descuento',
-            'normal': 'normal',
-            'expired': 'interés',
-            'change': 'cambiar',
             'account': 'cuenta',
             'accountingentries': 'asientos contables',
             'accountingentry': 'asiento contable',
@@ -31152,22 +31149,27 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'bank': 'banco',
             'blood_type': 'tipo de sangre',
             'celular': 'celular',
+            'change': 'cambiar',
+            'change_photo': 'cambiar foto',
             'charge_list': 'listado de cobros',
             'code': 'código',
             'code_title': 'código',
-            'cost': 'costo',
-            'costs': 'costos',
             'company': 'empresa',
             'company_phone': 'teléfono de la empresa',
             'company_title': 'nombre de la empresa',
+            'concept_type': 'concepto',
+            'concept_types': 'conceptos',
             'confirm_information': '¿Confirma que la información ingresada es válida?',
             'consecutive': 'consecutivo',
+            'cost': 'costo',
             'costcenter': 'centro',
+            'costs': 'costos',
+            'credit': 'crédito',
             'date': 'fecha',
             'debit': 'débito',
-            'credit': 'crédito',
-            'difference': 'diferencia',
             'description': 'descripción',
+            'difference': 'diferencia',
+            'discount': 'descuento',
             'district': 'barrio',
             'doctor_name': 'pediatra',
             'doctor_phone': 'teléfono',
@@ -31178,14 +31180,15 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'equal_treatment': '¿continúa tratamiento?',
             'error': 'error',
             'expedition': 'expedición',
+            'expired': 'interés',
             'family': 'familia',
-            'student': 'estudiante',
-            'responsible_singular': 'responsable',
             'firstname': 'nombres',
             'fullname': 'nombres y apellidos',
             'general': 'general',
             'general_success': 'La información general fue guardada satisfactoriamente',
             'generate': 'generar',
+            'grade': 'grado',
+            'grades': 'grados',
             'health_success': 'La información de salud fue guardada satisfactoriamente',
             'identification': 'identificación',
             'identification_type': 'tipo de identificación',
@@ -31202,6 +31205,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'next': 'next',
             'nit': 'nit',
             'no': 'no',
+            'normal': 'normal',
             'notice': 'Prematrícula',
             'observation': 'observación',
             'observation_additional': 'información adicional',
@@ -31222,20 +31226,22 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'psychological_support': '¿tiene apoyo psicológico?',
             'psychology': 'psicología',
             'receipt': 'recibo',
-            'receipt_form': 'estructura del recibo',
-            'receipt_success': 'recibo guardado satisfactoriamente',
-            'receipt_virtual': 'recibo virtual',
-            'receipt_manual': 'recibo manual',
-            'receipt_invoice': 'venta',
             'receipt_advance': 'anticipo',
             'receipt_document_help': 'documento (eje: 1,2 - 1-5 - 1..)',
+            'receipt_form': 'estructura del recibo',
+            'receipt_invoice': 'venta',
+            'receipt_manual': 'recibo manual',
+            'receipt_success': 'recibo guardado satisfactoriamente',
+            'receipt_virtual': 'recibo virtual',
             'religion': 'religión',
             'responsible': 'responsable esconómico',
+            'responsible_singular': 'responsable',
             'retired': 'retirados',
             'save': 'guardar',
             'specify_allergic': '¿a qué es alérgico?',
             'start': 'inicio',
             'step': 'paso',
+            'student': 'estudiante',
             'success': 'Felicitaciones',
             'suffered_illness': '¿ha sufrido alguna enfermedad?',
             'suffered_illness_description': 'descripción de la enfermedad',
@@ -31246,13 +31252,9 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'value': 'valor',
             'voucher': 'comprobante',
             'why_take_medication': '¿por qué toma el medicamento?',
-            'yes': 'si',
             'year': 'año',
             'years': 'años',
-            'grade': 'grado',
-            'grades': 'grados',
-            'concept_type': 'concepto',
-            'concept_types': 'conceptos'
+            'yes': 'si'
         }
     }
 });
@@ -31263,11 +31265,30 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = assets;
+/* unused harmony export each */
+/**
+ * Assets
+ * @returns {string}
+ */
 function assets() {
     return 'https://294347513a062ec6e0b6-8f8f94440e741fa4111c4d620d6f574f.ssl.cf5.rackcdn.com';
 }
 
-/* harmony default export */ __webpack_exports__["a"] = (assets);
+/**
+ * Each
+ * @param arr
+ * @param callback
+ * @returns {*}
+ */
+function each(arr, callback) {
+    var length = arr.length;
+    var i = void 0;
+    for (i = 0; i < length; i++) {
+        callback.call(arr, arr[i], i, arr);
+    }
+    return arr;
+}
 
 /***/ }),
 
@@ -31811,7 +31832,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 13:
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./resources/assets/js/sigeturbo/modules/financials/packages.js");

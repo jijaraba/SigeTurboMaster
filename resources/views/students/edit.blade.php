@@ -11,7 +11,8 @@
         <section class="grid-100">
             <div class="sige-contained">
                 <a href="{{ URL::route('admissions.students.index',['year' => $year,'search' => $search, 'view' => $view, 'sort' => $sort, 'order' => $order, 'page' => $page])}}"
-                   class="btn btn-transparent margin-bottom-20"><i class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
+                   class="btn btn-transparent margin-bottom-20"><i
+                            class="fa fa-arrow-left"></i>{{ Lang::get('sige.Back') }}</a>
                 <section class="sige-student-info">
                     <h4>{{ Lang::get('sige.StudentInformationData') }}</h4>
                     @if (count($errors) > 0)
@@ -27,11 +28,10 @@
                     <fieldset>
                         <ul class="display-horizontal col-100">
                             <li class="col-20 photo">
-                                <div>
-                                    <img src="{{env('ASSETS_SERVER')}}/img/users/{{$student->photo}}"
-                                         alt="{{ $student->lastname }}"
-                                         title="{{ $student->lastname ." ". $student->firstname }}">
-                                </div>
+                                <sigeturbo-global-users-photo user="{{ $student->iduser }}"
+                                                              photo="{{$student->photo}}"
+                                                              fullname="{{ $student->lastname ." ". $student->firstname }}"></sigeturbo-global-users-photo>
+
                             </li>
                             <li class="col-80 basic">
                                 <ul class="display-horizontal col-100">
@@ -118,7 +118,8 @@
                                         <input name="birth" id="birth" type="text" ng-model="student.birth"
                                                ng-value="student.birth" title="{{ Lang::get('sige.BirthTitle') }}"
                                                ng-init="student.birth = '{{$student->birth}}'"
-                                               placeholder="{{ Lang::get('sige.BirthTitle') }}" data-toggle="birth" required="true"/>
+                                               placeholder="{{ Lang::get('sige.BirthTitle') }}" data-toggle="birth"
+                                               required="true"/>
                                     </li>
                                 </ul>
                             </li>
@@ -303,6 +304,7 @@
 @stop
 @section("script")
     {!! HTML::script(mix('js/angular/' . getCurrentRoute() . '.js')) !!}
+    {!! HTML::script(mix('js/' . getCurrentRoute() . '/' . getCurrentApp() .  '.js')) !!}
 @stop
 @section("socket")
     {!! HTML::script(mix('js/vendor/socket.io.js')) !!}

@@ -85,6 +85,7 @@ mix
         'bower_components/datepicker/dist/datepicker.css',
         'node_modules/ng-dialog/css/ngDialog.css',
         'node_modules/ng-dialog/css/ngDialog-theme-default.css',
+        'node_modules/cropperjs/dist/cropper.css',
     ], 'public/css/vendor/vendor.css')
     .version();
 
@@ -131,7 +132,9 @@ mix
  |--------------------------------------------------------------------------
 */
 mix
-//Communications
+    //Admissions
+    .js('resources/assets/js/sigeturbo/modules/admissions/students.js', 'public/js/admissions')
+    //Communications
     .js('resources/assets/js/sigeturbo/modules/communications/dashboard.js', 'public/js/communications')
     //Group Director
     .js('resources/assets/js/sigeturbo/modules/groupdirector/dashboard.js', 'public/js/groupdirector')

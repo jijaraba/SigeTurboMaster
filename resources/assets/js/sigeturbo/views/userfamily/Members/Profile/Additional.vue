@@ -170,7 +170,7 @@
     import uppercase from "../../../../filters/string/uppercase";
     import capitalize from "../../../../filters/string/capitalize";
     import Preregistration from "../../../../models/Preregistration";
-    import assets from "../../../../core/utils";
+    import {assets} from "../../../../core/utils";
 
     export default {
 

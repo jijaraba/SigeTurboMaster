@@ -46,7 +46,7 @@
     import currency from '../../../../filters/other/currency';
     import Payment from '../../../../models/Payment';
     import PaymentReceipt from '../../../../views/financials/Payments/Payment/Receipt';
-    import assets from "../../../../core/utils";
+    import {assets} from "../../../../core/utils";
 
 
     export default {

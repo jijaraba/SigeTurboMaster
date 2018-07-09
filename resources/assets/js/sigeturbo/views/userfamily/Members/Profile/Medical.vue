@@ -415,7 +415,7 @@
     import Bloodtype from "../../../../models/Bloodtype";
     import Medicalinsurance from "../../../../models/Medicalinsurance";
     import Prepaidmedical from "../../../../models/Prepaidmedical";
-    import assets from "../../../../core/utils";
+    import {assets} from "../../../../core/utils";
 
     export default {
 

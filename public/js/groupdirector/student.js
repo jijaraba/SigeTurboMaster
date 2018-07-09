@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1951,7 +1951,7 @@ module.exports = {
             showDownload: false,
             generateText: 'Visualizar',
             download: '',
-            assets: Object(__WEBPACK_IMPORTED_MODULE_1__core_utils__["a" /* default */])()
+            assets: Object(__WEBPACK_IMPORTED_MODULE_1__core_utils__["a" /* assets */])()
         };
     },
     methods: {
@@ -62585,11 +62585,30 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = assets;
+/* unused harmony export each */
+/**
+ * Assets
+ * @returns {string}
+ */
 function assets() {
     return 'https://294347513a062ec6e0b6-8f8f94440e741fa4111c4d620d6f574f.ssl.cf5.rackcdn.com';
 }
 
-/* harmony default export */ __webpack_exports__["a"] = (assets);
+/**
+ * Each
+ * @param arr
+ * @param callback
+ * @returns {*}
+ */
+function each(arr, callback) {
+    var length = arr.length;
+    var i = void 0;
+    for (i = 0; i < length; i++) {
+        callback.call(arr, arr[i], i, arr);
+    }
+    return arr;
+}
 
 /***/ }),
 
@@ -63508,7 +63527,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 10:
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("./resources/assets/js/sigeturbo/modules/groupdirector/student.js");

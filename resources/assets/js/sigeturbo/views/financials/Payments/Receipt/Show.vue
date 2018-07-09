@@ -74,7 +74,7 @@
 </template>
 <script>
 
-    import assets from "../../../../core/utils";
+    import {assets} from "../../../../core/utils";
     import PaymentsPayment from '../../../../views/financials/Payments/Payment/Payment';
     import AccountingentryShow from '../../../../views/financials/Payments/Accountingentry/Show';
     import {chargeTotalRealValue, chargeTotalReceiptRealValue} from "../../../../filters/payment/charge";

@@ -255,27 +255,35 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
         'as' => 'uploads.tasks.upload',
         'uses' => 'UploadsController@uploadTask'
     ]);
-
     /* --- Delete Task File ---*/
     Route::get('/deletetask/', [
         'middleware' => ['auth', 'permission'],
         'as' => 'uploads.tasks.delete',
         'uses' => 'UploadsController@deleteTask'
     ]);
-
     Route::post('/uploadconsent/', [
         'middleware' => ['auth', 'permission'],
         'as' => 'uploads.consents.upload',
         'uses' => 'UploadsController@uploadConsent'
     ]);
-
     /* --- Delete Consent File ---*/
     Route::get('/deleteconsent/', [
         'middleware' => ['auth', 'permission'],
         'as' => 'uploads.consents.delete',
         'uses' => 'UploadsController@deleteConsent'
     ]);
-
+    /* --- Upload Photo File ---*/
+    Route::post('/upload/user/photo', [
+        'middleware' => ['auth', 'permission'],
+        'as' => 'uploads.users.photo',
+        'uses' => 'UploadsController@uploadUserPhoto'
+    ]);
+    /* --- Delete Task File ---*/
+    Route::get('/deletetask/', [
+        'middleware' => ['auth', 'permission'],
+        'as' => 'uploads.tasks.delete',
+        'uses' => 'UploadsController@deleteTask'
+    ]);
     /**
      * ===================================
      * Queues

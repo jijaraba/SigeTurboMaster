@@ -35,7 +35,7 @@
 </template>
 <script>
 
-    import assets from '../../../core/utils';
+    import {assets} from '../../../core/utils';
     import uppercase from '../../../filters/string/uppercase';
     import capitalize from '../../../filters/string/capitalize';
     import PackageCreateCost from "../../../views/financials/Packages/Create/Cost";

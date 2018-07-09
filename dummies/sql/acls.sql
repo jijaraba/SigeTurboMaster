@@ -13,7 +13,7 @@ INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('setti
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('settings.points', 'Admin,Teacher,Academic,Principal', NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('uploads.tasks.delete','Admin,Teacher,Academic,Principal,Account,Treasurer,Communicator,Librarian,Nurse,Discipline,Counseling,AreaManager,HomeroomTeacher',NOW(), NOW());
 INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('uploads.tasks.upload','Admin,Teacher,Academic,Principal,Account,Treasurer,Communicator,Librarian,Nurse,Discipline,Counseling,AreaManager,HomeroomTeacher',NOW(), NOW());
-
+INSERT INTO `acls` (`route`, `roles`, `created_at`, `updated_at`) VALUES ('uploads.users.photo','Admin,Admission',NOW(), NOW());
 
 /*####
 --ACLS MODELES

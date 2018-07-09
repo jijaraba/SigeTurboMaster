@@ -84,7 +84,7 @@
     import currency from '../../../filters/other/currency';
     import Bank from '../../../models/Bank';
     import PaymentsPayment from '../../../views/financials/Payments/Payment/Payment';
-    import assets from "../../../core/utils";
+    import {assets} from "../../../core/utils";
     import Payment from "../../../models/Payment";
     import {chargeTotal, chargeSubtotal} from "../../../filters/payment/charge";
     import capitalize from "../../../filters/string/capitalize";

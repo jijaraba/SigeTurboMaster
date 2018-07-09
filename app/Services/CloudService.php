@@ -3,6 +3,7 @@
 namespace SigeTurbo\Services;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use SigeTurbo\Taskfile;
@@ -58,7 +59,7 @@ class CloudService
      */
     public function uploadConsent(UploadedFile $file)
     {
-        $input = json_decode(Input::get('consent'),true);
+        $input = json_decode(Input::get('consent'), true);
         $this->type = 'consent';
         $this->file = $file;
         $this->fileName = fileName($this->type, $this->file->getClientOriginalExtension());
@@ -67,7 +68,7 @@ class CloudService
         if (self::upload()) {
             return Consent::create([
                 'iduser' => $input['iduser'],
-                'idconsenttype' =>  $input['idconsenttype'],
+                'idconsenttype' => $input['idconsenttype'],
                 'path' => $this->fileName
             ]);
         }
@@ -113,13 +114,20 @@ class CloudService
      */
     private function upload()
     {
+
+        //Change Route By Photo
+        $route = $this->type;
+        if ($this->type == 'photo') {
+            $route = 'img/users';
+        }
+
         $localFileName = $this->path . $this->fileName;
         //Open File
         $file = fopen($localFileName, 'r');
         //Rackspace
         $objectStoreService = App::make('Rackspace')->objectStoreService(null, getenv('RACKSPACE_REGION'));
         $container = $objectStoreService->getContainer(getenv('RACKSPACE_CONTAINER'));
-        $container->uploadObject($this->type . '/' . $this->fileName, $file);
+        $container->uploadObject($route . '/' . $this->fileName, $file);
         //Delete file
         unlink($localFileName);
         if ($container) {
@@ -130,10 +138,42 @@ class CloudService
 
     private function delete($file)
     {
+        //Change Route By Photo
+        $route = $this->type;
+        if ($this->type == 'photo') {
+            $route = 'img/users';
+        }
+
         //Rackspace
         $objectStoreService = App::make('Rackspace')->objectStoreService(null, getenv('RACKSPACE_REGION'));
         $container = $objectStoreService->getContainer(getenv('RACKSPACE_CONTAINER'));
-        $object = $container->getObject($this->type . "/" . $file);
+        $object = $container->getObject($route . "/" . $file);
         return $object->delete();
     }
+
+    /**
+     * Upload User Photo
+     * @param UploadedFile $file
+     * @param $user
+     * @return bool
+     */
+    public function uploadUserPhoto(UploadedFile $file, $user)
+    {
+        $this->type = 'photo';
+        $this->file = $file;
+        $this->fileName = photoName($user, $this->file->getClientOriginalExtension());
+        dd($this->fileName);
+        exit();
+        $this->path = storage_path() . '/files/users/photo';
+        $this->file->move($this->path, $this->fileName);
+        if (self::upload()) {
+            $user = User::find($user);
+            $user->fill([
+                'photo' => $this->fileName
+            ]);
+            $user->save();
+        }
+        return false;
+    }
+
 }

@@ -22,7 +22,7 @@
     import uppercase from "../../../filters/string/uppercase";
     import titlecase from "../../../filters/string/titlecase";
     import {chargeSubtotal, chargeTotal, chargeTotalRealValue} from "../../../filters/payment/charge";
-    import assets from "../../../core/utils";
+    import {assets} from "../../../core/utils";
     import Bank from "../../../models/Bank";
     import Receipt from "../../../models/Receipt";
     import ReceiptShow from "../../../views/financials/Payments/Receipt/Show";

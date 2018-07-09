@@ -237,7 +237,7 @@
     import Enrollment from "../../../../models/Enrollment";
     import Cost from "../../../../models/Cost";
     import Payment from "../../../../models/Payment";
-    import assets from "../../../../core/utils";
+    import {assets} from "../../../../core/utils";
     import capitalize from "../../../../filters/string/capitalize";
 
     export default {
