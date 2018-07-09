@@ -245,6 +245,7 @@
                         this.$refs.cropper.replace(event.target.result);
                     };
                     reader.readAsDataURL(file);
+                    this.setStep(2)
                 } else {
                     alert('Sorry, FileReader API not supported');
                 }
