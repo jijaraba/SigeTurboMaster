@@ -1753,6 +1753,22 @@ module.exports = {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1781,7 +1797,8 @@ module.exports = {
             cropImg: '',
             extension: 'jpg',
             type: 'image/jpeg',
-            photo_temp: this.photo
+            photo_temp: this.photo,
+            uploadingPhoto: false
         };
     },
     methods: {
@@ -1833,11 +1850,13 @@ module.exports = {
                 formData.append('user', _this2.user);
 
                 //Upload Photo
+                _this2.uploadingPhoto = true;
                 __WEBPACK_IMPORTED_MODULE_4__models_Upload__["a" /* default */].uploadUserPhoto(formData).then(function (_ref) {
                     var data = _ref.data;
 
                     if (data.status) {
                         _this2.photo_temp = data.result.photo;
+                        _this2.uploadingPhoto = false;
                     }
                 }).catch(function (error) {
                     return console.log(error);
@@ -24188,8 +24207,12 @@ var render = function() {
                                                           }
                                                         },
                                                         [
+                                                          _c("i", {
+                                                            staticClass:
+                                                              "fas fa-crop fa-lg"
+                                                          }),
                                                           _vm._v(
-                                                            "Crop\n                                                        "
+                                                            "\n                                                            Crop\n                                                        "
                                                           )
                                                         ]
                                                       )
@@ -24273,28 +24296,89 @@ var render = function() {
                                                         staticClass: "col-100"
                                                       },
                                                       [
-                                                        _vm.cropImg != ""
-                                                          ? _c(
-                                                              "button",
-                                                              {
-                                                                staticClass:
-                                                                  "btn btn-green margin-top-05",
-                                                                attrs: {
-                                                                  type: "button"
-                                                                },
-                                                                on: {
-                                                                  click:
-                                                                    _vm.uploadPhoto
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "\n                                                                Upload\n                                                            "
-                                                                )
-                                                              ]
-                                                            )
+                                                        !_vm.uploadingPhoto
+                                                          ? [
+                                                              _vm.cropImg != ""
+                                                                ? _c(
+                                                                    "button",
+                                                                    {
+                                                                      staticClass:
+                                                                        "btn btn-green margin-top-05",
+                                                                      attrs: {
+                                                                        type:
+                                                                          "button"
+                                                                      },
+                                                                      on: {
+                                                                        click:
+                                                                          _vm.uploadPhoto
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c("i", {
+                                                                        staticClass:
+                                                                          "fas fa-upload fa-lg"
+                                                                      }),
+                                                                      _vm._v(
+                                                                        " " +
+                                                                          _vm._s(
+                                                                            _vm._f(
+                                                                              "capitalize"
+                                                                            )(
+                                                                              _vm.$translate.text(
+                                                                                "sigeturbo.upload"
+                                                                              )
+                                                                            )
+                                                                          ) +
+                                                                          "\n                                                                "
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                : _vm._e()
+                                                            ]
+                                                          : _vm._e(),
+                                                        _vm._v(" "),
+                                                        _vm.uploadingPhoto
+                                                          ? [
+                                                              _vm.cropImg != ""
+                                                                ? _c(
+                                                                    "button",
+                                                                    {
+                                                                      staticClass:
+                                                                        "btn btn-green margin-top-05",
+                                                                      attrs: {
+                                                                        type:
+                                                                          "button"
+                                                                      },
+                                                                      on: {
+                                                                        click:
+                                                                          _vm.uploadPhoto
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _c("i", {
+                                                                        staticClass:
+                                                                          "fas fa-spinner fa-lg"
+                                                                      }),
+                                                                      _vm._v(
+                                                                        " " +
+                                                                          _vm._s(
+                                                                            _vm._f(
+                                                                              "capitalize"
+                                                                            )(
+                                                                              _vm.$translate.text(
+                                                                                "sigeturbo.uploading"
+                                                                              )
+                                                                            )
+                                                                          ) +
+                                                                          "\n                                                                "
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                : _vm._e()
+                                                            ]
                                                           : _vm._e()
-                                                      ]
+                                                      ],
+                                                      2
                                                     )
                                                   ]
                                                 )
@@ -35440,6 +35524,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
     en: {
         sigeturbo: {
             'academic': 'academic',
+            'upload': 'upload',
+            'uploading': 'uploading ...',
             'account': 'account',
             'accountingentries': 'accounting entries',
             'accountingentry': 'accounting entry',
@@ -35564,6 +35650,8 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
     es: {
         sigeturbo: {
             'academic': 'año académico',
+            'upload': 'upload',
+            'uploading': 'uploading ...',
             'account': 'cuenta',
             'accountingentries': 'asientos contables',
             'accountingentry': 'asiento contable',

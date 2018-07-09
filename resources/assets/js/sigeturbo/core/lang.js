@@ -2,6 +2,8 @@ export default {
     en: {
         sigeturbo: {
             'academic': 'academic',
+            'upload': 'upload',
+            'uploading': 'uploading ...',
             'account': 'account',
             'accountingentries': 'accounting entries',
             'accountingentry': 'accounting entry',
@@ -126,6 +128,8 @@ export default {
     es: {
         sigeturbo: {
             'academic': 'año académico',
+            'upload': 'upload',
+            'uploading': 'uploading ...',
             'account': 'cuenta',
             'accountingentries': 'asientos contables',
             'accountingentry': 'asiento contable',

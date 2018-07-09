@@ -67,7 +67,9 @@
                                                             <button class="btn btn-blue margin-top-05"
                                                                     style="margin:5px auto"
                                                                     @click="cropImage"
-                                                                    v-if="imgSrc != ''">Crop
+                                                                    v-if="imgSrc != ''">
+                                                                <i class="fas fa-crop fa-lg"></i>
+                                                                Crop
                                                             </button>
                                                         </li>
                                                         <li class="col-50">
@@ -89,12 +91,26 @@
                                                                      alt="Cropped Image"/>
                                                             </li>
                                                             <li class="col-100">
-                                                                <button class="btn btn-green margin-top-05"
-                                                                        type="button"
-                                                                        @click="uploadPhoto"
-                                                                        v-if="cropImg != ''">
-                                                                    Upload
-                                                                </button>
+                                                                <template v-if="!uploadingPhoto">
+                                                                    <button class="btn btn-green margin-top-05"
+                                                                            type="button"
+                                                                            @click="uploadPhoto"
+                                                                            v-if="cropImg != ''">
+                                                                        <i class="fas fa-upload fa-lg"></i> {{
+                                                                        $translate.text('sigeturbo.upload') |
+                                                                        capitalize}}
+                                                                    </button>
+                                                                </template>
+                                                                <template v-if="uploadingPhoto">
+                                                                    <button class="btn btn-green margin-top-05"
+                                                                            type="button"
+                                                                            @click="uploadPhoto"
+                                                                            v-if="cropImg != ''">
+                                                                        <i class="fas fa-spinner fa-lg"></i> {{
+                                                                        $translate.text('sigeturbo.uploading') |
+                                                                        capitalize}}
+                                                                    </button>
+                                                                </template>
                                                             </li>
                                                         </ul>
                                                     </template>
@@ -160,6 +176,7 @@
                 extension: 'jpg',
                 type: 'image/jpeg',
                 photo_temp: this.photo,
+                uploadingPhoto: false,
             }
         },
         methods: {
@@ -199,6 +216,7 @@
                 this.$refs.cropper.rotate(90);
             },
             uploadPhoto() {
+
                 this.$refs.cropper.getCroppedCanvas().toBlob((blob) => {
                     const formData = new FormData();
                     blob.lastModifiedDate = new Date();
@@ -207,9 +225,11 @@
                     formData.append('user', this.user);
 
                     //Upload Photo
+                    this.uploadingPhoto = true;
                     Upload.uploadUserPhoto(formData).then(({data}) => {
                         if (data.status) {
                             this.photo_temp = data.result.photo;
+                            this.uploadingPhoto = false;
                         }
                     }).catch(error => console.log(error));
 
