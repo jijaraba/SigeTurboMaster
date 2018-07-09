@@ -243,9 +243,10 @@
                     reader.onload = (event) => {
                         this.imgSrc = event.target.result;
                         this.$refs.cropper.replace(event.target.result);
+                        this.setStep(2)
+
                     };
                     reader.readAsDataURL(file);
-                    this.setStep(2)
                 } else {
                     alert('Sorry, FileReader API not supported');
                 }

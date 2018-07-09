@@ -1867,9 +1867,9 @@ module.exports = {
                 reader.onload = function (event) {
                     _this.imgSrc = event.target.result;
                     _this.$refs.cropper.replace(event.target.result);
+                    _this.setStep(2);
                 };
                 reader.readAsDataURL(file);
-                this.setStep(2);
             } else {
                 alert('Sorry, FileReader API not supported');
             }
