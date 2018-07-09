@@ -207,7 +207,9 @@
 
                     //Upload Photo
                     Upload.uploadUserPhoto(formData).then(({data}) => {
-                        console.log(data.photo);
+                        if (data.status) {
+                            this.photo = data.result.photo;
+                        }
                     }).catch(error => console.log(error));
 
                 }, this.type);
