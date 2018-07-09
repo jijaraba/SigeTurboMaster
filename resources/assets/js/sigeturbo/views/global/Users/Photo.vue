@@ -243,8 +243,6 @@
                     reader.onload = (event) => {
                         this.imgSrc = event.target.result;
                         this.$refs.cropper.replace(event.target.result);
-                        this.setStep(2)
-
                     };
                     reader.readAsDataURL(file);
                 } else {
