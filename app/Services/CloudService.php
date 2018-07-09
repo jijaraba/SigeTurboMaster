@@ -5,6 +5,7 @@ namespace SigeTurbo\Services;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
+use SigeTurbo\User;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use SigeTurbo\Taskfile;
 use SigeTurbo\Consent;
