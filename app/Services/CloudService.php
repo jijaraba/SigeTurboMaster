@@ -170,7 +170,7 @@ class CloudService
         $user = User::find($user);
 
         //Delete Previous Photo
-        if ($user->photo == env('ASSETS_DEFAULT_PHOTO')) {
+        if ($user->photo !== env('ASSETS_DEFAULT_PHOTO')) {
             self::delete($user->photo);
         }
 
