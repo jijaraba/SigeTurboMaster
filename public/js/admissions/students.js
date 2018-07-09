@@ -1780,7 +1780,8 @@ module.exports = {
             imgSrc: '',
             cropImg: '',
             extension: 'jpg',
-            type: 'image/jpeg'
+            type: 'image/jpeg',
+            photo_temp: this.photo
         };
     },
     methods: {
@@ -1836,7 +1837,7 @@ module.exports = {
                     var data = _ref.data;
 
                     if (data.status) {
-                        _this2.photo = data.result.photo;
+                        _this2.photo_temp = data.result.photo;
                     }
                 }).catch(function (error) {
                     return console.log(error);
@@ -23931,7 +23932,7 @@ var render = function() {
     _c("img", {
       attrs: {
         id: "user_photo_" + _vm.user,
-        src: _vm.assets + "/img/users/" + _vm.photo,
+        src: _vm.assets + "/img/users/" + _vm.photo_temp,
         alt: _vm.fullname,
         title: _vm.fullname
       }

@@ -1,6 +1,6 @@
 <template>
     <section class="sige-users-photo">
-        <img :id="'user_photo_'+user" :src="assets + '/img/users/' + photo"
+        <img :id="'user_photo_'+user" :src="assets + '/img/users/' + photo_temp"
              :alt="fullname"
              :title="fullname">
         <section class="change-photo" @click="togglePhotoForm()">{{ $translate.text('sigeturbo.change') | uppercase }}
@@ -159,6 +159,7 @@
                 cropImg: '',
                 extension: 'jpg',
                 type: 'image/jpeg',
+                photo_temp: this.photo,
             }
         },
         methods: {
@@ -208,7 +209,7 @@
                     //Upload Photo
                     Upload.uploadUserPhoto(formData).then(({data}) => {
                         if (data.status) {
-                            this.photo = data.result.photo;
+                            this.photo_temp = data.result.photo;
                         }
                     }).catch(error => console.log(error));
 
