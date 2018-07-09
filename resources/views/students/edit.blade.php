@@ -29,7 +29,7 @@
                         <ul class="display-horizontal col-100">
                             <li class="col-20 photo">
                                 <sigeturbo-global-users-photo user="{{ $student->iduser }}"
-                                                              photo="{{$student->photo}}"
+                                                              :photo="{{$student->photo}}"
                                                               fullname="{{ $student->lastname ." ". $student->firstname }}"></sigeturbo-global-users-photo>
 
                             </li>

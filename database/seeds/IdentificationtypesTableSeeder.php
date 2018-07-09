@@ -43,6 +43,9 @@ class IdentificationtypesTableSeeder extends Seeder
         Identificationtype::create([
             'name' => 'NIT'
         ]);
+        Identificationtype::create([
+            'name' => 'PEP'
+        ]);
     }
 
 }
