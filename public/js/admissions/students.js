@@ -1769,6 +1769,7 @@ module.exports = {
 //
 //
 //
+//
 
 
 
@@ -24168,11 +24169,12 @@ var render = function() {
                                                   _c("sigeturbo-cropper", {
                                                     ref: "cropper",
                                                     attrs: {
+                                                      "aspect-ratio": "1",
                                                       guides: true,
                                                       "view-mode": 2,
                                                       "drag-mode": "crop",
                                                       preview: ".preview",
-                                                      "auto-crop-area": 0.5,
+                                                      "auto-crop-area": 1,
                                                       "min-container-width": 355,
                                                       "min-container-height": 240,
                                                       background: true,

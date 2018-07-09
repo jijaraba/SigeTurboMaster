@@ -49,11 +49,12 @@
                                                         <li class="col-100">
                                                             <sigeturbo-cropper
                                                                     ref='cropper'
+                                                                    aspect-ratio=1
                                                                     :guides="true"
                                                                     :view-mode="2"
                                                                     drag-mode="crop"
                                                                     preview=".preview"
-                                                                    :auto-crop-area="0.5"
+                                                                    :auto-crop-area="1"
                                                                     :min-container-width=355
                                                                     :min-container-height=240
                                                                     :background="true"

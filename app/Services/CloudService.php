@@ -165,8 +165,18 @@ class CloudService
         $this->fileName = photoName($user, $this->file->getClientOriginalExtension());
         $this->path = storage_path() . '/files/users/photo/';
         $this->file->move($this->path, $this->fileName);
+
+        //Find User
+        $user = User::find($user);
+
+        //Delete Previous Photo
+        if ($user->photo == env('ASSETS_DEFAULT_PHOTO')) {
+            self::delete($user->photo);
+        }
+
+        //Upload photo
         if (self::upload()) {
-            $user = User::find($user);
+
             $user->fill([
                 'photo' => $this->fileName
             ]);
