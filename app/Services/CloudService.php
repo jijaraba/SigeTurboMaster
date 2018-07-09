@@ -171,6 +171,7 @@ class CloudService
                 'photo' => $this->fileName
             ]);
             $user->save();
+            return ['successful' => true, 'photo' => $this->fileName];
         }
         return false;
     }
