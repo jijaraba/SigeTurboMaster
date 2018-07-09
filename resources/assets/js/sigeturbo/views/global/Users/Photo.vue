@@ -95,20 +95,31 @@
                                                                     :img-style="{ 'width': '400px', 'height': '400px' }">
                                                             </sigeturbo-cropper>
                                                         </li>
-                                                        <li class="col-50">
-                                                            <button class="btn btn-blue margin-top-05"
-                                                                    style="margin:5px auto"
+                                                        <li class="col-20">
+                                                            <button class="small btn btn-blue margin-top-05"
+                                                                    style="margin:5px auto;width: 100px"
                                                                     @click="cropImage"
                                                                     v-if="imgSrc != ''">
                                                                 <i class="fas fa-crop fa-lg"></i>
                                                                 Crop
                                                             </button>
                                                         </li>
-                                                        <li class="col-50">
+                                                        <li class="col-20">
                                                             <button class="btn btn-blue margin-top-05"
-                                                                    style="margin:5px auto"
-                                                                    @click="rotate"
-                                                                    v-if="imgSrc != ''">Rotate
+                                                                    style="margin:5px auto;width: 100px"
+                                                                    @click="rotate($event,'left')"
+                                                                    v-if="imgSrc != ''">
+                                                                <i class="fas fa-caret-left fa-lg"></i>
+                                                                {{ $translate.text('sigeturbo.rotate') | capitalize }}
+                                                            </button>
+                                                        </li>
+                                                        <li class="col-20">
+                                                            <button class="btn btn-blue margin-top-05"
+                                                                    style="margin:5px auto;width: 100px"
+                                                                    @click="rotate($event,'right')"
+                                                                    v-if="imgSrc != ''">
+                                                                <i class="fas fa-caret-right fa-lg"></i>
+                                                                {{ $translate.text('sigeturbo.rotate') | capitalize }}
                                                             </button>
                                                         </li>
                                                     </ul>
@@ -203,6 +214,7 @@
                 togglePhoto: false,
                 steps: 2,
                 stepSelected: 0,
+                position: 0,
                 imgSrc: '',
                 cropImg: '',
                 extension: 'jpg',
@@ -242,10 +254,16 @@
                 // get image data for post processing, e.g. upload or setting image src
                 this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
             },
-            rotate(event) {
+            rotate(event, option) {
                 event.preventDefault();
-                // guess what this does :)
-                this.$refs.cropper.rotate(90);
+                if (option == 'left') {
+                    this.$refs.cropper.rotate(-1);
+                }
+                if (option == 'right') {
+                    this.$refs.cropper.rotate(1);
+                }
+                console.log(this.position);
+
             },
             uploadPhoto() {
 
@@ -271,7 +289,11 @@
                 for (let i = 0; i <= this.steps; i++) {
                     document.getElementById('step-' + i).style.display = "none";
                 }
-                document.getElementById('step-' + step).style.display = "block";
+                if (this.imgSrc == '') {
+                    document.getElementById('step-' + 1).style.display = "block";
+                } else {
+                    document.getElementById('step-' + step).style.display = "block";
+                }
                 //Step Selected
                 this.stepSelected = step;
             },

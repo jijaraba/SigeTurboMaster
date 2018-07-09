@@ -1801,6 +1801,17 @@ module.exports = {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1825,6 +1836,7 @@ module.exports = {
             togglePhoto: false,
             steps: 2,
             stepSelected: 0,
+            position: 0,
             imgSrc: '',
             cropImg: '',
             extension: 'jpg',
@@ -1866,10 +1878,15 @@ module.exports = {
             // get image data for post processing, e.g. upload or setting image src
             this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
         },
-        rotate: function rotate(event) {
+        rotate: function rotate(event, option) {
             event.preventDefault();
-            // guess what this does :)
-            this.$refs.cropper.rotate(90);
+            if (option == 'left') {
+                this.$refs.cropper.rotate(-1);
+            }
+            if (option == 'right') {
+                this.$refs.cropper.rotate(1);
+            }
+            console.log(this.position);
         },
         uploadPhoto: function uploadPhoto() {
             var _this2 = this;
@@ -1899,7 +1916,11 @@ module.exports = {
             for (var i = 0; i <= this.steps; i++) {
                 document.getElementById('step-' + i).style.display = "none";
             }
-            document.getElementById('step-' + step).style.display = "block";
+            if (this.imgSrc == '') {
+                document.getElementById('step-' + 1).style.display = "block";
+            } else {
+                document.getElementById('step-' + step).style.display = "block";
+            }
             //Step Selected
             this.stepSelected = step;
         }
@@ -24327,16 +24348,17 @@ var render = function() {
                                               _vm._v(" "),
                                               _c(
                                                 "li",
-                                                { staticClass: "col-50" },
+                                                { staticClass: "col-20" },
                                                 [
                                                   _vm.imgSrc != ""
                                                     ? _c(
                                                         "button",
                                                         {
                                                           staticClass:
-                                                            "btn btn-blue margin-top-05",
+                                                            "small btn btn-blue margin-top-05",
                                                           staticStyle: {
-                                                            margin: "5px auto"
+                                                            margin: "5px auto",
+                                                            width: "100px"
                                                           },
                                                           on: {
                                                             click: _vm.cropImage
@@ -24358,7 +24380,7 @@ var render = function() {
                                               _vm._v(" "),
                                               _c(
                                                 "li",
-                                                { staticClass: "col-50" },
+                                                { staticClass: "col-20" },
                                                 [
                                                   _vm.imgSrc != ""
                                                     ? _c(
@@ -24367,15 +24389,86 @@ var render = function() {
                                                           staticClass:
                                                             "btn btn-blue margin-top-05",
                                                           staticStyle: {
-                                                            margin: "5px auto"
+                                                            margin: "5px auto",
+                                                            width: "100px"
                                                           },
                                                           on: {
-                                                            click: _vm.rotate
+                                                            click: function(
+                                                              $event
+                                                            ) {
+                                                              _vm.rotate(
+                                                                $event,
+                                                                "left"
+                                                              )
+                                                            }
                                                           }
                                                         },
                                                         [
+                                                          _c("i", {
+                                                            staticClass:
+                                                              "fas fa-caret-left fa-lg"
+                                                          }),
                                                           _vm._v(
-                                                            "Rotate\n                                                        "
+                                                            "\n                                                            " +
+                                                              _vm._s(
+                                                                _vm._f(
+                                                                  "capitalize"
+                                                                )(
+                                                                  _vm.$translate.text(
+                                                                    "sigeturbo.rotate"
+                                                                  )
+                                                                )
+                                                              ) +
+                                                              "\n                                                        "
+                                                          )
+                                                        ]
+                                                      )
+                                                    : _vm._e()
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "li",
+                                                { staticClass: "col-20" },
+                                                [
+                                                  _vm.imgSrc != ""
+                                                    ? _c(
+                                                        "button",
+                                                        {
+                                                          staticClass:
+                                                            "btn btn-blue margin-top-05",
+                                                          staticStyle: {
+                                                            margin: "5px auto",
+                                                            width: "100px"
+                                                          },
+                                                          on: {
+                                                            click: function(
+                                                              $event
+                                                            ) {
+                                                              _vm.rotate(
+                                                                $event,
+                                                                "right"
+                                                              )
+                                                            }
+                                                          }
+                                                        },
+                                                        [
+                                                          _c("i", {
+                                                            staticClass:
+                                                              "fas fa-caret-right fa-lg"
+                                                          }),
+                                                          _vm._v(
+                                                            "\n                                                            " +
+                                                              _vm._s(
+                                                                _vm._f(
+                                                                  "capitalize"
+                                                                )(
+                                                                  _vm.$translate.text(
+                                                                    "sigeturbo.rotate"
+                                                                  )
+                                                                )
+                                                              ) +
+                                                              "\n                                                        "
                                                           )
                                                         ]
                                                       )
@@ -35673,6 +35766,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'uploading': 'uploading ...',
             'photo_select': 'select photo',
             'photo_edit': 'edit photo',
+            'rotate': 'rotate',
             'account': 'account',
             'accountingentries': 'accounting entries',
             'accountingentry': 'accounting entry',
@@ -35801,6 +35895,7 @@ window._ = __webpack_require__("./node_modules/lodash/lodash.js");
             'uploading': 'uploading ...',
             'photo_select': 'seleccionar foto',
             'photo_edit': 'organizar foto',
+            'rotate': 'rotar',
             'account': 'cuenta',
             'accountingentries': 'asientos contables',
             'accountingentry': 'asiento contable',
