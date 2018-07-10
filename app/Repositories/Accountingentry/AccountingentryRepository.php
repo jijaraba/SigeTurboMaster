@@ -190,7 +190,7 @@ class AccountingentryRepository implements AccountingentryRepositoryInterface
                     ->on('costcenters.idcostcenter', '=', 'accountingentries.idcostcenter');
             })
             ->whereIn('vouchertypes.code', [$code])
-            ->whereBetween('receipts.date', array($date_from, $date_to))
+            ->whereBetween('accountingentries.date', array($date_from, $date_to))
             ->orderBy('vouchertypes.code', 'ASC')
             ->orderBy('receipts.document', 'ASC')
             ->orderBy('accounttypes.order');
