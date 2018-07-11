@@ -20,10 +20,16 @@ class CreateHealthinformationsTable extends Migration
             $table->integer('idprepaidmedical')->unsigned();
             $table->integer('idmedicalinsurance')->unsigned();
             $table->string('policy_number')->nullable();
+            $table->enum('suffered_illness', ['Y', 'N'])->default('N');
             $table->text('diseases')->nullable();
-            $table->text('medical_treatment')->nullable();
+            $table->enum('medical_treatment', ['Y', 'N'])->default('N');
+            $table->text('medical_treatment_description')->nullable();
+            $table->enum('equal_treatment', ['Y', 'N'])->default('N');
+            $table->enum('take_medication', ['Y', 'N'])->default('N');
             $table->text('medication')->nullable();
+            $table->text('why_take_medication')->nullable();
             $table->text('dose')->nullable();
+            $table->enum('is_allergic', ['Y', 'N'])->default('N');
             $table->text('allergies')->nullable();
             $table->string('doctor_name')->nullable();
             $table->string('doctor_phone')->nullable();
@@ -56,7 +62,7 @@ class CreateHealthinformationsTable extends Migration
                 ->on('medicalinsurances')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->unique(array('iduser'),'healthinformations_user_unique');
+            $table->unique(array('iduser'), 'healthinformations_user_unique');
         });
     }
 
