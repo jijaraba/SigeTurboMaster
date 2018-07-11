@@ -168,7 +168,7 @@ class AccountingentryRepository implements AccountingentryRepositoryInterface
      */
     public function getAccountingentriesToExport($code, $date_from, $date_to)
     {
-        $select = Accountingentry::select(DB::raw("CONCAT(RPAD(accounttypes.code,10,' '),LPAD(vouchertypes.code,5,'0'),LPAD(DATE_FORMAT(receipts.date,'%m/%d/%Y'),10,'0'),LPAD(receipts.document,9,'0'),LPAD(accountingentries.reference,9,'0'),LPAD(accountingentries.nit,11,' '),RPAD(stringReplace(accountingentries.description,'ÁÉÍÓÚÑÀÈÌÒÙ','AEIOUNAEIOU'),28,' '),transactiontypes.prefix,LPAD(accountingentries.value,21,' '),LPAD(accountingentries.base,21,' '),RPAD(costcenters.code,6,' '),LPAD(accountingentries.transaction,3,' '),LPAD(accountingentries.term,4,' ')) AS Asiento"))
+        $select = Accountingentry::select(DB::raw("CONCAT(RPAD(accounttypes.code,10,' '),LPAD(vouchertypes.code,5,'0'),LPAD(DATE_FORMAT(accountingentries.date,'%m/%d/%Y'),10,'0'),LPAD(receipts.document,9,'0'),LPAD(accountingentries.reference,9,'0'),LPAD(accountingentries.nit,11,' '),RPAD(stringReplace(accountingentries.description,'ÁÉÍÓÚÑÀÈÌÒÙ','AEIOUNAEIOU'),28,' '),transactiontypes.prefix,LPAD(accountingentries.value,21,' '),LPAD(accountingentries.base,21,' '),RPAD(costcenters.code,6,' '),LPAD(accountingentries.transaction,3,' '),LPAD(accountingentries.term,4,' ')) AS Asiento"))
             ->join('receipts', function ($join) {
                 $join
                     ->on('receipts.idreceipt', '=', 'accountingentries.idreceipt');
