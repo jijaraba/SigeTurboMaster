@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('phone', 20)->nullable();
             $table->string('celular', 20)->nullable();
             $table->string('address', 255)->nullable();
+            $table->string('district', 255)->nullable();
             $table->string('email_personal', 255)->nullable();
             $table->string('photo', 255)->nullable()->default('sigeturbo.jpg');
             $table->string('role', 255)->default('Student');

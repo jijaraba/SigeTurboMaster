@@ -94,6 +94,7 @@ class InventoriesController extends Controller
     /**
      * Create Inventory
      * @param InventoryRequest $request
+     * @return
      */
     public function inventory(InventoryRequest $request)
     {
